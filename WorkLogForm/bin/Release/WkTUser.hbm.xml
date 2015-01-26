@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="ClassLibrary" assembly="ClassLibrary">
+
+  <class name="WkTUser" table="WK_T_USER" >
+    <id name="Id" column="KU_ID" type="long"  length="10" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property name="KuLid" column="KU_LID" type="String" length="20"/>
+    <property name="KuName" column="KU_NAME" type="String" length="10" />
+    <property name="KuPassWD" column="KU_PASSWD" type="String" length="50" />
+    
+    <property name="KuRegDate" column="KU_REGDATE" type="String" length="20" not-null="true"/>
+    <property name="KuStatus" column="KU_STATUS" type="String" length="1" />
+    <property name="KuSex" column="KU_SEX" type="String" length="2" />
+    <property name="KuBirthday" column="KU_BIRTHDAY" type="String" length="10"/>
+   
+    <property name="KuEmail" column="KU_EMAIL" type="String" length="50" />
+    <property name="KuPhone" column="KU_PHONE" type="String" length="20" />
+    <property name="KuCompany" column="KU_COMPANY" type="String" length="100"/>
+    
+    <property name="KuLevel" column="KU_LEVEL" type="Int32" length="6" />
+    <property name="KuLtime" column="KU_LTIME" type="String" length="20" />
+    <property name="KuRtime" column="KU_RTIME" type="String" length="20"/>
+    <property name="KuLastAddr" column="KU_LASTADDR" type="String" length="20" />
+    <property name="KuOnline" column="KU_ONLINE" type="String" length="1" />
+    <property name="KuLtimes" column="KU_LTIMES" type="Int32" length="6"/>
+    <property name="KuLimit" column="KU_LIMIT" type="Int32" length="6" />
+    <property name="KuStyle" column="KU_STYLE" type="String" length="20" />
+   
+    <property name="KuAutoShow" column="KU_AUTOSHOW" type="String" length="2" />
+    <property name="KuBindType" column="KU_BINDTYPE" type="String" length="2"/>
+    <property name="KuBindAddr" column="KU_BINDADDR" type="String" length="100"/>
+    <property name="KuQuestion" column="KU_QUESTION" type="String" length="200" />
+    <property name="KuAnswer" column="KU_ANSWER" type="String" length="100" />
+    <property name="KuAUTOENTER" column="KU_AUTOENTER" type="String" length="2"/>
+    <many-to-one name="Kdid" class="ClassLibrary.WkTDept, ClassLibrary">
+      <!--not-null="true" cascade="all" outer-join="auto" update="true" insert="true" column="KD_ID">-->
+      <column name="KD_ID" length="10" sql-type="long" not-null="true"/>
+    </many-to-one>
+  </class>
+
+</hibernate-mapping>

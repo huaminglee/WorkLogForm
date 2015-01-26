@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="ClassLibrary" assembly="ClassLibrary">
+
+  <class name="Schedule" table="SCHEDULE" >
+    <id name="Id" column="Id" type="long"  length="10" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <!--<id name="Id" type="Int64" unsaved-value="0" >
+      <column name="ID" length="18" sql-type="int" not-null="true" unique="true" />
+      <generator class="identity"  />
+    </id>-->
+    <property name="KU_ID" column="KU_ID" type="long" length="10"/>
+    <property name="LSD_CONTENT" column="LSD_CONTENT" type="string" length="4000"/>
+    <property name="LSD_TITLE" column="LSD_TITLE" type="string" length="1000"/>
+    <property name="LSD_WARNING" column="LSD_WARNING" type="int" length="4" />
+    <property name="LSD_WARNTIME" column="LSD_WARNTIME" type="DateTime" />    
+  </class>
+
+</hibernate-mapping>

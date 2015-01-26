@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="ClassLibrary" assembly="ClassLibrary">
+
+  <class name="Business" table="LOG_T_BUSINESS" >
+    <id name="Id" column="Id" type="long"  length="10" unsaved-value="0">
+      <generator class="native" />
+    </id>
+
+    <many-to-one name="Ku_Id" column="KU_ID" lazy="false" not-null="true"
+                class="ClassLibrary.WkTUser, ClassLibrary" />
+
+
+    <property name="StartTime" column="START_TIME" type="long" />
+    <property name="EndTime" column="END_TIME" type="long" />
+    <property name="BusinessReason" column="REASON" type="string" length="1000" />
+    <property name="BusinessNote" column="NOTE" type="string" length="1000" />
+    <property name="BusinessDestination" column="DESTINATION" type="string" length="500" />
+    <property name="PassExam" column="PASSEXAM" type="int" length="1"/>
+    <property name="WaitingNum" column="WAITINGNUM" type="int" length="18"/>
+    <property name="RefuseReason" column="REFUSEREASON" type="string" length="1000" />
+    
+    <property name="State" column="STATE" type="int" length="1"/>
+    <property name="TimeStamp" column="TIMESTAMP" type="long" length="10"/>
+
+    <!--<bag name="BusinessId" table="Business_M_WkTUser" lazy="false" cascade="all">
+      <key column="BUSINESSID"/>
+      <many-to-many class="ClassLibrary.WkTUser,ClassLibrary" column="KU_ID"/>
+    </bag>-->
+    <!--<many-to-one name="BusinessId" column="BUSINESSID" lazy="false" not-null="true"
+                class="ClassLibrary.WkTUser, ClassLibrary" />-->
+
+  </class>
+
+</hibernate-mapping>

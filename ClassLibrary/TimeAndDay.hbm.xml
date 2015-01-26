@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="ClassLibrary" assembly="ClassLibrary">
+
+  <class name="TimeAndDay" table="LOG_T_TIMEANDDAY" >
+    <id name="Id" column="id" type="long"  length="10" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property name="StartTime" column="STARTTIME" type="int" length="10"/>
+    <property name="EndTime" column="ENDTIME" type="int" length="10" />
+    <property name="WorkDay" column="WORKDAY" type="String" length="7" />
+    <property name="State" column="STATE" type="int" length="1"/>
+    <property name="TimeStamp" column="TIMESTAMP" type="long" length="10"/>
+    <bag name="Holidays" inverse="true" lazy="false" cascade="all-delete-orphan">
+      <key column="TimeAndDayId"/>
+      <one-to-many class="ClassLibrary.Holiday, ClassLibrary"/>
+    </bag>
+    <bag name="WorkDays" inverse="true" lazy="false" cascade="all-delete-orphan">
+      <key column="TimeAndDayId"/>
+      <one-to-many class="ClassLibrary.WorkDay, ClassLibrary"/>
+    </bag>
+  </class>
+
+</hibernate-mapping>

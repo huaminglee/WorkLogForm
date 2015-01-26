@@ -1,0 +1,372 @@
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WorkLogForm.exe.config
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\Interop.ShockwaveFlashObjects.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\AxInterop.ShockwaveFlashObjects.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csproj.ResolveComReference.cache
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.checkAttendance.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.main.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.shou_ye.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.TimeManagement.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WorkLogForm.exe
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WorkLogForm.pdb
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\ClassLibrary.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Iesi.Collections.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\IrisSkin2.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\LinFu.DynamicProxy.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\NHibernate.ByteCode.LinFu.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\NHibernate.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\NHibernate.Mapping.Attributes.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\ClassLibrary.pdb
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Interop.ShockwaveFlashObjects.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\AxInterop.ShockwaveFlashObjects.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.exe
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.pdb
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.apply_Allograph.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.staff_LogLeader.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.statistics_Attendance.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csprojResolveAssemblyReference.cache
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Leave.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.login.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Secretary.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.ExamAllograph.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csproj.GenerateResource.Cache
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\InterimLeader.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\LeaderSign.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WkTDept.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WkTUser.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WorkDay.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Holiday.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Microsoft.Office.Interop.Excel.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Microsoft.Office.Interop.Word.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Microsoft.Office.Interop.Excel.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Microsoft.Office.Interop.Word.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.personal_setting.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.writeSchedule.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.writeLog.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.BusinessManagement.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.InterimHead.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.OnDuty.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.WorkOvertime.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.schedule_Manage.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Comments.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\StaffLog.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WinHtmlEditor.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\NetSpell.SpellChecker.dll
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WinHtmlEditor.pdb
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\UsuallyDay.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Attendance.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.viewSchedule.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\StaffSchedule.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WkTRole.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Hobby.hbm.xml
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Examine_Allograph.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Properties.Resources.resources
+C:\Users\ASUS\Documents\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\LeaveManage.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WorkLogForm.exe.config
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csproj.ResolveComReference.cache
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.exe
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.pdb
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\InterimLeader.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\LeaderSign.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Comments.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WkTDept.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WkTUser.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WorkDay.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Holiday.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\StaffLog.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\UsuallyDay.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Attendance.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\StaffSchedule.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WkTRole.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Hobby.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\LeaveManage.hbm.xml
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WorkLogForm.exe
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WorkLogForm.pdb
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\ClassLibrary.dll
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Iesi.Collections.dll
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\IrisSkin2.dll
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\LinFu.DynamicProxy.dll
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\NHibernate.ByteCode.LinFu.dll
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\NHibernate.dll
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\NHibernate.Mapping.Attributes.dll
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WinHtmlEditor.dll
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\NetSpell.SpellChecker.dll
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\ClassLibrary.pdb
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WinHtmlEditor.pdb
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\ResolveAssemblyReference.cache
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Apply_Allograph.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.BusinessManagement.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.checkAttendance.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.InterimHead.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Leave.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.login.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.main.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.OnDuty.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Properties.Resources.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Examine_Allograph.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Secretary.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.shou_ye.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.staff_LogLeader.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.statistics_Attendance.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.TimeManagement.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.ExamAllograph.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.personal_setting.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.viewSchedule.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.WorkOvertime.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.writeSchedule.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.writeLog.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.schedule_Manage.resources
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\GenerateResource.read.1.tlog
+K:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WorkLogForm.exe.config
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csproj.ResolveComReference.cache
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.exe
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.pdb
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\InterimLeader.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\LeaderSign.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Comments.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WkTDept.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WkTUser.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WorkDay.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Holiday.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\StaffLog.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\UsuallyDay.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Attendance.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\StaffSchedule.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WkTRole.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Hobby.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\LeaveManage.hbm.xml
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WorkLogForm.exe
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WorkLogForm.pdb
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\ClassLibrary.dll
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Iesi.Collections.dll
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\IrisSkin2.dll
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\LinFu.DynamicProxy.dll
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\NHibernate.ByteCode.LinFu.dll
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\NHibernate.dll
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\NHibernate.Mapping.Attributes.dll
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WinHtmlEditor.dll
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\NetSpell.SpellChecker.dll
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\ClassLibrary.pdb
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\WinHtmlEditor.pdb
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Apply_Allograph.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.BusinessManagement.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.checkAttendance.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.InterimHead.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Leave.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.login.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.main.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.OnDuty.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Properties.Resources.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Examine_Allograph.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Secretary.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.shou_ye.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.staff_LogLeader.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.statistics_Attendance.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.TimeManagement.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.ExamAllograph.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.personal_setting.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.viewSchedule.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.WorkOvertime.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.writeSchedule.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.writeLog.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.schedule_Manage.resources
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\GenerateResource.read.1.tlog
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\GenerateResource.write.1.tlog
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\Interop.ShockwaveFlashObjects.dll
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\obj\x86\Debug\AxInterop.ShockwaveFlashObjects.dll
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\Interop.ShockwaveFlashObjects.dll
+E:\Visual Studio 2010\Projects\Project1\WorkLogForm\bin\Debug\AxInterop.ShockwaveFlashObjects.dll
+E:\vs_project\Project1\WorkLogForm\bin\Debug\WorkLogForm.exe.config
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\Interop.ShockwaveFlashObjects.dll
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\AxInterop.ShockwaveFlashObjects.dll
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csproj.ResolveComReference.cache
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.exe
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.pdb
+E:\vs_project\Project1\WorkLogForm\bin\Debug\InterimLeader.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\LeaderSign.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\Comments.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\WkTDept.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\WkTUser.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\WorkDay.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\Holiday.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\StaffLog.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\UsuallyDay.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\Attendance.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\StaffSchedule.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\WkTRole.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\Hobby.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\LeaveManage.hbm.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\WorkLogForm.exe
+E:\vs_project\Project1\WorkLogForm\bin\Debug\WorkLogForm.pdb
+E:\vs_project\Project1\WorkLogForm\bin\Debug\ClassLibrary.dll
+E:\vs_project\Project1\WorkLogForm\bin\Debug\Iesi.Collections.dll
+E:\vs_project\Project1\WorkLogForm\bin\Debug\IrisSkin2.dll
+E:\vs_project\Project1\WorkLogForm\bin\Debug\LinFu.DynamicProxy.dll
+E:\vs_project\Project1\WorkLogForm\bin\Debug\NHibernate.ByteCode.LinFu.dll
+E:\vs_project\Project1\WorkLogForm\bin\Debug\NHibernate.dll
+E:\vs_project\Project1\WorkLogForm\bin\Debug\NHibernate.Mapping.Attributes.dll
+E:\vs_project\Project1\WorkLogForm\bin\Debug\WinHtmlEditor.dll
+E:\vs_project\Project1\WorkLogForm\bin\Debug\NetSpell.SpellChecker.dll
+E:\vs_project\Project1\WorkLogForm\bin\Debug\ClassLibrary.pdb
+E:\vs_project\Project1\WorkLogForm\bin\Debug\WinHtmlEditor.pdb
+E:\vs_project\Project1\WorkLogForm\bin\Debug\Microsoft.Office.Interop.Excel.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\Microsoft.Office.Interop.Word.xml
+E:\vs_project\Project1\WorkLogForm\bin\Debug\Interop.ShockwaveFlashObjects.dll
+E:\vs_project\Project1\WorkLogForm\bin\Debug\AxInterop.ShockwaveFlashObjects.dll
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csprojResolveAssemblyReference.cache
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Apply_Allograph.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.BusinessManagement.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.checkAttendance.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.InterimHead.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Leave.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.login.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.main.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.OnDuty.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Properties.Resources.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Examine_Allograph.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Secretary.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.shou_ye.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.staff_LogLeader.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.statistics_Attendance.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.TimeManagement.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.ExamAllograph.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.personal_setting.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.viewSchedule.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.WorkOvertime.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.writeSchedule.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.writeLog.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.schedule_Manage.resources
+E:\vs_project\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csproj.GenerateResource.Cache
+I:\Project1\WorkLogForm\bin\Debug\WorkLogForm.exe.config
+I:\Project1\WorkLogForm\obj\x86\Debug\Interop.ShockwaveFlashObjects.dll
+I:\Project1\WorkLogForm\obj\x86\Debug\AxInterop.ShockwaveFlashObjects.dll
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csproj.ResolveComReference.cache
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.exe
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.pdb
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csprojResolveAssemblyReference.cache
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Apply_Allograph.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.BusinessManagement.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.checkAttendance.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.InterimHead.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Leave.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.login.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.main.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.OnDuty.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Properties.Resources.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Examine_Allograph.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Secretary.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.shou_ye.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.staff_LogLeader.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.statistics_Attendance.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.TimeManagement.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.ExamAllograph.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.personal_setting.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.viewSchedule.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.WorkOvertime.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.writeSchedule.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.writeLog.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.schedule_Manage.resources
+I:\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csproj.GenerateResource.Cache
+I:\Project1\WorkLogForm\bin\Debug\InterimLeader.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\LeaderSign.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\Comments.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\WkTDept.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\WkTUser.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\WorkDay.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\Holiday.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\StaffLog.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\UsuallyDay.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\Attendance.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\StaffSchedule.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\WkTRole.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\Hobby.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\LeaveManage.hbm.xml
+I:\Project1\WorkLogForm\bin\Debug\WorkLogForm.exe
+I:\Project1\WorkLogForm\bin\Debug\WorkLogForm.pdb
+I:\Project1\WorkLogForm\bin\Debug\ClassLibrary.dll
+I:\Project1\WorkLogForm\bin\Debug\Iesi.Collections.dll
+I:\Project1\WorkLogForm\bin\Debug\IrisSkin2.dll
+I:\Project1\WorkLogForm\bin\Debug\LinFu.DynamicProxy.dll
+I:\Project1\WorkLogForm\bin\Debug\NHibernate.ByteCode.LinFu.dll
+I:\Project1\WorkLogForm\bin\Debug\NHibernate.dll
+I:\Project1\WorkLogForm\bin\Debug\NHibernate.Mapping.Attributes.dll
+I:\Project1\WorkLogForm\bin\Debug\WinHtmlEditor.dll
+I:\Project1\WorkLogForm\bin\Debug\NetSpell.SpellChecker.dll
+I:\Project1\WorkLogForm\bin\Debug\ClassLibrary.pdb
+I:\Project1\WorkLogForm\bin\Debug\WinHtmlEditor.pdb
+I:\Project1\WorkLogForm\bin\Debug\Microsoft.Office.Interop.Excel.xml
+I:\Project1\WorkLogForm\bin\Debug\Microsoft.Office.Interop.Word.xml
+I:\Project1\WorkLogForm\bin\Debug\Interop.ShockwaveFlashObjects.dll
+I:\Project1\WorkLogForm\bin\Debug\AxInterop.ShockwaveFlashObjects.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\WorkLogForm.exe.config
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\Interop.ShockwaveFlashObjects.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\AxInterop.ShockwaveFlashObjects.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csproj.ResolveComReference.cache
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.exe
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.pdb
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\InterimLeader.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\LeaderSign.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\Comments.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\WkTDept.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\WkTUser.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\WorkDay.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\Holiday.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\StaffLog.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\UsuallyDay.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\Attendance.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\StaffSchedule.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\WkTRole.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\Hobby.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\LeaveManage.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\WorkLogForm.exe
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\WorkLogForm.pdb
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\ClassLibrary.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\Iesi.Collections.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\IrisSkin2.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\LinFu.DynamicProxy.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\NHibernate.ByteCode.LinFu.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\NHibernate.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\NHibernate.Mapping.Attributes.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\WinHtmlEditor.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\NetSpell.SpellChecker.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\ClassLibrary.pdb
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\WinHtmlEditor.pdb
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\Interop.ShockwaveFlashObjects.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\AxInterop.ShockwaveFlashObjects.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csprojResolveAssemblyReference.cache
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Apply_Allograph.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.BusinessManagement.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.checkAttendance.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.InterimHead.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Leave.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.login.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.main.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.OnDuty.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Properties.Resources.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Examine_Allograph.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.Secretary.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.shou_ye.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.staff_LogLeader.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.statistics_Attendance.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.TimeManagement.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.ExamAllograph.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.personal_setting.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.viewSchedule.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.WorkOvertime.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.writeSchedule.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.writeLog.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.schedule_Manage.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.csproj.GenerateResource.Cache
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\TimeArrangeForManager.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.ViewBusiness.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.RefuseReason.resources
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\DevComponents.DotNetBar2.dll
+D:\Users\仕\Desktop\Project1\WorkLogForm\bin\Debug\SuiBi.hbm.xml
+D:\Users\仕\Desktop\Project1\WorkLogForm\obj\x86\Debug\WorkLogForm.SuiBiGuanLi_New.resources
+E:\WorkLogForm\WorkLogForm\WorkLogForm\bin\Debug\WorkLogForm.exe.config
+E:\WorkLogForm\WorkLogForm\WorkLogForm\obj\x86\Debug\Interop.ShockwaveFlashObjects.dll
+E:\WorkLogForm\WorkLogForm\WorkLogForm\obj\x86\Debug\AxInterop.ShockwaveFlashObjects.dll
+E:\WorkLogForm\WorkLogForm\WorkLogForm\obj\x86\Debug\WorkLogForm.csproj.ResolveComReference.cache
+E:\WorkLogForm\WorkLogForm\WorkLogForm\obj\x86\Debug\WorkLogForm.exe
+E:\WorkLogForm\WorkLogForm\WorkLogForm\obj\x86\Debug\WorkLogForm.pdb

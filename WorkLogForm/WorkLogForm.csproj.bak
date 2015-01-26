@@ -1,0 +1,572 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3905A73B-D409-4D26-82F1-BA57D533085A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WorkLogForm</RootNamespace>
+    <AssemblyName>WorkLogForm</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2">
+      <HintPath>D:\a研究生\OGRE\工程\智能家居沙盘展示界面\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v13.1">
+      <HintPath>C:\Users\Administrator\Desktop\DevExpress 13.1.8 破解(完全破解可发布)\DevExpress 13.1.8 破解(完全破解可发布)\DevExpress.Data.v13.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v13.1">
+      <HintPath>C:\Users\Administrator\Desktop\DevExpress 13.1.8 破解(完全破解可发布)\DevExpress 13.1.8 破解(完全破解可发布)\DevExpress.Utils.v13.1.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Administrator\Desktop\NHibernate-3.1.0.GA-bin\Required_Bins\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="IrisSkin2">
+      <HintPath>..\..\WorkLog - 副本\WorkLogForm\bin\Debug\IrisSkin2.dll</HintPath>
+    </Reference>
+    <Reference Include="LinFu.DynamicProxy">
+      <HintPath>C:\Users\Administrator\Desktop\NHibernate-3.1.0.GA-bin\Required_For_LazyLoading\LinFu\LinFu.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NHibernate">
+      <HintPath>C:\Users\Administrator\Desktop\NHibernate-3.1.0.GA-bin\Required_Bins\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.LinFu">
+      <HintPath>C:\Users\Administrator\Desktop\NHibernate-3.1.0.GA-bin\Required_For_LazyLoading\LinFu\NHibernate.ByteCode.LinFu.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Mapping.Attributes">
+      <HintPath>C:\Users\Administrator\Desktop\NHibernateContrib-1.0.2.0\bin\NHibernate.Mapping.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="apply_Allograph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="apply_Allograph.Designer.cs">
+      <DependentUpon>apply_Allograph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="comment_Log.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="comment_Log.Designer.cs">
+      <DependentUpon>comment_Log.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonClass\CommonStaticParameter.cs" />
+    <Compile Include="leaderAllograph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="leaderAllograph.Designer.cs">
+      <DependentUpon>leaderAllograph.cs</DependentUpon>
+    </Compile>
+    <Compile Include="login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="login.Designer.cs">
+      <DependentUpon>login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="review.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="review.Designer.cs">
+      <DependentUpon>review.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Secretary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Secretary.Designer.cs">
+      <DependentUpon>Secretary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="staff_LogDepart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="staff_LogDepart.Designer.cs">
+      <DependentUpon>staff_LogDepart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="staff_LogLeader.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="staff_LogLeader.Designer.cs">
+      <DependentUpon>staff_LogLeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="statistics_Attendance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="statistics_Attendance.Designer.cs">
+      <DependentUpon>statistics_Attendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WindowUiClass\BackgroundPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="checkAttendance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="checkAttendance.designer.cs">
+      <DependentUpon>checkAttendance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonClass\CNDate.cs" />
+    <Compile Include="Connection\Connection.cs" />
+    <Compile Include="WindowUiClass\creatWindow.cs" />
+    <Compile Include="InterimHead.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterimHead.Designer.cs">
+      <DependentUpon>InterimHead.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Leave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Leave.Designer.cs">
+      <DependentUpon>Leave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="main.Designer.cs">
+      <DependentUpon>main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\BaseService.cs" />
+    <Compile Include="Service\TabelMonitor.cs" />
+    <Compile Include="shou_ye.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="shou_ye.Designer.cs">
+      <DependentUpon>shou_ye.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TimeManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TimeManagement.Designer.cs">
+      <DependentUpon>TimeManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WindowUiClass\CalendarClass.cs" />
+    <Compile Include="WindowUiClass\BackgroundTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WindowUiClass\BackgroundTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ExamAllograph.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExamAllograph.Designer.cs">
+      <DependentUpon>ExamAllograph.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="apply_Allograph.resx">
+      <DependentUpon>apply_Allograph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="checkAttendance.resx">
+      <DependentUpon>checkAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="comment_Log.resx">
+      <DependentUpon>comment_Log.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterimHead.resx">
+      <DependentUpon>InterimHead.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="leaderAllograph.resx">
+      <DependentUpon>leaderAllograph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Leave.resx">
+      <DependentUpon>Leave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="login.resx">
+      <DependentUpon>login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="main.resx">
+      <DependentUpon>main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="review.resx">
+      <DependentUpon>review.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Secretary.resx">
+      <DependentUpon>Secretary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="shou_ye.resx">
+      <DependentUpon>shou_ye.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="staff_LogDepart.resx">
+      <DependentUpon>staff_LogDepart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="staff_LogLeader.resx">
+      <DependentUpon>staff_LogLeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="statistics_Attendance.resx">
+      <DependentUpon>statistics_Attendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeManagement.resx">
+      <DependentUpon>TimeManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExamAllograph.resx">
+      <DependentUpon>ExamAllograph.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="nhibernate-configuration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="nhibernate-mapping.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\1.jpg" />
+    <None Include="resources\背景.jpg" />
+    <None Include="resources\背景1.jpg" />
+    <None Include="resources\背景2.jpg" />
+    <None Include="resources\背景3.jpg" />
+    <None Include="resources\背景4.jpg" />
+    <None Include="resources\背景5.jpg" />
+    <None Include="resources\背景6.jpg" />
+    <None Include="resources\背景7.jpg" />
+    <None Include="resources\立体背景.png" />
+    <None Include="resources\阴天.png" />
+    <None Include="resources\阴天.jpg" />
+    <None Include="resources\指定临时负责人.png" />
+    <None Include="resources\深蓝1.png" />
+    <None Include="resources\黄色.png" />
+    <None Include="resources\立体背景副本.png" />
+    <None Include="resources\透明登录21.png" />
+    <None Include="resources\指定临时负责人1.png" />
+    <None Include="resources\指定临时负责人2.png" />
+    <None Include="resources\指定临时负责人3.png" />
+    <None Include="resources\指定临时负责人4.png" />
+    <None Include="resources\指定临时负责人5.png" />
+    <None Include="resources\指定临时负责人6.png" />
+    <None Include="resources\指定临时负责人7.png" />
+    <None Include="resources\指定临时负责人8.png" />
+    <None Include="resources\指定临时负责人9.png" />
+    <None Include="resources\申请请假.png" />
+    <None Include="resources\请假审批.png" />
+    <None Include="resources\领导代签.png" />
+    <None Include="resources\查看考勤_副本.png" />
+    <None Include="resources\请假审批_副本.png" />
+    <None Include="resources\申请请假_副本.png" />
+    <None Include="resources\指定临时负责人_副本.png" />
+    <None Include="resources\领导代签_副本.png" />
+    <None Include="resources\右翻页_副本.png" />
+    <None Include="resources\左翻页_副本.png" />
+    <None Include="resources\申请请假背景.png" />
+    <None Include="resources\申请请假1.png" />
+    <None Include="resources\水晶环.png" />
+    <None Include="resources\申请请假标题.png" />
+    <None Include="resources\请假记录.JPG" />
+    <None Include="resources\透明登录22.png" />
+    <None Include="resources\查询.png" />
+    <None Include="resources\提交.png" />
+    <None Include="resources\取消.png" />
+    <None Include="resources\返回.png" />
+    <None Include="resources\申请请假背景1.png" />
+    <None Include="resources\申请请假2.png" />
+    <None Include="resources\申请请假3.png" />
+    <None Include="resources\负责人.png" />
+    <None Include="resources\申请请假4.png" />
+    <None Include="resources\领导代签标题.png" />
+    <None Include="resources\代签.png" />
+    <None Include="resources\查看考勤头部.png" />
+    <None Include="resources\bg_left.jpg" />
+    <None Include="resources\bg_dh.png" />
+    <None Include="resources\bg_dh1.png" />
+    <None Include="resources\bg_left1.jpg" />
+    <None Include="resources\bg_dh2.png" />
+    <None Include="resources\bg_left2.jpg" />
+    <None Include="resources\bg_dh3.png" />
+    <None Include="resources\box.png" />
+    <None Include="resources\查看考勤1.png" />
+    <None Include="resources\统计考勤1.png" />
+    <None Include="resources\查看考勤头部1.png" />
+    <None Include="resources\指定临时负责人表1.JPG" />
+    <None Include="resources\返回1.png" />
+    <None Include="resources\统计考勤表.JPG" />
+    <None Include="resources\查看考勤表.png" />
+    <None Include="resources\统计考勤.png" />
+    <Content Include="image\1526203950-4.jpg" />
+    <Content Include="image\16030Qb6-4.jpg" />
+    <Content Include="image\16030S140-0.jpg" />
+    <Content Include="image\16030S1O-3.jpg" />
+    <Content Include="image\16030W221-5.jpg" />
+    <Content Include="image\44.jpg" />
+    <None Include="image\button\add.gif" />
+    <None Include="image\button\apply.gif" />
+    <None Include="image\button\delete.gif" />
+    <None Include="image\button\edit.gif" />
+    <None Include="image\button\export.gif" />
+    <None Include="image\button\import.gif" />
+    <None Include="image\button\pass.gif" />
+    <None Include="image\button\save.gif" />
+    <None Include="image\button\search.gif" />
+    <None Include="image\button\select.gif" />
+    <None Include="image\button\statistics.gif" />
+    <None Include="image\button\update.gif" />
+    <None Include="image\button\删除.png" />
+    <None Include="image\button\添加.png" />
+    <None Include="image\button\未标题-1.png" />
+    <Content Include="image\logo.png" />
+    <None Include="image\logo2.png" />
+    <Content Include="image\logo2437.jpg" />
+    <None Include="image\侧边栏背景.png" />
+    <None Include="image\右箭头.png" />
+    <None Include="image\左箭头.png" />
+    <None Include="image\大背景.png" />
+    <None Include="image\今天.png" />
+    <None Include="image\侧边栏背景3.png" />
+    <None Include="image\天气预报标题.png" />
+    <None Include="image\学校校徽.png" />
+    <None Include="image\大背景3.png" />
+    <None Include="image\logo6.png" />
+    <None Include="image\情报院首页背景.png" />
+    <None Include="image\整体效果副本.png" />
+    <None Include="image\整体效果副本%281%29.png" />
+    <None Include="image\关闭.png" />
+    <None Include="image\关闭渐变.png" />
+    <Content Include="image\日历小方块.png" />
+    <None Include="image\日历小方块2.png" />
+    <Content Include="image\日历小方块_今.png" />
+    <Content Include="image\日历小方块_今选中.png" />
+    <None Include="image\日历小方块_阴影.png" />
+    <None Include="image\日历小方块_今选中2.png" />
+    <None Include="image\日历小方块_阴影3.png" />
+    <Content Include="image\日历小方块选中.png" />
+    <None Include="image\日立小方块\日历小方块.png" />
+    <None Include="image\星期\周二.png" />
+    <None Include="image\星期\周六.png" />
+    <None Include="image\星期\周日.png" />
+    <None Include="image\星期\周三.png" />
+    <None Include="image\星期\周四.png" />
+    <None Include="image\星期\周五.png" />
+    <None Include="image\星期\周一.png" />
+    <None Include="image\日立小方块\日历小方块_今.png" />
+    <None Include="image\日立小方块\日历小方块_今选中.png" />
+    <None Include="image\日立小方块\日历小方块_阴影.png" />
+    <None Include="image\日立小方块\日历小方块选中.png" />
+    <None Include="image\日历背景2.png" />
+    <None Include="image\日历背景3.png" />
+    <None Include="image\退出.png" />
+    <None Include="image\最小化.png" />
+    <None Include="image\普通背景.png" />
+    <None Include="image\日立小方块\日历小方块_喜.png" />
+    <None Include="image\背景.png" />
+    <None Include="image\最小化%282%29.png" />
+    <None Include="image\最小化渐变.png" />
+    <Content Include="lib\AxInterop.ShockwaveFlashObjects.dll" />
+    <Content Include="lib\Iesi.Collections.dll" />
+    <Content Include="lib\Interop.ShockwaveFlashObjects.dll" />
+    <Content Include="lib\IrisSkin2.dll" />
+    <Content Include="lib\LinFu.DynamicProxy.dll" />
+    <Content Include="lib\NHibernate.ByteCode.LinFu.dll" />
+    <Content Include="lib\NHibernate.dll" />
+    <Content Include="lib\NHibernate.Mapping.Attributes.dll" />
+    <None Include="resources\Image.bmp" />
+    <None Include="resources\周一1.png" />
+    <None Include="resources\周三1.png" />
+    <None Include="resources\周五1.png" />
+    <None Include="resources\周四1.png" />
+    <None Include="resources\周日1.png" />
+    <None Include="resources\周六1.png" />
+    <None Include="resources\周二1.png" />
+    <None Include="resources\关闭渐变.bmp" />
+    <None Include="resources\联系人.png" />
+    <None Include="resources\panel_background.png" />
+    <None Include="resources\1231216750.gif" />
+    <None Include="resources\展开.png" />
+    <None Include="resources\闭合1.png" />
+    <None Include="resources\闭合2.png" />
+    <None Include="resources\展开11.png" />
+    <None Include="resources\查看考勤2.png" />
+    <None Include="resources\查看考勤.png" />
+    <None Include="resources\工作日历.png" />
+    <None Include="resources\考勤统计.png" />
+    <None Include="resources\领导补签.png" />
+    <None Include="resources\领导审批.png" />
+    <None Include="resources\排班管理.png" />
+    <None Include="resources\请假管理.png" />
+    <None Include="resources\时间管理.png" />
+    <None Include="resources\闭合.png" />
+    <None Include="resources\展开1.png" />
+    <None Include="resources\最终背景.jpg" />
+    <None Include="resources\bg.png" />
+    <None Include="resources\bg1.png" />
+    <None Include="resources\日历小方块选中.png" />
+    <None Include="resources\日历小方块选中1.png" />
+    <Content Include="resources\鼠标跟随尾光.swf" />
+    <None Include="resources\纯色背景1.jpg" />
+    <None Include="resources\蓝色3.png" />
+    <None Include="resources\蓝31.png" />
+    <None Include="resources\蓝301.png" />
+    <None Include="resources\蓝291.png" />
+    <None Include="resources\蓝28.png" />
+    <None Include="resources\蓝27.png" />
+    <None Include="resources\蓝26.png" />
+    <None Include="resources\蓝25.png" />
+    <None Include="resources\蓝24.png" />
+    <None Include="resources\蓝23.png" />
+    <None Include="resources\蓝22.png" />
+    <None Include="resources\蓝211.png" />
+    <None Include="resources\蓝20.png" />
+    <None Include="resources\蓝19.png" />
+    <None Include="resources\蓝18.png" />
+    <None Include="resources\蓝17.png" />
+    <None Include="resources\蓝16.png" />
+    <None Include="resources\蓝15.png" />
+    <None Include="resources\蓝14.png" />
+    <None Include="resources\蓝13.png" />
+    <None Include="resources\蓝121.png" />
+    <None Include="resources\蓝111.png" />
+    <None Include="resources\蓝10.png" />
+    <None Include="resources\蓝9.png" />
+    <None Include="resources\蓝8.png" />
+    <None Include="resources\蓝7.png" />
+    <None Include="resources\蓝6.png" />
+    <None Include="resources\蓝5.png" />
+    <None Include="resources\蓝4.png" />
+    <None Include="resources\蓝21.png" />
+    <None Include="resources\蓝11.png" />
+    <None Include="resources\蓝30.png" />
+    <None Include="resources\蓝29.png" />
+    <None Include="resources\蓝2.png" />
+    <None Include="resources\蓝.png" />
+    <None Include="resources\红.png" />
+    <None Include="resources\白色.png" />
+    <None Include="resources\蓝1.png" />
+    <None Include="resources\蓝色背景1.png" />
+    <None Include="resources\蓝色背景.png" />
+    <None Include="resources\蓝12.png" />
+    <None Include="resources\关闭.png" />
+    <None Include="resources\棕1.png" />
+    <None Include="resources\病1.png" />
+    <None Include="resources\事1.png" />
+    <None Include="resources\婚20.png" />
+    <None Include="resources\婚201.png" />
+    <None Include="resources\network.png" />
+    <None Include="resources\network1.png" />
+    <None Include="resources\skype.png" />
+    <None Include="resources\library recorder tv.png" />
+    <None Include="resources\深黄.png" />
+    <None Include="resources\橘黄.png" />
+    <None Include="resources\桃红.png" />
+    <None Include="resources\浅蓝.png" />
+    <None Include="resources\深蓝.png" />
+    <None Include="resources\浅蓝1.png" />
+    <None Include="resources\右.png" />
+    <None Include="resources\左.png" />
+    <None Include="resources\左翻页.png" />
+    <None Include="resources\右翻页.png" />
+    <Content Include="resources\登陆.png" />
+    <None Include="resources\透明登录 - 副本副本_副本.png" />
+    <None Include="resources\透明登录 - 副本副本2.png" />
+    <None Include="resources\透明登录 - 副本副本1.png" />
+    <None Include="resources\透明登录2.png" />
+    <None Include="resources\透明登录 - 副本副本.png" />
+    <None Include="resources\登陆1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\登陆副本.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="ShockwaveFlashObjects">
+      <Guid>{D27CDB6B-AE6D-11CF-96B8-444553540000}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
+      <Project>{EB82119B-0737-4A23-A13E-D702690A347E}</Project>
+      <Name>ClassLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

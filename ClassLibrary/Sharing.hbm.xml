@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="ClassLibrary" assembly="ClassLibrary">
+
+  <class name="Sharing" table="SHARING" >
+    <id name="Id" column="Id" type="long"  length="10" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <!--<id name="Id" type="Int64" unsaved-value="0" >
+      <column name="ID" length="18" sql-type="int" not-null="true" unique="true" />
+      <generator class="identity"  />
+    </id>-->
+    <property name="LS_SHAREID" column="LS_SHAREID" type="long" length="10"/>
+    <property name="KU_ID" column="KU_ID" type="long" length="10" />
+    <property name="LAL_ID" column="LAL_ID" type="long" length="10" />
+  </class>
+
+</hibernate-mapping>

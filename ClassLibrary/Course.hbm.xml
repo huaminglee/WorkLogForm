@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="ClassLibrary" assembly="ClassLibrary">
+
+  <class name="Course" table="Course" >
+    <id name="Id" column="Id" type="long"  length="10" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <!--<id name="Id" type="Int64" unsaved-value="0" >
+      <column name="ID" length="18" sql-type="int" not-null="true" unique="true" />
+      <generator class="identity"  />
+    </id>-->
+    <property name="CourseID" column="CourseID" type="Int32" length="4"/>
+    <property name="CourseName" column="CourseName" type="String" length="10" />
+    <property name="DataCreated" column="DataCreated" type="DateTime" />
+  </class>
+
+</hibernate-mapping>

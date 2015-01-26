@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="ClassLibrary" assembly="ClassLibrary">
+
+  <class name="StaffSchedule" table="LOG_T_STAFFSCHEDULE" >
+    <id name="Id" column="id" type="long"  length="10" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property name="Content" column="Contents" type="StringClob" length="2147483647" />
+    <property name="ScheduleTime" column="ScheduleTime" type="long" length="10"/>
+    <property name="RemindTime" column="RemindTime" type="long" length="10"/>
+    <many-to-one name="Staff" column="WkTUserId" lazy="false" not-null="true"
+                 class="ClassLibrary.WkTUser, ClassLibrary" />
+    
+    <bag name="StaffScheduleStaffs" table="StaffSchedule_M_WkTUser" lazy="false" cascade="all">
+      <key column="StaffScheduleId"/>
+      <many-to-many class="ClassLibrary.WkTUser,ClassLibrary" column="KU_ID"/>
+    </bag>
+    <property name="Subject" column="Subject" type="String" length="15" />
+    <property name="IfRemind" column="IfRemind" type="int" length="1"/>
+    <property name="State" column="STATE" type="int" length="1"/>
+    <property name="TimeStamp" column="TIMESTAMP" type="long" length="10"/>
+  </class> 
+
+</hibernate-mapping>
