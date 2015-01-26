@@ -24,6 +24,7 @@ namespace WorkLogForm
 {
     public partial class shou_ye : Form
     {
+        //testGit
         private BaseService baseService = new BaseService();
         IList attendanceList;
         char[] usuallyDay;
@@ -46,23 +47,161 @@ namespace WorkLogForm
             InitializeComponent();
             creatWindow.SetFormRoundRectRgn(this, 15);
             creatWindow.SetFormShadow(this);
-            
+
+        }
+
+        #region 程序运行部分
+
+        private void shou_ye_Load(object sender, EventArgs e)
+        {
+            loadData();//封装label
+            year_comboBoxEx.SelectedIndex = DateTime.Now.Year - 2012;
+            month_comboBoxEx.SelectedIndex = DateTime.Now.Month - 1;
+            this.Visible = false;
+            this.Opacity = 0;
+            timer1.Start();
         }
         private void loadData()
         {
-            dateLabel.Add(label111);dateLabel.Add(label122);dateLabel.Add(label133);dateLabel.Add(label144);
-            dateLabel.Add(label155);dateLabel.Add(label166);dateLabel.Add(label177);dateLabel.Add(label211);
-            dateLabel.Add(label222);dateLabel.Add(label233);dateLabel.Add(label244);dateLabel.Add(label255);
-            dateLabel.Add(label266);dateLabel.Add(label277);dateLabel.Add(label311);dateLabel.Add(label322);
-            dateLabel.Add(label333);dateLabel.Add(label344);dateLabel.Add(label355);dateLabel.Add(label366);
-            dateLabel.Add(label377);dateLabel.Add(label411);dateLabel.Add(label422);dateLabel.Add(label433);
-            dateLabel.Add(label444);dateLabel.Add(label455);dateLabel.Add(label466);dateLabel.Add(label477);
-            dateLabel.Add(label511);dateLabel.Add(label522);dateLabel.Add(label533);dateLabel.Add(label544);
-            dateLabel.Add(label555);dateLabel.Add(label566);dateLabel.Add(label577);dateLabel.Add(label611);
-            dateLabel.Add(label622);dateLabel.Add(label633);dateLabel.Add(label644);dateLabel.Add(label655);
-            dateLabel.Add(label666);dateLabel.Add(label677);
+            dateLabel.Add(label111); dateLabel.Add(label122); dateLabel.Add(label133); dateLabel.Add(label144);
+            dateLabel.Add(label155); dateLabel.Add(label166); dateLabel.Add(label177); dateLabel.Add(label211);
+            dateLabel.Add(label222); dateLabel.Add(label233); dateLabel.Add(label244); dateLabel.Add(label255);
+            dateLabel.Add(label266); dateLabel.Add(label277); dateLabel.Add(label311); dateLabel.Add(label322);
+            dateLabel.Add(label333); dateLabel.Add(label344); dateLabel.Add(label355); dateLabel.Add(label366);
+            dateLabel.Add(label377); dateLabel.Add(label411); dateLabel.Add(label422); dateLabel.Add(label433);
+            dateLabel.Add(label444); dateLabel.Add(label455); dateLabel.Add(label466); dateLabel.Add(label477);
+            dateLabel.Add(label511); dateLabel.Add(label522); dateLabel.Add(label533); dateLabel.Add(label544);
+            dateLabel.Add(label555); dateLabel.Add(label566); dateLabel.Add(label577); dateLabel.Add(label611);
+            dateLabel.Add(label622); dateLabel.Add(label633); dateLabel.Add(label644); dateLabel.Add(label655);
+            dateLabel.Add(label666); dateLabel.Add(label677);
             //initTodayInfo();
         }
+
+        private void yearAndMonth_comboBoxEx_SelectedIndexChanged(object sender, EventArgs e)//初始化日历总入口
+        {
+            DevComponents.Editors.ComboItem yearItem = (DevComponents.Editors.ComboItem)year_comboBoxEx.SelectedItem;
+            DevComponents.Editors.ComboItem monthItem = (DevComponents.Editors.ComboItem)month_comboBoxEx.SelectedItem;
+            if (yearItem != null && monthItem != null && yearItem.Text != "" && monthItem.Text != "")
+            {
+                this.initCalendar(Convert.ToInt32(yearItem.Text), Convert.ToInt32(monthItem.Text));//1初始化日历日期数字
+                initAttendanceDate();//2初始化出勤信息attendanceList
+                initPanelDate();//3初始化假日信息holidayList 上班时间usuallyDayList 请假信息leaveList 调休信息workDayList
+                updateComponent();//4attendenceLabel_Paint更新label  attendencePanel_Paint更新panel
+            }
+        }
+
+        #region 1初始化日历数字
+        /// <summary>
+        /// 初始化日历日期
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        private void initCalendar(int year, int month)//初始化日历日期数字
+        {
+            DateTime selectDay = new DateTime(year, month, 1);
+            CNDate selectDateTool = new CNDate(selectDay);
+            CNDate beforeDateTool = new CNDate(month == 1 ? new DateTime(year - 1, 12, 1) : new DateTime(year, month - 1, 1));
+            switch (selectDay.DayOfWeek)
+            {
+                case DayOfWeek.Sunday:
+                    initDayOfCalendar(0, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
+                case DayOfWeek.Monday:
+                    initDayOfCalendar(1, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
+                case DayOfWeek.Tuesday:
+                    initDayOfCalendar(2, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
+                case DayOfWeek.Wednesday:
+                    initDayOfCalendar(3, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
+                case DayOfWeek.Thursday:
+                    initDayOfCalendar(4, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
+                case DayOfWeek.Friday:
+                    initDayOfCalendar(5, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
+                case DayOfWeek.Saturday:
+                    initDayOfCalendar(6, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
+            }
+        }
+        /// <summary>
+        /// 初始化日历日期子函数
+        /// </summary>
+        /// <param name="startDay"></param>
+        /// <param name="allDay"></param>
+        /// <param name="lastMonthLastDay"></param>
+        private void initDayOfCalendar(int startDay, int allDay, int lastMonthLastDay)//上一个函数的子函数，将DateTime信息存放在各panel的tag中
+        {
+            for (int i = 0; i < dateLabel.Count; i++)
+            {
+                if (i < startDay)//第一行上个月的日期
+                {
+                    dateLabel[i].Text = (lastMonthLastDay - (startDay - i) + 1).ToString();
+                    dateLabel[i].Parent.ForeColor = SystemColors.ControlDark;
+                    if (!month_comboBoxEx.Text.Equals("01"))
+                    {
+                        dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text), Convert.ToInt32(month_comboBoxEx.Text) - 1, lastMonthLastDay - (startDay - i) + 1);
+                    }
+                    else
+                    {
+                        dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text) - 1, 12, lastMonthLastDay - (startDay - i) + 1);
+                    }
+                }
+                else if (i >= (startDay + allDay))
+                {
+                    dateLabel[i].Text = (i - (startDay + allDay) + 1).ToString();
+                    dateLabel[i].Parent.ForeColor = SystemColors.ControlDark;
+                    if (!month_comboBoxEx.Text.Equals("12"))
+                    {
+                        dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text), Convert.ToInt32(month_comboBoxEx.Text) + 1, i - (startDay + allDay) + 1);
+                    }
+                    else
+                    {
+                        dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text) + 1, 1, i - (startDay + allDay) + 1);
+                    }
+
+                }
+                else
+                {
+                    dateLabel[i].Text = (i - startDay + 1).ToString();
+                    dateLabel[i].Parent.ForeColor = SystemColors.ControlText;
+                    dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text), Convert.ToInt32(month_comboBoxEx.Text), i - startDay + 1);
+                }
+            }
+
+        }
+        #endregion
+        #region 2初始化出勤信息
+        private void initAttendanceDate()//初始化出勤信息放入attendanceList
+        {
+            if (dateLabel[dateLabel.Count - 1].Parent.Tag != null && dateLabel[0].Parent.Tag != null)
+            {
+                DateTime startTime = (DateTime)dateLabel[0].Parent.Tag;
+                DateTime endTime = (DateTime)dateLabel[dateLabel.Count - 1].Parent.Tag;
+                attendanceList = baseService.loadEntityList("from Attendance where STATE=" + (int)IEntity.stateEnum.Normal + " and User=" + user.Id + " and SignDate>=" + startTime.Date.Ticks + " and SignDate<=" + endTime.Date.Ticks);
+            }
+        }
+        #endregion
+        #region 3初始化假日信息holidayList 上班时间usuallyDayList 请假信息leaveList 调休信息workDayList
+        private void initPanelDate()//初始化假日信息holidayList 上班时间usuallyDayList 请假信息leaveList 调休信息workDayList
+        {
+            if (dateLabel[dateLabel.Count - 1].Parent.Tag != null && dateLabel[0].Parent.Tag != null)
+            {
+                DateTime startTime = (DateTime)dateLabel[0].Parent.Tag;
+                DateTime endTime = (DateTime)dateLabel[dateLabel.Count - 1].Parent.Tag;
+                holidayList = baseService.loadEntityList("from Holiday where STATE=" + (int)IEntity.stateEnum.Normal + " and ((StartTime>=" + startTime.Date.Ticks + " and StartTime<=" + endTime.Date.Ticks + ") or (EndTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime<=" + startTime.Date.Ticks + " and EndTime>=" + endTime.Date.Ticks + "))");
+                workDayList = baseService.loadEntityList("from WorkDay where STATE=" + (int)IEntity.stateEnum.Normal + " and workDateTime>=" + startTime.Date.Ticks + " and workDateTime<=" + endTime.Date.Ticks);
+                leaveList = baseService.loadEntityList("from LeaveManage where State=" + (int)IEntity.stateEnum.Normal + " and Ku_Id=" + user.Id + " and LeaveResult=2s and ((StartTime>=" + startTime.Date.Ticks + " and StartTime<=" + endTime.Date.Ticks + ") or (EndTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime<=" + startTime.Date.Ticks + " and EndTime>=" + endTime.Date.Ticks + "))");
+                IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where STATE=" + (int)IEntity.stateEnum.Normal + " and StartTime<=" + startTime.Date.Ticks + " order by StartTime desc");
+
+
+                ///<summary>
+                ///？？只能适用一条信息
+                ///</summary>
+                if (usuallyDayList != null && usuallyDayList.Count == 1)
+                {
+                    UsuallyDay u = (UsuallyDay)usuallyDayList[0];
+                    usuallyDay = u.WorkDay.ToCharArray();
+                }
+            }
+        }
+        #endregion
+        #region 4attendenceLabel_Paint更新label  attendencePanel_Paint更新panel
         private void updateComponent()
         {
             attendenceLabel_Paint(label11); attendenceLabel_Paint(label21); attendenceLabel_Paint(label31); attendenceLabel_Paint(label41); attendenceLabel_Paint(label51); attendenceLabel_Paint(label61);
@@ -81,210 +220,7 @@ namespace WorkLogForm
             attendencePanel_Paint(panel16); attendencePanel_Paint(panel26); attendencePanel_Paint(panel36); attendencePanel_Paint(panel46); attendencePanel_Paint(panel56); attendencePanel_Paint(panel66);
             attendencePanel_Paint(panel17); attendencePanel_Paint(panel27); attendencePanel_Paint(panel37); attendencePanel_Paint(panel47); attendencePanel_Paint(panel57); attendencePanel_Paint(panel67);
         }
-        private void initAttendanceDate()
-        {
-            if (dateLabel[dateLabel.Count - 1].Parent.Tag != null && dateLabel[0].Parent.Tag != null)
-            {
-                DateTime startTime = (DateTime)dateLabel[0].Parent.Tag;
-                DateTime endTime = (DateTime)dateLabel[dateLabel.Count - 1].Parent.Tag;
-                attendanceList = baseService.loadEntityList("from Attendance where STATE=" + (int)IEntity.stateEnum.Normal + " and User=" + user.Id + " and SignDate>=" + startTime.Date.Ticks + " and SignDate<=" + endTime.Date.Ticks);
-            }
-        }
-        private void initPanelDate()
-        {
-            if (dateLabel[dateLabel.Count - 1].Parent.Tag != null && dateLabel[0].Parent.Tag != null)
-            {
-                DateTime startTime = (DateTime)dateLabel[0].Parent.Tag;
-                DateTime endTime = (DateTime)dateLabel[dateLabel.Count - 1].Parent.Tag;
-                holidayList = baseService.loadEntityList("from Holiday where STATE=" + (int)IEntity.stateEnum.Normal + " and ((StartTime>=" + startTime.Date.Ticks + " and StartTime<=" + endTime.Date.Ticks + ") or (EndTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime<=" + startTime.Date.Ticks + " and EndTime>=" + endTime.Date.Ticks + "))");
-                workDayList = baseService.loadEntityList("from WorkDay where STATE=" + (int)IEntity.stateEnum.Normal + " and workDateTime>=" + startTime.Date.Ticks + " and workDateTime<=" + endTime.Date.Ticks);
-                leaveList = baseService.loadEntityList("from LeaveManage where State=" + (int)IEntity.stateEnum.Normal + " and Ku_Id=" + user.Id + " and LeaveResult=2s and ((StartTime>=" + startTime.Date.Ticks + " and StartTime<=" + endTime.Date.Ticks + ") or (EndTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime<=" + startTime.Date.Ticks + " and EndTime>=" + endTime.Date.Ticks + "))");
-                IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where STATE=" + (int)IEntity.stateEnum.Normal + " and StartTime<=" + startTime.Date.Ticks + " order by StartTime desc");
-                if (usuallyDayList != null && usuallyDayList.Count == 1)
-                {
-                    UsuallyDay u = (UsuallyDay)usuallyDayList[0];
-                    usuallyDay = u.WorkDay.ToCharArray();
-                }
-            }
-        }
-        private void shou_ye_Load(object sender, EventArgs e)
-        {
-            loadData();
-            year_comboBoxEx.SelectedIndex = DateTime.Now.Year - 2012;
-            month_comboBoxEx.SelectedIndex = DateTime.Now.Month - 1;
-            this.Visible = false;
-            this.Opacity = 0;
-            timer1.Start();
-        }
-        #region 最小化关闭按钮
-        private void min_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.最小化_副本;
-        }
-        private void min_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.最小化渐变;
-        }
-        private void min_pictureBox_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-            //this.Visible = false;
-            this.Opacity = 0;
-        }
-        private void close_pictureBox_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        private void close_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            close_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.关闭渐变_副本;
-        }
-        private void close_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            close_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.关闭渐变;
-        }
-        #endregion
-        #region 窗体移动代码
-        private int x_point, y_point;
-        private void shou_ye_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                this.x_point = e.X;
-                this.y_point = e.Y;
-            }
-        }
 
-        private void shou_ye_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left && this.Location.Y > 0)
-            {
-                Top = MousePosition.Y - y_point;
-                Left = MousePosition.X - x_point;
-            }
-            else if (e.Button == MouseButtons.Left && e.Y > this.y_point)
-            {
-                Top = MousePosition.Y - y_point;
-                Left = MousePosition.X - x_point;
-            }
-        }
-        #endregion
-        /// <summary>
-        /// 初始化日历日期
-        /// </summary>
-        /// <param name="year"></param>
-        /// <param name="month"></param>
-        private void initCalendar(int year,int month)
-        {
-            DateTime selectDay = new DateTime(year,month,1);
-            CNDate selectDateTool = new CNDate(selectDay);
-            CNDate beforeDateTool = new CNDate(month == 1 ? new DateTime(year - 1, 12, 1) : new DateTime(year, month - 1, 1));
-            switch (selectDay.DayOfWeek)
-            {
-                case DayOfWeek.Sunday: 
-                    initDayOfCalendar(0, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
-                case DayOfWeek.Monday: 
-                    initDayOfCalendar(1, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
-                case DayOfWeek.Tuesday: 
-                    initDayOfCalendar(2, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
-                case DayOfWeek.Wednesday: 
-                    initDayOfCalendar(3, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
-                case DayOfWeek.Thursday: 
-                    initDayOfCalendar(4, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
-                case DayOfWeek.Friday: 
-                    initDayOfCalendar(5, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
-                case DayOfWeek.Saturday: 
-                    initDayOfCalendar(6, selectDateTool.GetDayNumOfMonth(), beforeDateTool.GetDayNumOfMonth()); break;
-            }
-        }
-        /// <summary>
-        /// 初始化日历日期子函数
-        /// </summary>
-        /// <param name="startDay"></param>
-        /// <param name="allDay"></param>
-        /// <param name="lastMonthLastDay"></param>
-        private void initDayOfCalendar(int startDay, int allDay, int lastMonthLastDay)
-        {
-            for (int i = 0; i < dateLabel.Count; i++)
-            {
-                if (i < startDay)
-                {
-                    dateLabel[i].Text = (lastMonthLastDay - (startDay-i)+1).ToString();
-                    dateLabel[i].Parent.ForeColor = SystemColors.ControlDark;
-                    if (!month_comboBoxEx.Text.Equals("01"))
-                    {
-                        dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text), Convert.ToInt32(month_comboBoxEx.Text) - 1, lastMonthLastDay - (startDay - i)+1);
-                    }
-                    else
-                    {
-                        dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text) - 1, 12, lastMonthLastDay - (startDay - i)+1);
-                    }
-                }
-                else if (i >= (startDay + allDay))
-                {
-                    dateLabel[i].Text = (i - (startDay + allDay) + 1).ToString();
-                    dateLabel[i].Parent.ForeColor = SystemColors.ControlDark;
-                    if (!month_comboBoxEx.Text.Equals("12"))
-                    {
-                        dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text), Convert.ToInt32(month_comboBoxEx.Text) + 1, i - (startDay + allDay) + 1);
-                    }
-                    else
-                    {
-                        dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text) + 1, 1, i - (startDay + allDay) + 1);
-                    }
-                    
-                }
-                else
-                {
-                    dateLabel[i].Text = (i - startDay + 1).ToString();
-                    dateLabel[i].Parent.ForeColor = SystemColors.ControlText;
-                    dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text), Convert.ToInt32(month_comboBoxEx.Text), i - startDay + 1);
-                }
-            }
-           
-        }
-        private void yearAndMonth_comboBoxEx_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DevComponents.Editors.ComboItem yearItem = (DevComponents.Editors.ComboItem)year_comboBoxEx.SelectedItem;
-            DevComponents.Editors.ComboItem monthItem = (DevComponents.Editors.ComboItem)month_comboBoxEx.SelectedItem;
-            if (yearItem != null && monthItem != null && yearItem.Text != "" && monthItem.Text != "")
-            {
-                this.initCalendar(Convert.ToInt32(yearItem.Text), Convert.ToInt32(monthItem.Text));
-                initAttendanceDate();
-                initPanelDate();
-                updateComponent();
-            }
-        }
-        private void calendar_ovalShape_left_Click(object sender, EventArgs e)
-        {
-            if (month_comboBoxEx.SelectedIndex != 0)
-            {
-                month_comboBoxEx.SelectedIndex = month_comboBoxEx.SelectedIndex - 1;
-            }
-            else if (month_comboBoxEx.SelectedIndex == 0)
-            {
-                if (year_comboBoxEx.SelectedIndex != 0)
-                {
-                    year_comboBoxEx.SelectedIndex = year_comboBoxEx.SelectedIndex - 1;
-                    month_comboBoxEx.SelectedIndex = 11;
-                }
-            }
-        }
-        private void calendar_ovalShape_right_Click(object sender, EventArgs e)
-        {
-            if (month_comboBoxEx.SelectedIndex != 11)
-            {
-                month_comboBoxEx.SelectedIndex = month_comboBoxEx.SelectedIndex + 1;
-            }
-            else if (month_comboBoxEx.SelectedIndex == 11)
-            {
-                if (year_comboBoxEx.SelectedIndex != year_comboBoxEx.Items.Count-1)
-                {
-                    year_comboBoxEx.SelectedIndex = year_comboBoxEx.SelectedIndex + 1;
-                    month_comboBoxEx.SelectedIndex = 0;
-                }
-            }
-        }
         /// <summary>
         /// 渲染考勤信息
         /// </summary>
@@ -394,9 +330,98 @@ namespace WorkLogForm
                     panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_休;//周六日休息图片，还没有做！！！@！！！！！！！
                 }
             }
-            catch 
+            catch
             { }
         }
+        #endregion
+
+        #endregion
+        #region 最小化关闭按钮
+        private void min_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.最小化_副本;
+        }
+        private void min_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.最小化渐变;
+        }
+        private void min_pictureBox_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+            //this.Visible = false;
+            this.Opacity = 0;
+        }
+        private void close_pictureBox_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void close_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            close_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.关闭渐变_副本;
+        }
+        private void close_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            close_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.关闭渐变;
+        }
+        #endregion
+        #region 窗体移动代码
+        private int x_point, y_point;
+        private void shou_ye_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.x_point = e.X;
+                this.y_point = e.Y;
+            }
+        }
+
+        private void shou_ye_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && this.Location.Y > 0)
+            {
+                Top = MousePosition.Y - y_point;
+                Left = MousePosition.X - x_point;
+            }
+            else if (e.Button == MouseButtons.Left && e.Y > this.y_point)
+            {
+                Top = MousePosition.Y - y_point;
+                Left = MousePosition.X - x_point;
+            }
+        }
+        #endregion
+
+
+        private void calendar_ovalShape_left_Click(object sender, EventArgs e)
+        {
+            if (month_comboBoxEx.SelectedIndex != 0)
+            {
+                month_comboBoxEx.SelectedIndex = month_comboBoxEx.SelectedIndex - 1;
+            }
+            else if (month_comboBoxEx.SelectedIndex == 0)
+            {
+                if (year_comboBoxEx.SelectedIndex != 0)
+                {
+                    year_comboBoxEx.SelectedIndex = year_comboBoxEx.SelectedIndex - 1;
+                    month_comboBoxEx.SelectedIndex = 11;
+                }
+            }
+        }
+        private void calendar_ovalShape_right_Click(object sender, EventArgs e)
+        {
+            if (month_comboBoxEx.SelectedIndex != 11)
+            {
+                month_comboBoxEx.SelectedIndex = month_comboBoxEx.SelectedIndex + 1;
+            }
+            else if (month_comboBoxEx.SelectedIndex == 11)
+            {
+                if (year_comboBoxEx.SelectedIndex != year_comboBoxEx.Items.Count - 1)
+                {
+                    year_comboBoxEx.SelectedIndex = year_comboBoxEx.SelectedIndex + 1;
+                    month_comboBoxEx.SelectedIndex = 0;
+                }
+            }
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.Visible = true;
@@ -435,7 +460,7 @@ namespace WorkLogForm
         private void pictureBox_rizhi_Click(object sender, EventArgs e)
         {
             PictureBox p = new PictureBox();
-               p=(PictureBox)sender;
+            p = (PictureBox)sender;
             writeLog log = new writeLog();
             log.IsView = true;
             log.User = this.user;
