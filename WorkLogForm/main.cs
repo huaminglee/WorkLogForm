@@ -16,6 +16,8 @@ using System.Data.SqlClient;
 
 namespace WorkLogForm
 {
+
+
     public partial class main : Form
     {
         private IList scheduleList;
