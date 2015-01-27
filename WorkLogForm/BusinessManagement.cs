@@ -294,10 +294,10 @@ namespace WorkLogForm
 
 
         private int flagOfRole=0;
-        private void initTabPage3()//初始化审核界面
+        private void initTabPage3()//初始化审批界面
         {
             listView3.Items.Clear();
-            listView8.Items.Clear();
+
             string query = "from Business b where b.PassExam=" + (int)Business.ExamState.waiting;
             IList depList = baseService.loadEntityList(query);
             int flagOfShow = 0;
@@ -488,7 +488,7 @@ namespace WorkLogForm
             {
                 Business b = (Business)listView3.SelectedItems[0].Tag;
                 IList businessEmployee = getEmpByBus(b);
-                listView8.Items.Clear();
+                //listView8.Items.Clear();
                 foreach (BusinessEmployee be in businessEmployee)
                 {
                     if (be.PassExam == (int)BusinessEmployee.ExamState.waiting)//还未审核
@@ -500,7 +500,7 @@ namespace WorkLogForm
                                 ListViewItem item = new ListViewItem();
                                 item.Text = be.EmployeeId.KuName;
                                 item.Tag = be;
-                                listView8.Items.Add(item);
+                                //listView8.Items.Add(item);
                             }
                         }
                         if (flagOfRole == 2)//副院长审核
@@ -510,14 +510,14 @@ namespace WorkLogForm
                                 ListViewItem item = new ListViewItem();
                                 item.Text = be.EmployeeId.KuName;
                                 item.Tag = be;
-                                listView8.Items.Add(item);
+                                //listView8.Items.Add(item);
                             }
                             if (roleInUser(be.EmployeeId, "院长"))
                             {
                                 ListViewItem item = new ListViewItem();
                                 item.Text = be.EmployeeId.KuName;
                                 item.Tag = be;
-                                listView8.Items.Add(item);
+                                //listView8.Items.Add(item);
                             }
                         }
                     }
@@ -525,7 +525,7 @@ namespace WorkLogForm
             }
         }
 
-        private void checkBox1_CheckStateChanged(object sender, EventArgs e)
+      /*  private void checkBox1_CheckStateChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked == true)
             {
@@ -541,7 +541,7 @@ namespace WorkLogForm
                     item.Checked = false ;
                 }
             }
-        }
+        }*/
 
         private void button6_Click(object sender, EventArgs e)
         {
