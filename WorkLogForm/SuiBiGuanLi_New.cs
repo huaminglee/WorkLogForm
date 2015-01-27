@@ -37,15 +37,18 @@ namespace WorkLogForm
 
         private void SuiBiGuanLi_New_Load(object sender, EventArgs e)
         {
+            this.MyOwnSuiBi_panel.Visible = true;
+            this.other_panel.Visible = false;
+            this.comboBox1.Text = this.comboBox1.Items[0].ToString();
             if (user != null)
             {
               
                 string sql = "from SuiBi  where STATE=" + (int)IEntity.stateEnum.Normal+ " and WkTUserId = " + user.Id +" and WriteTime > " + DateTime.Now.AddMonths(-1).Ticks;
                 IList suibilist = baseService.loadEntityList(sql);
                 ShowInFlowPanel(suibilist);
+                
             }
-            string sql2 = "from ";
-
+            
 
             
         }
@@ -117,12 +120,14 @@ namespace WorkLogForm
 
         private void MyOwnSuiBi_pictureBox_Click(object sender, EventArgs e)
         {
-
+            this.MyOwnSuiBi_panel.Visible = true;
+            this.other_panel.Visible = false;
         }
 
         private void OtherSuiBi_pictureBox_Click(object sender, EventArgs e)
         {
-
+            this.MyOwnSuiBi_panel.Visible = false;
+            this.other_panel.Visible = true;
         }
 
         private void SearchSuiBi_pictureBox_Click(object sender, EventArgs e)
@@ -132,10 +137,11 @@ namespace WorkLogForm
 
         public void ShowInFlowPanel(IList SuiBiList)
         {
+            ShowMyOwnSuiBi.Controls.Clear();
             if (  SuiBiList != null&&SuiBiList.Count > 0)
             {
 
-                ShowMyOwnSuiBi.Controls.Clear();
+               
                 foreach (SuiBi o in SuiBiList)
                 {
 
@@ -187,17 +193,21 @@ namespace WorkLogForm
 
         void deleteSuiBi_Click(object sender, EventArgs e)
         {
-            LinkLabel theLinklabel = (LinkLabel)sender;
-            SuiBi thesuibi = theLinklabel.Tag as SuiBi;
-            baseService.deleteEntity(thesuibi);
+            if (MessageBox.Show("确定要删除这条随笔吗？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                LinkLabel theLinklabel = (LinkLabel)sender;
+                SuiBi thesuibi = theLinklabel.Tag as SuiBi;
+                baseService.deleteEntity(thesuibi);
 
-            Panel thepanel = theLinklabel.Parent as Panel;
-            int index = thepanel.Parent.Controls.IndexOf(thepanel);
-           
-            //消除闪烁
-            //ShowMyOwnSuiBi.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).SetValue(thepanel, true, null);
+                Panel thepanel = theLinklabel.Parent as Panel;
+                int index = thepanel.Parent.Controls.IndexOf(thepanel);
 
-            ShowMyOwnSuiBi.Controls.RemoveAt(index);
+                //消除闪烁
+                //ShowMyOwnSuiBi.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).SetValue(thepanel, true, null);
+
+                ShowMyOwnSuiBi.Controls.RemoveAt(index);
+            }
+            
         }
 
 
@@ -234,7 +244,99 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
+            this.flowLayoutPanelOfOthers.Visible = false;
+            this.button2.Cursor = Cursors.WaitCursor;
+            if (this.comboBox1.Text == this.comboBox1.Items[0].ToString())
+            {
 
+
+                string sql = "select w.KU_NAME,s.* from SuiBi s left join WK_T_USER w on s.WkTUserId = w.KU_ID where w.KU_NAME like '%"
+                    + textBox3.Text.Trim() + "%' and s.STATE = "
+                    + (int)IEntity.stateEnum.Normal +
+                    " and s.WriteTime > " + this.dateTimePicker3.Value.Ticks +
+                    "  and s.WriteTime < " + this.dateTimePicker4.Value.Ticks +
+                    " and s.Contents like '%"+this.textBox2.Text+"%'";
+
+
+                IList suibilist = baseService.ExecuteSQL(sql);
+
+                ShowInFlowPanelBySQLInOthers(suibilist);
+            }
+            else if (this.comboBox1.Text != this.comboBox1.Items[0].ToString())
+            {
+
+
+                string sql = "select t.name,s.* from SuiBi s left join " +
+                    "(select w.KU_NAME name ,w.KU_ID id from WK_T_USER w left join WK_T_DEPT on " +
+                    " WK_T_DEPT.KD_ID = w.KD_ID where KD_NAME like '%" + this.comboBox1.Text.Trim()
+                    + "%') t  on s.WkTUserId = t.id where name like '%" + textBox3.Text.Trim() + "%'"+
+                    " and s.WriteTime > " + this.dateTimePicker3.Value.Ticks +
+                    "  and s.WriteTime < " + this.dateTimePicker4.Value.Ticks+
+                    " and s.Contents like '%"+this.textBox2.Text+"%'";
+
+
+                IList suibilist = baseService.ExecuteSQL(sql);
+
+                ShowInFlowPanelBySQLInOthers(suibilist);
+            
+            }
+            this.flowLayoutPanelOfOthers.Visible = true;
+            if (this.flowLayoutPanelOfOthers.Visible == true)
+            {
+                this.button2.Cursor = Cursors.Hand;
+            }
+
+
+        }
+        public void ShowInFlowPanelBySQLInOthers(IList SuiBiList)
+        {
+            flowLayoutPanelOfOthers.Controls.Clear();
+            if (SuiBiList != null && SuiBiList.Count > 0)
+            {
+
+
+                foreach (object[] o in SuiBiList)
+                {
+
+                    Panel newpanel = new Panel();
+
+                    Label name = new Label();
+                    name.Font = new Font (new FontFamily("微软雅黑"),12,FontStyle.Bold);
+                    name.Location = new Point(20, 13);
+                    name.Text = o[0].ToString();
+
+                    Label content = new Label();
+                    content.Font = new Font(new FontFamily("微软雅黑"), 10);
+                    content.AutoSize = false;
+
+                    int contentheight = ((o[2].ToString().Length / 52) + 1) * 22;
+                    content.Size = new Size(737, contentheight);
+                    content.Text = o[2].ToString();
+                    content.Location = new Point(20, 37);
+
+
+                    Label time = new Label();
+                    time.Font = new Font(new FontFamily("微软雅黑"), 9);
+                    time.AutoSize = true;
+                    time.Location = new Point(619, name.Height+content.Height + 15);
+                    time.Text = new DateTime(Convert.ToInt64(o[3].ToString())).ToString("yyyy年MM月dd日 hh:mm");
+
+                    newpanel.Size = new Size(768, name.Height+content.Height + time.Height + 25);
+                    newpanel.Parent = flowLayoutPanelOfOthers;
+
+
+                    name.Parent = newpanel;
+                    content.Parent = newpanel;
+                    time.Parent = newpanel;
+                    
+
+
+                    //消除闪烁
+                    //ShowMyOwnSuiBi.GetType().GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance| System.Reflection.BindingFlags.NonPublic).SetValue(newpanel, true, null);
+
+                }
+
+            }
         }
 
 
