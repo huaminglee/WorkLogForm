@@ -19,6 +19,8 @@
     <property name="PassExam" column="PASSEXAM" type="int" length="1"/>
     <property name="WaitingNum" column="WAITINGNUM" type="int" length="18"/>
     <property name="RefuseReason" column="REFUSEREASON" type="string" length="1000" />
+    <many-to-one name="Boss" column="BOSS" lazy="false" not-null="true"
+                class="ClassLibrary.WkTUser, ClassLibrary" />
     
     <property name="State" column="STATE" type="int" length="1"/>
     <property name="TimeStamp" column="TIMESTAMP" type="long" length="10"/>
@@ -29,7 +31,12 @@
     </bag>-->
     <!--<many-to-one name="BusinessId" column="BUSINESSID" lazy="false" not-null="true"
                 class="ClassLibrary.WkTUser, ClassLibrary" />-->
-
+    
+    
+     <bag name="BusinessEmployee" cascade="all" inverse="true" lazy="true"> 
+      <key column="Id"/> 
+      <one-to-many class="ClassLibrary.BusinessEmployee,ClassLibrary "/> 
+    </bag>
   </class>
 
 </hibernate-mapping>

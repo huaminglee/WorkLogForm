@@ -60,12 +60,13 @@ namespace ClassLibrary
             set { businessNote = value; }
         }
 
-        private int passExam;//是否通过审查
+        private int passExam;//审核审批状态
         public virtual int PassExam
         {
             get { return passExam; }
             set { passExam = value; }
         }
+
 
         private int waitingNum;//等待审核的员工个数
         public virtual int WaitingNum
@@ -80,7 +81,22 @@ namespace ClassLibrary
             get { return refuseReason; }
             set { refuseReason = value; }
         }
+
+        private WkTUser boss;//审批指定领导
+        public virtual WkTUser Boss
+        {
+            get { return boss; }
+            set { boss = value; }
+        }
+
+        private IList<BusinessEmployee> businessEmployee;
+
+        public virtual IList<BusinessEmployee> BusinessEmployee
+        {
+            get { return businessEmployee; }
+            set { businessEmployee = value; }
+        }
         
-        public enum ExamState{waiting,pass,npass};
+        public enum ExamState{waiting,pass,npass,redo};
     }
 }

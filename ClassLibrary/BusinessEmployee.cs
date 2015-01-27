@@ -7,21 +7,21 @@ namespace ClassLibrary
 {
     public  class BusinessEmployee:IEntity
     {
-        private Business businessId;
+        private Business businessId;//哪次出差
         public virtual Business BusinessId
         {
             get { return businessId; }
             set { businessId = value; }
         }
 
-        private WkTUser employeeId;
+        private WkTUser employeeId;//员工id
         public virtual  WkTUser EmployeeId
         {
             get { return employeeId; }
             set { employeeId = value; }
         }
 
-        private int passExam;
+        private int passExam;//审核审批状态
 
         public virtual  int PassExam
         {
@@ -29,7 +29,6 @@ namespace ClassLibrary
           set { passExam = value; }
         }
 
-
-        public enum ExamState { waiting, pass, npass };
+        public enum ExamState { waiting, pass, npass, redo };
     }
 }
