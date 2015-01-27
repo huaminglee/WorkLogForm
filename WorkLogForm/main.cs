@@ -1343,7 +1343,7 @@ namespace WorkLogForm
                     time.Font = new Font(new FontFamily("微软雅黑"), 9);
                     time.AutoSize = true;
                     time.Location = new Point(68, Name.Height + content.Height + 15);
-                    time.Text = new DateTime(Convert.ToInt64(o[2].ToString())).ToString("yyyy年MM月dd日 hh:mm");
+                    time.Text = new DateTime(Convert.ToInt64(o[2].ToString())).ToString("yyyy年MM月dd日 HH:mm");
 
                     newpanel.Size = new Size(215, Name.Height + content.Height + time.Height + 25);
                     newpanel.Parent = Show_SuiBi_flowPanel;

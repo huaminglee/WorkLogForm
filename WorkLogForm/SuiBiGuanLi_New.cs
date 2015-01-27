@@ -171,7 +171,7 @@ namespace WorkLogForm
                     time.Font = new Font(new FontFamily("微软雅黑"), 11);
                     time.AutoSize = true;
                     time.Location = new Point(500, content.Height + 10);
-                    time.Text = new DateTime(Convert.ToInt64(o.WriteTime.ToString())).ToString("yyyy年MM月dd日 hh:mm");
+                    time.Text = new DateTime(Convert.ToInt64(o.WriteTime.ToString())).ToString("yyyy年MM月dd日 HH:mm");
 
                     newpanel.Size = new Size(732, content.Height + time.Height + 25);
                     newpanel.Parent = ShowMyOwnSuiBi;
@@ -319,7 +319,7 @@ namespace WorkLogForm
                     time.Font = new Font(new FontFamily("微软雅黑"), 9);
                     time.AutoSize = true;
                     time.Location = new Point(619, name.Height+content.Height + 15);
-                    time.Text = new DateTime(Convert.ToInt64(o[3].ToString())).ToString("yyyy年MM月dd日 hh:mm");
+                    time.Text = new DateTime(Convert.ToInt64(o[3].ToString())).ToString("yyyy年MM月dd日 HH:mm");
 
                     newpanel.Size = new Size(768, name.Height+content.Height + time.Height + 25);
                     newpanel.Parent = flowLayoutPanelOfOthers;
