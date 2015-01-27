@@ -16,6 +16,7 @@ namespace WorkLogForm
     {
         private BaseService baseService=new BaseService();
         private Business selectedBusiness;
+        private IList EmpInBusDept;
 
         private WkTUser user;
         public WkTUser User
@@ -121,16 +122,17 @@ namespace WorkLogForm
                 item.Tag = b;
                 listView9.Items.Add(item);
             }
+            listView9.SelectedItems.Clear();
         }
 
 
         private void button17_Click(object sender, EventArgs e)//出差发起提交
         {
-            if (listView9.SelectedItems.Count == 0)
+            if (listView9.SelectedItems.Count==0)
                 MessageBox.Show("请指定审批院领导");
-            else if (textBox4.Text == null || textBox5.Text == null || listView9.SelectedItems.Count == 0)
+            else if (textBox4.Text == "" || textBox5.Text == "" || listView1.Items.Count == 0)
                 MessageBox.Show("请完成出差表单");
-            else if (dateTimePicker1.Value <= DateTime.Now || dateTimePicker2.Value <= dateTimePicker1.Value)
+            else if (dateTimePicker1.Value < DateTime.Now.Date || dateTimePicker2.Value < dateTimePicker1.Value)
                 MessageBox.Show("请正确选择时间");
             else
             {
@@ -161,6 +163,7 @@ namespace WorkLogForm
                 baseService.SaveOrUpdateEntity(buss);
 
                 MessageBox.Show("添加成功！");
+                listView9.SelectedItems.Clear();
                 textBox3.Clear();
                 textBox4.Clear();
                 textBox5.Clear();
@@ -215,9 +218,8 @@ namespace WorkLogForm
         private void initTabPage4()
         {
             listView5.Items.Clear();
-            listView7.Items.Clear();
             listView6.Items.Clear();
-            if (true)//(roleInUser(this.User, "部门负责人"))
+            if (roleInUser(this.User, "部门主任"))
             {
                 string query = "from Business b where b.PassExam=" + (int)Business.ExamState.waiting;
                 IList depList = baseService.loadEntityList(query);
@@ -226,25 +228,20 @@ namespace WorkLogForm
                 {
                     ListViewItem item = new ListViewItem();
                     item.Text = i.ToString();
-                    item.SubItems.Add(new DateTime(b.StartTime).ToShortDateString());
-                    item.SubItems.Add(new DateTime(b.EndTime).ToShortDateString());
-                    item.SubItems.Add(b.BusinessDestination);
-                    item.SubItems.Add(b.BusinessReason);
                     item.SubItems.Add(b.Ku_Id.KuName);
                     item.Tag = b;
                     listView5.Items.Add(item);
                     i++;
                 }
 
-
-                IList uList = getUserByDept(User.Kdid);
-                foreach (WkTUser u in uList)
-                {
-                    ListViewItem item = new ListViewItem();
-                    item.Text = u.KuName;
-                    item.Tag = u;
-                    listView7.Items.Add(item);
-                }
+                //IList uList = getUserByDept(User.Kdid);
+                //foreach (WkTUser u in uList)
+                //{
+                //    ListViewItem item = new ListViewItem();
+                //    item.Text = u.KuName;
+                //    item.Tag = u;
+                //    listView7.Items.Add(item);
+                //}
             }
 
         }
@@ -258,16 +255,69 @@ namespace WorkLogForm
             foreach (BusinessEmployee be in businessEmployee)
             {
 
-                if (be.EmployeeId.Kdid.KdName == this.User.Kdid.KdName && be.PassExam == (int)BusinessEmployee.ExamState.waiting)
+                ListViewItem item = new ListViewItem();
+                item.Text = be.EmployeeId.KuName;
+                item.SubItems.Add(be.EmployeeId.Kdid.KdName.Trim());
+                switch (be.PassExam)
                 {
-                    ListViewItem item = new ListViewItem();
-                    item.Text = be.EmployeeId.KuName;
-                    item.Tag = be;
-                    listView6.Items.Add(item);
+                    case (int)BusinessEmployee.ExamState.waiting:
+                        item.SubItems.Add("未审核");
+                        break;
+                    case (int)BusinessEmployee.ExamState.pass:
+                        item.SubItems.Add("已审核");
+                        break;
                 }
+
+                item.Tag = be;
+                listView6.Items.Add(item);
+            }
+            DateTime st=new DateTime(b.StartTime), et=new DateTime(b.EndTime);
+            textBox6.Text = b.BusinessReason;
+            textBox7.Text = st.ToString("yyyy年 MM月 dd日") + "----" + et.ToString("yyyy年 MM月 dd日");
+            textBox8.Text = b.BusinessDestination;
+            textBox12.Text = b.BusinessNote;
+
+
+            string queryEmp = "from BusinessEmployee be where be.BusinessId=" + b.Id + "and be.EmployeeId.Kdid=" + User.Kdid.Id + "and  be.PassExam=" + (int)BusinessEmployee.ExamState.waiting + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal;
+            EmpInBusDept = baseService.loadEntityList(queryEmp);
+            if (EmpInBusDept == null||EmpInBusDept.Count==0)
+            {
+                button4.Enabled = false;
+                button5.Enabled = false;
+                button8.Enabled = false;
+            }
+            else 
+            {
+                button4.Enabled = true;
+                button5.Enabled = true;
+                button8.Enabled = true;
             }
 
             selectedBusiness = b;
+        }
+
+        private void button5_Click(object sender, EventArgs e)// 审核通过
+        {
+            if (EmpInBusDept != null&&EmpInBusDept.Count!=0)
+            {
+                foreach (BusinessEmployee be in EmpInBusDept)
+                {
+                    
+                    string query1 = "update LOG_T_BUSINESSEMPLOYEE set PASSEXAM=" + (int)BusinessEmployee.ExamState.pass + " where Id=" + be.Id;//修改员工审核状态为通过
+                    baseService.ExecuteSQL(query1);
+                }
+
+                int waitNum = selectedBusiness.WaitingNum - EmpInBusDept.Count;
+                string query2 = "update LOG_T_BUSINESS set WAITINGNUM=" +waitNum + " where Id=" + selectedBusiness.Id;//修改待审核人数
+                baseService.ExecuteSQL(query2);
+                if (waitNum == 0)
+                {
+                    string query3 = "update LOG_T_BUSINESS set PASSEXAM=" + (int)Business.ExamState.pass + " where Id=" + selectedBusiness.Id;//修改出差审核状态为通过
+                    baseService.ExecuteSQL(query3);
+                }
+                MessageBox.Show("审核通过！");
+                initTabPage4();
+            }
         }
         #endregion
         #region tabpage3 院领导审批
@@ -474,43 +524,7 @@ namespace WorkLogForm
 
 
 
-        /*private void button5_Click(object sender, EventArgs e)
-        {
-            if (listView6.SelectedItems.Count != 0)
-            {
-                BusinessEmployee be = (BusinessEmployee)listView6.SelectedItems[0].Tag;
-                baseService.deleteEntity(be);
-                listView6.Items.Remove(listView6.SelectedItems[0]);
-
-                int i = selectedBusiness.WaitingNum;
-                i--;
-                string update = "update LOG_T_BUSINESS set WAITINGNUM ="+ i +" where id = "+selectedBusiness.Id;
-                baseService.ExecuteSQL(update);
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if (listView7.SelectedItems.Count != 0&&listView5.SelectedItems.Count!=0)
-            {
-                BusinessEmployee be = new BusinessEmployee();
-                be.BusinessId = selectedBusiness;
-                be.EmployeeId = (WkTUser)listView7.SelectedItems[0].Tag;
-                ListViewItem item = new ListViewItem();
-                item.Text = be.EmployeeId.KuName;
-                item.Tag = be;
-                listView6.Items.Add(item);
-                be.PassExam = (int)BusinessEmployee.ExamState.waiting;
-                baseService.SaveOrUpdateEntity(be);
-
-                int i = selectedBusiness.WaitingNum;
-                i++;
-                string update = "update LOG_T_BUSINESS set WAITINGNUM =" + i + " where id = " + selectedBusiness.Id;
-                baseService.ExecuteSQL(update);
-
-            }
-        }
-
+        /*
         private void listView3_MouseClick(object sender, MouseEventArgs e)
         {
             if (listView3.SelectedItems != null&&listView3.SelectedItems.Count!=0)
@@ -679,7 +693,7 @@ namespace WorkLogForm
             return baseService.loadEntityList(query);
         }
 
-        private IList getUserByDept(WkTDept dept)//获取登陆人所在部门
+        private IList getUserByDept(WkTDept dept)//获取登陆人所在部门的员工
         {
             string queryUser = "from WkTUser u where u.Kdid=" + dept.Id;
             return baseService.loadEntityList(queryUser);
@@ -697,12 +711,22 @@ namespace WorkLogForm
             IList<WkTRole> roleList = u.UserRole;
             foreach (WkTRole rr in roleList)
             {
-                if (rr.KrName.Trim() == roleName)
+                if (rr.KrName.Trim() == roleName && rr.KrDESC == "工作小秘书角色")
                     return true;
             }
             return false;
         }
         #endregion
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            BusinessChange bcForm = new BusinessChange();
+            bcForm.Tag = EmpInBusDept;
+            bcForm.ShowDialog();
+            initTabPage4();
+        }
+
+
 
     }
 }

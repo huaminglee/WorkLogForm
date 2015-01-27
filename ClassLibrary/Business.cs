@@ -97,6 +97,6 @@ namespace ClassLibrary
             set { businessEmployee = value; }
         }
         
-        public enum ExamState{waiting,pass,npass,redo};
+        public enum ExamState{waiting,pass,npass,redo,done};
     }
 }

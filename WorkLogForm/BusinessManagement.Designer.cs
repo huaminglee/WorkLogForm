@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.listView9 = new System.Windows.Forms.ListView();
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -61,10 +62,12 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.listView6 = new System.Windows.Forms.ListView();
             this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -116,8 +119,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.close_pictureBox = new System.Windows.Forms.PictureBox();
             this.min_pictureBox = new System.Windows.Forms.PictureBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -129,7 +132,6 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -155,6 +157,16 @@
             this.groupBox1.Size = new System.Drawing.Size(890, 532);
             this.groupBox1.TabIndex = 233;
             this.groupBox1.TabStop = false;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.listView9);
+            this.groupBox5.Location = new System.Drawing.Point(602, 149);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(222, 309);
+            this.groupBox5.TabIndex = 256;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "指定审批院领导";
             // 
             // listView9
             // 
@@ -416,6 +428,7 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -433,10 +446,10 @@
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabPage1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Location = new System.Drawing.Point(4, 32);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(902, 533);
+            this.tabPage1.Size = new System.Drawing.Size(902, 530);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "出差发起";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -449,9 +462,9 @@
             this.tabPage4.Controls.Add(this.groupBox3);
             this.tabPage4.Controls.Add(this.listView5);
             this.tabPage4.Controls.Add(this.label17);
-            this.tabPage4.Location = new System.Drawing.Point(4, 29);
+            this.tabPage4.Location = new System.Drawing.Point(4, 32);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(902, 533);
+            this.tabPage4.Size = new System.Drawing.Size(902, 530);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "部门审核";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -473,6 +486,7 @@
             this.button5.TabIndex = 261;
             this.button5.Text = "通过";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
@@ -482,13 +496,16 @@
             this.button4.TabIndex = 261;
             this.button4.Text = "修改人员";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.textBox12);
             this.groupBox3.Controls.Add(this.textBox8);
             this.groupBox3.Controls.Add(this.textBox7);
             this.groupBox3.Controls.Add(this.textBox6);
             this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.listView6);
             this.groupBox3.Controls.Add(this.label16);
             this.groupBox3.Controls.Add(this.label15);
@@ -500,9 +517,17 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "出差状况";
             // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(96, 386);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.ReadOnly = true;
+            this.textBox12.Size = new System.Drawing.Size(477, 26);
+            this.textBox12.TabIndex = 260;
+            // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(96, 379);
+            this.textBox8.Location = new System.Drawing.Point(95, 349);
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
             this.textBox8.Size = new System.Drawing.Size(477, 26);
@@ -510,7 +535,7 @@
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(96, 342);
+            this.textBox7.Location = new System.Drawing.Point(96, 313);
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
             this.textBox7.Size = new System.Drawing.Size(477, 26);
@@ -533,14 +558,24 @@
             this.label2.TabIndex = 258;
             this.label2.Text = "出差事由：";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(16, 352);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(94, 20);
+            this.label7.TabIndex = 258;
+            this.label7.Text = "出差地点：";
+            // 
             // listView6
             // 
             this.listView6.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader19,
             this.columnHeader22,
             this.columnHeader23});
+            this.listView6.Font = new System.Drawing.Font("宋体", 10F);
             this.listView6.FullRowSelect = true;
-            this.listView6.Location = new System.Drawing.Point(95, 88);
+            this.listView6.Location = new System.Drawing.Point(95, 77);
             this.listView6.MultiSelect = false;
             this.listView6.Name = "listView6";
             this.listView6.Size = new System.Drawing.Size(477, 230);
@@ -566,16 +601,16 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(16, 385);
+            this.label16.Location = new System.Drawing.Point(16, 389);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(94, 20);
+            this.label16.Size = new System.Drawing.Size(60, 20);
             this.label16.TabIndex = 258;
-            this.label16.Text = "出差地点：";
+            this.label16.Text = "备注：";
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(16, 344);
+            this.label15.Location = new System.Drawing.Point(16, 316);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(94, 20);
             this.label15.TabIndex = 258;
@@ -584,7 +619,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 88);
+            this.label8.Location = new System.Drawing.Point(16, 75);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(77, 20);
             this.label8.TabIndex = 258;
@@ -636,10 +671,10 @@
             this.tabPage3.Controls.Add(this.groupBox4);
             this.tabPage3.Controls.Add(this.listView7);
             this.tabPage3.Controls.Add(this.label22);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Location = new System.Drawing.Point(4, 32);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(902, 533);
+            this.tabPage3.Size = new System.Drawing.Size(902, 530);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "院领导审批";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -815,10 +850,10 @@
             this.tabPage2.Controls.Add(this.listView2);
             this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabPage2.ForeColor = System.Drawing.Color.SteelBlue;
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Location = new System.Drawing.Point(4, 32);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(902, 533);
+            this.tabPage2.Size = new System.Drawing.Size(902, 530);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "出差情况查看";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1019,16 +1054,6 @@
             this.min_pictureBox.TabIndex = 274;
             this.min_pictureBox.TabStop = false;
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.listView9);
-            this.groupBox5.Location = new System.Drawing.Point(602, 149);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(222, 309);
-            this.groupBox5.TabIndex = 256;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "指定审批院领导";
-            // 
             // BusinessManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1048,6 +1073,7 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BusinessManagement_MouseMove);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -1065,7 +1091,6 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).EndInit();
-            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1162,5 +1187,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.Label label7;
     }
 }
