@@ -59,7 +59,7 @@ namespace WorkLogForm
 
        
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)//移除
         {
             if (listView1.SelectedItems != null && listView1.SelectedItems.Count != 0)
             {
@@ -69,7 +69,7 @@ namespace WorkLogForm
                 count--;
             }
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)//添加
         {
             if (listView2.SelectedItems != null && listView2.SelectedItems.Count != 0)
             {
@@ -94,17 +94,18 @@ namespace WorkLogForm
             return baseService.loadEntityList(queryUser);
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)//取消
         {
             this.Close();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)//确认
         {
             foreach (BusinessEmployee be1 in origin)
             {
                 if (!beList.Contains(be1))
                 {
+                    //baseService.deleteEntity(be1);
                     business.BusinessEmployee.Remove(be1);
                 }
             }

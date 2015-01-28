@@ -42,10 +42,41 @@ namespace WorkLogForm
             creatWindow.SetFormRoundRectRgn(this, 15);
             creatWindow.SetFormShadow(this);
         }
-   
 
-        #region 最小化关闭按钮
-        private void min_pictureBox_MouseEnter(object sender, EventArgs e)
+         #region 窗口操作
+         private void BusinessManagement_Load(object sender, EventArgs e)
+         {
+             Dept = User.Kdid;
+             initTabPage1();
+         }
+         private void tabControl1_Selected(object sender, TabControlEventArgs e)
+         {
+             if (tabControl1.SelectedIndex == 0)
+             {
+                 initTabPage1();
+             }
+
+             if (tabControl1.SelectedIndex == 1)
+             {
+                 initTabPage4();
+             }
+             if (tabControl1.SelectedIndex == 2)
+             {
+                 initTabPage3();
+             }
+             if (tabControl1.SelectedIndex == 3)
+             {
+                 initTabPage5();
+             }
+             if (tabControl1.SelectedIndex == 4)
+             {
+                 initTabPage2();
+             }
+
+         }
+         #endregion
+         #region 最小化关闭按钮
+         private void min_pictureBox_MouseEnter(object sender, EventArgs e)
         {
             min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.最小化_副本;
         }
@@ -177,7 +208,7 @@ namespace WorkLogForm
         {
             string queryName = "from WkTUser user where user.Kdid.KdName ='" + ((WkTDept)comboBox1.SelectedValue).KdName.Trim() + "'";
             IList Employee = baseService.loadEntityList(queryName);
-            if (Employee.Count == 0)
+            if (Employee.Count == 0&&Employee==null)
                 listView4.Items.Clear();
             else
             {
@@ -224,26 +255,28 @@ namespace WorkLogForm
                 string query = "from Business b where b.PassExam=" + (int)Business.ExamState.waiting;
                 IList depList = baseService.loadEntityList(query);
                 int i = 1;
-                foreach (Business b in depList)
+                if (depList != null)
                 {
-                    ListViewItem item = new ListViewItem();
-                    item.Text = i.ToString();
-                    item.SubItems.Add(b.Ku_Id.KuName);
-                    item.Tag = b;
-                    listView5.Items.Add(item);
-                    i++;
+                    foreach (Business b in depList)
+                    {
+                        ListViewItem item = new ListViewItem();
+                        item.Text = i.ToString();
+                        item.SubItems.Add(b.Ku_Id.KuName);
+                        item.Tag = b;
+                        listView5.Items.Add(item);
+                        i++;
+                    }
                 }
-
-                //IList uList = getUserByDept(User.Kdid);
-                //foreach (WkTUser u in uList)
-                //{
-                //    ListViewItem item = new ListViewItem();
-                //    item.Text = u.KuName;
-                //    item.Tag = u;
-                //    listView7.Items.Add(item);
-                //}
             }
-
+            selectedBusiness = null;
+            EmpInBusDept = null;
+            textBox6.Text = "";
+            textBox7.Text = "";
+            textBox8.Text = "";
+            textBox12.Text = "";
+            button4.Enabled = false;
+            button5.Enabled = false;
+            button8.Enabled = false;
         }
 
 
@@ -319,96 +352,180 @@ namespace WorkLogForm
                 initTabPage4();
             }
         }
+
+        private void button8_Click(object sender, EventArgs e)//撤销出差
+        {
+            Business b = selectedBusiness;
+            b.PassExam = (int)Business.ExamState.npass;
+            //IList empList = getEmpByBus(b);
+            foreach (BusinessEmployee be in b.BusinessEmployee)
+            {
+                be.PassExam = (int)BusinessEmployee.ExamState.npass;
+            }
+            b.WaitingNum = -1;
+            baseService.SaveOrUpdateEntity(b);
+            initTabPage4();
+        }
+        private void button4_Click(object sender, EventArgs e)//人员修改
+        {
+            BusinessChange bcForm = new BusinessChange();
+            bcForm.Tag = EmpInBusDept;
+            bcForm.ShowDialog();
+            initTabPage4();
+        }
         #endregion
         #region tabpage3 院领导审批
-        private int flagOfRole = 0;
         private void initTabPage3()//初始化审批界面
         {
             listView3.Items.Clear();
-
-            string query = "from Business b where b.PassExam=" + (int)Business.ExamState.waiting;
-            IList depList = baseService.loadEntityList(query);
-            int flagOfShow = 0;
-
-
-            if (roleInUser(this.User, "院长"))
+            listView7.Items.Clear();
+            string query = "from Business b where b.Boss="+User.Id+"and b.PassExam=" + (int)Business.ExamState.pass;
+            IList busList = baseService.loadEntityList(query);
+            int i = 1;
+            if (busList != null)
             {
-                flagOfRole = 1;
-            }
-            if (roleInUser(this.User, "副院长"))
-            {
-                flagOfRole = 2;
-            }
-
-
-            if (flagOfRole == 1)//登陆用户为院长
-            {
-
-                foreach (Business b in depList)
+                foreach (Business b in busList)
                 {
-                    flagOfShow = 0;
-                    int i = 1;
-                    IList beList = getEmpByBus(b);
-                    foreach (BusinessEmployee be in beList)//判断是否显示本条出差记录
-                    {
-                        if (roleInUser(be.EmployeeId, "副院长") || roleInUser(be.EmployeeId, "部门主任"))
-                        {
-                            flagOfShow = 1;
-                        }
-                    }
+                    ListViewItem item = new ListViewItem();
+                    item.Text = i.ToString();
+                    item.SubItems.Add(b.Ku_Id.KuName);
+                    item.Tag = b;
+                    i++;
+                    listView7.Items.Add(item);
 
-                    if (flagOfShow == 1)
-                    {
+                }
+            }
+            textBox9.Text = "";
+            textBox10.Text = "";
+            textBox11.Text = "";
+            textBox13.Text = "";
+            selectedBusiness = null;
+        }
+        private void listView7_MouseClick(object sender, MouseEventArgs e)
+        {
+            listView3.Items.Clear();
+            Business b = (Business)listView7.SelectedItems[0].Tag;
+            foreach (BusinessEmployee be in b.BusinessEmployee)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = be.EmployeeId.KuName;
+                item.SubItems.Add(be.EmployeeId.Kdid.KdName.Trim());
+                item.Tag = be;
+                listView3.Items.Add(item);
+            }
 
-                        ListViewItem item = new ListViewItem();
-                        item.Text = i.ToString();
-                        item.SubItems.Add(new DateTime(b.StartTime).ToShortDateString());
-                        item.SubItems.Add(new DateTime(b.EndTime).ToShortDateString());
-                        item.SubItems.Add(b.BusinessDestination);
-                        item.SubItems.Add(b.BusinessReason);
-                        item.SubItems.Add(b.Ku_Id.KuName);
-                        item.Tag = b;
-                        listView3.Items.Add(item);
-                        i++;
-                    }
+            DateTime st = new DateTime(b.StartTime), et = new DateTime(b.EndTime);
+            textBox9.Text = b.BusinessNote;
+            textBox10.Text = b.BusinessDestination;
+            textBox11.Text = st.ToString("yyyy年 MM月 dd日") + "----" + et.ToString("yyyy年 MM月 dd日");
+            textBox13.Text = b.BusinessReason;
+            selectedBusiness = b;
+
+        }
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Business b = selectedBusiness;
+            foreach (BusinessEmployee be in b.BusinessEmployee)
+            {
+                be.PassExam = (int)BusinessEmployee.ExamState.done;
+            }
+            b.PassExam = (int)Business.ExamState.done;
+            baseService.SaveOrUpdateEntity(b);
+            initTabPage3();
+        }
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Business b = selectedBusiness;
+            foreach (BusinessEmployee be in b.BusinessEmployee)
+            {
+                be.PassExam = (int)BusinessEmployee.ExamState.npass;
+            }
+            b.PassExam = (int)Business.ExamState.npass;
+            baseService.SaveOrUpdateEntity(b);
+            initTabPage3();
+        }
+        private void button9_Click(object sender, EventArgs e)
+        {
+            BusinessRedo burdo = new BusinessRedo();
+            burdo.Tag = selectedBusiness;
+            burdo.ShowDialog();
+            MessageBox.Show("退回成功");
+            initTabPage3();
+        }
+
+
+        #endregion
+        #region 退回修改
+        private void initTabPage5()
+        {
+            listView8.Items.Clear();
+            listView10.Items.Clear();
+            string query = "from Business b where b.Ku_Id=" + this.User.Id + "and b.PassExam=" + (int)Business.ExamState.redo;
+            IList busList = baseService.loadEntityList(query);
+            int i=1;
+            if (busList != null)
+            {
+                foreach (Business b in busList)
+                {
+                    ListViewItem item = new ListViewItem();
+                    item.Text = i.ToString();
+                    item.SubItems.Add(b.Boss.KuName);
+                    item.Tag = b;
+                    listView10.Items.Add(item);
                 }
             }
 
-            if (flagOfRole == 2)
+            textBox14.Text = "";
+            textBox15.Text = "";
+            textBox16.Text = "";
+            textBox17.Text = "";
+            selectedBusiness = null;
+        }
+
+        private void listView10_Click(object sender, EventArgs e)
+        {
+            listView8.Items.Clear();
+            Business b = (Business)this.listView10.SelectedItems[0].Tag;
+            foreach (BusinessEmployee be in b.BusinessEmployee)
             {
-
-                foreach (Business b in depList)
+                ListViewItem item = new ListViewItem();
+                item.Text = be.EmployeeId.KuName;
+                item.SubItems.Add(be.EmployeeId.Kdid.KdName.Trim());
+                switch (be.PassExam)
                 {
-                    flagOfShow = 0;
-                    int i = 1;
-                    IList beList = getEmpByBus(b);
-                    foreach (BusinessEmployee be in beList)
-                    {
-                        if (be.PassExam == (int)BusinessEmployee.ExamState.waiting && be.EmployeeId.Kdid.KdName == this.User.Kdid.KdName && !roleInUser(be.EmployeeId, "副院长") && !roleInUser(be.EmployeeId, "部门主任"))
-                        {
-                            flagOfShow = 1;
-                        }
-                        if (be.PassExam == (int)BusinessEmployee.ExamState.waiting && roleInUser(be.EmployeeId, "院长"))
-                        {
-                            flagOfShow = 1;
-                        }
-                    }
-                    if (flagOfShow == 1)
-                    {
-
-                        ListViewItem item = new ListViewItem();
-                        item.Text = i.ToString();
-                        item.SubItems.Add(new DateTime(b.StartTime).ToShortDateString());
-                        item.SubItems.Add(new DateTime(b.EndTime).ToShortDateString());
-                        item.SubItems.Add(b.BusinessDestination);
-                        item.SubItems.Add(b.BusinessReason);
-                        item.SubItems.Add(b.Ku_Id.KuName);
-                        item.Tag = b;
-                        listView3.Items.Add(item);
-                        i++;
-                    }
+                    case (int)BusinessEmployee.ExamState.redo:
+                        item.SubItems.Add("退回");
+                        break;
+                    case (int)BusinessEmployee.ExamState.pass:
+                        item.SubItems.Add("通过审批");
+                        break;
+                }
+                item.Tag = be;
+                listView8.Items.Add(item);
+            }
+            selectedBusiness = b;
+            DateTime st = new DateTime(b.StartTime), et = new DateTime(b.EndTime);
+            textBox17.Text = b.BusinessReason;
+            textBox15.Text = b.BusinessDestination;
+            textBox14.Text = b.BusinessNote;
+            textBox16.Text = st.ToString("yyyy年 MM月 dd日") + "----" + et.ToString("yyyy年 MM月 dd日");
+        }
+        private void button11_Click(object sender, EventArgs e)//一键通过
+        {
+            Business b = selectedBusiness;
+            foreach (BusinessEmployee be in b.BusinessEmployee)
+            {
+                if (be.PassExam == (int)BusinessEmployee.ExamState.redo)
+                {
+                    b.BusinessEmployee.Remove(be);
+                }
+                else if (be.PassExam == (int)BusinessEmployee.ExamState.pass)
+                {
+                    be.PassExam = (int)BusinessEmployee.ExamState.done;
                 }
             }
+            b.PassExam = (int)Business.ExamState.done;
+            baseService.SaveOrUpdateEntity(b);
         }
 
         #endregion
@@ -419,34 +536,38 @@ namespace WorkLogForm
             string query = "from Business b";
             IList depList = baseService.loadEntityList(query);
             int i = 1;
-            foreach (Business b in depList)
-            {
-                ListViewItem item = new ListViewItem();
-                item.UseItemStyleForSubItems = false;
-                item.Text = i.ToString();
-                item.SubItems.Add(new DateTime(b.StartTime).ToShortDateString());
-                item.SubItems.Add(new DateTime(b.EndTime).ToShortDateString());
-                item.SubItems.Add(b.BusinessDestination);
-                item.SubItems.Add(b.BusinessReason);
-                item.SubItems.Add(b.Ku_Id.KuName);
-                switch (b.PassExam)
-                {
-                    case (int)Business.ExamState.waiting:
-                        item.SubItems.Add("待审核");
-                        break;
-                    case (int)Business.ExamState.pass:
-                        item.SubItems.Add("通过");
-                        break;
-                    case (int)Business.ExamState.npass:
-                        item.SubItems.Add("退回");
-                        break;
-                }
-                Font font = new Font(this.Font, FontStyle.Underline);
 
-                item.SubItems.Add("双击查看", Color.Blue, Color.Transparent, font);
-                item.Tag = b;
-                listView2.Items.Add(item);
-                i++;
+            if (depList != null)
+            {
+                foreach (Business b in depList)
+                {
+                    ListViewItem item = new ListViewItem();
+                    item.UseItemStyleForSubItems = false;
+                    item.Text = i.ToString();
+                    item.SubItems.Add(new DateTime(b.StartTime).ToShortDateString());
+                    item.SubItems.Add(new DateTime(b.EndTime).ToShortDateString());
+                    item.SubItems.Add(b.BusinessDestination);
+                    item.SubItems.Add(b.BusinessReason);
+                    item.SubItems.Add(b.Ku_Id.KuName);
+                    switch (b.PassExam)
+                    {
+                        case (int)Business.ExamState.waiting:
+                            item.SubItems.Add("待审核");
+                            break;
+                        case (int)Business.ExamState.pass:
+                            item.SubItems.Add("通过");
+                            break;
+                        case (int)Business.ExamState.npass:
+                            item.SubItems.Add("退回");
+                            break;
+                    }
+                    Font font = new Font(this.Font, FontStyle.Underline);
+
+                    item.SubItems.Add("双击查看", Color.Blue, Color.Transparent, font);
+                    item.Tag = b;
+                    listView2.Items.Add(item);
+                    i++;
+                }
             }
         }
 
@@ -499,179 +620,7 @@ namespace WorkLogForm
 
 
         
-        private void BusinessManagement_Load(object sender, EventArgs e)
-        {
-            Dept = User.Kdid;
-            initTabPage1();
-        }
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-           
-            if (tabControl1.SelectedIndex == 1)
-            {
-                initTabPage4();
-            }
-            if (tabControl1.SelectedIndex == 2)
-            {
-                initTabPage3();
-            }
-            if (tabControl1.SelectedIndex == 3)
-            {
-                 initTabPage2();
-            }
-
-        }
-
-
-
-        /*
-        private void listView3_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (listView3.SelectedItems != null&&listView3.SelectedItems.Count!=0)
-            {
-                Business b = (Business)listView3.SelectedItems[0].Tag;
-                IList businessEmployee = getEmpByBus(b);
-                //listView8.Items.Clear();
-                foreach (BusinessEmployee be in businessEmployee)
-                {
-                    if (be.PassExam == (int)BusinessEmployee.ExamState.waiting)//还未审核
-                    {
-                        if (flagOfRole == 1)//院长审核
-                        {
-                            if (roleInUser(be.EmployeeId, "副院长") || roleInUser(be.EmployeeId, "部门主任"))
-                            {
-                                ListViewItem item = new ListViewItem();
-                                item.Text = be.EmployeeId.KuName;
-                                item.Tag = be;
-                                //listView8.Items.Add(item);
-                            }
-                        }
-                        if (flagOfRole == 2)//副院长审核
-                        {
-                            if (be.EmployeeId.Kdid.KdName == this.User.Kdid.KdName && !roleInUser(be.EmployeeId, "副院长") && !roleInUser(be.EmployeeId, "部门主任"))
-                            {
-                                ListViewItem item = new ListViewItem();
-                                item.Text = be.EmployeeId.KuName;
-                                item.Tag = be;
-                                //listView8.Items.Add(item);
-                            }
-                            if (roleInUser(be.EmployeeId, "院长"))
-                            {
-                                ListViewItem item = new ListViewItem();
-                                item.Text = be.EmployeeId.KuName;
-                                item.Tag = be;
-                                //listView8.Items.Add(item);
-                            }
-                        }
-                    }
-                }
-            }
-        }*/
-
-      /*  private void checkBox1_CheckStateChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked == true)
-            {
-                foreach (ListViewItem item in listView3.Items)
-                {
-                    item.Checked = true;
-                }
-            }
-            if (checkBox1.Checked == false )
-            {
-                foreach (ListViewItem item in listView3.Items)
-                {
-                    item.Checked = false ;
-                }
-            }
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            foreach (ListViewItem item in listView3.Items)
-            {
-                if (item.Checked == true)
-                {
-                    Business b = (Business)item.Tag;
-                    IList businessEmployee = getEmpByBus(b);
-                    int count = b.WaitingNum;
-                    #region 根据审核角色修改BusinessEmployee表
-                    foreach (BusinessEmployee be in businessEmployee)
-                    {
-                        if (be.PassExam == (int)BusinessEmployee.ExamState.waiting)//还未审核
-                        {
-                            if (flagOfRole == 1)//院长审核
-                            {
-                                if (roleInUser(be.EmployeeId, "副院长") || roleInUser(be.EmployeeId, "部门主任"))
-                                {
-                                    string update = "update LOG_T_BUSINESSEMPLOYEE set PASSEXAM=" + (int)BusinessEmployee.ExamState.pass + " where Id=" + be.Id;
-                                    baseService.ExecuteSQL(update);
-                                    count--;
-                                }
-                            }
-                            if (flagOfRole == 2)//副院长审核
-                            {
-                                if (be.EmployeeId.Kdid.KdName == this.User.Kdid.KdName && !roleInUser(be.EmployeeId, "副院长") && !roleInUser(be.EmployeeId, "部门主任"))
-                                {
-                                    string update = "update LOG_T_BUSINESSEMPLOYEE set PASSEXAM=" +(int) BusinessEmployee.ExamState.pass + " where Id=" + be.Id;
-                                    baseService.ExecuteSQL(update);
-                                    count--;
-                                }
-                                if (roleInUser(be.EmployeeId, "院长"))
-                                {
-                                    string update = "update LOG_T_BUSINESSEMPLOYEE set PASSEXAM=" + (int)BusinessEmployee.ExamState.pass + " where Id=" + be.Id;
-                                    baseService.ExecuteSQL(update);
-                                    count--;
-                                }
-                            }
-                        }
-                    }
-                    #endregion
-
-                    string update1 = "update LOG_T_BUSINESS set WAITINGNUM =" + count + " where id = " + b.Id;
-                    baseService.ExecuteSQL(update1);
-                    if (count == 0)//所有人员通过审核
-                    {
-                        string update2 = "update LOG_T_BUSINESS set PASSEXAM =" + (int)Business.ExamState.pass + " where id = " + b.Id;
-                        baseService.ExecuteSQL(update2);
-                    }
-                    listView3.Items.Remove(item);
-                }
-            }
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            RefuseReason refuse = new RefuseReason();
-            if (refuse.ShowDialog() == DialogResult.OK)
-            {
-                foreach (ListViewItem item in listView3.Items)
-                {
-                    if (item.Checked == true)
-                    {
-                        Business b = (Business)item.Tag;
-                        IList businessEmployee = getEmpByBus(b);
-
-                        #region 修改BusinessEmployee表对应的项
-                        foreach (BusinessEmployee be in businessEmployee)
-                        {
-                            string update = "update LOG_T_BUSINESSEMPLOYEE set PASSEXAM=" + (int)BusinessEmployee.ExamState.npass + " where Id=" + be.Id;
-                            baseService.ExecuteSQL(update);
-                        }
-                        #endregion
-
-                        string update2 = "update LOG_T_BUSINESS set PASSEXAM =" + (int)Business.ExamState.npass + " ,REFUSEREASON='" + refuse.reason + "' ,WAITINGNUM=-1 where id = " + b.Id;
-                        baseService.ExecuteSQL(update2);
-
-                        listView3.Items.Remove(item);
-                    }
-                }
-            }
-        }
-
-        */
-
-
+     
 
         #region 数据库操作
         //private IList getBossDept()//获取院领导部门
@@ -718,14 +667,8 @@ namespace WorkLogForm
         }
         #endregion
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            BusinessChange bcForm = new BusinessChange();
-            bcForm.Tag = EmpInBusDept;
-            bcForm.ShowDialog();
-            initTabPage4();
-        }
 
+      
 
 
     }

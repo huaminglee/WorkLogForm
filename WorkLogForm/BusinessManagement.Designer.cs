@@ -87,17 +87,39 @@
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.listView3 = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
             this.listView7 = new System.Windows.Forms.ListView();
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label22 = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.listView8 = new System.Windows.Forms.ListView();
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.listView10 = new System.Windows.Forms.ListView();
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label29 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
@@ -119,6 +141,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.close_pictureBox = new System.Windows.Forms.PictureBox();
             this.min_pictureBox = new System.Windows.Forms.PictureBox();
+            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -128,6 +151,8 @@
             this.groupBox3.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
@@ -432,6 +457,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(41, 97);
@@ -477,6 +503,7 @@
             this.button8.TabIndex = 261;
             this.button8.Text = "撤销";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button5
             // 
@@ -619,7 +646,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 75);
+            this.label8.Location = new System.Drawing.Point(16, 82);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(77, 20);
             this.label8.TabIndex = 258;
@@ -681,21 +708,23 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(707, 480);
+            this.button9.Location = new System.Drawing.Point(528, 480);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(112, 30);
             this.button9.TabIndex = 265;
-            this.button9.Text = "撤销";
+            this.button9.Text = "退回";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(530, 480);
+            this.button6.Location = new System.Drawing.Point(717, 480);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(112, 30);
             this.button6.TabIndex = 265;
-            this.button6.Text = "退回";
+            this.button6.Text = "撤销";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -705,18 +734,21 @@
             this.button7.TabIndex = 266;
             this.button7.Text = "通过";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.textBox9);
             this.groupBox4.Controls.Add(this.textBox10);
             this.groupBox4.Controls.Add(this.textBox11);
+            this.groupBox4.Controls.Add(this.textBox13);
             this.groupBox4.Controls.Add(this.label18);
-            this.groupBox4.Controls.Add(this.listView3);
             this.groupBox4.Controls.Add(this.label19);
+            this.groupBox4.Controls.Add(this.listView3);
             this.groupBox4.Controls.Add(this.label20);
             this.groupBox4.Controls.Add(this.label21);
-            this.groupBox4.Location = new System.Drawing.Point(246, 22);
+            this.groupBox4.Controls.Add(this.label23);
+            this.groupBox4.Location = new System.Drawing.Point(244, 22);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(603, 452);
             this.groupBox4.TabIndex = 264;
@@ -725,87 +757,105 @@
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(96, 379);
+            this.textBox9.Location = new System.Drawing.Point(103, 385);
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
             this.textBox9.Size = new System.Drawing.Size(477, 26);
-            this.textBox9.TabIndex = 260;
+            this.textBox9.TabIndex = 268;
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(96, 342);
+            this.textBox10.Location = new System.Drawing.Point(102, 348);
             this.textBox10.Name = "textBox10";
             this.textBox10.ReadOnly = true;
             this.textBox10.Size = new System.Drawing.Size(477, 26);
-            this.textBox10.TabIndex = 260;
+            this.textBox10.TabIndex = 269;
             // 
             // textBox11
             // 
-            this.textBox11.Location = new System.Drawing.Point(95, 42);
+            this.textBox11.Location = new System.Drawing.Point(102, 312);
             this.textBox11.Name = "textBox11";
             this.textBox11.ReadOnly = true;
             this.textBox11.Size = new System.Drawing.Size(477, 26);
-            this.textBox11.TabIndex = 259;
+            this.textBox11.TabIndex = 270;
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(102, 38);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.ReadOnly = true;
+            this.textBox13.Size = new System.Drawing.Size(477, 26);
+            this.textBox13.TabIndex = 267;
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(16, 42);
+            this.label18.Location = new System.Drawing.Point(23, 41);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(94, 20);
-            this.label18.TabIndex = 258;
+            this.label18.TabIndex = 262;
             this.label18.Text = "出差事由：";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(23, 351);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(94, 20);
+            this.label19.TabIndex = 263;
+            this.label19.Text = "出差地点：";
             // 
             // listView3
             // 
             this.listView3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader3,
             this.columnHeader4});
+            this.listView3.Font = new System.Drawing.Font("宋体", 10F);
             this.listView3.FullRowSelect = true;
-            this.listView3.Location = new System.Drawing.Point(95, 88);
+            this.listView3.Location = new System.Drawing.Point(103, 76);
             this.listView3.MultiSelect = false;
             this.listView3.Name = "listView3";
             this.listView3.Size = new System.Drawing.Size(477, 230);
-            this.listView3.TabIndex = 254;
+            this.listView3.TabIndex = 261;
             this.listView3.UseCompatibleStateImageBehavior = false;
             this.listView3.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "姓名";
-            this.columnHeader3.Width = 160;
+            this.columnHeader3.Width = 122;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "部门";
-            this.columnHeader4.Width = 288;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(16, 385);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(94, 20);
-            this.label19.TabIndex = 258;
-            this.label19.Text = "出差地点：";
+            this.columnHeader4.Width = 194;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(16, 344);
+            this.label20.Location = new System.Drawing.Point(23, 388);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(94, 20);
-            this.label20.TabIndex = 258;
-            this.label20.Text = "出差时间：";
+            this.label20.Size = new System.Drawing.Size(60, 20);
+            this.label20.TabIndex = 264;
+            this.label20.Text = "备注：";
             // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(16, 88);
+            this.label21.Location = new System.Drawing.Point(23, 312);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(77, 20);
-            this.label21.TabIndex = 258;
-            this.label21.Text = "出差人：";
+            this.label21.Size = new System.Drawing.Size(94, 20);
+            this.label21.TabIndex = 265;
+            this.label21.Text = "出差时间：";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(23, 86);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(77, 20);
+            this.label23.TabIndex = 266;
+            this.label23.Text = "出差人：";
             // 
             // listView7
             // 
@@ -815,7 +865,7 @@
             this.listView7.Font = new System.Drawing.Font("宋体", 10F);
             this.listView7.FullRowSelect = true;
             this.listView7.GridLines = true;
-            this.listView7.Location = new System.Drawing.Point(58, 64);
+            this.listView7.Location = new System.Drawing.Point(56, 64);
             this.listView7.MultiSelect = false;
             this.listView7.Name = "listView7";
             this.listView7.Scrollable = false;
@@ -823,6 +873,7 @@
             this.listView7.TabIndex = 262;
             this.listView7.UseCompatibleStateImageBehavior = false;
             this.listView7.View = System.Windows.Forms.View.Details;
+            this.listView7.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView7_MouseClick);
             // 
             // columnHeader8
             // 
@@ -838,11 +889,204 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(54, 31);
+            this.label22.Location = new System.Drawing.Point(52, 31);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(94, 20);
             this.label22.TabIndex = 263;
             this.label22.Text = "待审批出差";
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.button10);
+            this.tabPage5.Controls.Add(this.button11);
+            this.tabPage5.Controls.Add(this.groupBox6);
+            this.tabPage5.Controls.Add(this.listView10);
+            this.tabPage5.Controls.Add(this.label29);
+            this.tabPage5.Location = new System.Drawing.Point(4, 32);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(902, 530);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "退回修改";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(619, 480);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(112, 30);
+            this.button10.TabIndex = 268;
+            this.button10.Text = "修改人员";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(433, 480);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(112, 30);
+            this.button11.TabIndex = 269;
+            this.button11.Text = "一键通过";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.textBox14);
+            this.groupBox6.Controls.Add(this.textBox15);
+            this.groupBox6.Controls.Add(this.textBox16);
+            this.groupBox6.Controls.Add(this.textBox17);
+            this.groupBox6.Controls.Add(this.label24);
+            this.groupBox6.Controls.Add(this.label25);
+            this.groupBox6.Controls.Add(this.listView8);
+            this.groupBox6.Controls.Add(this.label26);
+            this.groupBox6.Controls.Add(this.label27);
+            this.groupBox6.Controls.Add(this.label28);
+            this.groupBox6.Location = new System.Drawing.Point(244, 22);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(603, 452);
+            this.groupBox6.TabIndex = 267;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "出差状况";
+            // 
+            // textBox14
+            // 
+            this.textBox14.Location = new System.Drawing.Point(103, 385);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.ReadOnly = true;
+            this.textBox14.Size = new System.Drawing.Size(477, 26);
+            this.textBox14.TabIndex = 268;
+            // 
+            // textBox15
+            // 
+            this.textBox15.Location = new System.Drawing.Point(102, 348);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.ReadOnly = true;
+            this.textBox15.Size = new System.Drawing.Size(477, 26);
+            this.textBox15.TabIndex = 269;
+            // 
+            // textBox16
+            // 
+            this.textBox16.Location = new System.Drawing.Point(102, 312);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.ReadOnly = true;
+            this.textBox16.Size = new System.Drawing.Size(477, 26);
+            this.textBox16.TabIndex = 270;
+            // 
+            // textBox17
+            // 
+            this.textBox17.Location = new System.Drawing.Point(102, 38);
+            this.textBox17.Name = "textBox17";
+            this.textBox17.ReadOnly = true;
+            this.textBox17.Size = new System.Drawing.Size(477, 26);
+            this.textBox17.TabIndex = 267;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(23, 41);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(94, 20);
+            this.label24.TabIndex = 262;
+            this.label24.Text = "出差事由：";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(23, 351);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(94, 20);
+            this.label25.TabIndex = 263;
+            this.label25.Text = "出差地点：";
+            // 
+            // listView8
+            // 
+            this.listView8.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader5,
+            this.columnHeader15,
+            this.columnHeader25});
+            this.listView8.Font = new System.Drawing.Font("宋体", 10F);
+            this.listView8.FullRowSelect = true;
+            this.listView8.Location = new System.Drawing.Point(103, 76);
+            this.listView8.MultiSelect = false;
+            this.listView8.Name = "listView8";
+            this.listView8.Size = new System.Drawing.Size(477, 230);
+            this.listView8.TabIndex = 261;
+            this.listView8.UseCompatibleStateImageBehavior = false;
+            this.listView8.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "姓名";
+            this.columnHeader5.Width = 122;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "部门";
+            this.columnHeader15.Width = 194;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(23, 388);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(60, 20);
+            this.label26.TabIndex = 264;
+            this.label26.Text = "备注：";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(23, 312);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(94, 20);
+            this.label27.TabIndex = 265;
+            this.label27.Text = "出差时间：";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(23, 86);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(77, 20);
+            this.label28.TabIndex = 266;
+            this.label28.Text = "出差人：";
+            // 
+            // listView10
+            // 
+            this.listView10.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader16,
+            this.columnHeader24});
+            this.listView10.Font = new System.Drawing.Font("宋体", 10F);
+            this.listView10.FullRowSelect = true;
+            this.listView10.GridLines = true;
+            this.listView10.Location = new System.Drawing.Point(56, 64);
+            this.listView10.MultiSelect = false;
+            this.listView10.Name = "listView10";
+            this.listView10.Scrollable = false;
+            this.listView10.Size = new System.Drawing.Size(160, 410);
+            this.listView10.TabIndex = 265;
+            this.listView10.UseCompatibleStateImageBehavior = false;
+            this.listView10.View = System.Windows.Forms.View.Details;
+            this.listView10.Click += new System.EventHandler(this.listView10_Click);
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "序号";
+            this.columnHeader16.Width = 39;
+            // 
+            // columnHeader24
+            // 
+            this.columnHeader24.Text = "审核领导";
+            this.columnHeader24.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader24.Width = 89;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(52, 31);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(94, 20);
+            this.label29.TabIndex = 266;
+            this.label29.Text = "被退回出差";
             // 
             // tabPage2
             // 
@@ -1054,6 +1298,11 @@
             this.min_pictureBox.TabIndex = 274;
             this.min_pictureBox.TabStop = false;
             // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "状态";
+            this.columnHeader25.Width = 113;
+            // 
             // BusinessManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1086,6 +1335,10 @@
             this.tabPage3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -1171,16 +1424,6 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ListView listView3;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ListView listView7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader14;
@@ -1189,5 +1432,38 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ListView listView3;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.TextBox textBox17;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ListView listView8;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.ListView listView10;
+        private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.ColumnHeader columnHeader24;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.ColumnHeader columnHeader25;
     }
 }
