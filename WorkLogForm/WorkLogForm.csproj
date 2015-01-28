@@ -110,6 +110,18 @@
     <Compile Include="BusinessManagement.designer.cs">
       <DependentUpon>BusinessManagement.cs</DependentUpon>
     </Compile>
+    <Compile Include="BusinessRedo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusinessRedo.Designer.cs">
+      <DependentUpon>BusinessRedo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="redoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="redoForm.Designer.cs">
+      <DependentUpon>redoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RefuseReason.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +299,9 @@
     <EmbeddedResource Include="BusinessManagement.resx">
       <DependentUpon>BusinessManagement.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BusinessRedo.resx">
+      <DependentUpon>BusinessRedo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="checkAttendance.resx">
       <DependentUpon>checkAttendance.cs</DependentUpon>
     </EmbeddedResource>
@@ -312,6 +327,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Examine_Allograph.resx">
       <DependentUpon>Examine_Allograph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="redoForm.resx">
+      <DependentUpon>redoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RefuseReason.resx">
       <DependentUpon>RefuseReason.cs</DependentUpon>
