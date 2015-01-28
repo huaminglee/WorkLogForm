@@ -64,21 +64,12 @@ namespace WorkLogForm
             {
                 foreach (WkTDept dept in deptList)
                 {
-                    staff_comboBox.Items.Add(dept.KdName.Trim());
+                    
                     share_dept_comboBox.Items.Add(dept.KdName.Trim());
                 }
             }
            
-            if (role.KrOrder.Equals(2))
-            {
-                staff_comboBox.Items.Clear();
-                staff_comboBox.Items.Add(user.Kdid.KdName);
-            }
-            else if (role.Equals(3))
-            {
-                staff_comboBox.Items.Clear();
-            }
-            staff_comboBox.SelectedIndex = 0;
+            
             share_dept_comboBox.SelectedIndex = 0;
         }
 
