@@ -37,9 +37,10 @@ namespace WorkLogForm
 
         private void SuiBiGuanLi_New_Load(object sender, EventArgs e)
         {
+
             this.MyOwnSuiBi_panel.Visible = true;
             this.other_panel.Visible = false;
-            this.comboBox1.Text = this.comboBox1.Items[0].ToString();
+            
             if (user != null)
             {
               
@@ -48,8 +49,16 @@ namespace WorkLogForm
                 ShowInFlowPanel(suibilist);
                 
             }
-            
-
+            IList deptList = baseService.loadEntityList("from WkTDept");
+            comboBox1.Items.Add("选择全部…");
+            if (deptList != null && deptList.Count > 0)
+            {
+                foreach (WkTDept dept in deptList)
+                {
+                    comboBox1.Items.Add(dept.KdName.Trim());
+                }
+            }
+            this.comboBox1.Text = this.comboBox1.Items[0].ToString();
             
         }
 

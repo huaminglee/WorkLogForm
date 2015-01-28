@@ -42,6 +42,7 @@
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.other_panel = new System.Windows.Forms.Panel();
+            this.textBox3 = new System.Windows.Forms.TextBox();
             this.flowLayoutPanelOfOthers = new System.Windows.Forms.FlowLayoutPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -53,7 +54,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MyOwnSuiBi_pictureBox)).BeginInit();
@@ -210,14 +210,21 @@
             this.other_panel.Controls.Add(this.label6);
             this.other_panel.Controls.Add(this.dateTimePicker3);
             this.other_panel.Controls.Add(this.label5);
-            this.other_panel.Controls.Add(this.label4);
-            this.other_panel.Controls.Add(this.label3);
             this.other_panel.Controls.Add(this.comboBox1);
+            this.other_panel.Controls.Add(this.label3);
+            this.other_panel.Controls.Add(this.label4);
             this.other_panel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.other_panel.Location = new System.Drawing.Point(12, 77);
             this.other_panel.Name = "other_panel";
             this.other_panel.Size = new System.Drawing.Size(965, 592);
             this.other_panel.TabIndex = 174;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(272, 46);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(113, 29);
+            this.textBox3.TabIndex = 12;
             // 
             // flowLayoutPanelOfOthers
             // 
@@ -255,7 +262,7 @@
             // 
             // dateTimePicker4
             // 
-            this.dateTimePicker4.Location = new System.Drawing.Point(622, 48);
+            this.dateTimePicker4.Location = new System.Drawing.Point(618, 48);
             this.dateTimePicker4.Name = "dateTimePicker4";
             this.dateTimePicker4.Size = new System.Drawing.Size(138, 29);
             this.dateTimePicker4.TabIndex = 7;
@@ -271,7 +278,7 @@
             // 
             // dateTimePicker3
             // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(453, 47);
+            this.dateTimePicker3.Location = new System.Drawing.Point(454, 47);
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.Size = new System.Drawing.Size(145, 29);
             this.dateTimePicker3.TabIndex = 5;
@@ -279,7 +286,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(384, 48);
+            this.label5.Location = new System.Drawing.Point(391, 50);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 21);
             this.label5.TabIndex = 4;
@@ -288,7 +295,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(208, 48);
+            this.label4.Location = new System.Drawing.Point(223, 49);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 21);
             this.label4.TabIndex = 2;
@@ -298,7 +305,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(6, 45);
+            this.label3.Location = new System.Drawing.Point(6, 46);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 21);
             this.label3.TabIndex = 1;
@@ -307,33 +314,10 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "选择全部…",
-            "院领导",
-            "组织结构",
-            "综合办公室",
-            "后勤服务中心",
-            "科技信息资源研究所",
-            "科技发展战略研究所",
-            "科技宣传教育中心",
-            "科技统计评估中心",
-            "科技查新咨询中心",
-            "科学技术情报研究院",
-            "科技文献馆",
-            "技术转移中心",
-            "河北省科技信息处理实验室",
-            "河北省科学技术情报学会"});
-            this.comboBox1.Location = new System.Drawing.Point(66, 45);
+            this.comboBox1.Location = new System.Drawing.Point(54, 44);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(132, 29);
+            this.comboBox1.Size = new System.Drawing.Size(170, 29);
             this.comboBox1.TabIndex = 0;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(265, 46);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(113, 29);
-            this.textBox3.TabIndex = 12;
             // 
             // SuiBiGuanLi_New
             // 

@@ -58,10 +58,8 @@ namespace WorkLogForm
         #endregion
         private void initData()
         {
-            personal_year_comboBox.SelectedIndex = 0;
-            personal_month_comboBox.SelectedIndex = 0;
-            personal_day_comboBox.SelectedIndex = 0;
             IList deptList = baseService.loadEntityList("from WkTDept");
+            share_dept_comboBox.Items.Add("选择全部…"); 
             if (deptList != null && deptList.Count > 0)
             {
                 foreach (WkTDept dept in deptList)
@@ -70,6 +68,7 @@ namespace WorkLogForm
                     share_dept_comboBox.Items.Add(dept.KdName.Trim());
                 }
             }
+           
             if (role.KrOrder.Equals(2))
             {
                 staff_comboBox.Items.Clear();
@@ -82,6 +81,8 @@ namespace WorkLogForm
             staff_comboBox.SelectedIndex = 0;
             share_dept_comboBox.SelectedIndex = 0;
         }
+
+        #region 注释的内容
         //private void staff_LogLeader_Load(object sender, EventArgs e)
         //{
         //    this.month_comboBoxEx.SelectedIndex = 0;
@@ -248,6 +249,9 @@ namespace WorkLogForm
         //        xlApp.Quit();
         //    }
         //}
+        
+        #endregion
+
         #region 最小化关闭按钮
         private void min_pictureBox_MouseEnter(object sender, EventArgs e)
         {
@@ -274,6 +278,7 @@ namespace WorkLogForm
             close_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.关闭渐变;
         }
         #endregion
+        
         #region 窗体移动代码
         private int x_point, y_point;
         private void staff_LogLeader_MouseDown(object sender, MouseEventArgs e)
@@ -299,60 +304,12 @@ namespace WorkLogForm
             }
         }
         #endregion
-        private void initDayCombobox(object sender, EventArgs e)
-        {
-            if (personal_month_comboBox.Text.Trim() != "请选择" && personal_year_comboBox.Text.Trim() != "请选择")
-            {
-                personal_day_comboBox.Items.Clear();
-                CNDate cnDate = new CNDate(new DateTime( Convert.ToInt32(personal_year_comboBox.Text), Convert.ToInt32(personal_month_comboBox.Text), 1));
-                personal_day_comboBox.Items.Add("请选择");
-                for (int i = 1; i <= cnDate.GetDayNumOfMonth(); i++)
-                {
-                    personal_day_comboBox.Items.Add(i.ToString());
-                }
-            }
-            personal_day_comboBox.SelectedIndex = 0;
-        }
-        #region 个人日志
+
+      
+        #region 个人日志 已处理
         private void personal_search_button_Click(object sender, EventArgs e)
         {
-            int year = personal_year_comboBox.Text != "请选择" ? Convert.ToInt32(personal_year_comboBox.Text.Trim()) : 0;
-            int month = personal_month_comboBox.Text != "请选择" ? Convert.ToInt32(personal_month_comboBox.Text.Trim()) : 0;
-            int day = personal_day_comboBox.Text != "请选择" ? Convert.ToInt32(personal_day_comboBox.Text.Trim()) : 0;
-            long starttime = 0;
-            long endtime = 0;
-            if (year == 0)
-            {
-                starttime = new DateTime(1, 1, 1).Date.Ticks;
-                endtime = new DateTime(3000, 1, 1).Date.Ticks;
-                personal_month_comboBox.Text = "请选择";
-                personal_day_comboBox.Text = "请选择";
-            }
-            else if (month == 0)
-            {
-                starttime = new DateTime(year, 1, 1).Date.Ticks;
-                endtime = new DateTime(year, 12, 31,23,59,59).Date.Ticks;
-                personal_day_comboBox.Text = "请选择";
-            }
-            else if (day == 0)
-            {
-                if (month == 12)
-                {
-                    starttime = new DateTime(year, month, 1).Date.Ticks;
-                    endtime = new DateTime(year + 1, 1, 1).Date.Ticks;
-                }
-                else
-                {
-                    starttime = new DateTime(year, month, 1).Date.Ticks;
-                    endtime = new DateTime(year, month + 1, 1).Date.Ticks;
-                }
-            }
-            else
-            {
-                starttime = new DateTime(year, month, 1).Date.Ticks;
-                endtime = new DateTime(year, month , 1,23,59,59).Date.Ticks;
-            }
-            IList logList = baseService.loadEntityList("from StaffLog where State=" + (int)IEntity.stateEnum.Normal + " and WriteTime>=" + starttime + " and WriteTime<" + endtime + " and Staff=" + user.Id + " order by WriteTime desc");
+            IList logList = baseService.loadEntityList("from StaffLog where State=" + (int)IEntity.stateEnum.Normal + " and WriteTime>=" + dateTimePicker1.Value.Ticks + " and WriteTime<" + dateTimePicker2.Value.Ticks + " and Staff=" + user.Id + " and Content like '%"+this.textBox1.Text.Trim()+"%' order by WriteTime desc");
             personal_dataGridView.Rows.Clear();
             initPersonalDataGridView(logList);
         }
@@ -382,16 +339,10 @@ namespace WorkLogForm
                     }
                     row.Cells[2].Value = contentText;
                     row.Cells[2].ToolTipText = CommonUtil.toolTipFormat(contentText);
-                    if (sl.Comments != null && sl.Comments.Count > 0)
-                    {
-                        row.Cells[3].Value = sl.Comments[0].Content;
-                        foreach (Comments c in sl.Comments)
-                        {
-                            row.Cells[3].ToolTipText += c.CommentPersonName + "：" + System.Environment.NewLine + c.Content + System.Environment.NewLine;
-                        }
-                    }
-                    row.Cells[4].Value = "查看";
-                    row.Cells[4].Tag = sl;
+                   
+
+                    row.Cells[3].Value = "查看";
+                    row.Cells[3].Tag = sl;
                     personal_dataGridView.Rows.Add(row);
                     i++;
                 }
@@ -399,29 +350,57 @@ namespace WorkLogForm
         }
         private void personal_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 4)
+            if (e.ColumnIndex == 3)
             {
                 StaffLog sf = (StaffLog)personal_dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
                 writeLog wl = new writeLog();
                 wl.User = sf.Staff;
                 wl.LogDate = new DateTime(sf.WriteTime);
-                wl.IsView = true;
+                wl.IsComment = true;
+                wl.CommentPersonName = this.User.KuName;
                 wl.ShowDialog();
             }
         }
         #endregion
-        #region 分享日志
+
+
+        #region 分享日志  已处理
         private void share_search_button_Click(object sender, EventArgs e)
         {
             long starttime = share_dateTimePicker.Value.Date.Ticks;
             long endtime = share_dateTimePicker_end.Value.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
-            String sql = "select sf.id from LOG_T_STAFFLOG sf,StaffLog_M_WkTUser smu,WK_T_USER u,WK_T_DEPT dept where sf.WkTUserId=u.KU_ID and sf.Id=smu.StaffLogId and u.KD_ID=dept.KD_ID and smu.KU_ID=" + user.Id + " and sf.State=" + (int)IEntity.stateEnum.Normal + " and sf.WriteTime>=" + starttime + " and sf.WriteTime<" + endtime + " and u.KU_NAME like '%" + share_name_textBox.Text.Trim() + "%'";
-            if (share_dept_comboBox.Text.Trim() != "请选择")
+
+            String sql = "select tt.*,dept.KD_NAME from WK_T_DEPT dept , " +
+" (select t.*,ww.KU_NAME name ,ww.KD_ID depid from WK_T_USER ww,  " +
+" (select l.Id id ,l.Contents con ,l.WriteTime thetime ," +
+" l.WkTUserId fuser   from StaffLog_M_WkTUser m, LOG_T_STAFFLOG l,WK_T_USER w " +
+" where m.StaffLogId = l.Id and m.KU_ID = w.KU_ID and w.KU_ID = "+this.user.Id+" and " +
+" l.Contents like '%"+this.textBox3.Text.Trim()+"%' and l.WriteTime > "+ this.share_dateTimePicker.Value.Ticks+" and l.WriteTime<= "+this.share_dateTimePicker_end.Value.Ticks+") t " +
+" where t.fuser = ww.KU_ID and ww.KU_NAME like '%"+this.share_name_textBox.Text+"%') tt where tt.depid = dept.KD_ID " +
+" and dept.KD_NAME like '%" + this.share_dept_comboBox.Text + "%'  order by dept.KD_ID; ";
+
+            string sql1 = "select tt.*,dept.KD_NAME from WK_T_DEPT dept , " +
+" (select t.*,ww.KU_NAME name ,ww.KD_ID depid from WK_T_USER ww,  " +
+" (select l.Id id ,l.Contents con ,l.WriteTime thetime ," +
+" l.WkTUserId fuser   from StaffLog_M_WkTUser m, LOG_T_STAFFLOG l,WK_T_USER w " +
+" where m.StaffLogId = l.Id and m.KU_ID = w.KU_ID and w.KU_ID = " + this.user.Id + " and " +
+" l.Contents like '%" + this.textBox3.Text.Trim() + "%' and l.WriteTime > " + this.share_dateTimePicker.Value.Ticks + " and l.WriteTime<= " + this.share_dateTimePicker_end.Value.Ticks + ") t " +
+" where t.fuser = ww.KU_ID and ww.KU_NAME like '%" + this.share_name_textBox.Text + "%') tt where tt.depid = dept.KD_ID  order by dept.KD_ID;";
+
+            IList logList;
+            if (this.share_dept_comboBox.Text == this.share_dept_comboBox.Items[0].ToString())
             {
-                sql += " and dept.KD_NAME like '" + share_dept_comboBox.Text.Trim() + "%'";
+                //部门选择全部
+                logList = baseService.ExecuteSQL(sql1);
             }
-            sql += " order by WriteTime desc";
-            IList logList = baseService.ExecuteSQL(sql);
+            else
+            {
+                 logList = baseService.ExecuteSQL(sql);
+            }
+            //[0] 日志的ID [1] 日志内容 [2] 日志写的时间 [3]分享日志的人的ID [4]分享日志人的姓名 [5]分享人所在的部门ID [6] 分享人所在的部门名称
+            
+            
+           
             initShareDataGridView(logList);
         }
         private void initShareDataGridView(IList logList)
@@ -430,39 +409,33 @@ namespace WorkLogForm
             int i = 1;
             if (logList != null && logList.Count > 0)
             {
-                foreach (object[] slId in logList)
+                foreach (object[] sl in logList)
                 {
-                    StaffLog sl = new StaffLog();
-                    String id = slId[0].ToString();
-                    baseService.loadEntity(sl, Convert.ToInt64(id));
+            
                     DataGridViewRow row = new DataGridViewRow();
                     row.Tag = sl;
+
+                    //这一段代码很重要 要不然赋不进值去
                     foreach (DataGridViewColumn c in this.share_dataGridView.Columns)
                     {
                         row.Cells.Add(c.CellTemplate.Clone() as DataGridViewCell);
                     }
-                    row.Cells[0].Value = i;
-                    row.Cells[1].Value = sl.Staff.KuName.Trim();
-                    row.Cells[2].Value = sl.Staff.Kdid.KdName.Trim();
-                    DateTime writeTime = new DateTime(sl.WriteTime);
+                    //end
+                    row.Cells[0].Value = i.ToString();
+                    row.Cells[1].Value = sl[4].ToString();
+                    row.Cells[2].Value = sl[6].ToString().Trim();
+                    DateTime writeTime = new DateTime( Convert.ToInt64(sl[2].ToString()));
                     row.Cells[3].Value = writeTime.Year + "年" + writeTime.Month + "月" + writeTime.Day + "日";
                     Regex r = new Regex("<[^<]*>");
-                    MatchCollection mc = r.Matches(sl.Content.ToString());
-                    String contentText = sl.Content.ToString().Replace("&nbsp;", " ");
+                    MatchCollection mc = r.Matches(sl[1].ToString());
+                    String contentText = sl[1].ToString().Replace("&nbsp;", " ");
                     for (int j = 0; j < mc.Count; j++)
                     {
                         contentText = contentText.Replace(mc[j].Value, "");
                     }
                     row.Cells[4].Value = contentText;
                     row.Cells[4].ToolTipText = CommonUtil.toolTipFormat(contentText);
-                    if (sl.Comments != null && sl.Comments.Count > 0)
-                    {
-                        row.Cells[3].Value = sl.Comments[0].Content;
-                        foreach (Comments c in sl.Comments)
-                        {
-                            row.Cells[3].ToolTipText += c.CommentPersonName + "：" + System.Environment.NewLine + c.Content + System.Environment.NewLine;
-                        }
-                    }
+                   
                     row.Cells[5].Value = "查看";
                     row.Cells[5].Tag = sl;
                     share_dataGridView.Rows.Add(row);
@@ -474,106 +447,63 @@ namespace WorkLogForm
         {
             if (e.ColumnIndex == 5)
             {
-                StaffLog sf = (StaffLog)share_dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
+                StaffLog thelog = new StaffLog();
+                object[] sf = (object[])share_dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
+                thelog = (StaffLog)baseService.loadEntity(thelog, Convert.ToInt64(sf[0].ToString()));
+
                 writeLog wl = new writeLog();
-                wl.User = sf.Staff;
-                wl.LogDate = new DateTime(sf.WriteTime);
-                wl.IsView = true;
-                wl.ShowDialog();
-            }
-        }
-        #endregion
-        #region 员工日志
-        private void staff_button_Click(object sender, EventArgs e)
-        {
-            long starttime = staff_dateTimePicker_start.Value.Date.Ticks;
-            long endtime = staff_dateTimePicker_end.Value.Date.Ticks+new DateTime(1,1,2).Date.Ticks;
-            String sql = "select sf from StaffLog sf left join sf.Staff left join sf.Staff.Kdid where State=" + (int)IEntity.stateEnum.Normal + " and sf.WriteTime>=" + starttime + " and sf.WriteTime<" + endtime + " and sf.Staff.KuName like '%" + staff_name_textBox.Text.Trim() + "%' and sf.Staff.KuName !='" + user.KuName + "'";
-            if (staff_comboBox.Text.Trim() != "请选择")
-            {
-                sql += " and sf.Staff.Kdid.KdName like '" + share_dept_comboBox.Text.Trim() + "%'";
-            }
-            sql += " order by WriteTime desc";
-            IList logList = baseService.loadEntityList(sql);
-            initStaffDataGridView(logList);
-        }
-        private void initStaffDataGridView(IList logList)
-        {
-            staff_dataGridView.Rows.Clear();
-            int i = 1;
-            if (logList != null && logList.Count > 0)
-            {
-                foreach (StaffLog sl in logList)
-                {
-                    DataGridViewRow row = new DataGridViewRow();
-                    row.Tag = sl;
-                    foreach (DataGridViewColumn c in this.staff_dataGridView.Columns)
-                    {
-                        row.Cells.Add(c.CellTemplate.Clone() as DataGridViewCell);
-                    }
-                    row.Cells[0].Value = i;
-                    row.Cells[1].Value = sl.Staff.KuName.Trim();
-                    row.Cells[2].Value = sl.Staff.Kdid.KdName.Trim();
-                    DateTime writeTime = new DateTime(sl.WriteTime);
-                    row.Cells[3].Value = writeTime.Year + "年" + writeTime.Month + "月" + writeTime.Day + "日";
-                    Regex r = new Regex("<[^<]*>");
-                    MatchCollection mc = r.Matches(sl.Content.ToString());
-                    String contentText = sl.Content.ToString().Replace("&nbsp;", " ");
-                    for (int j = 0; j < mc.Count; j++)
-                    {
-                        contentText = contentText.Replace(mc[j].Value, "");
-                    }
-                    row.Cells[4].Value = contentText;
-                    row.Cells[4].ToolTipText = CommonUtil.toolTipFormat(contentText);
-                    if (sl.Comments != null && sl.Comments.Count > 0)
-                    {
-                        row.Cells[3].Value = sl.Comments[0].Content;
-                        foreach (Comments c in sl.Comments)
-                        {
-                            row.Cells[3].ToolTipText += c.CommentPersonName + "：" + System.Environment.NewLine + c.Content + System.Environment.NewLine;
-                        }
-                    }
-                    row.Cells[5].Value = "查看";
-                    row.Cells[5].Tag = sl;
-                    staff_dataGridView.Rows.Add(row);
-                    i++;
-                }
-            }
-        }
-        private void staff_dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 5)
-            {
-                StaffLog sf = (StaffLog)staff_dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
-                writeLog wl = new writeLog();
-                wl.User = sf.Staff;
-                wl.LogDate = new DateTime(sf.WriteTime);
-                wl.CommentPersonName = user.KuName;
+                wl.User = thelog.Staff;
+                wl.LogDate = new DateTime(thelog.WriteTime);
                 wl.IsComment = true;
+                wl.CommentPersonName = this.user.KuName;
                 wl.ShowDialog();
             }
         }
         #endregion
 
+        #region 员工日志 未处理
+      
+        #endregion
+
+        #region 三个按钮
+        /// <summary>
+        /// 个人日志按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void panel1_pictureBox_Click(object sender, EventArgs e)
         {
             panel1.Visible = true;
             panel2.Visible = false;
             panel3.Visible = false;
+            this.label14.Text = "个人日志";
         }
 
+        /// <summary>
+        /// 分享日志按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void panel2_pictureBox_Click(object sender, EventArgs e)
-        {
-            panel1.Visible = false;
-            panel2.Visible = true;
-            panel3.Visible = false;
-        }
-
-        private void panel3_pictureBox_Click(object sender, EventArgs e)
         {
             panel1.Visible = false;
             panel2.Visible = false;
             panel3.Visible = true;
+            this.label14.Text = "分享日志";
         }
+        /// <summary>
+        /// 员工日志按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void panel3_pictureBox_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = false;
+            panel2.Visible = true;
+            panel3.Visible = false;
+            this.label14.Text = "员工日志";
+        }
+
+        #endregion
     }
 }

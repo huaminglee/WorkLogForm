@@ -83,8 +83,8 @@ namespace WorkLogForm
             if (this.isComment == true)
             {
                 label1.Dispose();
-                label4.Font = new Font(label4.Font.FontFamily, (float)21.75, FontStyle.Bold);
-                label4.Location = new Point(647, 104);
+                label4.Font = new Font(label4.Font.FontFamily, (float)18, FontStyle.Bold);
+                label4.Location = new Point(630, 44);
                 label4.Text = user.KuName+"的日志-" + logDate.Year + "年" + logDate.Month + "月" + logDate.Day + "日";
                 label3.Dispose();
                 label2.Dispose();
