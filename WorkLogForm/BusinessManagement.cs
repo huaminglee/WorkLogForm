@@ -528,6 +528,13 @@ namespace WorkLogForm
             baseService.SaveOrUpdateEntity(b);
         }
 
+        private void button10_Click(object sender, EventArgs e)//人员修改
+        {
+            redoForm rf = new redoForm();
+            rf.business = selectedBusiness;
+            rf.ShowDialog();
+        }
+
         #endregion
         #region tabpage2 出差查看
         private void initTabPage2()
@@ -666,6 +673,8 @@ namespace WorkLogForm
             return false;
         }
         #endregion
+
+
 
 
       

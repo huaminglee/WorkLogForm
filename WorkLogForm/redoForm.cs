@@ -38,7 +38,7 @@ namespace WorkLogForm
                 ListViewItem item = new ListViewItem();
                 item.Text =i.ToString();
                 item.SubItems.Add(be.EmployeeId.KuName);
-                item.SubItems.Add(be.EmployeeId.Kdid.KdName);
+                item.SubItems.Add(be.EmployeeId.Kdid.KdName.Trim());
                 switch (be.PassExam)
                 { 
                     case(int) BusinessEmployee.ExamState.redo:
@@ -51,7 +51,7 @@ namespace WorkLogForm
 
                 i++;
                 item.Tag = be;
-                listView1.Items.Add(item);
+                listView3.Items.Add(item);
             }
         }
 
@@ -80,7 +80,7 @@ namespace WorkLogForm
             empList.Add(u);
             ListViewItem item = new ListViewItem();
             item.Text = u.KuName;
-            item.SubItems.Add(u.Kdid.KdName);
+            item.SubItems.Add(u.Kdid.KdName.Trim());
             item.Tag = u;
             listView2.Items.Add(item);
         }

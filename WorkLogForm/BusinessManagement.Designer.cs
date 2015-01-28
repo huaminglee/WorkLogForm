@@ -113,6 +113,7 @@
             this.listView8 = new System.Windows.Forms.ListView();
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label26 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
@@ -141,7 +142,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.close_pictureBox = new System.Windows.Forms.PictureBox();
             this.min_pictureBox = new System.Windows.Forms.PictureBox();
-            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -463,7 +463,7 @@
             this.tabControl1.Location = new System.Drawing.Point(41, 97);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(910, 566);
+            this.tabControl1.Size = new System.Drawing.Size(1000, 600);
             this.tabControl1.TabIndex = 272;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
@@ -475,7 +475,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 32);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(902, 530);
+            this.tabPage1.Size = new System.Drawing.Size(992, 564);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "出差发起";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -904,7 +904,7 @@
             this.tabPage5.Controls.Add(this.label29);
             this.tabPage5.Location = new System.Drawing.Point(4, 32);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(902, 530);
+            this.tabPage5.Size = new System.Drawing.Size(992, 564);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "退回修改";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -917,6 +917,7 @@
             this.button10.TabIndex = 268;
             this.button10.Text = "修改人员";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
@@ -1022,6 +1023,11 @@
             // 
             this.columnHeader15.Text = "部门";
             this.columnHeader15.Width = 194;
+            // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "状态";
+            this.columnHeader25.Width = 113;
             // 
             // label26
             // 
@@ -1297,11 +1303,6 @@
             this.min_pictureBox.Size = new System.Drawing.Size(28, 24);
             this.min_pictureBox.TabIndex = 274;
             this.min_pictureBox.TabStop = false;
-            // 
-            // columnHeader25
-            // 
-            this.columnHeader25.Text = "状态";
-            this.columnHeader25.Width = 113;
             // 
             // BusinessManagement
             // 
