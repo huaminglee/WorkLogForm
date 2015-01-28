@@ -613,6 +613,16 @@ namespace WorkLogForm.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap 我的随笔 {
+            get {
+                object obj = ResourceManager.GetObject("我的随笔", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap 排班管理 {
             get {
                 object obj = ResourceManager.GetObject("排班管理", resourceCulture);
@@ -1186,6 +1196,16 @@ namespace WorkLogForm.Properties {
         internal static System.Drawing.Bitmap 随笔1 {
             get {
                 object obj = ResourceManager.GetObject("随笔1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 随笔查询 {
+            get {
+                object obj = ResourceManager.GetObject("随笔查询", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

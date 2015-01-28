@@ -131,12 +131,14 @@ namespace WorkLogForm
         {
             this.MyOwnSuiBi_panel.Visible = true;
             this.other_panel.Visible = false;
+            this.label8.Text = "个人随笔";
         }
 
         private void OtherSuiBi_pictureBox_Click(object sender, EventArgs e)
         {
             this.MyOwnSuiBi_panel.Visible = false;
             this.other_panel.Visible = true;
+            this.label8.Text = "随笔查询";
         }
 
         private void SearchSuiBi_pictureBox_Click(object sender, EventArgs e)

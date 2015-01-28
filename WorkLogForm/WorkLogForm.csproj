@@ -385,6 +385,8 @@
     <Content Include="resources\个人考勤副本.png" />
     <Content Include="resources\代签审批.png" />
     <Content Include="resources\代签审批副本.png" />
+    <None Include="resources\我的随笔.png" />
+    <None Include="resources\随笔查询.png" />
     <None Include="resources\随笔.png" />
     <None Include="resources\随笔1.png" />
     <None Include="resources\值班管理22.png" />

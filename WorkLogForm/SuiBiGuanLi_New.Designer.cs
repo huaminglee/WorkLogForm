@@ -51,9 +51,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MyOwnSuiBi_pictureBox)).BeginInit();
@@ -98,7 +99,7 @@
             this.label45.BackColor = System.Drawing.Color.Transparent;
             this.label45.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label45.ForeColor = System.Drawing.Color.White;
-            this.label45.Location = new System.Drawing.Point(810, 42);
+            this.label45.Location = new System.Drawing.Point(744, 43);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(110, 31);
             this.label45.TabIndex = 169;
@@ -107,9 +108,11 @@
             // MyOwnSuiBi_pictureBox
             // 
             this.MyOwnSuiBi_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.MyOwnSuiBi_pictureBox.Image = global::WorkLogForm.Properties.Resources.我的随笔;
             this.MyOwnSuiBi_pictureBox.Location = new System.Drawing.Point(50, 38);
             this.MyOwnSuiBi_pictureBox.Name = "MyOwnSuiBi_pictureBox";
             this.MyOwnSuiBi_pictureBox.Size = new System.Drawing.Size(84, 33);
+            this.MyOwnSuiBi_pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.MyOwnSuiBi_pictureBox.TabIndex = 170;
             this.MyOwnSuiBi_pictureBox.TabStop = false;
             this.MyOwnSuiBi_pictureBox.Click += new System.EventHandler(this.MyOwnSuiBi_pictureBox_Click);
@@ -117,9 +120,11 @@
             // OtherSuiBi_pictureBox
             // 
             this.OtherSuiBi_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.OtherSuiBi_pictureBox.Image = global::WorkLogForm.Properties.Resources.随笔查询;
             this.OtherSuiBi_pictureBox.Location = new System.Drawing.Point(162, 38);
             this.OtherSuiBi_pictureBox.Name = "OtherSuiBi_pictureBox";
             this.OtherSuiBi_pictureBox.Size = new System.Drawing.Size(84, 33);
+            this.OtherSuiBi_pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.OtherSuiBi_pictureBox.TabIndex = 172;
             this.OtherSuiBi_pictureBox.TabStop = false;
             this.OtherSuiBi_pictureBox.Click += new System.EventHandler(this.OtherSuiBi_pictureBox_Click);
@@ -292,14 +297,13 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "时间段：";
             // 
-            // label4
+            // comboBox1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(223, 49);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 21);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "员工：";
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(54, 44);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(170, 29);
+            this.comboBox1.TabIndex = 0;
             // 
             // label3
             // 
@@ -311,13 +315,26 @@
             this.label3.TabIndex = 1;
             this.label3.Text = "部门：";
             // 
-            // comboBox1
+            // label4
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(54, 44);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(170, 29);
-            this.comboBox1.TabIndex = 0;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(223, 49);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(58, 21);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "员工：";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(849, 51);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(74, 21);
+            this.label8.TabIndex = 175;
+            this.label8.Text = "个人随笔";
             // 
             // SuiBiGuanLi_New
             // 
@@ -326,6 +343,7 @@
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.日志管理系统首页2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(992, 681);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.other_panel);
             this.Controls.Add(this.MyOwnSuiBi_panel);
             this.Controls.Add(this.OtherSuiBi_pictureBox);
@@ -383,5 +401,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label8;
     }
 }
