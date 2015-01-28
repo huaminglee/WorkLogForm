@@ -363,9 +363,12 @@ namespace WorkLogForm
             {
                 rz_flowLayoutPanel.Controls.RemoveAt(0);
             }
-            IList staffLogList = baseService.ExecuteSQL
-                ("select sl.Contents,sl.WriteTime,u.KU_NAME,sl.id from StaffLog_M_WkTUser m,LOG_T_STAFFLOG sl,WK_T_USER u where m.KU_ID=u.KU_ID and m.StaffLogId=sl.id and m.KU_ID=" 
-                + user.Id + " order by sl.WriteTime desc"); //查询自己的日志与其他人分享的日志
+
+            string sql = "select t.c,t.t ,w.KU_NAME,t.id  from WK_T_USER w right join " +
+                        "(select sl.Contents c,sl.WriteTime t,u.KU_NAME n ,sl.id id,sl.WkTUserId from  " +
+                        "StaffLog_M_WkTUser m,LOG_T_STAFFLOG sl,WK_T_USER u where m.KU_ID=u.KU_ID " +
+                        "and m.StaffLogId=sl.id and m.KU_ID= " + user.Id + " ) t on t.WkTUserId = w.KU_ID order by t.t desc";
+            IList staffLogList = baseService.ExecuteSQL(sql); //查询自己的日志与其他人分享的日志
             creat_ri_zhi_Panel(staffLogList);
             rz_flowLayoutPanel.Visible = rzVisible;
             //}
@@ -384,8 +387,8 @@ namespace WorkLogForm
                     Panel bgPanel = new Panel();
                     bgPanel.BackColor = System.Drawing.Color.Transparent;
                     bgPanel.BorderStyle = BorderStyle.FixedSingle;
-                    bgPanel.Size = new Size(238, 143);
-                    bgPanel.Parent = rz_flowLayoutPanel;
+                    bgPanel.Size = new Size(221, 143);
+                   
                     PictureBox personImage = new PictureBox();
                     personImage.Size = new Size(44, 44);
                     personImage.Location = new Point(7, 1);
@@ -404,7 +407,7 @@ namespace WorkLogForm
                     timeLabel.Parent = bgPanel;
                     Panel contentPanel = new Panel();
                     contentPanel.Size = new Size(213, 69);
-                    contentPanel.Location = new Point(7, 51);
+                    contentPanel.Location = new Point(2, 51);
                     contentPanel.BackColor = System.Drawing.Color.Transparent;
                     contentPanel.Parent = bgPanel;
                     Label contentLabel = new Label();
@@ -423,10 +426,12 @@ namespace WorkLogForm
                     contentLabel.Parent = contentPanel;
                     LinkLabel moreLink = new LinkLabel();
                     moreLink.Text = "点击查看全文";
-                    moreLink.Location = new Point(153, 123);
+                    moreLink.Location = new Point(140, 123);
                     moreLink.Parent = bgPanel;
                     moreLink.Click += onMoreLinkLabelClickEventHandler;
                     moreLink.Tag = sf;
+
+                    bgPanel.Parent = rz_flowLayoutPanel;
                 }
                 if (rzList.Count > 0)
                     rzList.RemoveAt(0);
@@ -437,18 +442,37 @@ namespace WorkLogForm
                 if (rzList.Count > 0)
                 {
                     Panel morePanel = new Panel();
-                    morePanel.Size = rz_flowLayoutPanel.Controls.Count == 3 ? new Size(238, 25) : new Size(223, 25);
+                    morePanel.Size = new Size(220, 25); //rz_flowLayoutPanel.Controls.Count == 3 ? new Size(2, 25) : new Size(223, 25);
                     morePanel.Parent = rz_flowLayoutPanel;
                     morePanel.BackColor = System.Drawing.Color.Transparent;
                     morePanel.Tag = rzList;
-                    morePanel.Click += onMorePanelClickEventHandler;
+                    
                     LinkLabel moreLinkLabel = new LinkLabel();
                     moreLinkLabel.Text = "点击查看更多";
                     moreLinkLabel.Location = rz_flowLayoutPanel.Controls.Count == 3 ? new Point(75, 12) : new Point(75, 7);
                     moreLinkLabel.Parent = morePanel;
+                    moreLinkLabel.Click += moreLinkLabel_Click;
+                    //moreLinkLabel.Tag = rzList;
+                    //moreLinkLabel.Left = 75;
                 }
             }
         }
+
+        void moreLinkLabel_Click(object sender, EventArgs e)
+        {
+            Panel panel = (Panel)((LinkLabel)sender).Parent;
+            IList rzList = (IList)panel.Tag;
+            if (panel.Parent.Controls.Count == 4)
+            {
+                panel.Parent.Controls[0].Size = new Size(221, 143);
+                panel.Parent.Controls[1].Size = new Size(221, 143);
+                panel.Parent.Controls[2].Size = new Size(221, 143);
+            }
+            panel.Parent.Controls.Remove(panel);
+            creat_ri_zhi_Panel(rzList);
+        }
+
+       
         private void onMoreLinkLabelClickEventHandler(object sender, EventArgs e)
         {
             LinkLabel ll = (LinkLabel)sender;
@@ -456,24 +480,13 @@ namespace WorkLogForm
             StaffLog sl = new StaffLog();
             baseService.loadEntity(sl,Convert.ToInt64(obj[3].ToString()));
             writeLog log = new writeLog();
-            log.IsView = true;
+            log.IsComment = true;
             log.User = sl.Staff;
+            log.CommentPersonName = User.KuName;
             log.LogDate = new DateTime(sl.WriteTime);
             log.ShowDialog();
         }
-        private void onMorePanelClickEventHandler(object sender, EventArgs e)
-        {
-            Panel panel = (Panel)sender;
-            IList rzList = (IList)panel.Tag;
-            if (panel.Parent.Controls.Count == 4)
-            {
-                panel.Parent.Controls[0].Size = new Size(223, 143);
-                panel.Parent.Controls[1].Size = new Size(223, 143);
-                panel.Parent.Controls[2].Size = new Size(223, 143);
-            }
-            panel.Parent.Controls.Remove(panel);
-            creat_ri_zhi_Panel(rzList);
-        }
+      
         #endregion
        
         

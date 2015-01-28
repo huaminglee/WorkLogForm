@@ -32,7 +32,6 @@
             this.min_pictureBox = new System.Windows.Forms.PictureBox();
             this.label45 = new System.Windows.Forms.Label();
             this.MyOwnSuiBi_pictureBox = new System.Windows.Forms.PictureBox();
-            this.SearchSuiBi_pictureBox = new System.Windows.Forms.PictureBox();
             this.OtherSuiBi_pictureBox = new System.Windows.Forms.PictureBox();
             this.MyOwnSuiBi_panel = new System.Windows.Forms.Panel();
             this.ShowMyOwnSuiBi = new System.Windows.Forms.FlowLayoutPanel();
@@ -58,7 +57,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MyOwnSuiBi_pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SearchSuiBi_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OtherSuiBi_pictureBox)).BeginInit();
             this.MyOwnSuiBi_panel.SuspendLayout();
             this.other_panel.SuspendLayout();
@@ -115,16 +113,6 @@
             this.MyOwnSuiBi_pictureBox.TabIndex = 170;
             this.MyOwnSuiBi_pictureBox.TabStop = false;
             this.MyOwnSuiBi_pictureBox.Click += new System.EventHandler(this.MyOwnSuiBi_pictureBox_Click);
-            // 
-            // SearchSuiBi_pictureBox
-            // 
-            this.SearchSuiBi_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SearchSuiBi_pictureBox.Location = new System.Drawing.Point(273, 39);
-            this.SearchSuiBi_pictureBox.Name = "SearchSuiBi_pictureBox";
-            this.SearchSuiBi_pictureBox.Size = new System.Drawing.Size(84, 33);
-            this.SearchSuiBi_pictureBox.TabIndex = 171;
-            this.SearchSuiBi_pictureBox.TabStop = false;
-            this.SearchSuiBi_pictureBox.Click += new System.EventHandler(this.SearchSuiBi_pictureBox_Click);
             // 
             // OtherSuiBi_pictureBox
             // 
@@ -357,7 +345,6 @@
             this.Controls.Add(this.other_panel);
             this.Controls.Add(this.MyOwnSuiBi_panel);
             this.Controls.Add(this.OtherSuiBi_pictureBox);
-            this.Controls.Add(this.SearchSuiBi_pictureBox);
             this.Controls.Add(this.MyOwnSuiBi_pictureBox);
             this.Controls.Add(this.label45);
             this.Controls.Add(this.close_pictureBox);
@@ -374,7 +361,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MyOwnSuiBi_pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SearchSuiBi_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OtherSuiBi_pictureBox)).EndInit();
             this.MyOwnSuiBi_panel.ResumeLayout(false);
             this.MyOwnSuiBi_panel.PerformLayout();
@@ -391,7 +377,6 @@
         private System.Windows.Forms.PictureBox min_pictureBox;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.PictureBox MyOwnSuiBi_pictureBox;
-        private System.Windows.Forms.PictureBox SearchSuiBi_pictureBox;
         private System.Windows.Forms.PictureBox OtherSuiBi_pictureBox;
         private System.Windows.Forms.Panel MyOwnSuiBi_panel;
         private System.Windows.Forms.Button button1;

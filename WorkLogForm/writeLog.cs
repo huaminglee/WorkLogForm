@@ -21,18 +21,27 @@ namespace WorkLogForm
         private DateTime logDate;
         private List<WkTUser> sharedUser;
         private bool isView = false;
+        /// <summary>
+        /// 界面用于编写还是展示
+        /// </summary>
         public bool IsView
         {
             get { return isView; }
             set { isView = value; }
         }
         private String commentPersonName;
+        /// <summary>
+        /// 传送评论人信息也就是当前登陆系统的人
+        /// </summary>
         public String CommentPersonName
         {
             get { return commentPersonName; }
             set { commentPersonName = value; }
         }
         private bool isComment = false;
+        /// <summary>
+        /// 用否需要评论（现在规定只要是展示就需要可以评论）
+        /// </summary>
         public bool IsComment
         {
             get { return isComment; }
@@ -48,6 +57,9 @@ namespace WorkLogForm
             get { return logDate; }
             set { logDate = value; }
         }
+        /// <summary>
+        /// 当前日志是谁写的
+        /// </summary>
         public WkTUser User
         {
             get { return user; }
@@ -116,7 +128,7 @@ namespace WorkLogForm
                 logDate = DateTime.Now;
             }
             IList staffLogList = baseService.loadEntityList("from StaffLog where State=" + (int)IEntity.stateEnum.Normal + " and WriteTime=" + logDate.Date.Ticks + " and Staff=" + user.Id);
-            IList staffHobbyList = baseService.loadEntityList("from Hobby where State=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and TypeFlag=" + (int)Hobby.hobbyTypeEnum.RiZhi);
+           
             if (staffLogList != null && staffLogList.Count > 0)
             {
                 StaffLog s = (StaffLog)staffLogList[0];
@@ -126,15 +138,24 @@ namespace WorkLogForm
                 SharedUser.AddRange(s.SharedStaffs);
                 initCommentList(s.Comments);
             }
-            else if (staffHobbyList != null && staffHobbyList.Count > 0)
+            if (IsComment != true)
             {
-                Hobby s = (Hobby)staffHobbyList[0];
-                SharedUser = new List<WkTUser>();
-                SharedUser.AddRange(s.SharedStaffs);
+                //偏好设置
+                IList staffHobbyList = baseService.loadEntityList("from Hobby where State=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and TypeFlag=" + (int)Hobby.hobbyTypeEnum.RiZhi);
+                if (staffHobbyList != null && staffHobbyList.Count > 0)
+                {
+                    Hobby s = (Hobby)staffHobbyList[0];
+                    SharedUser = new List<WkTUser>();
+                    SharedUser.AddRange(s.SharedStaffs);
+                }
+
+                //当用于编写日志作用时候加载日程
+
+                long nextDay = logDate.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
+                IList scheduleList = baseService.loadEntityList("from StaffSchedule where State=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + logDate.Date.Ticks + " and ScheduleTime<" + nextDay + " order by ScheduleTime asc");
+                initScheduleList(scheduleList);
             }
-            long nextDay = logDate.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
-            IList scheduleList = baseService.loadEntityList("from StaffSchedule where State=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + logDate.Date.Ticks + " and ScheduleTime<" + nextDay + " order by ScheduleTime asc");
-            initScheduleList(scheduleList);
+            
         }
         #endregion
         #region 最小化关闭按钮
@@ -215,6 +236,7 @@ namespace WorkLogForm
             if (scList != null && scList.Count > 0)
             {
                 schedule_listView.Items.Clear();
+                
                 foreach (StaffSchedule s in scList)
                 {
                     ListViewItem item = new ListViewItem();
@@ -223,9 +245,16 @@ namespace WorkLogForm
                     ListViewItem.ListViewSubItem content = new ListViewItem.ListViewSubItem();
                     time.Text = CNDate.getTimeByTimeTicks(new DateTime(s.ScheduleTime).TimeOfDay.Ticks);
                     content.Text = s.Content;
+                    ListViewItem.ListViewSubItem check = new ListViewItem.ListViewSubItem();
+                    ListViewItem.ListViewSubItem number = new ListViewItem.ListViewSubItem();
+                    number.Text = "1";
+
+                    item.SubItems.Add(number);
                     item.SubItems.Add(time);
                     item.SubItems.Add(content);
+                    
                     schedule_listView.Items.Add(item);
+                    
                     
                 }
             }
@@ -357,12 +386,13 @@ namespace WorkLogForm
             StaffLog staffLog = (StaffLog)htmlEditor1.Tag;
             Comments comment = new Comments();
             comment.Content = comment_textBox.Text.Trim();
-            comment.CommentPersonName = commentPersonName;
+            comment.CommentPersonName = this.CommentPersonName;
             comment.State = (int)IEntity.stateEnum.Normal;
             comment.TimeStamp = DateTime.Now.Ticks;
             staffLog.Comments.Add(comment);
             baseService.SaveOrUpdateEntity(staffLog);
             initCommentList(staffLog.Comments);
+            this.comment_textBox.Text = "";
         }      
     }
 }

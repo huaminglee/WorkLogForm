@@ -191,7 +191,7 @@
             this.user_label.BackColor = System.Drawing.Color.Transparent;
             this.user_label.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.user_label.ForeColor = System.Drawing.Color.Black;
-            this.user_label.Location = new System.Drawing.Point(51, 41);
+            this.user_label.Location = new System.Drawing.Point(51, 40);
             this.user_label.Name = "user_label";
             this.user_label.Size = new System.Drawing.Size(109, 12);
             this.user_label.TabIndex = 1;
@@ -253,7 +253,7 @@
             this.attendance_label.BackColor = System.Drawing.Color.Transparent;
             this.attendance_label.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.attendance_label.ForeColor = System.Drawing.Color.Black;
-            this.attendance_label.Location = new System.Drawing.Point(115, 59);
+            this.attendance_label.Location = new System.Drawing.Point(115, 58);
             this.attendance_label.Name = "attendance_label";
             this.attendance_label.Size = new System.Drawing.Size(0, 12);
             this.attendance_label.TabIndex = 5;
@@ -265,7 +265,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(50, 59);
+            this.label4.Location = new System.Drawing.Point(50, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 12);
             this.label4.TabIndex = 6;
@@ -563,7 +563,7 @@
             this.rc_flowLayoutPanel.Controls.Add(this.panel20);
             this.rc_flowLayoutPanel.Location = new System.Drawing.Point(44, 115);
             this.rc_flowLayoutPanel.Name = "rc_flowLayoutPanel";
-            this.rc_flowLayoutPanel.Size = new System.Drawing.Size(248, 484);
+            this.rc_flowLayoutPanel.Size = new System.Drawing.Size(248, 480);
             this.rc_flowLayoutPanel.TabIndex = 22;
             this.rc_flowLayoutPanel.Visible = false;
             // 
@@ -902,7 +902,7 @@
             this.rz_flowLayoutPanel.Controls.Add(this.panel7);
             this.rz_flowLayoutPanel.Location = new System.Drawing.Point(43, 115);
             this.rz_flowLayoutPanel.Name = "rz_flowLayoutPanel";
-            this.rz_flowLayoutPanel.Size = new System.Drawing.Size(248, 484);
+            this.rz_flowLayoutPanel.Size = new System.Drawing.Size(248, 479);
             this.rz_flowLayoutPanel.TabIndex = 2;
             // 
             // panel4
@@ -915,13 +915,13 @@
             this.panel4.Controls.Add(this.pictureBox3);
             this.panel4.Location = new System.Drawing.Point(3, 3);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(238, 143);
+            this.panel4.Size = new System.Drawing.Size(223, 143);
             this.panel4.TabIndex = 2;
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.label5);
-            this.panel1.Location = new System.Drawing.Point(7, 51);
+            this.panel1.Location = new System.Drawing.Point(4, 51);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(213, 69);
             this.panel1.TabIndex = 5;
@@ -981,13 +981,13 @@
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Location = new System.Drawing.Point(3, 152);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(237, 143);
+            this.panel2.Size = new System.Drawing.Size(221, 143);
             this.panel2.TabIndex = 3;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.label6);
-            this.panel3.Location = new System.Drawing.Point(7, 51);
+            this.panel3.Location = new System.Drawing.Point(4, 51);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(213, 69);
             this.panel3.TabIndex = 5;
@@ -1046,13 +1046,13 @@
             this.panel5.Controls.Add(this.pictureBox2);
             this.panel5.Location = new System.Drawing.Point(3, 301);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(237, 143);
+            this.panel5.Size = new System.Drawing.Size(221, 143);
             this.panel5.TabIndex = 4;
             // 
             // panel6
             // 
             this.panel6.Controls.Add(this.label11);
-            this.panel6.Location = new System.Drawing.Point(7, 51);
+            this.panel6.Location = new System.Drawing.Point(3, 51);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(213, 69);
             this.panel6.TabIndex = 5;
@@ -1139,7 +1139,7 @@
             this.SuiBi_flowLayoutPanel.Controls.Add(this.SuiBi_SeeMore);
             this.SuiBi_flowLayoutPanel.Location = new System.Drawing.Point(45, 115);
             this.SuiBi_flowLayoutPanel.Name = "SuiBi_flowLayoutPanel";
-            this.SuiBi_flowLayoutPanel.Size = new System.Drawing.Size(248, 484);
+            this.SuiBi_flowLayoutPanel.Size = new System.Drawing.Size(248, 480);
             this.SuiBi_flowLayoutPanel.TabIndex = 7;
             // 
             // write_SuiBi
@@ -1205,7 +1205,7 @@
             this.BackColor = System.Drawing.Color.DarkGray;
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.首页背景2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(294, 603);
+            this.ClientSize = new System.Drawing.Size(294, 600);
             this.Controls.Add(this.SuiBiGuanLi_pictureBox);
             this.Controls.Add(this.rz_flowLayoutPanel);
             this.Controls.Add(this.dai_qian_sp_pictureBox);
