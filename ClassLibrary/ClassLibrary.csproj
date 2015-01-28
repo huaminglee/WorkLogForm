@@ -60,6 +60,7 @@
     <Compile Include="WkTUser.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Wktuser_M_Dept.cs" />
     <Compile Include="WorkDay.cs" />
     <Compile Include="StaffLog.cs" />
     <Compile Include="UsuallyDay.cs" />
@@ -166,6 +167,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Wktuser_M_Dept.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
