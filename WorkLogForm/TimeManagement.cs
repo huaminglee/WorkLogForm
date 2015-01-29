@@ -43,7 +43,7 @@ namespace WorkLogForm
             #region 部门管理页加载
 
             //查询出副院长的姓名添加到列表中
-            string sql = "select u from WkTUser u right join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 1";
+            string sql = "select u from WkTUser u right join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder <> 3";
             IList Namelist = baseService.loadEntityList(sql);
             
             if(Namelist != null && Namelist.Count > 0)
@@ -723,7 +723,7 @@ namespace WorkLogForm
                 
                 //加载数据到表2
                 this.dataGridView2.Rows.Clear();
-                if (theone != null && theone.Count > 1)
+                if (theone != null && theone.Count > 0)
                 {
                     foreach (WkTDept o in theone)
                     {
@@ -774,7 +774,7 @@ namespace WorkLogForm
                 //删除原来的
                 string sql = "select u from Wktuser_M_Dept u where u.WktuserId = " + userNow.Id + " and u.State = " + (int)IEntity.stateEnum.Normal;
                 IList theone = baseService.loadEntityList(sql);
-                if (theone != null && theone.Count > 1)
+                if (theone != null && theone.Count > 0)
                 {
                     foreach (Wktuser_M_Dept o in theone)
                     {
@@ -805,7 +805,7 @@ namespace WorkLogForm
 
                 //加载数据到表2
                 this.dataGridView2.Rows.Clear();
-                if (theone1 != null && theone1.Count > 1)
+                if (theone1 != null && theone1.Count > 0)
                 {
                     foreach (WkTDept o in theone1)
                     {
