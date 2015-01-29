@@ -29,6 +29,8 @@ namespace WorkLogForm
             initHolidayData();
         }
 
+        private WkTUser userNow;
+
         #region 自定义窗体初始化方法
         /// <summary>
         /// 初始化window（界面效果）
@@ -715,15 +717,111 @@ namespace WorkLogForm
         {
             if(e.ColumnIndex == 1)
             {
-                string sql = "select u from Wktuser_M_Dept u where u.WktuserId = " + ((WkTUser)this.dataGridView1.Rows[e.RowIndex].Tag).Id ;
+                userNow = (WkTUser)this.dataGridView1.Rows[e.RowIndex].Tag;
+                string sql = "select u.DeptId from Wktuser_M_Dept u where u.WktuserId = " + ((WkTUser)this.dataGridView1.Rows[e.RowIndex].Tag).Id + " and u.State =  " + (int)IEntity.stateEnum.Normal; 
                 IList theone = baseService.loadEntityList(sql);
                 
-            
+                //加载数据到表2
+                this.dataGridView2.Rows.Clear();
+                if (theone != null && theone.Count > 1)
+                {
+                    foreach (WkTDept o in theone)
+                    {
+                        this.dataGridView2.Rows.Add(o.KdName);
+                    }
+                }
+                else 
+                {
+                    MessageBox.Show("您还未设置！");
+                }
+                
             }
         }
 
+
+        /// <summary>
+        /// 设置按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.panel3.Visible = true;
+
+            string sql = "select u from WkTDept u"; 
+            IList depts = baseService.loadEntityList(sql);
+            this.dataGridView3.Rows.Clear();
+            if(depts != null && depts.Count > 0)
+            {
+                foreach(WkTDept o in depts)
+                {
+                    this.dataGridView3.Rows.Add(0, o.KdName);
+                    this.dataGridView3.Rows[this.dataGridView3.Rows.Count - 1].Tag = o;
+                }
+            }
+
+        }
+
+        /// <summary>
+        ///  确定按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确定修改？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                //删除原来的
+                string sql = "select u from Wktuser_M_Dept u where u.WktuserId = " + userNow.Id + " and u.State = " + (int)IEntity.stateEnum.Normal;
+                IList theone = baseService.loadEntityList(sql);
+                if (theone != null && theone.Count > 1)
+                {
+                    foreach (Wktuser_M_Dept o in theone)
+                    {
+                        Wktuser_M_Dept oldone = o;
+                        oldone.State = (int)IEntity.stateEnum.Deleted;
+                        baseService.SaveOrUpdateEntity(o);
+                    }
+                }
+
+
+                int number = this.dataGridView3.Rows.Count;
+                for (int i = 0; i < number; i++)
+                {
+                    if ((bool)dataGridView3.Rows[i].Cells[0].EditedFormattedValue == true)
+                    {
+                        Wktuser_M_Dept thenew = new Wktuser_M_Dept();
+                        thenew.WktuserId = userNow;
+                        thenew.DeptId = (WkTDept)dataGridView3.Rows[i].Tag;
+                        thenew.State = (int)IEntity.stateEnum.Normal;
+                        thenew.TimeStamp = DateTime.Now.Ticks;
+                        baseService.SaveOrUpdateEntity(thenew);
+                    }
+
+                }
+                MessageBox.Show("设置成功！");
+                string sql1 = "select u.DeptId from Wktuser_M_Dept u where u.WktuserId = " + userNow.Id + " and u.State = " + (int)IEntity.stateEnum.Normal; 
+                IList theone1 = baseService.loadEntityList(sql1);
+
+                //加载数据到表2
+                this.dataGridView2.Rows.Clear();
+                if (theone1 != null && theone1.Count > 1)
+                {
+                    foreach (WkTDept o in theone1)
+                    {
+                        this.dataGridView2.Rows.Add(o.KdName);
+                    }
+                }
+                this.panel3.Visible = false;
+            }
+            
+        }
+
+
         #endregion
 
+
+       
 
     }
 }
