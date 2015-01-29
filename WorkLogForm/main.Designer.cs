@@ -309,7 +309,7 @@
             this.spgl_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.个人考勤;
             this.spgl_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.spgl_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.spgl_pictureBox.Location = new System.Drawing.Point(0, 445);
+            this.spgl_pictureBox.Location = new System.Drawing.Point(0, 405);
             this.spgl_pictureBox.Name = "spgl_pictureBox";
             this.spgl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.spgl_pictureBox.TabIndex = 11;
@@ -389,7 +389,7 @@
             this.sjgl_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.系统管理;
             this.sjgl_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.sjgl_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.sjgl_pictureBox.Location = new System.Drawing.Point(0, 405);
+            this.sjgl_pictureBox.Location = new System.Drawing.Point(0, 526);
             this.sjgl_pictureBox.Name = "sjgl_pictureBox";
             this.sjgl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.sjgl_pictureBox.TabIndex = 11;
@@ -449,7 +449,7 @@
             this.dai_qian_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.补签;
             this.dai_qian_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.dai_qian_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dai_qian_pictureBox.Location = new System.Drawing.Point(1, 486);
+            this.dai_qian_pictureBox.Location = new System.Drawing.Point(1, 446);
             this.dai_qian_pictureBox.Name = "dai_qian_pictureBox";
             this.dai_qian_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.dai_qian_pictureBox.TabIndex = 23;
@@ -465,7 +465,7 @@
             this.dai_qian_sp_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.代签审批;
             this.dai_qian_sp_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.dai_qian_sp_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dai_qian_sp_pictureBox.Location = new System.Drawing.Point(0, 525);
+            this.dai_qian_sp_pictureBox.Location = new System.Drawing.Point(0, 485);
             this.dai_qian_sp_pictureBox.Name = "dai_qian_sp_pictureBox";
             this.dai_qian_sp_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.dai_qian_sp_pictureBox.TabIndex = 24;

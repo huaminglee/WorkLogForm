@@ -37,7 +37,22 @@ namespace WorkLogForm
         {
             creatWindow.SetFormRoundRectRgn(this, 15);
             creatWindow.SetFormShadow(this);
-          
+
+            #region 部门管理页加载
+
+            //查询出副院长的姓名添加到列表中
+            string sql = "select u from WkTUser u right join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 1";
+            IList Namelist = baseService.loadEntityList(sql);
+            
+            if(Namelist != null && Namelist.Count > 0)
+            {
+                foreach(WkTUser o in Namelist)
+                {
+                    this.dataGridView1.Rows.Add(o.KuName, "查看");
+                    this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Tag = o;
+                }
+            }
+            #endregion
         }
         private void initHolidayData()
         {
@@ -690,17 +705,24 @@ namespace WorkLogForm
             }
         }
         #endregion
+
+       
         #endregion
-        private void panel1_pictureBox_Click(object sender, EventArgs e)
+
+        #region
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            panel1.Visible = true;
-            panel2.Visible = false;
+            if(e.ColumnIndex == 1)
+            {
+                string sql = "select u from Wktuser_M_Dept u where u.WktuserId = " + ((WkTUser)this.dataGridView1.Rows[e.RowIndex].Tag).Id ;
+                IList theone = baseService.loadEntityList(sql);
+                
+            
+            }
         }
-        private void panel2_pictureBox_Click(object sender, EventArgs e)
-        {
-            panel1.Visible = false;
-            panel2.Visible = true;
-        }
+
+        #endregion
 
 
     }

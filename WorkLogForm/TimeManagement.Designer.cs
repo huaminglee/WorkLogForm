@@ -55,8 +55,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.start_dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.panel2_pictureBox = new System.Windows.Forms.PictureBox();
-            this.panel1_pictureBox = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.work_start_dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.work_name_comboBox = new System.Windows.Forms.ComboBox();
@@ -84,13 +82,34 @@
             this.label5 = new System.Windows.Forms.Label();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.Column3 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewLinkColumn();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panel2_pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panel1_pictureBox)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -135,7 +154,7 @@
             this.label45.BackColor = System.Drawing.Color.Transparent;
             this.label45.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label45.ForeColor = System.Drawing.Color.White;
-            this.label45.Location = new System.Drawing.Point(768, 44);
+            this.label45.Location = new System.Drawing.Point(769, 43);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(110, 31);
             this.label45.TabIndex = 157;
@@ -362,33 +381,9 @@
             this.start_dateTimePicker.Size = new System.Drawing.Size(161, 21);
             this.start_dateTimePicker.TabIndex = 13;
             // 
-            // panel2_pictureBox
-            // 
-            this.panel2_pictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.panel2_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.节日时间;
-            this.panel2_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2_pictureBox.Location = new System.Drawing.Point(146, 39);
-            this.panel2_pictureBox.Name = "panel2_pictureBox";
-            this.panel2_pictureBox.Size = new System.Drawing.Size(84, 33);
-            this.panel2_pictureBox.TabIndex = 220;
-            this.panel2_pictureBox.TabStop = false;
-            this.panel2_pictureBox.Click += new System.EventHandler(this.panel2_pictureBox_Click);
-            // 
-            // panel1_pictureBox
-            // 
-            this.panel1_pictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.panel1_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.考勤时间;
-            this.panel1_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel1_pictureBox.Location = new System.Drawing.Point(56, 39);
-            this.panel1_pictureBox.Name = "panel1_pictureBox";
-            this.panel1_pictureBox.Size = new System.Drawing.Size(84, 33);
-            this.panel1_pictureBox.TabIndex = 219;
-            this.panel1_pictureBox.TabStop = false;
-            this.panel1_pictureBox.Click += new System.EventHandler(this.panel1_pictureBox_Click);
-            // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(221)))), ((int)(((byte)(208)))));
             this.panel1.Controls.Add(this.work_start_dateTimePicker);
             this.panel1.Controls.Add(this.work_name_comboBox);
             this.panel1.Controls.Add(this.label2);
@@ -408,9 +403,9 @@
             this.panel1.Controls.Add(this.checkBox7);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.checkBox6);
-            this.panel1.Location = new System.Drawing.Point(27, 84);
+            this.panel1.Location = new System.Drawing.Point(13, 8);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(956, 595);
+            this.panel1.Size = new System.Drawing.Size(942, 579);
             this.panel1.TabIndex = 34;
             // 
             // work_start_dateTimePicker
@@ -688,31 +683,181 @@
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Transparent;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(221)))), ((int)(((byte)(208)))));
             this.panel2.Controls.Add(this.holiday_listView);
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.holiday_year_comboBox);
-            this.panel2.Location = new System.Drawing.Point(27, 84);
+            this.panel2.Location = new System.Drawing.Point(11, 6);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(956, 595);
+            this.panel2.Size = new System.Drawing.Size(946, 574);
             this.panel2.TabIndex = 221;
-            this.panel2.Visible = false;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabControl1.Location = new System.Drawing.Point(4, 40);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(992, 629);
+            this.tabControl1.TabIndex = 222;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.panel2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 36);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(984, 589);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "考勤时间";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(221)))), ((int)(((byte)(208)))));
+            this.tabPage2.Controls.Add(this.panel1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 36);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(984, 589);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "节日时间";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(221)))), ((int)(((byte)(208)))));
+            this.tabPage3.Controls.Add(this.button2);
+            this.tabPage3.Controls.Add(this.panel3);
+            this.tabPage3.Controls.Add(this.dataGridView2);
+            this.tabPage3.Controls.Add(this.dataGridView1);
+            this.tabPage3.Location = new System.Drawing.Point(4, 36);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(984, 589);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "部门管理";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column5,
+            this.Column1});
+            this.dataGridView1.Location = new System.Drawing.Point(51, 37);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(254, 162);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column2});
+            this.dataGridView2.Location = new System.Drawing.Point(347, 37);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowTemplate.Height = 23;
+            this.dataGridView2.Size = new System.Drawing.Size(249, 162);
+            this.dataGridView2.TabIndex = 1;
+            // 
+            // Column2
+            // 
+            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column2.HeaderText = "管理部门";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.dataGridView3);
+            this.panel3.Location = new System.Drawing.Point(51, 205);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(545, 353);
+            this.panel3.TabIndex = 2;
+            this.panel3.Visible = false;
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.AllowUserToAddRows = false;
+            this.dataGridView3.AllowUserToDeleteRows = false;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column3,
+            this.Column4});
+            this.dataGridView3.Location = new System.Drawing.Point(106, 18);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.ReadOnly = true;
+            this.dataGridView3.RowTemplate.Height = 23;
+            this.dataGridView3.Size = new System.Drawing.Size(337, 245);
+            this.dataGridView3.TabIndex = 0;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column4
+            // 
+            this.Column4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column4.HeaderText = "部门名称";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(224, 279);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(115, 41);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "确定";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(652, 107);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(126, 43);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "修改";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // Column5
+            // 
+            this.Column5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column5.HeaderText = "姓名";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "操作";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // TimeManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(221)))), ((int)(((byte)(208)))));
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.日志管理系统首页2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1008, 702);
-            this.Controls.Add(this.panel2_pictureBox);
-            this.Controls.Add(this.panel1_pictureBox);
             this.Controls.Add(this.label45);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.close_pictureBox);
             this.Controls.Add(this.min_pictureBox);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.panel2);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TimeManagement";
@@ -725,12 +870,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panel2_pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panel1_pictureBox)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -764,8 +915,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.PictureBox panel2_pictureBox;
-        private System.Windows.Forms.PictureBox panel1_pictureBox;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DateTimePicker work_start_dateTimePicker;
         private System.Windows.Forms.ComboBox work_name_comboBox;
@@ -793,5 +942,20 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox checkBox6;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewLinkColumn Column1;
     }
 }
