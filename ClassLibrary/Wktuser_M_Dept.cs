@@ -14,13 +14,17 @@ namespace ClassLibrary
             get { return wktuserId; }
             set { wktuserId = value; }
         }
-        private WkTDept WkTDept;
+        private WkTDept deptId;
 
-        public virtual WkTDept WkTDept1
+        public virtual WkTDept DeptId
         {
-            get { return WkTDept; }
-            set { WkTDept = value; }
+            get { return deptId; }
+            set { deptId = value; }
         }
+
+      
+
+
 
     }
 }

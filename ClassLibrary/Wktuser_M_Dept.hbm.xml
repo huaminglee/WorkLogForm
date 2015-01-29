@@ -3,7 +3,7 @@
     namespace="ClassLibrary" assembly="ClassLibrary">
 
   <class name="Wktuser_M_Dept" table="Wktuser_M_Dept" >
-    <id name="Id" column="id" type="long"  length="10" unsaved-value="0">
+    <id name="Id" column="Id" type="long"  length="10" unsaved-value="0">
       <generator class="native" />
     </id>
 
@@ -12,7 +12,7 @@
 
     <many-to-one name="DeptId" column="DeptId" lazy="false" not-null="true"
                 class="ClassLibrary.WkTDept, ClassLibrary" />
-  
+
     <property name="State" column="STATE" type="int" length="1"/>
     <property name="TimeStamp" column="TIMESTAMP" type="long" length="10"/>
   </class>
