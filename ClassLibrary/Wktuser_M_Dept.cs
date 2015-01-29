@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ClassLibrary
 {
-    class Wktuser_M_Dept : IEntity
+    public class Wktuser_M_Dept : IEntity
     {
         private WkTUser wktuserId;
 
