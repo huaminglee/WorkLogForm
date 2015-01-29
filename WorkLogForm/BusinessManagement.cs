@@ -311,8 +311,18 @@ namespace WorkLogForm
             textBox12.Text = b.BusinessNote;
 
 
-            string queryEmp = "from BusinessEmployee be where be.BusinessId=" + b.Id + "and be.EmployeeId.Kdid=" + User.Kdid.Id + "and  be.PassExam=" + (int)BusinessEmployee.ExamState.waiting + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal;
+            string queryEmp;
+            if (User.Kdid.KdName.Trim() != "综合办公室")
+            {
+                queryEmp = "from BusinessEmployee be where be.BusinessId=" + b.Id + "and be.EmployeeId.Kdid=" + User.Kdid.Id + "and  be.PassExam=" + (int)BusinessEmployee.ExamState.waiting + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal;
+            }
+            else 
+            {
+                queryEmp = "from BusinessEmployee be where be.BusinessId=" + b.Id + "and (be.EmployeeId.Kdid=" + User.Kdid.Id + " or be.EmployeeId.Kdid=" + 11 + ") and  be.PassExam=" + (int)BusinessEmployee.ExamState.waiting + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal;
+  
+            }
             EmpInBusDept = baseService.loadEntityList(queryEmp);
+
             if (EmpInBusDept == null||EmpInBusDept.Count==0)
             {
                 button4.Enabled = false;
@@ -455,7 +465,7 @@ namespace WorkLogForm
 
 
         #endregion
-        #region 退回修改
+        #region tabpage5 退回修改
         private void initTabPage5()
         {
             listView8.Items.Clear();
@@ -512,20 +522,30 @@ namespace WorkLogForm
         }
         private void button11_Click(object sender, EventArgs e)//一键通过
         {
-            Business b = selectedBusiness;
-            foreach (BusinessEmployee be in b.BusinessEmployee)
+            
+            if (selectedBusiness != null )
             {
-                if (be.PassExam == (int)BusinessEmployee.ExamState.redo)
+                Business b = selectedBusiness;
+                List<BusinessEmployee> beList = new List<BusinessEmployee>(b.BusinessEmployee);
+                foreach (BusinessEmployee be in beList)
                 {
-                    b.BusinessEmployee.Remove(be);
+                    if (be.PassExam == (int)BusinessEmployee.ExamState.redo)
+                    {
+                        b.BusinessEmployee.Remove(be);
+                    }
+                    else if (be.PassExam == (int)BusinessEmployee.ExamState.pass)
+                    {
+                        be.PassExam = (int)BusinessEmployee.ExamState.done;
+                    }
                 }
-                else if (be.PassExam == (int)BusinessEmployee.ExamState.pass)
-                {
-                    be.PassExam = (int)BusinessEmployee.ExamState.done;
-                }
+                b.PassExam = (int)Business.ExamState.done;
+                baseService.SaveOrUpdateEntity(b);
             }
-            b.PassExam = (int)Business.ExamState.done;
-            baseService.SaveOrUpdateEntity(b);
+            else 
+            {
+                MessageBox.Show("未选中出差");
+            }
+            initTabPage5();
         }
 
         private void button10_Click(object sender, EventArgs e)//人员修改
@@ -533,6 +553,7 @@ namespace WorkLogForm
             redoForm rf = new redoForm();
             rf.business = selectedBusiness;
             rf.ShowDialog();
+            initTabPage5();
         }
 
         #endregion
@@ -562,10 +583,16 @@ namespace WorkLogForm
                             item.SubItems.Add("待审核");
                             break;
                         case (int)Business.ExamState.pass:
-                            item.SubItems.Add("通过");
+                            item.SubItems.Add("通过审核");
                             break;
                         case (int)Business.ExamState.npass:
+                            item.SubItems.Add("撤销");
+                            break;
+                        case (int)Business.ExamState.redo:
                             item.SubItems.Add("退回");
+                            break;
+                        case (int)Business.ExamState.done:
+                            item.SubItems.Add("通过审批");
                             break;
                     }
                     Font font = new Font(this.Font, FontStyle.Underline);
@@ -600,10 +627,16 @@ namespace WorkLogForm
                         item.SubItems.Add("待审核");
                         break;
                     case (int)Business.ExamState.pass:
-                        item.SubItems.Add("通过");
+                        item.SubItems.Add("通过审核");
                         break;
                     case (int)Business.ExamState.npass:
+                        item.SubItems.Add("撤销");
+                        break;
+                    case (int)Business.ExamState.redo:
                         item.SubItems.Add("退回");
+                        break;
+                    case (int)Business.ExamState.done:
+                        item.SubItems.Add("通过审批");
                         break;
                 }
                 Font font = new Font(this.Font, FontStyle.Underline);

@@ -460,10 +460,10 @@
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabControl1.Location = new System.Drawing.Point(41, 97);
+            this.tabControl1.Location = new System.Drawing.Point(54, 101);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1000, 600);
+            this.tabControl1.Size = new System.Drawing.Size(900, 577);
             this.tabControl1.TabIndex = 272;
             this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
@@ -475,7 +475,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 32);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(992, 564);
+            this.tabPage1.Size = new System.Drawing.Size(892, 541);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "出差发起";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -490,7 +490,7 @@
             this.tabPage4.Controls.Add(this.label17);
             this.tabPage4.Location = new System.Drawing.Point(4, 32);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(902, 530);
+            this.tabPage4.Size = new System.Drawing.Size(892, 541);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "部门审核";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1103,7 +1103,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 32);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(902, 530);
+            this.tabPage2.Size = new System.Drawing.Size(892, 541);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "出差情况查看";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1118,7 +1118,7 @@
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.dateTimePicker3);
             this.panel1.Controls.Add(this.dateTimePicker4);
-            this.panel1.Location = new System.Drawing.Point(11, 33);
+            this.panel1.Location = new System.Drawing.Point(6, 33);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(880, 95);
             this.panel1.TabIndex = 238;
@@ -1211,7 +1211,7 @@
             this.listView2.Font = new System.Drawing.Font("宋体", 10F);
             this.listView2.FullRowSelect = true;
             this.listView2.GridLines = true;
-            this.listView2.Location = new System.Drawing.Point(11, 158);
+            this.listView2.Location = new System.Drawing.Point(6, 158);
             this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
             this.listView2.Scrollable = false;

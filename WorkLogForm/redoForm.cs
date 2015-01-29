@@ -91,5 +91,45 @@ namespace WorkLogForm
             empList.Remove(u);
             listView2.Items.Remove(this.listView2.SelectedItems[0]);
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (listView2.Items.Count == 0 && listView2.Items == null)
+            {
+                MessageBox.Show("未作人员修改");
+            }
+            else
+            {
+                WkTUser user = new WkTUser();
+                foreach (ListViewItem item in listView2.Items)
+                {
+                    user = (WkTUser)item.Tag;
+                    BusinessEmployee be = new BusinessEmployee();
+                    be.EmployeeId=user;
+                    be.BusinessId = business;
+                    be.PassExam = (int)BusinessEmployee.ExamState.pass;
+                    business.BusinessEmployee.Add(be);
+                }
+
+                foreach (ListViewItem item in listView3.Items)
+                {
+
+                    BusinessEmployee be = (BusinessEmployee)item.Tag; ;
+                    if (be.PassExam == (int)BusinessEmployee.ExamState.redo)
+                    {
+                        business.BusinessEmployee.Remove(be);
+                    }
+                }
+                business.PassExam = (int)Business.ExamState.pass;
+                baseService.SaveOrUpdateEntity(business);
+                MessageBox.Show("成功提交");
+                this.DialogResult = DialogResult.OK;
+            }
+        }
     }
 }

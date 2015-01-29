@@ -23,17 +23,17 @@ namespace WorkLogForm
 
         private void ViewBusiness_Load(object sender, EventArgs e)
         {
-            if (business.PassExam == (int)Business.ExamState.npass)
-            {
-                label1.Enabled = true;
-                textBox1.Enabled = true;
-                textBox1.Text = business.RefuseReason;
-            }
-            else 
-            {
-                label1.Enabled = false;
-                textBox1.Enabled = false;
-            }
+            //if (business.PassExam == (int)Business.ExamState.npass)
+            //{
+            //    label1.Enabled = true;
+            //    textBox1.Enabled = true;
+            //    textBox1.Text = business.RefuseReason;
+            //}
+            //else 
+            //{
+            //    label1.Enabled = false;
+            //    textBox1.Enabled = false;
+            //}
 
             IList businessEmployee = getEmpByBus(business);
             listView8.Items.Clear();

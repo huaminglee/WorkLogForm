@@ -31,8 +31,6 @@
             this.listView8 = new System.Windows.Forms.ListView();
             this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // listView8
@@ -41,7 +39,7 @@
             this.columnHeader16,
             this.columnHeader1});
             this.listView8.FullRowSelect = true;
-            this.listView8.Location = new System.Drawing.Point(70, 16);
+            this.listView8.Location = new System.Drawing.Point(24, 27);
             this.listView8.MultiSelect = false;
             this.listView8.Name = "listView8";
             this.listView8.Size = new System.Drawing.Size(432, 235);
@@ -59,36 +57,16 @@
             this.columnHeader1.Text = "部门";
             this.columnHeader1.Width = 158;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 276);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
-            this.label1.TabIndex = 261;
-            this.label1.Text = "退回原因：";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(70, 273);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(432, 106);
-            this.textBox1.TabIndex = 262;
-            // 
             // ViewBusiness
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 391);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(480, 355);
             this.Controls.Add(this.listView8);
             this.Name = "ViewBusiness";
             this.Text = "出差查看";
             this.Load += new System.EventHandler(this.ViewBusiness_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -97,7 +75,5 @@
         private System.Windows.Forms.ListView listView8;
         private System.Windows.Forms.ColumnHeader columnHeader16;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }
