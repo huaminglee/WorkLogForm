@@ -221,6 +221,16 @@ namespace WorkLogForm
             attendencePanel_Paint(panel17); attendencePanel_Paint(panel27); attendencePanel_Paint(panel37); attendencePanel_Paint(panel47); attendencePanel_Paint(panel57); attendencePanel_Paint(panel67);
         }
 
+
+        public void Paint_Label(object sender, PaintEventArgs e)
+        {
+            Pen pen1 = new Pen(Color.Red);
+            Pen pen2 = new Pen(Color.LightGreen);
+            pen1.Width = 6;
+            pen2.Width = 6;
+            e.Graphics.DrawLine(pen1,0,3,((Label)sender).Size.Width,3);
+            e.Graphics.DrawLine(pen2, 0, 9, ((Label)sender).Size.Width, 9);
+        }
         /// <summary>
         /// 渲染考勤信息
         /// </summary>
@@ -235,14 +245,17 @@ namespace WorkLogForm
                 {
                     if (a.SignDate == date.Date.Ticks)
                     {
-                        label.Text += a.SignStartTime != 0 ? CNDate.getTimeByTimeTicks(a.SignStartTime) : "";
-                        label.Text += "~";
-                        label.Text += a.SignEndTime != 0 ? CNDate.getTimeByTimeTicks(a.SignEndTime) : "";
+                        //label.Text += a.SignStartTime != 0 ? CNDate.getTimeByTimeTicks(a.SignStartTime) : "";
+                        //label.Text += "~";
+                        //label.Text += a.SignEndTime != 0 ? CNDate.getTimeByTimeTicks(a.SignEndTime) : "";
+                        label.Paint += new PaintEventHandler(Paint_Label);
+                        label.Refresh();
                         attendanceList.Remove(a);
                         break;
                     }
                 }
             }
+        
             if (holidayList != null && holidayList.Count > 0)//判断是否节假日
             {
                 foreach (Holiday a in holidayList)
