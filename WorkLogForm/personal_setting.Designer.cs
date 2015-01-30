@@ -79,9 +79,18 @@
             this.sui_bi_checkBoxWT = new System.Windows.Forms.CheckBox();
             this.sui_bi_checkBoxBT = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.button3 = new System.Windows.Forms.Button();
             this.ri_zhi_groupBox.SuspendLayout();
             this.ri_cheng_groupBox.SuspendLayout();
             this.sui_bi_groupBox.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboItem12
@@ -215,7 +224,7 @@
             this.ri_zhi_groupBox.Controls.Add(this.ri_zhi_checkBoxBT);
             this.ri_zhi_groupBox.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ri_zhi_groupBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.ri_zhi_groupBox.Location = new System.Drawing.Point(28, 38);
+            this.ri_zhi_groupBox.Location = new System.Drawing.Point(11, 47);
             this.ri_zhi_groupBox.Name = "ri_zhi_groupBox";
             this.ri_zhi_groupBox.Size = new System.Drawing.Size(277, 70);
             this.ri_zhi_groupBox.TabIndex = 30;
@@ -277,7 +286,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(62, 304);
+            this.button1.Location = new System.Drawing.Point(45, 313);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 26);
             this.button1.TabIndex = 26;
@@ -294,7 +303,7 @@
             this.ri_cheng_groupBox.Controls.Add(this.ri_cheng_checkBoxBT);
             this.ri_cheng_groupBox.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ri_cheng_groupBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.ri_cheng_groupBox.Location = new System.Drawing.Point(28, 119);
+            this.ri_cheng_groupBox.Location = new System.Drawing.Point(11, 128);
             this.ri_cheng_groupBox.Name = "ri_cheng_groupBox";
             this.ri_cheng_groupBox.Size = new System.Drawing.Size(277, 70);
             this.ri_cheng_groupBox.TabIndex = 160;
@@ -352,7 +361,7 @@
             this.sui_bi_groupBox.Controls.Add(this.sui_bi_checkBoxBT);
             this.sui_bi_groupBox.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.sui_bi_groupBox.ForeColor = System.Drawing.Color.SteelBlue;
-            this.sui_bi_groupBox.Location = new System.Drawing.Point(29, 203);
+            this.sui_bi_groupBox.Location = new System.Drawing.Point(12, 212);
             this.sui_bi_groupBox.Name = "sui_bi_groupBox";
             this.sui_bi_groupBox.Size = new System.Drawing.Size(277, 90);
             this.sui_bi_groupBox.TabIndex = 161;
@@ -422,7 +431,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(182, 304);
+            this.button2.Location = new System.Drawing.Point(165, 313);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 26);
             this.button2.TabIndex = 162;
@@ -430,19 +439,81 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Location = new System.Drawing.Point(12, 48);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(376, 493);
+            this.tabControl1.TabIndex = 164;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.ri_zhi_groupBox);
+            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.sui_bi_groupBox);
+            this.tabPage1.Controls.Add(this.ri_cheng_groupBox);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(368, 467);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "原来的代码";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.treeView1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(368, 467);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "日志分享偏好";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(368, 467);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "日程偏好设置";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // treeView1
+            // 
+            this.treeView1.CheckBoxes = true;
+            this.treeView1.Location = new System.Drawing.Point(51, 19);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(250, 380);
+            this.treeView1.TabIndex = 0;
+            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(137, 419);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 1;
+            this.button3.Text = "保存";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // personal_setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.日志管理系统背景小;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(332, 347);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.sui_bi_groupBox);
-            this.Controls.Add(this.ri_cheng_groupBox);
+            this.ClientSize = new System.Drawing.Size(400, 553);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.ri_zhi_groupBox);
-            this.Controls.Add(this.button1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "personal_setting";
@@ -455,6 +526,9 @@
             this.ri_cheng_groupBox.PerformLayout();
             this.sui_bi_groupBox.ResumeLayout(false);
             this.sui_bi_groupBox.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -512,5 +586,11 @@
         private System.Windows.Forms.CheckBox sui_bi_checkBoxWT;
         private System.Windows.Forms.CheckBox sui_bi_checkBoxBT;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.Button button3;
     }
 }
