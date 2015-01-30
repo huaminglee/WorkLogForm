@@ -224,12 +224,16 @@ namespace WorkLogForm
 
         public void Paint_Label(object sender, PaintEventArgs e)
         {
-            Pen pen1 = new Pen(Color.Red);
-            Pen pen2 = new Pen(Color.LightGreen);
-            pen1.Width = 6;
-            pen2.Width = 6;
-            e.Graphics.DrawLine(pen1,0,3,((Label)sender).Size.Width,3);
-            e.Graphics.DrawLine(pen2, 0, 9, ((Label)sender).Size.Width, 9);
+            Label l =(Label) sender;
+            if ((bool)l.Tag == true)
+            {
+                Pen pen1 = new Pen(Color.Red);
+                Pen pen2 = new Pen(Color.LightGreen);
+                pen1.Width = 6;
+                pen2.Width = 6;
+                e.Graphics.DrawLine(pen1, 0, 3, ((Label)sender).Size.Width, 3);
+                e.Graphics.DrawLine(pen2, 0, 9, ((Label)sender).Size.Width, 9);
+            }
         }
         /// <summary>
         /// 渲染考勤信息
@@ -238,6 +242,9 @@ namespace WorkLogForm
         private void attendenceLabel_Paint(Label label)
         {
             label.Text = "";
+            label.Tag = false;
+            label.Paint += new PaintEventHandler(Paint_Label);
+                        
             DateTime date = (DateTime)label.Parent.Tag;
             if (attendanceList != null && attendanceList.Count > 0)
             {
@@ -248,14 +255,15 @@ namespace WorkLogForm
                         //label.Text += a.SignStartTime != 0 ? CNDate.getTimeByTimeTicks(a.SignStartTime) : "";
                         //label.Text += "~";
                         //label.Text += a.SignEndTime != 0 ? CNDate.getTimeByTimeTicks(a.SignEndTime) : "";
-                        label.Paint += new PaintEventHandler(Paint_Label);
-                        label.Refresh();
+                        label.Tag = true;
                         attendanceList.Remove(a);
                         break;
                     }
                 }
             }
-        
+            label.Refresh();
+
+
             if (holidayList != null && holidayList.Count > 0)//判断是否节假日
             {
                 foreach (Holiday a in holidayList)
