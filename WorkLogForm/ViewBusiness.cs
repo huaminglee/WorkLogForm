@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using WorkLogForm.WindowUiClass;
 using ClassLibrary;
+using WorkLogForm.CommonClass;
 using WorkLogForm.Service;
 using System.Collections;
 
@@ -19,28 +21,20 @@ namespace WorkLogForm
         public ViewBusiness()
         {
             InitializeComponent();
+            creatWindow.SetFormRoundRectRgn(this, 15);
+            creatWindow.SetFormShadow(this);
         }
 
         private void ViewBusiness_Load(object sender, EventArgs e)
         {
-            //if (business.PassExam == (int)Business.ExamState.npass)
-            //{
-            //    label1.Enabled = true;
-            //    textBox1.Enabled = true;
-            //    textBox1.Text = business.RefuseReason;
-            //}
-            //else 
-            //{
-            //    label1.Enabled = false;
-            //    textBox1.Enabled = false;
-            //}
-
+            this.MaximizeBox = false;
             IList businessEmployee = getEmpByBus(business);
             listView8.Items.Clear();
             foreach (BusinessEmployee be in businessEmployee)
             {
                 ListViewItem item = new ListViewItem();
                 item.Text = be.EmployeeId.KuName;
+                item.SubItems.Add(be.EmployeeId.Kdid.KdName.Trim());
                 item.Tag = be;
                 listView8.Items.Add(item);
             }            

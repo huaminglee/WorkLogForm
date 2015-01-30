@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections;
+using WorkLogForm.WindowUiClass;
 using ClassLibrary;
+using WorkLogForm.CommonClass;
 using WorkLogForm.Service;
 namespace WorkLogForm
 {
@@ -19,10 +21,14 @@ namespace WorkLogForm
         public redoForm()
         {
             InitializeComponent();
+            creatWindow.SetFormRoundRectRgn(this, 15);
+            creatWindow.SetFormShadow(this);
+
         }
 
         private void redoForm_Load(object sender, EventArgs e)
         {
+            this.MaximizeBox = false;
             string query = "from WkTDept";
             IList depList = baseService.loadEntityList(query);
             WkTDept dep = new WkTDept();

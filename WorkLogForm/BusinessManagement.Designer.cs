@@ -701,7 +701,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 32);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(902, 530);
+            this.tabPage3.Size = new System.Drawing.Size(892, 541);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "院领导审批";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -904,7 +904,7 @@
             this.tabPage5.Controls.Add(this.label29);
             this.tabPage5.Location = new System.Drawing.Point(4, 32);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(992, 564);
+            this.tabPage5.Size = new System.Drawing.Size(892, 541);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "退回修改";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -1263,7 +1263,7 @@
             // 
             // columnHeader13
             // 
-            this.columnHeader13.Text = "查看详情";
+            this.columnHeader13.Text = "出差人员";
             this.columnHeader13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader13.Width = 76;
             // 

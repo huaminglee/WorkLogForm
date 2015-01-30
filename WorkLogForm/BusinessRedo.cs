@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using ClassLibrary;
 using WorkLogForm.Service;
 using System.Collections;
+using WorkLogForm.WindowUiClass;
 
 namespace WorkLogForm
 {
@@ -19,10 +20,13 @@ namespace WorkLogForm
         public BusinessRedo()
         {
             InitializeComponent();
+            creatWindow.SetFormRoundRectRgn(this, 15);
+            creatWindow.SetFormShadow(this);
         }
 
         private void BusinessRedo_Load(object sender, EventArgs e)
         {
+            this.MaximizeBox = false;
             business = (Business)this.Tag;
             IList<BusinessEmployee> beList=business.BusinessEmployee;
             foreach (BusinessEmployee be in beList)

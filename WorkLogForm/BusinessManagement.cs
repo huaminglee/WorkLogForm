@@ -188,7 +188,7 @@ namespace WorkLogForm
                     BusinessEmployee be = new BusinessEmployee();
                     be.EmployeeId = (WkTUser)row.Tag;
                     be.PassExam = (int)BusinessEmployee.ExamState.waiting;
-
+                    be.BusinessId = buss;
                     buss.BusinessEmployee.Add(be);
                 }
                 baseService.SaveOrUpdateEntity(buss);
@@ -302,6 +302,7 @@ namespace WorkLogForm
                 }
 
                 item.Tag = be;
+                
                 listView6.Items.Add(item);
             }
             DateTime st=new DateTime(b.StartTime), et=new DateTime(b.EndTime);
@@ -318,7 +319,8 @@ namespace WorkLogForm
             }
             else 
             {
-                queryEmp = "from BusinessEmployee be where be.BusinessId=" + b.Id + "and (be.EmployeeId.Kdid=" + User.Kdid.Id + " or be.EmployeeId.Kdid=" + 11 + ") and  be.PassExam=" + (int)BusinessEmployee.ExamState.waiting + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal;
+
+                queryEmp = "from BusinessEmployee be where be.BusinessId=" + b.Id + "and (be.EmployeeId.Kdid=" + User.Kdid.Id + " or be.EmployeeId.Kdid.KdName like '%院领导%' ) and  be.PassExam=" + (int)BusinessEmployee.ExamState.waiting + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal;
   
             }
             EmpInBusDept = baseService.loadEntityList(queryEmp);
@@ -550,9 +552,16 @@ namespace WorkLogForm
 
         private void button10_Click(object sender, EventArgs e)//人员修改
         {
-            redoForm rf = new redoForm();
-            rf.business = selectedBusiness;
-            rf.ShowDialog();
+            if (selectedBusiness != null)
+            {
+                redoForm rf = new redoForm();
+                rf.business = selectedBusiness;
+                rf.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("未选中出差");
+            }
             initTabPage5();
         }
 
