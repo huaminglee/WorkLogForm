@@ -261,7 +261,8 @@ namespace WorkLogForm
                     {
                         ListViewItem item = new ListViewItem();
                         item.Text = i.ToString();
-                        item.SubItems.Add(b.Ku_Id.KuName);
+                        DateTime st = new DateTime(b.StartTime);
+                        item.SubItems.Add(st.ToString("MM月 dd日"));
                         item.Tag = b;
                         listView5.Items.Add(item);
                         i++;
@@ -399,8 +400,9 @@ namespace WorkLogForm
                 foreach (Business b in busList)
                 {
                     ListViewItem item = new ListViewItem();
-                    item.Text = i.ToString();
-                    item.SubItems.Add(b.Ku_Id.KuName);
+                    item.Text = i.ToString(); 
+                    DateTime st = new DateTime(b.StartTime);
+                    item.SubItems.Add(st.ToString("MM月 dd日"));
                     item.Tag = b;
                     i++;
                     listView7.Items.Add(item);
