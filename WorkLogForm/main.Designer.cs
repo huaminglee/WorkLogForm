@@ -58,36 +58,6 @@
             this.setting_pictureBox = new System.Windows.Forms.PictureBox();
             this.timer_show = new System.Windows.Forms.Timer(this.components);
             this.rc_flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.label17 = new System.Windows.Forms.Label();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.label18 = new System.Windows.Forms.Label();
-            this.panel14 = new System.Windows.Forms.Panel();
-            this.label19 = new System.Windows.Forms.Label();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
-            this.panel15 = new System.Windows.Forms.Panel();
-            this.label20 = new System.Windows.Forms.Label();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.label21 = new System.Windows.Forms.Label();
-            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
-            this.panel17 = new System.Windows.Forms.Panel();
-            this.label22 = new System.Windows.Forms.Label();
-            this.panel18 = new System.Windows.Forms.Panel();
-            this.label23 = new System.Windows.Forms.Label();
-            this.linkLabel5 = new System.Windows.Forms.LinkLabel();
-            this.panel19 = new System.Windows.Forms.Panel();
-            this.label24 = new System.Windows.Forms.Label();
-            this.panel20 = new System.Windows.Forms.Panel();
-            this.label25 = new System.Windows.Forms.Label();
-            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
-            this.panel21 = new System.Windows.Forms.Panel();
-            this.label26 = new System.Windows.Forms.Label();
             this.rc_toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.rz_flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -126,6 +96,9 @@
             this.linkLabel12 = new System.Windows.Forms.LinkLabel();
             this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wdrl_pictureBox)).BeginInit();
@@ -145,18 +118,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.setting_pictureBox)).BeginInit();
             this.rc_flowLayoutPanel.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.panel12.SuspendLayout();
-            this.panel13.SuspendLayout();
-            this.panel14.SuspendLayout();
-            this.panel15.SuspendLayout();
-            this.panel16.SuspendLayout();
-            this.panel17.SuspendLayout();
-            this.panel18.SuspendLayout();
-            this.panel19.SuspendLayout();
-            this.panel20.SuspendLayout();
-            this.panel21.SuspendLayout();
             this.rz_flowLayoutPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -173,6 +134,7 @@
             this.SuiBi_SeeMore.SuspendLayout();
             this.write_SuiBi.SuspendLayout();
             this.panel8.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -524,334 +486,11 @@
             // 
             this.rc_flowLayoutPanel.AutoScroll = true;
             this.rc_flowLayoutPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.rc_flowLayoutPanel.Controls.Add(this.panel10);
-            this.rc_flowLayoutPanel.Controls.Add(this.panel12);
-            this.rc_flowLayoutPanel.Controls.Add(this.panel14);
-            this.rc_flowLayoutPanel.Controls.Add(this.panel16);
-            this.rc_flowLayoutPanel.Controls.Add(this.panel18);
-            this.rc_flowLayoutPanel.Controls.Add(this.panel20);
+            this.rc_flowLayoutPanel.Controls.Add(this.panel9);
             this.rc_flowLayoutPanel.Location = new System.Drawing.Point(43, 115);
             this.rc_flowLayoutPanel.Name = "rc_flowLayoutPanel";
             this.rc_flowLayoutPanel.Size = new System.Drawing.Size(248, 480);
             this.rc_flowLayoutPanel.TabIndex = 22;
-            // 
-            // panel10
-            // 
-            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel10.Controls.Add(this.label1);
-            this.panel10.Controls.Add(this.linkLabel1);
-            this.panel10.Controls.Add(this.panel11);
-            this.panel10.Location = new System.Drawing.Point(3, 3);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(240, 71);
-            this.panel10.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("幼圆", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(5, 5);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "08:33";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(205, 5);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(29, 12);
-            this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "删除";
-            // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.label3);
-            this.panel11.Location = new System.Drawing.Point(1, 25);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(223, 44);
-            this.panel11.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Name = "label3";
-            this.label3.Padding = new System.Windows.Forms.Padding(5);
-            this.label3.Size = new System.Drawing.Size(223, 44);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "参加院内大会参加院内大会参加院内大会参加院内大会参加院内大会参加...";
-            // 
-            // panel12
-            // 
-            this.panel12.BackgroundImage = global::WorkLogForm.Properties.Resources.rcBG;
-            this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel12.Controls.Add(this.label17);
-            this.panel12.Controls.Add(this.linkLabel2);
-            this.panel12.Controls.Add(this.panel13);
-            this.panel12.Location = new System.Drawing.Point(3, 80);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(240, 71);
-            this.panel12.TabIndex = 1;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.BackColor = System.Drawing.Color.Transparent;
-            this.label17.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label17.Location = new System.Drawing.Point(4, 6);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(47, 14);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "08:33";
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.linkLabel2.Location = new System.Drawing.Point(205, 5);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(29, 12);
-            this.linkLabel2.TabIndex = 0;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "删除";
-            // 
-            // panel13
-            // 
-            this.panel13.BackColor = System.Drawing.Color.Transparent;
-            this.panel13.Controls.Add(this.label18);
-            this.panel13.Location = new System.Drawing.Point(1, 25);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(223, 44);
-            this.panel13.TabIndex = 0;
-            // 
-            // label18
-            // 
-            this.label18.BackColor = System.Drawing.Color.Transparent;
-            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label18.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label18.Location = new System.Drawing.Point(0, 0);
-            this.label18.Name = "label18";
-            this.label18.Padding = new System.Windows.Forms.Padding(5);
-            this.label18.Size = new System.Drawing.Size(223, 44);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "参加院内大会参加院内大会参加院内大会参加院内大会参加院内大会参加...";
-            // 
-            // panel14
-            // 
-            this.panel14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel14.Controls.Add(this.label19);
-            this.panel14.Controls.Add(this.linkLabel3);
-            this.panel14.Controls.Add(this.panel15);
-            this.panel14.Location = new System.Drawing.Point(3, 157);
-            this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(240, 71);
-            this.panel14.TabIndex = 2;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label19.Location = new System.Drawing.Point(4, 6);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(47, 14);
-            this.label19.TabIndex = 1;
-            this.label19.Text = "08:33";
-            // 
-            // linkLabel3
-            // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(205, 5);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(29, 12);
-            this.linkLabel3.TabIndex = 0;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "删除";
-            // 
-            // panel15
-            // 
-            this.panel15.Controls.Add(this.label20);
-            this.panel15.Location = new System.Drawing.Point(1, 25);
-            this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(223, 44);
-            this.panel15.TabIndex = 0;
-            // 
-            // label20
-            // 
-            this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label20.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label20.Location = new System.Drawing.Point(0, 0);
-            this.label20.Name = "label20";
-            this.label20.Padding = new System.Windows.Forms.Padding(5);
-            this.label20.Size = new System.Drawing.Size(223, 44);
-            this.label20.TabIndex = 0;
-            this.label20.Text = "参加院内大会参加院内大会参加院内大会参加院内大会参加院内大会参加...";
-            // 
-            // panel16
-            // 
-            this.panel16.BackgroundImage = global::WorkLogForm.Properties.Resources.rcBG;
-            this.panel16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel16.Controls.Add(this.label21);
-            this.panel16.Controls.Add(this.linkLabel4);
-            this.panel16.Controls.Add(this.panel17);
-            this.panel16.Location = new System.Drawing.Point(3, 234);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(240, 71);
-            this.panel16.TabIndex = 3;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.BackColor = System.Drawing.Color.Transparent;
-            this.label21.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label21.Location = new System.Drawing.Point(4, 6);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(47, 14);
-            this.label21.TabIndex = 1;
-            this.label21.Text = "08:33";
-            // 
-            // linkLabel4
-            // 
-            this.linkLabel4.AutoSize = true;
-            this.linkLabel4.BackColor = System.Drawing.Color.Transparent;
-            this.linkLabel4.Location = new System.Drawing.Point(205, 5);
-            this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(29, 12);
-            this.linkLabel4.TabIndex = 0;
-            this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "删除";
-            // 
-            // panel17
-            // 
-            this.panel17.BackColor = System.Drawing.Color.Transparent;
-            this.panel17.Controls.Add(this.label22);
-            this.panel17.Location = new System.Drawing.Point(1, 25);
-            this.panel17.Name = "panel17";
-            this.panel17.Size = new System.Drawing.Size(223, 44);
-            this.panel17.TabIndex = 0;
-            // 
-            // label22
-            // 
-            this.label22.BackColor = System.Drawing.Color.Transparent;
-            this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label22.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label22.Location = new System.Drawing.Point(0, 0);
-            this.label22.Name = "label22";
-            this.label22.Padding = new System.Windows.Forms.Padding(5);
-            this.label22.Size = new System.Drawing.Size(223, 44);
-            this.label22.TabIndex = 0;
-            this.label22.Text = "参加院内大会参加院内大会参加院内大会参加院内大会参加院内大会参加...";
-            // 
-            // panel18
-            // 
-            this.panel18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel18.Controls.Add(this.label23);
-            this.panel18.Controls.Add(this.linkLabel5);
-            this.panel18.Controls.Add(this.panel19);
-            this.panel18.Location = new System.Drawing.Point(3, 311);
-            this.panel18.Name = "panel18";
-            this.panel18.Size = new System.Drawing.Size(240, 71);
-            this.panel18.TabIndex = 4;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label23.Location = new System.Drawing.Point(4, 6);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(47, 14);
-            this.label23.TabIndex = 1;
-            this.label23.Text = "08:33";
-            // 
-            // linkLabel5
-            // 
-            this.linkLabel5.AutoSize = true;
-            this.linkLabel5.Location = new System.Drawing.Point(205, 5);
-            this.linkLabel5.Name = "linkLabel5";
-            this.linkLabel5.Size = new System.Drawing.Size(29, 12);
-            this.linkLabel5.TabIndex = 0;
-            this.linkLabel5.TabStop = true;
-            this.linkLabel5.Text = "删除";
-            // 
-            // panel19
-            // 
-            this.panel19.Controls.Add(this.label24);
-            this.panel19.Location = new System.Drawing.Point(1, 25);
-            this.panel19.Name = "panel19";
-            this.panel19.Size = new System.Drawing.Size(223, 44);
-            this.panel19.TabIndex = 0;
-            // 
-            // label24
-            // 
-            this.label24.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label24.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label24.Location = new System.Drawing.Point(0, 0);
-            this.label24.Name = "label24";
-            this.label24.Padding = new System.Windows.Forms.Padding(5);
-            this.label24.Size = new System.Drawing.Size(223, 44);
-            this.label24.TabIndex = 0;
-            this.label24.Text = "参加院内大会参加院内大会参加院内大会参加院内大会参加院内大会参加...";
-            // 
-            // panel20
-            // 
-            this.panel20.BackgroundImage = global::WorkLogForm.Properties.Resources.rcBG;
-            this.panel20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel20.Controls.Add(this.label25);
-            this.panel20.Controls.Add(this.linkLabel6);
-            this.panel20.Controls.Add(this.panel21);
-            this.panel20.Location = new System.Drawing.Point(3, 388);
-            this.panel20.Name = "panel20";
-            this.panel20.Size = new System.Drawing.Size(240, 71);
-            this.panel20.TabIndex = 5;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.BackColor = System.Drawing.Color.Transparent;
-            this.label25.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label25.Location = new System.Drawing.Point(4, 6);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(47, 14);
-            this.label25.TabIndex = 1;
-            this.label25.Text = "08:33";
-            // 
-            // linkLabel6
-            // 
-            this.linkLabel6.AutoSize = true;
-            this.linkLabel6.BackColor = System.Drawing.Color.Transparent;
-            this.linkLabel6.Location = new System.Drawing.Point(205, 5);
-            this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.Size = new System.Drawing.Size(29, 12);
-            this.linkLabel6.TabIndex = 0;
-            this.linkLabel6.TabStop = true;
-            this.linkLabel6.Text = "删除";
-            // 
-            // panel21
-            // 
-            this.panel21.BackColor = System.Drawing.Color.Transparent;
-            this.panel21.Controls.Add(this.label26);
-            this.panel21.Location = new System.Drawing.Point(1, 25);
-            this.panel21.Name = "panel21";
-            this.panel21.Size = new System.Drawing.Size(223, 44);
-            this.panel21.TabIndex = 0;
-            // 
-            // label26
-            // 
-            this.label26.BackColor = System.Drawing.Color.Transparent;
-            this.label26.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label26.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label26.Location = new System.Drawing.Point(0, 0);
-            this.label26.Name = "label26";
-            this.label26.Padding = new System.Windows.Forms.Padding(5);
-            this.label26.Size = new System.Drawing.Size(223, 44);
-            this.label26.TabIndex = 0;
-            this.label26.Text = "参加院内大会参加院内大会参加院内大会参加院内大会参加院内大会参加...";
             // 
             // rc_toolTip
             // 
@@ -1210,6 +849,32 @@
             this.linkLabel10.Text = "点击查看更多";
             this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel10_LinkClicked);
             // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.label1);
+            this.panel9.Controls.Add(this.panel10);
+            this.panel9.Location = new System.Drawing.Point(3, 3);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(219, 289);
+            this.panel9.TabIndex = 0;
+            // 
+            // panel10
+            // 
+            this.panel10.Location = new System.Drawing.Point(32, 9);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(157, 33);
+            this.panel10.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(5, 61);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(211, 157);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测" +
+    "试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测" +
+    "试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字";
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1274,24 +939,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.setting_pictureBox)).EndInit();
             this.rc_flowLayoutPanel.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
-            this.panel11.ResumeLayout(false);
-            this.panel12.ResumeLayout(false);
-            this.panel12.PerformLayout();
-            this.panel13.ResumeLayout(false);
-            this.panel14.ResumeLayout(false);
-            this.panel14.PerformLayout();
-            this.panel15.ResumeLayout(false);
-            this.panel16.ResumeLayout(false);
-            this.panel16.PerformLayout();
-            this.panel17.ResumeLayout(false);
-            this.panel18.ResumeLayout(false);
-            this.panel18.PerformLayout();
-            this.panel19.ResumeLayout(false);
-            this.panel20.ResumeLayout(false);
-            this.panel20.PerformLayout();
-            this.panel21.ResumeLayout(false);
             this.rz_flowLayoutPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -1314,6 +961,7 @@
             this.write_SuiBi.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            this.panel9.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1348,36 +996,6 @@
         private System.Windows.Forms.PictureBox rcgl_pictureBox;
         private System.Windows.Forms.Timer timer_show;
         private System.Windows.Forms.FlowLayoutPanel rc_flowLayoutPanel;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Panel panel14;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.Panel panel15;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel16;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.LinkLabel linkLabel4;
-        private System.Windows.Forms.Panel panel17;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Panel panel18;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.LinkLabel linkLabel5;
-        private System.Windows.Forms.Panel panel19;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Panel panel20;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.LinkLabel linkLabel6;
-        private System.Windows.Forms.Panel panel21;
-        private System.Windows.Forms.Label label26;
         private System.Windows.Forms.ToolTip rc_toolTip;
         private System.Windows.Forms.FlowLayoutPanel rz_flowLayoutPanel;
         private System.Windows.Forms.Panel panel4;
@@ -1417,5 +1035,8 @@
         private System.Windows.Forms.LinkLabel linkLabel11;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel10;
     }
 }
