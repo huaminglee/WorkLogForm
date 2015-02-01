@@ -744,6 +744,7 @@ namespace WorkLogForm
         }
         private void setting_pictureBox_Click(object sender, EventArgs e)
         {
+            setting_pictureBox.Cursor = Cursors.WaitCursor;
             if (personalSetting==null||personalSetting.IsDisposed)
             {
                 personalSetting = new personal_setting();
@@ -760,6 +761,8 @@ namespace WorkLogForm
                 personalSetting.WindowState = FormWindowState.Normal;
                 personalSetting.Focus();
             }
+            setting_pictureBox.Cursor = Cursors.Hand;
+
         }
         private void log_pictureBox_Click(object sender, EventArgs e)
         {

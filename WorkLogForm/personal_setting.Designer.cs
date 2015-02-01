@@ -66,8 +66,11 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.close_pictureBox = new System.Windows.Forms.PictureBox();
+            this.treeView2 = new System.Windows.Forms.TreeView();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -248,6 +251,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.treeView2);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(368, 467);
@@ -268,6 +273,25 @@
             this.close_pictureBox.TabStop = false;
             this.close_pictureBox.Click += new System.EventHandler(this.close_pictureBox_Click);
             // 
+            // treeView2
+            // 
+            this.treeView2.CheckBoxes = true;
+            this.treeView2.Location = new System.Drawing.Point(13, 26);
+            this.treeView2.Name = "treeView2";
+            this.treeView2.Size = new System.Drawing.Size(337, 385);
+            this.treeView2.TabIndex = 0;
+            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(146, 417);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "保存";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // personal_setting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -286,6 +310,7 @@
             this.Load += new System.EventHandler(this.personal_setting_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -331,5 +356,7 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.PictureBox close_pictureBox;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TreeView treeView2;
     }
 }

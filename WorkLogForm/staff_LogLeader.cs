@@ -374,7 +374,17 @@ namespace WorkLogForm
                    
 
                     row.Cells[3].Value = "查看";
-                    row.Cells[4].Value = "删除";
+
+                    DateTime now = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day);
+
+
+                    if (now.AddDays(-1).AddHours(24).Ticks - sl.WriteTime<= 24*60*60)
+                    {
+                        row.Cells[4].Value = "删除";
+                       // row.Cells[5].Value = "修改";
+                    }
+                   
+
                     row.Cells[3].Tag = sl;
                     personal_dataGridView.Rows.Add(row);
                     i++;
@@ -393,7 +403,8 @@ namespace WorkLogForm
                 wl.CommentPersonName = this.User.KuName;
                 wl.ShowDialog();
             }
-            else if (e.ColumnIndex == 4)
+
+            else if (e.ColumnIndex == 4 && this.personal_dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "删除")
             {
                 if (MessageBox.Show("确定要删除吗？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
@@ -402,9 +413,19 @@ namespace WorkLogForm
                     baseService.SaveOrUpdateEntity(sf);
                     this.personal_dataGridView.Rows.RemoveAt(e.RowIndex);
                 }
-                
-            
             }
+
+            //else if (e.ColumnIndex == 5 && this.personal_dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "修改")
+            //{
+            //    StaffLog sf = (StaffLog)personal_dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
+            //    writeLog wl = new writeLog();
+            //    wl.User = sf.Staff;
+            //    wl.LogDate = new DateTime(sf.WriteTime);
+            //    wl.IsComment = true;
+            //    wl.CommentPersonName = this.User.KuName;
+            //    wl.ShowDialog();
+            //}
+
         }
         #endregion
 
@@ -535,10 +556,34 @@ namespace WorkLogForm
                                  + " log.State = " + (int)IEntity.stateEnum.Normal;
                             IList thelist = baseService.loadEntityList(sql);
 
-                            foreach (StaffLog oo in thelist)
+                            foreach (StaffLog sl in thelist)
                             {
-                                this.dataGridView3.Rows.Add(oo.Staff.KuName,oo.Staff.Kdid.KdName,oo.Content,oo.WriteTime, "查看");
-                                this.dataGridView3.Rows[this.dataGridView3.Rows.Count - 1].Tag = oo;
+                                DataGridViewRow row = new DataGridViewRow();
+                                row.Tag = sl;
+
+                                //这一段代码很重要 要不然赋不进值去
+                                foreach (DataGridViewColumn c in this.dataGridView3.Columns)
+                                {
+                                    row.Cells.Add(c.CellTemplate.Clone() as DataGridViewCell);
+                                }
+                                //end
+
+                                Regex r = new Regex("<[^<]*>");
+                                MatchCollection mc = r.Matches(sl.Content.ToString());
+                                String contentText = sl.Content.ToString().Replace("&nbsp;", " ");
+                                for (int j = 0; j < mc.Count; j++)
+                                {
+                                    contentText = contentText.Replace(mc[j].Value, "");
+                                }
+                                row.Cells[0].Value = sl.Staff.KuName;
+                                row.Cells[1].Value = sl.Staff.Kdid.KdName;
+                                row.Cells[2].Value = contentText;
+                                row.Cells[2].ToolTipText = CommonUtil.toolTipFormat(contentText);
+
+                                row.Cells[3].Value = new DateTime(sl.WriteTime).ToString("yyyy-MM-dd");
+                                row.Cells[4].Value = "查看";
+
+                                dataGridView3.Rows.Add(row);
                             }
                             
                         }
@@ -574,10 +619,38 @@ namespace WorkLogForm
                     }
                     IList thelist = baseService.loadEntityList(sql);
                     this.dataGridView3.Rows.Clear();
-                    foreach (StaffLog oo in thelist)
+                    foreach (StaffLog sl in thelist)
                     {
-                        this.dataGridView3.Rows.Add(oo.Staff.KuName, oo.Staff.Kdid.KdName, oo.Content, new DateTime(oo.WriteTime).ToString("yyyy-MM-dd"), "查看");
-                        this.dataGridView3.Rows[this.dataGridView3.Rows.Count - 1].Tag = oo;
+
+                        DataGridViewRow row = new DataGridViewRow();
+                        row.Tag = sl;
+
+                        //这一段代码很重要 要不然赋不进值去
+                        foreach (DataGridViewColumn c in this.dataGridView3.Columns)
+                        {
+                            row.Cells.Add(c.CellTemplate.Clone() as DataGridViewCell);
+                        }
+                        //end
+
+                        Regex r = new Regex("<[^<]*>");
+                        MatchCollection mc = r.Matches(sl.Content.ToString());
+                        String contentText = sl.Content.ToString().Replace("&nbsp;", " ");
+                        for (int j = 0; j < mc.Count; j++)
+                        {
+                            contentText = contentText.Replace(mc[j].Value, "");
+                        }
+                        row.Cells[0].Value = sl.Staff.KuName;
+                        row.Cells[1].Value = sl.Staff.Kdid.KdName;
+                        row.Cells[2].Value = contentText;
+                        row.Cells[2].ToolTipText = CommonUtil.toolTipFormat(contentText);
+
+                        row.Cells[3].Value = new DateTime(sl.WriteTime).ToString("yyyy-MM-dd");
+                        row.Cells[4].Value = "查看";
+
+                        dataGridView3.Rows.Add(row);
+
+                        //this.dataGridView3.Rows.Add(sl.Staff.KuName, sl.Staff.Kdid.KdName,CommonUtil.toolTipFormat( sl.Content), new DateTime(sl.WriteTime).ToString("yyyy-MM-dd"), "查看");
+                        //this.dataGridView3.Rows[this.dataGridView3.Rows.Count - 1].Tag = sl;
                     }
 
                 }
@@ -615,6 +688,8 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //row.Cells[2].ToolTipText = CommonUtil.toolTipFormat(contentText);
+
             if(e.ColumnIndex == 3)
             {
                 if(Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString()) != 0)
@@ -622,12 +697,36 @@ namespace WorkLogForm
                     int id = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Tag.ToString());
                     IList logList = baseService.loadEntityList("from StaffLog where State=" + (int)IEntity.stateEnum.Normal + 
                         " and Staff=" + id + "  order by WriteTime desc");
-                    
-                    foreach(StaffLog sl in logList)
+
+                    foreach (StaffLog sl in logList)
                     {
-                        
-                        this.dataGridView2.Rows.Add(sl.Content, new DateTime(sl.WriteTime).ToString("yyyy-MM-dd"), "查看");
-                        this.dataGridView2.Rows[this.dataGridView2.Rows.Count - 1].Tag = sl;
+
+                        DataGridViewRow row = new DataGridViewRow();
+                        row.Tag = sl;
+
+                        //这一段代码很重要 要不然赋不进值去
+                        foreach (DataGridViewColumn c in this.dataGridView2.Columns)
+                        {
+                            row.Cells.Add(c.CellTemplate.Clone() as DataGridViewCell);
+                        }
+                        //end
+                                                
+                        Regex r = new Regex("<[^<]*>");
+                        MatchCollection mc = r.Matches(sl.Content.ToString());
+                        String contentText = sl.Content.ToString().Replace("&nbsp;", " ");
+                        for (int j = 0; j < mc.Count; j++)
+                        {
+                            contentText = contentText.Replace(mc[j].Value, "");
+                        }
+                        row.Cells[0].Value = contentText;
+                        row.Cells[0].ToolTipText = CommonUtil.toolTipFormat(contentText);
+                        row.Cells[1].Value = new DateTime(sl.WriteTime).ToString("yyyy-MM-dd");
+                        row.Cells[2].Value = "查看";
+
+                        dataGridView2.Rows.Add(row);
+
+
+
                     }
                 }
             }

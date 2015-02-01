@@ -48,6 +48,7 @@ namespace WorkLogForm
             initialWindow();
         }
         IList hobbysList;
+        IList hobbysRiChenglist;
         #region 自定义窗体初始化方法
         /// <summary>
         /// 初始化window（界面效果）
@@ -65,12 +66,15 @@ namespace WorkLogForm
             {
                 this.Location = formLocation;
             }
-        
-            hobbysList = baseService.loadEntityList("from Hobby where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id);
+
+            hobbysList = baseService.loadEntityList("from Hobby where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and TypeFlag = " + (int)Hobby.hobbyTypeEnum.RiZhi);
+            hobbysRiChenglist = baseService.loadEntityList("from Hobby where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and TypeFlag = " + (int)Hobby.hobbyTypeEnum.RiCheng);
 
 
+            IList<WkTUser> shares = new List<WkTUser>();
+            IList<WkTUser> sharesRicheng = new List<WkTUser>();
 
-            IList<WkTUser> shares = new List<WkTUser>(); ;
+
             if (hobbysList != null && hobbysList.Count != 0)
             {
                 foreach (Hobby oo in hobbysList)
@@ -80,10 +84,29 @@ namespace WorkLogForm
                 }
             }
 
+            if (hobbysRiChenglist != null && hobbysRiChenglist.Count != 0)
+            {
+                foreach (Hobby oo in hobbysRiChenglist)
+                {
+
+                    sharesRicheng = oo.SharedStaffs;
+                }
+            }
+
+
+            createTree(treeView1,shares);
+            createTree( treeView2,sharesRicheng);
+
+
+
+        }
+
+        public void createTree(TreeView tv, IList<WkTUser> shares)
+        {
             #region 加载树结构
             TreeNode Gt = new TreeNode();
             Gt.Text = "部门";
-            treeView1.Nodes.Add(Gt);
+            tv.Nodes.Add(Gt);
             string sql = "select u from WkTDept u";
             IList depts = baseService.loadEntityList(sql);
             if (depts != null && depts.Count > 0)
@@ -110,7 +133,7 @@ namespace WorkLogForm
                                 {
                                     foreach (WkTUser n in shares)
                                     {
-                                        if(n.Id == oo.Id)
+                                        if (n.Id == oo.Id)
                                         {
                                             t2.Checked = true;
                                         }
@@ -125,12 +148,8 @@ namespace WorkLogForm
                 }
             }
             #endregion
-
-
-
+        
         }
-
-
         
 
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
@@ -247,9 +266,61 @@ namespace WorkLogForm
             MessageBox.Show("保存成功！");
         }
 
+
         private void close_pictureBox_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+
+        /// <summary>
+        /// 日程偏好保存按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TreeNode t = treeView2.Nodes[0];
+            //表中是否有存 如果有先删除原来的
+            if (hobbysList != null)
+            {
+                foreach (Hobby h in hobbysRiChenglist)
+                {
+                    h.State = (int)IEntity.stateEnum.Deleted;
+                    baseService.SaveOrUpdateEntity(h);
+                }
+            }
+
+            ri_cheng_hobby = new Hobby();
+            ri_cheng_hobby.Staff = user;
+            ri_cheng_hobby.State = (int)IEntity.stateEnum.Normal;
+            ri_cheng_hobby.TimeStamp = DateTime.Now.Ticks;
+            ri_cheng_hobby.TypeFlag = (int)Hobby.hobbyTypeEnum.RiCheng;
+
+            if (ri_cheng_hobby.SharedStaffs == null)
+            {
+                ri_cheng_hobby.SharedStaffs = new List<WkTUser>();
+            }
+            else
+            {
+                ri_cheng_hobby.SharedStaffs.Clear();
+            }
+
+            foreach (TreeNode t1 in t.Nodes)
+            {
+                foreach (TreeNode t2 in t1.Nodes)
+                {
+                    if (t2.Checked == true)
+                    {
+                        WkTUser u = (WkTUser)t2.Tag;
+                        ri_cheng_hobby.SharedStaffs.Add(u);
+                    }
+
+                }
+            }
+
+            baseService.SaveOrUpdateEntity(ri_cheng_hobby);
+            MessageBox.Show("保存成功！");
         }
 
     }
