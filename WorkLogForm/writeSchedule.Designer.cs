@@ -60,22 +60,40 @@
             this.comboItem9 = new DevComponents.Editors.ComboItem();
             this.comboItem10 = new DevComponents.Editors.ComboItem();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.close_pictureBox = new System.Windows.Forms.PictureBox();
             this.min_pictureBox = new System.Windows.Forms.PictureBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboItem12
@@ -212,104 +230,13 @@
             this.label4.TabIndex = 159;
             this.label4.Text = "日程编写";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(232, 372);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 26;
-            this.button1.Text = "确定";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(90, 372);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 162;
-            this.button2.Text = "设置分享人";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(7, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 14);
-            this.label1.TabIndex = 163;
-            this.label1.Text = "日程内容：";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(81, 39);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(292, 206);
-            this.textBox1.TabIndex = 164;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(6, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 14);
-            this.label2.TabIndex = 165;
-            this.label2.Text = "(限200字)";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(7, 301);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 14);
-            this.label3.TabIndex = 166;
-            this.label3.Text = "提醒时间：";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CustomFormat = "HH:mm";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(81, 298);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.ShowUpDown = true;
-            this.dateTimePicker1.Size = new System.Drawing.Size(138, 21);
-            this.dateTimePicker1.TabIndex = 167;
-            this.dateTimePicker1.Value = new System.DateTime(2014, 3, 30, 15, 29, 0, 0);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(81, 330);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(226, 20);
-            this.comboBox1.TabIndex = 169;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(7, 331);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 14);
-            this.label5.TabIndex = 170;
-            this.label5.Text = "日程主题：";
-            // 
             // close_pictureBox
             // 
             this.close_pictureBox.BackColor = System.Drawing.Color.Transparent;
             this.close_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.关闭渐变;
             this.close_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.close_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.close_pictureBox.Location = new System.Drawing.Point(356, 0);
+            this.close_pictureBox.Location = new System.Drawing.Point(503, 0);
             this.close_pictureBox.Name = "close_pictureBox";
             this.close_pictureBox.Size = new System.Drawing.Size(28, 23);
             this.close_pictureBox.TabIndex = 172;
@@ -324,7 +251,7 @@
             this.min_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.最小化渐变;
             this.min_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.min_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.min_pictureBox.Location = new System.Drawing.Point(328, 0);
+            this.min_pictureBox.Location = new System.Drawing.Point(475, 0);
             this.min_pictureBox.Name = "min_pictureBox";
             this.min_pictureBox.Size = new System.Drawing.Size(28, 23);
             this.min_pictureBox.TabIndex = 171;
@@ -333,27 +260,57 @@
             this.min_pictureBox.MouseEnter += new System.EventHandler(this.min_pictureBox_MouseEnter);
             this.min_pictureBox.MouseLeave += new System.EventHandler(this.min_pictureBox_MouseLeave);
             // 
-            // label6
+            // tabControl1
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(7, 269);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 14);
-            this.label6.TabIndex = 166;
-            this.label6.Text = "日程时间：";
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(13, 43);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(509, 444);
+            this.tabControl1.TabIndex = 173;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
-            // dateTimePicker2
+            // tabPage1
             // 
-            this.dateTimePicker2.CustomFormat = "HH:mm";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(81, 266);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.ShowUpDown = true;
-            this.dateTimePicker2.Size = new System.Drawing.Size(226, 21);
-            this.dateTimePicker2.TabIndex = 167;
-            this.dateTimePicker2.Value = new System.DateTime(2014, 3, 30, 15, 29, 0, 0);
+            this.tabPage1.Controls.Add(this.label5);
+            this.tabPage1.Controls.Add(this.comboBox1);
+            this.tabPage1.Controls.Add(this.checkBox1);
+            this.tabPage1.Controls.Add(this.dateTimePicker2);
+            this.tabPage1.Controls.Add(this.dateTimePicker1);
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(488, 418);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "我的日程";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(26, 323);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(77, 14);
+            this.label5.TabIndex = 182;
+            this.label5.Text = "日程主题：";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(100, 322);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(226, 20);
+            this.comboBox1.TabIndex = 181;
             // 
             // checkBox1
             // 
@@ -362,12 +319,253 @@
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.checkBox1.Location = new System.Drawing.Point(225, 301);
+            this.checkBox1.Location = new System.Drawing.Point(244, 293);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(82, 18);
-            this.checkBox1.TabIndex = 168;
+            this.checkBox1.TabIndex = 180;
             this.checkBox1.Text = "到时提醒";
             this.checkBox1.UseVisualStyleBackColor = false;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CustomFormat = "HH:mm";
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker2.Location = new System.Drawing.Point(100, 258);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.ShowUpDown = true;
+            this.dateTimePicker2.Size = new System.Drawing.Size(226, 21);
+            this.dateTimePicker2.TabIndex = 178;
+            this.dateTimePicker2.Value = new System.DateTime(2014, 3, 30, 15, 29, 0, 0);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "HH:mm";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(100, 290);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(138, 21);
+            this.dateTimePicker1.TabIndex = 179;
+            this.dateTimePicker1.Value = new System.DateTime(2014, 3, 30, 15, 29, 0, 0);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(26, 261);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 14);
+            this.label6.TabIndex = 176;
+            this.label6.Text = "日程时间：";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(26, 293);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 14);
+            this.label3.TabIndex = 177;
+            this.label3.Text = "提醒时间：";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(71, 14);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 14);
+            this.label2.TabIndex = 175;
+            this.label2.Text = "(限200字)";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(9, 31);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(462, 200);
+            this.textBox1.TabIndex = 174;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(6, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(77, 14);
+            this.label1.TabIndex = 173;
+            this.label1.Text = "日程内容：";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(120, 364);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 172;
+            this.button2.Text = "设置分享人";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(292, 364);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 171;
+            this.button1.Text = "确定";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.dateTimePicker4);
+            this.tabPage2.Controls.Add(this.textBox3);
+            this.tabPage2.Controls.Add(this.button3);
+            this.tabPage2.Controls.Add(this.label9);
+            this.tabPage2.Controls.Add(this.checkBox2);
+            this.tabPage2.Controls.Add(this.dateTimePicker3);
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.label11);
+            this.tabPage2.Controls.Add(this.textBox2);
+            this.tabPage2.Controls.Add(this.label7);
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.treeView1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(501, 418);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "员工日程安排";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // treeView1
+            // 
+            this.treeView1.CheckBoxes = true;
+            this.treeView1.Location = new System.Drawing.Point(15, 18);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(192, 388);
+            this.treeView1.TabIndex = 0;
+            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.Location = new System.Drawing.Point(278, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(70, 14);
+            this.label7.TabIndex = 177;
+            this.label7.Text = "(限200字)";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(213, 18);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 14);
+            this.label8.TabIndex = 176;
+            this.label8.Text = "日程内容：";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(213, 45);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(269, 200);
+            this.textBox2.TabIndex = 178;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label9.Location = new System.Drawing.Point(210, 333);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(77, 14);
+            this.label9.TabIndex = 189;
+            this.label9.Text = "日程主题：";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.BackColor = System.Drawing.Color.Transparent;
+            this.checkBox2.Checked = true;
+            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.checkBox2.Location = new System.Drawing.Point(415, 302);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(82, 18);
+            this.checkBox2.TabIndex = 187;
+            this.checkBox2.Text = "到时提醒";
+            this.checkBox2.UseVisualStyleBackColor = false;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label10.Location = new System.Drawing.Point(210, 271);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(77, 14);
+            this.label10.TabIndex = 183;
+            this.label10.Text = "日程时间：";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(210, 303);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(77, 14);
+            this.label11.TabIndex = 184;
+            this.label11.Text = "提醒时间：";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(311, 375);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 190;
+            this.button3.Text = "确定";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(284, 332);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(198, 21);
+            this.textBox3.TabIndex = 191;
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.CustomFormat = "yyyy-MM-dd HH:mm";
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker3.Location = new System.Drawing.Point(284, 268);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.ShowUpDown = true;
+            this.dateTimePicker3.Size = new System.Drawing.Size(125, 21);
+            this.dateTimePicker3.TabIndex = 185;
+            this.dateTimePicker3.Value = new System.DateTime(2015, 2, 1, 17, 25, 21, 0);
+            // 
+            // dateTimePicker4
+            // 
+            this.dateTimePicker4.CustomFormat = "yyyy-MM-dd HH:mm";
+            this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker4.Location = new System.Drawing.Point(283, 299);
+            this.dateTimePicker4.Name = "dateTimePicker4";
+            this.dateTimePicker4.ShowUpDown = true;
+            this.dateTimePicker4.Size = new System.Drawing.Size(128, 21);
+            this.dateTimePicker4.TabIndex = 192;
+            this.dateTimePicker4.Value = new System.DateTime(2015, 2, 1, 17, 25, 21, 0);
             // 
             // writeSchedule
             // 
@@ -376,22 +574,11 @@
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.日志管理系统背景小;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(385, 425);
+            this.ClientSize = new System.Drawing.Size(534, 509);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.close_pictureBox);
             this.Controls.Add(this.min_pictureBox);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "writeSchedule";
@@ -402,6 +589,11 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.writeSchedule_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -440,19 +632,34 @@
         private DevComponents.Editors.ComboItem comboItem9;
         private DevComponents.Editors.ComboItem comboItem10;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox close_pictureBox;
         private System.Windows.Forms.PictureBox min_pictureBox;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.DateTimePicker dateTimePicker4;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
     }
 }

@@ -788,6 +788,7 @@ namespace WorkLogForm
                 writeSchedule.ParentFormChange formChangeDelegate = new writeSchedule.ParentFormChange(init_rc_Panel);
                 write_schedule = new writeSchedule(formChangeDelegate);
                 write_schedule.User = this.user;
+                write_schedule.Role = this.role;
                 write_schedule.ScheduleDate = DateTime.Now;
             }
             if (!write_schedule.Created)

@@ -1218,9 +1218,9 @@
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.首页背景2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(293, 600);
+            this.Controls.Add(this.rc_flowLayoutPanel);
             this.Controls.Add(this.SuiBiGuanLi_pictureBox);
             this.Controls.Add(this.rz_flowLayoutPanel);
-            this.Controls.Add(this.rc_flowLayoutPanel);
             this.Controls.Add(this.setting_pictureBox);
             this.Controls.Add(this.tong_xun_pictureBox);
             this.Controls.Add(this.ri_cheng_pictureBox1);

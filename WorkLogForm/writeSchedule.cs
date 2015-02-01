@@ -36,6 +36,13 @@ namespace WorkLogForm
             get { return user; }
             set { user = value; }
         }
+        private WkTRole role;
+
+        public WkTRole Role
+        {
+            get { return role; }
+            set { role = value; }
+        }
         public writeSchedule(ParentFormChange parentChangeDelegate)
         {
             this.parentChangeDelegate = parentChangeDelegate;
@@ -44,6 +51,10 @@ namespace WorkLogForm
         }
         private void writeSchedule_Load(object sender, EventArgs e)
         {
+            if(role.KrOrder.Equals(3))
+            {
+                this.tabControl1.TabPages.RemoveAt(1);
+            }
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 2 - this.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2 - this.Height / 2);
             initData();
         }
@@ -144,6 +155,7 @@ namespace WorkLogForm
             staffSchedule.TimeStamp = DateTime.Now.Ticks;
             staffSchedule.State = (int)IEntity.stateEnum.Normal;
             staffSchedule.Content = textBox1.Text.Trim();
+            staffSchedule.ArrangeMan = user;
             try
             {
                 baseService.SaveOrUpdateEntity(staffSchedule);
@@ -165,5 +177,180 @@ namespace WorkLogForm
             interimHead.ParentForm1 = this;
             interimHead.ShowDialog();
         }
+
+        public void createTree(TreeView tv)
+        {
+            #region 加载树结构
+            TreeNode Gt = new TreeNode();
+            Gt.Text = "部门";
+            tv.Nodes.Add(Gt);
+            string sql = "select u.DeptId from Wktuser_M_Dept u where u.WktuserId = " + user.Id + " and u.State = " + (int)IEntity.stateEnum.Normal;
+            IList depts = baseService.loadEntityList(sql);
+            if (depts != null && depts.Count > 0)
+            {
+                foreach (WkTDept o in depts)
+                {
+                    TreeNode t1 = new TreeNode();
+                    t1.Tag = o;
+                    t1.Text = o.KdName;
+
+                    string sql1 = "select u from WkTUser u left join u.Kdid dept where dept.Id = " + o.Id;
+                    IList userlist = baseService.loadEntityList(sql1);
+
+                    if (userlist != null && userlist.Count > 0)
+                    {
+                        foreach (WkTUser oo in userlist)
+                        {
+                            if (oo.Id != user.Id)
+                            {
+                                TreeNode t2 = new TreeNode();
+                                t2.Text = oo.KuName;
+                                t2.Tag = oo;
+                               
+
+                                t1.Nodes.Add(t2);
+                            }
+                        }
+                    }
+                    Gt.Nodes.Add(t1);
+                }
+            }
+            #endregion
+
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(tabControl1.TabPages.Count > 1)
+            {
+                if (tabControl1.SelectedIndex == 1)
+                {
+                    //向树中加载数据
+                    createTree(treeView1);
+                }
+            }
+           
+        }
+
+        private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            TreeNode t = e.Node;
+            SelectTree(t);
+        }
+
+        private void SelectTree(TreeNode t)
+        {
+            if (t.Text == "部门")
+            {
+                TreeNode tt = treeView1.Nodes[0];
+                if (t.Checked == true)
+                {
+
+                    foreach (TreeNode t2 in tt.Nodes)
+                    {
+                        t2.Checked = true;
+                    }
+
+                }
+                else if (t.Checked == false)
+                {
+                    foreach (TreeNode t2 in tt.Nodes)
+                    {
+                        t2.Checked = false;
+                        foreach (TreeNode t3 in t2.Nodes)
+                        {
+                            t3.Checked = false;
+                        }
+                    }
+                }
+            }
+            else if (t.Text != "部门")
+            {
+                if (t.Tag is WkTDept)
+                {
+
+                    if (t.Checked == true)
+                    {
+                        foreach (TreeNode t3 in t.Nodes)
+                        {
+                            t3.Checked = true;
+                        }
+                    }
+                    else if (t.Checked == false)
+                    {
+                        foreach (TreeNode t3 in t.Nodes)
+                        {
+                            t3.Checked = false;
+                        }
+                    }
+
+
+                }
+                else if (t.Tag is WkTUser)
+                {
+
+                }
+
+            }
+
+        }
+
+
+        /// <summary>
+        /// 员工安排日程确定
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.button3.Cursor = Cursors.WaitCursor;
+            TreeNode t = treeView1.Nodes[0];
+
+            foreach (TreeNode t1 in t.Nodes)
+            {
+                foreach (TreeNode t2 in t1.Nodes)
+                {
+                    if (t2.Checked == true)
+                    {
+                        WkTUser u = (WkTUser)t2.Tag;
+
+
+                        //日程编写
+                        StaffSchedule staffSchedule = new StaffSchedule();
+                        staffSchedule.IfRemind = checkBox2.Checked ? (int)StaffSchedule.IfRemindEnum.Renmind : (int)StaffSchedule.IfRemindEnum.NotRemind;
+                        //会议时间
+                        staffSchedule.ScheduleTime = dateTimePicker3.Value.Ticks;//scheduleDate.Date.Ticks + dateTimePicker1.Value.TimeOfDay.Ticks;
+                        //提醒时间
+                        staffSchedule.RemindTime = dateTimePicker4.Value.Ticks ;//scheduleDate.Date.Ticks + dateTimePicker2.Value.TimeOfDay.Ticks;
+                        staffSchedule.Staff = u;
+                        //staffSchedule.StaffScheduleStaffs = sharedUser;
+                        staffSchedule.Subject = textBox3.Text.Trim();
+                        staffSchedule.TimeStamp = DateTime.Now.Ticks;
+                        staffSchedule.State = (int)IEntity.stateEnum.Normal;
+                        staffSchedule.Content = textBox2.Text.Trim();
+                        staffSchedule.ArrangeMan = user;
+                        try
+                        {
+                            baseService.SaveOrUpdateEntity(staffSchedule);
+                        }
+                        catch
+                        {
+                            MessageBox.Show("保存失败！");
+                            return;
+                        }
+                        
+                    }
+
+                }
+            }
+
+            this.button3.Cursor = Cursors.Hand;
+
+            MessageBox.Show("保存成功!");
+
+        }
+
+
+
     }
 }

@@ -35,6 +35,17 @@ namespace ClassLibrary
             get { return staff; }
             set { staff = value; }
         }
+
+
+        private WkTUser arrangeMan;
+
+        public virtual WkTUser ArrangeMan
+        {
+            get { return arrangeMan; }
+            set { arrangeMan = value; }
+        }
+
+
         private long scheduleTime;
         //日程时间
         public virtual long ScheduleTime
