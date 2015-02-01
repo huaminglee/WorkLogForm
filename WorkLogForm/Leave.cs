@@ -335,6 +335,11 @@ namespace WorkLogForm
         {
             listView2.Items.Clear();
             IList list2 = baseService.loadEntityList("from LeaveManage where STATE=" + (int)IEntity.stateEnum.Normal + "and Ku_Id=" + leaveman.Id);
+            if (role.KrOrder == 3)
+            {
+                comboBox1.Enabled = false;
+                textBox1.Enabled = false;
+            }
             if (list2 != null)
             { initlistviewdata(list2, listView2); }
 
@@ -373,7 +378,7 @@ namespace WorkLogForm
                     subchargeman.Text = subchargeman.Text+h.KuName+" ";
                 }
                
-                //审批状态，审批阶段组合含义。LeaveResult=3未审批；0:1负责人审批未通过，LeaveResult：LeaveStage=1：1负责人审批通过；0：2副院长审批未通过，1：2副院长审批通过；0：3院长审批未通过，1:3院长审批通过；LeaveResult=2,审批通过
+                //审批状态，审批阶段组合含义。LeaveResult=3未审批；LeaveResult：LeaveStage=0:1负责人审批未通过，1：1负责人审批通过；0：2副院长审批未通过，1：2副院长审批通过；0：3院长审批未通过，1:3院长审批通过；LeaveResult=2,审批通过
                 
                 if (u.LeaveResult.Trim() == "3")
                 { subresult.Text = "待审批"; }
@@ -486,7 +491,15 @@ namespace WorkLogForm
         {
             //请假查看-查询按钮
             listView2.Items.Clear();
-            String sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox1.Text.Trim() + "%'and d.KdName like '%" + comboBox1.Text.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks;
+            String sql = "";
+            if (role.KrOrder == 0 || role.KrOrder == 1)
+            {
+                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox1.Text.Trim() + "%'and d.KdName like '%" + comboBox1.Text.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks;
+            }
+            else
+            {
+                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + this.Leaveman.KuName +"%'and d.KdName like '%" + leaveman.Kdid.KdName.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks; 
+            }
 
             IList searchList = baseService.loadEntityList(sql);
             if (searchList != null && searchList.Count > 0)
@@ -520,21 +533,28 @@ namespace WorkLogForm
 
         private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)//双击listview,更改被选中数据的信息，弹出修改框，完成修改保存到数据库
         {
-            if (this.listView2.SelectedItems == null) return;
-            ListViewItem item = this.listView2.SelectedItems[0];//请假查看-listview2中的数据被选中
-            if (item == null) return;
-            //取出item中的数据，在请假修改groupbox3中显示
-            groupBox3.Visible = true;
-            LeaveManage u = (LeaveManage)item.Tag;
+            //if (this.listView2.SelectedItems == null) return;
+            //ListViewItem item = this.listView2.SelectedItems[0];//请假查看-listview2中的数据被选中
+            //if (item == null) return;
+            
+            //LeaveManage u = (LeaveManage)item.Tag;
+            //if (u.LeaveResult.Trim() == "3")
+            //{
+            //    //取出item中的数据，在请假修改groupbox3中显示
 
-            label21.Text=item.SubItems[6].Text;//负责人
-            comboBox3.Text = item.SubItems[3].Text;//请假类别
-            textBox2.Text = item.SubItems[8].Text;//请假原因
-
-            dateTimePicker5.Value = new DateTime(u.StartTime);//开始时间
-            dateTimePicker6.Value = new DateTime(u.EndTime);//结束时间
+            //    groupBox3.Visible = true;
 
 
+            //    label21.Text = item.SubItems[6].Text;//负责人
+            //    comboBox3.Text = item.SubItems[3].Text;//请假类别
+            //    textBox2.Text = item.SubItems[8].Text;//请假原因
+
+            //    dateTimePicker5.Value = new DateTime(u.StartTime);//开始时间
+            //    dateTimePicker6.Value = new DateTime(u.EndTime);//结束时间
+
+            //}
+            //else
+            //    groupBox3.Visible = false;
 
 
 ;
@@ -564,7 +584,7 @@ namespace WorkLogForm
                 MessageBox.Show("请假开始时间必须早于或等于结束时间！");
                 return;
             }
-            if (comboBox3.Text == null || comboBox2.Text == "")
+            if (comboBox3.Text == null || comboBox3.Text == "")
             {
                 MessageBox.Show("请选择请假类型！");
                 return;
@@ -681,12 +701,14 @@ namespace WorkLogForm
             }
             else if (role.KrOrder == 1)
             { //副院长，只是加载负责人审批通过的请假申请（多个部门）
-                sql = "from LeaveManage where STATE=" + (int)IEntity.stateEnum.Normal + "and LeaveStage=" + 1 + "and LeaveResult=" + 1;
+                           
+                //sql = "from LeaveManage where STATE=" + (int)IEntity.stateEnum.Normal + "and LeaveStage=" + 1 + "and LeaveResult=" + 1;
+                sql = "from LeaveManage leave where leave.Ku_Id.Kdid in (select w.DeptId from Wktuser_M_Dept w where w.WktuserId=" + Leaveman.Id + " and w.State=" + (int)IEntity.stateEnum.Normal + " ) and STATE=" + (int)IEntity.stateEnum.Normal + "and LeaveStage=" + 1 + "and LeaveResult=" + 1;
             }
             else if (role.KrOrder == 2)
             { 
             //负责人，加载员工提交的请假申请，但是只是加载本部门的（单个部门）
-                sql = "from LeaveManage where STATE=" + (int)IEntity.stateEnum.Normal + "and LeaveResult=" + 3 + "and Ku_Id.Kdid.KdName=" + leaveman.Kdid.KdName;
+                sql = "from LeaveManage where STATE=" + (int)IEntity.stateEnum.Normal + "and LeaveResult=" + 3 + "and Ku_Id.Kdid.KdName like '%" + leaveman.Kdid.KdName.Trim()+"%'";
             }
             IList list4 = baseService.loadEntityList(sql);
             if (list4 != null)
@@ -771,11 +793,15 @@ namespace WorkLogForm
             }
             else if (role.KrOrder == 1)
             { //副院长，只是加载负责人审批通过的请假申请（多个部门）
-                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox5.Text.Trim() + "%'and d.KdName like '%" + comboBox6.Text.Trim() + "%' and h.StartTime>=" + dateTimePicker7.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker8.Value.Date.Ticks + "and h.LeaveStage=" + 1 + "and h.LeaveResult=" + 1;
+                
+                //sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox5.Text.Trim() + "%'and d.KdName like '%" + comboBox6.Text.Trim() + "%' and h.StartTime>=" + dateTimePicker7.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker8.Value.Date.Ticks + "and h.LeaveStage=" + 1 + "and h.LeaveResult=" + 1;
+                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox5.Text.Trim() + "%'and d.KdName like '%" + comboBox6.Text.Trim() + "%' and h.StartTime>=" + dateTimePicker7.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker8.Value.Date.Ticks + " and  h.Ku_Id.Kdid in (select w.DeptId from Wktuser_M_Dept w where w.WktuserId=" + Leaveman.Id + " and w.State=" + (int)IEntity.stateEnum.Normal + " )  and h.LeaveStage=" + 1 + "and h.LeaveResult=" + 1;
+
             }
             else if (role.KrOrder == 2)
             {
                 //负责人,只加载本部门
+                
                   sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox5.Text.Trim() + "%'and d.KdName like '%" + leaveman.Kdid.KdName + "%' and h.StartTime>=" + dateTimePicker7.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker8.Value.Date.Ticks + "and h.LeaveStage=" + 1 + "and h.LeaveResult=" + 1;    
             }
 
@@ -855,7 +881,7 @@ namespace WorkLogForm
                 }
                
                 item.Checked = false;
-                item.SubItems.Clear();
+                listView4.Items.Remove(item);
             }
             
             MessageBox.Show("审批成功！");
@@ -1008,6 +1034,28 @@ namespace WorkLogForm
 
             }
 
+        }
+
+        private void listView2_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (this.listView2.SelectedItems == null) return;
+            ListViewItem item = this.listView2.SelectedItems[0];//请假查看-listview2中的数据被选中
+            if (item == null) return;
+
+            LeaveManage u = (LeaveManage)item.Tag;
+          
+
+            groupBox3.Visible = true;
+
+            button8.Visible = false;
+            button9.Visible = false;
+            linkLabel1.Visible = false;
+            label21.Text = item.SubItems[6].Text;//负责人
+            comboBox3.Text = item.SubItems[3].Text;//请假类别
+            textBox2.Text = item.SubItems[8].Text;//请假原因
+
+            dateTimePicker5.Value = new DateTime(u.StartTime);//开始时间
+            dateTimePicker6.Value = new DateTime(u.EndTime);//结束时间
         }
 
       

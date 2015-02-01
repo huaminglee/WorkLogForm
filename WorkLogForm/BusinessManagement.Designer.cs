@@ -677,7 +677,7 @@
             // 
             // columnHeader27
             // 
-            this.columnHeader27.Text = "经办人";
+            this.columnHeader27.Text = "出差时间";
             this.columnHeader27.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader27.Width = 89;
             // 
@@ -882,8 +882,7 @@
             // 
             // columnHeader14
             // 
-            this.columnHeader14.Text = "经办人";
-            this.columnHeader14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader14.Text = "出差时间";
             this.columnHeader14.Width = 89;
             // 
             // label22
