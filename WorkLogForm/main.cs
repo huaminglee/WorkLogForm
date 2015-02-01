@@ -203,7 +203,7 @@ namespace WorkLogForm
                 long thisDay = DateTime.Now.Date.Ticks;
                 long nextDay = DateTime.Now.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
                 IList staffScheduleList = baseService.loadEntityList("from StaffSchedule where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + thisDay + " and ScheduleTime<" + nextDay + " order by ScheduleTime asc");
-                scheduleList = staffScheduleList; //把查询出来的日志列表付给全局变量
+                scheduleList = staffScheduleList; //把查询出来的日程列表付给全局变量
                 creat_ri_cheng_Panel(staffScheduleList);
                 rc_flowLayoutPanel.Visible = rcVisible;
             }
@@ -214,71 +214,61 @@ namespace WorkLogForm
         /// <param name="rcList"></param>
         private void creat_ri_cheng_Panel(IList rcList)
         {
+            rc_flowLayoutPanel.Controls.Clear();
             if (rcList != null && rcList.Count > 0)
             {
-                bool isBlue = false;
-                Font timeLabelFont = new Font("幼圆", (float)11.25, FontStyle.Bold);
-                Font contentLabelFont = new Font("微软雅黑",(float)9,FontStyle.Regular);
-                Size bgPanelSize ;
-                Point deleteLinkLabelLocation;
-                if (rcList.Count > 6)
+
+                foreach (StaffSchedule ss in rcList)
                 {
-                    bgPanelSize = new Size(225, 71);
-                    deleteLinkLabelLocation = new Point(189, 5);
-                }
-                else
-                {
-                    bgPanelSize = new Size(240, 71);
-                    deleteLinkLabelLocation = new Point(205, 5);
-                }
-                foreach (StaffSchedule sc in rcList)
-                {
-                    Panel bgPanel = new Panel();
-                    bgPanel.BorderStyle = BorderStyle.FixedSingle;
-                    bgPanel.Size = bgPanelSize;
-                    bgPanel.BackColor = System.Drawing.Color.Transparent;
-                    if (isBlue)
+                    Panel p = new Panel();
+
+                    Label l1Time = new Label();
+                    l1Time.AutoSize = true;
+                    //l1.Size = new System.Drawing.Size(127, 26);
+                    l1Time.Font = new System.Drawing.Font("微软雅黑", 15, FontStyle.Bold);
+                    l1Time.Location = new Point(7, 5);
+                    l1Time.Text = new DateTime(ss.ScheduleTime).ToString("yyyy-MM-dd HH:mm");
+                    l1Time.Parent = p;
+                    l1Time.ForeColor = Color.FromArgb(128, 128, 255);
+                    
+                    if (ss.ArrangeMan.Id != user.Id)
                     {
-                        bgPanel.BackgroundImage = WorkLogForm.Properties.Resources.rcBG;
-                        isBlue = false;
+                        l1Time.ForeColor = Color.Red;
                     }
-                    else
-                    {
-                        isBlue = true;
-                    }
-                    bgPanel.Parent = rc_flowLayoutPanel;
-                    Label timeLabel = new Label();
-                    DateTime time = new DateTime(sc.ScheduleTime);
-                    timeLabel.Text = CNDate.getTimeByTimeTicks(time.TimeOfDay.Ticks);
-                    timeLabel.Font = timeLabelFont;
-                    timeLabel.BackColor = System.Drawing.Color.Transparent;
-                    timeLabel.Location = new Point(5, 5);
-                    timeLabel.Parent = bgPanel;
-                    LinkLabel deleteLinkLabel = new LinkLabel();
-                    deleteLinkLabel.Text = "删除";
-                    deleteLinkLabel.BackColor = System.Drawing.Color.Transparent;
-                    deleteLinkLabel.Location = deleteLinkLabelLocation;
-                    deleteLinkLabel.Click += onDeleteLinkLabelClickEventHandler;
-                    deleteLinkLabel.Tag = sc;
-                    deleteLinkLabel.Parent = bgPanel;
-                    Panel contentPanel = new Panel();
-                    contentPanel.BackColor = System.Drawing.Color.Transparent;
-                    contentPanel.Location = new Point(1, 25);
-                    contentPanel.Size = new Size(223, 44);
-                    contentPanel.Parent = bgPanel;
-                    Label contentLabel = new Label();
-                    contentLabel.Font = contentLabelFont;
-                    contentLabel.AutoSize = false;
-                    contentLabel.Dock = DockStyle.Fill;
-                    contentLabel.Padding = new Padding(5, 5, 5, 5);
-                    contentLabel.BackColor = System.Drawing.Color.Transparent;
-                    contentLabel.Text = sc.Content.Length > 32 ? (sc.Content.Substring(0, 32)+"...") : sc.Content;
-                    contentLabel.Tag = sc.Content;
-                    contentLabel.Parent = contentPanel;
-                    ToolTip contentToolTip = new ToolTip();
-                    contentToolTip.ShowAlways = true;
-                    contentToolTip.SetToolTip(contentLabel, CommonUtil.toolTipFormat(contentLabel.Tag.ToString()));
+
+
+                    Label l2Name = new Label();
+                    l2Name.AutoSize = false;
+                    l2Name.Size = new System.Drawing.Size(206, 21);
+                    l2Name.Font = new System.Drawing.Font("微软雅黑", 12);
+                    l2Name.Text = "安排人：" + ss.ArrangeMan.KuName;
+                    l2Name.Location = new Point(6, 35);
+                    l2Name.Parent = p;
+
+                    Label l3Title = new Label();
+                    l3Title.Location = new Point(4, 61);
+                    l3Title.Font = new System.Drawing.Font("微软雅黑", 15);
+                    l3Title.Parent = p;
+                    l3Title.Text = ss.Subject.ToString();
+
+                    Label l4Content = new Label();
+                    l4Content.Font = new Font("微软雅黑", 10);
+                    l4Content.Location = new Point(2, 90);
+                    l4Content.AutoSize = false;
+                    l4Content.Text = ss.Content;
+                    int height = ((ss.Content.Length / 14) + 1) * 18;
+                    l4Content.Size = new Size(210, height);
+                    l4Content.Parent = p;
+
+                    p.Size = new Size(219, l4Content.Location.Y + l4Content.Height + 10);
+
+                    p.BorderStyle = BorderStyle.FixedSingle;
+                    p.BackColor = Color.FromArgb(224, 224, 224);
+
+                    p.Parent = rc_flowLayoutPanel;
+
                 }
+
             }
         }
         private void onDeleteLinkLabelClickEventHandler(object sender, EventArgs e)

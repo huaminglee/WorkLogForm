@@ -58,6 +58,10 @@
             this.setting_pictureBox = new System.Windows.Forms.PictureBox();
             this.timer_show = new System.Windows.Forms.Timer(this.components);
             this.rc_flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.rc_toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.rz_flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -96,9 +100,7 @@
             this.linkLabel12 = new System.Windows.Forms.LinkLabel();
             this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wdrl_pictureBox)).BeginInit();
@@ -118,6 +120,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.setting_pictureBox)).BeginInit();
             this.rc_flowLayoutPanel.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.rz_flowLayoutPanel.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -134,7 +137,6 @@
             this.SuiBi_SeeMore.SuspendLayout();
             this.write_SuiBi.SuspendLayout();
             this.panel8.SuspendLayout();
-            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -491,6 +493,50 @@
             this.rc_flowLayoutPanel.Name = "rc_flowLayoutPanel";
             this.rc_flowLayoutPanel.Size = new System.Drawing.Size(248, 480);
             this.rc_flowLayoutPanel.TabIndex = 22;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel9.Controls.Add(this.label15);
+            this.panel9.Controls.Add(this.label14);
+            this.panel9.Controls.Add(this.label3);
+            this.panel9.Controls.Add(this.label1);
+            this.panel9.Location = new System.Drawing.Point(3, 3);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(219, 473);
+            this.panel9.TabIndex = 0;
+            // 
+            // label14
+            // 
+            this.label14.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label14.Location = new System.Drawing.Point(6, 35);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(206, 21);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "安排人：张彦忠";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(7, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(197, 26);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "2015-12-31 12：12";
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(2, 90);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(210, 317);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测" +
+    "试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测" +
+    "试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字";
             // 
             // rc_toolTip
             // 
@@ -849,31 +895,14 @@
             this.linkLabel10.Text = "点击查看更多";
             this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel10_LinkClicked);
             // 
-            // panel9
+            // label15
             // 
-            this.panel9.Controls.Add(this.label1);
-            this.panel9.Controls.Add(this.panel10);
-            this.panel9.Location = new System.Drawing.Point(3, 3);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(219, 289);
-            this.panel9.TabIndex = 0;
-            // 
-            // panel10
-            // 
-            this.panel10.Location = new System.Drawing.Point(32, 9);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(157, 33);
-            this.panel10.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(5, 61);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(211, 157);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测" +
-    "试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测" +
-    "试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字测试的文字";
+            this.label15.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label15.Location = new System.Drawing.Point(4, 61);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(200, 23);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "开会开会开会";
             // 
             // main
             // 
@@ -939,6 +968,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.setting_pictureBox)).EndInit();
             this.rc_flowLayoutPanel.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.rz_flowLayoutPanel.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -961,7 +992,6 @@
             this.write_SuiBi.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            this.panel9.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1037,6 +1067,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label15;
     }
 }
