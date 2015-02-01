@@ -22,7 +22,7 @@ namespace WorkLogForm
         private Hobby sui_bi_hobby;
         private WkTRole role;
 
-        private bool Issurvice;
+   
         public WkTRole Role
         {
             get { return role; }
@@ -47,7 +47,7 @@ namespace WorkLogForm
             InitializeComponent();
             initialWindow();
         }
-
+        IList hobbysList;
         #region 自定义窗体初始化方法
         /// <summary>
         /// 初始化window（界面效果）
@@ -61,60 +61,24 @@ namespace WorkLogForm
 
         private void personal_setting_Load(object sender, EventArgs e)
         {
-            #region  原来的代码
             if (this.formLocation != null)
             {
                 this.Location = formLocation;
             }
-            IList hobbyList = baseService.loadEntityList("from Hobby where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id);
-            if (hobbyList != null && hobbyList.Count > 0)
+        
+            hobbysList = baseService.loadEntityList("from Hobby where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id);
+
+
+
+            IList<WkTUser> shares = new List<WkTUser>(); ;
+            if (hobbysList != null && hobbysList.Count != 0)
             {
-                foreach (Hobby h in hobbyList)
+                foreach (Hobby oo in hobbysList)
                 {
-                    if (h.VisibleFlag == "")
-                    {
-                        return;
-                    }
-                    char[] flag = h.VisibleFlag.ToArray();
-                    if (h.TypeFlag.Equals((int)Hobby.hobbyTypeEnum.RiZhi))
-                    {
-                        ri_zhi_hobby = h;
-                        initCheckBox(ri_zhi_checkBoxBT, flag[(int)Hobby.visibleTypeEnum.BT]);
-                        initCheckBox(ri_zhi_checkBoxBX, flag[(int)Hobby.visibleTypeEnum.BX]);
-                        initCheckBox(ri_zhi_checkBoxWT, flag[(int)Hobby.visibleTypeEnum.WT]);
-                        initCheckBox(ri_zhi_checkBoxWX, flag[(int)Hobby.visibleTypeEnum.WX]);
-                    }
-                    if (h.TypeFlag.Equals((int)Hobby.hobbyTypeEnum.RiCheng))
-                    {
-                        ri_cheng_hobby = h;
-                        initCheckBox(ri_cheng_checkBoxBT, flag[(int)Hobby.visibleTypeEnum.BT]);
-                        initCheckBox(ri_cheng_checkBoxBX, flag[(int)Hobby.visibleTypeEnum.BX]);
-                        initCheckBox(ri_cheng_checkBoxWT, flag[(int)Hobby.visibleTypeEnum.WT]);
-                        initCheckBox(ri_cheng_checkBoxWX, flag[(int)Hobby.visibleTypeEnum.WX]);
-                    }
-                    if (h.TypeFlag.Equals((int)Hobby.hobbyTypeEnum.SuiBi))
-                    {
-                        sui_bi_hobby = h;
-                        initCheckBox(sui_bi_checkBoxBT, flag[(int)Hobby.visibleTypeEnum.BT]);
-                        initCheckBox(sui_bi_checkBoxBX, flag[(int)Hobby.visibleTypeEnum.BX]);
-                        initCheckBox(sui_bi_checkBoxWT, flag[(int)Hobby.visibleTypeEnum.WT]);
-                        initCheckBox(sui_bi_checkBoxWX, flag[(int)Hobby.visibleTypeEnum.WX]);
-                        initCheckBox(sui_bi_checkBoxBS, flag[(int)Hobby.visibleTypeEnum.BS]);
-                        initCheckBox(sui_bi_checkBoxWS, flag[(int)Hobby.visibleTypeEnum.WS]);
-                    }
+                    
+                    shares = oo.SharedStaffs;
                 }
             }
-            #endregion
-
-
-            IList hobbysList = baseService.loadEntityList("from Hobby where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id);
-            if (hobbysList == null|| hobbysList.Count == 0)
-            {
-
-            
-            }
-
-
 
             #region 加载树结构
             TreeNode Gt = new TreeNode();
@@ -142,6 +106,17 @@ namespace WorkLogForm
                                 TreeNode t2 = new TreeNode();
                                 t2.Text = oo.KuName;
                                 t2.Tag = oo;
+                                if (shares != null && shares.Count > 0)
+                                {
+                                    foreach (WkTUser n in shares)
+                                    {
+                                        if(n.Id == oo.Id)
+                                        {
+                                            t2.Checked = true;
+                                        }
+                                    }
+                                }
+
                                 t1.Nodes.Add(t2);
                             }
                         }
@@ -156,207 +131,7 @@ namespace WorkLogForm
         }
 
 
-        #region 原来的代码
-        private void initCheckBox(CheckBox cb, char flag)
-        {
-            if (flag.Equals('0'))
-            {
-                cb.Checked = true;
-            }
-            else if (flag.Equals('1'))
-            {
-                cb.Checked = false;
-            }
-        }
-
-        private string getCheckBox(CheckBox cb)
-        {
-            if (cb.Checked == true)
-            {
-                return "0";
-            }
-            else if (cb.Checked == false)
-            {
-                return "1";
-            }
-            return null;
-        }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            IList BS = baseService.loadEntityList("select u from WkTUser u left join u.UserRole r where u.Kdid=" + user.Kdid.Id + " and r.KrDESC='" + CommonStaticParameter.RoleDesc + "' and r.KrOrder<" + role.KrOrder);
-            IList BT = baseService.loadEntityList("select u from WkTUser u left join u.UserRole r where u.Kdid=" + user.Kdid.Id + " and r.KrDESC='" + CommonStaticParameter.RoleDesc + "' and r.KrOrder=" + role.KrOrder);
-            IList BX = baseService.loadEntityList("select u from WkTUser u left join u.UserRole r where u.Kdid=" + user.Kdid.Id + " and r.KrDESC='" + CommonStaticParameter.RoleDesc + "' and r.KrOrder>" + role.KrOrder);
-            IList WS = baseService.loadEntityList("select u from WkTUser u left join u.UserRole r where u.Kdid!=" + user.Kdid.Id + " and r.KrDESC='" + CommonStaticParameter.RoleDesc + "' and r.KrOrder<" + role.KrOrder);
-            IList WT = baseService.loadEntityList("select u from WkTUser u left join u.UserRole r where u.Kdid!=" + user.Kdid.Id + " and r.KrDESC='" + CommonStaticParameter.RoleDesc + "' and r.KrOrder=" + role.KrOrder);
-            IList WX = baseService.loadEntityList("select u from WkTUser u left join u.UserRole r where u.Kdid!=" + user.Kdid.Id + " and r.KrDESC='" + CommonStaticParameter.RoleDesc + "' and r.KrOrder>" + role.KrOrder);
-            if (ri_zhi_hobby == null)
-            {
-                ri_zhi_hobby = new Hobby();
-            }
-            if (ri_cheng_hobby == null)
-            {
-                ri_cheng_hobby = new Hobby();
-            }
-            if (sui_bi_hobby == null)
-            {
-                sui_bi_hobby = new Hobby();
-            }
-            #region 保存日志偏好
-            ri_zhi_hobby.Staff = user;
-            ri_zhi_hobby.State = (int)IEntity.stateEnum.Normal;
-            ri_zhi_hobby.TimeStamp = DateTime.Now.Ticks;
-            ri_zhi_hobby.TypeFlag = (int)Hobby.hobbyTypeEnum.RiZhi;
-            ri_zhi_hobby.VisibleFlag = "0" + getCheckBox(ri_zhi_checkBoxBT) + getCheckBox(ri_zhi_checkBoxBX) + "0" + getCheckBox(ri_zhi_checkBoxWT) + getCheckBox(ri_zhi_checkBoxWX);
-            if (ri_zhi_hobby.SharedStaffs == null)
-            {
-                ri_zhi_hobby.SharedStaffs = new List<WkTUser>();
-            }
-            else
-            {
-                ri_zhi_hobby.SharedStaffs.Clear();
-            }
-            if (ri_zhi_checkBoxBT.Checked)
-            {
-                foreach (WkTUser u in BT)
-                {
-                    ri_zhi_hobby.SharedStaffs.Add(u);
-                }
-            }
-            if (ri_zhi_checkBoxBX.Checked)
-            {
-                foreach (WkTUser u in BX)
-                {
-                    ri_zhi_hobby.SharedStaffs.Add(u);
-                }
-            }
-            if (ri_zhi_checkBoxWT.Checked)
-            {
-                foreach (WkTUser u in WT)
-                {
-                    ri_zhi_hobby.SharedStaffs.Add(u);
-                }
-            }
-            if (ri_zhi_checkBoxWX.Checked)
-            {
-                foreach (WkTUser u in WX)
-                {
-                    ri_zhi_hobby.SharedStaffs.Add(u);
-                }
-            }
-            baseService.SaveOrUpdateEntity(ri_zhi_hobby);
-            #endregion
-            #region 保存日程偏好
-            ri_cheng_hobby.Staff = user;
-            ri_cheng_hobby.State = (int)IEntity.stateEnum.Normal;
-            ri_cheng_hobby.TimeStamp = DateTime.Now.Ticks;
-            ri_cheng_hobby.TypeFlag = (int)Hobby.hobbyTypeEnum.RiCheng;
-            ri_cheng_hobby.VisibleFlag = "0" + getCheckBox(ri_cheng_checkBoxBT) + getCheckBox(ri_cheng_checkBoxBX) + "0" + getCheckBox(ri_cheng_checkBoxWT) + getCheckBox(ri_cheng_checkBoxWX);
-            if (ri_cheng_hobby.SharedStaffs == null)
-            {
-                ri_cheng_hobby.SharedStaffs = new List<WkTUser>();
-            }
-            else
-            {
-                ri_cheng_hobby.SharedStaffs.Clear();
-            }
-            if (ri_cheng_checkBoxBT.Checked)
-            {
-                foreach (WkTUser u in BT)
-                {
-                    ri_cheng_hobby.SharedStaffs.Add(u);
-                }
-            }
-            if (ri_cheng_checkBoxBX.Checked)
-            {
-                foreach (WkTUser u in BX)
-                {
-                    ri_cheng_hobby.SharedStaffs.Add(u);
-                }
-            }
-            if (ri_cheng_checkBoxWT.Checked)
-            {
-                foreach (WkTUser u in WT)
-                {
-                    ri_cheng_hobby.SharedStaffs.Add(u);
-                }
-            }
-            if (ri_cheng_checkBoxWX.Checked)
-            {
-                foreach (WkTUser u in WX)
-                {
-                    ri_cheng_hobby.SharedStaffs.Add(u);
-                }
-            }
-            baseService.SaveOrUpdateEntity(ri_cheng_hobby);
-            #endregion
-            #region 保存随笔偏好
-            sui_bi_hobby.Staff = user;
-            sui_bi_hobby.State = (int)IEntity.stateEnum.Normal;
-            sui_bi_hobby.TimeStamp = DateTime.Now.Ticks;
-            sui_bi_hobby.TypeFlag = (int)Hobby.hobbyTypeEnum.SuiBi;
-            sui_bi_hobby.VisibleFlag = getCheckBox(sui_bi_checkBoxBS) + getCheckBox(sui_bi_checkBoxBT) + getCheckBox(sui_bi_checkBoxBX) + getCheckBox(sui_bi_checkBoxWS) + getCheckBox(sui_bi_checkBoxWT) + getCheckBox(sui_bi_checkBoxWX);
-            if (sui_bi_hobby.SharedStaffs == null)
-            {
-                sui_bi_hobby.SharedStaffs = new List<WkTUser>();
-            }
-            else
-            {
-                sui_bi_hobby.SharedStaffs.Clear();
-            }
-            if (sui_bi_checkBoxBS.Checked)
-            {
-                foreach (WkTUser u in BS)
-                {
-                    sui_bi_hobby.SharedStaffs.Add(u);
-                }
-            }
-            if (sui_bi_checkBoxWS.Checked)
-            {
-                foreach (WkTUser u in WS)
-                {
-                    sui_bi_hobby.SharedStaffs.Add(u);
-                }
-            }
-            if (sui_bi_checkBoxBT.Checked)
-            {
-                foreach (WkTUser u in BT)
-                {
-                    sui_bi_hobby.SharedStaffs.Add(u);
-                }
-            }
-            if (sui_bi_checkBoxBX.Checked)
-            {
-                foreach (WkTUser u in BX)
-                {
-                    sui_bi_hobby.SharedStaffs.Add(u);
-                }
-            }
-            if (sui_bi_checkBoxWT.Checked)
-            {
-                foreach (WkTUser u in WT)
-                {
-                    sui_bi_hobby.SharedStaffs.Add(u);
-                }
-            }
-            if (sui_bi_checkBoxWX.Checked)
-            {
-                foreach (WkTUser u in WX)
-                {
-                    sui_bi_hobby.SharedStaffs.Add(u);
-                }
-            }
-            baseService.SaveOrUpdateEntity(sui_bi_hobby);
-            #endregion
-        }
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        #endregion
+        
 
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
@@ -431,22 +206,50 @@ namespace WorkLogForm
         {
             TreeNode t = treeView1.Nodes[0];
             //表中是否有存 如果有先删除原来的
+            if(hobbysList != null)
+            {
+                foreach (Hobby h in hobbysList)
+                {
+                    h.State = (int)IEntity.stateEnum.Deleted;
+                    baseService.SaveOrUpdateEntity(h);
+                }
+            }
 
             ri_zhi_hobby = new Hobby();
             ri_zhi_hobby.Staff = user;
             ri_zhi_hobby.State = (int)IEntity.stateEnum.Normal;
             ri_zhi_hobby.TimeStamp = DateTime.Now.Ticks;
             ri_zhi_hobby.TypeFlag = (int)Hobby.hobbyTypeEnum.RiZhi;
-            ri_cheng_hobby.SharedStaffs = new List<WkTUser>();
+           
+            if (ri_zhi_hobby.SharedStaffs == null)
+            {
+                ri_zhi_hobby.SharedStaffs = new List<WkTUser>();
+            }
+            else
+            {
+                ri_zhi_hobby.SharedStaffs.Clear();
+            }
+
             foreach(TreeNode t1 in t.Nodes)
             {
               foreach(TreeNode t2 in t1.Nodes)
               {
-                  WkTUser u = (WkTUser)t2.Tag;
-                  ri_zhi_hobby.SharedStaffs.Add(u);
+                  if(t2.Checked == true)
+                  {
+                      WkTUser u = (WkTUser)t2.Tag;
+                      ri_zhi_hobby.SharedStaffs.Add(u);
+                  }
+                 
               }
             }
+           
             baseService.SaveOrUpdateEntity(ri_zhi_hobby);
+            MessageBox.Show("保存成功！");
+        }
+
+        private void close_pictureBox_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
     }
