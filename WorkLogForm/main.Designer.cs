@@ -51,8 +51,6 @@
             this.schedule_pictureBox = new System.Windows.Forms.PictureBox();
             this.log_pictureBox = new System.Windows.Forms.PictureBox();
             this.rcgl_pictureBox = new System.Windows.Forms.PictureBox();
-            this.dai_qian_pictureBox = new System.Windows.Forms.PictureBox();
-            this.dai_qian_sp_pictureBox = new System.Windows.Forms.PictureBox();
             this.SuiBiGuanLi_pictureBox = new System.Windows.Forms.PictureBox();
             this.ri_zhi_pictureBox = new System.Windows.Forms.PictureBox();
             this.ri_cheng_pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -117,11 +115,15 @@
             this.schedule_listen_timer = new System.Windows.Forms.Timer(this.components);
             this.tong_xun_pictureBox = new System.Windows.Forms.PictureBox();
             this.SuiBi_flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.write_SuiBi = new System.Windows.Forms.Panel();
-            this.Pulish_button = new System.Windows.Forms.Button();
-            this.Write_SUiBi_textBox = new System.Windows.Forms.TextBox();
             this.Show_SuiBi_flowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuiBi_SeeMore = new System.Windows.Forms.Panel();
+            this.write_SuiBi = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.Pulish_button = new System.Windows.Forms.Button();
+            this.Write_SUiBi_textBox = new System.Windows.Forms.TextBox();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.linkLabel11 = new System.Windows.Forms.LinkLabel();
+            this.linkLabel12 = new System.Windows.Forms.LinkLabel();
             this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
@@ -137,8 +139,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.schedule_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.log_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rcgl_pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dai_qian_pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dai_qian_sp_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SuiBiGuanLi_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ri_zhi_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ri_cheng_pictureBox1)).BeginInit();
@@ -170,8 +170,9 @@
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tong_xun_pictureBox)).BeginInit();
             this.SuiBi_flowLayoutPanel.SuspendLayout();
-            this.write_SuiBi.SuspendLayout();
             this.SuiBi_SeeMore.SuspendLayout();
+            this.write_SuiBi.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -191,7 +192,7 @@
             this.user_label.BackColor = System.Drawing.Color.Transparent;
             this.user_label.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.user_label.ForeColor = System.Drawing.Color.Black;
-            this.user_label.Location = new System.Drawing.Point(51, 40);
+            this.user_label.Location = new System.Drawing.Point(50, 40);
             this.user_label.Name = "user_label";
             this.user_label.Size = new System.Drawing.Size(109, 12);
             this.user_label.TabIndex = 1;
@@ -253,7 +254,7 @@
             this.attendance_label.BackColor = System.Drawing.Color.Transparent;
             this.attendance_label.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.attendance_label.ForeColor = System.Drawing.Color.Black;
-            this.attendance_label.Location = new System.Drawing.Point(115, 58);
+            this.attendance_label.Location = new System.Drawing.Point(114, 58);
             this.attendance_label.Name = "attendance_label";
             this.attendance_label.Size = new System.Drawing.Size(0, 12);
             this.attendance_label.TabIndex = 5;
@@ -265,7 +266,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(50, 58);
+            this.label4.Location = new System.Drawing.Point(49, 58);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(64, 12);
             this.label4.TabIndex = 6;
@@ -389,7 +390,7 @@
             this.sjgl_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.系统管理;
             this.sjgl_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.sjgl_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.sjgl_pictureBox.Location = new System.Drawing.Point(0, 526);
+            this.sjgl_pictureBox.Location = new System.Drawing.Point(0, 445);
             this.sjgl_pictureBox.Name = "sjgl_pictureBox";
             this.sjgl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.sjgl_pictureBox.TabIndex = 11;
@@ -443,38 +444,6 @@
             this.rcgl_pictureBox.MouseEnter += new System.EventHandler(this.rcgl_pictureBox_MouseEnter);
             this.rcgl_pictureBox.MouseLeave += new System.EventHandler(this.rcgl_pictureBox_MouseLeave);
             // 
-            // dai_qian_pictureBox
-            // 
-            this.dai_qian_pictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.dai_qian_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.补签;
-            this.dai_qian_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.dai_qian_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dai_qian_pictureBox.Location = new System.Drawing.Point(1, 446);
-            this.dai_qian_pictureBox.Name = "dai_qian_pictureBox";
-            this.dai_qian_pictureBox.Size = new System.Drawing.Size(41, 40);
-            this.dai_qian_pictureBox.TabIndex = 23;
-            this.dai_qian_pictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.dai_qian_pictureBox, "代签管理");
-            this.dai_qian_pictureBox.Click += new System.EventHandler(this.dai_qian_pictureBox_Click);
-            this.dai_qian_pictureBox.MouseLeave += new System.EventHandler(this.dai_qian_pictureBox_MouseLeave);
-            this.dai_qian_pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dai_qian_pictureBox_MouseMove);
-            // 
-            // dai_qian_sp_pictureBox
-            // 
-            this.dai_qian_sp_pictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.dai_qian_sp_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.代签审批;
-            this.dai_qian_sp_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.dai_qian_sp_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dai_qian_sp_pictureBox.Location = new System.Drawing.Point(0, 485);
-            this.dai_qian_sp_pictureBox.Name = "dai_qian_sp_pictureBox";
-            this.dai_qian_sp_pictureBox.Size = new System.Drawing.Size(41, 40);
-            this.dai_qian_sp_pictureBox.TabIndex = 24;
-            this.dai_qian_sp_pictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.dai_qian_sp_pictureBox, "代签审批");
-            this.dai_qian_sp_pictureBox.Click += new System.EventHandler(this.dai_qian_sp_pictureBox_Click);
-            this.dai_qian_sp_pictureBox.MouseLeave += new System.EventHandler(this.dai_qian_sp_pictureBox_MouseLeave);
-            this.dai_qian_sp_pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.dai_qian_sp_pictureBox_MouseMove);
-            // 
             // SuiBiGuanLi_pictureBox
             // 
             this.SuiBiGuanLi_pictureBox.BackColor = System.Drawing.Color.Transparent;
@@ -493,10 +462,10 @@
             // 
             // ri_zhi_pictureBox
             // 
-            this.ri_zhi_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.日志分享_副本;
+            this.ri_zhi_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.日志分享;
             this.ri_zhi_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ri_zhi_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ri_zhi_pictureBox.Location = new System.Drawing.Point(44, 80);
+            this.ri_zhi_pictureBox.Location = new System.Drawing.Point(128, 80);
             this.ri_zhi_pictureBox.Name = "ri_zhi_pictureBox";
             this.ri_zhi_pictureBox.Size = new System.Drawing.Size(83, 33);
             this.ri_zhi_pictureBox.TabIndex = 17;
@@ -507,10 +476,10 @@
             // 
             // ri_cheng_pictureBox1
             // 
-            this.ri_cheng_pictureBox1.BackgroundImage = global::WorkLogForm.Properties.Resources.我的日程;
+            this.ri_cheng_pictureBox1.BackgroundImage = global::WorkLogForm.Properties.Resources.我的日程_副本;
             this.ri_cheng_pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ri_cheng_pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ri_cheng_pictureBox1.Location = new System.Drawing.Point(126, 80);
+            this.ri_cheng_pictureBox1.Location = new System.Drawing.Point(44, 80);
             this.ri_cheng_pictureBox1.Name = "ri_cheng_pictureBox1";
             this.ri_cheng_pictureBox1.Size = new System.Drawing.Size(83, 33);
             this.ri_cheng_pictureBox1.TabIndex = 18;
@@ -561,11 +530,10 @@
             this.rc_flowLayoutPanel.Controls.Add(this.panel16);
             this.rc_flowLayoutPanel.Controls.Add(this.panel18);
             this.rc_flowLayoutPanel.Controls.Add(this.panel20);
-            this.rc_flowLayoutPanel.Location = new System.Drawing.Point(44, 115);
+            this.rc_flowLayoutPanel.Location = new System.Drawing.Point(43, 115);
             this.rc_flowLayoutPanel.Name = "rc_flowLayoutPanel";
             this.rc_flowLayoutPanel.Size = new System.Drawing.Size(248, 480);
             this.rc_flowLayoutPanel.TabIndex = 22;
-            this.rc_flowLayoutPanel.Visible = false;
             // 
             // panel10
             // 
@@ -902,8 +870,9 @@
             this.rz_flowLayoutPanel.Controls.Add(this.panel7);
             this.rz_flowLayoutPanel.Location = new System.Drawing.Point(43, 115);
             this.rz_flowLayoutPanel.Name = "rz_flowLayoutPanel";
-            this.rz_flowLayoutPanel.Size = new System.Drawing.Size(248, 479);
+            this.rz_flowLayoutPanel.Size = new System.Drawing.Size(248, 480);
             this.rz_flowLayoutPanel.TabIndex = 2;
+            this.rz_flowLayoutPanel.Visible = false;
             // 
             // panel4
             // 
@@ -1134,28 +1103,55 @@
             // 
             this.SuiBi_flowLayoutPanel.BackColor = System.Drawing.SystemColors.Control;
             this.SuiBi_flowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SuiBi_flowLayoutPanel.Controls.Add(this.write_SuiBi);
             this.SuiBi_flowLayoutPanel.Controls.Add(this.Show_SuiBi_flowPanel);
             this.SuiBi_flowLayoutPanel.Controls.Add(this.SuiBi_SeeMore);
-            this.SuiBi_flowLayoutPanel.Location = new System.Drawing.Point(45, 115);
+            this.SuiBi_flowLayoutPanel.Location = new System.Drawing.Point(44, 114);
             this.SuiBi_flowLayoutPanel.Name = "SuiBi_flowLayoutPanel";
             this.SuiBi_flowLayoutPanel.Size = new System.Drawing.Size(248, 480);
             this.SuiBi_flowLayoutPanel.TabIndex = 7;
             // 
+            // Show_SuiBi_flowPanel
+            // 
+            this.Show_SuiBi_flowPanel.AutoScroll = true;
+            this.Show_SuiBi_flowPanel.Location = new System.Drawing.Point(3, 3);
+            this.Show_SuiBi_flowPanel.Name = "Show_SuiBi_flowPanel";
+            this.Show_SuiBi_flowPanel.Size = new System.Drawing.Size(238, 293);
+            this.Show_SuiBi_flowPanel.TabIndex = 3;
+            // 
+            // SuiBi_SeeMore
+            // 
+            this.SuiBi_SeeMore.Controls.Add(this.write_SuiBi);
+            this.SuiBi_SeeMore.Controls.Add(this.panel8);
+            this.SuiBi_SeeMore.Location = new System.Drawing.Point(3, 302);
+            this.SuiBi_SeeMore.Name = "SuiBi_SeeMore";
+            this.SuiBi_SeeMore.Size = new System.Drawing.Size(242, 171);
+            this.SuiBi_SeeMore.TabIndex = 2;
+            // 
             // write_SuiBi
             // 
+            this.write_SuiBi.Controls.Add(this.button1);
             this.write_SuiBi.Controls.Add(this.Pulish_button);
             this.write_SuiBi.Controls.Add(this.Write_SUiBi_textBox);
-            this.write_SuiBi.Location = new System.Drawing.Point(3, 3);
+            this.write_SuiBi.Location = new System.Drawing.Point(2, 9);
             this.write_SuiBi.Name = "write_SuiBi";
             this.write_SuiBi.Size = new System.Drawing.Size(238, 122);
             this.write_SuiBi.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(165, 87);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(68, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "取消";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Pulish_button
             // 
-            this.Pulish_button.Location = new System.Drawing.Point(20, 87);
+            this.Pulish_button.Location = new System.Drawing.Point(2, 87);
             this.Pulish_button.Name = "Pulish_button";
-            this.Pulish_button.Size = new System.Drawing.Size(207, 23);
+            this.Pulish_button.Size = new System.Drawing.Size(162, 23);
             this.Pulish_button.TabIndex = 1;
             this.Pulish_button.Text = "发布";
             this.Pulish_button.UseVisualStyleBackColor = true;
@@ -1171,26 +1167,42 @@
             this.Write_SUiBi_textBox.TabIndex = 0;
             this.Write_SUiBi_textBox.TextChanged += new System.EventHandler(this.Write_SUiBi_textBox_TextChanged);
             // 
-            // Show_SuiBi_flowPanel
+            // panel8
             // 
-            this.Show_SuiBi_flowPanel.AutoScroll = true;
-            this.Show_SuiBi_flowPanel.Location = new System.Drawing.Point(3, 131);
-            this.Show_SuiBi_flowPanel.Name = "Show_SuiBi_flowPanel";
-            this.Show_SuiBi_flowPanel.Size = new System.Drawing.Size(238, 313);
-            this.Show_SuiBi_flowPanel.TabIndex = 3;
+            this.panel8.Controls.Add(this.linkLabel11);
+            this.panel8.Controls.Add(this.linkLabel12);
+            this.panel8.Controls.Add(this.linkLabel10);
+            this.panel8.Location = new System.Drawing.Point(18, 138);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(200, 28);
+            this.panel8.TabIndex = 3;
             // 
-            // SuiBi_SeeMore
+            // linkLabel11
             // 
-            this.SuiBi_SeeMore.Controls.Add(this.linkLabel10);
-            this.SuiBi_SeeMore.Location = new System.Drawing.Point(3, 450);
-            this.SuiBi_SeeMore.Name = "SuiBi_SeeMore";
-            this.SuiBi_SeeMore.Size = new System.Drawing.Size(242, 25);
-            this.SuiBi_SeeMore.TabIndex = 2;
+            this.linkLabel11.AutoSize = true;
+            this.linkLabel11.Location = new System.Drawing.Point(3, 10);
+            this.linkLabel11.Name = "linkLabel11";
+            this.linkLabel11.Size = new System.Drawing.Size(29, 12);
+            this.linkLabel11.TabIndex = 1;
+            this.linkLabel11.TabStop = true;
+            this.linkLabel11.Text = "刷新";
+            this.linkLabel11.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel11_LinkClicked);
+            // 
+            // linkLabel12
+            // 
+            this.linkLabel12.AutoSize = true;
+            this.linkLabel12.Location = new System.Drawing.Point(156, 10);
+            this.linkLabel12.Name = "linkLabel12";
+            this.linkLabel12.Size = new System.Drawing.Size(41, 12);
+            this.linkLabel12.TabIndex = 2;
+            this.linkLabel12.TabStop = true;
+            this.linkLabel12.Text = "写随笔";
+            this.linkLabel12.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel12_LinkClicked);
             // 
             // linkLabel10
             // 
             this.linkLabel10.AutoSize = true;
-            this.linkLabel10.Location = new System.Drawing.Point(82, 7);
+            this.linkLabel10.Location = new System.Drawing.Point(59, 10);
             this.linkLabel10.Name = "linkLabel10";
             this.linkLabel10.Size = new System.Drawing.Size(77, 12);
             this.linkLabel10.TabIndex = 0;
@@ -1205,12 +1217,10 @@
             this.BackColor = System.Drawing.Color.DarkGray;
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.首页背景2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(294, 600);
+            this.ClientSize = new System.Drawing.Size(293, 600);
             this.Controls.Add(this.SuiBiGuanLi_pictureBox);
             this.Controls.Add(this.rz_flowLayoutPanel);
-            this.Controls.Add(this.dai_qian_sp_pictureBox);
             this.Controls.Add(this.rc_flowLayoutPanel);
-            this.Controls.Add(this.dai_qian_pictureBox);
             this.Controls.Add(this.setting_pictureBox);
             this.Controls.Add(this.tong_xun_pictureBox);
             this.Controls.Add(this.ri_cheng_pictureBox1);
@@ -1258,8 +1268,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.schedule_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.log_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rcgl_pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dai_qian_pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dai_qian_sp_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SuiBiGuanLi_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ri_zhi_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ri_cheng_pictureBox1)).EndInit();
@@ -1301,10 +1309,11 @@
             this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tong_xun_pictureBox)).EndInit();
             this.SuiBi_flowLayoutPanel.ResumeLayout(false);
+            this.SuiBi_SeeMore.ResumeLayout(false);
             this.write_SuiBi.ResumeLayout(false);
             this.write_SuiBi.PerformLayout();
-            this.SuiBi_SeeMore.ResumeLayout(false);
-            this.SuiBi_SeeMore.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1394,8 +1403,6 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.LinkLabel linkLabel8;
         private System.Windows.Forms.Timer schedule_listen_timer;
-        private System.Windows.Forms.PictureBox dai_qian_pictureBox;
-        private System.Windows.Forms.PictureBox dai_qian_sp_pictureBox;
         private System.Windows.Forms.PictureBox tong_xun_pictureBox;
         private System.Windows.Forms.FlowLayoutPanel SuiBi_flowLayoutPanel;
         private System.Windows.Forms.Panel write_SuiBi;
@@ -1406,5 +1413,9 @@
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.FlowLayoutPanel Show_SuiBi_flowPanel;
         private System.Windows.Forms.PictureBox SuiBiGuanLi_pictureBox;
+        private System.Windows.Forms.LinkLabel linkLabel12;
+        private System.Windows.Forms.LinkLabel linkLabel11;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Button button1;
     }
 }

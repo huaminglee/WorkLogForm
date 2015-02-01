@@ -174,71 +174,14 @@ namespace WorkLogForm
                 #endregion
 
                 #region 调用随笔显示
+                ChangeLocationAftercancel();
                 ShowSuiBiInFlowPanel(10);
                 #endregion
             }
         }
 
 
-        ///// <summary>
-        ///// 创建人员列表panel
-        ///// </summary>
-        ///// <param name="personList">wktuserList</param>
-        //public void creatPersonPanel(ArrayList personList,int Y)
-        //{
-        //    Panel childPanel = new Panel();
-        //    childPanel.Width = 268;
-        //    childPanel.Height = 20 * personList.Count;
-        //    childPanel.Left = 0;
-        //    childPanel.Top = Y;
-        //    //childPanel.Parent = panel1;
-        //    for (int i = 0; i < personList.Count; i++)
-        //    {
-        //        WkTUser u = (WkTUser)personList[0];
-        //        Button user = new Button();
-        //        user.Parent = childPanel;
-        //        user.Width = 500;
-        //        user.Height = 20;
-        //        user.Left = 0;
-        //        user.Top = 20 * i;
-        //        user.TextAlign = ContentAlignment.MiddleLeft;
-        //        user.FlatStyle = FlatStyle.Flat;
-        //        user.FlatAppearance.BorderSize = 0;
-        //        user.FlatAppearance.MouseOverBackColor = Color.SkyBlue;
-        //        user.Text = "    "+u.KuName;
-        //    }
-        //}
-        ///// <summary>
-        ///// 创建部门列表panel
-        ///// </summary>
-        ///// <param name="personList">wktuserList</param>
-        //public void creatDeptPanel(ArrayList deptList)
-        //{
-        //    for (int i = 0; i < deptList.Count; i++)
-        //    {
-        //        WkTDept d = (WkTDept)deptList[0];
-        //        Button dept = new Button();
-        //        //dept.Parent = panel1;
-        //        dept.Width = 500;
-        //        dept.Height = 20;
-        //        dept.Left = 0;
-        //        dept.Top = 20 * i;
-        //        dept.TextAlign = ContentAlignment.MiddleLeft;
-        //        dept.FlatStyle = FlatStyle.Flat;
-        //        dept.FlatAppearance.BorderSize = 0;
-        //        dept.FlatAppearance.MouseOverBackColor = Color.SkyBlue;
-        //        dept.Text = d.KdName;
-        //        dept.Name = d.Id.ToString();
-        //        dept.Click += new EventHandler(onClickEventHandler);
-        //    }
-        //}
-        //private void onClickEventHandler(object sender, EventArgs e)
-        //{
-        //    Button b = (Button)sender;
-        //    List<string> s = new List<string>(); s.Add("WkTUser");
-        //    ArrayList wktUserList = baseService.loadEntityList(s, new string[,] { { "WkTUser", "kdid", CommonStaticParameter.IS_NOT_STRING, b.Name } });
-        //    creatPersonPanel(wktUserList,b.Top+b.Height);
-        //}
+      
         #endregion
 
         #region 日程显示页
@@ -1175,25 +1118,25 @@ namespace WorkLogForm
             spgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人考勤;
         }
 
-        private void dai_qian_sp_pictureBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            dai_qian_sp_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.代签审批副本;
-        }
+        //private void dai_qian_sp_pictureBox_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    dai_qian_sp_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.代签审批副本;
+        //}
 
-        private void dai_qian_sp_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            dai_qian_sp_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.代签审批;
-        }
+        //private void dai_qian_sp_pictureBox_MouseLeave(object sender, EventArgs e)
+        //{
+        //    dai_qian_sp_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.代签审批;
+        //}
 
-        private void dai_qian_pictureBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            dai_qian_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.补签1;
-        }
+        //private void dai_qian_pictureBox_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    dai_qian_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.补签1;
+        //}
 
-        private void dai_qian_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            dai_qian_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.补签;
-        }
+        //private void dai_qian_pictureBox_MouseLeave(object sender, EventArgs e)
+        //{
+        //    dai_qian_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.补签;
+        //}
 
         private void sjgl_pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
@@ -1266,6 +1209,7 @@ namespace WorkLogForm
                 }
                 ShowSuiBiInFlowPanel(10);
                 this.SuiBi_SeeMore.Enabled = true;
+                ChangeLocationAftercancel();
             }
 
         }
@@ -1371,8 +1315,56 @@ namespace WorkLogForm
         
         }
 
+        /// <summary>
+        /// 随笔刷新功能
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void linkLabel11_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ShowSuiBiInFlowPanel(10);
+        }
+
+        /// <summary>
+        /// 写随笔
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void linkLabel12_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.Show_SuiBi_flowPanel.Height = 293;
+            this.SuiBi_SeeMore.Height = 169;
+            this.write_SuiBi.Visible = true;
+            this.panel8.Location = new Point(panel8.Location.X, write_SuiBi.Height+5);
+        }
+
+        /// <summary>
+        /// 取消发布按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ChangeLocationAftercancel();
+        }
+
+        public void ChangeLocationAftercancel()
+        {
+            this.SuiBi_SeeMore.Height = 45;
+            this.Show_SuiBi_flowPanel.Height = 420;
+            this.write_SuiBi.Visible = false;
+            this.panel8.Location = new Point(this.panel8.Location.X, 7);
+        }
 
         #endregion
+
+        
+
+       
+
+
+
+        
 
       
 

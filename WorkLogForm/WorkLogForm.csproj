@@ -403,6 +403,7 @@
     <Content Include="resources\个人考勤副本.png" />
     <Content Include="resources\代签审批.png" />
     <Content Include="resources\代签审批副本.png" />
+    <None Include="resources\首页背景2.png" />
     <None Include="resources\我的随笔.png" />
     <None Include="resources\随笔查询.png" />
     <None Include="resources\随笔.png" />
@@ -459,7 +460,6 @@
     <None Include="resources\考勤统计1.png" />
     <None Include="resources\xitongbackground1.png" />
     <None Include="resources\1.png" />
-    <None Include="resources\首页背景2.png" />
     <None Include="resources\阴天1.png" />
     <None Include="resources\退出.png" />
     <None Include="resources\请假管理11.png" />
