@@ -240,8 +240,8 @@ namespace WorkLogForm
                     Label l2Name = new Label();
                     l2Name.AutoSize = false;
                     l2Name.Size = new System.Drawing.Size(206, 21);
-                    l2Name.Font = new System.Drawing.Font("微软雅黑", 12);
-                    l2Name.Text = "安排人：" + ss.ArrangeMan.KuName;
+                    l2Name.Font = new System.Drawing.Font("微软雅黑", 10);
+                    l2Name.Text = "安排人:" + ss.ArrangeMan.KuName + "   执行人:"+ ss.Staff.KuName;
                     l2Name.Location = new Point(6, 35);
                     l2Name.Parent = p;
 
