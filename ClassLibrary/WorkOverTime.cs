@@ -16,9 +16,9 @@ namespace ClassLibrary
             set { ku_Id = value; }
         }
 
-        private WkTUser workManId;//指定加班人员
+        private IList <WkTUser> workManId;//指定加班人员
 
-        public virtual WkTUser WorkManId
+        public virtual IList<WkTUser> WorkManId
         {
             get { return workManId; }
             set { workManId = value; }
@@ -40,6 +40,14 @@ namespace ClassLibrary
         {
             get { return endTime; }
             set { endTime = value; }
+        }
+
+        private WkTDept dept;
+
+        public virtual WkTDept Dept
+        {
+            get { return dept; }
+            set { dept = value; }
         }
 
         private string workContent;//加班内容

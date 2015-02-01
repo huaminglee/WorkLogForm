@@ -10,12 +10,16 @@
                 class="ClassLibrary.WkTUser, ClassLibrary" />
     <property name="StartTime" column="STARTTIME" type="long"/>
     <property name="EndTime" column="ENDTIME" type="long"/>
+    <many-to-one name="Dept" column="KD_ID" lazy="false" not-null="true"
+                    class="ClassLibrary.WkTDept, ClassLibrary" />
     <property name="WorkContent" column="WORKCONTENT" type="string"/>
     <property name="State" column="STATE" type="int" length="1"/>
     <property name="Date" column="DATE" type="long" />
     <property name="DayTime" column="DAYTIME" type="long" />
-    
-    <many-to-one name="WorkManId" column="WORKMAN_ID" lazy="false" not-null="true"
-                class="ClassLibrary.WkTUser, ClassLibrary" />
+
+    <bag name="WorkManId" table="LOG_T_OVERTIMEUSER" lazy="false" cascade="all">
+      <key column="WK_ID"/>
+      <many-to-many class="ClassLibrary.WkTUser,ClassLibrary" column="OU_ID"/>
+    </bag>
   </class>
 </hibernate-mapping>

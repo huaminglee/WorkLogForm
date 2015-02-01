@@ -22,6 +22,14 @@ namespace WorkLogForm
             get { return user; }
             set { user = value; }
         }
+        private WkTRole role;
+
+        public WkTRole Role
+        {
+            get { return role; }
+            set { role = value; }
+        }
+
         private WkTDept dept;
 
         public WkTDept Dept
@@ -121,71 +129,91 @@ namespace WorkLogForm
             Dept = User.Kdid;
             userrole = User.UserRole;
             int flag=0;
-            foreach (WkTRole r in userrole)
+            
+            if (Role.KrOrder==2)
             {
-                if (r.KrName == "部门主任")
-                {
-                    flag=1;
-                }
-                
+                flag=1;
             }
 
-            if (flag==1)
+
+
+            if (flag == 1)
             {
                 textBox1.Text = User.KuName;
                 textBox3.Text = Dept.KdName;
                 upDateListView1(Dept);
             }
             else
-                tabControl1.Enabled = false;
+                tabControl1.TabPages.Remove(tabControl1.TabPages[0]);
             
         }
 
 
-        private IList getUserByDept(WkTDept dept)//获取登陆人所在部门
+        private IList getUserByDept(WkTDept dept)//获取登陆人所在部门的员工
         {
             string queryUser="from WkTUser u where u.Kdid="+dept.Id;
             return baseService.loadEntityList(queryUser);
         }
 
-        private string  getOverTimeOfDay(WkTUser user, DateTime date)//获取当日加班时间
+        private long  getOverTimeOfDay(WkTUser user, DateTime date)//获取当日加班时间
         {
-            string query1 = "from WorkOverTime w where w.WorkManId =" + user.Id+" and w.Date like '%" + date.Date.Ticks + "%'";
+            string query1 = "from WorkOverTime w where w.Date like '%" + date.Date.Ticks + "%'";
             IList result1=baseService.loadEntityList(query1);
 
+            bool flag = false;
             long sum = 0;
             if (result1 != null && result1.Count != 0)
             {
                 foreach (WorkOverTime wkot in result1)
                 {
-                    sum += wkot.DayTime;
+                    foreach (WkTUser u in wkot.WorkManId)
+                    {
+                        if (u.Id == user.Id)
+                        {
+                            flag = true;
+                        }
+                    }
+                    if (flag)
+                    {
+                        sum += wkot.DayTime;
+                        flag = false;
+                    }
                 }
             }
-            DateTime daytime = new DateTime(sum);
-            return daytime.ToString("HH小时 mm分");
+            return sum;
         }
 
 
-        private string  getOverTimeOfMonth(WkTUser user, DateTime date)//获取当月加班时间
+        private long  getOverTimeOfMonth(WkTUser user, DateTime date)//获取当月加班时间
         {
             DateTime d1 = date.AddDays(-date.Day).Date;
             DateTime d2 = d1.AddMonths(1);
-            string query2 = "from WorkOverTime w where w.WorkManId =" + user.Id + "and w.Date>" + d1.Ticks+ "and w.Date<=" + d2.Ticks;
+            string query2 = "from WorkOverTime w where w.Date>" + d1.Ticks+ "and w.Date<=" + d2.Ticks;
             IList result2 = baseService.loadEntityList(query2);
             long sum=0;
+            bool flag = false;
             if (result2 != null && result2.Count != 0)
             {
                 foreach (WorkOverTime wkot in result2)
                 {
-                    sum += wkot.DayTime;
-                }
-            }
-            TimeSpan tt = new TimeSpan(sum);
-            return (int)tt.TotalHours+"小时 "+tt.Minutes+"分";
-           
+                    foreach(WkTUser u in wkot.WorkManId)
+                    {
+                        if (u.Id == user.Id)
+                        {
+                            flag = true;
+                        }
+                    }
+                    if (flag)
+                    {
+                        sum += wkot.DayTime;
+                        flag = false;
+                    }                    
+                }               
+            }           
+            return sum;           
         }
 
-        private string getOverTime(WkTUser user, DateTime d1,DateTime d2)//获取两段时间内加班时间  时间在数据库里的格式到底是怎样的？
+        private string getOverTime(WkTUser user, DateTime d1,DateTime d2)//获取两段时间内加班时间 
         {
             //string query3 = "from WorkOverTime w where w.WorkManId =" + user.Id + "and w.Date>" + d1.ToString("yyyyMMdd000000") + "and w.Date<=" + d2.ToString("yyyyMMdd235959");
             string query3 = "from WorkOverTime w where w.WorkManId =" + user.Id + "and w.Date>=" + d1.Ticks + "and w.Date<=" + d2.Ticks;
@@ -211,15 +239,14 @@ namespace WorkLogForm
             DateTime date = dateTimePicker1.Value;
             foreach (WkTUser u in subUsers)
             {
-                string tOfDay, tOfMonth;
-                tOfDay = getOverTimeOfDay(u, date);
-                tOfMonth = getOverTimeOfMonth(u, date);
+               
+                TimeSpan  tOfDay =new TimeSpan ( getOverTimeOfDay(u, date));
+                TimeSpan  tOfMonth =new TimeSpan( getOverTimeOfMonth(u, date));
                 ListViewItem item = new ListViewItem();
                 //item.Checked = true;
                 item.SubItems.Add(u.KuName);
-                item.SubItems.Add(tOfDay);
-                item.SubItems.Add(tOfMonth);
-                item.SubItems.Add(Dept.KdName.Trim());
+                item.SubItems.Add(tOfDay.Hours.ToString ()+"小时"+tOfDay.Minutes.ToString()+"分");
+                item.SubItems.Add(tOfMonth.Hours.ToString() + "小时" + tOfMonth.Minutes.ToString() + "分");
                 item.Tag = u;
                 listView1.Items.Add(item);
             }
@@ -230,24 +257,38 @@ namespace WorkLogForm
         private void upDateListView2(DateTime t1,DateTime t2,string s)
         {
             listView2.Items.Clear();
-            string query = "from WorkOverTime w where w.Date >= " + t1.Ticks + " and w.Date<= " + t2.Ticks + " and w.WorkManId.Kdid.KdName like '%" + s + "%' order by w.Date";
-            IList overTimes=baseService.loadEntityList(query);
-            int i = 1;
+            
             if(s.Contains("所有部门"))
                 s="";
+            string query="";
+            if (Role.KrOrder < 6)
+            {
+                query= "from WorkOverTime w where w.Date >= " + t1.Ticks + " and w.Date<= " + t2.Ticks + " and w.Dept like '%" + s + "%' order by w.Date group by w.StartTime";
+            }
+            else
+            {
+                query = "from WorkOverTime w where w.Date >= " + t1.Ticks + " and w.Date<= " + t2.Ticks + " and w.Dept like '%" + User.Kdid.KdName + "%' order by w.Date group by w.StartTime";
+            }
+            IList overTimes=baseService.loadEntityList(query);
+            int i = 1;
+            
             if (overTimes!=null)
             {
                 foreach (WorkOverTime o in overTimes)
                 {
-                    string overTimeTotal = getOverTime(o.WorkManId, t1, t2);
+
+                    TimeSpan ts = new TimeSpan (o.DayTime);
                     ListViewItem item = new ListViewItem();
+                    item.UseItemStyleForSubItems = false;
                     item.Text = i.ToString();//序号
-                    item.SubItems.Add(o.WorkManId.KuName);//姓名
-                    item.SubItems.Add((new DateTime(o.Date).ToShortDateString())+"  "+(new DateTime(o.StartTime).ToShortTimeString())+"-"+(new DateTime(o.EndTime).ToShortTimeString()));//时段
+                    item.SubItems.Add(new DateTime (o.Date).Date.ToString ("yy年 MM月 dd日"));//
+                    item.SubItems.Add(new DateTime(o.StartTime).ToString("HH点 mm分") + "---" + new DateTime(o.EndTime).ToString("HH点 mm分"));//时段
                     item.SubItems.Add(o.WorkContent);          //内容     
-                    item.SubItems.Add(overTimeTotal.ToString());//总时长
-                    item.SubItems.Add(o.WorkManId.Kdid.KdName.Trim());
+                    item.SubItems.Add(ts.Hours+"小时 "+ts.Minutes+"分");//总时长
+                    item.SubItems.Add(o.Dept.KdName.Trim());
                     item.SubItems.Add(o.Ku_Id.KuName);//
+                    Font font = new Font(this.Font, FontStyle.Underline);
+                    item.SubItems.Add("双击查看", Color.Blue,Color.Transparent,font);
                     item.Tag = o;
                     listView2.Items.Add(item);
                     i++;
@@ -261,45 +302,33 @@ namespace WorkLogForm
             if (ts.Hours > 3)
             {
                 MessageBox.Show("超过加班时长限制");
+                return;
             }
             else
             {
-                int count = 0;
-                IList userlist = listView1.Items;
+                IList userlist = listView1.CheckedItems;
                 ClassLibrary.WorkOverTime wkot = new WorkOverTime();
-                foreach (ListViewItem item in userlist)
+                wkot.WorkManId = new List<WkTUser>();
+                if (userlist != null && userlist.Count != 0)
                 {
-                    if (item.Checked == true)
-                    {
-                        count++;
-                        string totaltime=item.SubItems[2].Text;
-                        string totalhour = totaltime.Substring(0, totaltime.IndexOf("小时"));
-                        string totalmin = totaltime.Substring(totaltime.LastIndexOf("小时")+3, totaltime.IndexOf("分") - totaltime.LastIndexOf("小时")-3);
-                        TimeSpan t1=new TimeSpan( Convert.ToInt32(totalhour),Convert.ToInt32(totalmin),0);
-                        TimeSpan t2 = dateTimePicker5.Value.AddSeconds(1) - dateTimePicker2.Value;
-                        if ((t1 + t2).Hours >= 36)
-                        {
-                            MessageBox.Show(wkot.Ku_Id.KuName + "本月加班时间不能超过36小时！");
-                        }
-                        else
-                        {
-                            wkot.Ku_Id = User;
-                            wkot.WorkManId = (WkTUser)item.Tag;
-                            wkot.StartTime = dateTimePicker2.Value.Ticks;
-                            wkot.EndTime = dateTimePicker5.Value.Ticks;
-                            wkot.Date = dateTimePicker1.Value.Date.Ticks;
-                            wkot.DayTime = ts.Ticks;
-                            wkot.WorkContent = textBox7.Text;
-                            wkot.State = (int)WorkOverTime.stateEnum.Normal;
-                            baseService.SaveOrUpdateEntity(wkot);
-                            MessageBox.Show("提交成功");
-                        }
+                    foreach (ListViewItem item in userlist)
+                    {                 
+                        wkot.WorkManId.Add((WkTUser)item.Tag);
                     }
-                    if(count  == 0)
-                    {
-                        MessageBox.Show("请指定人员！");
-                    }
+                    wkot.Ku_Id = User;
+
+                    wkot.StartTime = dateTimePicker2.Value.Ticks;
+                    wkot.EndTime = dateTimePicker5.Value.Ticks;
+                    wkot.Date = dateTimePicker1.Value.Date.Ticks;
+                    wkot.Dept = this.Dept;
+                    wkot.DayTime = ts.Ticks;
+                    wkot.WorkContent = textBox7.Text;
+                    wkot.State = (int)WorkOverTime.stateEnum.Normal;
+                    baseService.SaveOrUpdateEntity(wkot);
+                    MessageBox.Show("提交成功");
                 }
+                else
+                    MessageBox.Show("请选择人员");
                 upDateListView1(Dept);
             }
                
@@ -313,14 +342,12 @@ namespace WorkLogForm
             DateTime date = dateTimePicker1.Value;
             foreach (WkTUser u in l)
             {
-                string tOfDay, tOfMonth;
-                tOfDay = getOverTimeOfDay(u, date);
-                tOfMonth = getOverTimeOfMonth(u, date);
+                TimeSpan tOfDay = new TimeSpan(getOverTimeOfDay(u, date));
+                TimeSpan tOfMonth = new TimeSpan(getOverTimeOfMonth(u, date));
                 ListViewItem item = new ListViewItem();
                 item.SubItems.Add(u.KuName);
-                item.SubItems.Add(tOfDay);
-                item.SubItems.Add(tOfMonth);
-                item.SubItems.Add(Dept.KdName.Trim());
+                item.SubItems.Add(tOfDay.Hours.ToString() + "小时" + tOfDay.Minutes.ToString() + "分");
+                item.SubItems.Add(tOfMonth.Hours.ToString() + "小时" + tOfMonth.Minutes.ToString() + "分");
                 item.Tag = u;
                 listView1.Items.Add(item);
             }
@@ -331,7 +358,8 @@ namespace WorkLogForm
             upDateListView1(Dept);
         }
 
-        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedIndex == 1)
             {
@@ -346,6 +374,11 @@ namespace WorkLogForm
                 upDateListView2(new DateTime(1900,1,1),new DateTime(2099,1,1),"");
 
             }
+        }
+
+        private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
         }
 
        

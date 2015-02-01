@@ -273,7 +273,7 @@ namespace WorkLogForm.Service
             }
             catch (Exception e)
             {
-                //throw e;
+                throw e;
                 return null;
             }
         }

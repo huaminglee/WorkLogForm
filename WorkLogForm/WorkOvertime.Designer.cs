@@ -28,54 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new System.Windows.Forms.ListViewItem.ListViewSubItem[] {
+            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem(new System.Windows.Forms.ListViewItem.ListViewSubItem[] {
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "", System.Drawing.SystemColors.WindowText, System.Drawing.Color.WhiteSmoke, new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)))),
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "张彦忠", System.Drawing.SystemColors.WindowText, System.Drawing.SystemColors.Window, new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)))),
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "2:00"),
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "13:40"),
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "综合办公室")}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "周文礼",
             "2:20",
             "12:30",
             "科技文献馆"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))));
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "李永明",
             "1:00",
             "10:10",
             "技术转移中心"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.WhiteSmoke, new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))));
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
-            "1",
-            "边建国",
-            "2014-06-05 17:00-19:00",
-            "软件整合开发",
-            "2:20",
-            "综合办公室",
-            "张彦忠",
-            "3",
-            "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem(new string[] {
-            "3",
-            "王大伟",
-            "2014-06-11 17;30-20:30",
-            "会议结果分析",
-            "3:00",
-            "技术转移中心",
-            "张彦忠",
-            "2",
-            "0"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem(new string[] {
-            "8",
-            "冯彩英",
-            "2014-06-01 17:30-21:30",
-            "数据处理分析",
-            "4:00",
-            "综合办公室",
-            "王红",
-            "1",
-            "0"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.AliceBlue, null);
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -100,7 +70,6 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -124,6 +93,8 @@
             this.close_pictureBox = new System.Windows.Forms.PictureBox();
             this.min_pictureBox = new System.Windows.Forms.PictureBox();
             this.label45 = new System.Windows.Forms.Label();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -140,32 +111,33 @@
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(563, 32);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(186, 22);
+            this.comboBox2.Size = new System.Drawing.Size(186, 25);
             this.comboBox2.TabIndex = 236;
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(44, 96);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(911, 561);
             this.tabControl1.TabIndex = 221;
-            this.tabControl1.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Controls.Add(this.panel43);
             this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabPage1.ForeColor = System.Drawing.Color.SteelBlue;
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(903, 533);
+            this.tabPage1.Size = new System.Drawing.Size(903, 531);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "安排加班";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -370,15 +342,14 @@
             this.columnHeader1,
             this.columnHeader3,
             this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader14});
-            listViewItem1.StateImageIndex = 0;
-            listViewItem2.StateImageIndex = 0;
-            listViewItem3.StateImageIndex = 0;
+            this.columnHeader5});
+            listViewItem13.StateImageIndex = 0;
+            listViewItem14.StateImageIndex = 0;
+            listViewItem15.StateImageIndex = 0;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3});
+            listViewItem13,
+            listViewItem14,
+            listViewItem15});
             this.listView1.Location = new System.Drawing.Point(94, 52);
             this.listView1.Name = "listView1";
             this.listView1.Scrollable = false;
@@ -408,12 +379,6 @@
             this.columnHeader5.Text = "本月加班时长";
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader5.Width = 182;
-            // 
-            // columnHeader14
-            // 
-            this.columnHeader14.Text = "部门";
-            this.columnHeader14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader14.Width = 303;
             // 
             // textBox5
             // 
@@ -450,12 +415,12 @@
             // 
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.listView2);
-            this.tabPage2.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tabPage2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabPage2.ForeColor = System.Drawing.Color.SteelBlue;
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(903, 533);
+            this.tabPage2.Size = new System.Drawing.Size(903, 531);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "安排概览";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -565,38 +530,37 @@
             this.columnHeader10,
             this.columnHeader11,
             this.columnHeader12,
-            this.columnHeader13});
+            this.columnHeader13,
+            this.columnHeader2});
             this.listView2.Font = new System.Drawing.Font("宋体", 10F);
             this.listView2.FullRowSelect = true;
             this.listView2.GridLines = true;
-            this.listView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4,
-            listViewItem5,
-            listViewItem6});
             this.listView2.Location = new System.Drawing.Point(15, 107);
+            this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
             this.listView2.Scrollable = false;
             this.listView2.Size = new System.Drawing.Size(872, 402);
             this.listView2.TabIndex = 48;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
+            this.listView2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView2_MouseDoubleClick);
             // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "序号";
-            this.columnHeader6.Width = 39;
+            this.columnHeader6.Width = 42;
             // 
             // columnHeader7
             // 
-            this.columnHeader7.Text = "加班者";
+            this.columnHeader7.Text = "加班日期";
             this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader7.Width = 76;
+            this.columnHeader7.Width = 156;
             // 
             // columnHeader9
             // 
             this.columnHeader9.Text = "加班时段";
             this.columnHeader9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader9.Width = 192;
+            this.columnHeader9.Width = 184;
             // 
             // columnHeader10
             // 
@@ -608,19 +572,19 @@
             // 
             this.columnHeader11.Text = "加班总时长";
             this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader11.Width = 118;
+            this.columnHeader11.Width = 84;
             // 
             // columnHeader12
             // 
             this.columnHeader12.Text = "部门";
             this.columnHeader12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader12.Width = 126;
+            this.columnHeader12.Width = 95;
             // 
             // columnHeader13
             // 
             this.columnHeader13.Text = "安排人员";
             this.columnHeader13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader13.Width = 99;
+            this.columnHeader13.Width = 67;
             // 
             // close_pictureBox
             // 
@@ -663,6 +627,21 @@
             this.label45.Size = new System.Drawing.Size(110, 24);
             this.label45.TabIndex = 224;
             this.label45.Text = "加班管理";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "加班人员";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 70;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 26);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(903, 531);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "个人统计";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // WorkOvertime
             // 
@@ -740,7 +719,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader13;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.ColumnHeader columnHeader14;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox close_pictureBox;
         private System.Windows.Forms.PictureBox min_pictureBox;
@@ -748,6 +726,8 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.DateTimePicker dateTimePicker5;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.TabPage tabPage3;
 
 
     }

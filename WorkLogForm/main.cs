@@ -899,7 +899,7 @@ namespace WorkLogForm
             if (!workOvertime.Created)
             {
                 workOvertime.User = this.User;
-                
+                workOvertime.Role = this.Role;
                 workOvertime.Show();
             }
             else
