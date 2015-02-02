@@ -7,7 +7,7 @@ namespace ClassLibrary
 {
     public class TimeArrangeForManager : IEntity
     {
-        
+
         private WkTUser userId;
         public virtual WkTUser UserId
         {
@@ -42,6 +42,14 @@ namespace ClassLibrary
             get { return dutyType; }
             set { dutyType = value; }
         }
+
+        private int examineState;
+        public virtual int ExamineState
+        {
+            get { return examineState; }
+            set { examineState = value; }
+        }
+
 
     }
 }
