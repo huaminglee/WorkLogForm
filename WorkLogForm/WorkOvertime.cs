@@ -38,7 +38,7 @@ namespace WorkLogForm
             set { dept = value; }
         }
 
-
+        private ViewOverWork viewForm;
 
         public WorkOvertime()
         {
@@ -261,13 +261,13 @@ namespace WorkLogForm
             if(s.Contains("所有部门"))
                 s="";
             string query="";
-            if (Role.KrOrder < 6)
+            if (Role.KrOrder <= 2)
             {
-                query= "from WorkOverTime w where w.Date >= " + t1.Ticks + " and w.Date<= " + t2.Ticks + " and w.Dept like '%" + s + "%' order by w.Date group by w.StartTime";
+                query = "from WorkOverTime w where w.Date >= " + t1.Ticks + " and w.Date<= " + t2.Ticks + " and w.Dept.KdName  like '%" + s.Trim() + "%'  and w.State=" + (int)WorkOverTime.stateEnum.Normal + " order by w.Date";
             }
             else
             {
-                query = "from WorkOverTime w where w.Date >= " + t1.Ticks + " and w.Date<= " + t2.Ticks + " and w.Dept like '%" + User.Kdid.KdName + "%' order by w.Date group by w.StartTime";
+                query = "from WorkOverTime w where w.Date >= " + t1.Ticks + " and w.Date<= " + t2.Ticks + " and w.Dept.KdName  like '%" + User.Kdid.KdName + "%' w.Date and w.State=" + (int)WorkOverTime.stateEnum.Normal + " order by w.Date";
             }
             IList overTimes=baseService.loadEntityList(query);
             int i = 1;
@@ -295,7 +295,43 @@ namespace WorkLogForm
                 }
             }
         }
+        private void upDateListView4(DateTime t1, DateTime t2, string s)
+        {
+            listView4.Items.Clear();
 
+            if (s.Contains("所有部门"))
+                s = "";
+            string query = "";
+            if (Role.KrOrder ==2)
+            {
+                query = "from WorkOverTime w where w.Date >= " + t1.Ticks + " and w.Date<= " + t2.Ticks + " and w.Dept.KdName like '%" + s.Trim() + "%' and w.State=" + (int)WorkOverTime.stateEnum.Normal + " order by w.Date  ";
+            }
+            IList overTimes = baseService.loadEntityList(query);
+            int i = 1;
+
+            if (overTimes != null)
+            {
+                foreach (WorkOverTime o in overTimes)
+                {
+                    
+                    TimeSpan ts = new TimeSpan(o.DayTime);
+                    ListViewItem item = new ListViewItem();
+                    item.UseItemStyleForSubItems = false;
+                    item.Text = i.ToString();//序号
+                    item.SubItems.Add(new DateTime(o.Date).Date.ToString("yy年 MM月 dd日"));//
+                    item.SubItems.Add(new DateTime(o.StartTime).ToString("HH点 mm分") + "---" + new DateTime(o.EndTime).ToString("HH点 mm分"));//时段
+                    item.SubItems.Add(o.WorkContent);          //内容     
+                    item.SubItems.Add(ts.Hours + "小时 " + ts.Minutes + "分");//总时长
+                    item.SubItems.Add(o.Dept.KdName.Trim());
+                    item.SubItems.Add(o.Ku_Id.KuName);//
+                    Font font = new Font(this.Font, FontStyle.Underline);
+                    item.SubItems.Add("双击查看", Color.Blue, Color.Transparent, font);
+                    item.Tag = o;
+                    listView4.Items.Add(item);
+                    i++;
+                }
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             TimeSpan ts=dateTimePicker5.Value.AddSeconds(1).TimeOfDay-dateTimePicker2.Value.TimeOfDay;
@@ -367,6 +403,7 @@ namespace WorkLogForm
                 IList depList = baseService.loadEntityList(query);
                 WkTDept dep = new WkTDept();
                 dep.KdName = "所有部门";
+                depList.RemoveAt(0);
                 depList.Insert(0, dep);
                 comboBox2.DataSource = depList;
                 comboBox2.DisplayMember = "KdName";
@@ -374,12 +411,126 @@ namespace WorkLogForm
                 upDateListView2(new DateTime(1900,1,1),new DateTime(2099,1,1),"");
 
             }
+            if (tabControl1.SelectedIndex == 3)
+            {
+                string query = "from WkTDept";
+                IList depList = baseService.loadEntityList(query);
+                WkTDept dep = new WkTDept();
+                depList.RemoveAt(0);
+                comboBox1.DataSource = depList;
+                comboBox1.DisplayMember = "KdName";
+                comboBox1.ValueMember = "Itself";
+                initPage3();
+            }
+            if (tabControl1.SelectedIndex == 2)
+            {
+                initPage4();
+            }
+        }
+        private void initPage3()
+        {
+            listView3.Items.Clear();
+            comboBox1.Enabled = false;
+            comboBox3.Enabled = false;
+            if (Role.KrOrder < 2)
+            {
+                comboBox1.Enabled = true;
+                comboBox3.Enabled = true;
+            }
+            else if (Role.KrOrder == 2)
+            {
+                comboBox3.Enabled = true;
+            }
+            comboBox1.SelectedText = Dept.KdName;
+            comboBox3.Text = User.KuName;
+
+
+        }
+        void initPage4()
+        {
+            upDateListView4(DateTime.Now.Date.AddDays(-1), new DateTime(2099, 1, 1), Dept.KdName);
         }
 
         private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            if (viewForm == null||viewForm.IsDisposed)
+            {
+                viewForm = new ViewOverWork();
+                viewForm.wkot = (ClassLibrary.WorkOverTime)listView2.SelectedItems[0].Tag;
+                viewForm.Show();
+            }
+            else
+            {
+                viewForm.wkot = (ClassLibrary.WorkOverTime)listView2.SelectedItems[0].Tag;
+                viewForm.init();
+                viewForm.Focus();
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IList uList = getUserByDept((WkTDept)comboBox1.SelectedValue);
+            comboBox3.DataSource = uList;
+            comboBox3.DisplayMember = "KuName";
+            comboBox3.ValueMember="Itself";
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            listView3.Items.Clear();            
+            DateTime t=dateTimePicker6.Value;
+            DateTime st=t.Date.AddDays(-t.Day+1);
+            DateTime ed = st.AddMonths(1);
+            string query = "from WorkOverTime wkot where wkot.StartTime>" + st.Ticks + " and wkot.EndTime<" + ed.Ticks + "and wkot.State="+(int)WorkOverTime.stateEnum.Normal+" order by wkot.Date" ;
+            IList oList=baseService.loadEntityList(query);
+            foreach (WorkOverTime o in oList)
+            {
+                bool flag = false;
+                foreach (WkTUser u in o.WorkManId)
+                {
+                   
+                    if (u.Id == ((WkTUser)comboBox3.SelectedValue).Id)
+                        flag = true;
+                }
+                if (flag)
+                {
+                    ListViewItem item = new ListViewItem();
+                    item.Text = new DateTime(o.Date).ToString("dd日");
+                    item.SubItems.Add(new DateTime(o.StartTime).ToString("hh点 MM分")+"---"+new DateTime(o.EndTime).ToString("hh点 MM分"));
+                    item.SubItems.Add(o.WorkContent);
+                    item.Tag=o;
+                    listView3.Items.Add(item);
+                    TimeSpan ts=new TimeSpan( getOverTimeOfMonth((WkTUser)comboBox3.SelectedValue, t.Date));
+                    textBox4.Text = ts.Hours + "小时 " + ts.Minutes+"分钟";
+                }
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                foreach (ListViewItem item in listView4.Items)
+                    item.Checked = true;
+            }
+            else
+                foreach (ListViewItem item in listView4.Items)
+                    item.Checked = false;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listView4.CheckedItems)
+            {
+                WorkOverTime wkot = new WorkOverTime();
+                wkot = (WorkOverTime)item.Tag;
+                wkot.State = (int)WorkOverTime.stateEnum.Deleted;
+                baseService.SaveOrUpdateEntity(wkot);
+                listView4.Items.Remove(item);
+            }
+        }
+
 
        
       
