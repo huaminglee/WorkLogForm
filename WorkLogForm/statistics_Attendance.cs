@@ -145,7 +145,7 @@ namespace WorkLogForm
             #region 出勤统计数据初始化
             List<object> staticsList = new List<object>();
             DateTime startTime = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, 1);
-            DateTime endTime = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, CNDate.GetDayNumOfMonth(new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, 1)));
+            DateTime endTime = startTime.AddMonths(1);//new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, CNDate.GetDayNumOfMonth(new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, 1)));
             IList staticAttendanceList = baseService.loadEntityList("select att from Attendance att left join att.User u left join u.Kdid dept where dept.KdName='" + dept_comboBox.Text.Trim() + "' and att.State=" + (int)IEntity.stateEnum.Normal + " and u.KuName='" + userName_textBox.Text.Trim() + "' and att.SignDate>=" + startTime.Date.Ticks + " and att.SignDate<=" + endTime.Date.Ticks);
             noneAttNum = CNDate.getWorkDayNum(startTime.Date, endTime.Date).Count - staticAttendanceList.Count;
             staticsList.Add(staticAttendanceList.Count);

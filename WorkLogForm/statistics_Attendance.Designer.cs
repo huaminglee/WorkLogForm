@@ -2276,7 +2276,7 @@
             // 
             // columnHeader12
             // 
-            this.columnHeader12.Text = "缺卡/次";
+            this.columnHeader12.Text = "缺勤/次";
             this.columnHeader12.Width = 161;
             // 
             // columnHeader13

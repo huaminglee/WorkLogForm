@@ -992,9 +992,10 @@ namespace WorkLogForm
                         if (usuallyDayList != null && usuallyDayList.Count == 1)
                         {
                             UsuallyDay u = (UsuallyDay)usuallyDayList[0];
-                            if (u.WorkTimeEnd <= today.TimeOfDay.Ticks)
+
+                            if (u.WorkTimeEnd <= today.TimeOfDay.Ticks)//未早退
                             {
-                                if (todaySignStart.LateOrLeaveEarly == (int)Attendance.lateOrLeaveEarlyEnum.Late)  // 感觉好像写错了 ，应该是 LateAndEarly
+                                if (todaySignStart.LateOrLeaveEarly == (int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly)  //登陆为LateAndEarly表示迟到
                                 {
                                     todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.Late; // 只是迟到
                                 }
@@ -1003,14 +1004,20 @@ namespace WorkLogForm
                                     todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.Normal;  //  正常签到
                                 }
                             }
-                            else if (todaySignStart.LateOrLeaveEarly == (int)Attendance.lateOrLeaveEarlyEnum.Late)  // 感觉好像写错了 ，应该是 LateAndEarly
+
+
+                            else //早退
                             {
-                                todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly; //迟到并且早退
+                                if (todaySignStart.LateOrLeaveEarly == (int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly)
+                                {
+                                    todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly; //迟到并且早退
+                                }
+                                else
+                                {
+                                    todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.Early; //只是早退
+                                }
                             }
-                            else
-                            {
-                                todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.Early; //只是早退
-                            }
+                            
                         }
                         todaySignStart.SignEndTime = today.TimeOfDay.Ticks;
                         todaySignStart.SignDate = today.Date.Ticks;
