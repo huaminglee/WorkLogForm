@@ -103,29 +103,48 @@ namespace WorkLogForm
         private void statistics_Attendance_Load(object sender, EventArgs e)
         {
             initialWindow();
+            loadCombox();
             init();
         }
 
-        #region 考勤统计页面
-
-
-        private void init()//载入时操作
+        private void loadCombox()
         {
             IList deptList = baseService.loadEntityList("from WkTDept");
             if (deptList != null && deptList.Count > 0)
             {
                 foreach (WkTDept dept in deptList)
                 {
-                    dept_comboBox.Items.Add(dept.KdName.Trim());
+                    if (!dept.KdName.Contains("组织结构"))
+                    {
+                        dept_comboBox.Items.Add(dept.KdName.Trim());
+                        comboBox1.Items.Add(dept.KdName.Trim());
+                    }
+                    
                 }
             }
             dept_comboBox.SelectedIndex = 0;
+            comboBox1.SelectedIndex = 0;
+        }
+
+        private void dept_comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string query = "from WkTUser u where u.Kdid.KdName like '%" + this.dept_comboBox.Text + "%'";
+            IList uList = baseService.loadEntityList(query);
+            comboBox2.DataSource = uList;
+            comboBox2.DisplayMember = "KuName";
+            comboBox2.ValueMember = "Itself";
+        }
+        #region 考勤统计页面
+
+
+        private void init()//载入时操作
+        {   
             loadData();
             dateTimePicker5.Value = DateTime.Now;
             this.initCalendar(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month);
             updateLabel();
         }
-
+        
         private void button1_Click(object sender, EventArgs e)//查询时操作
         {
             leaveDayNum = 0;
@@ -146,7 +165,7 @@ namespace WorkLogForm
             List<object> staticsList = new List<object>();
             DateTime startTime = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, 1);
             DateTime endTime = startTime.AddMonths(1);//new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, CNDate.GetDayNumOfMonth(new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, 1)));
-            IList staticAttendanceList = baseService.loadEntityList("select att from Attendance att left join att.User u left join u.Kdid dept where dept.KdName='" + dept_comboBox.Text.Trim() + "' and att.State=" + (int)IEntity.stateEnum.Normal + " and u.KuName='" + userName_textBox.Text.Trim() + "' and att.SignDate>=" + startTime.Date.Ticks + " and att.SignDate<=" + endTime.Date.Ticks);
+            IList staticAttendanceList = baseService.loadEntityList("select att from Attendance att left join att.User u left join u.Kdid dept where dept.KdName='" + dept_comboBox.Text.Trim() + "' and att.State=" + (int)IEntity.stateEnum.Normal + " and u.KuName='" + comboBox2.Text.Trim() + "' and att.SignDate>=" + startTime.Date.Ticks + " and att.SignDate<=" + endTime.Date.Ticks);
             noneAttNum = CNDate.getWorkDayNum(startTime.Date, endTime.Date).Count - staticAttendanceList.Count;
             staticsList.Add(staticAttendanceList.Count);
             if (staticAttendanceList != null && staticAttendanceList.Count > 0)
@@ -208,7 +227,7 @@ namespace WorkLogForm
             {
                 DateTime startTime = (DateTime)dateLabel[0].Parent.Tag;
                 DateTime endTime = (DateTime)dateLabel[dateLabel.Count - 1].Parent.Tag;
-                attendanceList = baseService.loadEntityList("select att from Attendance att left join att.User u left join u.Kdid dept where dept.KdName='" + dept_comboBox.Text.Trim() + "' and att.State=" + (int)IEntity.stateEnum.Normal + " and u.KuName='" + userName_textBox.Text.Trim() + "' and att.SignDate>=" + startTime.Date.Ticks + " and att.SignDate<=" + endTime.Date.Ticks);
+                attendanceList = baseService.loadEntityList("select att from Attendance att left join att.User u left join u.Kdid dept where dept.KdName='" + dept_comboBox.Text.Trim() + "' and att.State=" + (int)IEntity.stateEnum.Normal + " and u.KuName='" + comboBox2.Text.Trim() + "' and att.SignDate>=" + startTime.Date.Ticks + " and att.SignDate<=" + endTime.Date.Ticks);
             }
         }
 
@@ -613,5 +632,7 @@ namespace WorkLogForm
             panel2.Visible = true;
         }
         #endregion
+
+   
     }
 }
