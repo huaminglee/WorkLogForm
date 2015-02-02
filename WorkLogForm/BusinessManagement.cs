@@ -24,7 +24,13 @@ namespace WorkLogForm
             get { return user; }
             set { user = value; }
         }
+        private WkTRole role;
 
+        public WkTRole Role
+        {
+            get { return role; }
+            set { role = value; }
+        }
         private WkTDept dept;
         public WkTDept Dept
         {
@@ -48,6 +54,23 @@ namespace WorkLogForm
          {
              Dept = User.Kdid;
              initTabPage1();
+
+             switch (Role.KrOrder)
+             { 
+                 case 0:
+                     tabControl1.TabPages.RemoveAt(1);
+                     break;
+                 case 1:
+                     tabControl1.TabPages.RemoveAt(1);
+                     break;
+                 case 2:                 
+                     tabControl1.TabPages.RemoveAt(2);
+                     break;
+                 case 3:
+                     tabControl1.TabPages.RemoveAt(1);//院领导
+                     tabControl1.TabPages.RemoveAt(2);
+                     break;
+             }
          }
          private void tabControl1_Selected(object sender, TabControlEventArgs e)
          {
@@ -572,7 +595,15 @@ namespace WorkLogForm
         private void initTabPage2()
         {
             listView2.Items.Clear();
-            string query = "from Business b";
+            string query="";
+            if (Role.KrOrder <= 2)
+            {
+                query = "from Business b  where b.State=" + (int)Business.stateEnum.Normal;
+            }
+            else
+            {
+                query = "from Business b where b.Id in (select be.BusinessId from BusinessEmployee be where be.EmployeeId=" + this.User.Id +" and be.State="+(int)BusinessEmployee.stateEnum.Normal+ " ) and b.State=" + (int)Business.stateEnum.Normal;
+            }
             IList depList = baseService.loadEntityList(query);
             int i = 1;
 
@@ -619,7 +650,15 @@ namespace WorkLogForm
         private void button2_Click_1(object sender, EventArgs e)
         {
             listView2.Items.Clear();
-            string query = "from Business b where b.StartTime>= " + dateTimePicker3.Value.Date.Ticks + " and  b.EndTime<=" + dateTimePicker4.Value.Date.Ticks + " and b.Ku_Id.KuName like '%" + textBox2.Text + "%'";
+            string query="";
+            if (Role.KrOrder <= 2)
+            {
+                query = "from Business b where b.StartTime>= " + dateTimePicker3.Value.Date.Ticks + " and  b.EndTime<=" + dateTimePicker4.Value.Date.Ticks + " and b.Ku_Id.KuName like '%" + textBox2.Text + "%' and b.State="+ (int)Business.stateEnum.Normal;
+            }
+            else
+            {
+                query = "from Business b where b.StartTime>= " + dateTimePicker3.Value.Date.Ticks + " and  b.EndTime<=" + dateTimePicker4.Value.Date.Ticks + " and b.Ku_Id.KuName like '%" + textBox2.Text + "%' and b.Id in (select be.BusinessId from BusinessEmployee be where be.EmployeeId=" + this.User.Id + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal + " ) and b.State=" + (int)Business.stateEnum.Normal; 
+            }
             IList depList = baseService.loadEntityList(query);
             int i = 1;
             foreach (Business b in depList)

@@ -290,20 +290,23 @@ namespace WorkLogForm
         #endregion
         private void Leave_Load(object sender, EventArgs e)
         {
-           if(role.KrOrder==2)
-           {
-              //如果当前用户是负责人，那么请假审批的-部门以及部门选择框都不显示，该用户只能查看本部门的请假申请
-               comboBox6.Visible=false;
-               label23.Visible = false;
-           }
-           else if (role.KrOrder == 3)
-           { 
-           //当前用户为员工，没有请假审批和审批修改等功能
-               pictureBox4.Visible = false;
-               pictureBox5.Visible = false;
+            if(role.KrOrder==2)
+            {
+                //如果当前用户是负责人，那么请假审批的-部门以及部门选择框都不显示，该用户只能查看本部门的请假申请
+                comboBox6.Visible=false;
+                label23.Visible = false;
+            }
+            else if (role.KrOrder == 3)
+            { 
+                //当前用户为员工，没有请假审批和审批修改等功能
+                pictureBox4.Visible = false;
+                pictureBox5.Visible = false;
+            }
+            if (!Leaveman.Kdid.KdName.Contains("综合办公室"))
+            {
+                pictureBox5.Visible = false;
+            }
 
-           
-           }
             try
             {
                 initdata1();
