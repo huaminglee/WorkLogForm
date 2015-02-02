@@ -926,6 +926,7 @@ namespace WorkLogForm
             if (!businessManagement.Created)
             {
                 businessManagement.User = this.User;
+                businessManagement.Role = this.Role;
                 businessManagement.Show();
             }
             else
