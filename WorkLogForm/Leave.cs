@@ -492,13 +492,18 @@ namespace WorkLogForm
             //请假查看-查询按钮
             listView2.Items.Clear();
             String sql = "";
-            if (role.KrOrder == 0 || role.KrOrder == 1)
+            if (role.KrOrder<2)
             {
                 sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox1.Text.Trim() + "%'and d.KdName like '%" + comboBox1.Text.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks;
             }
+            else if (role.KrOrder == 2)
+            {
+                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox1.Text.Trim() + "%'and d.KdName like '%" + leaveman.Kdid.KdName.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks;
+               
+            }
             else
             {
-                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + this.Leaveman.KuName +"%'and d.KdName like '%" + leaveman.Kdid.KdName.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks; 
+                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + this.Leaveman.KuName + "%'and d.KdName like '%" + leaveman.Kdid.KdName.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks;
             }
 
             IList searchList = baseService.loadEntityList(sql);
@@ -934,7 +939,8 @@ namespace WorkLogForm
                 }
 
                 item.Checked = false;
-                item.SubItems.Clear();
+                //item.SubItems.Clear();
+                listView4.Items.Remove(item);
             }
 
             MessageBox.Show("审批成功！");
@@ -957,12 +963,12 @@ namespace WorkLogForm
             }
             else if (role.KrOrder == 1)
             { //副院长，只是加载负责人审批通过的请假申请（多个部门）
-                sql = "from LeaveManage where STATE=" + (int)IEntity.stateEnum.Normal + "and LeaveStage=" +2;
+                sql = "from LeaveManage leave where leave.STATE=" + (int)IEntity.stateEnum.Normal + "and leave.Ku_Id.Kdid in (select w.DeptId from Wktuser_M_Dept w where w.WktuserId=" + Leaveman.Id + " and w.State=" + (int)IEntity.stateEnum.Normal + " ) and LeaveStage=" + 2;
             }
             else if (role.KrOrder == 2)
             {
                 //负责人，加载员工提交的请假申请，但是只是加载本部门的（单个部门）
-                sql = "from LeaveManage where STATE=" + (int)IEntity.stateEnum.Normal + "and LeaveResult=" + 1 + "and Ku_Id.Kdid.KdName=" + leaveman.Kdid.KdName;
+                sql = "from LeaveManage where STATE=" + (int)IEntity.stateEnum.Normal + "and LeaveResult=" + 1 + "and Ku_Id.Kdid.KdName like '%" + leaveman.Kdid.KdName+"%'";
             }
             IList list5 = baseService.loadEntityList(sql);
             if (list5 != null)
