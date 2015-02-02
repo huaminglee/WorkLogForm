@@ -438,7 +438,7 @@ namespace WorkLogForm
             }
             comboBox1.SelectedText = Dept.KdName;
             comboBox3.Text = User.KuName;
-            textBox4.Text"";
+            textBox4.Text="";
         }
         void initPage4()
         {
