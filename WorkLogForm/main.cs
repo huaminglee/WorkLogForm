@@ -209,7 +209,7 @@ namespace WorkLogForm
             }
         }
         /// <summary>
-        /// 把日志附加到panel中
+        /// 把日程附加到panel中
         /// </summary>
         /// <param name="rcList"></param>
         private void creat_ri_cheng_Panel(IList rcList)
