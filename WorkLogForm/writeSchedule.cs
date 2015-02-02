@@ -221,6 +221,8 @@ namespace WorkLogForm
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.tabControl1.Cursor = Cursors.WaitCursor;
+            this.treeView1.Nodes.Clear();
             if(tabControl1.TabPages.Count > 1)
             {
                 if (tabControl1.SelectedIndex == 1)
@@ -229,6 +231,7 @@ namespace WorkLogForm
                     createTree(treeView1);
                 }
             }
+            this.tabControl1.Cursor = Cursors.Hand;
            
         }
 

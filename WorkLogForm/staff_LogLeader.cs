@@ -527,6 +527,7 @@ namespace WorkLogForm
 
             if(e.ColumnIndex == 3)
             {
+                dataGridView2.Rows.Clear();
                 if(Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString()) != 0)
                 {
                     int id = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Tag.ToString());
@@ -559,8 +560,6 @@ namespace WorkLogForm
                         row.Cells[2].Value = "查看";
 
                         dataGridView2.Rows.Add(row);
-
-
 
                     }
                 }
