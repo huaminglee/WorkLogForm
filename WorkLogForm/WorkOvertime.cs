@@ -128,23 +128,18 @@ namespace WorkLogForm
             
             Dept = User.Kdid;
             userrole = User.UserRole;
-            int flag=0;
-            
-            if (Role.KrOrder==2)
-            {
-                flag=1;
-            }
 
-
-
-            if (flag == 1)
+            if (Role.KrOrder == 2)
             {
                 textBox1.Text = User.KuName;
                 textBox3.Text = Dept.KdName;
                 upDateListView1(Dept);
             }
             else
-                tabControl1.TabPages.Remove(tabControl1.TabPages[0]);
+            {
+                tabControl1.TabPages.RemoveAt(2);
+                tabControl1.TabPages.RemoveAt(0); 
+            }
             
         }
 
@@ -157,7 +152,7 @@ namespace WorkLogForm
 
         private long  getOverTimeOfDay(WkTUser user, DateTime date)//获取当日加班时间
         {
-            string query1 = "from WorkOverTime w where w.Date like '%" + date.Date.Ticks + "%'";
+            string query1 = "from WorkOverTime w where w.Date like '%" + date.Date.Ticks + "%'" + " and w.State=" + (int)WorkOverTime.stateEnum.Normal;
             IList result1=baseService.loadEntityList(query1);
 
             bool flag = false;
@@ -188,7 +183,7 @@ namespace WorkLogForm
         {
             DateTime d1 = date.AddDays(-date.Day).Date;
             DateTime d2 = d1.AddMonths(1);
-            string query2 = "from WorkOverTime w where w.Date>" + d1.Ticks+ "and w.Date<=" + d2.Ticks;
+            string query2 = "from WorkOverTime w where w.Date>" + d1.Ticks+ "and w.Date<=" + d2.Ticks+" and w.State="+(int)WorkOverTime.stateEnum.Normal; 
             IList result2 = baseService.loadEntityList(query2);
             long sum=0;
             bool flag = false;
@@ -335,7 +330,7 @@ namespace WorkLogForm
         private void button1_Click(object sender, EventArgs e)
         {
             TimeSpan ts=dateTimePicker5.Value.AddSeconds(1).TimeOfDay-dateTimePicker2.Value.TimeOfDay;
-            if (ts.Hours > 3)
+            if (ts.Hours >= 3)
             {
                 MessageBox.Show("超过加班时长限制");
                 return;
@@ -397,7 +392,7 @@ namespace WorkLogForm
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedIndex == 1)
+            if (tabControl1.SelectedTab.Text=="安排概览")
             {
                 string query = "from WkTDept";
                 IList depList = baseService.loadEntityList(query);
@@ -411,18 +406,18 @@ namespace WorkLogForm
                 upDateListView2(new DateTime(1900,1,1),new DateTime(2099,1,1),"");
 
             }
-            if (tabControl1.SelectedIndex == 3)
+            if (tabControl1.SelectedTab.Text == "加班统计")
             {
                 string query = "from WkTDept";
                 IList depList = baseService.loadEntityList(query);
-                WkTDept dep = new WkTDept();
+                //WkTDept dep = new WkTDept();
                 depList.RemoveAt(0);
                 comboBox1.DataSource = depList;
                 comboBox1.DisplayMember = "KdName";
                 comboBox1.ValueMember = "Itself";
                 initPage3();
             }
-            if (tabControl1.SelectedIndex == 2)
+            if (tabControl1.SelectedTab.Text == "加班取消")
             {
                 initPage4();
             }
@@ -443,8 +438,7 @@ namespace WorkLogForm
             }
             comboBox1.SelectedText = Dept.KdName;
             comboBox3.Text = User.KuName;
-
-
+            textBox4.Text="";
         }
         void initPage4()
         {
@@ -478,6 +472,7 @@ namespace WorkLogForm
 
         private void button3_Click(object sender, EventArgs e)
         {
+            textBox4.Text = "";
             listView3.Items.Clear();            
             DateTime t=dateTimePicker6.Value;
             DateTime st=t.Date.AddDays(-t.Day+1);
@@ -531,12 +526,20 @@ namespace WorkLogForm
             }
         }
 
-
-       
-      
-
-       
-        
-        
+        private void listView4_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (viewForm == null || viewForm.IsDisposed)
+            {
+                viewForm = new ViewOverWork();
+                viewForm.wkot = (ClassLibrary.WorkOverTime)listView4.SelectedItems[0].Tag;
+                viewForm.Show();
+            }
+            else
+            {
+                viewForm.wkot = (ClassLibrary.WorkOverTime)listView4.SelectedItems[0].Tag;
+                viewForm.init();
+                viewForm.Focus();
+            }
+        }
     }
 }

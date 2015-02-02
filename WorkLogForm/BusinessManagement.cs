@@ -67,31 +67,31 @@ namespace WorkLogForm
                      tabControl1.TabPages.RemoveAt(2);
                      break;
                  case 3:
-                     tabControl1.TabPages.RemoveAt(1);//院领导
-                     tabControl1.TabPages.RemoveAt(2);
+                     tabControl1.TabPages.RemoveAt(1);
+                     tabControl1.TabPages.RemoveAt(1);
                      break;
              }
          }
          private void tabControl1_Selected(object sender, TabControlEventArgs e)
          {
-             if (tabControl1.SelectedIndex == 0)
+             if (tabControl1.SelectedTab.Text == "出差发起")
              {
                  initTabPage1();
              }
 
-             if (tabControl1.SelectedIndex == 1)
+             if (tabControl1.SelectedTab.Text == "部门审核")
              {
                  initTabPage4();
              }
-             if (tabControl1.SelectedIndex == 2)
+             if (tabControl1.SelectedTab.Text == "院领导审批")
              {
                  initTabPage3();
              }
-             if (tabControl1.SelectedIndex == 3)
+             if (tabControl1.SelectedTab.Text == "退回修改")
              {
                  initTabPage5();
              }
-             if (tabControl1.SelectedIndex == 4)
+             if (tabControl1.SelectedTab.Text == "出差情况查看")
              {
                  initTabPage2();
              }

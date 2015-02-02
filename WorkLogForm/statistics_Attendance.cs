@@ -98,8 +98,18 @@ namespace WorkLogForm
             }
         }
         #endregion
-        #region 统计考勤
-        private void init()
+
+
+        private void statistics_Attendance_Load(object sender, EventArgs e)
+        {
+            initialWindow();
+            init();
+        }
+
+        #region 考勤统计页面
+
+
+        private void init()//载入时操作
         {
             IList deptList = baseService.loadEntityList("from WkTDept");
             if (deptList != null && deptList.Count > 0)
@@ -115,6 +125,63 @@ namespace WorkLogForm
             this.initCalendar(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month);
             updateLabel();
         }
+
+        private void button1_Click(object sender, EventArgs e)//查询时操作
+        {
+            leaveDayNum = 0;
+            int lateDayNum = 0;
+            int earlyDayNum = 0;
+            int noneAttNum = 0;
+
+            //初始化数据
+            this.initCalendar(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month);
+            initPanelDate();
+            initAttendanceDate();
+
+            //更新数据
+            updatePanel();
+            updateLabel();
+
+            #region 出勤统计数据初始化
+            List<object> staticsList = new List<object>();
+            DateTime startTime = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, 1);
+            DateTime endTime = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, CNDate.GetDayNumOfMonth(new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, 1)));
+            IList staticAttendanceList = baseService.loadEntityList("select att from Attendance att left join att.User u left join u.Kdid dept where dept.KdName='" + dept_comboBox.Text.Trim() + "' and att.State=" + (int)IEntity.stateEnum.Normal + " and u.KuName='" + userName_textBox.Text.Trim() + "' and att.SignDate>=" + startTime.Date.Ticks + " and att.SignDate<=" + endTime.Date.Ticks);
+            noneAttNum = CNDate.getWorkDayNum(startTime.Date, endTime.Date).Count - staticAttendanceList.Count;
+            staticsList.Add(staticAttendanceList.Count);
+            if (staticAttendanceList != null && staticAttendanceList.Count > 0)
+            {
+                foreach (Attendance att in staticAttendanceList)
+                {
+                    if (att.LateOrLeaveEarly.Equals((int)Attendance.lateOrLeaveEarlyEnum.Early))
+                    {
+                        earlyDayNum++;
+                    }
+                    else if (att.LateOrLeaveEarly.Equals((int)Attendance.lateOrLeaveEarlyEnum.Late))
+                    {
+                        lateDayNum++;
+                    }
+                    else if (att.LateOrLeaveEarly.Equals((int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly))
+                    {
+                        lateDayNum++;
+                        earlyDayNum++;
+                    }
+                }
+            }
+            staticsList.Add(lateDayNum);
+            staticsList.Add(earlyDayNum);
+            staticsList.Add(noneAttNum);
+            staticsList.Add(leaveDayNum);
+            #endregion
+            listView2.Items.Clear();
+            initListView2(listView2, staticsList);
+        }
+
+
+
+        /// <summary>
+        /// 将日历的label加入dateLabel队列
+        /// </summary>
         private void loadData()
         {
             dateLabel.Add(label111); dateLabel.Add(label122); dateLabel.Add(label133); dateLabel.Add(label144);
@@ -129,98 +196,12 @@ namespace WorkLogForm
             dateLabel.Add(label622); dateLabel.Add(label633); dateLabel.Add(label644); dateLabel.Add(label655);
             dateLabel.Add(label666); dateLabel.Add(label677);
         }
-        private void updateLabel()
-        {
-            attendenceLabel_Paint(label11); attendenceLabel_Paint(label21); attendenceLabel_Paint(label31); attendenceLabel_Paint(label41); attendenceLabel_Paint(label51); attendenceLabel_Paint(label61);
-            attendenceLabel_Paint(label12); attendenceLabel_Paint(label22); attendenceLabel_Paint(label32); attendenceLabel_Paint(label42); attendenceLabel_Paint(label52); attendenceLabel_Paint(label62);
-            attendenceLabel_Paint(label13); attendenceLabel_Paint(label23); attendenceLabel_Paint(label33); attendenceLabel_Paint(label43); attendenceLabel_Paint(label53); attendenceLabel_Paint(label63);
-            attendenceLabel_Paint(label14); attendenceLabel_Paint(label24); attendenceLabel_Paint(label34); attendenceLabel_Paint(label44); attendenceLabel_Paint(label54); attendenceLabel_Paint(label64);
-            attendenceLabel_Paint(label15); attendenceLabel_Paint(label25); attendenceLabel_Paint(label35); attendenceLabel_Paint(label45); attendenceLabel_Paint(label55); attendenceLabel_Paint(label65);
-            attendenceLabel_Paint(label16); attendenceLabel_Paint(label26); attendenceLabel_Paint(label36); attendenceLabel_Paint(label46); attendenceLabel_Paint(label56); attendenceLabel_Paint(label66);
-            attendenceLabel_Paint(label17); attendenceLabel_Paint(label27); attendenceLabel_Paint(label37); attendenceLabel_Paint(label47); attendenceLabel_Paint(label57); attendenceLabel_Paint(label67);
-        }
-        private void updatePanel()
-        {
-            attendencePanel_Paint(panel11); attendencePanel_Paint(panel21); attendencePanel_Paint(panel31); attendencePanel_Paint(panel41); attendencePanel_Paint(panel51); attendencePanel_Paint(panel61);
-            attendencePanel_Paint(panel12); attendencePanel_Paint(panel22); attendencePanel_Paint(panel32); attendencePanel_Paint(panel42); attendencePanel_Paint(panel52); attendencePanel_Paint(panel62);
-            attendencePanel_Paint(panel13); attendencePanel_Paint(panel23); attendencePanel_Paint(panel33); attendencePanel_Paint(panel43); attendencePanel_Paint(panel53); attendencePanel_Paint(panel63);
-            attendencePanel_Paint(panel14); attendencePanel_Paint(panel24); attendencePanel_Paint(panel34); attendencePanel_Paint(panel44); attendencePanel_Paint(panel54); attendencePanel_Paint(panel64);
-            attendencePanel_Paint(panel15); attendencePanel_Paint(panel25); attendencePanel_Paint(panel35); attendencePanel_Paint(panel45); attendencePanel_Paint(panel55); attendencePanel_Paint(panel65);
-            attendencePanel_Paint(panel16); attendencePanel_Paint(panel26); attendencePanel_Paint(panel36); attendencePanel_Paint(panel46); attendencePanel_Paint(panel56); attendencePanel_Paint(panel66);
-            attendencePanel_Paint(panel17); attendencePanel_Paint(panel27); attendencePanel_Paint(panel37); attendencePanel_Paint(panel47); attendencePanel_Paint(panel57); attendencePanel_Paint(panel67);
-        }
-        private void attendencePanel_Paint(Panel panel)
-        {
-            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2;
-            DateTime date = (DateTime)panel.Tag;
-            int dayOfWeek = (int)date.DayOfWeek == 0 ? 6 : (int)date.DayOfWeek - 1;
-            if (leaveList != null && leaveList.Count > 0)
-            {
-                foreach (LeaveManage a in leaveList)
-                {
-                    if (a.StartTime <= date.Date.Ticks && a.EndTime > date.Date.Ticks)
-                    {
-                        leaveDayNum++;
-                        if (a.LeaveType == "婚假")
-                        {
-                            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_婚;
-                        }
-                        else if (a.LeaveType == "探亲假")
-                        {
-                            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_亲;
-                        }
-                        else if (a.LeaveType == "年休假")
-                        {
-                            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_年;
-                        }
-                        else if (a.LeaveType == "事假")
-                        {
-                            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_事;
-                        }
-                        else if (a.LeaveType == "病假")
-                        {
-                            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_病;
-                        }
-                        else if (a.LeaveType == "产假")
-                        {
-                            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_产;
-                        }
-                        panel.Tag = null;
-                        break;
-                    }
-                }
-            }
-            if (workDayList != null && workDayList.Count > 0)//判断是不是补班
-            {
-                foreach (WorkDay a in workDayList)
-                {
-                    if (a.WorkDateTime == date.Date.Ticks)
-                    {
-                        return;
-                    }
-                }
-            }
-            if (holidayList != null && holidayList.Count > 0)//判断是否节假日
-            {
-                foreach (Holiday a in holidayList)
-                {
-                    if (a.StartTime <= date.Date.Ticks && a.EndTime > date.Date.Ticks)
-                    {
-                        Image img = new Bitmap(panel.BackgroundImage);
-                        Graphics panelG = Graphics.FromImage(img);
-                        panelG.DrawString(a.Name, new Font("华文楷体", (float)28.0, FontStyle.Regular), System.Drawing.Brushes.Black, new PointF(22, 45));
-                        panel.BackgroundImage = img;
-                        panel.Tag = null;
-                        return;
-                    }
-                }
-            }
-            if (usuallyDayChar[dayOfWeek].Equals((char)UsuallyDay.workDayEnum.Holiday))//判断是否周六日
-            {
-                panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_休;
-                panel.Tag = null;
-            }
-        }
+
+
+        #region 初始化数据
+        /// <summary>
+        /// 初始化出勤attendanceList
+        /// </summary>
         private void initAttendanceDate()
         {
             if (dateLabel[dateLabel.Count - 1].Parent.Tag != null && dateLabel[0].Parent.Tag != null)
@@ -230,6 +211,10 @@ namespace WorkLogForm
                 attendanceList = baseService.loadEntityList("select att from Attendance att left join att.User u left join u.Kdid dept where dept.KdName='" + dept_comboBox.Text.Trim() + "' and att.State=" + (int)IEntity.stateEnum.Normal + " and u.KuName='" + userName_textBox.Text.Trim() + "' and att.SignDate>=" + startTime.Date.Ticks + " and att.SignDate<=" + endTime.Date.Ticks);
             }
         }
+
+        /// <summary>
+        /// 初始化请假leaveList、补班workDayList、节假日holidayList、周末信息usuallyDay
+        /// </summary>
         private void initPanelDate()
         {
             if (dateLabel[dateLabel.Count - 1].Parent.Tag != null && dateLabel[0].Parent.Tag != null)
@@ -247,6 +232,8 @@ namespace WorkLogForm
                 }
             }
         }
+
+
         /// <summary>
         /// 初始化日历日期
         /// </summary>
@@ -321,6 +308,15 @@ namespace WorkLogForm
             }
 
         }
+        #endregion
+
+
+
+        #region 更新操作
+        /// <summary>
+        /// 更新label，显示考勤信息attendanceList
+        /// </summary>
+        /// <param name="label"></param>
         private void attendenceLabel_Paint(Label label)
         {
             label.Text = "";
@@ -351,51 +347,121 @@ namespace WorkLogForm
                 label.ForeColor = Color.Red;
             }
         }
-        private void button1_Click(object sender, EventArgs e)
+
+        /// <summary>
+        /// 用attendanceList更新所有日历中的label
+        /// </summary>
+        private void updateLabel()
         {
-            leaveDayNum = 0;
-            int lateDayNum = 0;
-            int earlyDayNum = 0;
-            int noneAttNum = 0;
-            this.initCalendar(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month);
-            initPanelDate();
-            initAttendanceDate();
-            updatePanel();
-            updateLabel();
-            #region 出勤统计数据初始化
-            List<object> staticsList = new List<object>();
-            DateTime startTime = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, 1);
-            DateTime endTime = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, CNDate.GetDayNumOfMonth(new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, 1)));
-            IList staticAttendanceList = baseService.loadEntityList("select att from Attendance att left join att.User u left join u.Kdid dept where dept.KdName='" + dept_comboBox.Text.Trim() + "' and att.State=" + (int)IEntity.stateEnum.Normal + " and u.KuName='" + userName_textBox.Text.Trim() + "' and att.SignDate>=" + startTime.Date.Ticks + " and att.SignDate<=" + endTime.Date.Ticks);
-            noneAttNum = CNDate.getWorkDayNum(startTime.Date, endTime.Date).Count - staticAttendanceList.Count;
-            staticsList.Add(staticAttendanceList.Count);
-            if (staticAttendanceList != null && staticAttendanceList.Count > 0)
+            attendenceLabel_Paint(label11); attendenceLabel_Paint(label21); attendenceLabel_Paint(label31); attendenceLabel_Paint(label41); attendenceLabel_Paint(label51); attendenceLabel_Paint(label61);
+            attendenceLabel_Paint(label12); attendenceLabel_Paint(label22); attendenceLabel_Paint(label32); attendenceLabel_Paint(label42); attendenceLabel_Paint(label52); attendenceLabel_Paint(label62);
+            attendenceLabel_Paint(label13); attendenceLabel_Paint(label23); attendenceLabel_Paint(label33); attendenceLabel_Paint(label43); attendenceLabel_Paint(label53); attendenceLabel_Paint(label63);
+            attendenceLabel_Paint(label14); attendenceLabel_Paint(label24); attendenceLabel_Paint(label34); attendenceLabel_Paint(label44); attendenceLabel_Paint(label54); attendenceLabel_Paint(label64);
+            attendenceLabel_Paint(label15); attendenceLabel_Paint(label25); attendenceLabel_Paint(label35); attendenceLabel_Paint(label45); attendenceLabel_Paint(label55); attendenceLabel_Paint(label65);
+            attendenceLabel_Paint(label16); attendenceLabel_Paint(label26); attendenceLabel_Paint(label36); attendenceLabel_Paint(label46); attendenceLabel_Paint(label56); attendenceLabel_Paint(label66);
+            attendenceLabel_Paint(label17); attendenceLabel_Paint(label27); attendenceLabel_Paint(label37); attendenceLabel_Paint(label47); attendenceLabel_Paint(label57); attendenceLabel_Paint(label67);
+        }
+
+
+        /// <summary>
+        /// 更新日历小方格的请假、补班、节假日、周末信息
+        /// </summary>
+        /// <param name="panel"></param>
+        private void attendencePanel_Paint(Panel panel)
+        {
+            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2;
+            DateTime date = (DateTime)panel.Tag;
+            int dayOfWeek = (int)date.DayOfWeek == 0 ? 6 : (int)date.DayOfWeek - 1;
+            if (leaveList != null && leaveList.Count > 0)
             {
-                foreach (Attendance att in staticAttendanceList)
+                foreach (LeaveManage a in leaveList)
                 {
-                    if (att.LateOrLeaveEarly.Equals((int)Attendance.lateOrLeaveEarlyEnum.Early))
+                    if (a.StartTime <= date.Date.Ticks && a.EndTime > date.Date.Ticks)
                     {
-                        earlyDayNum++;
-                    }
-                    else if (att.LateOrLeaveEarly.Equals((int)Attendance.lateOrLeaveEarlyEnum.Late))
-                    {
-                        lateDayNum++;
-                    }
-                    else if (att.LateOrLeaveEarly.Equals((int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly))
-                    {
-                        lateDayNum++;
-                        earlyDayNum++;
+                        leaveDayNum++;
+                        if (a.LeaveType == "婚假")
+                        {
+                            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_婚;
+                        }
+                        else if (a.LeaveType == "探亲假")
+                        {
+                            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_亲;
+                        }
+                        else if (a.LeaveType == "年休假")
+                        {
+                            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_年;
+                        }
+                        else if (a.LeaveType == "事假")
+                        {
+                            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_事;
+                        }
+                        else if (a.LeaveType == "病假")
+                        {
+                            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_病;
+                        }
+                        else if (a.LeaveType == "产假")
+                        {
+                            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_产;
+                        }
+                        panel.Tag = null;
+                        break;
                     }
                 }
             }
-            staticsList.Add(lateDayNum);
-            staticsList.Add(earlyDayNum);
-            staticsList.Add(noneAttNum);
-            staticsList.Add(leaveDayNum);
-            #endregion
-            listView2.Items.Clear();
-            initListView2(listView2, staticsList);
+            if (workDayList != null && workDayList.Count > 0)//判断是不是补班
+            {
+                foreach (WorkDay a in workDayList)
+                {
+                    if (a.WorkDateTime == date.Date.Ticks)
+                    {
+                        return;
+                    }
+                }
+            }
+            if (holidayList != null && holidayList.Count > 0)//判断是否节假日
+            {
+                foreach (Holiday a in holidayList)
+                {
+                    if (a.StartTime <= date.Date.Ticks && a.EndTime > date.Date.Ticks)
+                    {
+                        Image img = new Bitmap(panel.BackgroundImage);
+                        Graphics panelG = Graphics.FromImage(img);
+                        panelG.DrawString(a.Name, new Font("华文楷体", (float)28.0, FontStyle.Regular), System.Drawing.Brushes.Black, new PointF(22, 45));
+                        panel.BackgroundImage = img;
+                        panel.Tag = null;
+                        return;
+                    }
+                }
+            }
+            if (usuallyDayChar[dayOfWeek].Equals((char)UsuallyDay.workDayEnum.Holiday))//判断是否周六日
+            {
+                panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_休;
+                panel.Tag = null;
+            }
         }
+       
+
+        /// <summary>
+        /// 更新日历的请假leaveList、补班workDayList、节假日holidayList、周末信息UsuallyDay
+        /// </summary>
+        private void updatePanel()
+        {
+            attendencePanel_Paint(panel11); attendencePanel_Paint(panel21); attendencePanel_Paint(panel31); attendencePanel_Paint(panel41); attendencePanel_Paint(panel51); attendencePanel_Paint(panel61);
+            attendencePanel_Paint(panel12); attendencePanel_Paint(panel22); attendencePanel_Paint(panel32); attendencePanel_Paint(panel42); attendencePanel_Paint(panel52); attendencePanel_Paint(panel62);
+            attendencePanel_Paint(panel13); attendencePanel_Paint(panel23); attendencePanel_Paint(panel33); attendencePanel_Paint(panel43); attendencePanel_Paint(panel53); attendencePanel_Paint(panel63);
+            attendencePanel_Paint(panel14); attendencePanel_Paint(panel24); attendencePanel_Paint(panel34); attendencePanel_Paint(panel44); attendencePanel_Paint(panel54); attendencePanel_Paint(panel64);
+            attendencePanel_Paint(panel15); attendencePanel_Paint(panel25); attendencePanel_Paint(panel35); attendencePanel_Paint(panel45); attendencePanel_Paint(panel55); attendencePanel_Paint(panel65);
+            attendencePanel_Paint(panel16); attendencePanel_Paint(panel26); attendencePanel_Paint(panel36); attendencePanel_Paint(panel46); attendencePanel_Paint(panel56); attendencePanel_Paint(panel66);
+            attendencePanel_Paint(panel17); attendencePanel_Paint(panel27); attendencePanel_Paint(panel37); attendencePanel_Paint(panel47); attendencePanel_Paint(panel57); attendencePanel_Paint(panel67);
+        }
+        #endregion
+  
+
+        /// <summary>
+        /// ListView2显示个人统计
+        /// </summary>
+        /// <param name="listView"></param>
+        /// <param name="o"></param>
         private void initListView2(ListView listView, List<object> o)
         {
             ListViewItem item = new ListViewItem();
@@ -417,11 +483,9 @@ namespace WorkLogForm
             listView.Items.Add(item);
         }
         #endregion
-        private void statistics_Attendance_Load(object sender, EventArgs e)
-        {
-            initialWindow();
-            init();
-        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        #region 综合统计页面
         private void initListView(ListView listView, Hashtable userList)
         {
             if (userList != null && userList.Count > 0)
@@ -533,7 +597,10 @@ namespace WorkLogForm
             listView1.Items.Clear();
             initListView(listView1, ht);
         }
+        #endregion
 
+
+        #region 页面切换
         private void all_static_pictureBox_Click(object sender, EventArgs e)
         {
             panel1.Visible = true;
@@ -545,5 +612,6 @@ namespace WorkLogForm
             panel1.Visible = false;
             panel2.Visible = true;
         }
+        #endregion
     }
 }
