@@ -439,6 +439,8 @@ namespace WorkLogForm
             panel4.Visible = false;
             panel5.Visible = false;
 
+            this.label34.Text = "请假申请";
+
            
 
 
@@ -455,6 +457,9 @@ namespace WorkLogForm
             panel2.Visible = true;
             panel4.Visible = false;
             panel5.Visible = false;
+
+            this.label34.Text = "请假查看";
+
             initdata2();
             
         }
@@ -470,6 +475,7 @@ namespace WorkLogForm
             panel2.Visible = false;
             panel4.Visible = true;
             panel5.Visible = false;
+            this.label34.Text = "请假审批";
             initdata4();
 
 
@@ -487,6 +493,8 @@ namespace WorkLogForm
             panel2.Visible = false;
             panel4.Visible =false;
             panel5.Visible = true;
+
+            this.label34.Text = "审批修改";
             initdata5();
         }
 
