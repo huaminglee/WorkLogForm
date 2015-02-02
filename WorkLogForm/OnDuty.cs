@@ -16,6 +16,14 @@ namespace WorkLogForm
 
         IList Ondutys;
         IList<WkTRole> userrole;
+
+        WkTRole role;
+        public WkTRole Role
+        {
+            get { return role; }
+            set { role = value; }
+        }
+
         private BaseService baseService = new BaseService();
 
         private List<Label> dateLabel = new List<Label>();
@@ -278,15 +286,15 @@ namespace WorkLogForm
             for (int i = 0; i < this.dateLabel.Count; i++)
             {
                  
-                foreach(TimeArrangeForManager o in times)
-                {
-                    DateTime dt = (DateTime)dateLabel[i].Parent.Tag;
-                    if (dateLabel[i].Parent.ForeColor != SystemColors.ControlDark && dt.Date.Ticks >= o.Startime && dt.Date.Ticks < o.Endtime && dateLabel[i].Parent.Controls[1].Text == "")
-                    {
-                        dateLabel[i].Click += OnDuty_Click;
-                        dateLabel[i].ForeColor = Color.Red;
-                    }
-                }
+                //foreach(TimeArrangeForManager o in times)
+                //{
+                //    DateTime dt = (DateTime)dateLabel[i].Parent.Tag;
+                //    if (dateLabel[i].Parent.ForeColor != SystemColors.ControlDark && dt.Date.Ticks >= o.Startime && dt.Date.Ticks < o.Endtime && dateLabel[i].Parent.Controls[1].Text == "")
+                //    {
+                //        dateLabel[i].Click += OnDuty_Click;
+                //        dateLabel[i].ForeColor = Color.Red;
+                //    }
+                //}
                 
             }
         }
@@ -740,12 +748,12 @@ namespace WorkLogForm
                 string[] set = stret.Split(new char[] { '-' });
 
 
-                TimeArrangeForManager tafm = new TimeArrangeForManager();
-                tafm.Startime = new DateTime(int.Parse(sst[0]), int.Parse(sst[1]), int.Parse(sst[2])).Ticks;
-                tafm.Endtime = new DateTime(int.Parse(set[0]), int.Parse(set[1]), int.Parse(set[2])).AddDays(-1).Ticks;
-                tafm.UserId = this.dataGridView2.Rows[i].Tag as WkTUser;
+                //TimeArrangeForManager tafm = new TimeArrangeForManager();
+                //tafm.Startime = new DateTime(int.Parse(sst[0]), int.Parse(sst[1]), int.Parse(sst[2])).Ticks;
+                //tafm.Endtime = new DateTime(int.Parse(set[0]), int.Parse(set[1]), int.Parse(set[2])).AddDays(-1).Ticks;
+                //tafm.UserId = this.dataGridView2.Rows[i].Tag as WkTUser;
                
-                opp.SaveOrUpdateEntity(tafm);
+                //opp.SaveOrUpdateEntity(tafm);
 
             }
 
@@ -768,28 +776,6 @@ namespace WorkLogForm
         }
 
         
-
-       
-
-
-
-
-       
-
-      
-
-      
-
-       
-
-       
-
-       
-       
-     
-        
-      
-
        
         
     }

@@ -19,7 +19,7 @@ namespace WorkLogForm
         BaseService baseService = new BaseService();
         private Hobby ri_zhi_hobby;
         private Hobby ri_cheng_hobby;
-        private Hobby sui_bi_hobby;
+        //private Hobby sui_bi_hobby;
         private WkTRole role;
 
    

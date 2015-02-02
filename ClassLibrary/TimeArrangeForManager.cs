@@ -5,28 +5,42 @@ using System.Text;
 
 namespace ClassLibrary
 {
-    public class TimeArrangeForManager : BaseEntity
+    public class TimeArrangeForManager : IEntity
     {
-
-        private long startime;
-        public virtual long Startime
-        {
-            get { return startime; }
-            set { startime = value; }
-        }
-
-        private long endtime;
-        public virtual long Endtime
-        {
-            get { return endtime; }
-            set { endtime = value; }
-        }
-
+        
         private WkTUser userId;
         public virtual WkTUser UserId
         {
             get { return userId; }
             set { userId = value; }
+        }
+
+        private WkTUser arrangeUserId;
+        public virtual WkTUser ArrangeUserId
+        {
+            get { return arrangeUserId; }
+            set { arrangeUserId = value; }
+        }
+
+        private long timeMonth;
+        public virtual long TimeMonth
+        {
+            get { return timeMonth; }
+            set { timeMonth = value; }
+        }
+
+        private int isDone;
+        public virtual int IsDone
+        {
+            get { return isDone; }
+            set { isDone = value; }
+        }
+
+        private int dutyType;
+        public virtual int DutyType
+        {
+            get { return dutyType; }
+            set { dutyType = value; }
         }
 
     }

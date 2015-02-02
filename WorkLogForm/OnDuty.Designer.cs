@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.comboItem12 = new DevComponents.Editors.ComboItem();
             this.comboItem23 = new DevComponents.Editors.ComboItem();
             this.comboItem22 = new DevComponents.Editors.ComboItem();
@@ -290,12 +290,6 @@
             this.panel32 = new System.Windows.Forms.Panel();
             this.label48 = new System.Windows.Forms.Label();
             this.OnDutyAdd = new System.Windows.Forms.Panel();
-            this.ShowDuty = new System.Windows.Forms.Panel();
-            this.ShowDutyGridView = new DevComponents.DotNetBar.Controls.DataGridViewX();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.labelX3 = new DevComponents.DotNetBar.LabelX();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.OndutyaddForYuanZhang = new System.Windows.Forms.Panel();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
@@ -332,6 +326,12 @@
             this.label89 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.ShowDuty = new System.Windows.Forms.Panel();
+            this.ShowDutyGridView = new DevComponents.DotNetBar.Controls.DataGridViewX();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.labelX3 = new DevComponents.DotNetBar.LabelX();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.month_comboBoxEx = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -403,9 +403,6 @@
             this.panel34.SuspendLayout();
             this.panel32.SuspendLayout();
             this.OnDutyAdd.SuspendLayout();
-            this.ShowDuty.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ShowDutyGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.OndutyaddForYuanZhang.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -413,6 +410,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox46)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.ShowDuty.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ShowDutyGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.SuspendLayout();
             // 
             // comboItem12
@@ -2868,78 +2868,6 @@
             this.OnDutyAdd.Visible = false;
             this.OnDutyAdd.VisibleChanged += new System.EventHandler(this.OnDutyAdd_VisibleChanged);
             // 
-            // ShowDuty
-            // 
-            this.ShowDuty.BackColor = System.Drawing.Color.White;
-            this.ShowDuty.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ShowDuty.Controls.Add(this.ShowDutyGridView);
-            this.ShowDuty.Controls.Add(this.labelX3);
-            this.ShowDuty.Controls.Add(this.pictureBox11);
-            this.ShowDuty.Location = new System.Drawing.Point(240, 135);
-            this.ShowDuty.Name = "ShowDuty";
-            this.ShowDuty.Size = new System.Drawing.Size(552, 452);
-            this.ShowDuty.TabIndex = 331;
-            this.ShowDuty.Visible = false;
-            this.ShowDuty.VisibleChanged += new System.EventHandler(this.ShowDuty_VisibleChanged);
-            // 
-            // ShowDutyGridView
-            // 
-            this.ShowDutyGridView.AllowUserToAddRows = false;
-            this.ShowDutyGridView.AllowUserToDeleteRows = false;
-            this.ShowDutyGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ShowDutyGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column3,
-            this.Column8});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.ShowDutyGridView.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ShowDutyGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
-            this.ShowDutyGridView.Location = new System.Drawing.Point(36, 61);
-            this.ShowDutyGridView.Name = "ShowDutyGridView";
-            this.ShowDutyGridView.ReadOnly = true;
-            this.ShowDutyGridView.RowTemplate.Height = 23;
-            this.ShowDutyGridView.Size = new System.Drawing.Size(477, 296);
-            this.ShowDutyGridView.TabIndex = 119;
-            // 
-            // Column3
-            // 
-            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column3.HeaderText = "值班时间";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "值班类型";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            // 
-            // labelX3
-            // 
-            this.labelX3.AutoSize = true;
-            this.labelX3.Location = new System.Drawing.Point(44, 10);
-            this.labelX3.Name = "labelX3";
-            this.labelX3.Size = new System.Drawing.Size(0, 0);
-            this.labelX3.TabIndex = 118;
-            // 
-            // pictureBox11
-            // 
-            this.pictureBox11.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox11.BackgroundImage = global::WorkLogForm.Properties.Resources.关闭1;
-            this.pictureBox11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox11.Location = new System.Drawing.Point(522, -1);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(30, 26);
-            this.pictureBox11.TabIndex = 106;
-            this.pictureBox11.TabStop = false;
-            this.pictureBox11.Click += new System.EventHandler(this.pictureBox11_Click);
-            // 
             // OndutyaddForYuanZhang
             // 
             this.OndutyaddForYuanZhang.BackColor = System.Drawing.Color.White;
@@ -3322,6 +3250,78 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // ShowDuty
+            // 
+            this.ShowDuty.BackColor = System.Drawing.Color.White;
+            this.ShowDuty.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ShowDuty.Controls.Add(this.ShowDutyGridView);
+            this.ShowDuty.Controls.Add(this.labelX3);
+            this.ShowDuty.Controls.Add(this.pictureBox11);
+            this.ShowDuty.Location = new System.Drawing.Point(240, 135);
+            this.ShowDuty.Name = "ShowDuty";
+            this.ShowDuty.Size = new System.Drawing.Size(552, 452);
+            this.ShowDuty.TabIndex = 331;
+            this.ShowDuty.Visible = false;
+            this.ShowDuty.VisibleChanged += new System.EventHandler(this.ShowDuty_VisibleChanged);
+            // 
+            // ShowDutyGridView
+            // 
+            this.ShowDutyGridView.AllowUserToAddRows = false;
+            this.ShowDutyGridView.AllowUserToDeleteRows = false;
+            this.ShowDutyGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ShowDutyGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column3,
+            this.Column8});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ShowDutyGridView.DefaultCellStyle = dataGridViewCellStyle5;
+            this.ShowDutyGridView.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(215)))), ((int)(((byte)(229)))));
+            this.ShowDutyGridView.Location = new System.Drawing.Point(36, 61);
+            this.ShowDutyGridView.Name = "ShowDutyGridView";
+            this.ShowDutyGridView.ReadOnly = true;
+            this.ShowDutyGridView.RowTemplate.Height = 23;
+            this.ShowDutyGridView.Size = new System.Drawing.Size(477, 296);
+            this.ShowDutyGridView.TabIndex = 119;
+            // 
+            // Column3
+            // 
+            this.Column3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column3.HeaderText = "值班时间";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "值班类型";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            // 
+            // labelX3
+            // 
+            this.labelX3.AutoSize = true;
+            this.labelX3.Location = new System.Drawing.Point(44, 10);
+            this.labelX3.Name = "labelX3";
+            this.labelX3.Size = new System.Drawing.Size(0, 0);
+            this.labelX3.TabIndex = 118;
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox11.BackgroundImage = global::WorkLogForm.Properties.Resources.关闭1;
+            this.pictureBox11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox11.Location = new System.Drawing.Point(522, -1);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(30, 26);
+            this.pictureBox11.TabIndex = 106;
+            this.pictureBox11.TabStop = false;
+            this.pictureBox11.Click += new System.EventHandler(this.pictureBox11_Click);
+            // 
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -3592,10 +3592,6 @@
             this.panel32.PerformLayout();
             this.OnDutyAdd.ResumeLayout(false);
             this.OnDutyAdd.PerformLayout();
-            this.ShowDuty.ResumeLayout(false);
-            this.ShowDuty.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ShowDutyGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.OndutyaddForYuanZhang.ResumeLayout(false);
             this.OndutyaddForYuanZhang.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
@@ -3606,6 +3602,10 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.ShowDuty.ResumeLayout(false);
+            this.ShowDuty.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ShowDutyGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

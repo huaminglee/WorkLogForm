@@ -812,12 +812,14 @@ namespace WorkLogForm
         }
         private void sjgl_pictureBox_Click(object sender, EventArgs e)
         {
+            sjgl_pictureBox.Cursor = Cursors.WaitCursor;
             if (time_management == null || time_management.IsDisposed)
             {
                 time_management = new TimeManagement();
             }
             if (!time_management.Created)
             {
+                time_management.User = user;
                 time_management.Show();
             }
             else
@@ -825,6 +827,7 @@ namespace WorkLogForm
                 time_management.WindowState = FormWindowState.Normal;
                 time_management.Focus();
             }
+            sjgl_pictureBox.Cursor = Cursors.Hand;
         }
         private void qjgl_pictureBox_Click(object sender, EventArgs e)
         {
@@ -900,6 +903,7 @@ namespace WorkLogForm
         }
         private void zbgl_pictureBox_Click(object sender, EventArgs e)
         {
+            zbgl_pictureBox.Cursor = Cursors.WaitCursor;
             if (onDuty == null || onDuty.IsDisposed)
             {
                 onDuty = new OnDuty();
@@ -908,6 +912,7 @@ namespace WorkLogForm
             if (!onDuty.Created)
             {
                 onDuty.User = this.User;
+                onDuty.Role = this.Role;
                 onDuty.Show();
             }
             else
@@ -916,6 +921,8 @@ namespace WorkLogForm
                 onDuty.Focus();
                
             }
+            zbgl_pictureBox.Cursor = Cursors.Hand;
+
         }
         private void ccgl_pictureBox_Click(object sender, EventArgs e)
         {
@@ -1317,6 +1324,7 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void linkLabel11_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            this.Show_SuiBi_flowPanel.Controls.Clear();
             ShowSuiBiInFlowPanel(10);
         }
 

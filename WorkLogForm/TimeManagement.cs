@@ -17,6 +17,15 @@ namespace WorkLogForm
         private List<Button> bu_ban_button_list = new List<Button>();
         private BaseService baseService = new BaseService();
 
+
+        private WkTUser user;
+        public WkTUser User
+        {
+            get { return user; }
+            set { user = value; }
+        }
+
+
         public TimeManagement()
         {
             InitializeComponent();
@@ -29,6 +38,13 @@ namespace WorkLogForm
             initHolidayData();
         }
 
+
+        private List<WkTDept> thedepts;
+        private List<WkTUser> theusers;
+
+        /// <summary>
+        /// 部门管理中一个变量
+        /// </summary>
         private WkTUser userNow;
 
         #region 自定义窗体初始化方法
@@ -711,7 +727,7 @@ namespace WorkLogForm
        
         #endregion
 
-        #region
+        #region  部门管理
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -821,7 +837,154 @@ namespace WorkLogForm
         #endregion
 
 
+        #region 值班管理
+
+        /// <summary>
+        /// 选择tab页的时候加载
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            this.comboBox3.SelectedIndex = 0;
+            if(this.tabControl1.SelectedIndex == 3)
+            {
+                //加载以往加载的安排事件
+                if(this.dataGridView4.Rows.Count == 0)
+                {
+                    //查库
+                    string sql = "select u from  TimeArrangeForManager u where u.State = " + (int)IEntity.stateEnum.Normal;
+                    IList i = baseService.loadEntityList(sql);
+                    if(i!= null && i.Count > 0)
+                    {
+                        foreach (TimeArrangeForManager tgm in i)
+                        {
+                            DataGridView4RowsAdd(tgm);
+                        }
+                    
+                    }
+                
+                   
+
+                }
+
+
+                //加载部门下拉列表
+                if(this.comboBox1.Items.Count == 0) //防止重复加载
+                {
+                    //下拉菜单中加载部门信息
+                    string sql = "select u from WkTDept u";
+                    IList depts  = baseService.loadEntityList(sql);
+                    if(depts != null && depts.Count>0)
+                    {
+                        thedepts = new List<WkTDept>();
+                        
+                        foreach (WkTDept dd in depts)
+                        {
+                            this.comboBox1.Items.Add(dd.KdName.ToString().Trim());
+                            thedepts.Add(dd);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 当部门选择改变的时候需要显示相应部门的人员
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox1.Cursor = Cursors.WaitCursor;
+            this.comboBox2.Items.Clear();
+            if (theusers == null)
+            {
+                theusers = new List<WkTUser>();
+            }
+            this.theusers.Clear();
+            string sql = "select u from WkTUser u left join u.Kdid dept where dept.Id = " + this.thedepts[this.comboBox1.SelectedIndex].Id;
+            IList users = baseService.loadEntityList(sql);
+            if (users != null && users.Count > 0)
+            {
+               
+                if (theusers.Count > 0)
+                {
+                    this.theusers.Clear();
+                }
+                foreach (WkTUser u in users)
+                {
+                    this.comboBox2.Items.Add(u.KuName.ToString().Trim());
+                    this.theusers.Add(u);
+                }
+            }
+
+            comboBox1.Cursor = Cursors.Hand;
+        }
+
+        /// <summary>
+        /// 确定按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.button3.Cursor = Cursors.WaitCursor;
+            DateTime dt = new DateTime(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, 1);
+            //判断这个月是否安排
+            string sql = "select u from  TimeArrangeForManager u where u.TimeMonth = " + dt.Ticks + 
+                " and u.DutyType = "+this.comboBox3.SelectedIndex+
+                " and u.State = "+ (int)IEntity.stateEnum.Normal;
+            IList i = baseService.loadEntityList(sql);
+            if(i!= null &&i.Count>0)
+            {
+                MessageBox.Show("该月份已经安排过了");
+                this.button3.Cursor = Cursors.Hand;
+                return;
+            }
+            
+            
+            if(this.comboBox1.Text != "" && this.comboBox2.Text != "")
+            {
+                TimeArrangeForManager tgm = new TimeArrangeForManager();
+                tgm.ArrangeUserId = User;
+                tgm.UserId = theusers[this.comboBox2.SelectedIndex];
+                tgm.State = (int)IEntity.stateEnum.Normal;
+                tgm.TimeStamp = DateTime.Now.Ticks;
+               
+                tgm.TimeMonth = dt.Ticks;
+                tgm.IsDone = 0;
+                tgm.DutyType = this.comboBox3.SelectedIndex;
+                baseService.SaveOrUpdateEntity(tgm);
+                DataGridView4RowsAdd(tgm);
+                MessageBox.Show("添加成功！");
+            }
+            this.button3.Cursor = Cursors.Hand;
+        }
+
+        public void DataGridView4RowsAdd(TimeArrangeForManager tgm)
+        {
+            if(tgm != null)
+            {
+                DateTime dt = new DateTime (tgm.TimeMonth);
+                this.dataGridView4.Rows.Add(dt.ToString("yyyy年MM月"), tgm.UserId.KuName, tgm.ArrangeUserId.KuName, tgm.DutyType == 0?"行政班":"网络班" ,tgm.IsDone == 1?"":"删除");
+                this.dataGridView4.Rows[this.dataGridView4.Rows.Count - 1].Tag = tgm;
+            }
+        }
+
+      
+
+        #endregion
+
+      
+
        
+
+       
+
+
+
 
     }
 }
