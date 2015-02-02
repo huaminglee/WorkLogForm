@@ -65,9 +65,9 @@
             this.button3 = new System.Windows.Forms.Button();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.close_pictureBox = new System.Windows.Forms.PictureBox();
-            this.treeView2 = new System.Windows.Forms.TreeView();
             this.button1 = new System.Windows.Forms.Button();
+            this.treeView2 = new System.Windows.Forms.TreeView();
+            this.close_pictureBox = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -260,6 +260,25 @@
             this.tabPage3.Text = "日程偏好设置";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(146, 417);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "保存";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // treeView2
+            // 
+            this.treeView2.CheckBoxes = true;
+            this.treeView2.Location = new System.Drawing.Point(13, 26);
+            this.treeView2.Name = "treeView2";
+            this.treeView2.Size = new System.Drawing.Size(337, 385);
+            this.treeView2.TabIndex = 0;
+            this.treeView2.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
+            // 
             // close_pictureBox
             // 
             this.close_pictureBox.BackColor = System.Drawing.Color.Transparent;
@@ -272,25 +291,6 @@
             this.close_pictureBox.TabIndex = 169;
             this.close_pictureBox.TabStop = false;
             this.close_pictureBox.Click += new System.EventHandler(this.close_pictureBox_Click);
-            // 
-            // treeView2
-            // 
-            this.treeView2.CheckBoxes = true;
-            this.treeView2.Location = new System.Drawing.Point(13, 26);
-            this.treeView2.Name = "treeView2";
-            this.treeView2.Size = new System.Drawing.Size(337, 385);
-            this.treeView2.TabIndex = 0;
-            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(146, 417);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "保存";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // personal_setting
             // 

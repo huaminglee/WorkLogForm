@@ -37,6 +37,7 @@ namespace WorkLogForm
         {
             InitializeComponent();
             initialWindow();
+            initData();
         }
 
         private List<WkTDept> theDepts = new List<WkTDept>();
@@ -93,6 +94,21 @@ namespace WorkLogForm
         {
             creatWindow.SetFormRoundRectRgn(this, 15);
             creatWindow.SetFormShadow(this);
+        }
+        private void initData()
+        {
+            IList deptList = baseService.loadEntityList("from WkTDept");
+            share_dept_comboBox.Items.Add("选择全部…");
+            if (deptList != null && deptList.Count > 0)
+            {
+                foreach (WkTDept dept in deptList)
+                {
+                    share_dept_comboBox.Items.Add(dept.KdName.Trim());
+                }
+            }
+
+
+            share_dept_comboBox.SelectedIndex = 0;
         }
         #endregion
 
@@ -158,7 +174,7 @@ namespace WorkLogForm
             long starttime = dateTimePicker1.Value.Ticks;
             long endtime = dateTimePicker2.Value.Ticks;
             string sql = "from StaffSchedule where State="
-                + (int)IEntity.stateEnum.Normal + " and ScheduleTime>=" + starttime + " and ScheduleTime< " + endtime + " and Staff = " + user.Id +
+                + (int)IEntity.stateEnum.Normal + " and ScheduleTime>=" + starttime + " and ScheduleTime<= " + endtime + " and Staff = " + user.Id +
                 " and ArrangeMan.KuName like '%" + this.textBox2.Text.Trim() + "%' and Content like '%"
                 + this.textBox1.Text.Trim() + "%' order by ScheduleTime desc";
             IList logList = baseService.loadEntityList(sql);
@@ -215,17 +231,49 @@ namespace WorkLogForm
 
 
         #region 分享日程
+
+        /// <summary>
+        /// 分享日程查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void share_search_button_Click(object sender, EventArgs e)
         {
+
             long starttime = share_dateTimePicker.Value.Date.Ticks;
-            long endtime = starttime + new DateTime(1, 1, 2).Date.Ticks;
-            String sql = "select sf.id from LOG_T_STAFFSCHEDULE sf,StaffSchedule_M_WkTUser smu,WK_T_USER u,WK_T_DEPT dept where sf.WkTUserId=u.KU_ID and sf.Id=smu.StaffScheduleId and u.KD_ID=dept.KD_ID and smu.KU_ID=" + user.Id + " and sf.State=" + (int)IEntity.stateEnum.Normal + " and sf.ScheduleTime>=" + starttime + " and sf.ScheduleTime<" + endtime + " and u.KU_NAME like '%" + share_name_textBox.Text.Trim() + "%'";
-            if (share_dept_comboBox.Text.Trim() != "请选择")
+            long endtime = share_dateTimePicker_end.Value.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
+
+            String sql = "select tt.*,dept.KD_NAME from WK_T_DEPT dept , " +
+" (select t.*,ww.KU_NAME name ,ww.KD_ID depid from WK_T_USER ww,  " +
+" (select l.Id id ,l.Contents con ,l.ScheduleTime thetime ," +
+" l.WkTUserId fuser   from StaffSchedule_M_WkTUser m, LOG_T_STAFFSCHEDULE l,WK_T_USER w " +
+" where m.StaffScheduleId = l.Id and m.KU_ID = w.KU_ID and w.KU_ID = " + this.user.Id + " and " +
+" l.Contents like '%" + this.textBox5.Text.Trim() + "%' and l.ScheduleTime >= " + this.share_dateTimePicker.Value.Ticks + " and l.ScheduleTime<= " + this.share_dateTimePicker_end.Value.Ticks + ") t " +
+" where t.fuser = ww.KU_ID and ww.KU_NAME like '%" + this.share_name_textBox.Text + "%') tt where tt.depid = dept.KD_ID " +
+" and dept.KD_NAME like '%" + this.share_dept_comboBox.Text + "%'  order by dept.KD_ID; ";
+
+            string sql1 = "select tt.*,dept.KD_NAME from WK_T_DEPT dept , " +
+" (select t.*,ww.KU_NAME name ,ww.KD_ID depid from WK_T_USER ww,  " +
+" (select l.Id id ,l.Contents con ,l.ScheduleTime thetime ," +
+" l.WkTUserId fuser   from StaffSchedule_M_WkTUser m, LOG_T_STAFFSCHEDULE l,WK_T_USER w " +
+" where m.StaffScheduleId = l.Id and m.KU_ID = w.KU_ID and w.KU_ID = " + this.user.Id + " and " +
+" l.Contents like '%" + this.textBox5.Text.Trim() + "%' and l.ScheduleTime > " + this.share_dateTimePicker.Value.Ticks + " and l.ScheduleTime<= " + this.share_dateTimePicker_end.Value.Ticks + ") t " +
+" where t.fuser = ww.KU_ID and ww.KU_NAME like '%" + this.share_name_textBox.Text + "%') tt where tt.depid = dept.KD_ID  order by dept.KD_ID;";
+
+            IList logList;
+            if (this.share_dept_comboBox.Text == this.share_dept_comboBox.Items[0].ToString())
             {
-                sql += " and dept.KD_NAME like '" + share_dept_comboBox.Text.Trim() + "%'";
+                //部门选择全部
+                logList = baseService.ExecuteSQL(sql1);
             }
-            sql += " order by ScheduleTime desc";
-            IList logList = baseService.ExecuteSQL(sql);
+            else
+            {
+                logList = baseService.ExecuteSQL(sql);
+            }
+            //[0] 日志的ID [1] 日志内容 [2] 日志写的时间 [3]分享日志的人的ID [4]分享日志人的姓名 [5]分享人所在的部门ID [6] 分享人所在的部门名称
+
+
+
             initShareDataGridView(logList);
         }
         private void initShareDataGridView(IList logList)
@@ -234,69 +282,42 @@ namespace WorkLogForm
             int i = 1;
             if (logList != null && logList.Count > 0)
             {
-                foreach (object[] slId in logList)
+                foreach (object[] sl in logList)
                 {
-                    StaffSchedule sl = new StaffSchedule();
-                    String id = slId[0].ToString();
-                    baseService.loadEntity(sl, Convert.ToInt64(id));
+
                     DataGridViewRow row = new DataGridViewRow();
                     row.Tag = sl;
+
+                    //这一段代码很重要 要不然赋不进值去
                     foreach (DataGridViewColumn c in this.share_dataGridView.Columns)
                     {
                         row.Cells.Add(c.CellTemplate.Clone() as DataGridViewCell);
                     }
-                    row.Cells[0].Value = i;
-                    row.Cells[1].Value = sl.Staff.KuName.Trim();
-                    row.Cells[2].Value = sl.Staff.Kdid.KdName.Trim();
-                    DateTime writeTime = new DateTime(sl.ScheduleTime);
-                    row.Cells[3].Value = CNDate.getTimeByTimeTicks(writeTime.TimeOfDay.Ticks);
-                    row.Cells[4].Value = sl.Content;
-                    row.Cells[4].ToolTipText = CommonUtil.toolTipFormat(sl.Content);
+                    //end
+                    row.Cells[0].Value = i.ToString();
+                    row.Cells[1].Value = sl[4].ToString();
+                    row.Cells[2].Value = sl[6].ToString().Trim();
+                    DateTime writeTime = new DateTime(Convert.ToInt64(sl[2].ToString()));
+                    row.Cells[3].Value = writeTime.ToString("yyyy-MM-dd HH:mm");
+                   
+                    row.Cells[4].Value = sl[1].ToString();
+                    row.Cells[4].ToolTipText = CommonUtil.toolTipFormat(sl[1].ToString());
+
                     share_dataGridView.Rows.Add(row);
                     i++;
                 }
             }
         }
+
         #endregion
 
         #region 员工日程
-       
-
-
-        #endregion
-        #region 三个按钮
-        private void panel1_pictureBox_Click(object sender, EventArgs e)
-        {
-            panel1.Visible = true;
-            panel2.Visible = false;
-            panel3.Visible = false;
-            this.label1.Text = "个人日程";
-
-        }
-
-        private void panel2_pictureBox_Click(object sender, EventArgs e)
-        {
-            panel1.Visible = false;
-            panel2.Visible = true;
-            panel3.Visible = false;
-            this.label1.Text = "分享日程";
-        }
-
-        private void panel3_pictureBox_Click(object sender, EventArgs e)
-        {
-            panel1.Visible = false;
-            panel2.Visible = false;
-            panel3.Visible = true;
-            this.label1.Text = "员工日程";
-        }
-
-
-        #endregion
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == 3)
             {
+                dataGridView2.Rows.Clear();
                 if (Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString()) != 0)
                 {
                     int id = Convert.ToInt32(this.dataGridView1.Rows[e.RowIndex].Tag.ToString());
@@ -326,13 +347,224 @@ namespace WorkLogForm
                         }
 
                         dataGridView2.Rows.Add(row);
-
-
-
                     }
                 }
             }
         }
+
+
+        /// <summary>
+        /// 表二的删除操作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 3 && this.dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "删除")
+            {
+                if (MessageBox.Show("您确定要删除？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    StaffSchedule ss = (StaffSchedule)this.dataGridView2.Rows[e.RowIndex].Tag;
+                    ss.State = (int)IEntity.stateEnum.Deleted;
+                    baseService.SaveOrUpdateEntity(ss);
+                    this.dataGridView2.Rows.RemoveAt(e.RowIndex);
+                    MessageBox.Show("删除成功！");
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// 日程查询按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.button1.Cursor = Cursors.WaitCursor;
+            if (comboBox1.Items.Count != 0)
+            {
+                //选择全部
+                if (this.comboBox1.Text == this.comboBox1.Items[0].ToString())
+                {
+                    this.dataGridView3.Rows.Clear();
+                    if (theDepts.Count > 0)
+                    {
+
+                        foreach (WkTDept o in theDepts)
+                        {
+                            string sql = "select log from StaffSchedule log  left join log.Staff u where u.Kdid = "
+                                + o.Id + " and u.KuName like '%"
+                                + this.textBox3.Text.Trim()
+                                + "%' and  log.Content like '%"
+                                + this.textBox4.Text.Trim() + "%' and " +
+                                " log.ScheduleTime >=  " + this.dateTimePicker3.Value.Ticks +
+                                " log.ScheduleTime <=  " + this.dateTimePicker4.Value.Ticks
+                                 + " log.State = " + (int)IEntity.stateEnum.Normal;
+                            IList thelist = baseService.loadEntityList(sql);
+
+                            foreach (StaffSchedule sl in thelist)
+                            {
+                                DataGridViewRow row = new DataGridViewRow();
+                                row.Tag = sl;
+
+                                //这一段代码很重要 要不然赋不进值去
+                                foreach (DataGridViewColumn c in this.dataGridView3.Columns)
+                                {
+                                    row.Cells.Add(c.CellTemplate.Clone() as DataGridViewCell);
+                                }
+                                //end
+
+                                
+                                row.Cells[0].Value = sl.Staff.KuName;
+                                row.Cells[1].Value = sl.Staff.Kdid.KdName;
+                                row.Cells[2].Value = sl.Content;
+                                row.Cells[2].ToolTipText = CommonUtil.toolTipFormat(sl.Content);
+
+                                row.Cells[3].Value = new DateTime(sl.ScheduleTime).ToString("yyyy-MM-dd HH:mm");
+                                row.Cells[4].Value = sl.ArrangeMan.KuName;
+                                if (sl.ArrangeMan.Id == user.Id)
+                                {
+                                    row.Cells[5].Value = "删除";
+                                }
+
+                                dataGridView3.Rows.Add(row);
+                            }
+
+                        }
+
+                    }
+
+                }
+                else //选择某一个
+                {
+                    string sql;
+                    if (theDepts.Count > 1)
+                    {
+                        sql = "select log from StaffSchedule log  left join log.Staff u where u.Kdid = "
+                                   + ((WkTDept)theDepts[this.comboBox1.SelectedIndex - 1]).Id + " and u.KuName like '%"
+                                   + this.textBox3.Text.Trim()
+                                   + "%' and  log.Content like '%"
+                                   + this.textBox4.Text.Trim() + "%' and " +
+                                   " log.ScheduleTime > " + this.dateTimePicker3.Value.Ticks +
+                                   " log.ScheduleTime < " + this.dateTimePicker4.Value.Ticks
+                                    + " log.State = " + (int)IEntity.stateEnum.Normal;
+
+                    }
+                    else
+                    {
+                        sql = "select log from StaffSchedule log  left join log.Staff u where u.Kdid = "
+                                     + ((WkTDept)theDepts[this.comboBox1.SelectedIndex]).Id + " and u.KuName like '%"
+                                     + this.textBox3.Text.Trim()
+                                     + "%' and  log.Content like '%"
+                                     + this.textBox4.Text.Trim() + "%' and " +
+                                     " log.ScheduleTime > " + this.dateTimePicker3.Value.Ticks +
+                                     " log.ScheduleTime < " + this.dateTimePicker4.Value.Ticks
+                                     + " log.State = " + (int)IEntity.stateEnum.Normal;
+                    }
+                    IList thelist = baseService.loadEntityList(sql);
+                    this.dataGridView3.Rows.Clear();
+                    foreach (StaffSchedule sl in thelist)
+                    {
+
+                        DataGridViewRow row = new DataGridViewRow();
+                        row.Tag = sl;
+
+                        //这一段代码很重要 要不然赋不进值去
+                        foreach (DataGridViewColumn c in this.dataGridView3.Columns)
+                        {
+                            row.Cells.Add(c.CellTemplate.Clone() as DataGridViewCell);
+                        }
+                        //end
+
+
+                        row.Cells[0].Value = sl.Staff.KuName;
+                        row.Cells[1].Value = sl.Staff.Kdid.KdName;
+                        row.Cells[2].Value = sl.Content;
+                        row.Cells[2].ToolTipText = CommonUtil.toolTipFormat(sl.Content);
+
+                        row.Cells[3].Value = new DateTime(sl.ScheduleTime).ToString("yyyy-MM-dd HH:mm");
+                        row.Cells[4].Value = sl.ArrangeMan.KuName;
+                        if (sl.ArrangeMan.Id == user.Id)
+                        {
+                            row.Cells[5].Value = "删除";
+                        }
+
+                        dataGridView3.Rows.Add(row);
+
+                       
+                    }
+
+                }
+                this.button1.Cursor = Cursors.Hand;
+            }
+            else
+            {
+                MessageBox.Show("没有选择部门，请联系管理员。");
+
+            }
+        }
+
+        /// <summary>
+        /// 日程查询的删除按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 5 && this.dataGridView3.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "删除")
+            {
+                if (MessageBox.Show("您确定要删除？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    StaffSchedule ss = (StaffSchedule)this.dataGridView3.Rows[e.RowIndex].Tag;
+                    ss.State = (int)IEntity.stateEnum.Deleted;
+                    baseService.SaveOrUpdateEntity(ss);
+                    this.dataGridView3.Rows.RemoveAt(e.RowIndex);
+                    MessageBox.Show("删除成功！");
+                }
+            
+            }
+        }
+        #endregion
+
+        #region 三个按钮
+        private void panel1_pictureBox_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = true;
+            panel2.Visible = false;
+            panel3.Visible = false;
+            this.label1.Text = "个人日程";
+
+        }
+
+        private void panel2_pictureBox_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = false;
+            panel2.Visible = true;
+            panel3.Visible = false;
+            this.label1.Text = "分享日程";
+        }
+
+        private void panel3_pictureBox_Click(object sender, EventArgs e)
+        {
+            panel1.Visible = false;
+            panel2.Visible = false;
+            panel3.Visible = true;
+            this.label1.Text = "员工日程";
+        }
+
+
+        #endregion
+
+       
+
+       
+
+
+        
+      
+
+     
 
     }
 }

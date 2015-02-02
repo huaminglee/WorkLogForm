@@ -155,14 +155,14 @@ namespace WorkLogForm
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
             TreeNode t = e.Node;
-            SelectTree(t);
+            TreeView tree = (TreeView)sender;
+            SelectTree(t,tree.Nodes[0]);
         }
 
-        private void SelectTree(TreeNode t)
+        private void SelectTree(TreeNode t,TreeNode tt)
         {
             if (t.Text == "部门")
             {
-                TreeNode tt = treeView1.Nodes[0];
                 if (t.Checked == true)
                 {
 
