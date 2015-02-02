@@ -235,6 +235,7 @@
             this.columnHeader38 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader39 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label34 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -2011,6 +2012,18 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(639, 38);
             this.flowLayoutPanel1.TabIndex = 235;
             // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.BackColor = System.Drawing.Color.Transparent;
+            this.label34.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label34.ForeColor = System.Drawing.Color.White;
+            this.label34.Location = new System.Drawing.Point(868, 50);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(74, 21);
+            this.label34.TabIndex = 236;
+            this.label34.Text = "请假申请";
+            // 
             // Leave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2018,6 +2031,7 @@
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.日志管理系统首页3;
             this.ClientSize = new System.Drawing.Size(1008, 702);
+            this.Controls.Add(this.label34);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.close_pictureBox);
             this.Controls.Add(this.min_pictureBox);
@@ -2241,5 +2255,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader38;
         private System.Windows.Forms.ColumnHeader columnHeader39;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label label34;
     }
 }
