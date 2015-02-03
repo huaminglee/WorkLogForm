@@ -509,16 +509,16 @@ namespace WorkLogForm
             String sql = "";
             if (role.KrOrder<2)
             {
-                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox1.Text.Trim() + "%'and d.KdName like '%" + comboBox1.Text.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks;
+                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox1.Text.Trim() + "%'and d.KdName like '%" + comboBox1.Text.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks + " and h.State=" + (int)LeaveManage.stateEnum.Normal;
             }
             else if (role.KrOrder == 2)
             {
-                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox1.Text.Trim() + "%'and d.KdName like '%" + leaveman.Kdid.KdName.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks;
+                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox1.Text.Trim() + "%'and d.KdName like '%" + leaveman.Kdid.KdName.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks + " and h.State=" + (int)LeaveManage.stateEnum.Normal;
                
             }
             else
             {
-                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + this.Leaveman.KuName + "%'and d.KdName like '%" + leaveman.Kdid.KdName.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks;
+                sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + this.Leaveman.KuName + "%'and d.KdName like '%" + leaveman.Kdid.KdName.Trim() + "%' and h.StartTime>=" + dateTimePicker3.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker4.Value.Date.Ticks + " and h.State=" + (int)LeaveManage.stateEnum.Normal;
             }
 
             IList searchList = baseService.loadEntityList(sql);
