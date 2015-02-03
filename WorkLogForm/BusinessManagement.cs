@@ -275,7 +275,7 @@ namespace WorkLogForm
             listView6.Items.Clear();
             if (roleInUser(this.User, "部门主任"))
             {
-                string query = "from Business b where b.PassExam=" + (int)Business.ExamState.waiting;
+                string query = "from Business b where b.PassExam=" + (int)Business.ExamState.waiting + " order by b.StartTime";
                 IList depList = baseService.loadEntityList(query);
                 int i = 1;
                 if (depList != null)
@@ -333,6 +333,7 @@ namespace WorkLogForm
             textBox6.Text = b.BusinessReason;
             textBox7.Text = st.ToString("yyyy年 MM月 dd日") + "----" + et.ToString("yyyy年 MM月 dd日");
             textBox8.Text = b.BusinessDestination;
+            textBox20.Text = b.Ku_Id.KuName;
             textBox12.Text = b.BusinessNote;
 
 
@@ -344,7 +345,7 @@ namespace WorkLogForm
             else 
             {
 
-                queryEmp = "from BusinessEmployee be where be.BusinessId=" + b.Id + "and (be.EmployeeId.Kdid=" + User.Kdid.Id + " or be.EmployeeId.Kdid.KdName like '%院领导%' ) and  be.PassExam=" + (int)BusinessEmployee.ExamState.waiting + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal;
+                queryEmp = "from BusinessEmployee be where be.BusinessId=" + b.Id + "and (be.EmployeeId.Kdid=" + User.Kdid.Id + " or be.EmployeeId.Kdid.KdName like '%院领导%' ) and  be.PassExam=" + (int)BusinessEmployee.ExamState.waiting + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal ;
   
             }
             EmpInBusDept = baseService.loadEntityList(queryEmp);
@@ -415,7 +416,7 @@ namespace WorkLogForm
         {
             listView3.Items.Clear();
             listView7.Items.Clear();
-            string query = "from Business b where b.Boss="+User.Id+"and b.PassExam=" + (int)Business.ExamState.pass;
+            string query = "from Business b where b.Boss=" + User.Id + "and b.PassExam=" + (int)Business.ExamState.pass + " order by b.StartTime";
             IList busList = baseService.loadEntityList(query);
             int i = 1;
             if (busList != null)
@@ -456,6 +457,7 @@ namespace WorkLogForm
             textBox10.Text = b.BusinessDestination;
             textBox11.Text = st.ToString("yyyy年 MM月 dd日") + "----" + et.ToString("yyyy年 MM月 dd日");
             textBox13.Text = b.BusinessReason;
+            textBox19.Text = b.Ku_Id.KuName;
             selectedBusiness = b;
 
         }
@@ -497,7 +499,7 @@ namespace WorkLogForm
         {
             listView8.Items.Clear();
             listView10.Items.Clear();
-            string query = "from Business b where b.Ku_Id=" + this.User.Id + "and b.PassExam=" + (int)Business.ExamState.redo;
+            string query = "from Business b where b.Ku_Id=" + this.User.Id + "and b.PassExam=" + (int)Business.ExamState.redo + " order by b.StartTime";
             IList busList = baseService.loadEntityList(query);
             int i=1;
             if (busList != null)
@@ -546,6 +548,7 @@ namespace WorkLogForm
             textBox15.Text = b.BusinessDestination;
             textBox14.Text = b.BusinessNote;
             textBox16.Text = st.ToString("yyyy年 MM月 dd日") + "----" + et.ToString("yyyy年 MM月 dd日");
+            textBox18.Text = b.Ku_Id.KuName;
         }
         private void button11_Click(object sender, EventArgs e)//一键通过
         {
@@ -598,11 +601,11 @@ namespace WorkLogForm
             string query="";
             if (Role.KrOrder <= 2)
             {
-                query = "from Business b  where b.State=" + (int)Business.stateEnum.Normal;
+                query = "from Business b  where b.State=" + (int)Business.stateEnum.Normal + " order by b.StartTime";
             }
             else
             {
-                query = "from Business b where b.Id in (select be.BusinessId from BusinessEmployee be where be.EmployeeId=" + this.User.Id +" and be.State="+(int)BusinessEmployee.stateEnum.Normal+ " ) and b.State=" + (int)Business.stateEnum.Normal;
+                query = "from Business b where b.Id in (select be.BusinessId from BusinessEmployee be where be.EmployeeId=" + this.User.Id + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal + " ) and b.State=" + (int)Business.stateEnum.Normal + " order by b.StartTime";
             }
             IList depList = baseService.loadEntityList(query);
             int i = 1;
@@ -616,8 +619,8 @@ namespace WorkLogForm
                     item.Text = i.ToString();
                     item.SubItems.Add(new DateTime(b.StartTime).ToShortDateString());
                     item.SubItems.Add(new DateTime(b.EndTime).ToShortDateString());
-                    item.SubItems.Add(b.BusinessDestination);
-                    item.SubItems.Add(b.BusinessReason);
+                   // item.SubItems.Add(b.BusinessDestination);
+                   // item.SubItems.Add(b.BusinessReason);
                     item.SubItems.Add(b.Ku_Id.KuName);
                     switch (b.PassExam)
                     {
@@ -653,11 +656,11 @@ namespace WorkLogForm
             string query="";
             if (Role.KrOrder <= 2)
             {
-                query = "from Business b where b.StartTime>= " + dateTimePicker3.Value.Date.Ticks + " and  b.EndTime<=" + dateTimePicker4.Value.Date.Ticks + " and b.Ku_Id.KuName like '%" + textBox2.Text + "%' and b.State="+ (int)Business.stateEnum.Normal;
+                query = "from Business b where b.StartTime>= " + dateTimePicker3.Value.Date.Ticks + " and  b.EndTime<=" + dateTimePicker4.Value.Date.Ticks + " and b.Ku_Id.KuName like '%" + textBox2.Text + "%' and b.State=" + (int)Business.stateEnum.Normal + " order by b.StartTime";
             }
             else
             {
-                query = "from Business b where b.StartTime>= " + dateTimePicker3.Value.Date.Ticks + " and  b.EndTime<=" + dateTimePicker4.Value.Date.Ticks + " and b.Ku_Id.KuName like '%" + textBox2.Text + "%' and b.Id in (select be.BusinessId from BusinessEmployee be where be.EmployeeId=" + this.User.Id + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal + " ) and b.State=" + (int)Business.stateEnum.Normal; 
+                query = "from Business b where b.StartTime>= " + dateTimePicker3.Value.Date.Ticks + " and  b.EndTime<=" + dateTimePicker4.Value.Date.Ticks + " and b.Ku_Id.KuName like '%" + textBox2.Text + "%' and b.Id in (select be.BusinessId from BusinessEmployee be where be.EmployeeId=" + this.User.Id + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal + " ) and b.State=" + (int)Business.stateEnum.Normal + " order by b.StartTime"; 
             }
             IList depList = baseService.loadEntityList(query);
             int i = 1;
