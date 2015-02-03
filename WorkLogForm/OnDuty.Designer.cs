@@ -231,15 +231,8 @@
             this.label43 = new System.Windows.Forms.Label();
             this.label155 = new System.Windows.Forms.Label();
             this.panel22 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -447,6 +440,10 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
+            this.CheckState = new System.Windows.Forms.Label();
+            this.PanelOfTwoButtons = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -500,6 +497,7 @@
             this.panel35.SuspendLayout();
             this.panel34.SuspendLayout();
             this.panel32.SuspendLayout();
+            this.PanelOfTwoButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboItem12
@@ -671,6 +669,8 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(221)))), ((int)(((byte)(208)))));
+            this.tabPage1.Controls.Add(this.PanelOfTwoButtons);
+            this.tabPage1.Controls.Add(this.CheckState);
             this.tabPage1.Controls.Add(this.dateTimePicker1);
             this.tabPage1.Controls.Add(this.panel46);
             this.tabPage1.Controls.Add(this.panel45);
@@ -727,7 +727,6 @@
             this.tabPage1.Size = new System.Drawing.Size(976, 606);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "值班查看";
-            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // dateTimePicker1
             // 
@@ -2362,15 +2361,8 @@
             this.panel22.BackgroundImage = global::WorkLogForm.Properties.Resources.日历小方块2;
             this.panel22.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel22.Controls.Add(this.label13);
-            this.panel22.Controls.Add(this.label12);
-            this.panel22.Controls.Add(this.label9);
-            this.panel22.Controls.Add(this.label8);
-            this.panel22.Controls.Add(this.linkLabel1);
             this.panel22.Controls.Add(this.label11);
             this.panel22.Controls.Add(this.label10);
-            this.panel22.Controls.Add(this.label7);
-            this.panel22.Controls.Add(this.label6);
             this.panel22.Controls.Add(this.label5);
             this.panel22.Controls.Add(this.label4);
             this.panel22.Controls.Add(this.label3);
@@ -2381,61 +2373,6 @@
             this.panel22.Name = "panel22";
             this.panel22.Size = new System.Drawing.Size(140, 90);
             this.panel22.TabIndex = 343;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label13.Location = new System.Drawing.Point(90, 67);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(44, 17);
-            this.label13.TabIndex = 13;
-            this.label13.Text = "张彦忠";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.Location = new System.Drawing.Point(51, 67);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(44, 17);
-            this.label12.TabIndex = 12;
-            this.label12.Text = "张彦忠";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label9.ForeColor = System.Drawing.Color.Red;
-            this.label9.Location = new System.Drawing.Point(90, 49);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 17);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "张彦忠";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(51, 49);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(44, 17);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "张彦忠";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.ActiveLinkColor = System.Drawing.Color.Yellow;
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.linkLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.linkLabel1.LinkColor = System.Drawing.Color.Blue;
-            this.linkLabel1.Location = new System.Drawing.Point(6, 67);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(32, 17);
-            this.linkLabel1.TabIndex = 1;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "排班";
             // 
             // label11
             // 
@@ -2458,26 +2395,6 @@
             this.label10.Size = new System.Drawing.Size(20, 17);
             this.label10.TabIndex = 10;
             this.label10.Text = "白";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.Location = new System.Drawing.Point(90, 29);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 17);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "张彦忠";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(50, 29);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 17);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "张彦忠";
             // 
             // label5
             // 
@@ -4934,6 +4851,48 @@
             this.label1.TabIndex = 334;
             this.label1.Text = "值班管理";
             // 
+            // CheckState
+            // 
+            this.CheckState.AutoSize = true;
+            this.CheckState.ForeColor = System.Drawing.Color.Navy;
+            this.CheckState.Location = new System.Drawing.Point(11, 12);
+            this.CheckState.Name = "CheckState";
+            this.CheckState.Size = new System.Drawing.Size(15, 21);
+            this.CheckState.TabIndex = 387;
+            this.CheckState.Text = " ";
+            // 
+            // PanelOfTwoButtons
+            // 
+            this.PanelOfTwoButtons.Controls.Add(this.button2);
+            this.PanelOfTwoButtons.Controls.Add(this.button1);
+            this.PanelOfTwoButtons.Location = new System.Drawing.Point(673, -4);
+            this.PanelOfTwoButtons.Name = "PanelOfTwoButtons";
+            this.PanelOfTwoButtons.Size = new System.Drawing.Size(277, 41);
+            this.PanelOfTwoButtons.TabIndex = 388;
+            this.PanelOfTwoButtons.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.Location = new System.Drawing.Point(39, 15);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(109, 23);
+            this.button1.TabIndex = 389;
+            this.button1.Text = "审核通过";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.Location = new System.Drawing.Point(163, 15);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(89, 23);
+            this.button2.TabIndex = 390;
+            this.button2.Text = "审核不通过";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // OnDuty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -4956,6 +4915,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.panel46.ResumeLayout(false);
             this.panel46.PerformLayout();
             this.panel45.ResumeLayout(false);
@@ -5047,6 +5007,7 @@
             this.panel34.PerformLayout();
             this.panel32.ResumeLayout(false);
             this.panel32.PerformLayout();
+            this.PanelOfTwoButtons.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5315,15 +5276,8 @@
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -5472,6 +5426,10 @@
         private System.Windows.Forms.Label label167;
         private System.Windows.Forms.Label label168;
         private System.Windows.Forms.Label label169;
+        private System.Windows.Forms.Panel PanelOfTwoButtons;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label CheckState;
 
     }
 }

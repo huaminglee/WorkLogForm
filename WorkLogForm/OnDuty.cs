@@ -36,12 +36,18 @@ namespace WorkLogForm
             set { user = value; }
         }
 
+        IList dutyDayLis;
+
+        /// <summary>
+        /// 判定角色0是普通人 1是综合办主任 2是科研所主任
+        /// </summary>
+        private int Therole;
+
         OpOndutyDateBase opp = new OpOndutyDateBase();
         public OnDuty()
         {
             InitializeComponent();
             initialWindow();
-            
             
         }
         #region 自定义窗体初始化方法
@@ -135,46 +141,156 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void OnDuty_Load(object sender, EventArgs e)
         {
+            //查询综合办与网络中心的主任
+
+            Therole = 0;
+            string sql = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%科技信息资源研究所%' or u.Kdid.KdName like '%综合办公室%') ";
+            IList i = baseService.loadEntityList(sql);
+            foreach (WkTUser o in i)
+            {
+                if (o.Kdid.KdName.Trim() == "科技信息资源研究所")
+                {
+                    if(user.Id == o.Id)
+                    {
+                        Therole = 2;
+                    }
+                }
+                else if (o.Kdid.KdName.Trim() == "综合办公室")
+                {
+                    if (user.Id == o.Id)
+                    {
+                        Therole = 1;
+                    }
+                }
+
+            }
+
+            
+
             loadData();
             this.dateTimePicker1.Value = DateTime.Now;
            
         }
-
-
-      
-
-        /// <summary>
-        /// 添加事件
-        /// </summary>
-        public void AddeventToAlable(long t1,long t2)
+        
+        public void PrintDutyPersonName(Panel p, WkTUser DaiBan, WkTUser Baiban, WkTUser Yeban, int Type)
         {
-
-            for (int i = 0; i < this.dateLabel.Count; i++)
+            #region
+            if (Type == 0) //行政班
             {
-                dateLabel[i].Click += null;
-                //dateLabel[i].ForeColor = Color.Black;
+                Label Duser = GetTheLabelByLocation(p, 51, 29);
+                if (Duser == null)
+                {
+                    Duser = new Label();
+                    Duser.Text = DaiBan.KuName;
+                    Duser.Location = new Point(51, 29);
+                    Duser.Font = new Font("微软雅黑", 9);
+                    Duser.Parent = p;
+                    Duser.ForeColor = DaiBan.Id == user.Id ? Color.Red : Color.Black;
+                    Duser.AutoSize = true;
+                }
+                else
+                {
+                    Duser.Text = DaiBan.KuName;
+                    Duser.ForeColor = DaiBan.Id == user.Id ? Color.Red : Color.Black;
+
+                }
+
+                Label Buser = GetTheLabelByLocation(p, 51, 49);
+                if (Buser == null)
+                {
+                    Buser = new Label();
+                    Buser.Text = Baiban.KuName;
+                    Buser.Location = new Point(51, 49);
+                    Buser.Font = new Font("微软雅黑", 9);
+                    Buser.Parent = p;
+                    Buser.ForeColor = Baiban.Id == user.Id ? Color.Red : Color.Black;
+                    Buser.AutoSize = true;
+                }
+                else
+                {
+                    Buser.Text = Baiban.KuName;
+                    Buser.ForeColor = Baiban.Id == user.Id ? Color.Red : Color.Black;
+
+                }
+
+                Label Yuser = GetTheLabelByLocation(p, 51, 67);
+                if (Yuser == null)
+                {
+                    Yuser = new Label();
+                    Yuser.Text = Yeban.KuName;
+                    Yuser.Location = new Point(51, 67);
+                    Yuser.Font = new Font("微软雅黑", 9);
+                    Yuser.Parent = p;
+                    Yuser.ForeColor = Yeban.Id == user.Id ? Color.Red : Color.Black;
+                    Yuser.AutoSize = true;
+                }
+                else
+                {
+                    Yuser.Text = Yeban.KuName;
+                    Yuser.ForeColor = Yeban.Id == user.Id ? Color.Red : Color.Black;
+                }
+
             }
+            #endregion
 
-
-            IList times = opp.SelectManagerTime(this.User, t1, t2);
-
-            for (int i = 0; i < this.dateLabel.Count; i++)
+            #region 网络班
+            else
             {
-                 
-                //foreach(TimeArrangeForManager o in times)
-                //{
-                //    DateTime dt = (DateTime)dateLabel[i].Parent.Tag;
-                //    if (dateLabel[i].Parent.ForeColor != SystemColors.ControlDark && dt.Date.Ticks >= o.Startime && dt.Date.Ticks < o.Endtime && dateLabel[i].Parent.Controls[1].Text == "")
-                //    {
-                //        dateLabel[i].Click += OnDuty_Click;
-                //        dateLabel[i].ForeColor = Color.Red;
-                //    }
-                //}
-                
+                Label Duser = GetTheLabelByLocation(p, 91, 29);
+                if (Duser == null)
+                {
+                    Duser = new Label();
+                    Duser.Text = DaiBan.KuName;
+                    Duser.Location = new Point(91, 29);
+                    Duser.Font = new Font("微软雅黑", 9);
+                    Duser.ForeColor = DaiBan.Id == user.Id ? Color.Red : Color.Black;
+                    Duser.Parent = p;
+                    Duser.AutoSize = true;
+                }
+                else
+                {
+                    Duser.Text = DaiBan.KuName;
+                    Duser.ForeColor = DaiBan.Id == user.Id ? Color.Red : Color.Black;
+
+                }
+
+                Label Buser = GetTheLabelByLocation(p, 91, 49);
+                if (Buser == null)
+                {
+                    Buser = new Label();
+                    Buser.Text = Baiban.KuName;
+                    Buser.Location = new Point(91, 49);
+                    Buser.Font = new Font("微软雅黑", 9);
+                    Buser.Parent = p;
+                    Buser.ForeColor = Baiban.Id == user.Id ? Color.Red : Color.Black;
+                    Buser.AutoSize = true;
+                }
+                else
+                {
+                    Buser.Text = Baiban.KuName;
+                    Buser.ForeColor = Baiban.Id == user.Id ? Color.Red : Color.Black;
+
+                }
+
+                Label Yuser = GetTheLabelByLocation(p, 91, 67);
+                if (Yuser == null)
+                {
+                    Yuser = new Label();
+                    Yuser.Text = Yeban.KuName;
+                    Yuser.Location = new Point(91, 67);
+                    Yuser.Font = new Font("微软雅黑", 9);
+                    Yuser.Parent = p;
+                    Yuser.ForeColor = Yeban.Id == user.Id ? Color.Red : Color.Black;
+                    Yuser.AutoSize = true;
+                }
+                else
+                {
+                    Yuser.ForeColor = Yeban.Id == user.Id ? Color.Red : Color.Black;
+                    Yuser.Text = Yeban.KuName;
+                }
             }
+            #endregion
         }
-
-
       
 
         /// <summary>
@@ -227,7 +343,6 @@ namespace WorkLogForm
                     }
                 }
 
-
                 if (i < startDay)
                 {
                     dateLabel[i].Text = (lastMonthLastDay - (startDay - i) + 1).ToString();
@@ -275,8 +390,47 @@ namespace WorkLogForm
                         panban.Click += panban_Click;
                     }
                 }
+
+
+                //加载人员
+                DateTime dt = (DateTime)dateLabel[i].Parent.Tag;
+                List<OnDutyTable> dayInfo = IsTheTimeIndutyDayLis(dt);
+                if (dayInfo !=null)
+                {
+                    foreach (OnDutyTable oo in dayInfo)
+                    {
+                        if(oo.Type == 0)
+                        {
+                            PrintDutyPersonName((Panel)dateLabel[i].Parent, oo.DaiBanID, oo.BaiBanID, oo.YeBanID, 0);
+                        }
+                        else if (oo.Type == 1)
+                        {
+                            PrintDutyPersonName((Panel)dateLabel[i].Parent, oo.DaiBanID, oo.BaiBanID, oo.YeBanID, 1);
+                        }
+                    
+                    }
+                
+                }
             }
 
+        }
+
+        public List<OnDutyTable> IsTheTimeIndutyDayLis(DateTime dt)
+        {
+            List<OnDutyTable> dayInfo = null;
+            if (dutyDayLis != null && dutyDayLis.Count>0)
+            {
+                foreach (OnDutyTable o in dutyDayLis)
+                {
+                    if(o.Time == dt.Ticks)
+                    {
+                        dayInfo = new List<OnDutyTable>();
+                        dayInfo.Add(o);
+                    }
+                }
+            }
+
+            return dayInfo;
         }
 
 
@@ -293,129 +447,52 @@ namespace WorkLogForm
             {
                 if (TfM != null)
                 {
+                    OnDutyTable ot;
+                    DateTime dt = new DateTime (((DateTime)((((LinkLabel)sender).Parent).Tag)).Ticks);
+                    string sql = "select u from OnDutyTable u where u.Time = " + dt.Ticks+ 
+                        " and u.State = "+(int)IEntity.stateEnum.Normal;
+                    IList i = baseService.loadEntityList(sql);
+                    if (i != null && i.Count > 0)
+                    {
+                        ot = (OnDutyTable)i[0];
+                    }
+                    else
+                    {
+                        ot = new OnDutyTable();
+                    
+                    }
+                    ot.TFMId = TfM;
+                    ot.Time = dt.Ticks;
+                    ot.DaiBanID = ad.Duser;
+                    ot.BaiBanID = ad.Buser;
+                    ot.YeBanID = ad.Yuser;
+                    ot.State = (int)IEntity.stateEnum.Normal;
+                    ot.TimeStamp = DateTime.Now.Ticks;
                     if(TfM.IsDone == 0)
                     {
                         TfM.IsDone = 1;
+                        baseService.SaveOrUpdateEntity(TfM);
                     }
 
                     #region 行政班
                     if (TfM.DutyType == 0) //行政班
                     {
-                        Label Duser = GetTheLabelByLocation((Panel)((LinkLabel)sender).Parent, 51, 29);
-                        if (  Duser == null)
-                        {
-                            Duser = new Label();
-                            Duser.Text = ad.Duser.KuName;
-                            Duser.Location = new Point(51, 29);
-                            Duser.Font = new Font("微软雅黑", 9);
-                            Duser.Parent = ((LinkLabel)sender).Parent;
-                            Duser.ForeColor = ad.Duser.Id == user.Id ? Color.Red : Color.Black;
-                            Duser.AutoSize = true;
-                        }
-                        else
-                        {
-                            Duser.Text = ad.Duser.KuName;
-                            Duser.ForeColor = ad.Duser.Id == user.Id ? Color.Red : Color.Black;
-
-                        }
-
-                        Label Buser = GetTheLabelByLocation((Panel)((LinkLabel)sender).Parent, 51, 49);
-                        if (Buser == null)
-                        {
-                            Buser = new Label();
-                            Buser.Text = ad.Buser.KuName;
-                            Buser.Location = new Point(51, 49);
-                            Buser.Font = new Font("微软雅黑", 9);
-                            Buser.Parent = ((LinkLabel)sender).Parent;
-                            Buser.ForeColor = ad.Buser.Id == user.Id ? Color.Red : Color.Black;
-                            Buser.AutoSize = true;
-                        }
-                        else
-                        {
-                            Buser.Text = ad.Buser.KuName;
-                            Buser.ForeColor = ad.Buser.Id == user.Id ? Color.Red : Color.Black;
-
-                        }
-
-                        Label Yuser = GetTheLabelByLocation((Panel)((LinkLabel)sender).Parent, 51, 67);
-                        if (Yuser == null)
-                        {
-                            Yuser = new Label();
-                            Yuser.Text = ad.Yuser.KuName;
-                            Yuser.Location = new Point(51, 67);
-                            Yuser.Font = new Font("微软雅黑", 9);
-                            Yuser.Parent = ((LinkLabel)sender).Parent;
-                            Yuser.ForeColor = ad.Yuser.Id == user.Id ? Color.Red : Color.Black;
-                            Yuser.AutoSize = true;
-                        }
-                        else
-                        {
-                            Yuser.Text = ad.Yuser.KuName;
-                            Yuser.ForeColor = ad.Yuser.Id == user.Id ? Color.Red : Color.Black;
-
-                        }
-
+                        PrintDutyPersonName((Panel)((LinkLabel)sender).Parent, ad.Duser, ad.Buser, ad.Yuser, 0);
+                        ot.Type = 0;
                     }
                     #endregion
 
                     #region 网络班
                     else 
                     {
-                         Label Duser = GetTheLabelByLocation((Panel)((LinkLabel)sender).Parent, 91, 29);
-                         if (Duser == null)
-                         {
-                             Duser = new Label();
-                             Duser.Text = ad.Duser.KuName;
-                             Duser.Location = new Point(91, 29);
-                             Duser.Font = new Font("微软雅黑", 9);
-                             Duser.ForeColor = ad.Duser.Id == user.Id ? Color.Red : Color.Black;
-                             Duser.Parent = ((LinkLabel)sender).Parent;
-                             Duser.AutoSize = true;
-                         }
-                         else
-                         {
-                             Duser.Text = ad.Duser.KuName;
-                             Duser.ForeColor = ad.Duser.Id == user.Id ? Color.Red : Color.Black;
 
-                         }
-
-                         Label Buser = GetTheLabelByLocation((Panel)((LinkLabel)sender).Parent, 91, 49);
-                         if (Buser == null)
-                         {
-                             Buser = new Label();
-                             Buser.Text = ad.Buser.KuName;
-                             Buser.Location = new Point(91, 49);
-                             Buser.Font = new Font("微软雅黑", 9);
-                             Buser.Parent = ((LinkLabel)sender).Parent;
-                             Buser.ForeColor = ad.Buser.Id == user.Id ? Color.Red : Color.Black;
-                             Buser.AutoSize = true;
-                         }
-                         else
-                         {
-                             Buser.Text = ad.Buser.KuName;
-                             Buser.ForeColor = ad.Buser.Id == user.Id ? Color.Red : Color.Black;
-
-                         }
-
-                         Label Yuser = GetTheLabelByLocation((Panel)((LinkLabel)sender).Parent, 91, 67);
-                         if (Yuser == null)
-                         {
-                             Yuser = new Label();
-                             Yuser.Text = ad.Yuser.KuName;
-                             Yuser.Location = new Point(91, 67);
-                             Yuser.Font = new Font("微软雅黑", 9);
-                             Yuser.Parent = ((LinkLabel)sender).Parent;
-                             Yuser.ForeColor = ad.Yuser.Id == user.Id ? Color.Red : Color.Black;
-                             Yuser.AutoSize = true;
-                         }
-                         else
-                         {
-                             Yuser.ForeColor = ad.Yuser.Id == user.Id ? Color.Red : Color.Black;
-                             Yuser.Text = ad.Yuser.KuName;
-                         }
+                        PrintDutyPersonName((Panel)((LinkLabel)sender).Parent, ad.Duser, ad.Buser, ad.Yuser, 1);
+                        ot.Type = 1;
                     }
-                    #endregion
 
+                    baseService.SaveOrUpdateEntity(ot);
+
+                    #endregion
 
                 }
             
@@ -436,8 +513,6 @@ namespace WorkLogForm
             }
             return l;
         }
-
-
 
         private void loadData()
         {
@@ -461,19 +536,21 @@ namespace WorkLogForm
 
         }
 
-       
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
+
+            DateTime tt = new DateTime(this.dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, 1);
+
+            string sql1 = "Select u from OnDutyTable u where u.State = "+(int)IEntity.stateEnum.Normal+
+                " and u.Time > " + tt.AddDays(-16).Ticks+
+                " and u.Time < " + tt.AddDays(16).Ticks;
+            dutyDayLis = baseService.loadEntityList(sql1);
+
             dateTimePicker1.Cursor = Cursors.WaitCursor;
             if (this.dateTimePicker1.Value.Ticks > DateTime.Now.Ticks)
             {
-                DateTime tt = new DateTime(this.dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, 1);
+               
                 //查询这个月是否自己排班
 
                 string sql = "select u from TimeArrangeForManager u where u.UserId = " + user.Id +
@@ -481,25 +558,82 @@ namespace WorkLogForm
                     " and u.State = " + (int)IEntity.stateEnum.Normal;
 
                 IList timemananer = baseService.loadEntityList(sql);
+
                 if (timemananer != null && timemananer.Count > 0)
                 {
                     TfM = new TimeArrangeForManager();
                     TfM = (TimeArrangeForManager)timemananer[0];
 
                     this.initCalendar(this.dateTimePicker1.Value.Year, this.dateTimePicker1.Value.Month,true);
+                    switch (TfM.ExamineState)
+                    {
+                        case 0:
+                            this.CheckState.Text = "审核状态：未审核"; break;
+                        case 1:
+                            this.CheckState.Text = "审核状态：审核通过"; break;
+                        case 2:
+                            this.CheckState.Text = "审核状态：审核为通过"; break;
+                    }
                 }
                 else
                 {
                     this.initCalendar(this.dateTimePicker1.Value.Year, this.dateTimePicker1.Value.Month, false);
+                    this.CheckState.Text = "";
+                }
+
+                if (Therole != 0)
+                {
+                    this.PanelOfTwoButtons.Visible = true;
                 }
 
             }
             else 
             {
                 this.initCalendar(this.dateTimePicker1.Value.Year, this.dateTimePicker1.Value.Month,false);
+                this.CheckState.Text = "";
+                this.PanelOfTwoButtons.Visible = false;
             }
+
             dateTimePicker1.Cursor = Cursors.Hand;
         }
-                           
+
+
+        /// <summary>
+        /// 审核通过
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(TfM != null)
+            {
+                if (MessageBox.Show("确定要通过吗？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    TfM.ExamineState = 1;
+                    baseService.SaveOrUpdateEntity(TfM);
+                    this.CheckState.Text = "审核状态：审核通过";
+                }
+               
+            }
+
+        }
+
+        /// <summary>
+        /// 审核不通过
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (TfM != null)
+            {
+                if (MessageBox.Show("确定要通过吗？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    TfM.ExamineState = 2;
+                    baseService.SaveOrUpdateEntity(TfM);
+                    this.CheckState.Text = "审核状态：审核为通过";
+                }
+            }
+        }                           
     }
 }

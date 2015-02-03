@@ -2,19 +2,21 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
     namespace="ClassLibrary" assembly="ClassLibrary">
 
-  <class name="OnDuty" table="LOG_T_ONDUTY" >
+  <class name="OnDutyTable" table="LOG_T_ONDUTY" >
     <id name="Id" column="Id" type="long"  length="10" unsaved-value="0">
       <generator class="native" />
     </id>
 
-    <many-to-one name="Ku_Id" column="KU_ID" lazy="false" not-null="true"
-                class="ClassLibrary.WkTUser, ClassLibrary" />
-    
-    <many-to-one name="Staff_Id" column="ONDUTY_STAFFID" lazy="false" not-null="true"
+    <many-to-one name="DaiBanID" column="ONDUTY_STAFFDaiBanID" lazy="false" not-null="true"
                class="ClassLibrary.WkTUser, ClassLibrary" />
+    <many-to-one name="BaiBanID" column="ONDUTY_STAFFBaiBanID" lazy="false" not-null="true"
+               class="ClassLibrary.WkTUser, ClassLibrary" />
+    <many-to-one name="YeBanID" column="ONDUTY_STAFFYeBanID" lazy="false" not-null="true"
+               class="ClassLibrary.WkTUser, ClassLibrary" />
+    <many-to-one name="TFMId" column="TFMId" lazy="false" not-null="true"
+               class="ClassLibrary.TimeArrangeForManager, ClassLibrary" />
     
     <property name="Time" column="ONDUTY_TIME" type="long" />
-    <property name="Times" column="ONDUTY_TIMES" type="int" />
     <property name="Type" column="ONDUTY_TYPE" type="int" />
 
     <property name="State" column="STATE" type="int" length="1"/>
