@@ -854,7 +854,7 @@ namespace WorkLogForm
                 if(this.dataGridView4.Rows.Count == 0)
                 {
                     //查库
-                    string sql = "select u from  TimeArrangeForManager u where u.State = " + (int)IEntity.stateEnum.Normal;
+                    string sql = "select u from  TimeArrangeForManager u where u.State = " + (int)IEntity.stateEnum.Normal + " order by u.TimeMonth desc";
                     IList i = baseService.loadEntityList(sql);
                     if(i!= null && i.Count > 0)
                     {
@@ -862,11 +862,8 @@ namespace WorkLogForm
                         {
                             DataGridView4RowsAdd(tgm);
                         }
-                    
                     }
                 
-                   
-
                 }
 
 
@@ -956,6 +953,7 @@ namespace WorkLogForm
                 tgm.TimeMonth = dt.Ticks;
                 tgm.IsDone = 0;
                 tgm.DutyType = this.comboBox3.SelectedIndex;
+                tgm.ExamineState = 0;
                 baseService.SaveOrUpdateEntity(tgm);
                 DataGridView4RowsAdd(tgm);
                 MessageBox.Show("添加成功！");
@@ -968,7 +966,19 @@ namespace WorkLogForm
             if(tgm != null)
             {
                 DateTime dt = new DateTime (tgm.TimeMonth);
-                this.dataGridView4.Rows.Add(dt.ToString("yyyy年MM月"), tgm.UserId.KuName, tgm.ArrangeUserId.KuName, tgm.DutyType == 0?"行政班":"网络班" ,tgm.IsDone == 1?"":"删除");
+                if(tgm.ExamineState == 0)
+                {
+                    this.dataGridView4.Rows.Add(dt.ToString("yyyy年MM月"), tgm.UserId.KuName, tgm.ArrangeUserId.KuName, tgm.DutyType == 0 ? "行政班" : "网络班","未审核", tgm.IsDone == 1 ? "" : "删除");
+                }
+                else if(tgm.ExamineState == 1)
+                {
+                    this.dataGridView4.Rows.Add(dt.ToString("yyyy年MM月"), tgm.UserId.KuName, tgm.ArrangeUserId.KuName, tgm.DutyType == 0 ? "行政班" : "网络班","审核通过", tgm.IsDone == 1 ? "" : "删除");
+                }
+                else if(tgm.ExamineState == 2)
+                {
+                    this.dataGridView4.Rows.Add(dt.ToString("yyyy年MM月"), tgm.UserId.KuName, tgm.ArrangeUserId.KuName, tgm.DutyType == 0 ? "行政班" : "网络班","审核为通过", tgm.IsDone == 1 ? "" : "删除");
+                }
+
                 this.dataGridView4.Rows[this.dataGridView4.Rows.Count - 1].Tag = tgm;
             }
         }
@@ -976,15 +986,6 @@ namespace WorkLogForm
       
 
         #endregion
-
-      
-
-       
-
-       
-
-
-
 
     }
 }

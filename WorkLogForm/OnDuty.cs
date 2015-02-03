@@ -33,6 +33,7 @@ namespace WorkLogForm
             get { return user; }
             set { user = value; }
         }
+
         OpOndutyDateBase opp = new OpOndutyDateBase();
         public OnDuty()
         {
@@ -53,7 +54,27 @@ namespace WorkLogForm
         #endregion
 
         #region 最小化关闭按钮
-        
+
+
+        /// <summary>
+        /// 窗体关闭按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox8_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// 窗体最小化
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBox9_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
         private void pictureBox9_MouseMove(object sender, MouseEventArgs e)
         {
             pictureBox9.BackgroundImage = WorkLogForm.Properties.Resources.最小化_副本;
@@ -107,83 +128,17 @@ namespace WorkLogForm
         }
         #endregion
 
-        private void panel_Click(object sender, EventArgs e)
-        {
-            //OnDutyAdd.Visible = true;
-        }
+      
 
-        /// <summary>
-        /// 关闭按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pictureBox46_Click(object sender, EventArgs e)
-        {
-            OnDutyAdd.Visible = false;
-        }
        
-        private void pictureBox8_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void label122_Click(object sender, EventArgs e)
-        {
-            //OnDutyAdd.Visible = true;
-        }
-
-
-        /// <summary>
-        /// 确定按钮安排值班人员
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button2_Click(object sender, EventArgs e)
-        {
-            //保存信息
-
-
-            for (int i = 0; i < this.dataGridView1.Rows.Count; i++ )
-            {
-                //判断打勾的
-                if( Convert.ToBoolean(this.dataGridView1.Rows[i].Cells[0].Value) )
-                {
-                    ClassLibrary.OnDuty theduty = new ClassLibrary.OnDuty();
-                    theduty.Ku_Id = this.User;
-                    theduty.Staff_Id = this.dataGridView1.Rows[i].Tag as WkTUser;
-                    theduty.Time = ((DateTime)this.labelX1.Tag).Date.Ticks;
-                    //theduty.Times = theduty.Times + 1;
-                    if(Convert.ToBoolean(this.dataGridView1.Rows[i].Cells[4].Value))
-                    {
-                        theduty.Type = (int)ClassLibrary.OnDuty.DutyType.day;
-                    }
-                    else if(Convert.ToBoolean(this.dataGridView1.Rows[i].Cells[5].Value))
-                    {
-                        theduty.Type = (int)ClassLibrary.OnDuty.DutyType.night;
-                    }
-                    
-                    opp.SaveOrUpdateEntity(theduty);
-
-
-                    WkTUser thuser = this.dataGridView1.Rows[i].Tag as WkTUser;
-                    thuser.DutyTimes = thuser.DutyTimes + 1;
-                    opp.SaveOrUpdateEntity(thuser);
-
-
-                }
-
-            }
-            
-            this.Visible = false;
-            MessageBox.Show("值班安排信息保存成功！");
-        }
+       
 
 
 
-        private void pictureBox9_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
+     
+
+
+     
 
         /// <summary>
         /// 窗口加载事件
@@ -193,10 +148,8 @@ namespace WorkLogForm
         private void OnDuty_Load(object sender, EventArgs e)
         {
             
-            OnDutyAdd.Visible = false;
-            OndutyaddForYuanZhang.Visible = false;
-            ShowDuty.Visible = false;
-
+          
+         
 
             loadData();
 
@@ -204,8 +157,8 @@ namespace WorkLogForm
             year_comboBoxEx.SelectedIndex = DateTime.Now.Year - 2012;
 
 
-            this.button3.Visible = false;
-            this.button5.Visible = false;
+          
+           
 
             //判断用登陆角色户
              userrole = User.UserRole;
@@ -221,7 +174,7 @@ namespace WorkLogForm
                     Ondutys = opp.GetMonthDuty(dt.Ticks, dt.Date.AddMonths(1).Ticks);
                     //赋予不同功能
                     SetLabel();
-                    this.button3.Visible = true;
+                    //this.button3.Visible = true;
                     
                 }
                 else if (o.KrOrder == 2) //负责人登陆
@@ -233,7 +186,7 @@ namespace WorkLogForm
                 }
                 else if (o.KrOrder == 3) //员工登陆
                 {
-                    this.button5.Visible = true;
+                  
                 }
             }
 
@@ -258,11 +211,11 @@ namespace WorkLogForm
                 {
                    for (int i = 0; i < dateLabel.Count; i++)
                     {
-                        if (o.Time == ((DateTime)dateLabel[i].Parent.Tag).Date.Ticks)
-                        {
-                            dateLabel[i].Parent.Controls[0].Text = o.Ku_Id.KuName;
-                            dateLabel[i].Parent.Controls[1].Text = dateLabel[i].Parent.Controls[1].Text + "/" + o.Staff_Id.KuName;
-                        }
+                        //if (o.Time == ((DateTime)dateLabel[i].Parent.Tag).Date.Ticks)
+                        //{
+                           // dateLabel[i].Parent.Controls[0].Text = o.Ku_Id.KuName;
+                            //dateLabel[i].Parent.Controls[1].Text = dateLabel[i].Parent.Controls[1].Text + "/" + o.Staff_Id.KuName;
+                       // }
                     }
                 }
             }
@@ -300,21 +253,7 @@ namespace WorkLogForm
         }
 
 
-        /// <summary>
-        /// 点击事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void OnDuty_Click(object sender, EventArgs e)
-        {
-        
-            OnDutyAdd.Visible = true;
-            System.Windows.Forms.Label thelab = (System.Windows.Forms.Label)sender;
-            DateTime thetime = (DateTime) thelab.Parent.Tag;
-            this.labelX1.Text = thetime.ToString("yyyy年MM月dd日");
-            this.labelX1.Tag = thetime;
-        
-        }
+      
 
         /// <summary>
         /// 初始化日历日期
@@ -453,329 +392,31 @@ namespace WorkLogForm
             }
         }
 
-
-        /// <summary>
-        /// 院长控制
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button3_Click(object sender, EventArgs e)
-        {
-            OndutyaddForYuanZhang.Visible = true;
-            OndutyaddForYuanZhang.BringToFront();
-            OnDutyAdd.Visible = true;
-            this.dataGridView2.Rows.Clear();
-        }
+       
 
 
+      
 
-        /// <summary>
-        /// 查询按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.dataGridView1.Rows.Clear();
-            
-            if(this.comboBox2.Text != "")
-            {
-                WkTDept select = (WkTDept)this.comboBox2.SelectedValue;
-                IList users = opp.GetSelectYuanGong(this.textBox7.Text, select);
-                if(users != null)
-                {
-                    foreach (WkTUser o in users)
-                    {
-                        this.dataGridView1.Rows.Add(false, o.KuName,o.Kdid.KdName, o.DutyTimes, false, false);
-                        this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Tag = o;
-                    }
-                }
-            }
-        }
+
 
 
        
 
 
-        /// <summary>
-        /// 下拉事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboBox2_DropDown(object sender, EventArgs e)
-        {
+   
 
-
-
-        }
-
-        /// <summary>
-        /// 显示框点击事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            #region
-            if (this.dataGridView1.CurrentCell.ColumnIndex == 0)
-            {
-
-               if(Convert.ToBoolean(this.dataGridView1.CurrentRow.Cells[0].EditedFormattedValue) == true)
-               {
-                   this.dataGridView1.CurrentRow.Cells[4].ReadOnly = false;
-                   this.dataGridView1.CurrentRow.Cells[5].ReadOnly = false;
-
-                   this.dataGridView1.CurrentRow.Cells[4].Value = true;
-               }
-
-               if(Convert.ToBoolean(this.dataGridView1.CurrentRow.Cells[0].EditedFormattedValue) == false)
-               {
-                   this.dataGridView1.CurrentRow.Cells[4].Value = false;
-                   this.dataGridView1.CurrentRow.Cells[5].Value = false;
-               
-                   this.dataGridView1.CurrentRow.Cells[4].ReadOnly = true;
-                   this.dataGridView1.CurrentRow.Cells[5].ReadOnly = true;
-               }
-            }
-            #endregion
-
-            if (e.ColumnIndex == 4 || e.ColumnIndex == 5)
-            {
-                if (Convert.ToBoolean(this.dataGridView1.CurrentRow.Cells[4].EditedFormattedValue) == true)
-                {
-                    this.dataGridView1.CurrentRow.Cells[5].Value = false;
-                }
-                if (Convert.ToBoolean(this.dataGridView1.CurrentRow.Cells[5].EditedFormattedValue) == true)
-                {
-                    this.dataGridView1.CurrentRow.Cells[4].Value = false;
-                }
-
-            }
-
-        }
-
-        /// <summary>
-        /// 院长显示 关闭按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pictureBox10_Click(object sender, EventArgs e)
-        {
-            this.OndutyaddForYuanZhang.Visible = false;
-            this.OnDutyAdd.Visible = false;
-        }
-
-        /// <summary>
-        /// 员工查看关闭按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pictureBox11_Click(object sender, EventArgs e)
-        {
-            this.OnDutyAdd.Visible = false;
-            this.OndutyaddForYuanZhang.Visible = false;
-            this.ShowDuty.Visible = false;
-        }
-
-        /// <summary>
-        /// 查看自己
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button5_Click(object sender, EventArgs e)
-        {
-            this.OnDutyAdd.Visible = true;
-            this.OndutyaddForYuanZhang.Visible = true;
-            this.ShowDuty.Visible = true;
-        }
-
-
-
-        /// <summary>
-        /// 员工值班信息界面显示
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ShowDuty_VisibleChanged(object sender, EventArgs e)
-        {
-            if(this.ShowDuty.Visible == true)
-            {
-                DevComponents.Editors.ComboItem yearItem = (DevComponents.Editors.ComboItem)year_comboBoxEx.SelectedItem;
-                DevComponents.Editors.ComboItem monthItem = (DevComponents.Editors.ComboItem)month_comboBoxEx.SelectedItem;
-                DateTime dt = new DateTime(Convert.ToInt32(yearItem.Text), Convert.ToInt32(monthItem.Text), 1);
-                IList myduty = opp.GetMonthDuty(dt.Ticks, dt.Date.AddMonths(1).Ticks);
-
-                
-                foreach(ClassLibrary.OnDuty o in myduty)
-                {
-                    if(o.Staff_Id == this.User)
-                    {
-                        this.ShowDutyGridView.Rows.Add(new DateTime(o.Time).ToString("yyyy-MM-dd"), o.Type == (int)ClassLibrary.OnDuty.DutyType.day ? "白班" : "夜班");
-                    }
-                }
-            }
-        }
-
-
-
-
-        /// <summary>
-        /// 院长控制界面加载
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OndutyaddForYuanZhang_VisibleChanged(object sender, EventArgs e)
-        {
-            if (this.OndutyaddForYuanZhang.Visible == true && this.ShowDuty.Visible == false)
-            {
-                IList depts = opp.GetAllDept();
-                if (depts != null && depts.Count > 0)
-                {
-                    this.comboBox1.DataSource = depts;
-                    this.comboBox1.DisplayMember = "KdName";
-                    this.comboBox1.ValueMember = "Itself";
-                }
-            }
-        }
-
-        /// <summary>
-        /// 当ondutyadd显示的时候
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnDutyAdd_VisibleChanged(object sender, EventArgs e)
-        {
-            if (OnDutyAdd.Visible == true && false == this.ShowDuty.Visible && false == this.OndutyaddForYuanZhang.Visible)
-            {
-                this.dataGridView1.Rows.Clear();
-                IList depts = opp.GetAllDept();
-                if (depts != null && depts.Count > 0)
-                {
-                    this.comboBox2.DataSource = depts;
-                    this.comboBox2.DisplayMember = "KdName";
-                    this.comboBox2.ValueMember = "Itself";
-                }
-            }
-        }
-
-
-
-        /// <summary>
-        /// 加载负责人下拉选项
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //部门已经选择
-            if (this.comboBox1.SelectedValue != null)
-            {
-
-                IList deptleaders = opp.GetDeptLeader((WkTDept)this.comboBox1.SelectedValue);
-                if (deptleaders != null && deptleaders.Count > 0)
-                {
-                    this.comboBox3.DataSource = deptleaders;
-                    this.comboBox3.DisplayMember = "kuName";
-                    this.comboBox3.ValueMember = "Itself";
-                }
-
-            }
-            else
-            {
-                MessageBox.Show("您还没选择部门");
-
-            }
-
-        }
+     
 
 
 
 
 
-        /// <summary>
-        /// 添加时间段
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonX1_Click(object sender, EventArgs e)
-        {
-            
-            //起始时间要小于截止时间
 
-            if (this.dateTimePicker1.Value.Ticks > this.dateTimePicker2.Value.Ticks)
-            {
-                MessageBox.Show("起始时间要小于截至时间！");
-            }
-            else
-            {
-                
-                //当前选择的没有安排 
-                if (!opp.IsSurInSheetManager( this.dateTimePicker1.Value.Date.Ticks, this.dateTimePicker2.Value.Date.Ticks))
-                {
-                    //插入到grid中
-                    this.dataGridView2.Rows.Add(new DateTime(this.dateTimePicker1.Value.Ticks).ToString("yyyy-MM-dd"),
-                        new DateTime(this.dateTimePicker2.Value.Ticks).ToString("yyyy-MM-dd"),
-                        ((WkTDept)this.comboBox1.SelectedValue).KdName,
-                        ((WkTUser)this.comboBox3.SelectedValue).KuName,
-                        "删除");
-
-                    this.dataGridView2.Rows[this.dataGridView2.Rows.Count - 1].Tag = (WkTUser)this.comboBox3.SelectedValue;
-                }
-                else
-                {
-                    MessageBox.Show("这段时间已经安排过了，或者有重合！");
-                }
-                
-            }
-
-        }
+       // DevComponents.Editors.ComboItem yearItem = (DevComponents.Editors.ComboItem)year_comboBoxEx.SelectedItem;
+        //DevComponents.Editors.ComboItem monthItem = (DevComponents.Editors.ComboItem)month_comboBoxEx.SelectedItem;
+       // DateTime dt = new DateTime(Convert.ToInt32(yearItem.Text), Convert.ToInt32(monthItem.Text), 1);
 
 
-        /// <summary>
-        /// 向aarrangetimeformanager
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonX2_Click(object sender, EventArgs e)
-        {
-            for(int i = 0 ; i < this.dataGridView2.Rows.Count;i++)
-            {
-              
-                
-                String strst = this.dataGridView2.Rows[i].Cells[0].Value.ToString();
-                string[] sst = strst.Split(new char[] { '-' });
-                String stret = this.dataGridView2.Rows[i].Cells[1].Value.ToString();
-                string[] set = stret.Split(new char[] { '-' });
-
-
-                //TimeArrangeForManager tafm = new TimeArrangeForManager();
-                //tafm.Startime = new DateTime(int.Parse(sst[0]), int.Parse(sst[1]), int.Parse(sst[2])).Ticks;
-                //tafm.Endtime = new DateTime(int.Parse(set[0]), int.Parse(set[1]), int.Parse(set[2])).AddDays(-1).Ticks;
-                //tafm.UserId = this.dataGridView2.Rows[i].Tag as WkTUser;
-               
-                //opp.SaveOrUpdateEntity(tafm);
-
-            }
-
-            this.OndutyaddForYuanZhang.Visible = false;
-            this.OnDutyAdd.Visible = false;
-        }
-
-
-        /// <summary>
-        /// 点击删除按钮时候
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if(e.ColumnIndex == 4 && this.dataGridView2.CurrentCell.Value.ToString() == "删除")
-            {
-                this.dataGridView2.Rows.Remove(this.dataGridView2.CurrentRow);
-            }
-        }
-
-        
        
         
     }

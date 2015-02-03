@@ -11,7 +11,8 @@
     
     <many-to-one name="UserId" column="UserId" lazy="false" class="ClassLibrary.WkTUser, ClassLibrary" ></many-to-one>
     <many-to-one name="ArrangeUserId" column="ArrangeUserId" lazy="false" class="ClassLibrary.WkTUser, ClassLibrary" ></many-to-one>
-
+    
+    <property name="ExamineState" column="ExamineState" type="int" length="1"/>
     <property name="DutyType" column="DutyType" type="int" length="1"/>
     <property name="IsDone" column="IsDone" type="int" length="1"/>
     <property name="State" column="STATE" type="int" length="1"/>
