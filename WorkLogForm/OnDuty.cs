@@ -147,50 +147,10 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void OnDuty_Load(object sender, EventArgs e)
         {
-            
-          
-         
-
             loadData();
 
-            month_comboBoxEx.SelectedIndex = DateTime.Now.Month - 1;
-            year_comboBoxEx.SelectedIndex = DateTime.Now.Year - 2012;
+            this.dateTimePicker1.Value = DateTime.Now;
 
-
-          
-           
-
-            //判断用登陆角色户
-             userrole = User.UserRole;
-
-            DevComponents.Editors.ComboItem yearItem = (DevComponents.Editors.ComboItem)year_comboBoxEx.SelectedItem;
-            DevComponents.Editors.ComboItem monthItem = (DevComponents.Editors.ComboItem)month_comboBoxEx.SelectedItem;
-            DateTime dt = new DateTime(Convert.ToInt32(yearItem.Text), Convert.ToInt32(monthItem.Text), 1);
-
-            foreach(WkTRole o in userrole)
-            {
-                if(o.KrOrder == 0 || o.KrOrder == 1) //院长副院长登陆
-                {
-                    Ondutys = opp.GetMonthDuty(dt.Ticks, dt.Date.AddMonths(1).Ticks);
-                    //赋予不同功能
-                    SetLabel();
-                    //this.button3.Visible = true;
-                    
-                }
-                else if (o.KrOrder == 2) //负责人登陆
-                {
-                    Ondutys = opp.GetMonthDuty(dt.Ticks, dt.Date.AddMonths(1).Ticks);
-                    //赋予不同功能
-                    SetLabel();
-                    AddeventToAlable(dt.Ticks, dt.Date.AddMonths(1).Ticks);
-                }
-                else if (o.KrOrder == 3) //员工登陆
-                {
-                  
-                }
-            }
-
-           
         }
 
 
@@ -294,31 +254,32 @@ namespace WorkLogForm
         {
             for (int i = 0; i < dateLabel.Count; i++)
             {
+
                 if (i < startDay)
                 {
                     dateLabel[i].Text = (lastMonthLastDay - (startDay - i) + 1).ToString();
                     dateLabel[i].Parent.ForeColor = SystemColors.ControlDark;
 
-                    if (!((DevComponents.Editors.ComboItem)month_comboBoxEx.SelectedItem).Text.Equals("01"))
+                    if (this.dateTimePicker1.Value.Month != 1)
                     {
-                        dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text), Convert.ToInt32(((DevComponents.Editors.ComboItem)month_comboBoxEx.SelectedItem).Text) - 1, lastMonthLastDay - (startDay - i) + 1);
+                        dateLabel[i].Parent.Tag = new DateTime(this.dateTimePicker1.Value.Year, this.dateTimePicker1.Value.Month - 1, lastMonthLastDay - (startDay - i) + 1);
                     }
                     else
                     {
-                        dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text) - 1, 12, lastMonthLastDay - (startDay - i) + 1);
+                        dateLabel[i].Parent.Tag = new DateTime(this.dateTimePicker1.Value.Year - 1, 12, lastMonthLastDay - (startDay - i) + 1);
                     }
                 }
                 else if (i >= (startDay + allDay))
                 {
                     dateLabel[i].Text = (i - (startDay + allDay) + 1).ToString();
                     dateLabel[i].Parent.ForeColor = SystemColors.ControlDark;
-                    if (!((DevComponents.Editors.ComboItem)month_comboBoxEx.SelectedItem).Text.Equals("12"))
+                    if (this.dateTimePicker1.Value.Month != 12)
                     {
-                        dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text), Convert.ToInt32(((DevComponents.Editors.ComboItem)month_comboBoxEx.SelectedItem).Text) + 1, i - (startDay + allDay) + 1);
+                        dateLabel[i].Parent.Tag = new DateTime(this.dateTimePicker1.Value.Year, this.dateTimePicker1.Value.Month + 1, i - (startDay + allDay) + 1);
                     }
                     else
                     {
-                        dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text) + 1, 1, i - (startDay + allDay) + 1);
+                        dateLabel[i].Parent.Tag = new DateTime(this.dateTimePicker1.Value.Year + 1, 1, i - (startDay + allDay) + 1);
                     }
 
                 }
@@ -326,7 +287,7 @@ namespace WorkLogForm
                 {
                     dateLabel[i].Text = (i - startDay + 1).ToString();
                     dateLabel[i].Parent.ForeColor = SystemColors.ControlText;
-                    dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text), Convert.ToInt32(((DevComponents.Editors.ComboItem)month_comboBoxEx.SelectedItem).Text), i - startDay + 1);
+                    dateLabel[i].Parent.Tag = new DateTime(this.dateTimePicker1.Value.Year,this.dateTimePicker1.Value.Month, i - startDay + 1);
                 }
             }
 
@@ -354,70 +315,17 @@ namespace WorkLogForm
 
         }
 
-        private void yearAndMonth_comboBoxEx_SelectedIndexChanged(object sender, EventArgs e)
+       
+
+        private void tabPage1_Click(object sender, EventArgs e)
         {
-            DevComponents.Editors.ComboItem yearItem = (DevComponents.Editors.ComboItem)year_comboBoxEx.SelectedItem;
-            DevComponents.Editors.ComboItem monthItem = (DevComponents.Editors.ComboItem)month_comboBoxEx.SelectedItem;
-            if (yearItem != null && monthItem != null && yearItem.Text != "" && monthItem.Text != "")
-            {
 
-                this.initCalendar(Convert.ToInt32(yearItem.Text), Convert.ToInt32(monthItem.Text));
-
-                DateTime dt = new DateTime(Convert.ToInt32(yearItem.Text), Convert.ToInt32(monthItem.Text), 1);
-
-                userrole = User.UserRole;
-                foreach (WkTRole o in userrole)
-                {
-                    if (o.KrOrder == 0 || o.KrOrder == 1) //院长副院长登陆
-                    {
-                        Ondutys = opp.GetMonthDuty(dt.Ticks, dt.Date.AddMonths(1).Ticks);
-                        SetLabel();
-                    }
-                    else if (o.KrOrder == 2) //负责人登陆
-                    {
-                        Ondutys = opp.GetMonthDuty(dt.Ticks, dt.Date.AddMonths(1).Ticks);
-                        SetLabel();
-                        AddeventToAlable(dt.Ticks, dt.Date.AddMonths(1).Ticks);
-                    }
-                    else if (o.KrOrder == 3) //员工登陆
-                    {
-                        Ondutys = opp.GetMonthDuty(dt.Ticks, dt.Date.AddMonths(1).Ticks);
-                        SetLabel();
-                    }
-                }
-                //AddeventToAlable(dt.Ticks, dt.Date.AddMonths(1).Ticks);
-                //Ondutys = opp.GetMonthDuty(dt.Ticks, dt.Date.AddMonths(1).Ticks);
-                //赋予不同功能
-                //SetLabel();
-            }
         }
 
-       
-
-
-      
-
-
-
-
-       
-
-
-   
-
-     
-
-
-
-
-
-
-       // DevComponents.Editors.ComboItem yearItem = (DevComponents.Editors.ComboItem)year_comboBoxEx.SelectedItem;
-        //DevComponents.Editors.ComboItem monthItem = (DevComponents.Editors.ComboItem)month_comboBoxEx.SelectedItem;
-       // DateTime dt = new DateTime(Convert.ToInt32(yearItem.Text), Convert.ToInt32(monthItem.Text), 1);
-
-
-       
-        
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            this.initCalendar(this.dateTimePicker1.Value.Year, this.dateTimePicker1.Value.Month);
+        }
+                           
     }
 }
