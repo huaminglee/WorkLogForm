@@ -98,6 +98,12 @@
     <Compile Include="Apply_Allograph.Designer.cs">
       <DependentUpon>Apply_Allograph.cs</DependentUpon>
     </Compile>
+    <Compile Include="ArrangeDuty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArrangeDuty.Designer.cs">
+      <DependentUpon>ArrangeDuty.cs</DependentUpon>
+    </Compile>
     <Compile Include="BusinessChange.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,6 +304,9 @@
     </Compile>
     <EmbeddedResource Include="Apply_Allograph.resx">
       <DependentUpon>Apply_Allograph.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArrangeDuty.resx">
+      <DependentUpon>ArrangeDuty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="BusinessChange.resx">
       <DependentUpon>BusinessChange.cs</DependentUpon>
