@@ -306,6 +306,7 @@ namespace WorkLogForm
                 {
                     dateLabel[i].Text = (lastMonthLastDay - (startDay - i) + 1).ToString();
                     dateLabel[i].Parent.ForeColor = SystemColors.ControlDark;
+                    dateLabel[i].ForeColor = SystemColors.ControlDark;
                     if (!dateTimePicker5.Value.Month.Equals(1))
                     {
                         dateLabel[i].Parent.Tag = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month - 1, lastMonthLastDay - (startDay - i) + 1);
@@ -319,6 +320,7 @@ namespace WorkLogForm
                 {
                     dateLabel[i].Text = (i - (startDay + allDay) + 1).ToString();
                     dateLabel[i].Parent.ForeColor = SystemColors.ControlDark;
+                    dateLabel[i].ForeColor = SystemColors.ControlDark;
                     if (!dateTimePicker5.Value.Month.Equals(12))
                     {
                         dateLabel[i].Parent.Tag = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month + 1, i - (startDay + allDay) + 1);
@@ -333,6 +335,8 @@ namespace WorkLogForm
                 {
                     dateLabel[i].Text = (i - startDay + 1).ToString();
                     dateLabel[i].Parent.ForeColor = SystemColors.ControlText;
+                    dateLabel[i].ForeColor = SystemColors.ControlText;
+
                     dateLabel[i].Parent.Tag = new DateTime(dateTimePicker5.Value.Year, dateTimePicker5.Value.Month, i - startDay + 1);
                 }
             }
@@ -373,8 +377,13 @@ namespace WorkLogForm
                         return;
                     }
                 }
-                label.Text += "缺勤";
-                label.ForeColor = Color.Red;
+                if (date.Ticks > DateTime.Now.Ticks)
+                    label.Text = "未考勤";
+                else
+                {
+                    label.Text += "缺勤";
+                    label.ForeColor = Color.Red;
+                }
             }
         }
 
