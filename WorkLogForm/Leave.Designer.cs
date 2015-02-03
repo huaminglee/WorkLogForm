@@ -904,7 +904,6 @@
             this.groupBox3.TabIndex = 230;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "详情";
-            this.groupBox3.Visible = false;
             // 
             // linkLabel1
             // 
@@ -917,6 +916,7 @@
             this.linkLabel1.TabIndex = 231;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "重新指定负责人";
+            this.linkLabel1.Visible = false;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // label21
@@ -2036,10 +2036,10 @@
             this.Controls.Add(this.close_pictureBox);
             this.Controls.Add(this.min_pictureBox);
             this.Controls.Add(this.label45);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Leave";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

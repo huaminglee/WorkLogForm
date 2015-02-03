@@ -890,6 +890,10 @@ namespace WorkLogForm
             {
                 listView2.Items.Clear();
             }
+            if (tabControl1.SelectedIndex == 5)
+            {
+                initPage8();
+            }
         }
 
         /// <summary>
@@ -1044,6 +1048,124 @@ namespace WorkLogForm
                 baseService.ExecuteSQL(query1);
                 listView2.Items.Remove(listView2.SelectedItems[0]);
             }
+        }
+        #endregion
+        #region 请假销假管理
+        private void button6_Click(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+            String sql = "select h from LeaveManage h left join h.Ku_Id u left join u.Kdid d where u.KuName like '%" + textBox1.Text.Trim() + "%'and d.KdName like '%" + comboBox1.Text.Trim() + "%' and h.StartTime>=" + dateTimePicker5.Value.Date.Ticks + " and h.EndTime<=" + dateTimePicker2.Value.Date.Ticks + "and h.LeaveResult=2 and h.State="+(int)LeaveManage.stateEnum.Normal;
+
+            IList searchList = baseService.loadEntityList(sql);
+            if (searchList != null && searchList.Count > 0)
+            {
+                initlistviewdata(searchList, listView1);
+            }
+        }
+        private void initlistviewdata(IList lista, ListView list_a)//将list1中的数据加载到list_a中显示
+        {
+            int i = 1;
+            Font subfont = new Font(list_a.Font.FontFamily, 9, FontStyle.Regular);
+
+            foreach (LeaveManage u in lista)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Tag = u;
+                item.Font = subfont;
+                item.Text = i.ToString();
+                ListViewItem.ListViewSubItem subname = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem subdepartment = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem subtype = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem subdays = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem substart_end = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem subresult = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem subchargeman = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem subreason = new ListViewItem.ListViewSubItem();
+                subname.Text = u.Ku_Id.KuName.Trim();
+                subdepartment.Text = u.Ku_Id.Kdid.KdName.Trim();
+                subtype.Text = u.LeaveType;
+                subdays.Text = ((u.EndTime - u.StartTime) / 864000000000 + 1).ToString();//请假天数，将数据库中保存的纳秒数装换为天
+                DateTime starttime = new DateTime(u.StartTime);
+                DateTime endtime = new DateTime(u.EndTime);
+
+                substart_end.Text = starttime.ToShortDateString() + "-" + endtime.ToShortDateString(); //将显示精确到天就行
+
+                foreach (WkTUser h in u.LeaveChargeId)
+                {
+                    subchargeman.Text = subchargeman.Text + h.KuName + " ";
+                }
+
+                subresult.Text = "审批通过";
+                subreason.Text = u.LeaveReason.Trim();
+
+
+                item.SubItems.Add(subname);
+                item.SubItems.Add(subdepartment);
+                item.SubItems.Add(subtype);
+                item.SubItems.Add(subdays);
+                item.SubItems.Add(substart_end);
+                item.SubItems.Add(subchargeman);
+                item.SubItems.Add(subresult);
+                item.SubItems.Add(subreason);
+
+                list_a.Items.Add(item);
+                i++;
+
+            }
+
+        }
+        private void initPage8() 
+        {
+            listView1.Items.Clear();
+            button8.Enabled = false;
+            button9.Enabled = false;
+        }
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            if (this.listView1.SelectedItems == null) return;
+            ListViewItem item = this.listView1.SelectedItems[0];//请假查看-listview2中的数据被选中
+            if (item == null) return;
+
+            LeaveManage u = (LeaveManage)item.Tag;
+   
+            comboBox5.Text = item.SubItems[3].Text;//请假类别
+            textBox3.Text = item.SubItems[8].Text;//请假原因
+
+            dateTimePicker7.Value = new DateTime(u.StartTime);//开始时间
+            dateTimePicker6.Value = new DateTime(u.EndTime);//结束时间
+            groupBox3.Enabled = true;
+            button8.Enabled = true;
+            button9.Enabled = true;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (this.listView1.SelectedItems == null) return;
+            ListViewItem item = this.listView1.SelectedItems[0];//请假查看-listview2中的数据被选中
+            if (item == null) return;
+
+            LeaveManage u = (LeaveManage)item.Tag;
+            u.StartTime = dateTimePicker7.Value.Ticks;
+            u.EndTime = dateTimePicker6.Value.Ticks;
+            baseService.SaveOrUpdateEntity(u);
+            listView1.Items.Remove(item);
+            button8.Enabled = false;
+            button9.Enabled = false;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (this.listView1.SelectedItems == null) return;
+            ListViewItem item = this.listView1.SelectedItems[0];//请假查看-listview2中的数据被选中
+            if (item == null) return;
+
+            LeaveManage u = (LeaveManage)item.Tag;
+            u.State = (int)LeaveManage.stateEnum.Deleted;
+            baseService.SaveOrUpdateEntity(u);
+            listView1.Items.Remove(item);
+            button8.Enabled = false;
+            button9.Enabled = false;
         }
         #endregion
     }
