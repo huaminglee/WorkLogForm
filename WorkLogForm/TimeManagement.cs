@@ -885,6 +885,11 @@ namespace WorkLogForm
                     }
                 }
             }
+
+            if (tabControl1.SelectedIndex == 4)
+            {
+                listView2.Items.Clear();
+            }
         }
 
         /// <summary>
@@ -987,5 +992,59 @@ namespace WorkLogForm
 
         #endregion
 
+        #region 出差管理
+        private void button4_Click(object sender, EventArgs e)
+        {
+            listView2.Items.Clear();
+            string query = "from Business b where b.StartTime>= " + dateTimePicker3.Value.Date.Ticks + " and  b.EndTime<=" + dateTimePicker4.Value.Date.Ticks + " and b.Ku_Id.KuName like '%" + textBox2.Text + "%' and b.State=" + (int)Business.stateEnum.Normal +" and b.PassExam="+(int)Business.ExamState.done+ " order by b.StartTime";
+            IList depList = baseService.loadEntityList(query);
+            int i = 1;
+            foreach (Business b in depList)
+            {
+                ListViewItem item = new ListViewItem();
+                item.UseItemStyleForSubItems = false;
+                item.Text = i.ToString();
+                item.SubItems.Add(new DateTime(b.StartTime).ToShortDateString());
+                item.SubItems.Add(new DateTime(b.EndTime).ToShortDateString());
+                //item.SubItems.Add(b.BusinessDestination);
+                //item.SubItems.Add(b.BusinessReason);
+                item.SubItems.Add(b.Ku_Id.KuName);
+                item.SubItems.Add("通过审批");
+                Font font = new Font(this.Font, FontStyle.Underline);
+                item.SubItems.Add("双击查看", Color.Blue, Color.Transparent, font);
+                item.Tag = b;
+                listView2.Items.Add(item);
+                i++;
+            }
+        }
+
+        private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ViewBusiness view = new ViewBusiness();
+            view.business = (Business)listView2.SelectedItems[0].Tag;
+            view.ShowDialog();
+        }
+
+        private void listView2_MouseDoubleClick_1(object sender, MouseEventArgs e)
+        {
+            ViewBusiness view = new ViewBusiness();
+            view.business = (Business)listView2.SelectedItems[0].Tag;
+            view.ShowDialog();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Business b = new Business();
+            if (listView2.SelectedItems != null)
+            {
+                b = (Business)listView2.SelectedItems[0].Tag;
+                string query1 = "update LOG_T_BUSINESS set STATE="+(int)Business.stateEnum.Deleted+"where Id="+b.Id;
+                string query2 = "update LOG_T_BUSINESSEMPLOYEE set STATE=" + (int)BusinessEmployee.stateEnum.Deleted + "where BUSINESSID=" + b.Id;
+                baseService.ExecuteSQL(query2);
+                baseService.ExecuteSQL(query1);
+                listView2.Items.Remove(listView2.SelectedItems[0]);
+            }
+        }
+        #endregion
     }
 }

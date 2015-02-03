@@ -37,7 +37,11 @@ namespace WorkLogForm
                 item.SubItems.Add(be.EmployeeId.Kdid.KdName.Trim());
                 item.Tag = be;
                 listView8.Items.Add(item);
-            }            
+            }
+
+            textBox1.Text = business.BusinessReason;
+            textBox2.Text = business.BusinessDestination;
+            textBox3.Text = business.BusinessNote;
         }
 
         private IList getUserByDept(WkTDept dept)//获取登陆人所在部门
@@ -51,6 +55,11 @@ namespace WorkLogForm
         {
             string queryUser = "from BusinessEmployee be where be.BusinessId=" + b.Id + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal;
             return baseService.loadEntityList(queryUser);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

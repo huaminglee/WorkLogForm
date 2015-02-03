@@ -2036,10 +2036,10 @@
             this.Controls.Add(this.close_pictureBox);
             this.Controls.Add(this.min_pictureBox);
             this.Controls.Add(this.label45);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Leave";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
