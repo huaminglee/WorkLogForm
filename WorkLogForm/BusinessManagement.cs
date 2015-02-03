@@ -335,6 +335,7 @@ namespace WorkLogForm
             textBox8.Text = b.BusinessDestination;
             textBox20.Text = b.Ku_Id.KuName;
             textBox12.Text = b.BusinessNote;
+            textBox21.Text = b.Boss.KuName;
 
 
             string queryEmp;
@@ -671,8 +672,8 @@ namespace WorkLogForm
                 item.Text = i.ToString();
                 item.SubItems.Add(new DateTime(b.StartTime).ToShortDateString());
                 item.SubItems.Add(new DateTime(b.EndTime).ToShortDateString());
-                item.SubItems.Add(b.BusinessDestination);
-                item.SubItems.Add(b.BusinessReason);
+                //item.SubItems.Add(b.BusinessDestination);
+                //item.SubItems.Add(b.BusinessReason);
                 item.SubItems.Add(b.Ku_Id.KuName);
                 switch (b.PassExam)
                 {
