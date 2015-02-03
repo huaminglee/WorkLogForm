@@ -122,8 +122,19 @@ namespace WorkLogForm
                     
                 }
             }
-            dept_comboBox.SelectedIndex = 0;
-            comboBox1.SelectedIndex = 0;
+            dept_comboBox.Text = this.User.Kdid.KdName.Trim();
+            comboBox1.Text = this.User.Kdid.KdName.Trim();
+            comboBox2.Text = this.User.KuName;
+            if (Role.KrOrder <= 2)
+            {
+                dept_comboBox.Enabled = true;
+                comboBox1.Enabled = true;
+            }
+            else
+            {
+                dept_comboBox.Enabled = false;
+                comboBox1.Enabled =false;
+            }
         }
 
         private void dept_comboBox_SelectedIndexChanged(object sender, EventArgs e)
