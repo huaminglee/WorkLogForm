@@ -290,11 +290,15 @@ namespace WorkLogForm
         #endregion
         private void Leave_Load(object sender, EventArgs e)
         {
+            groupBox4.Enabled = false;
+            pictureBox5.Visible = false;
             if(role.KrOrder==2)
             {
                 //如果当前用户是负责人，那么请假审批的-部门以及部门选择框都不显示，该用户只能查看本部门的请假申请
                 comboBox6.Visible=false;
                 label23.Visible = false;
+
+                groupBox4.Enabled = true;
             }
             else if (role.KrOrder == 3)
             { 
