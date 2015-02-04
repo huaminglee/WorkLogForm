@@ -80,11 +80,6 @@ namespace WorkLogForm
                     comboBox1.SelectedIndex = 0;
                 }
                
-               
-               
-
-
-
             }
             initData();
         }

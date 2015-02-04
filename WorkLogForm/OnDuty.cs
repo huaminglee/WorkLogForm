@@ -23,6 +23,7 @@ namespace WorkLogForm
         }
 
 
+        private List<WkTDept> theDepts = new List<WkTDept> () ;
 
         TimeArrangeForManager TfM;
 
@@ -146,7 +147,7 @@ namespace WorkLogForm
                 this.button4.Visible = false;
             }
             this.comboBox1.SelectedIndex = 1;
-
+            this.comboBox3.SelectedIndex = 2;
 
             //查询综合办与网络中心的主任
             Therole = 0;
@@ -794,11 +795,197 @@ namespace WorkLogForm
             this.panel2.Visible = true;
             this.panel1.Visible = false;
 
+            //加载部门信息
+            if (this.comboBox2.Items.Count == 0)
+            {
+                string sql = "select u.DeptId from Wktuser_M_Dept u where u.WktuserId = " + user.Id + " and u.State = " + (int)IEntity.stateEnum.Normal;
+                IList theone = baseService.loadEntityList(sql);
 
+                if (theone != null && theone.Count > 0)
+                {
+                    if (theone.Count >= 1)
+                    {
+                        comboBox2.Items.Add("选择全部…");
+
+                    }
+                    foreach (WkTDept dept in theone)
+                    {
+                        comboBox2.Items.Add(dept.KdName.Trim());
+                        theDepts.Add(dept);
+                    }
+                }
+                this.comboBox2.Text = this.comboBox2.Items[0].ToString(); ; 
+            }
 
 
             this.button4.Cursor = Cursors.Hand;
         }
+
+        /// <summary>
+        /// 员工查询按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.button6.Cursor = Cursors.WaitCursor;
+            if (this.comboBox2.Items.Count > 1)
+            {
+                #region 选择全部
+                if (this.comboBox2.SelectedIndex == 0)
+                {
+                    this.dataGridView2.Rows.Clear();
+                    int i = 1;
+                    foreach (WkTDept d in theDepts)
+                    {
+                        string sql0 = "select u from OnDutyTable u left join u.DaiBanID user where user.KuName like '%" + textBox1.Text.Trim() + "%' and"
+                        + " user.Kdid = " + d.Id + " and u.Time >= " + this.dateTimePicker4.Value.Ticks + " and u.Time <= " + this.dateTimePicker5.Value.Ticks
+                        + " and u.State = " + (int)IEntity.stateEnum.Normal;
+
+                        string sql1 = "select u from OnDutyTable u left join u.BaiBanID user where user.KuName like '%" + textBox1.Text.Trim() + "%' and"
+                        + " user.Kdid = " + d.Id + " and u.Time >= " + this.dateTimePicker4.Value.Ticks + " and u.Time <= " + this.dateTimePicker5.Value.Ticks
+                        + " and u.State = " + (int)IEntity.stateEnum.Normal;
+
+                        string sql2 = "select u from OnDutyTable u left join u.YeBanID user where user.KuName like '%" + textBox1.Text.Trim() + "%' and"
+                        + " user.Kdid = " + d.Id + " and u.Time >= " + this.dateTimePicker4.Value.Ticks + " and u.Time <= " + this.dateTimePicker5.Value.Ticks
+                        + " and u.State = " + (int)IEntity.stateEnum.Normal;
+
+                        string sql = "";
+                        switch (this.comboBox3.SelectedIndex)
+                        {
+                            case 0:
+                                sql = sql0; break;
+                            case 1:
+                                sql = sql1; break;
+                            case 2:
+                                sql = sql2; break;
+                        }
+                        if (sql != "")
+                        {
+                            IList times = baseService.loadEntityList(sql);
+
+                            if (times != null)
+                            {
+                                foreach (OnDutyTable o in times)
+                                {
+                                    DateTime dt = new DateTime(o.Time);
+
+                                    switch (this.comboBox3.SelectedIndex)
+                                    {
+                                        case 0:
+                                            this.dataGridView2.Rows.Add(i,
+                                                o.DaiBanID.Kdid.KdName,
+                                                o.DaiBanID.KuName,
+                                                dt.ToString("yyyy年MM月dd日") + EnglishToChinese(dt),
+                                                this.comboBox3.Text, o.Type == 0 ? "行政班" : "网络班");
+                                            break;
+                                        case 1:
+                                            this.dataGridView2.Rows.Add(i,
+                                                o.BaiBanID.Kdid.KdName,
+                                                o.BaiBanID.KuName,
+                                                dt.ToString("yyyy年MM月dd日") + EnglishToChinese(dt),
+                                                this.comboBox3.Text, o.Type == 0 ? "行政班" : "网络班");
+                                            break;
+                                        case 2:
+                                            this.dataGridView2.Rows.Add(i,
+                                                o.YeBanID.Kdid.KdName,
+                                                o.YeBanID.KuName,
+                                                dt.ToString("yyyy年MM月dd日") + EnglishToChinese(dt),
+                                                this.comboBox3.Text, o.Type == 0 ? "行政班" : "网络班");
+                                            break;
+                                    }
+                                    i++;
+                                }
+
+                            }
+                        }
+
+                    }
+
+                }
+                #endregion
+
+                #region 选择某一个
+                else 
+                {
+                    this.dataGridView2.Rows.Clear();
+                    int i = 1;
+                    WkTDept d = theDepts[this.comboBox2.SelectedIndex - 1];
+                    string sql0 = "select u from OnDutyTable u left join u.DaiBanID user where user.KuName like '%" + textBox1.Text.Trim() + "%' and"
+                       + " user.Kdid = " + d.Id + " and u.Time >= " + this.dateTimePicker4.Value.Ticks + " and u.Time <= " + this.dateTimePicker5.Value.Ticks
+                       + " and u.State = " + (int)IEntity.stateEnum.Normal;
+
+                    string sql1 = "select u from OnDutyTable u left join u.BaiBanID user where user.KuName like '%" + textBox1.Text.Trim() + "%' and"
+                    + " user.Kdid = " + d.Id + " and u.Time >= " + this.dateTimePicker4.Value.Ticks + " and u.Time <= " + this.dateTimePicker5.Value.Ticks
+                    + " and u.State = " + (int)IEntity.stateEnum.Normal;
+
+                    string sql2 = "select u from OnDutyTable u left join u.YeBanID user where user.KuName like '%" + textBox1.Text.Trim() + "%' and"
+                    + " user.Kdid = " + d.Id + " and u.Time >= " + this.dateTimePicker4.Value.Ticks + " and u.Time <= " + this.dateTimePicker5.Value.Ticks
+                    + " and u.State = " + (int)IEntity.stateEnum.Normal;
+
+                    string sql = "";
+                    switch (this.comboBox3.SelectedIndex)
+                    {
+                        case 0:
+                            sql = sql0; break;
+                        case 1:
+                            sql = sql1; break;
+                        case 2:
+                            sql = sql2; break;
+                    }
+                    if (sql != "")
+                    {
+                        IList times = baseService.loadEntityList(sql);
+
+                        if (times != null)
+                        {
+                            foreach (OnDutyTable o in times)
+                            {
+                                DateTime dt = new DateTime(o.Time);
+
+                                switch (this.comboBox3.SelectedIndex)
+                                {
+                                    case 0:
+                                        this.dataGridView2.Rows.Add(i,
+                                            o.DaiBanID.Kdid.KdName,
+                                            o.DaiBanID.KuName,
+                                            dt.ToString("yyyy年MM月dd日") + EnglishToChinese(dt),
+                                            this.comboBox3.Text, o.Type == 0 ? "行政班" : "网络班");
+                                        break;
+                                    case 1:
+                                        this.dataGridView2.Rows.Add(i,
+                                            o.BaiBanID.Kdid.KdName,
+                                            o.BaiBanID.KuName,
+                                            dt.ToString("yyyy年MM月dd日") + EnglishToChinese(dt),
+                                            this.comboBox3.Text, o.Type == 0 ? "行政班" : "网络班");
+                                        break;
+                                    case 2:
+                                        this.dataGridView2.Rows.Add(i,
+                                            o.YeBanID.Kdid.KdName,
+                                            o.YeBanID.KuName,
+                                            dt.ToString("yyyy年MM月dd日") + EnglishToChinese(dt),
+                                            this.comboBox3.Text, o.Type == 0 ? "行政班" : "网络班");
+                                        break;
+                                }
+                                i++;
+                            }
+
+                        }
+
+                    }
+
+
+                }
+                #endregion
+
+            }
+
+            this.button6.Cursor = Cursors.Hand;
+
+        }
+
+
+
 
 
     }
