@@ -868,22 +868,8 @@ namespace WorkLogForm
 
 
                 //加载部门下拉列表
-                if(this.comboBox1.Items.Count == 0) //防止重复加载
-                {
-                    //下拉菜单中加载部门信息
-                    string sql = "select u from WkTDept u";
-                    IList depts  = baseService.loadEntityList(sql);
-                    if(depts != null && depts.Count>0)
-                    {
-                        thedepts = new List<WkTDept>();
-                        
-                        foreach (WkTDept dd in depts)
-                        {
-                            this.comboBox1.Items.Add(dd.KdName.ToString().Trim());
-                            thedepts.Add(dd);
-                        }
-                    }
-                }
+                AddDeptsInCombox(this.comboBox1);
+               
             }
 
             if (tabControl1.SelectedIndex == 4)
@@ -895,6 +881,34 @@ namespace WorkLogForm
                 initPage8();
             }
         }
+
+        public void AddDeptsInCombox(ComboBox cb)
+        {
+            if (cb.Items.Count == 0) //防止重复加载
+            {
+                //下拉菜单中加载部门信息
+                string sql = "select u from WkTDept u";
+                IList depts = baseService.loadEntityList(sql);
+                if (depts != null && depts.Count > 0)
+                {
+                    if (thedepts == null)
+                    {
+                        thedepts = new List<WkTDept>();
+                    }
+                    else
+                    {
+                        thedepts.Clear();
+                    }
+                    foreach (WkTDept dd in depts)
+                    {
+                        cb.Items.Add(dd.KdName.ToString().Trim());
+                        thedepts.Add(dd);
+                    }
+                }
+            }
+        
+        }
+
 
         /// <summary>
         /// 当部门选择改变的时候需要显示相应部门的人员
@@ -992,10 +1006,151 @@ namespace WorkLogForm
             }
         }
 
-      
+
+        /// <summary>
+        /// 选择值班更换界面时候发生的事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabControl2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.tabControl2.SelectedIndex == 1)
+            {
+                this.comboBox11.SelectedIndex = 0;
+            }
+        }
+
+        OnDutyTable onDutyTable;
+        /// <summary>
+        /// 值班调整查询按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button11_Click(object sender, EventArgs e)
+        {
+            this.button11.Cursor = Cursors.WaitCursor;
+
+            DateTime dt = new DateTime(this.dateTimePicker9.Value.Year,this.dateTimePicker9.Value.Month,this.dateTimePicker9.Value.Day);
+            string sql = "select u from OnDutyTable u where u.Time = " + dt.Ticks + " and u.State = "+(int)IEntity.stateEnum.Normal;
+            IList thedayInfo = baseService.loadEntityList(sql);
+            if (thedayInfo != null && thedayInfo.Count > 0)
+            {
+                onDutyTable = (OnDutyTable)thedayInfo[0];
+                this.labelOfDaiBan.Text = onDutyTable.DaiBanID.KuName;
+                this.labelOfBaiBan.Text = onDutyTable.BaiBanID.KuName;
+                this.labelOfYeBan.Text = onDutyTable.YeBanID.KuName;
+                this.panelOfThreeButtonChange.Visible = true;
+            }
+            else
+            {
+                MessageBox.Show("没有值班信息");
+            }
+
+
+            this.button11.Cursor = Cursors.Hand;
+        }
+
+        int whichOne;
+        private void buttonDaiban_Click(object sender, EventArgs e)
+        {
+            this.panelOfGetNew.Visible = true;
+            whichOne = 0;
+            AddDeptsInCombox(this.comboBox10);
+        }
+
+        private void buttonOfBaiban_Click(object sender, EventArgs e)
+        {
+            this.panelOfGetNew.Visible = true;
+            whichOne = 1;
+            AddDeptsInCombox(this.comboBox10);
+        }
+
+        private void buttonOfYeBan_Click(object sender, EventArgs e)
+        {
+            this.panelOfGetNew.Visible = true;
+            whichOne = 2;
+            AddDeptsInCombox(this.comboBox10);
+        }
+
+
+        private void comboBox10_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBox10.Cursor = Cursors.WaitCursor;
+            this.comboBox9.Items.Clear();
+            if (theusers == null)
+            {
+                theusers = new List<WkTUser>();
+            }
+            this.theusers.Clear();
+            string sql = "select u from WkTUser u left join u.Kdid dept where dept.Id = " + this.thedepts[this.comboBox10.SelectedIndex].Id;
+            IList users = baseService.loadEntityList(sql);
+            if (users != null && users.Count > 0)
+            {
+
+                if (theusers.Count > 0)
+                {
+                    this.theusers.Clear();
+                }
+                foreach (WkTUser u in users)
+                {
+                    this.comboBox9.Items.Add(u.KuName.ToString().Trim());
+                    this.theusers.Add(u);
+                }
+            }
+
+            comboBox10.Cursor = Cursors.Hand;
+        }
+
+
+        /// <summary>
+        /// 确定更改
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (this.comboBox9.Text == "")
+            {
+                MessageBox.Show("您还为选择！");
+            }
+            else
+            {
+                if(MessageBox.Show("确定要更改吗?", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    if (onDutyTable != null)
+                    {
+                        WkTUser newuser = this.theusers[this.comboBox9.SelectedIndex];
+                        switch (whichOne)
+                        {
+                            case 0:
+                                onDutyTable.DaiBanID = newuser;
+                                this.labelOfDaiBan.Text = newuser.KuName;
+                                break;
+                            case 1:
+                                onDutyTable.BaiBanID = newuser;
+                                this.labelOfBaiBan.Text = newuser.KuName;
+                                break;
+                            case 2:
+                        onDutyTable.YeBanID = newuser;
+                                this.labelOfYeBan.Text = newuser.KuName;
+                                break;
+                        }
+
+                        baseService.SaveOrUpdateEntity(onDutyTable);
+                        MessageBox.Show("更改成功！");
+                        this.panelOfGetNew.Visible = false;
+                    
+                    }
+                
+                }
+            }
+
+        }
+
 
         #endregion
 
+        
         #region 出差管理
         private void button4_Click(object sender, EventArgs e)
         {
@@ -1168,5 +1323,16 @@ namespace WorkLogForm
             button9.Enabled = false;
         }
         #endregion
+
+      
+
+       
+
+        
+
+       
+
+      
+
     }
 }
