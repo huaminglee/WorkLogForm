@@ -32,6 +32,9 @@ namespace WorkLogForm
         IList workDayList;
         IList leaveList;
 
+        private DateTime startTime;
+        private DateTime endTime ;
+
 
         private WkTUser user;//当前使用用户
         public WkTUser User
@@ -55,6 +58,9 @@ namespace WorkLogForm
         private void shou_ye_Load(object sender, EventArgs e)
         {
             loadData();//封装label
+
+            initUsuallyday();
+
             year_comboBoxEx.SelectedIndex = DateTime.Now.Year - 2012;
             month_comboBoxEx.SelectedIndex = DateTime.Now.Month - 1;
             this.Visible = false;
@@ -84,9 +90,16 @@ namespace WorkLogForm
             if (yearItem != null && monthItem != null && yearItem.Text != "" && monthItem.Text != "")
             {
                 this.initCalendar(Convert.ToInt32(yearItem.Text), Convert.ToInt32(monthItem.Text));//1初始化日历日期数字
-                initAttendanceDate();//2初始化出勤信息attendanceList
-                initPanelDate();//3初始化假日信息holidayList 上班时间usuallyDayList 请假信息leaveList 调休信息workDayList
-                updateComponent();//4attendenceLabel_Paint更新label  attendencePanel_Paint更新panel
+                if (dateLabel[dateLabel.Count - 1].Parent.Tag != null && dateLabel[0].Parent.Tag != null)
+                {
+                    startTime = (DateTime)dateLabel[0].Parent.Tag;
+                    endTime = (DateTime)dateLabel[dateLabel.Count - 1].Parent.Tag;
+                }
+                //initAttendanceDate();//2初始化出勤信息attendanceList
+                //initPanelDate();//3初始化假日信息holidayList 上班时间usuallyDayList 请假信息leaveList 调休信息workDayList
+                //updateComponent();//4attendenceLabel_Paint更新label  attendencePanel_Paint更新panel
+
+                initDateInfo();
             }
         }
 
@@ -133,6 +146,7 @@ namespace WorkLogForm
                 {
                     dateLabel[i].Text = (lastMonthLastDay - (startDay - i) + 1).ToString();
                     dateLabel[i].Parent.ForeColor = SystemColors.ControlDark;
+                    dateLabel[i].ForeColor = SystemColors.ControlDark;
                     if (!month_comboBoxEx.Text.Equals("01"))
                     {
                         dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text), Convert.ToInt32(month_comboBoxEx.Text) - 1, lastMonthLastDay - (startDay - i) + 1);
@@ -146,6 +160,7 @@ namespace WorkLogForm
                 {
                     dateLabel[i].Text = (i - (startDay + allDay) + 1).ToString();
                     dateLabel[i].Parent.ForeColor = SystemColors.ControlDark;
+                    dateLabel[i].ForeColor = SystemColors.ControlDark;
                     if (!month_comboBoxEx.Text.Equals("12"))
                     {
                         dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text), Convert.ToInt32(month_comboBoxEx.Text) + 1, i - (startDay + allDay) + 1);
@@ -160,6 +175,7 @@ namespace WorkLogForm
                 {
                     dateLabel[i].Text = (i - startDay + 1).ToString();
                     dateLabel[i].Parent.ForeColor = SystemColors.ControlText;
+                    dateLabel[i].ForeColor = SystemColors.ControlText ;
                     dateLabel[i].Parent.Tag = new DateTime(Convert.ToInt32(year_comboBoxEx.Text), Convert.ToInt32(month_comboBoxEx.Text), i - startDay + 1);
                 }
             }
@@ -168,13 +184,8 @@ namespace WorkLogForm
         #endregion
         #region 2初始化出勤信息
         private void initAttendanceDate()//初始化出勤信息放入attendanceList
-        {
-            if (dateLabel[dateLabel.Count - 1].Parent.Tag != null && dateLabel[0].Parent.Tag != null)
-            {
-                DateTime startTime = (DateTime)dateLabel[0].Parent.Tag;
-                DateTime endTime = (DateTime)dateLabel[dateLabel.Count - 1].Parent.Tag;
+        {     
                 attendanceList = baseService.loadEntityList("from Attendance where STATE=" + (int)IEntity.stateEnum.Normal + " and User=" + user.Id + " and SignDate>=" + startTime.Date.Ticks + " and SignDate<=" + endTime.Date.Ticks);
-            }
         }
         #endregion
         #region 3初始化假日信息holidayList 上班时间usuallyDayList 请假信息leaveList 调休信息workDayList
@@ -182,8 +193,7 @@ namespace WorkLogForm
         {
             if (dateLabel[dateLabel.Count - 1].Parent.Tag != null && dateLabel[0].Parent.Tag != null)
             {
-                DateTime startTime = (DateTime)dateLabel[0].Parent.Tag;
-                DateTime endTime = (DateTime)dateLabel[dateLabel.Count - 1].Parent.Tag;
+                 
                 holidayList = baseService.loadEntityList("from Holiday where STATE=" + (int)IEntity.stateEnum.Normal + " and ((StartTime>=" + startTime.Date.Ticks + " and StartTime<=" + endTime.Date.Ticks + ") or (EndTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime<=" + startTime.Date.Ticks + " and EndTime>=" + endTime.Date.Ticks + "))");
                 workDayList = baseService.loadEntityList("from WorkDay where STATE=" + (int)IEntity.stateEnum.Normal + " and workDateTime>=" + startTime.Date.Ticks + " and workDateTime<=" + endTime.Date.Ticks);
                 leaveList = baseService.loadEntityList("from LeaveManage where State=" + (int)IEntity.stateEnum.Normal + " and Ku_Id=" + user.Id + " and LeaveResult=2 and ((StartTime>=" + startTime.Date.Ticks + " and StartTime<=" + endTime.Date.Ticks + ") or (EndTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime<=" + startTime.Date.Ticks + " and EndTime>=" + endTime.Date.Ticks + "))");
@@ -411,7 +421,7 @@ namespace WorkLogForm
         }
         #endregion
 
-
+        #region 响应函数
         private void calendar_ovalShape_left_Click(object sender, EventArgs e)
         {
             if (month_comboBoxEx.SelectedIndex != 0)
@@ -440,20 +450,6 @@ namespace WorkLogForm
                     year_comboBoxEx.SelectedIndex = year_comboBoxEx.SelectedIndex + 1;
                     month_comboBoxEx.SelectedIndex = 0;
                 }
-            }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            this.Visible = true;
-            this.Opacity = 1;
-            timer1.Stop();
-        }
-        private void shou_ye_SizeChanged(object sender, EventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                this.timer1.Start();
             }
         }
         private void pictureBox_richeng_Click(object sender, EventArgs e)
@@ -502,6 +498,21 @@ namespace WorkLogForm
             PictureBox p = (PictureBox)sender;
             p.BackgroundImage = WorkLogForm.Properties.Resources._257;
         }
+        #endregion
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.Visible = true;
+            this.Opacity = 1;
+            timer1.Stop();
+        }
+        private void shou_ye_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.timer1.Start();
+            }
+        }
+     
         /// <summary>
         /// 加载今日阴历、阳历、天气信息
         /// </summary>
@@ -529,6 +540,144 @@ namespace WorkLogForm
             tomorrow_weather_pictureBox2.BackgroundImage = new Bitmap(Application.StartupPath.ToString() + "\\Weather\\" + weathers[16]);
             tomorrow2_weather_pictureBox1.BackgroundImage = new Bitmap(Application.StartupPath.ToString() + "\\Weather\\" + weathers[20]);
             tomorrow2_weather_pictureBox2.BackgroundImage = new Bitmap(Application.StartupPath.ToString() + "\\Weather\\" + weathers[21]);
+        }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        #region 更新假期+工作日信息
+        private void initDateInfo()
+        {
+            holidayList = baseService.loadEntityList("from Holiday where STATE=" + (int)IEntity.stateEnum.Normal + " and ((StartTime>=" + startTime.Date.Ticks + " and StartTime<=" + endTime.Date.Ticks + ") or (EndTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime<=" + startTime.Date.Ticks + " and EndTime>=" + endTime.Date.Ticks + "))");
+            workDayList = baseService.loadEntityList("from WorkDay where STATE=" + (int)IEntity.stateEnum.Normal + " and workDateTime>=" + startTime.Date.Ticks + " and workDateTime<=" + endTime.Date.Ticks);
+            updateDateInfo();
+        }
+
+        private void updateDateInfo()
+        {
+            UpdLabel1(label11); UpdLabel1(label21); UpdLabel1(label31); UpdLabel1(label41); UpdLabel1(label51); UpdLabel1(label61);
+            UpdLabel1(label12); UpdLabel1(label22); UpdLabel1(label32); UpdLabel1(label42); UpdLabel1(label52); UpdLabel1(label62);
+            UpdLabel1(label13); UpdLabel1(label23); UpdLabel1(label33); UpdLabel1(label43); UpdLabel1(label53); UpdLabel1(label63);
+            UpdLabel1(label14); UpdLabel1(label24); UpdLabel1(label34); UpdLabel1(label44); UpdLabel1(label54); UpdLabel1(label64);
+            UpdLabel1(label15); UpdLabel1(label25); UpdLabel1(label35); UpdLabel1(label45); UpdLabel1(label55); UpdLabel1(label65);
+            UpdLabel1(label16); UpdLabel1(label26); UpdLabel1(label36); UpdLabel1(label46); UpdLabel1(label56); UpdLabel1(label66);
+            UpdLabel1(label17); UpdLabel1(label27); UpdLabel1(label37); UpdLabel1(label47); UpdLabel1(label57); UpdLabel1(label67);
+
+            UpdPanel1(panel11); UpdPanel1(panel21); UpdPanel1(panel31); UpdPanel1(panel41); UpdPanel1(panel51); UpdPanel1(panel61);
+            UpdPanel1(panel12); UpdPanel1(panel22); UpdPanel1(panel32); UpdPanel1(panel42); UpdPanel1(panel52); UpdPanel1(panel62);
+            UpdPanel1(panel13); UpdPanel1(panel23); UpdPanel1(panel33); UpdPanel1(panel43); UpdPanel1(panel53); UpdPanel1(panel63);
+            UpdPanel1(panel14); UpdPanel1(panel24); UpdPanel1(panel34); UpdPanel1(panel44); UpdPanel1(panel54); UpdPanel1(panel64);
+            UpdPanel1(panel15); UpdPanel1(panel25); UpdPanel1(panel35); UpdPanel1(panel45); UpdPanel1(panel55); UpdPanel1(panel65);
+            UpdPanel1(panel16); UpdPanel1(panel26); UpdPanel1(panel36); UpdPanel1(panel46); UpdPanel1(panel56); UpdPanel1(panel66);
+            UpdPanel1(panel17); UpdPanel1(panel27); UpdPanel1(panel37); UpdPanel1(panel47); UpdPanel1(panel57); UpdPanel1(panel67);
+        }
+        private void UpdLabel1(Label label)
+        {
+            label.Text = "";
+            DateTime date = (DateTime)label.Parent.Tag;
+            if (holidayList != null && holidayList.Count > 0)//判断是否节假日
+            {
+                foreach (Holiday a in holidayList)
+                {
+                    if (a.StartTime <= date.Date.Ticks && a.EndTime > date.Date.Ticks)
+                    {
+                        label.Text = a.Name;
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void UpdPanel1(Panel panel)
+        {
+            panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2;
+            DateTime date = (DateTime)panel.Tag;
+            int dayOfWeek = (int)date.DayOfWeek == 0 ? 6 : (int)date.DayOfWeek - 1;
+            if (usuallyDay[dayOfWeek].Equals((char)UsuallyDay.workDayEnum.Holiday))//判断是否周六日
+            {
+                panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_休;//周六日休息图片，还没有做！！！@！！！！！！！
+            }
+        }
+
+        private void initUsuallyday()
+        {
+            IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where STATE=" + (int)IEntity.stateEnum.Normal + " and StartTime<=" + DateTime.Now.Ticks + " order by StartTime desc");
+            if (usuallyDayList != null && usuallyDayList.Count == 1)
+            {
+                UsuallyDay u = (UsuallyDay)usuallyDayList[0];
+                usuallyDay = u.WorkDay.ToCharArray();
+            }
+        }
+        #endregion
+        
+
+
+        #region 考勤信息
+        private void initDutyInfo()
+        {
+            leaveList = baseService.loadEntityList("from LeaveManage where State=" + (int)IEntity.stateEnum.Normal + " and Ku_Id=" + user.Id + " and LeaveResult=2 and ((StartTime>=" + startTime.Date.Ticks + " and StartTime<=" + endTime.Date.Ticks + ") or (EndTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime<=" + startTime.Date.Ticks + " and EndTime>=" + endTime.Date.Ticks + "))");
+            attendanceList = baseService.loadEntityList("from Attendance where STATE=" + (int)IEntity.stateEnum.Normal + " and User=" + user.Id + " and SignDate>=" + startTime.Date.Ticks + " and SignDate<=" + endTime.Date.Ticks);
+            updateDutyInfo();
+        }
+
+        private void updateDutyInfo()
+        {
+            UpdLabel2(label11); UpdLabel2(label21); UpdLabel2(label31); UpdLabel2(label41); UpdLabel2(label51); UpdLabel2(label61);
+            UpdLabel2(label12); UpdLabel2(label22); UpdLabel2(label32); UpdLabel2(label42); UpdLabel2(label52); UpdLabel2(label62);
+            UpdLabel2(label13); UpdLabel2(label23); UpdLabel2(label33); UpdLabel2(label43); UpdLabel2(label53); UpdLabel2(label63);
+            UpdLabel2(label14); UpdLabel2(label24); UpdLabel2(label34); UpdLabel2(label44); UpdLabel2(label54); UpdLabel2(label64);
+            UpdLabel2(label15); UpdLabel2(label25); UpdLabel2(label35); UpdLabel2(label45); UpdLabel2(label55); UpdLabel2(label65);
+            UpdLabel2(label16); UpdLabel2(label26); UpdLabel2(label36); UpdLabel2(label46); UpdLabel2(label56); UpdLabel2(label66);
+            UpdLabel2(label17); UpdLabel2(label27); UpdLabel2(label37); UpdLabel2(label47); UpdLabel2(label57); UpdLabel2(label67);
+
+            UpdPanel2(panel11); UpdPanel2(panel21); UpdPanel2(panel31); UpdPanel2(panel41); UpdPanel2(panel51); UpdPanel2(panel61);
+            UpdPanel2(panel12); UpdPanel2(panel22); UpdPanel2(panel32); UpdPanel2(panel42); UpdPanel2(panel52); UpdPanel2(panel62);
+            UpdPanel2(panel13); UpdPanel2(panel23); UpdPanel2(panel33); UpdPanel2(panel43); UpdPanel2(panel53); UpdPanel2(panel63);
+            UpdPanel2(panel14); UpdPanel2(panel24); UpdPanel2(panel34); UpdPanel2(panel44); UpdPanel2(panel54); UpdPanel2(panel64);
+            UpdPanel2(panel15); UpdPanel2(panel25); UpdPanel2(panel35); UpdPanel2(panel45); UpdPanel2(panel55); UpdPanel2(panel65);
+            UpdPanel2(panel16); UpdPanel2(panel26); UpdPanel2(panel36); UpdPanel2(panel46); UpdPanel2(panel56); UpdPanel2(panel66);
+            UpdPanel2(panel17); UpdPanel2(panel27); UpdPanel2(panel37); UpdPanel2(panel47); UpdPanel2(panel57); UpdPanel2(panel67);
+        }
+
+        private void UpdLabel2(Label label)
+        {
+            if (((DateTime)(label.Parent.Tag)).DayOfWeek == DayOfWeek.Sunday || ((DateTime)(label.Parent.Tag)).DayOfWeek == DayOfWeek.Saturday ||label.Text != "")
+            {
+                return;
+            }
+            DateTime date = (DateTime)label.Parent.Tag;
+            if (attendanceList != null && attendanceList.Count > 0)
+            {
+                foreach (Attendance a in attendanceList)
+                {
+                    if (a.SignDate == date.Date.Ticks)
+                    {
+                        label.Text += a.SignStartTime != 0 ? CNDate.getTimeByTimeTicks(a.SignStartTime) : "";
+                        label.Text += "~";
+                        label.Text += a.SignEndTime != 0 ? CNDate.getTimeByTimeTicks(a.SignEndTime) : "";
+                        attendanceList.Remove(a);
+                        return;
+                    }
+                }
+            }
+            if (date.Ticks > DateTime.Now.Ticks)
+                label.Text = "未考勤";
+            else
+                label.Text = "缺勤";
+            
+
+        }
+
+        private void UpdPanel2(Panel panel)
+        { 
+        
+        }
+        #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            initDutyInfo();
         }
     }
 }

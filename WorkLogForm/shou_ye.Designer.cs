@@ -304,6 +304,10 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.today_label4 = new System.Windows.Forms.Label();
             this.today_label3 = new System.Windows.Forms.Label();
@@ -471,6 +475,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel10.SuspendLayout();
             this.panel5.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel9.SuspendLayout();
@@ -807,7 +812,6 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(108, 17);
             this.label13.TabIndex = 3;
-            this.label13.Text = "09:00~17:00";
             this.label13.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label133
@@ -969,7 +973,6 @@
             this.label67.Name = "label67";
             this.label67.Size = new System.Drawing.Size(108, 17);
             this.label67.TabIndex = 3;
-            this.label67.Text = "09:00~17:00";
             this.label67.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label677
@@ -1038,7 +1041,6 @@
             this.label66.Name = "label66";
             this.label66.Size = new System.Drawing.Size(108, 17);
             this.label66.TabIndex = 3;
-            this.label66.Text = "09:00~17:00";
             this.label66.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label666
@@ -1107,7 +1109,6 @@
             this.label65.Name = "label65";
             this.label65.Size = new System.Drawing.Size(108, 17);
             this.label65.TabIndex = 3;
-            this.label65.Text = "09:00~17:00";
             this.label65.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label655
@@ -1176,7 +1177,6 @@
             this.label64.Name = "label64";
             this.label64.Size = new System.Drawing.Size(108, 17);
             this.label64.TabIndex = 3;
-            this.label64.Text = "09:00~17:00";
             this.label64.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label644
@@ -1245,7 +1245,6 @@
             this.label63.Name = "label63";
             this.label63.Size = new System.Drawing.Size(108, 17);
             this.label63.TabIndex = 3;
-            this.label63.Text = "09:00~17:00";
             this.label63.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label633
@@ -1314,7 +1313,6 @@
             this.label62.Name = "label62";
             this.label62.Size = new System.Drawing.Size(108, 17);
             this.label62.TabIndex = 3;
-            this.label62.Text = "09:00~17:00";
             this.label62.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label622
@@ -1383,7 +1381,6 @@
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(108, 17);
             this.label61.TabIndex = 3;
-            this.label61.Text = "09:00~17:00";
             this.label61.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label611
@@ -1451,7 +1448,6 @@
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(108, 17);
             this.label31.TabIndex = 3;
-            this.label31.Text = "09:00~17:00";
             this.label31.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label311
@@ -1519,7 +1515,6 @@
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(108, 17);
             this.label32.TabIndex = 3;
-            this.label32.Text = "09:00~17:00";
             this.label32.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label322
@@ -1587,7 +1582,6 @@
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(108, 17);
             this.label37.TabIndex = 3;
-            this.label37.Text = "09:00~17:00";
             this.label37.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label377
@@ -1655,7 +1649,6 @@
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(108, 17);
             this.label36.TabIndex = 3;
-            this.label36.Text = "09:00~17:00";
             this.label36.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label366
@@ -1723,7 +1716,6 @@
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(108, 17);
             this.label33.TabIndex = 3;
-            this.label33.Text = "09:00~17:00";
             this.label33.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label333
@@ -1791,7 +1783,6 @@
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(108, 17);
             this.label35.TabIndex = 3;
-            this.label35.Text = "09:00~17:00";
             this.label35.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label355
@@ -1859,7 +1850,6 @@
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(108, 17);
             this.label34.TabIndex = 3;
-            this.label34.Text = "09:00~17:00";
             this.label34.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label344
@@ -1928,7 +1918,6 @@
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(108, 17);
             this.label57.TabIndex = 3;
-            this.label57.Text = "09:00~17:00";
             this.label57.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label577
@@ -1996,7 +1985,6 @@
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(108, 17);
             this.label56.TabIndex = 3;
-            this.label56.Text = "09:00~17:00";
             this.label56.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label566
@@ -2064,7 +2052,6 @@
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(108, 17);
             this.label55.TabIndex = 3;
-            this.label55.Text = "09:00~17:00";
             this.label55.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label555
@@ -2132,7 +2119,6 @@
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(108, 17);
             this.label54.TabIndex = 3;
-            this.label54.Text = "09:00~17:00";
             this.label54.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label544
@@ -2196,7 +2182,6 @@
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(108, 17);
             this.label53.TabIndex = 3;
-            this.label53.Text = "09:00~17:00";
             this.label53.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label533
@@ -2264,7 +2249,6 @@
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(108, 17);
             this.label52.TabIndex = 3;
-            this.label52.Text = "09:00~17:00";
             this.label52.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label522
@@ -2332,7 +2316,6 @@
             this.label51.Name = "label51";
             this.label51.Size = new System.Drawing.Size(108, 17);
             this.label51.TabIndex = 3;
-            this.label51.Text = "09:00~17:00";
             this.label51.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label511
@@ -2400,7 +2383,6 @@
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(108, 17);
             this.label47.TabIndex = 3;
-            this.label47.Text = "09:00~17:00";
             this.label47.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label477
@@ -2468,7 +2450,6 @@
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(108, 17);
             this.label46.TabIndex = 3;
-            this.label46.Text = "09:00~17:00";
             this.label46.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label466
@@ -2536,7 +2517,6 @@
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(108, 17);
             this.label45.TabIndex = 3;
-            this.label45.Text = "09:00~17:00";
             this.label45.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label455
@@ -2604,7 +2584,6 @@
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(108, 17);
             this.label44.TabIndex = 3;
-            this.label44.Text = "09:00~17:00";
             this.label44.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label444
@@ -2672,7 +2651,6 @@
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(108, 17);
             this.label43.TabIndex = 3;
-            this.label43.Text = "09:00~17:00";
             this.label43.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label433
@@ -2740,7 +2718,6 @@
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(108, 17);
             this.label42.TabIndex = 3;
-            this.label42.Text = "09:00~17:00";
             this.label42.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label422
@@ -2808,7 +2785,6 @@
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(108, 17);
             this.label41.TabIndex = 3;
-            this.label41.Text = "09:00~17:00";
             this.label41.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label411
@@ -2876,7 +2852,6 @@
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(108, 17);
             this.label27.TabIndex = 3;
-            this.label27.Text = "09:00~17:00";
             this.label27.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label277
@@ -2944,7 +2919,6 @@
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(108, 17);
             this.label26.TabIndex = 3;
-            this.label26.Text = "09:00~17:00";
             this.label26.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label266
@@ -3012,7 +2986,6 @@
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(108, 17);
             this.label25.TabIndex = 3;
-            this.label25.Text = "09:00~17:00";
             this.label25.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label255
@@ -3080,7 +3053,6 @@
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(108, 17);
             this.label24.TabIndex = 3;
-            this.label24.Text = "09:00~17:00";
             this.label24.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label244
@@ -3148,7 +3120,6 @@
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(108, 17);
             this.label23.TabIndex = 3;
-            this.label23.Text = "09:00~17:00";
             this.label23.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label233
@@ -3216,7 +3187,6 @@
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(108, 17);
             this.label22.TabIndex = 3;
-            this.label22.Text = "09:00~17:00";
             this.label22.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label222
@@ -3284,7 +3254,6 @@
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(108, 17);
             this.label21.TabIndex = 3;
-            this.label21.Text = "09:00~17:00";
             this.label21.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label211
@@ -3352,7 +3321,6 @@
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(108, 17);
             this.label17.TabIndex = 3;
-            this.label17.Text = "09:00~17:00";
             this.label17.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label177
@@ -3421,7 +3389,6 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(108, 17);
             this.label15.TabIndex = 3;
-            this.label15.Text = "09:00~17:00";
             this.label15.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label155
@@ -3489,7 +3456,6 @@
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(108, 17);
             this.label16.TabIndex = 3;
-            this.label16.Text = "09:00~17:00";
             this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label166
@@ -3542,7 +3508,6 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(108, 17);
             this.label14.TabIndex = 3;
-            this.label14.Text = "09:00~17:00";
             this.label14.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label144
@@ -3558,7 +3523,7 @@
             // 
             // panel12
             // 
-            this.panel12.BackColor = System.Drawing.Color.White;
+            this.panel12.BackColor = System.Drawing.Color.Transparent;
             this.panel12.BackgroundImage = global::WorkLogForm.Properties.Resources.日历小方块2;
             this.panel12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -3614,7 +3579,6 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(108, 17);
             this.label12.TabIndex = 2;
-            this.label12.Text = "09:00~17:00";
             this.label12.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label122
@@ -3655,7 +3619,6 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(108, 17);
             this.label11.TabIndex = 1;
-            this.label11.Text = "09:00~17:00";
             this.label11.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pictureBox11z
@@ -3750,6 +3713,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.SkyBlue;
+            this.panel1.Controls.Add(this.panel10);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.today_label1);
@@ -3758,6 +3722,59 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(204, 562);
             this.panel1.TabIndex = 159;
+            // 
+            // panel10
+            // 
+            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel10.Controls.Add(this.button1);
+            this.panel10.Controls.Add(this.comboBox2);
+            this.panel10.Controls.Add(this.comboBox1);
+            this.panel10.Location = new System.Drawing.Point(1, 201);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(203, 360);
+            this.panel10.TabIndex = 35;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(26, 248);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(148, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "显示考勤信息";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "",
+            "日程安排",
+            "值班安排",
+            "出差安排",
+            "请假情况",
+            "考勤时间"});
+            this.comboBox2.Location = new System.Drawing.Point(26, 167);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(148, 20);
+            this.comboBox2.TabIndex = 0;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "",
+            "日程安排",
+            "值班安排",
+            "出差安排",
+            "请假情况",
+            "考勤时间"});
+            this.comboBox1.Location = new System.Drawing.Point(26, 86);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(148, 20);
+            this.comboBox1.TabIndex = 0;
             // 
             // panel5
             // 
@@ -4318,6 +4335,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).EndInit();
             this.panel1.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -4620,32 +4638,36 @@
         private System.Windows.Forms.Label today_label3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label today_label2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.PictureBox tomorrow_weather_pictureBox2;
-        private System.Windows.Forms.PictureBox tomorrow_weather_pictureBox1;
-        private System.Windows.Forms.Label tomorrow_weather_label;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label tomorrow_weather_label2;
-        private System.Windows.Forms.Label tomorrow_weather_label1;
-        private System.Windows.Forms.PictureBox today_weather_pictureBox2;
-        private System.Windows.Forms.PictureBox today_weather_pictureBox1;
-        private System.Windows.Forms.Label today_weather_label;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label today_weather_label2;
-        private System.Windows.Forms.Label today_weather_label1;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label today_weather_label;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label tomorrow2_weather_label;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label tomorrow_weather_label;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label tomorrow2_weather_label1;
         private System.Windows.Forms.Label tomorrow2_weather_label2;
         private System.Windows.Forms.PictureBox tomorrow2_weather_pictureBox2;
         private System.Windows.Forms.PictureBox tomorrow2_weather_pictureBox1;
-        private System.Windows.Forms.Label tomorrow2_weather_label;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label tomorrow_weather_label1;
+        private System.Windows.Forms.Label tomorrow_weather_label2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label today_weather_label2;
+        private System.Windows.Forms.Label today_weather_label1;
+        private System.Windows.Forms.PictureBox tomorrow_weather_pictureBox2;
+        private System.Windows.Forms.PictureBox tomorrow_weather_pictureBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.PictureBox today_weather_pictureBox2;
+        private System.Windows.Forms.PictureBox today_weather_pictureBox1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button button1;
 
     }
 }
