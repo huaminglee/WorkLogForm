@@ -78,6 +78,12 @@ namespace WorkLogForm
             initialData();//显示日程 日志 考勤
             schedule_listen_timer.Start();//监听日程提醒
             listen_ri_cheng();//监测日程表变动
+
+            if(this.user.Kdid.KdName.Trim() != "综合办公室" )
+            {
+                sjgl_pictureBox.Visible = false;
+            }
+            
         }
 
         #region 自定义窗体初始化方法
@@ -611,6 +617,7 @@ namespace WorkLogForm
             ccgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.出差管理;
         }
         #endregion
+        
         #region 主界面切换按钮
         private void ri_zhi_pictureBox_MouseEnter(object sender, EventArgs e)
         {
@@ -645,6 +652,7 @@ namespace WorkLogForm
             tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人随笔1;
         }
         #endregion  
+
         #region 主界面切换
         private void ri_cheng_pictureBox1_Click(object sender, EventArgs e)
         {
