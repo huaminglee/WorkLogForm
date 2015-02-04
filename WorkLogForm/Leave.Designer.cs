@@ -1725,8 +1725,8 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.panel5.Controls.Add(this.groupBox7);
             this.panel5.Controls.Add(this.groupBox8);
+            this.panel5.Controls.Add(this.groupBox7);
             this.panel5.Controls.Add(this.listView5);
             this.panel5.Location = new System.Drawing.Point(13, 78);
             this.panel5.Name = "panel5";

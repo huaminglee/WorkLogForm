@@ -31,6 +31,9 @@ namespace WorkLogForm
         IList holidayList;
         IList workDayList;
         IList leaveList;
+        InfoLine infoLine1,infoLine2;
+        int count_btn=0;
+        //IList otherList;
 
         private DateTime startTime;
         private DateTime endTime ;
@@ -98,6 +101,9 @@ namespace WorkLogForm
                 //initAttendanceDate();//2初始化出勤信息attendanceList
                 //initPanelDate();//3初始化假日信息holidayList 上班时间usuallyDayList 请假信息leaveList 调休信息workDayList
                 //updateComponent();//4attendenceLabel_Paint更新label  attendencePanel_Paint更新panel
+
+                comboBox1.Text = "";
+                comboBox2.Text = "";
 
                 initDateInfo();
             }
@@ -552,6 +558,7 @@ namespace WorkLogForm
             holidayList = baseService.loadEntityList("from Holiday where STATE=" + (int)IEntity.stateEnum.Normal + " and ((StartTime>=" + startTime.Date.Ticks + " and StartTime<=" + endTime.Date.Ticks + ") or (EndTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime<=" + startTime.Date.Ticks + " and EndTime>=" + endTime.Date.Ticks + "))");
             workDayList = baseService.loadEntityList("from WorkDay where STATE=" + (int)IEntity.stateEnum.Normal + " and workDateTime>=" + startTime.Date.Ticks + " and workDateTime<=" + endTime.Date.Ticks);
             updateDateInfo();
+            count_btn = 0;
         }
 
         private void updateDateInfo()
@@ -574,7 +581,16 @@ namespace WorkLogForm
         }
         private void UpdLabel1(Label label)
         {
+            if (count_btn == 1)
+            {
+                label.Paint -= new PaintEventHandler(paint_InfoLine);
+            }
+            label.Refresh();
+
             label.Text = "";
+            label.Height = 17;
+
+            
             DateTime date = (DateTime)label.Parent.Tag;
             if (holidayList != null && holidayList.Count > 0)//判断是否节假日
             {
@@ -587,7 +603,17 @@ namespace WorkLogForm
                     }
                 }
             }
+            
         }
+
+        //private void paint_Clear(object sender, PaintEventArgs e)
+        //{
+        //    Color c = System.Drawing.ColorTranslator.FromHtml("#FFFCFAF7");            
+        //    e.Graphics.Clear(c);
+               
+        //}
+
+
 
         private void UpdPanel1(Panel panel)
         {
@@ -631,13 +657,13 @@ namespace WorkLogForm
             UpdLabel2(label16); UpdLabel2(label26); UpdLabel2(label36); UpdLabel2(label46); UpdLabel2(label56); UpdLabel2(label66);
             UpdLabel2(label17); UpdLabel2(label27); UpdLabel2(label37); UpdLabel2(label47); UpdLabel2(label57); UpdLabel2(label67);
 
-            UpdPanel2(panel11); UpdPanel2(panel21); UpdPanel2(panel31); UpdPanel2(panel41); UpdPanel2(panel51); UpdPanel2(panel61);
-            UpdPanel2(panel12); UpdPanel2(panel22); UpdPanel2(panel32); UpdPanel2(panel42); UpdPanel2(panel52); UpdPanel2(panel62);
-            UpdPanel2(panel13); UpdPanel2(panel23); UpdPanel2(panel33); UpdPanel2(panel43); UpdPanel2(panel53); UpdPanel2(panel63);
-            UpdPanel2(panel14); UpdPanel2(panel24); UpdPanel2(panel34); UpdPanel2(panel44); UpdPanel2(panel54); UpdPanel2(panel64);
-            UpdPanel2(panel15); UpdPanel2(panel25); UpdPanel2(panel35); UpdPanel2(panel45); UpdPanel2(panel55); UpdPanel2(panel65);
-            UpdPanel2(panel16); UpdPanel2(panel26); UpdPanel2(panel36); UpdPanel2(panel46); UpdPanel2(panel56); UpdPanel2(panel66);
-            UpdPanel2(panel17); UpdPanel2(panel27); UpdPanel2(panel37); UpdPanel2(panel47); UpdPanel2(panel57); UpdPanel2(panel67);
+            //UpdPanel2(panel11); UpdPanel2(panel21); UpdPanel2(panel31); UpdPanel2(panel41); UpdPanel2(panel51); UpdPanel2(panel61);
+            //UpdPanel2(panel12); UpdPanel2(panel22); UpdPanel2(panel32); UpdPanel2(panel42); UpdPanel2(panel52); UpdPanel2(panel62);
+            //UpdPanel2(panel13); UpdPanel2(panel23); UpdPanel2(panel33); UpdPanel2(panel43); UpdPanel2(panel53); UpdPanel2(panel63);
+            //UpdPanel2(panel14); UpdPanel2(panel24); UpdPanel2(panel34); UpdPanel2(panel44); UpdPanel2(panel54); UpdPanel2(panel64);
+            //UpdPanel2(panel15); UpdPanel2(panel25); UpdPanel2(panel35); UpdPanel2(panel45); UpdPanel2(panel55); UpdPanel2(panel65);
+            //UpdPanel2(panel16); UpdPanel2(panel26); UpdPanel2(panel36); UpdPanel2(panel46); UpdPanel2(panel56); UpdPanel2(panel66);
+            //UpdPanel2(panel17); UpdPanel2(panel27); UpdPanel2(panel37); UpdPanel2(panel47); UpdPanel2(panel57); UpdPanel2(panel67);
         }
 
         private void UpdLabel2(Label label)
@@ -669,15 +695,377 @@ namespace WorkLogForm
 
         }
 
-        private void UpdPanel2(Panel panel)
-        { 
+        //private void UpdPanel2(Panel panel)
+        //{ 
         
-        }
-        #endregion
+        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
             initDutyInfo();
         }
+        #endregion
+
+
+        #region 日历加载信息
+        private void button2_Click(object sender, EventArgs e)
+        {
+            
+            if (comboBox1.Text != "")
+            {
+                infoLine1.used = true; ;
+                infoLine1.info = comboBox1.Text;
+            }
+            else
+                infoLine1.used = false;
+
+
+
+            if (comboBox2.Text != "" && comboBox2.Text != comboBox1.Text)
+            {
+                infoLine2.used = true;
+                infoLine2.info = comboBox2.Text;
+            }
+            else
+                infoLine2.used = false;
+
+
+
+            load_OtherInfo();
+
+            
+            if (infoLine1.list != null)
+                infoLine1.list.Clear();
+            if (infoLine2.list != null)
+                infoLine2.list.Clear();
+            count_btn = 1;
+            
+        }
+
+        private void load_OtherInfo()
+        {
+            if (infoLine1.used)
+            {
+                loadOtherInfo(ref infoLine1);
+            }
+
+
+            if (infoLine2.used)
+            {
+                loadOtherInfo(ref infoLine2);
+            }
+
+            updateLabels();
+
+            
+        }
+
+
+        /// <summary>
+        /// 读取信息函数
+        /// </summary>
+        /// <param name="infoLine"></param>
+        private void loadOtherInfo(ref InfoLine infoLine)
+        {
+            string query = "";
+            switch (infoLine.info)
+            {
+                case "日程安排":
+                    query = "from StaffSchedule where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + startTime.Ticks + " and ScheduleTime<" + endTime.Ticks + " order by ScheduleTime asc";
+                    break;
+                case "值班安排":
+                    query = "select u from OnDutyTable u where (u.DaiBanID= " + User.Id + " or u.YeBanID="+User.Id+" or u.BaiBanID="+User.Id+" ) and u.Time >= " + startTime.Ticks + " and u.Time <= " + endTime.Ticks + " u.State = " + (int)IEntity.stateEnum.Normal;
+                    break;
+                case "出差安排":
+                    query = "from Business b where b.StartTime>= " + startTime.Ticks + " and  b.EndTime<=" + endTime.Ticks + " and b.Id in (select be.BusinessId from BusinessEmployee be where be.EmployeeId=" + this.User.Id + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal + " ) and b.State=" + (int)Business.stateEnum.Normal + " order by b.StartTime";
+                    break;
+                case "请假情况":
+                    query = "select h from LeaveManage h  where h.Ku_Id =" + this.User.Id + "and h.StartTime>=" + startTime.Ticks + " and h.EndTime<=" + endTime.Ticks + " and h.State=" + (int)LeaveManage.stateEnum.Normal;
+                    break;
+            }
+            if (query != "")
+                infoLine.list = baseService.loadEntityList(query);
+        }
+
+
+        /// <summary>
+        /// 更新各个label
+        /// </summary>
+        private void updateLabels()
+        {
+            UpdLabel3(label11); UpdLabel3(label21); UpdLabel3(label31); UpdLabel3(label41); UpdLabel3(label51); UpdLabel3(label61);
+            UpdLabel3(label12); UpdLabel3(label22); UpdLabel3(label32); UpdLabel3(label42); UpdLabel3(label52); UpdLabel3(label62);
+            UpdLabel3(label13); UpdLabel3(label23); UpdLabel3(label33); UpdLabel3(label43); UpdLabel3(label53); UpdLabel3(label63);
+            UpdLabel3(label14); UpdLabel3(label24); UpdLabel3(label34); UpdLabel3(label44); UpdLabel3(label54); UpdLabel3(label64);
+            UpdLabel3(label15); UpdLabel3(label25); UpdLabel3(label35); UpdLabel3(label45); UpdLabel3(label55); UpdLabel3(label65);
+            UpdLabel3(label16); UpdLabel3(label26); UpdLabel3(label36); UpdLabel3(label46); UpdLabel3(label56); UpdLabel3(label66);
+            UpdLabel3(label17); UpdLabel3(label27); UpdLabel3(label37); UpdLabel3(label47); UpdLabel3(label57); UpdLabel3(label67);
+        }
+
+        /// <summary>
+        /// 更新label函数
+        /// </summary>
+        /// <param name="label"></param>
+        private void UpdLabel3(Label label)
+        {
+            DrawFlag dflag = new DrawFlag();
+            dflag.l1 = false;
+            dflag.l2 = false;
+
+            DateTime date = (DateTime)label.Parent.Tag;
+
+            if (infoLine1.used == false && infoLine2.used == false)
+                label.Height = 17;
+            else
+                label.Height = 27;
+
+            #region 是否画线1
+            if (infoLine1.used)
+            {
+
+
+                switch (infoLine1.info)
+                {
+                    #region 日程安排
+                    case "日程安排":
+                        if (infoLine1.list != null && infoLine1.list.Count > 0)
+                        {
+                            foreach (StaffSchedule richeng in infoLine1.list)
+                            {
+                                if (new DateTime(richeng.ScheduleTime).Date == date.Date)
+                                {
+                                    dflag.l1 = true;
+                                    infoLine1.list.Remove(richeng);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    #endregion
+
+
+
+                    #region 值班安排
+                    case "值班安排":
+                        if (infoLine1.list != null && infoLine1.list.Count > 0)
+                        {
+                            foreach (OnDutyTable u in infoLine1.list)
+                            {
+                                if (new DateTime(u.Time).Date == date.Date)
+                                {
+                                    dflag.l1 = true;
+                                    infoLine1.list.Remove(u);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    #endregion
+
+
+
+                    #region 出差安排
+                    case "出差安排":
+                        if (infoLine1.list != null && infoLine1.list.Count > 0)
+                        {
+                            foreach (Business  b in infoLine1.list)
+                            {
+                                if (date.Date.Ticks>=b.StartTime && date.Date.Ticks<=b.EndTime)
+                                {
+                                    dflag.l1 = true;
+                                    infoLine1.list.Remove(b);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    #endregion
+
+
+
+                    #region 请假情况
+                    case "请假情况":
+                        if (infoLine1.list != null && infoLine1.list.Count > 0)
+                        {
+                            foreach (LeaveManage leave in infoLine1.list)
+                            {
+                                if (leave.StartTime<= date.Date.Ticks && leave.EndTime>=date.Date.Ticks)
+                                {
+                                    dflag.l1 = true;
+                                    infoLine1.list.Remove(leave);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    #endregion
+
+                }
+            }
+            #endregion
+
+            #region 是否画线2
+            if (infoLine2.used)
+            {
+               
+
+                switch (infoLine2.info)
+                {
+                    #region 日程安排
+                    case "日程安排":
+                        if (infoLine2.list != null && infoLine2.list.Count > 0)
+                        {
+                            foreach (StaffSchedule richeng in infoLine2.list)
+                            {
+                                if (new DateTime(richeng.ScheduleTime).Date == date.Date)
+                                {
+                                    dflag.l2 = true;
+                                    infoLine2.list.Remove(richeng);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    #endregion
+
+
+
+                    #region 值班安排
+                    case "值班安排":
+                        if (infoLine2.list != null && infoLine2.list.Count > 0)
+                        {
+                            foreach (OnDutyTable u in infoLine2.list)
+                            {
+                                if (new DateTime(u.Time).Date == date.Date)
+                                {
+                                    dflag.l2 = true;
+                                    infoLine2.list.Remove(u);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    #endregion
+
+
+
+                    #region 出差安排
+                    case "出差安排":
+                        if (infoLine2.list != null && infoLine2.list.Count > 0)
+                        {
+                            foreach (Business b in infoLine2.list)
+                            {
+                                if (date.Date.Ticks >= b.StartTime && date.Date.Ticks <= b.EndTime)
+                                {
+                                    dflag.l2 = true;
+                                    infoLine2.list.Remove(b);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    #endregion
+
+
+
+                    #region 请假情况
+                    case "请假情况":
+                        if (infoLine2.list != null && infoLine2.list.Count > 0)
+                        {
+                            foreach (LeaveManage leave in infoLine2.list)
+                            {
+                                if (leave.StartTime <= date.Date.Ticks && leave.EndTime >= date.Date.Ticks)
+                                {
+                                    dflag.l2 = true;
+                                    infoLine2.list.Remove(leave);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    #endregion
+                }
+            }
+            #endregion
+
+
+            label.Tag = dflag;
+            if(count_btn!=1)
+            {
+                label.Paint += new PaintEventHandler(paint_InfoLine);
+            }
+            
+            label.Refresh();
+        }
+
+
+
+        /// <summary>
+        /// 画线函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void paint_InfoLine(object sender, PaintEventArgs e)
+        {
+
+            Label label = (Label)sender;
+
+
+            Pen pen1=new Pen(Color.Transparent);
+            Pen pen2 = new Pen(Color.Transparent);
+            
+
+            Point paintLocation1=new Point(0,0);
+            Point paintLocation2 = new Point(0, 0);
+            #region 画线1
+            if (((DrawFlag)label.Tag).l1)
+            {
+                pen1 = new Pen(pictureBox8.BackColor);
+                pen1.Width = 6;
+                paintLocation1 = new Point(0, 14);
+                
+                e.Graphics.DrawLine(pen1, paintLocation1.X, paintLocation1.Y, label.Size.Width, paintLocation1.Y);
+            }
+
+            
+            #endregion
+
+            #region 画线2
+            if (((DrawFlag)label.Tag).l2)
+            {
+
+                pen2 = new Pen(pictureBox9.BackColor);
+                pen2.Width = 6;
+                paintLocation2 = new Point(0, 22);
+
+                e.Graphics.DrawLine(pen2, paintLocation2.X, paintLocation2.Y, label.Size.Width, paintLocation2.Y);
+            }
+            #endregion  
+
+            #region 清理画线
+            Pen pen3 = new Pen(Color.White);
+            if (((DrawFlag)label.Tag).l1 == false && ((DrawFlag)label.Tag).l2 == false)
+            {
+                e.Graphics.DrawLine(pen3, 0, 10, 0, 10);
+            }
+            #endregion
+        }
+
+        #endregion
+    }
+
+
+
+    struct InfoLine
+    {
+        public bool used;
+        public string info;
+        public IList list;
+    }
+
+    struct DrawFlag
+    {
+        public bool l1;
+        public bool l2;
     }
 }
