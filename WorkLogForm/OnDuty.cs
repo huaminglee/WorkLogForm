@@ -141,8 +141,14 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void OnDuty_Load(object sender, EventArgs e)
         {
-            //查询综合办与网络中心的主任
+            if (role.KrOrder == 3)
+            {
+                this.button4.Visible = false;
+            }
+            this.comboBox1.SelectedIndex = 1;
 
+
+            //查询综合办与网络中心的主任
             Therole = 0;
             string sql = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%科技信息资源研究所%' or u.Kdid.KdName like '%综合办公室%') ";
             IList i = baseService.loadEntityList(sql);
@@ -443,14 +449,14 @@ namespace WorkLogForm
         {
             ArrangeDuty ad = new ArrangeDuty();
             ad.ShowDialog();
-            if(ad.DialogResult == DialogResult.OK)
+            if (ad.DialogResult == DialogResult.OK)
             {
                 if (TfM != null)
                 {
                     OnDutyTable ot;
-                    DateTime dt = new DateTime (((DateTime)((((LinkLabel)sender).Parent).Tag)).Ticks);
-                    string sql = "select u from OnDutyTable u where u.Time = " + dt.Ticks+ 
-                        " and u.State = "+(int)IEntity.stateEnum.Normal;
+                    DateTime dt = new DateTime(((DateTime)((((LinkLabel)sender).Parent).Tag)).Ticks);
+                    string sql = "select u from OnDutyTable u where u.Time = " + dt.Ticks +
+                        " and u.State = " + (int)IEntity.stateEnum.Normal;
                     IList i = baseService.loadEntityList(sql);
                     if (i != null && i.Count > 0)
                     {
@@ -459,7 +465,7 @@ namespace WorkLogForm
                     else
                     {
                         ot = new OnDutyTable();
-                    
+
                     }
                     ot.TFMId = TfM;
                     ot.Time = dt.Ticks;
@@ -468,11 +474,12 @@ namespace WorkLogForm
                     ot.YeBanID = ad.Yuser;
                     ot.State = (int)IEntity.stateEnum.Normal;
                     ot.TimeStamp = DateTime.Now.Ticks;
-                    if(TfM.IsDone == 0)
-                    {
-                        TfM.IsDone = 1;
-                        baseService.SaveOrUpdateEntity(TfM);
-                    }
+                    TfM.IsDone = 1;
+
+                    TfM.ExamineState = 0;
+                    this.CheckState.Text = "审核状态：未审核";
+
+                    baseService.SaveOrUpdateEntity(TfM);
 
                     #region 行政班
                     if (TfM.DutyType == 0) //行政班
@@ -483,7 +490,7 @@ namespace WorkLogForm
                     #endregion
 
                     #region 网络班
-                    else 
+                    else
                     {
 
                         PrintDutyPersonName((Panel)((LinkLabel)sender).Parent, ad.Duser, ad.Buser, ad.Yuser, 1);
@@ -495,7 +502,7 @@ namespace WorkLogForm
                     #endregion
 
                 }
-            
+
             }
 
         }
@@ -572,7 +579,7 @@ namespace WorkLogForm
                         case 1:
                             this.CheckState.Text = "审核状态：审核通过"; break;
                         case 2:
-                            this.CheckState.Text = "审核状态：审核为通过"; break;
+                            this.CheckState.Text = "审核状态：审核未通过"; break;
                     }
                 }
                 else
@@ -605,16 +612,35 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            if(TfM != null)
-            {
-                if (MessageBox.Show("确定要通过吗？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                {
-                    TfM.ExamineState = 1;
-                    baseService.SaveOrUpdateEntity(TfM);
-                    this.CheckState.Text = "审核状态：审核通过";
-                }
+            DateTime tt = new DateTime(this.dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, 1);
+            string sql = "select u from TimeArrangeForManager u where " +
+             "  u.TimeMonth = " + tt.Ticks +
+             " and u.State = " + (int)IEntity.stateEnum.Normal + 
+             " and u.IsDone = 1 ";
+
+            IList timemananer = baseService.loadEntityList(sql);
+             if(timemananer != null && timemananer.Count > 0)
+             {
+                 TimeArrangeForManager timeman = (TimeArrangeForManager)timemananer[0];
+                 if (timeman.ExamineState == 0)
+                 {
+                     if (MessageBox.Show("确定要通过吗？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                     {
+
+                         timeman.ExamineState = 1;
+                         baseService.SaveOrUpdateEntity(timeman);
+
+                         this.CheckState.Text = "审核状态：审核通过";
+                     }
+                 }
+                 else
+                 {
+                     MessageBox.Show("您已经审核过了");
+                 }
+                
+             }
                
-            }
+            
 
         }
 
@@ -625,15 +651,155 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            if (TfM != null)
+            DateTime tt = new DateTime(this.dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, 1);
+            string sql = "select u from TimeArrangeForManager u where " +
+             "  u.TimeMonth = " + tt.Ticks +
+             " and u.State = " + (int)IEntity.stateEnum.Normal +
+             " and u.IsDone = 1 ";
+
+            IList timemananer = baseService.loadEntityList(sql);
+            if (timemananer != null && timemananer.Count > 0)
             {
-                if (MessageBox.Show("确定要通过吗？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                TimeArrangeForManager timeman = (TimeArrangeForManager)timemananer[0];
+                if (timeman.ExamineState == 0)
                 {
-                    TfM.ExamineState = 2;
-                    baseService.SaveOrUpdateEntity(TfM);
-                    this.CheckState.Text = "审核状态：审核为通过";
+                    if (MessageBox.Show("确定要不通过吗？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+
+                        timeman.ExamineState = 2;
+                        baseService.SaveOrUpdateEntity(timeman);
+
+                        this.CheckState.Text = "审核状态：审核不通过";
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("您已经审核过了");
+                }
+
+            }
+        }
+        /*-----------------值班统计---------------------------*/
+
+        #region 统计自己
+        /// <summary>
+        /// 统计自己查询
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button5_Click(object sender, EventArgs e)
+        {
+            this.button5.Cursor = Cursors.WaitCursor;
+
+            string sql0 = "select u from OnDutyTable u left join u.DaiBanID user where user.Id = " + user.Id +
+                " and u.Time >= "+this.dateTimePicker2.Value.Ticks + " and u.Time <= " +dateTimePicker3.Value.Ticks+ 
+                " u.State = "+(int)IEntity.stateEnum.Normal;
+            string sql1 = "select u from OnDutyTable u left join u.BaiBanID user where user.Id = " + user.Id +
+                " and u.Time >= " + this.dateTimePicker2.Value.Ticks + " and u.Time <= " + dateTimePicker3.Value.Ticks +
+                " u.State = " + (int)IEntity.stateEnum.Normal;
+            string sql2 = "select u from OnDutyTable u left join u.YeBanID user where user.Id = " + user.Id +
+                " and u.Time >= " + this.dateTimePicker2.Value.Ticks + " and u.Time <= " + dateTimePicker3.Value.Ticks +
+                " u.State = " + (int)IEntity.stateEnum.Normal;
+            string sql = "";
+            
+            switch (this.comboBox1.SelectedIndex)
+            {
+                case 0:
+                    sql = sql0;break;
+                case 1:
+                    sql = sql1;break;
+                case 2:
+                    sql = sql2;break;
+            }
+            if (sql != "")
+            {
+                IList times = baseService.loadEntityList(sql);
+                if(times!= null && times.Count > 0)
+                {
+                    this.dataGridView1.Rows.Clear();
+                    int i = 1;
+                    foreach (OnDutyTable o in times)
+                    {
+                        DateTime dt = new DateTime(o.Time);
+                        this.dataGridView1.Rows.Add(i, dt.ToString("yyyy年MM月dd日") +"  "+EnglishToChinese(dt), 
+                            this.comboBox1.Text,
+                            user.KuName);
+                        i++;
+                    }
+                
                 }
             }
-        }                           
+
+            this.button5.Cursor = Cursors.Hand;
+        }
+        //Monday Tuesday Wednesday Thursday  Friday Saturday  Sunday
+        public string EnglishToChinese(DateTime dt)
+        {
+            string weekday = dt.DayOfWeek.ToString();
+           
+            if (dt.DayOfWeek.ToString() == "Monday")
+            {
+                weekday = "星期一";
+            }
+            else if (dt.DayOfWeek.ToString() == "Tuesday")
+            {
+                weekday = "星期二";
+            }
+            else if (dt.DayOfWeek.ToString() == "Wednesday")
+            {
+                weekday = "星期三";
+            }
+            else if (dt.DayOfWeek.ToString() == "Thursday")
+            {
+                weekday = "星期四";
+            }
+            else if (dt.DayOfWeek.ToString() == "Friday")
+            {
+                weekday = "星期五";
+            }
+            else if (dt.DayOfWeek.ToString() == "Saturday")
+            {
+                weekday = "星期六";
+            }
+            else if (dt.DayOfWeek.ToString() == "Sunday")
+            {
+                weekday = "星期日";
+            }
+
+
+            return weekday;
+        }
+        #endregion
+        /// <summary>
+        /// 统计自己
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.panel1.Visible = true;
+            this.panel2.Visible = false;
+            
+        }
+
+        /// <summary>
+        /// 统计员工
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.button4.Cursor = Cursors.WaitCursor;
+
+            this.panel2.Visible = true;
+            this.panel1.Visible = false;
+
+
+
+
+            this.button4.Cursor = Cursors.Hand;
+        }
+
+
     }
 }
