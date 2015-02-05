@@ -249,7 +249,7 @@ namespace WorkLogForm
                     ListViewItem.ListViewSubItem number = new ListViewItem.ListViewSubItem();
                     number.Text = "1";
 
-                    item.SubItems.Add(number);
+                    //item.SubItems.Add(number); 多余的代码
                     item.SubItems.Add(time);
                     item.SubItems.Add(content);
                     

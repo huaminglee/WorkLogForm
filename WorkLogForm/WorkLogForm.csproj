@@ -417,6 +417,7 @@
     <None Include="Service References\WeatherService\WeatherWebService.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\refresh.jpg" />
     <Content Include="resources\个人考勤.png" />
     <Content Include="resources\个人考勤副本.png" />
     <Content Include="resources\代签审批.png" />
