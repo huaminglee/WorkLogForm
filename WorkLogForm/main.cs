@@ -28,7 +28,10 @@ namespace WorkLogForm
         private WkTUser user;
         private WkTRole role;
         Secretary sec;
-
+        /// <summary>
+        ///判断是否写过日志
+        /// </summary>
+        int IsWriteLog;
         /// <summary>
         /// 存储用户角色 用来传值
         /// </summary>
@@ -83,6 +86,16 @@ namespace WorkLogForm
             {
                 sjgl_pictureBox.Visible = false;
             }
+
+             IList staffLogList = baseService.loadEntityList
+                 ("from StaffLog where State=" 
+                 + (int)IEntity.stateEnum.Normal + 
+                 " and WriteTime=" + DateTime.Now.Date.Ticks + " and Staff=" + user.Id);
+
+             if (staffLogList != null && staffLogList.Count > 0)
+             {
+                 IsWriteLog = 1;
+             }
             
         }
 
@@ -790,6 +803,13 @@ namespace WorkLogForm
                 write_log.WindowState = FormWindowState.Normal;
                 write_log.Focus();
             }
+            if (write_log.DialogResult == DialogResult.OK)
+            {
+                if (IsWriteLog == 0)
+                {
+                    IsWriteLog = 1;
+                }
+            }
         }
         private void schedule_pictureBox_Click(object sender, EventArgs e)
         {
@@ -902,6 +922,7 @@ namespace WorkLogForm
                 scheduleManage.WindowState = FormWindowState.Normal;
                 scheduleManage.Focus();
             }
+            
         }
         private void jbgl_pictureBox_Click(object sender, EventArgs e)
         {
@@ -1115,6 +1136,7 @@ namespace WorkLogForm
         }
         #endregion
 
+        #region 日程提醒
         private void schedule_listen_timer_Tick(object sender, EventArgs e)//设置日程提醒
         {
             IList sl = scheduleList;
@@ -1127,7 +1149,15 @@ namespace WorkLogForm
                     {
                         //MessageBox.Show(ss.Content);
                         sec.LogtooltipString = ss.Content;
-                        sec.Show();
+                        if (!sec.Created)
+                        {
+                            sec.Show();
+                        }
+                        else
+                        {
+                            sec.Focus();
+                        }
+                        
                         if (scheduleList.Contains(ss))
                         {
                             scheduleList.Remove(ss);
@@ -1137,6 +1167,7 @@ namespace WorkLogForm
                 }
             }
         }
+        #endregion
 
         #region 边栏图片效果
         private void spgl_pictureBox_MouseMove(object sender, MouseEventArgs e)
@@ -1396,6 +1427,29 @@ namespace WorkLogForm
         {
             init_rc_Panel();
             init_rz_Panel();
+        }
+        #endregion
+
+        #region
+        /// <summary>
+        /// 提醒写日志
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RemindwriteLog_Tick(object sender, EventArgs e)
+        {
+            if(DateTime.Now.Hour == 17 && DateTime.Now.Minute == 10)
+            {
+                sec.LogtooltipString = "要写日志了！";
+                if (!sec.Created)
+                {
+                    sec.Show();
+                }
+                else
+                {
+                    sec.Focus();
+                }
+            }
         }
         #endregion
 

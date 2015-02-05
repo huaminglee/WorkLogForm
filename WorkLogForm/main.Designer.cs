@@ -102,6 +102,7 @@
             this.linkLabel12 = new System.Windows.Forms.LinkLabel();
             this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.RemindwriteLog = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wdrl_pictureBox)).BeginInit();
@@ -921,6 +922,12 @@
             this.linkLabel10.Text = "点击查看更多";
             this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel10_LinkClicked);
             // 
+            // RemindwriteLog
+            // 
+            this.RemindwriteLog.Enabled = true;
+            this.RemindwriteLog.Interval = 60000;
+            this.RemindwriteLog.Tick += new System.EventHandler(this.RemindwriteLog_Tick);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1090,5 +1097,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.PictureBox pictureBoxOfrefresh;
+        private System.Windows.Forms.Timer RemindwriteLog;
     }
 }

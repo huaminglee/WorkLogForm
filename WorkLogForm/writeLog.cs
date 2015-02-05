@@ -354,6 +354,7 @@ namespace WorkLogForm
             }
             MessageBox.Show("保存成功！");
 
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
         private void button2_Click(object sender, EventArgs e)
