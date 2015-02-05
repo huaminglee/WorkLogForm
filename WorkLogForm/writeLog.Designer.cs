@@ -80,8 +80,10 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.htmlEditor1 = new WinHtmlEditor.HtmlEditor();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboItem12
@@ -220,7 +222,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(433, 656);
+            this.button1.Location = new System.Drawing.Point(97, 11);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 26;
@@ -230,7 +232,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(514, 656);
+            this.button2.Location = new System.Drawing.Point(178, 11);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 162;
@@ -332,7 +334,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(352, 656);
+            this.button3.Location = new System.Drawing.Point(16, 11);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 171;
@@ -342,7 +344,7 @@
             // 
             // comment_button
             // 
-            this.comment_button.Location = new System.Drawing.Point(802, 656);
+            this.comment_button.Location = new System.Drawing.Point(323, 11);
             this.comment_button.Name = "comment_button";
             this.comment_button.Size = new System.Drawing.Size(75, 23);
             this.comment_button.TabIndex = 177;
@@ -409,6 +411,18 @@
             this.htmlEditor1.WebBrowserShortcutsEnabled = false;
             this.htmlEditor1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.htmlEditor1_KeyDown);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.comment_button);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.button2);
+            this.panel1.Location = new System.Drawing.Point(379, 645);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(568, 45);
+            this.panel1.TabIndex = 178;
+            // 
             // writeLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -416,10 +430,9 @@
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.日志管理系统首页3;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1008, 702);
-            this.Controls.Add(this.comment_button);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.comment_textBox);
             this.Controls.Add(this.comment_listView);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.htmlEditor1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.close_pictureBox);
@@ -427,9 +440,7 @@
             this.Controls.Add(this.schedule_listView);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -441,6 +452,7 @@
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.writeLog_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -498,5 +510,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Panel panel1;
     }
 }

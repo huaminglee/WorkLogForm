@@ -181,6 +181,25 @@ namespace WorkLogForm
         
         public void PrintDutyPersonName(Panel p, WkTUser DaiBan, WkTUser Baiban, WkTUser Yeban, int Type)
         {
+
+            if (DaiBan == null)
+            {
+                DaiBan = new WkTUser();
+                DaiBan.Id = 0;
+                DaiBan.KuName = "";
+            }
+            if (Baiban == null)
+            {
+                Baiban = new WkTUser();
+                Baiban.Id = 0;
+                Baiban.KuName = "";
+            }
+            if (Yeban == null)
+            {
+                Yeban = new WkTUser();
+                Yeban.Id = 0;
+                Yeban.KuName = "";
+            }
             #region
             if (Type == 0) //行政班
             {
@@ -299,6 +318,7 @@ namespace WorkLogForm
             #endregion
         }
       
+      
 
         /// <summary>
         /// 初始化日历日期
@@ -349,6 +369,10 @@ namespace WorkLogForm
                         break;
                     }
                 }
+
+                PrintDutyPersonName((Panel)dateLabel[i].Parent, null, null, null, 0);
+                PrintDutyPersonName((Panel)dateLabel[i].Parent, null, null, null, 1);
+
 
                 if (i < startDay)
                 {
@@ -402,11 +426,11 @@ namespace WorkLogForm
                 //加载人员
                 DateTime dt = (DateTime)dateLabel[i].Parent.Tag;
                 List<OnDutyTable> dayInfo = IsTheTimeIndutyDayLis(dt);
-                if (dayInfo !=null)
+                if (dayInfo != null)
                 {
                     foreach (OnDutyTable oo in dayInfo)
                     {
-                        if(oo.Type == 0)
+                        if (oo.Type == 0)
                         {
                             PrintDutyPersonName((Panel)dateLabel[i].Parent, oo.DaiBanID, oo.BaiBanID, oo.YeBanID, 0);
                         }
@@ -414,10 +438,10 @@ namespace WorkLogForm
                         {
                             PrintDutyPersonName((Panel)dateLabel[i].Parent, oo.DaiBanID, oo.BaiBanID, oo.YeBanID, 1);
                         }
-                    
+
                     }
-                
                 }
+                
             }
 
         }

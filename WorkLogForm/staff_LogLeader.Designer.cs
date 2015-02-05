@@ -1075,8 +1075,8 @@
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.日志管理系统首页2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1008, 710);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.panel3_pictureBox);
