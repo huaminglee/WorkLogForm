@@ -75,12 +75,52 @@ namespace WorkLogForm
             this.Opacity = 0;
             timer_show.Start();
         }
+        #region 界面滚动
+        private void MouseWeelTest(object sender, MouseEventArgs e)
+        {
+            panelScroll(sender, e.Delta);
+        }
+
+        private void panelScroll(object label, int delta)
+        {
+            Panel panel = (Panel)label;
+            int mVSValue = panel.VerticalScroll.Value;
+            int pScrollValueDelta = delta;
+
+            if ((mVSValue - pScrollValueDelta) <= panel.VerticalScroll.Minimum)
+            {
+                panel.VerticalScroll.Value = panel.VerticalScroll.Minimum;
+            }
+            else if ((mVSValue - pScrollValueDelta) >= panel.VerticalScroll.Maximum)
+            {
+                panel.VerticalScroll.Value = panel.VerticalScroll.Maximum;
+            }
+            else
+            {
+                panel.VerticalScroll.Value -= pScrollValueDelta;
+            }
+
+            if (panel.VerticalScroll.Value != mVSValue)
+            {
+                return;
+            }
+            panel.Refresh();
+            panel.Invalidate();
+            panel.Update();
+        }
+
+        #endregion
+
         private void main_Load(object sender, EventArgs e)
         {
             initialWindow();
             initialData();//显示日程 日志 考勤
             schedule_listen_timer.Start();//监听日程提醒
             listen_ri_cheng();//监测日程表变动
+
+            this.rc_flowLayoutPanel.MouseWheel += new MouseEventHandler(MouseWeelTest);
+            this.rz_flowLayoutPanel.MouseWheel += new MouseEventHandler(MouseWeelTest);
+            this.Show_SuiBi_flowPanel.MouseWheel += new MouseEventHandler(MouseWeelTest);
 
             if(this.user.Kdid.KdName.Trim() != "综合办公室" )
             {
@@ -1452,6 +1492,13 @@ namespace WorkLogForm
             }
         }
         #endregion
+
+        private void rc_flowLayoutPanel_MouseEnter(object sender, EventArgs e)
+        {
+            Panel p = (Panel)sender;
+            p.Focus();
+        }
+
 
 
 

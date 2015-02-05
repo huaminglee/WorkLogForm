@@ -206,11 +206,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("幼圆", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label2.Location = new System.Drawing.Point(30, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 14);
+            this.label2.Size = new System.Drawing.Size(83, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "工作小秘书";
             // 
@@ -510,6 +510,7 @@
             this.rc_flowLayoutPanel.Name = "rc_flowLayoutPanel";
             this.rc_flowLayoutPanel.Size = new System.Drawing.Size(248, 480);
             this.rc_flowLayoutPanel.TabIndex = 22;
+            this.rc_flowLayoutPanel.MouseEnter += new System.EventHandler(rc_flowLayoutPanel_MouseEnter);
             // 
             // panel9
             // 
@@ -584,6 +585,7 @@
             this.rz_flowLayoutPanel.Size = new System.Drawing.Size(248, 480);
             this.rz_flowLayoutPanel.TabIndex = 2;
             this.rz_flowLayoutPanel.Visible = false;
+            this.rz_flowLayoutPanel.MouseEnter += new System.EventHandler(this.rc_flowLayoutPanel_MouseEnter);
             // 
             // panel4
             // 
@@ -814,27 +816,29 @@
             // 
             this.SuiBi_flowLayoutPanel.BackColor = System.Drawing.SystemColors.Control;
             this.SuiBi_flowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SuiBi_flowLayoutPanel.Controls.Add(this.Show_SuiBi_flowPanel);
             this.SuiBi_flowLayoutPanel.Controls.Add(this.SuiBi_SeeMore);
+            this.SuiBi_flowLayoutPanel.Controls.Add(this.Show_SuiBi_flowPanel);
             this.SuiBi_flowLayoutPanel.Location = new System.Drawing.Point(44, 114);
             this.SuiBi_flowLayoutPanel.Name = "SuiBi_flowLayoutPanel";
             this.SuiBi_flowLayoutPanel.Size = new System.Drawing.Size(248, 480);
             this.SuiBi_flowLayoutPanel.TabIndex = 7;
             this.SuiBi_flowLayoutPanel.Visible = false;
+            this.SuiBi_flowLayoutPanel.MouseEnter += new System.EventHandler(this.rc_flowLayoutPanel_MouseEnter);
             // 
             // Show_SuiBi_flowPanel
             // 
             this.Show_SuiBi_flowPanel.AutoScroll = true;
-            this.Show_SuiBi_flowPanel.Location = new System.Drawing.Point(3, 3);
+            this.Show_SuiBi_flowPanel.Location = new System.Drawing.Point(3, 180);
             this.Show_SuiBi_flowPanel.Name = "Show_SuiBi_flowPanel";
             this.Show_SuiBi_flowPanel.Size = new System.Drawing.Size(238, 293);
             this.Show_SuiBi_flowPanel.TabIndex = 3;
+            this.Show_SuiBi_flowPanel.MouseEnter += new System.EventHandler(this.rc_flowLayoutPanel_MouseEnter);
             // 
             // SuiBi_SeeMore
             // 
             this.SuiBi_SeeMore.Controls.Add(this.write_SuiBi);
             this.SuiBi_SeeMore.Controls.Add(this.panel8);
-            this.SuiBi_SeeMore.Location = new System.Drawing.Point(3, 302);
+            this.SuiBi_SeeMore.Location = new System.Drawing.Point(3, 3);
             this.SuiBi_SeeMore.Name = "SuiBi_SeeMore";
             this.SuiBi_SeeMore.Size = new System.Drawing.Size(242, 171);
             this.SuiBi_SeeMore.TabIndex = 2;
@@ -937,10 +941,7 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(293, 600);
             this.Controls.Add(this.pictureBoxOfrefresh);
-            this.Controls.Add(this.rc_flowLayoutPanel);
-            this.Controls.Add(this.SuiBi_flowLayoutPanel);
             this.Controls.Add(this.SuiBiGuanLi_pictureBox);
-            this.Controls.Add(this.rz_flowLayoutPanel);
             this.Controls.Add(this.setting_pictureBox);
             this.Controls.Add(this.tong_xun_pictureBox);
             this.Controls.Add(this.ri_cheng_pictureBox1);
@@ -963,6 +964,9 @@
             this.Controls.Add(this.close_pictureBox);
             this.Controls.Add(this.min_pictureBox);
             this.Controls.Add(this.user_label);
+            this.Controls.Add(this.rz_flowLayoutPanel);
+            this.Controls.Add(this.rc_flowLayoutPanel);
+            this.Controls.Add(this.SuiBi_flowLayoutPanel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "main";
