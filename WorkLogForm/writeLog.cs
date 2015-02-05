@@ -268,7 +268,7 @@ namespace WorkLogForm
             }
             else
             {
-                htmlEditor1.BodyInnerHTML = htmlEditor1.BodyInnerHTML!=null?htmlEditor1.BodyInnerHTML.Replace(item.SubItems[1].Text + "-" + item.SubItems[2].Text + "。", ""):"";
+               // htmlEditor1.BodyInnerHTML = htmlEditor1.BodyInnerHTML!=null?htmlEditor1.BodyInnerHTML.Replace(item.SubItems[1].Text + "-" + item.SubItems[2].Text + "。", ""):"";
             }
         }
         /// <summary>
