@@ -53,5 +53,10 @@ namespace WorkLogForm
         {
            // toolTip1.SetToolTip(this, logToolTip("参加院内大会"));
         }
+
+        private void contextMenuStrip1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
