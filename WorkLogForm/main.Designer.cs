@@ -52,6 +52,7 @@
             this.log_pictureBox = new System.Windows.Forms.PictureBox();
             this.rcgl_pictureBox = new System.Windows.Forms.PictureBox();
             this.SuiBiGuanLi_pictureBox = new System.Windows.Forms.PictureBox();
+            this.pictureBoxofRefresh = new System.Windows.Forms.PictureBox();
             this.ri_zhi_pictureBox = new System.Windows.Forms.PictureBox();
             this.ri_cheng_pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
@@ -59,6 +60,7 @@
             this.timer_show = new System.Windows.Forms.Timer(this.components);
             this.rc_flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -100,7 +102,6 @@
             this.linkLabel12 = new System.Windows.Forms.LinkLabel();
             this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.label15 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wdrl_pictureBox)).BeginInit();
@@ -115,6 +116,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.log_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rcgl_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SuiBiGuanLi_pictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxofRefresh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ri_zhi_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ri_cheng_pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
@@ -424,6 +426,20 @@
             this.SuiBiGuanLi_pictureBox.MouseEnter += new System.EventHandler(this.SuiBiGuanLi_pictureBox_MouseEnter);
             this.SuiBiGuanLi_pictureBox.MouseLeave += new System.EventHandler(this.SuiBiGuanLi_pictureBox_MouseLeave);
             // 
+            // pictureBoxofRefresh
+            // 
+            this.pictureBoxofRefresh.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxofRefresh.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxofRefresh.BackgroundImage")));
+            this.pictureBoxofRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBoxofRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxofRefresh.Location = new System.Drawing.Point(0, 555);
+            this.pictureBoxofRefresh.Name = "pictureBoxofRefresh";
+            this.pictureBoxofRefresh.Size = new System.Drawing.Size(41, 40);
+            this.pictureBoxofRefresh.TabIndex = 26;
+            this.pictureBoxofRefresh.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBoxofRefresh, "刷新");
+            this.pictureBoxofRefresh.Click += new System.EventHandler(this.pictureBoxofRefresh_Click);
+            // 
             // ri_zhi_pictureBox
             // 
             this.ri_zhi_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.日志分享;
@@ -506,6 +522,15 @@
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(219, 473);
             this.panel9.TabIndex = 0;
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label15.Location = new System.Drawing.Point(4, 61);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(200, 23);
+            this.label15.TabIndex = 4;
+            this.label15.Text = "开会开会开会";
             // 
             // label14
             // 
@@ -895,15 +920,6 @@
             this.linkLabel10.Text = "点击查看更多";
             this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel10_LinkClicked);
             // 
-            // label15
-            // 
-            this.label15.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label15.Location = new System.Drawing.Point(4, 61);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(200, 23);
-            this.label15.TabIndex = 4;
-            this.label15.Text = "开会开会开会";
-            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -912,8 +928,9 @@
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.首页背景2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(293, 600);
-            this.Controls.Add(this.SuiBi_flowLayoutPanel);
+            this.Controls.Add(this.pictureBoxofRefresh);
             this.Controls.Add(this.rc_flowLayoutPanel);
+            this.Controls.Add(this.SuiBi_flowLayoutPanel);
             this.Controls.Add(this.SuiBiGuanLi_pictureBox);
             this.Controls.Add(this.rz_flowLayoutPanel);
             this.Controls.Add(this.setting_pictureBox);
@@ -963,6 +980,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.log_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rcgl_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SuiBiGuanLi_pictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxofRefresh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ri_zhi_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ri_cheng_pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
@@ -1070,5 +1088,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.PictureBox pictureBoxofRefresh;
     }
 }

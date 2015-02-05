@@ -1205,6 +1205,7 @@ namespace WorkLogForm
             }
         }
         #endregion
+
         #region 请假销假管理
         private void button6_Click(object sender, EventArgs e)
         {

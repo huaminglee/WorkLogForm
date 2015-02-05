@@ -172,7 +172,7 @@ namespace WorkLogForm
                 #endregion
 
                 #region 调用日程显示页
-                init_rc_Panel();
+                init_rc_Panel(); 
                 #endregion
 
                 #region 调用日志显示页
@@ -209,6 +209,10 @@ namespace WorkLogForm
                 long thisDay = DateTime.Now.Date.Ticks;
                 long nextDay = DateTime.Now.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
                 IList staffScheduleList = baseService.loadEntityList("from StaffSchedule where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + thisDay + " and ScheduleTime<" + nextDay + " order by ScheduleTime asc");
+                if (scheduleList != null)
+                {
+                    scheduleList.Clear();
+                }
                 scheduleList = staffScheduleList; //把查询出来的日程列表付给全局变量
                 creat_ri_cheng_Panel(staffScheduleList);
                 rc_flowLayoutPanel.Visible = rcVisible;
@@ -1376,23 +1380,32 @@ namespace WorkLogForm
 
         #endregion
 
-        
 
-       
+        #region
+        private void pictureBoxofRefresh_Click(object sender, EventArgs e)
+        {
+            init_rc_Panel();
+            init_rz_Panel();
+        }
+        #endregion
 
 
 
-        
 
-      
 
-      
 
-       
 
-      
 
-       
+
+
+
+
+
+
+
+
+
+
 
     }
 }
