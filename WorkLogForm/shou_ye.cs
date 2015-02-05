@@ -793,10 +793,26 @@ namespace WorkLogForm
                 infoLine.list = baseService.loadEntityList(query);
                 if (infoLine.info == "加班安排")
                 {
+                    bool flag=false;
+                    IList delLst=new List<WorkOverTime>();
                     foreach (WorkOverTime w in infoLine.list)
                     {
-                        if (!w.WorkManId.Contains(User))
-                            infoLine.list.Remove(w);
+                        foreach (WkTUser u in w.WorkManId)
+                        {
+                            if (u.Id == User.Id)
+                                flag = true;
+                        }
+                        if (flag == false)
+                        {
+                            delLst.Add(w);
+                            flag = false;
+                        }
+                    }
+
+
+                    foreach (WorkOverTime w in delLst)
+                    {
+                        infoLine.list.Remove(w);
                     }
                 }
             }
@@ -850,7 +866,7 @@ namespace WorkLogForm
                                 if (new DateTime(richeng.ScheduleTime).Date == date.Date)
                                 {
                                     dflag.l1 = true;
-                                    infoLine1.list.Remove(richeng);
+                                    //infoLine1.list.Remove(richeng);
                                     break;
                                 }
                             }
@@ -869,7 +885,7 @@ namespace WorkLogForm
                                 if (new DateTime(u.Time).Date == date.Date)
                                 {
                                     dflag.l1 = true;
-                                    infoLine1.list.Remove(u);
+                                    //infoLine1.list.Remove(u);
                                     break;
                                 }
                             }
@@ -885,10 +901,10 @@ namespace WorkLogForm
                         {
                             foreach (Business  b in infoLine1.list)
                             {
-                                if (date.Date.Ticks>=b.StartTime && date.Date.Ticks<=b.EndTime)
+                                if (date.Date.Ticks >= (new DateTime(b.StartTime)).Date.Ticks && date.Date.Ticks <= (new DateTime(b.EndTime)).Date.Ticks)
                                 {
                                     dflag.l1 = true;
-                                    infoLine1.list.Remove(b);
+                                    //infoLine1.list.Remove(b);
                                     break;
                                 }
                             }
@@ -904,10 +920,10 @@ namespace WorkLogForm
                         {
                             foreach (LeaveManage leave in infoLine1.list)
                             {
-                                if (leave.StartTime<= date.Date.Ticks && leave.EndTime>=date.Date.Ticks)
+                                if ((new DateTime(leave.StartTime)).Date.Ticks <= date.Date.Ticks && (new DateTime(leave.EndTime)).Date.Ticks >= date.Date.Ticks)
                                 {
                                     dflag.l1 = true;
-                                    infoLine1.list.Remove(leave);
+                                    //infoLine1.list.Remove(leave);
                                     break;
                                 }
                             }
@@ -920,10 +936,10 @@ namespace WorkLogForm
                         {                           
                             foreach (WorkOverTime w in infoLine1.list)
                             {
-                                if (w.StartTime <= date.Date.Ticks && w.EndTime >= date.Date.Ticks)
+                                if ((new DateTime(w.StartTime)).Date.Ticks <= date.Date.Ticks && (new DateTime(w.EndTime)).Date.Ticks >= date.Date.Ticks)
                                 {
                                     dflag.l1 = true;
-                                    infoLine1.list.Remove(w);
+                                    //infoLine1.list.Remove(w);
                                     break;
                                 }
                             }
@@ -951,7 +967,7 @@ namespace WorkLogForm
                                 if (new DateTime(richeng.ScheduleTime).Date == date.Date)
                                 {
                                     dflag.l2 = true;
-                                    infoLine2.list.Remove(richeng);
+                                    //infoLine2.list.Remove(richeng);
                                     break;
                                 }
                             }
@@ -970,7 +986,7 @@ namespace WorkLogForm
                                 if (new DateTime(u.Time).Date == date.Date)
                                 {
                                     dflag.l2 = true;
-                                    infoLine2.list.Remove(u);
+                                    //infoLine2.list.Remove(u);
                                     break;
                                 }
                             }
@@ -986,10 +1002,10 @@ namespace WorkLogForm
                         {
                             foreach (Business b in infoLine2.list)
                             {
-                                if (date.Date.Ticks >= b.StartTime && date.Date.Ticks <= b.EndTime)
+                                if (date.Date.Ticks >= (new DateTime(b.StartTime)).Date.Ticks && date.Date.Ticks <= (new DateTime(b.EndTime)).Date.Ticks)
                                 {
                                     dflag.l2 = true;
-                                    infoLine2.list.Remove(b);
+                                    //infoLine2.list.Remove(b);
                                     break;
                                 }
                             }
@@ -1005,10 +1021,10 @@ namespace WorkLogForm
                         {
                             foreach (LeaveManage leave in infoLine2.list)
                             {
-                                if (leave.StartTime <= date.Date.Ticks && leave.EndTime >= date.Date.Ticks)
+                                if ((new DateTime(leave.StartTime)).Date.Ticks <= date.Date.Ticks && (new DateTime(leave.EndTime)).Date.Ticks >= date.Date.Ticks)
                                 {
                                     dflag.l2 = true;
-                                    infoLine2.list.Remove(leave);
+                                    //infoLine2.list.Remove(leave);
                                     break;
                                 }
                             }
@@ -1021,10 +1037,10 @@ namespace WorkLogForm
                         {                            
                             foreach (WorkOverTime w in infoLine2.list)
                             {
-                                if (w.StartTime <= date.Date.Ticks && w.EndTime >= date.Date.Ticks)
+                                if ((new DateTime(w.StartTime)).Date.Ticks <= date.Date.Ticks && (new DateTime(w.EndTime)).Date.Ticks >= date.Date.Ticks)
                                 {
                                     dflag.l2 = true;
-                                    infoLine2.list.Remove(w);
+                                    //infoLine2.list.Remove(w);
                                     break;
                                 }
                             }
