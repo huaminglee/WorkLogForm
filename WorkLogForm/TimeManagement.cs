@@ -743,7 +743,7 @@ namespace WorkLogForm
                 {
                     foreach (WkTDept o in theone)
                     {
-                        this.dataGridView2.Rows.Add(o.KdName);
+                        this.dataGridView2.Rows.Add(o.KdName.ToString().Trim());
                     }
                 }
                 else 
@@ -771,7 +771,7 @@ namespace WorkLogForm
             {
                 foreach(WkTDept o in depts)
                 {
-                    this.dataGridView3.Rows.Add(0, o.KdName);
+                    this.dataGridView3.Rows.Add(0, o.KdName.ToString().Trim());
                     this.dataGridView3.Rows[this.dataGridView3.Rows.Count - 1].Tag = o;
                 }
             }
@@ -825,7 +825,7 @@ namespace WorkLogForm
                 {
                     foreach (WkTDept o in theone1)
                     {
-                        this.dataGridView2.Rows.Add(o.KdName);
+                        this.dataGridView2.Rows.Add(o.KdName.ToString().Trim());
                     }
                 }
                 this.panel3.Visible = false;

@@ -22,6 +22,14 @@ namespace WorkLogForm
             get { return logtooltipString; }
             set { logtooltipString = value; }
         }
+        private main main;
+
+        public main Main
+        {
+            get { return main; }
+            set { main = value; }
+        }
+
         private string logToolTip(string l)
         {
             int s = (int)Math.Sqrt(3*l.Length/4);
@@ -57,6 +65,11 @@ namespace WorkLogForm
         private void contextMenuStrip1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Secretary_DoubleClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("");
         }
     }
 }

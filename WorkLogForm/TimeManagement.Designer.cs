@@ -117,6 +117,27 @@
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewLinkColumn();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.panelOfGetNew = new System.Windows.Forms.Panel();
+            this.button10 = new System.Windows.Forms.Button();
+            this.comboBox9 = new System.Windows.Forms.ComboBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.comboBox10 = new System.Windows.Forms.ComboBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.panelOfThreeButtonChange = new System.Windows.Forms.Panel();
+            this.buttonDaiban = new System.Windows.Forms.Button();
+            this.buttonOfBaiban = new System.Windows.Forms.Button();
+            this.buttonOfYeBan = new System.Windows.Forms.Button();
+            this.labelOfYeBan = new System.Windows.Forms.Label();
+            this.labelOfBaiBan = new System.Windows.Forms.Label();
+            this.labelOfDaiBan = new System.Windows.Forms.Label();
+            this.dateTimePicker9 = new System.Windows.Forms.DateTimePicker();
+            this.label25 = new System.Windows.Forms.Label();
+            this.comboBox11 = new System.Windows.Forms.ComboBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.button5 = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -136,6 +157,7 @@
             this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker7 = new System.Windows.Forms.DateTimePicker();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.dateTimePicker6 = new System.Windows.Forms.DateTimePicker();
             this.label26 = new System.Windows.Forms.Label();
@@ -144,7 +166,6 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
-            this.dateTimePicker7 = new System.Windows.Forms.DateTimePicker();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -157,6 +178,8 @@
             this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -165,29 +188,6 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox9 = new System.Windows.Forms.ComboBox();
-            this.comboBox10 = new System.Windows.Forms.ComboBox();
-            this.comboBox11 = new System.Windows.Forms.ComboBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.button11 = new System.Windows.Forms.Button();
-            this.dateTimePicker9 = new System.Windows.Forms.DateTimePicker();
-            this.label25 = new System.Windows.Forms.Label();
-            this.buttonDaiban = new System.Windows.Forms.Button();
-            this.buttonOfBaiban = new System.Windows.Forms.Button();
-            this.buttonOfYeBan = new System.Windows.Forms.Button();
-            this.labelOfDaiBan = new System.Windows.Forms.Label();
-            this.labelOfBaiBan = new System.Windows.Forms.Label();
-            this.labelOfYeBan = new System.Windows.Forms.Label();
-            this.panelOfThreeButtonChange = new System.Windows.Forms.Panel();
-            this.panelOfGetNew = new System.Windows.Forms.Panel();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.button10 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -206,13 +206,13 @@
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
             this.tabPage6.SuspendLayout();
+            this.panelOfGetNew.SuspendLayout();
+            this.panelOfThreeButtonChange.SuspendLayout();
             this.tabPage7.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tabPage8.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panelOfThreeButtonChange.SuspendLayout();
-            this.panelOfGetNew.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -1007,7 +1007,7 @@
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Items.AddRange(new object[] {
             "行政班",
-            "网络版"});
+            "网络班"});
             this.comboBox3.Location = new System.Drawing.Point(716, 71);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(72, 29);
@@ -1181,6 +1181,208 @@
             this.tabPage6.Size = new System.Drawing.Size(948, 523);
             this.tabPage6.TabIndex = 1;
             this.tabPage6.Text = "值班调整";
+            // 
+            // panelOfGetNew
+            // 
+            this.panelOfGetNew.Controls.Add(this.button10);
+            this.panelOfGetNew.Controls.Add(this.comboBox9);
+            this.panelOfGetNew.Controls.Add(this.label31);
+            this.panelOfGetNew.Controls.Add(this.comboBox10);
+            this.panelOfGetNew.Controls.Add(this.label28);
+            this.panelOfGetNew.Location = new System.Drawing.Point(510, 154);
+            this.panelOfGetNew.Name = "panelOfGetNew";
+            this.panelOfGetNew.Size = new System.Drawing.Size(424, 97);
+            this.panelOfGetNew.TabIndex = 26;
+            this.panelOfGetNew.Visible = false;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(355, 34);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(54, 26);
+            this.button10.TabIndex = 25;
+            this.button10.Text = "确定";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // comboBox9
+            // 
+            this.comboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox9.FormattingEnabled = true;
+            this.comboBox9.Location = new System.Drawing.Point(228, 32);
+            this.comboBox9.Name = "comboBox9";
+            this.comboBox9.Size = new System.Drawing.Size(121, 28);
+            this.comboBox9.TabIndex = 17;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(180, 35);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(51, 20);
+            this.label31.TabIndex = 24;
+            this.label31.Text = "姓名：";
+            // 
+            // comboBox10
+            // 
+            this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox10.FormattingEnabled = true;
+            this.comboBox10.Location = new System.Drawing.Point(58, 32);
+            this.comboBox10.Name = "comboBox10";
+            this.comboBox10.Size = new System.Drawing.Size(121, 28);
+            this.comboBox10.TabIndex = 16;
+            this.comboBox10.SelectedIndexChanged += new System.EventHandler(this.comboBox10_SelectedIndexChanged);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(11, 35);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(51, 20);
+            this.label28.TabIndex = 23;
+            this.label28.Text = "部门：";
+            // 
+            // panelOfThreeButtonChange
+            // 
+            this.panelOfThreeButtonChange.Controls.Add(this.buttonDaiban);
+            this.panelOfThreeButtonChange.Controls.Add(this.buttonOfBaiban);
+            this.panelOfThreeButtonChange.Controls.Add(this.buttonOfYeBan);
+            this.panelOfThreeButtonChange.Location = new System.Drawing.Point(393, 125);
+            this.panelOfThreeButtonChange.Name = "panelOfThreeButtonChange";
+            this.panelOfThreeButtonChange.Size = new System.Drawing.Size(108, 152);
+            this.panelOfThreeButtonChange.TabIndex = 25;
+            this.panelOfThreeButtonChange.Visible = false;
+            // 
+            // buttonDaiban
+            // 
+            this.buttonDaiban.Location = new System.Drawing.Point(15, 16);
+            this.buttonDaiban.Name = "buttonDaiban";
+            this.buttonDaiban.Size = new System.Drawing.Size(75, 27);
+            this.buttonDaiban.TabIndex = 19;
+            this.buttonDaiban.Text = "更改";
+            this.buttonDaiban.UseVisualStyleBackColor = true;
+            this.buttonDaiban.Click += new System.EventHandler(this.buttonDaiban_Click);
+            // 
+            // buttonOfBaiban
+            // 
+            this.buttonOfBaiban.Location = new System.Drawing.Point(15, 60);
+            this.buttonOfBaiban.Name = "buttonOfBaiban";
+            this.buttonOfBaiban.Size = new System.Drawing.Size(75, 27);
+            this.buttonOfBaiban.TabIndex = 20;
+            this.buttonOfBaiban.Text = "更改";
+            this.buttonOfBaiban.UseVisualStyleBackColor = true;
+            this.buttonOfBaiban.Click += new System.EventHandler(this.buttonOfBaiban_Click);
+            // 
+            // buttonOfYeBan
+            // 
+            this.buttonOfYeBan.Location = new System.Drawing.Point(15, 102);
+            this.buttonOfYeBan.Name = "buttonOfYeBan";
+            this.buttonOfYeBan.Size = new System.Drawing.Size(75, 27);
+            this.buttonOfYeBan.TabIndex = 21;
+            this.buttonOfYeBan.Text = "更改";
+            this.buttonOfYeBan.UseVisualStyleBackColor = true;
+            this.buttonOfYeBan.Click += new System.EventHandler(this.buttonOfYeBan_Click);
+            // 
+            // labelOfYeBan
+            // 
+            this.labelOfYeBan.AutoSize = true;
+            this.labelOfYeBan.Location = new System.Drawing.Point(302, 227);
+            this.labelOfYeBan.Name = "labelOfYeBan";
+            this.labelOfYeBan.Size = new System.Drawing.Size(13, 20);
+            this.labelOfYeBan.TabIndex = 24;
+            this.labelOfYeBan.Text = " ";
+            // 
+            // labelOfBaiBan
+            // 
+            this.labelOfBaiBan.AutoSize = true;
+            this.labelOfBaiBan.Location = new System.Drawing.Point(302, 185);
+            this.labelOfBaiBan.Name = "labelOfBaiBan";
+            this.labelOfBaiBan.Size = new System.Drawing.Size(13, 20);
+            this.labelOfBaiBan.TabIndex = 23;
+            this.labelOfBaiBan.Text = " ";
+            // 
+            // labelOfDaiBan
+            // 
+            this.labelOfDaiBan.AutoSize = true;
+            this.labelOfDaiBan.Location = new System.Drawing.Point(302, 141);
+            this.labelOfDaiBan.Name = "labelOfDaiBan";
+            this.labelOfDaiBan.Size = new System.Drawing.Size(13, 20);
+            this.labelOfDaiBan.TabIndex = 22;
+            this.labelOfDaiBan.Text = " ";
+            // 
+            // dateTimePicker9
+            // 
+            this.dateTimePicker9.Location = new System.Drawing.Point(281, 61);
+            this.dateTimePicker9.Name = "dateTimePicker9";
+            this.dateTimePicker9.Size = new System.Drawing.Size(142, 26);
+            this.dateTimePicker9.TabIndex = 9;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(229, 64);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(51, 20);
+            this.label25.TabIndex = 18;
+            this.label25.Text = "时间：";
+            // 
+            // comboBox11
+            // 
+            this.comboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox11.FormattingEnabled = true;
+            this.comboBox11.Items.AddRange(new object[] {
+            "行政班",
+            "网络班"});
+            this.comboBox11.Location = new System.Drawing.Point(511, 61);
+            this.comboBox11.Name = "comboBox11";
+            this.comboBox11.Size = new System.Drawing.Size(121, 28);
+            this.comboBox11.TabIndex = 14;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(427, 64);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(79, 20);
+            this.label33.TabIndex = 15;
+            this.label33.Text = "值班类型：";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(151, 227);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(121, 20);
+            this.label34.TabIndex = 13;
+            this.label34.Text = "值班人（夜班）：";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(151, 184);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(121, 20);
+            this.label35.TabIndex = 12;
+            this.label35.Text = "值班人（白班）：";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(151, 141);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(117, 20);
+            this.label36.TabIndex = 11;
+            this.label36.Text = "带       班      人：";
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(648, 61);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(154, 28);
+            this.button11.TabIndex = 10;
+            this.button11.Text = "查询";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // tabPage7
             // 
@@ -1383,6 +1585,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "详情";
             // 
+            // dateTimePicker7
+            // 
+            this.dateTimePicker7.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePicker7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePicker7.Location = new System.Drawing.Point(84, 52);
+            this.dateTimePicker7.Name = "dateTimePicker7";
+            this.dateTimePicker7.Size = new System.Drawing.Size(98, 21);
+            this.dateTimePicker7.TabIndex = 225;
+            // 
             // comboBox5
             // 
             this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -1483,15 +1694,6 @@
             this.label30.Size = new System.Drawing.Size(74, 21);
             this.label30.TabIndex = 226;
             this.label30.Text = "请假时间";
-            // 
-            // dateTimePicker7
-            // 
-            this.dateTimePicker7.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dateTimePicker7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dateTimePicker7.Location = new System.Drawing.Point(84, 52);
-            this.dateTimePicker7.Name = "dateTimePicker7";
-            this.dateTimePicker7.Size = new System.Drawing.Size(98, 21);
-            this.dateTimePicker7.TabIndex = 225;
             // 
             // textBox3
             // 
@@ -1599,6 +1801,24 @@
             this.groupBox1.TabIndex = 223;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " 查询条件";
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePicker2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePicker2.Location = new System.Drawing.Point(547, 33);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(98, 21);
+            this.dateTimePicker2.TabIndex = 215;
+            // 
+            // dateTimePicker5
+            // 
+            this.dateTimePicker5.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePicker5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dateTimePicker5.Location = new System.Drawing.Point(428, 32);
+            this.dateTimePicker5.Name = "dateTimePicker5";
+            this.dateTimePicker5.Size = new System.Drawing.Size(98, 21);
+            this.dateTimePicker5.TabIndex = 216;
             // 
             // comboBox4
             // 
@@ -1708,226 +1928,6 @@
             this.label24.Size = new System.Drawing.Size(0, 20);
             this.label24.TabIndex = 218;
             // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dateTimePicker2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(547, 33);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(98, 21);
-            this.dateTimePicker2.TabIndex = 215;
-            // 
-            // dateTimePicker5
-            // 
-            this.dateTimePicker5.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dateTimePicker5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dateTimePicker5.Location = new System.Drawing.Point(428, 32);
-            this.dateTimePicker5.Name = "dateTimePicker5";
-            this.dateTimePicker5.Size = new System.Drawing.Size(98, 21);
-            this.dateTimePicker5.TabIndex = 216;
-            // 
-            // comboBox9
-            // 
-            this.comboBox9.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(228, 32);
-            this.comboBox9.Name = "comboBox9";
-            this.comboBox9.Size = new System.Drawing.Size(121, 28);
-            this.comboBox9.TabIndex = 17;
-            // 
-            // comboBox10
-            // 
-            this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Location = new System.Drawing.Point(58, 32);
-            this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(121, 28);
-            this.comboBox10.TabIndex = 16;
-            this.comboBox10.SelectedIndexChanged += new System.EventHandler(this.comboBox10_SelectedIndexChanged);
-            // 
-            // comboBox11
-            // 
-            this.comboBox11.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox11.FormattingEnabled = true;
-            this.comboBox11.Items.AddRange(new object[] {
-            "行政班",
-            "网络班"});
-            this.comboBox11.Location = new System.Drawing.Point(511, 61);
-            this.comboBox11.Name = "comboBox11";
-            this.comboBox11.Size = new System.Drawing.Size(121, 28);
-            this.comboBox11.TabIndex = 14;
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(427, 64);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(79, 20);
-            this.label33.TabIndex = 15;
-            this.label33.Text = "值班类型：";
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(151, 227);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(121, 20);
-            this.label34.TabIndex = 13;
-            this.label34.Text = "值班人（夜班）：";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(151, 184);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(121, 20);
-            this.label35.TabIndex = 12;
-            this.label35.Text = "值班人（白班）：";
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(151, 141);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(117, 20);
-            this.label36.TabIndex = 11;
-            this.label36.Text = "带       班      人：";
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(648, 61);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(154, 28);
-            this.button11.TabIndex = 10;
-            this.button11.Text = "查询";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
-            // dateTimePicker9
-            // 
-            this.dateTimePicker9.Location = new System.Drawing.Point(281, 61);
-            this.dateTimePicker9.Name = "dateTimePicker9";
-            this.dateTimePicker9.Size = new System.Drawing.Size(142, 26);
-            this.dateTimePicker9.TabIndex = 9;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(229, 64);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(51, 20);
-            this.label25.TabIndex = 18;
-            this.label25.Text = "时间：";
-            // 
-            // buttonDaiban
-            // 
-            this.buttonDaiban.Location = new System.Drawing.Point(15, 16);
-            this.buttonDaiban.Name = "buttonDaiban";
-            this.buttonDaiban.Size = new System.Drawing.Size(75, 27);
-            this.buttonDaiban.TabIndex = 19;
-            this.buttonDaiban.Text = "更改";
-            this.buttonDaiban.UseVisualStyleBackColor = true;
-            this.buttonDaiban.Click += new System.EventHandler(this.buttonDaiban_Click);
-            // 
-            // buttonOfBaiban
-            // 
-            this.buttonOfBaiban.Location = new System.Drawing.Point(15, 60);
-            this.buttonOfBaiban.Name = "buttonOfBaiban";
-            this.buttonOfBaiban.Size = new System.Drawing.Size(75, 27);
-            this.buttonOfBaiban.TabIndex = 20;
-            this.buttonOfBaiban.Text = "更改";
-            this.buttonOfBaiban.UseVisualStyleBackColor = true;
-            this.buttonOfBaiban.Click += new System.EventHandler(this.buttonOfBaiban_Click);
-            // 
-            // buttonOfYeBan
-            // 
-            this.buttonOfYeBan.Location = new System.Drawing.Point(15, 102);
-            this.buttonOfYeBan.Name = "buttonOfYeBan";
-            this.buttonOfYeBan.Size = new System.Drawing.Size(75, 27);
-            this.buttonOfYeBan.TabIndex = 21;
-            this.buttonOfYeBan.Text = "更改";
-            this.buttonOfYeBan.UseVisualStyleBackColor = true;
-            this.buttonOfYeBan.Click += new System.EventHandler(this.buttonOfYeBan_Click);
-            // 
-            // labelOfDaiBan
-            // 
-            this.labelOfDaiBan.AutoSize = true;
-            this.labelOfDaiBan.Location = new System.Drawing.Point(302, 141);
-            this.labelOfDaiBan.Name = "labelOfDaiBan";
-            this.labelOfDaiBan.Size = new System.Drawing.Size(13, 20);
-            this.labelOfDaiBan.TabIndex = 22;
-            this.labelOfDaiBan.Text = " ";
-            // 
-            // labelOfBaiBan
-            // 
-            this.labelOfBaiBan.AutoSize = true;
-            this.labelOfBaiBan.Location = new System.Drawing.Point(302, 185);
-            this.labelOfBaiBan.Name = "labelOfBaiBan";
-            this.labelOfBaiBan.Size = new System.Drawing.Size(13, 20);
-            this.labelOfBaiBan.TabIndex = 23;
-            this.labelOfBaiBan.Text = " ";
-            // 
-            // labelOfYeBan
-            // 
-            this.labelOfYeBan.AutoSize = true;
-            this.labelOfYeBan.Location = new System.Drawing.Point(302, 227);
-            this.labelOfYeBan.Name = "labelOfYeBan";
-            this.labelOfYeBan.Size = new System.Drawing.Size(13, 20);
-            this.labelOfYeBan.TabIndex = 24;
-            this.labelOfYeBan.Text = " ";
-            // 
-            // panelOfThreeButtonChange
-            // 
-            this.panelOfThreeButtonChange.Controls.Add(this.buttonDaiban);
-            this.panelOfThreeButtonChange.Controls.Add(this.buttonOfBaiban);
-            this.panelOfThreeButtonChange.Controls.Add(this.buttonOfYeBan);
-            this.panelOfThreeButtonChange.Location = new System.Drawing.Point(393, 125);
-            this.panelOfThreeButtonChange.Name = "panelOfThreeButtonChange";
-            this.panelOfThreeButtonChange.Size = new System.Drawing.Size(108, 152);
-            this.panelOfThreeButtonChange.TabIndex = 25;
-            this.panelOfThreeButtonChange.Visible = false;
-            // 
-            // panelOfGetNew
-            // 
-            this.panelOfGetNew.Controls.Add(this.button10);
-            this.panelOfGetNew.Controls.Add(this.comboBox9);
-            this.panelOfGetNew.Controls.Add(this.label31);
-            this.panelOfGetNew.Controls.Add(this.comboBox10);
-            this.panelOfGetNew.Controls.Add(this.label28);
-            this.panelOfGetNew.Location = new System.Drawing.Point(510, 154);
-            this.panelOfGetNew.Name = "panelOfGetNew";
-            this.panelOfGetNew.Size = new System.Drawing.Size(424, 97);
-            this.panelOfGetNew.TabIndex = 26;
-            this.panelOfGetNew.Visible = false;
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(11, 35);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(51, 20);
-            this.label28.TabIndex = 23;
-            this.label28.Text = "部门：";
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(180, 35);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(51, 20);
-            this.label31.TabIndex = 24;
-            this.label31.Text = "姓名：";
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(355, 34);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(54, 26);
-            this.button10.TabIndex = 25;
-            this.button10.Text = "确定";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
             // TimeManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1971,6 +1971,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
             this.tabPage6.ResumeLayout(false);
             this.tabPage6.PerformLayout();
+            this.panelOfGetNew.ResumeLayout(false);
+            this.panelOfGetNew.PerformLayout();
+            this.panelOfThreeButtonChange.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -1979,9 +1982,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panelOfThreeButtonChange.ResumeLayout(false);
-            this.panelOfGetNew.ResumeLayout(false);
-            this.panelOfGetNew.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -53,14 +53,14 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.关闭ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(99, 26);
             this.contextMenuStrip1.Text = "关闭";
             this.contextMenuStrip1.Click += new System.EventHandler(this.contextMenuStrip1_Click);
             // 
             // 关闭ToolStripMenuItem
             // 
             this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
-            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.关闭ToolStripMenuItem.Text = "关闭";
             // 
             // Secretary
@@ -80,6 +80,7 @@
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.SystemColors.Control;
             this.Load += new System.EventHandler(this.Secretary_Load);
+            this.DoubleClick += new System.EventHandler(this.Secretary_DoubleClick);
             this.MouseHover += new System.EventHandler(this.Secretary_MouseHover);
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);

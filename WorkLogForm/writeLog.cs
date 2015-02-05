@@ -74,6 +74,7 @@ namespace WorkLogForm
             initialWindow();
             initData();
             schedule_listView.Focus();
+            this.Location = new Point((Screen.GetBounds(this).Width - this.Width) / 2, (Screen.GetBounds(this).Height - this.Height) / 2);
         }     
         #region 自定义窗体初始化方法
         private void initialWindow()
