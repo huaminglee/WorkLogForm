@@ -69,10 +69,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -451,10 +448,7 @@
             this.columnHeader2,
             this.columnHeader4,
             this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8,
-            this.columnHeader10});
+            this.columnHeader8});
             this.listView1.Font = new System.Drawing.Font("宋体", 10F);
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
@@ -468,49 +462,31 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "序号";
-            this.columnHeader1.Width = 52;
+            this.columnHeader1.Width = 40;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "姓名";
             this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader2.Width = 66;
+            this.columnHeader2.Width = 200;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "应上班天数";
             this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader4.Width = 97;
+            this.columnHeader4.Width = 200;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "实际出勤天数";
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader5.Width = 112;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "加班天数";
-            this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader6.Width = 107;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "值班天数";
-            this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader7.Width = 110;
+            this.columnHeader5.Width = 200;
             // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "请假天数";
             this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader8.Width = 99;
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "未出勤天数";
-            this.columnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader10.Width = 124;
+            this.columnHeader8.Width = 200;
             // 
             // label3
             // 
@@ -2367,8 +2343,8 @@
             this.Controls.Add(this.all_static_pictureBox);
             this.Controls.Add(this.close_pictureBox);
             this.Controls.Add(this.min_pictureBox);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "statistics_Attendance";
@@ -2522,10 +2498,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;

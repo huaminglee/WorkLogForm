@@ -3794,7 +3794,8 @@
             "日程安排",
             "值班安排",
             "出差安排",
-            "请假情况"});
+            "请假情况",
+            "加班安排"});
             this.comboBox2.Location = new System.Drawing.Point(54, 93);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(107, 20);
@@ -3810,7 +3811,8 @@
             "日程安排",
             "值班安排",
             "出差安排",
-            "请假情况"});
+            "请假情况",
+            "加班安排"});
             this.comboBox1.Location = new System.Drawing.Point(54, 41);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(109, 20);

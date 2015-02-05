@@ -782,9 +782,24 @@ namespace WorkLogForm
                 case "请假情况":
                     query = "select h from LeaveManage h  where h.Ku_Id =" + this.User.Id + "and h.StartTime>=" + startTime.Ticks + " and h.EndTime<=" + endTime.Ticks + " and h.State=" + (int)LeaveManage.stateEnum.Normal;
                     break;
+                case "加班安排":
+                    query = "from WorkOverTime w where  w.Date >= " + this.startTime.Ticks + " and w.Date<= " + this.endTime.Ticks + " and  w.State=" + (int)WorkOverTime.stateEnum.Normal + " order by w.Date";
+                    break;
+
+
             }
             if (query != "")
+            {
                 infoLine.list = baseService.loadEntityList(query);
+                if (infoLine.info == "加班安排")
+                {
+                    foreach (WorkOverTime w in infoLine.list)
+                    {
+                        if (!w.WorkManId.Contains(User))
+                            infoLine.list.Remove(w);
+                    }
+                }
+            }
         }
 
 
@@ -899,6 +914,22 @@ namespace WorkLogForm
                         }
                         break;
                     #endregion
+                    #region 加班安排
+                    case "加班安排":
+                        if (infoLine1.list != null && infoLine1.list.Count > 0)
+                        {                           
+                            foreach (WorkOverTime w in infoLine1.list)
+                            {
+                                if (w.StartTime <= date.Date.Ticks && w.EndTime >= date.Date.Ticks)
+                                {
+                                    dflag.l1 = true;
+                                    infoLine1.list.Remove(w);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    #endregion
 
                 }
             }
@@ -978,6 +1009,22 @@ namespace WorkLogForm
                                 {
                                     dflag.l2 = true;
                                     infoLine2.list.Remove(leave);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    #endregion
+                    #region 加班安排
+                    case "加班安排":
+                        if (infoLine2.list != null && infoLine2.list.Count > 0)
+                        {                            
+                            foreach (WorkOverTime w in infoLine2.list)
+                            {
+                                if (w.StartTime <= date.Date.Ticks && w.EndTime >= date.Date.Ticks)
+                                {
+                                    dflag.l2 = true;
+                                    infoLine2.list.Remove(w);
                                     break;
                                 }
                             }

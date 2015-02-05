@@ -552,8 +552,8 @@ namespace WorkLogForm
                     item.SubItems.Add(name);
                     item.SubItems.Add(ying_shang_ban);
                     item.SubItems.Add(shi_chu_qin);
-                    item.SubItems.Add(jia_ban);
-                    item.SubItems.Add(zhi_ban);
+                    //item.SubItems.Add(jia_ban);
+                    //item.SubItems.Add(zhi_ban);
                     item.SubItems.Add(qing_jia);
                     //item.SubItems.Add(wei_chu_qin);
                     listView.Items.Add(item);
