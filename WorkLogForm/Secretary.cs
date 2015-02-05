@@ -15,7 +15,13 @@ namespace WorkLogForm
         {
             InitializeComponent();
         }
+        private string logtooltipString;
 
+        public string LogtooltipString
+        {
+            get { return logtooltipString; }
+            set { logtooltipString = value; }
+        }
         private string logToolTip(string l)
         {
             int s = (int)Math.Sqrt(3*l.Length/4);
@@ -37,9 +43,9 @@ namespace WorkLogForm
         {
             base.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - base.Width, Screen.PrimaryScreen.WorkingArea.Height - base.Height);
             toolTip1.Active =false;
-            toolTip1.SetToolTip(label1, logToolTip("参加院内大会"));
+            toolTip1.SetToolTip(label1, logToolTip(logtooltipString));
             toolTip1.Active = true; toolTip1.OwnerDraw = false;
-            toolTip1.Show("参加院内大会", label1, -100, -20, 100000);
+            toolTip1.Show(logtooltipString, label1, -100, -20, 100000);
             //toolTip1.Container
         }
 

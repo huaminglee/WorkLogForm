@@ -27,7 +27,7 @@ namespace WorkLogForm
         private BaseService baseService = new BaseService();
         private WkTUser user;
         private WkTRole role;
-        
+        Secretary sec;
 
         /// <summary>
         /// 存储用户角色 用来传值
@@ -101,9 +101,9 @@ namespace WorkLogForm
             creatWindow.SetFormRoundRectRgn(this, 15);
             creatWindow.SetFormShadow(this);
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width * 3 / 4, Screen.PrimaryScreen.WorkingArea.Height / 8);
-            Secretary sec = new Secretary();
-            sec.Show();
-
+            sec = new Secretary(); //右下角的
+            //sec.LogtooltipString ="ceshi" ;
+            //sec.Show();
         }
 
 
@@ -209,6 +209,10 @@ namespace WorkLogForm
                 long thisDay = DateTime.Now.Date.Ticks;
                 long nextDay = DateTime.Now.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
                 IList staffScheduleList = baseService.loadEntityList("from StaffSchedule where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + thisDay + " and ScheduleTime<" + nextDay + " order by ScheduleTime asc");
+                if (scheduleList != null)
+                {
+                    scheduleList.Clear();
+                }
                 scheduleList = staffScheduleList; //把查询出来的日程列表付给全局变量
                 creat_ri_cheng_Panel(staffScheduleList);
                 rc_flowLayoutPanel.Visible = rcVisible;
@@ -649,7 +653,10 @@ namespace WorkLogForm
         }
         private void tong_xun_pictureBox_MouseLeave(object sender, EventArgs e)
         {
-            tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人随笔1;
+            if (SuiBi_flowLayoutPanel.Visible == false)
+            {
+                tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人随笔1;
+            }
         }
         #endregion  
 
@@ -660,6 +667,7 @@ namespace WorkLogForm
             rz_flowLayoutPanel.Visible = false;
             rc_flowLayoutPanel.Visible = true;
             SuiBi_flowLayoutPanel.Visible = false;
+            tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人随笔1;
             
         }
         private void ri_zhi_pictureBox_Click(object sender, EventArgs e)
@@ -668,6 +676,7 @@ namespace WorkLogForm
             rz_flowLayoutPanel.Visible = true;
             rc_flowLayoutPanel.Visible = false;
             SuiBi_flowLayoutPanel.Visible = false;
+            tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人随笔1;
         }
 
         private void tong_xun_pictureBox_Click(object sender, EventArgs e)
@@ -676,6 +685,9 @@ namespace WorkLogForm
             rz_flowLayoutPanel.Visible = false;
             rc_flowLayoutPanel.Visible = false;
             SuiBi_flowLayoutPanel.Visible = true;
+            ri_zhi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日志分享;
+            ri_cheng_pictureBox1.BackgroundImage = WorkLogForm.Properties.Resources.我的日程;
+
         }
 
 
@@ -1113,7 +1125,9 @@ namespace WorkLogForm
                     DateTime scheduleTime = new DateTime(ss.ScheduleTime);
                     if (scheduleTime.Hour == DateTime.Now.Hour && scheduleTime.Minute == DateTime.Now.Minute)
                     {
-                        MessageBox.Show(ss.Content);
+                        //MessageBox.Show(ss.Content);
+                        sec.LogtooltipString = ss.Content;
+                        sec.Show();
                         if (scheduleList.Contains(ss))
                         {
                             scheduleList.Remove(ss);
@@ -1376,23 +1390,32 @@ namespace WorkLogForm
 
         #endregion
 
-        
 
-       
+        #region 刷新
+        private void pictureBoxOfrefresh_Click(object sender, EventArgs e)
+        {
+            init_rc_Panel();
+            init_rz_Panel();
+        }
+        #endregion
 
 
 
-        
 
-      
 
-      
 
-       
 
-      
 
-       
+
+
+
+
+
+
+
+
+
+
 
     }
 }
