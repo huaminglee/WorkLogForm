@@ -69,6 +69,11 @@ namespace WorkLogForm
             this.Visible = false;
             this.Opacity = 0;
             timer1.Start();
+
+            CNDate cnd = new CNDate(DateTime.Now);
+            this.today_label1.Text = DateTime.Now.ToString("yyyy-MM-dd") + cnd.GetDayOfWeek();
+            this.today_label2.Text = DateTime.Now.ToString("dd");
+
         }
         private void loadData()
         {

@@ -3848,6 +3848,7 @@
             this.today_label4.TabIndex = 15;
             this.today_label4.Text = "甲午 马年";
             this.today_label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.today_label4.Visible = false;
             // 
             // today_label3
             // 
@@ -3860,6 +3861,7 @@
             this.today_label3.TabIndex = 14;
             this.today_label3.Text = "四月廿九";
             this.today_label3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.today_label3.Visible = false;
             // 
             // groupBox1
             // 
