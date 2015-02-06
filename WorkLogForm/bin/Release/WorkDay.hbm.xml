@@ -7,7 +7,8 @@
       <generator class="native" />
     </id>
     <property name="WorkDateTime" column="WORKDATETIME" type="long" length="10"/>
-    <property name="HolidayId" column="HOLIDAYID" type="long" length="10"/>
+    <many-to-one name="HolidayId" column="HolidayId" lazy="false" not-null="true"
+                 class="ClassLibrary.Holiday, ClassLibrary" />
     <property name="State" column="STATE" type="int" length="1"/>
     <property name="TimeStamp" column="TIMESTAMP" type="long" length="10"/>
   </class>

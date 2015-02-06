@@ -10,7 +10,8 @@
     <property name="HolidayYear" column="HolidayYear" type="int" length="4"/>
     <property name="StartTime" column="STARTTIME" type="long" length="10"/>
     <property name="EndTime" column="ENDTIME" type="long" length="10"/>
-    <bag name="WorkDays" inverse="true" lazy="false" cascade="all-delete-orphan">
+    <!--inverse="true"-->
+    <bag name="WorkDays" lazy="false" cascade="all-delete-orphan">
       <key column="HolidayId"/>
       <one-to-many class="ClassLibrary.WorkDay, ClassLibrary"/>
     </bag>

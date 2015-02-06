@@ -34,10 +34,22 @@
     <property name="KuQuestion" column="KU_QUESTION" type="String" length="200" />
     <property name="KuAnswer" column="KU_ANSWER" type="String" length="100" />
     <property name="KuAUTOENTER" column="KU_AUTOENTER" type="String" length="2"/>
-    <many-to-one name="Kdid" class="ClassLibrary.WkTDept, ClassLibrary">
+
+
+    <property name="DutyTimes" column="DutyTimes" type="int"/>
+
+    
+
+    <many-to-one name="Kdid" class="ClassLibrary.WkTDept, ClassLibrary" lazy="false">
       <!--not-null="true" cascade="all" outer-join="auto" update="true" insert="true" column="KD_ID">-->
       <column name="KD_ID" length="10" sql-type="long" not-null="true"/>
     </many-to-one>
+    
+    <bag name="UserRole" table="WK_T_USEROLE" lazy="false" cascade="all">
+      <key column="KU_ID"/>
+      <many-to-many class="ClassLibrary.WkTRole,ClassLibrary" column="KR_ID"/>
+    </bag>
+  
   </class>
 
 </hibernate-mapping>
