@@ -76,7 +76,7 @@ namespace WorkLogForm
         {
             holiday_year_comboBox.Items.Clear();
             holiday_listView.Items.Clear();
-            IList alreadyYearList = baseService.loadEntityList("select distinct HolidayYear from Holiday where STATE=" + (int)IEntity.stateEnum.Normal);
+            IList alreadyYearList = baseService.loadEntityList("select distinct HolidayYear from Holiday where State=" + (int)IEntity.stateEnum.Normal);
             if (alreadyYearList != null)
             {
                 for (int i = 0; i < alreadyYearList.Count; i++)
@@ -104,7 +104,7 @@ namespace WorkLogForm
             work_start_dateTimePicker.Value = DateTime.Now;
             work_end_dateTimePicker.Value = DateTime.Now;
             work_startDate_dateTimePicker.Value = DateTime.Now;
-            IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where STATE=" + (int)IEntity.stateEnum.Normal);
+            IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where State=" + (int)IEntity.stateEnum.Normal);
             if (usuallyDayList != null)
             {
                 for (int i = 0; i < usuallyDayList.Count; i++)
@@ -224,8 +224,8 @@ namespace WorkLogForm
                     bu_ban_button_list[i].TabIndex--;
                     bu_ban_button_list[i].Top -= 30;
                 }
-                submit_button.Location = new Point(submit_button.Location.X, submit_button.Location.Y - 30);
-                delete_button.Location = new Point(delete_button.Location.X, delete_button.Location.Y - 30);
+                //submit_button.Location = new Point(submit_button.Location.X, submit_button.Location.Y - 30);
+                //delete_button.Location = new Point(delete_button.Location.X, delete_button.Location.Y - 30);
             }
             else
             {
@@ -251,8 +251,8 @@ namespace WorkLogForm
             }
             bu_ban_picker_list.Clear();
             button7.Location = new Point(147, 196);
-            submit_button.Location = new Point(86, 244);
-            delete_button.Location = new Point(175, 244);
+            //submit_button.Location = new Point(53, 238);
+            //delete_button.Location = new Point(198, 238);
             IList holidayList = baseService.loadEntityList("from Holiday where HolidayYear=" + Convert.ToInt32(year_textBox.Text) + " and name='" + holiday_comboBox.Text + "' and State=" + (int)IEntity.stateEnum.Normal);
             if (holidayList != null && holidayList.Count > 0)
             {
@@ -264,11 +264,11 @@ namespace WorkLogForm
                 {
                     foreach (WorkDay d in h.WorkDays)
                     {
-                        if (bu_ban_picker_list.Count != 0)
-                        {
-                            submit_button.Location = new Point(submit_button.Location.X, submit_button.Location.Y + 30);
-                            delete_button.Location = new Point(delete_button.Location.X, delete_button.Location.Y + 30);
-                        }
+                        //if (bu_ban_picker_list.Count != 0)
+                        //{
+                            //submit_button.Location = new Point(submit_button.Location.X, submit_button.Location.Y + 30);
+                            //delete_button.Location = new Point(delete_button.Location.X, delete_button.Location.Y + 30);
+                        //}
                         Button delete = new Button();
                         delete.Text = "-";
                         delete.Size = button7.Size;
@@ -357,7 +357,7 @@ namespace WorkLogForm
                 newHoliday.Name = holiday_comboBox.Text;
                 newHoliday.StartTime = start_dateTimePicker.Value.Date.Ticks;
                 newHoliday.EndTime = end_dateTimePicker.Value.Date.Ticks;
-                newHoliday.State = (int)IEntity.stateEnum.Normal;
+                //newHoliday.State = (int)IEntity.stateEnum.Normal;
                 newHoliday.TimeStamp = DateTime.Now.Ticks;
                 newHoliday.HolidayYear = Convert.ToInt32(year_textBox.Text.Trim());
                 IList<WorkDay> workList = new List<WorkDay>();
@@ -452,7 +452,7 @@ namespace WorkLogForm
         private void holiday_year_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             holiday_listView.Items.Clear();
-            IList holidayList = baseService.loadEntityList("from Holiday where STATE=" + (int)IEntity.stateEnum.Normal + " and HolidayYear=" + Convert.ToInt32(holiday_year_comboBox.Text.Trim()));
+            IList holidayList = baseService.loadEntityList("from Holiday where State =" + (int)IEntity.stateEnum.Normal + " and HolidayYear=" + Convert.ToInt32(holiday_year_comboBox.Text.Trim()));
             if (holidayList != null && holidayList.Count > 0)
             {
                 initHolidayListView(holidayList);
@@ -476,8 +476,8 @@ namespace WorkLogForm
             }
             bu_ban_picker_list.Clear();
             button7.Location = new Point(147, 196);
-            submit_button.Location = new Point(86, 244);
-            delete_button.Location = new Point(175, 244);
+            //submit_button.Location = new Point(86, 244);
+            //delete_button.Location = new Point(175, 244);
             start_dateTimePicker.Value = DateTime.Now;
             end_dateTimePicker.Value = DateTime.Now;
             holiday_comboBox.SelectedIndex = -1;
@@ -557,7 +557,7 @@ namespace WorkLogForm
                     + dtp.Value.Date.Ticks + ")";
                 checkSql += " or w.WorkDateTime=" + dtp.Value.Date.Ticks;
             }
-            checkSql += ") and h.STATE=" + (int)IEntity.stateEnum.Normal + " and w.STATE=" + (int)IEntity.stateEnum.Normal;
+            checkSql += ") and h.State=" + (int)IEntity.stateEnum.Normal + " and w.State=" + (int)IEntity.stateEnum.Normal;
             if (isUpdate)
             {
                 checkSql += " and h.Id!=" + holidayId;
@@ -641,7 +641,7 @@ namespace WorkLogForm
         }
         private void work_name_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where STATE=" + (int)IEntity.stateEnum.Normal + " and Name='" + work_name_comboBox.Text.Trim() + "'");
+            IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where State=" + (int)IEntity.stateEnum.Normal + " and Name='" + work_name_comboBox.Text.Trim() + "'");
             if (usuallyDayList != null && usuallyDayList.Count > 0)
             {
                 UsuallyDay usuallyDay = (UsuallyDay)usuallyDayList[0];
@@ -1197,8 +1197,8 @@ namespace WorkLogForm
             if (listView2.SelectedItems != null)
             {
                 b = (Business)listView2.SelectedItems[0].Tag;
-                string query1 = "update LOG_T_BUSINESS set STATE="+(int)Business.stateEnum.Deleted+"where Id="+b.Id;
-                string query2 = "update LOG_T_BUSINESSEMPLOYEE set STATE=" + (int)BusinessEmployee.stateEnum.Deleted + "where BUSINESSID=" + b.Id;
+                string query1 = "update LOG_T_BUSINESS set State="+(int)Business.stateEnum.Deleted+"where Id="+b.Id;
+                string query2 = "update LOG_T_BUSINESSEMPLOYEE set State=" + (int)BusinessEmployee.stateEnum.Deleted + "where BUSINESSID=" + b.Id;
                 baseService.ExecuteSQL(query2);
                 baseService.ExecuteSQL(query1);
                 listView2.Items.Remove(listView2.SelectedItems[0]);

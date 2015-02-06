@@ -1310,7 +1310,7 @@ namespace WorkLogForm
                     Show_SuiBi_flowPanel.Controls.RemoveAt(0); // 删除所有日程消息
                 }
                 ShowSuiBiInFlowPanel(10);
-                this.SuiBi_SeeMore.Enabled = true;
+                this.linkLabel10.Enabled = true;
                 ChangeLocationAftercancel();
             }
 
@@ -1329,7 +1329,7 @@ namespace WorkLogForm
 
         public void ShowSuiBiInFlowPanel(int end)
         { 
-
+           
 
             //从数据库中查出区间内容
 
@@ -1366,7 +1366,7 @@ namespace WorkLogForm
                                 "WK_T_USER on _t.WkTUserId = WK_T_USER.KU_ID ) as t order by t.time desc ) as tt order by tt.time asc ) as ttt order by ttt.time desc";
 
                
-                this.SuiBi_SeeMore.Enabled = false;
+                this.linkLabel10.Enabled = false;
             }
 
 
@@ -1426,6 +1426,7 @@ namespace WorkLogForm
         {
             this.Show_SuiBi_flowPanel.Controls.Clear();
             ShowSuiBiInFlowPanel(10);
+            this.linkLabel10.Enabled = true;
         }
 
         /// <summary>

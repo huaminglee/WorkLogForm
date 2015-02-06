@@ -155,7 +155,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="WorkOverTime.hbm.xml" />
+    <EmbeddedResource Include="WorkOverTime.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BusinessEmployee.hbm.xml">

@@ -417,7 +417,7 @@
             this.delete_button.BackColor = System.Drawing.SystemColors.Menu;
             this.delete_button.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.delete_button.ForeColor = System.Drawing.Color.Navy;
-            this.delete_button.Location = new System.Drawing.Point(271, 238);
+            this.delete_button.Location = new System.Drawing.Point(198, 238);
             this.delete_button.Name = "delete_button";
             this.delete_button.Size = new System.Drawing.Size(65, 31);
             this.delete_button.TabIndex = 17;
@@ -430,7 +430,7 @@
             this.submit_button.BackColor = System.Drawing.SystemColors.Menu;
             this.submit_button.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.submit_button.ForeColor = System.Drawing.Color.Navy;
-            this.submit_button.Location = new System.Drawing.Point(149, 238);
+            this.submit_button.Location = new System.Drawing.Point(53, 238);
             this.submit_button.Name = "submit_button";
             this.submit_button.Size = new System.Drawing.Size(65, 31);
             this.submit_button.TabIndex = 16;
@@ -666,7 +666,7 @@
             this.work_delete_button.BackColor = System.Drawing.SystemColors.Menu;
             this.work_delete_button.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.work_delete_button.ForeColor = System.Drawing.Color.Navy;
-            this.work_delete_button.Location = new System.Drawing.Point(258, 294);
+            this.work_delete_button.Location = new System.Drawing.Point(226, 294);
             this.work_delete_button.Name = "work_delete_button";
             this.work_delete_button.Size = new System.Drawing.Size(65, 31);
             this.work_delete_button.TabIndex = 27;
@@ -692,7 +692,7 @@
             this.work_submit_button.BackColor = System.Drawing.SystemColors.Menu;
             this.work_submit_button.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.work_submit_button.ForeColor = System.Drawing.Color.Navy;
-            this.work_submit_button.Location = new System.Drawing.Point(143, 294);
+            this.work_submit_button.Location = new System.Drawing.Point(56, 294);
             this.work_submit_button.Name = "work_submit_button";
             this.work_submit_button.Size = new System.Drawing.Size(65, 31);
             this.work_submit_button.TabIndex = 26;
@@ -821,7 +821,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(984, 580);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "考勤时间";
+            this.tabPage1.Text = "节日管理";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
@@ -833,7 +833,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(984, 580);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "节日时间";
+            this.tabPage2.Text = "考勤时间";
             // 
             // tabPage3
             // 
