@@ -905,10 +905,11 @@
             // 
             // label466
             // 
+            this.label466.AutoSize = true;
             this.label466.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label466.Location = new System.Drawing.Point(1, 0);
+            this.label466.Location = new System.Drawing.Point(1, -2);
             this.label466.Name = "label466";
-            this.label466.Size = new System.Drawing.Size(49, 32);
+            this.label466.Size = new System.Drawing.Size(38, 28);
             this.label466.TabIndex = 0;
             this.label466.Text = "24";
             this.label466.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1000,10 +1001,11 @@
             // 
             // label455
             // 
+            this.label455.AutoSize = true;
             this.label455.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label455.Location = new System.Drawing.Point(-3, -3);
             this.label455.Name = "label455";
-            this.label455.Size = new System.Drawing.Size(55, 32);
+            this.label455.Size = new System.Drawing.Size(38, 28);
             this.label455.TabIndex = 0;
             this.label455.Text = "23";
             this.label455.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1095,10 +1097,11 @@
             // 
             // label444
             // 
+            this.label444.AutoSize = true;
             this.label444.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label444.Location = new System.Drawing.Point(0, 0);
             this.label444.Name = "label444";
-            this.label444.Size = new System.Drawing.Size(55, 29);
+            this.label444.Size = new System.Drawing.Size(38, 28);
             this.label444.TabIndex = 0;
             this.label444.Text = "22";
             this.label444.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1190,10 +1193,11 @@
             // 
             // label522
             // 
+            this.label522.AutoSize = true;
             this.label522.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label522.Location = new System.Drawing.Point(0, 0);
+            this.label522.Location = new System.Drawing.Point(5, 0);
             this.label522.Name = "label522";
-            this.label522.Size = new System.Drawing.Size(52, 29);
+            this.label522.Size = new System.Drawing.Size(38, 28);
             this.label522.TabIndex = 0;
             this.label522.Text = "27";
             this.label522.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1285,10 +1289,11 @@
             // 
             // label477
             // 
+            this.label477.AutoSize = true;
             this.label477.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label477.Location = new System.Drawing.Point(3, -3);
             this.label477.Name = "label477";
-            this.label477.Size = new System.Drawing.Size(38, 35);
+            this.label477.Size = new System.Drawing.Size(38, 28);
             this.label477.TabIndex = 0;
             this.label477.Text = "25";
             this.label477.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1380,10 +1385,11 @@
             // 
             // label511
             // 
+            this.label511.AutoSize = true;
             this.label511.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label511.Location = new System.Drawing.Point(0, 0);
             this.label511.Name = "label511";
-            this.label511.Size = new System.Drawing.Size(52, 29);
+            this.label511.Size = new System.Drawing.Size(38, 28);
             this.label511.TabIndex = 0;
             this.label511.Text = "26";
             this.label511.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1570,10 +1576,11 @@
             // 
             // label255
             // 
+            this.label255.AutoSize = true;
             this.label255.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label255.Location = new System.Drawing.Point(0, 0);
             this.label255.Name = "label255";
-            this.label255.Size = new System.Drawing.Size(45, 30);
+            this.label255.Size = new System.Drawing.Size(25, 28);
             this.label255.TabIndex = 0;
             this.label255.Text = "9";
             this.label255.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1760,10 +1767,11 @@
             // 
             // label244
             // 
+            this.label244.AutoSize = true;
             this.label244.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label244.Location = new System.Drawing.Point(0, 0);
             this.label244.Name = "label244";
-            this.label244.Size = new System.Drawing.Size(43, 30);
+            this.label244.Size = new System.Drawing.Size(25, 28);
             this.label244.TabIndex = 0;
             this.label244.Text = "8";
             this.label244.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1855,10 +1863,11 @@
             // 
             // label233
             // 
+            this.label233.AutoSize = true;
             this.label233.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label233.Location = new System.Drawing.Point(0, 0);
             this.label233.Name = "label233";
-            this.label233.Size = new System.Drawing.Size(48, 30);
+            this.label233.Size = new System.Drawing.Size(25, 28);
             this.label233.TabIndex = 0;
             this.label233.Text = "7";
             this.label233.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2045,10 +2054,11 @@
             // 
             // label277
             // 
+            this.label277.AutoSize = true;
             this.label277.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label277.Location = new System.Drawing.Point(1, 0);
             this.label277.Name = "label277";
-            this.label277.Size = new System.Drawing.Size(42, 30);
+            this.label277.Size = new System.Drawing.Size(38, 28);
             this.label277.TabIndex = 0;
             this.label277.Text = "11";
             this.label277.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2140,10 +2150,11 @@
             // 
             // label411
             // 
+            this.label411.AutoSize = true;
             this.label411.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label411.Location = new System.Drawing.Point(0, 0);
             this.label411.Name = "label411";
-            this.label411.Size = new System.Drawing.Size(52, 32);
+            this.label411.Size = new System.Drawing.Size(38, 28);
             this.label411.TabIndex = 0;
             this.label411.Text = "19";
             this.label411.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2236,10 +2247,11 @@
             // 
             // label111
             // 
+            this.label111.AutoSize = true;
             this.label111.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label111.Location = new System.Drawing.Point(0, 0);
             this.label111.Name = "label111";
-            this.label111.Size = new System.Drawing.Size(52, 31);
+            this.label111.Size = new System.Drawing.Size(0, 28);
             this.label111.TabIndex = 0;
             this.label111.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -2330,11 +2342,13 @@
             // 
             // label177
             // 
+            this.label177.AutoSize = true;
+            this.label177.Enabled = false;
             this.label177.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label177.ForeColor = System.Drawing.SystemColors.ControlText;
             this.label177.Location = new System.Drawing.Point(0, -2);
             this.label177.Name = "label177";
-            this.label177.Size = new System.Drawing.Size(39, 33);
+            this.label177.Size = new System.Drawing.Size(25, 28);
             this.label177.TabIndex = 0;
             this.label177.Text = "4";
             this.label177.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2426,10 +2440,12 @@
             // 
             // label155
             // 
+            this.label155.AutoSize = true;
+            this.label155.Enabled = false;
             this.label155.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label155.Location = new System.Drawing.Point(0, 0);
             this.label155.Name = "label155";
-            this.label155.Size = new System.Drawing.Size(45, 29);
+            this.label155.Size = new System.Drawing.Size(25, 28);
             this.label155.TabIndex = 0;
             this.label155.Text = "2";
             this.label155.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2521,10 +2537,11 @@
             // 
             // label222
             // 
+            this.label222.AutoSize = true;
             this.label222.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label222.Location = new System.Drawing.Point(0, 0);
+            this.label222.Location = new System.Drawing.Point(7, 0);
             this.label222.Name = "label222";
-            this.label222.Size = new System.Drawing.Size(43, 30);
+            this.label222.Size = new System.Drawing.Size(25, 28);
             this.label222.TabIndex = 0;
             this.label222.Text = "6";
             this.label222.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2616,10 +2633,11 @@
             // 
             // label211
             // 
+            this.label211.AutoSize = true;
             this.label211.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label211.Location = new System.Drawing.Point(0, 0);
             this.label211.Name = "label211";
-            this.label211.Size = new System.Drawing.Size(52, 30);
+            this.label211.Size = new System.Drawing.Size(25, 28);
             this.label211.TabIndex = 0;
             this.label211.Text = "5";
             this.label211.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2712,11 +2730,12 @@
             // 
             // label122
             // 
+            this.label122.AutoSize = true;
             this.label122.BackColor = System.Drawing.Color.Transparent;
             this.label122.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label122.Location = new System.Drawing.Point(1, 0);
             this.label122.Name = "label122";
-            this.label122.Size = new System.Drawing.Size(44, 29);
+            this.label122.Size = new System.Drawing.Size(38, 28);
             this.label122.TabIndex = 0;
             this.label122.Text = "30";
             this.label122.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2808,10 +2827,12 @@
             // 
             // label166
             // 
+            this.label166.AutoSize = true;
+            this.label166.Enabled = false;
             this.label166.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label166.Location = new System.Drawing.Point(0, -2);
+            this.label166.Location = new System.Drawing.Point(2, -2);
             this.label166.Name = "label166";
-            this.label166.Size = new System.Drawing.Size(45, 31);
+            this.label166.Size = new System.Drawing.Size(25, 28);
             this.label166.TabIndex = 0;
             this.label166.Text = "3";
             this.label166.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2903,10 +2924,12 @@
             // 
             // label144
             // 
+            this.label144.AutoSize = true;
+            this.label144.Enabled = false;
             this.label144.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label144.Location = new System.Drawing.Point(0, 0);
             this.label144.Name = "label144";
-            this.label144.Size = new System.Drawing.Size(43, 29);
+            this.label144.Size = new System.Drawing.Size(25, 28);
             this.label144.TabIndex = 0;
             this.label144.Text = "1";
             this.label144.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2998,10 +3021,11 @@
             // 
             // label533
             // 
+            this.label533.AutoSize = true;
             this.label533.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label533.Location = new System.Drawing.Point(0, 0);
+            this.label533.Location = new System.Drawing.Point(4, 0);
             this.label533.Name = "label533";
-            this.label533.Size = new System.Drawing.Size(48, 29);
+            this.label533.Size = new System.Drawing.Size(38, 28);
             this.label533.TabIndex = 0;
             this.label533.Text = "28";
             this.label533.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3094,10 +3118,11 @@
             // 
             // label677
             // 
+            this.label677.AutoSize = true;
             this.label677.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label677.Location = new System.Drawing.Point(7, -1);
+            this.label677.Location = new System.Drawing.Point(8, -1);
             this.label677.Name = "label677";
-            this.label677.Size = new System.Drawing.Size(23, 31);
+            this.label677.Size = new System.Drawing.Size(25, 28);
             this.label677.TabIndex = 0;
             this.label677.Text = "8";
             this.label677.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3190,10 +3215,11 @@
             // 
             // label133
             // 
+            this.label133.AutoSize = true;
             this.label133.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label133.Location = new System.Drawing.Point(0, 0);
             this.label133.Name = "label133";
-            this.label133.Size = new System.Drawing.Size(48, 31);
+            this.label133.Size = new System.Drawing.Size(38, 28);
             this.label133.TabIndex = 0;
             this.label133.Text = "31";
             this.label133.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3300,13 +3326,13 @@
             this.panel66.BackgroundImage = global::WorkLogForm.Properties.Resources.日历小方块2;
             this.panel66.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel66.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel66.Controls.Add(this.label666);
             this.panel66.Controls.Add(this.label234);
             this.panel66.Controls.Add(this.label235);
             this.panel66.Controls.Add(this.label236);
             this.panel66.Controls.Add(this.label237);
             this.panel66.Controls.Add(this.label238);
             this.panel66.Controls.Add(this.label239);
-            this.panel66.Controls.Add(this.label666);
             this.panel66.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel66.ForeColor = System.Drawing.SystemColors.ControlText;
             this.panel66.Location = new System.Drawing.Point(693, 514);
@@ -3382,10 +3408,11 @@
             // 
             // label666
             // 
+            this.label666.AutoSize = true;
             this.label666.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label666.Location = new System.Drawing.Point(11, -1);
+            this.label666.Location = new System.Drawing.Point(7, -1);
             this.label666.Name = "label666";
-            this.label666.Size = new System.Drawing.Size(34, 31);
+            this.label666.Size = new System.Drawing.Size(25, 28);
             this.label666.TabIndex = 0;
             this.label666.Text = "7";
             this.label666.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3557,10 +3584,11 @@
             // 
             // label577
             // 
+            this.label577.AutoSize = true;
             this.label577.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label577.Location = new System.Drawing.Point(0, 0);
+            this.label577.Location = new System.Drawing.Point(3, 0);
             this.label577.Name = "label577";
-            this.label577.Size = new System.Drawing.Size(38, 29);
+            this.label577.Size = new System.Drawing.Size(25, 28);
             this.label577.TabIndex = 0;
             this.label577.Text = "1";
             this.label577.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3652,10 +3680,11 @@
             // 
             // label377
             // 
+            this.label377.AutoSize = true;
             this.label377.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label377.Location = new System.Drawing.Point(1, -5);
             this.label377.Name = "label377";
-            this.label377.Size = new System.Drawing.Size(41, 35);
+            this.label377.Size = new System.Drawing.Size(38, 28);
             this.label377.TabIndex = 0;
             this.label377.Text = "18";
             this.label377.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3748,10 +3777,11 @@
             // 
             // label633
             // 
+            this.label633.AutoSize = true;
             this.label633.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label633.Location = new System.Drawing.Point(0, 0);
+            this.label633.Location = new System.Drawing.Point(7, 0);
             this.label633.Name = "label633";
-            this.label633.Size = new System.Drawing.Size(47, 29);
+            this.label633.Size = new System.Drawing.Size(25, 28);
             this.label633.TabIndex = 0;
             this.label633.Text = "4";
             this.label633.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3844,10 +3874,11 @@
             // 
             // label622
             // 
+            this.label622.AutoSize = true;
             this.label622.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label622.Location = new System.Drawing.Point(0, 0);
+            this.label622.Location = new System.Drawing.Point(8, 0);
             this.label622.Name = "label622";
-            this.label622.Size = new System.Drawing.Size(42, 27);
+            this.label622.Size = new System.Drawing.Size(25, 28);
             this.label622.TabIndex = 0;
             this.label622.Text = "3";
             this.label622.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3940,10 +3971,11 @@
             // 
             // label644
             // 
+            this.label644.AutoSize = true;
             this.label644.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label644.Location = new System.Drawing.Point(0, 0);
+            this.label644.Location = new System.Drawing.Point(7, 0);
             this.label644.Name = "label644";
-            this.label644.Size = new System.Drawing.Size(43, 27);
+            this.label644.Size = new System.Drawing.Size(25, 28);
             this.label644.TabIndex = 0;
             this.label644.Text = "5";
             this.label644.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4036,10 +4068,11 @@
             // 
             // label611
             // 
+            this.label611.AutoSize = true;
             this.label611.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label611.Location = new System.Drawing.Point(5, 0);
             this.label611.Name = "label611";
-            this.label611.Size = new System.Drawing.Size(36, 29);
+            this.label611.Size = new System.Drawing.Size(25, 28);
             this.label611.TabIndex = 0;
             this.label611.Text = "2";
             this.label611.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4131,10 +4164,11 @@
             // 
             // label566
             // 
+            this.label566.AutoSize = true;
             this.label566.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label566.Location = new System.Drawing.Point(1, 0);
             this.label566.Name = "label566";
-            this.label566.Size = new System.Drawing.Size(50, 29);
+            this.label566.Size = new System.Drawing.Size(38, 28);
             this.label566.TabIndex = 0;
             this.label566.Text = "31";
             this.label566.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4226,10 +4260,11 @@
             // 
             // label555
             // 
+            this.label555.AutoSize = true;
             this.label555.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label555.Location = new System.Drawing.Point(0, 0);
             this.label555.Name = "label555";
-            this.label555.Size = new System.Drawing.Size(45, 29);
+            this.label555.Size = new System.Drawing.Size(38, 28);
             this.label555.TabIndex = 0;
             this.label555.Text = "30";
             this.label555.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4321,10 +4356,11 @@
             // 
             // label544
             // 
+            this.label544.AutoSize = true;
             this.label544.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label544.Location = new System.Drawing.Point(0, 0);
+            this.label544.Location = new System.Drawing.Point(5, 0);
             this.label544.Name = "label544";
-            this.label544.Size = new System.Drawing.Size(55, 29);
+            this.label544.Size = new System.Drawing.Size(38, 28);
             this.label544.TabIndex = 0;
             this.label544.Text = "29";
             this.label544.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4416,10 +4452,11 @@
             // 
             // label311
             // 
+            this.label311.AutoSize = true;
             this.label311.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label311.Location = new System.Drawing.Point(0, 0);
             this.label311.Name = "label311";
-            this.label311.Size = new System.Drawing.Size(52, 30);
+            this.label311.Size = new System.Drawing.Size(38, 28);
             this.label311.TabIndex = 0;
             this.label311.Text = "12";
             this.label311.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4511,10 +4548,11 @@
             // 
             // label366
             // 
+            this.label366.AutoSize = true;
             this.label366.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label366.Location = new System.Drawing.Point(2, 0);
             this.label366.Name = "label366";
-            this.label366.Size = new System.Drawing.Size(45, 30);
+            this.label366.Size = new System.Drawing.Size(38, 28);
             this.label366.TabIndex = 0;
             this.label366.Text = "17";
             this.label366.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4606,10 +4644,11 @@
             // 
             // label333
             // 
+            this.label333.AutoSize = true;
             this.label333.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label333.Location = new System.Drawing.Point(0, 0);
             this.label333.Name = "label333";
-            this.label333.Size = new System.Drawing.Size(48, 30);
+            this.label333.Size = new System.Drawing.Size(38, 28);
             this.label333.TabIndex = 0;
             this.label333.Text = "14";
             this.label333.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4796,10 +4835,11 @@
             // 
             // label344
             // 
+            this.label344.AutoSize = true;
             this.label344.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label344.Location = new System.Drawing.Point(0, 0);
             this.label344.Name = "label344";
-            this.label344.Size = new System.Drawing.Size(55, 30);
+            this.label344.Size = new System.Drawing.Size(38, 28);
             this.label344.TabIndex = 0;
             this.label344.Text = "15";
             this.label344.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4891,10 +4931,11 @@
             // 
             // label322
             // 
+            this.label322.AutoSize = true;
             this.label322.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label322.Location = new System.Drawing.Point(0, 0);
             this.label322.Name = "label322";
-            this.label322.Size = new System.Drawing.Size(52, 30);
+            this.label322.Size = new System.Drawing.Size(38, 28);
             this.label322.TabIndex = 0;
             this.label322.Text = "13";
             this.label322.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
