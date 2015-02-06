@@ -73,6 +73,7 @@
   <ItemGroup>
     <EmbeddedResource Include="InsteadAttendance.hbm.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="InterimLeader.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -142,12 +143,14 @@
   <ItemGroup>
     <EmbeddedResource Include="Business.hbm.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="LeaveManage.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="OnDutyTable.hbm.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="TimeArrangeForManager.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -162,6 +165,7 @@
   <ItemGroup>
     <EmbeddedResource Include="BusinessEmployee.hbm.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

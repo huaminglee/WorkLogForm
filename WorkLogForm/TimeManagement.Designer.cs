@@ -514,7 +514,7 @@
             // 
             // work_start_dateTimePicker
             // 
-            this.work_start_dateTimePicker.CustomFormat = "hh:mm";
+            this.work_start_dateTimePicker.CustomFormat = "HH:mm";
             this.work_start_dateTimePicker.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.work_start_dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.work_start_dateTimePicker.Location = new System.Drawing.Point(108, 209);
@@ -522,6 +522,7 @@
             this.work_start_dateTimePicker.ShowUpDown = true;
             this.work_start_dateTimePicker.Size = new System.Drawing.Size(62, 23);
             this.work_start_dateTimePicker.TabIndex = 31;
+            this.work_start_dateTimePicker.Value = new System.DateTime(2015, 2, 6, 8, 30, 0, 0);
             // 
             // work_name_comboBox
             // 
@@ -548,7 +549,7 @@
             // 
             // work_end_dateTimePicker
             // 
-            this.work_end_dateTimePicker.CustomFormat = "hh:mm";
+            this.work_end_dateTimePicker.CustomFormat = "HH:mm";
             this.work_end_dateTimePicker.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.work_end_dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.work_end_dateTimePicker.Location = new System.Drawing.Point(259, 210);
@@ -556,7 +557,7 @@
             this.work_end_dateTimePicker.ShowUpDown = true;
             this.work_end_dateTimePicker.Size = new System.Drawing.Size(64, 23);
             this.work_end_dateTimePicker.TabIndex = 32;
-            this.work_end_dateTimePicker.Value = new System.DateTime(2014, 3, 20, 10, 10, 0, 0);
+            this.work_end_dateTimePicker.Value = new System.DateTime(2014, 3, 20, 17, 30, 0, 0);
             // 
             // label1
             // 
