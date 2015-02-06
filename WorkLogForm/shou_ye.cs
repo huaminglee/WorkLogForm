@@ -485,8 +485,9 @@ namespace WorkLogForm
             PictureBox p = new PictureBox();
             p = (PictureBox)sender;
             writeLog log = new writeLog();
-            log.IsView = true;
+            log.IsComment = true;
             log.User = this.user;
+            log.CommentPersonName = this.User.KuName;
             log.LogDate = (DateTime)p.Parent.Tag;
             log.ShowDialog();
         }
