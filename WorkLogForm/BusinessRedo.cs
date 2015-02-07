@@ -58,6 +58,7 @@ namespace WorkLogForm
                 string query2 = "update LOG_T_BUSINESS set PASSEXAM=" + (int)Business.ExamState.redo + " where Id=" + business.Id;
                 baseService.ExecuteSQL(query2);
                 this.DialogResult = DialogResult.OK;
+                MessageBox.Show("退回成功");
             }
             else
             {

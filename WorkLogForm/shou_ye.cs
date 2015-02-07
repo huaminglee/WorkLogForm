@@ -608,6 +608,18 @@ namespace WorkLogForm
                     }
                 }
             }
+
+            //if (workDayList != null && workDayList.Count > 0)//判断是不是补班
+            //{
+            //    foreach (WorkDay a in workDayList)
+            //    {
+            //        if (new DateTime (a.WorkDateTime).Date == date.Date)
+            //        {
+            //            label.Text ="补班";
+            //            return;
+            //        }
+            //    }
+            //}
             
         }
 
@@ -627,7 +639,7 @@ namespace WorkLogForm
             int dayOfWeek = (int)date.DayOfWeek == 0 ? 6 : (int)date.DayOfWeek - 1;
             if (usuallyDay[dayOfWeek].Equals((char)UsuallyDay.workDayEnum.Holiday))//判断是否周六日
             {
-                panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_休;//周六日休息图片，还没有做！！！@！！！！！！！
+                panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块_周末;//周六日休息图片，还没有做！！！@！！！！！！！
             }
         }
 

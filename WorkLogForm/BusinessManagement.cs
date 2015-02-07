@@ -275,7 +275,8 @@ namespace WorkLogForm
             listView6.Items.Clear();
             if (roleInUser(this.User, "部门主任"))
             {
-                string query = "from Business b where b.PassExam=" + (int)Business.ExamState.waiting + " order by b.StartTime";
+                
+                string query = "from Business b where " + Dept.Id + "in (select be.BusinessId.Ku_Id.Kdid from  BusinessEmployee be where be.BusinessId=b.Id) and b.PassExam=" + (int)Business.ExamState.waiting + " order by b.StartTime desc";
                 IList depList = baseService.loadEntityList(query);
                 int i = 1;
                 if (depList != null)
@@ -417,7 +418,7 @@ namespace WorkLogForm
         {
             listView3.Items.Clear();
             listView7.Items.Clear();
-            string query = "from Business b where b.Boss=" + User.Id + "and b.PassExam=" + (int)Business.ExamState.pass + " order by b.StartTime";
+            string query = "from Business b where b.Boss=" + User.Id + "and b.PassExam=" + (int)Business.ExamState.pass + " order by b.StartTime desc";
             IList busList = baseService.loadEntityList(query);
             int i = 1;
             if (busList != null)
@@ -465,31 +466,39 @@ namespace WorkLogForm
         private void button7_Click(object sender, EventArgs e)
         {
             Business b = selectedBusiness;
-            foreach (BusinessEmployee be in b.BusinessEmployee)
+            if (b != null)
             {
-                be.PassExam = (int)BusinessEmployee.ExamState.done;
+                foreach (BusinessEmployee be in b.BusinessEmployee)
+                {
+                    be.PassExam = (int)BusinessEmployee.ExamState.done;
+                }
+                b.PassExam = (int)Business.ExamState.done;
+                baseService.SaveOrUpdateEntity(b);
             }
-            b.PassExam = (int)Business.ExamState.done;
-            baseService.SaveOrUpdateEntity(b);
             initTabPage3();
         }
         private void button6_Click(object sender, EventArgs e)
         {
             Business b = selectedBusiness;
-            foreach (BusinessEmployee be in b.BusinessEmployee)
+            if (b != null)
             {
-                be.PassExam = (int)BusinessEmployee.ExamState.npass;
+                foreach (BusinessEmployee be in b.BusinessEmployee)
+                {
+                    be.PassExam = (int)BusinessEmployee.ExamState.npass;
+                }
+                b.PassExam = (int)Business.ExamState.npass;
+                baseService.SaveOrUpdateEntity(b);
             }
-            b.PassExam = (int)Business.ExamState.npass;
-            baseService.SaveOrUpdateEntity(b);
             initTabPage3();
         }
         private void button9_Click(object sender, EventArgs e)
-        {
-            BusinessRedo burdo = new BusinessRedo();
-            burdo.Tag = selectedBusiness;
-            burdo.ShowDialog();
-            MessageBox.Show("退回成功");
+        {  
+            if (selectedBusiness != null)
+            {
+                BusinessRedo burdo = new BusinessRedo();
+                burdo.Tag = selectedBusiness;
+                burdo.ShowDialog();
+            }
             initTabPage3();
         }
 
@@ -500,7 +509,7 @@ namespace WorkLogForm
         {
             listView8.Items.Clear();
             listView10.Items.Clear();
-            string query = "from Business b where b.Ku_Id=" + this.User.Id + "and b.PassExam=" + (int)Business.ExamState.redo + " order by b.StartTime";
+            string query = "from Business b where b.Ku_Id=" + this.User.Id + "and b.PassExam=" + (int)Business.ExamState.redo + " order by b.StartTime desc";
             IList busList = baseService.loadEntityList(query);
             int i=1;
             if (busList != null)
@@ -602,11 +611,11 @@ namespace WorkLogForm
             string query="";
             if (Role.KrOrder <= 2)
             {
-                query = "from Business b  where b.State=" + (int)Business.stateEnum.Normal + " order by b.StartTime";
+                query = "from Business b  where b.State=" + (int)Business.stateEnum.Normal + " order by b.StartTime desc";
             }
             else
             {
-                query = "from Business b where b.Id in (select be.BusinessId from BusinessEmployee be where be.EmployeeId=" + this.User.Id + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal + " ) and b.State=" + (int)Business.stateEnum.Normal + " order by b.StartTime";
+                query = "from Business b where b.Id in (select be.BusinessId from BusinessEmployee be where be.EmployeeId=" + this.User.Id + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal + " ) and b.State=" + (int)Business.stateEnum.Normal + " order by b.StartTime desc";
             }
             IList depList = baseService.loadEntityList(query);
             int i = 1;
