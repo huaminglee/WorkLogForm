@@ -474,7 +474,7 @@ namespace WorkLogForm
             }
             if (usuallyDayChar[dayOfWeek].Equals((char)UsuallyDay.workDayEnum.Holiday))//判断是否周六日
             {
-                panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块_周末;
+                panel.BackgroundImage = WorkLogForm.Properties.Resources.日历小方块2_休;
                 panel.Tag = null;
             }
         }

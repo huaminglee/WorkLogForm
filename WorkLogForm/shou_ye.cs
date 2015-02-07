@@ -609,17 +609,17 @@ namespace WorkLogForm
                 }
             }
 
-            //if (workDayList != null && workDayList.Count > 0)//判断是不是补班
-            //{
-            //    foreach (WorkDay a in workDayList)
-            //    {
-            //        if (new DateTime (a.WorkDateTime).Date == date.Date)
-            //        {
-            //            label.Text ="补班";
-            //            return;
-            //        }
-            //    }
-            //}
+            if (workDayList != null && workDayList.Count > 0)//判断是不是补班
+            {
+                foreach (WorkDay a in workDayList)
+                {
+                    if (new DateTime (a.WorkDateTime).Date == date.Date)
+                    {
+                        label.Text ="补班";
+                        return;
+                    }
+                }
+            }
             
         }
 
@@ -685,7 +685,7 @@ namespace WorkLogForm
 
         private void UpdLabel2(Label label)
         {
-            if (((DateTime)(label.Parent.Tag)).DayOfWeek == DayOfWeek.Sunday || ((DateTime)(label.Parent.Tag)).DayOfWeek == DayOfWeek.Saturday ||label.Text != "")
+            if ((((DateTime)(label.Parent.Tag)).DayOfWeek == DayOfWeek.Sunday || ((DateTime)(label.Parent.Tag)).DayOfWeek == DayOfWeek.Saturday ||label.Text != "")&&label.Text!="补班")
             {
                 return;
             }
