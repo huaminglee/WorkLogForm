@@ -420,6 +420,7 @@ namespace WorkLogForm
                         panban.AutoSize = true;
                         panban.Click += panban_Click;
                     }
+                   
                 }
 
 
@@ -430,15 +431,58 @@ namespace WorkLogForm
                 {
                     foreach (OnDutyTable oo in dayInfo)
                     {
-                        if (oo.Type == 0)
+                        if (oo.TFMId.UserId.Id == user.Id)
                         {
-                            PrintDutyPersonName((Panel)dateLabel[i].Parent, oo.DaiBanID, oo.BaiBanID, oo.YeBanID, 0);
+
+                            if (oo.Type == 0)
+                            {
+                                PrintDutyPersonName((Panel)dateLabel[i].Parent, oo.DaiBanID, oo.BaiBanID, oo.YeBanID, 0);
+                            }
+                            else if (oo.Type == 1)
+                            {
+                                PrintDutyPersonName((Panel)dateLabel[i].Parent, oo.DaiBanID, oo.BaiBanID, oo.YeBanID, 1);
+                            }
+
+
                         }
-                        else if (oo.Type == 1)
+                        else
                         {
-                            PrintDutyPersonName((Panel)dateLabel[i].Parent, oo.DaiBanID, oo.BaiBanID, oo.YeBanID, 1);
+                            if (Therole == 0)
+                            {
+                                if (oo.TFMId.ExamineState == 1)
+                                {
+                                    if (oo.Type == 0)
+                                    {
+                                        PrintDutyPersonName((Panel)dateLabel[i].Parent, oo.DaiBanID, oo.BaiBanID, oo.YeBanID, 0);
+                                    }
+                                    else if (oo.Type == 1)
+                                    {
+                                        PrintDutyPersonName((Panel)dateLabel[i].Parent, oo.DaiBanID, oo.BaiBanID, oo.YeBanID, 1);
+                                    }
+                                }
+                            }
+                            else if(Therole == 1)
+                            {
+                                if (oo.Type == 0) //综合办
+                                {
+                                    PrintDutyPersonName((Panel)dateLabel[i].Parent, oo.DaiBanID, oo.BaiBanID, oo.YeBanID, 0);
+                                }
+                               
+ 
+                            
+                            
+                            }
+                            else if(Therole == 2)
+                            {
+                                if (oo.Type == 1)//网络班
+                                {
+                                   PrintDutyPersonName((Panel)dateLabel[i].Parent, oo.DaiBanID, oo.BaiBanID, oo.YeBanID, 1);
+                                }
+                            }
+                            
                         }
 
+                       
                     }
                 }
                 
@@ -590,12 +634,11 @@ namespace WorkLogForm
                     " and u.State = " + (int)IEntity.stateEnum.Normal;
 
                 IList timemananer = baseService.loadEntityList(sql);
-
+                if(TfM == null)
+                TfM = new TimeArrangeForManager();
                 if (timemananer != null && timemananer.Count > 0)
                 {
-                    TfM = new TimeArrangeForManager();
                     TfM = (TimeArrangeForManager)timemananer[0];
-
                     this.initCalendar(this.dateTimePicker1.Value.Year, this.dateTimePicker1.Value.Month,true);
                     switch (TfM.ExamineState)
                     {
@@ -615,9 +658,19 @@ namespace WorkLogForm
 
                 if (Therole != 0)
                 {
-                    this.PanelOfTwoButtons.Visible = true;
+                    this.PanelOfTwoButtons.Visible = true; switch (TfM.ExamineState)
+                    {
+                        case 0:
+                            this.CheckState.Text = "审核状态：未审核"; break;
+                        case 1:
+                            this.CheckState.Text = "审核状态：审核通过"; break;
+                        case 2:
+                            this.CheckState.Text = "审核状态：审核未通过"; break;
+                    }
                 }
 
+
+               
             }
             else 
             {

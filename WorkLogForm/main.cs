@@ -1027,7 +1027,7 @@ namespace WorkLogForm
         private void SuiBiGuanLi_pictureBox_Click(object sender, EventArgs e)
         {
             SuiBiGuanLi_pictureBox.Cursor = Cursors.WaitCursor;
-            if (shouYe == null || shouYe.IsDisposed)
+            if (suibiguanli == null || suibiguanli.IsDisposed)
             {
                 suibiguanli = new SuiBiGuanLi_New();
             }

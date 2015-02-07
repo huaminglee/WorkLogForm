@@ -1089,7 +1089,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "staff_LogLeader";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "员工日志";
+            this.Text = "日志管理";
             this.Load += new System.EventHandler(this.staff_LogLeader_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.staff_LogLeader_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.staff_LogLeader_MouseMove);

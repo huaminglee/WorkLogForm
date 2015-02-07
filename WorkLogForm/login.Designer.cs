@@ -174,7 +174,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "login";
+            this.Text = "登录";
             this.Load += new System.EventHandler(this.login_Load);
             this.Shown += new System.EventHandler(this.login_Shown);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.login_MouseDown);

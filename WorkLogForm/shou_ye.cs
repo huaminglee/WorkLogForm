@@ -487,10 +487,9 @@ namespace WorkLogForm
         }
         private void pictureBox_rizhi_Click(object sender, EventArgs e)
         {
-            PictureBox p = new PictureBox();
-            p = (PictureBox)sender;
+            PictureBox p = (PictureBox)sender;
             writeLog log = new writeLog();
-            log.IsComment = true;
+            log.IsView = true;
             log.User = this.user;
             log.CommentPersonName = this.User.KuName;
             log.LogDate = (DateTime)p.Parent.Tag;

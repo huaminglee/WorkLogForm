@@ -306,7 +306,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "personal_setting";
             this.ShowInTaskbar = false;
-            this.Text = "申请领导代签";
+            this.Text = "设置";
             this.Load += new System.EventHandler(this.personal_setting_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);

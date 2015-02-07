@@ -64,11 +64,13 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox21 = new System.Windows.Forms.TextBox();
             this.textBox20 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
             this.listView6 = new System.Windows.Forms.ListView();
             this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -146,8 +148,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.close_pictureBox = new System.Windows.Forms.PictureBox();
             this.min_pictureBox = new System.Windows.Forms.PictureBox();
-            this.label33 = new System.Windows.Forms.Label();
-            this.textBox21 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -571,6 +571,14 @@
             this.textBox8.Size = new System.Drawing.Size(477, 26);
             this.textBox8.TabIndex = 260;
             // 
+            // textBox21
+            // 
+            this.textBox21.Location = new System.Drawing.Point(96, 404);
+            this.textBox21.Name = "textBox21";
+            this.textBox21.ReadOnly = true;
+            this.textBox21.Size = new System.Drawing.Size(477, 26);
+            this.textBox21.TabIndex = 260;
+            // 
             // textBox20
             // 
             this.textBox20.Location = new System.Drawing.Point(95, 256);
@@ -613,6 +621,15 @@
             this.label7.Size = new System.Drawing.Size(94, 20);
             this.label7.TabIndex = 258;
             this.label7.Text = "出差地点：";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(16, 407);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(94, 20);
+            this.label33.TabIndex = 258;
+            this.label33.Text = "审批领导：";
             // 
             // listView6
             // 
@@ -1358,23 +1375,6 @@
             this.min_pictureBox.TabIndex = 274;
             this.min_pictureBox.TabStop = false;
             // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(16, 407);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(94, 20);
-            this.label33.TabIndex = 258;
-            this.label33.Text = "审批领导：";
-            // 
-            // textBox21
-            // 
-            this.textBox21.Location = new System.Drawing.Point(96, 404);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.ReadOnly = true;
-            this.textBox21.Size = new System.Drawing.Size(477, 26);
-            this.textBox21.TabIndex = 260;
-            // 
             // BusinessManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1388,7 +1388,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BusinessManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "BusinessManagement";
+            this.Text = "出差管理";
             this.Load += new System.EventHandler(this.BusinessManagement_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BusinessManagement_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BusinessManagement_MouseMove);

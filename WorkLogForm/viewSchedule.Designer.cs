@@ -1229,7 +1229,7 @@
             this.title_label.ForeColor = System.Drawing.Color.Black;
             this.title_label.Location = new System.Drawing.Point(7, 2);
             this.title_label.Name = "title_label";
-            this.title_label.Size = new System.Drawing.Size(193, 20);
+            this.title_label.Size = new System.Drawing.Size(185, 19);
             this.title_label.TabIndex = 6;
             this.title_label.Text = "查看日程-2013年10月21日";
             // 
@@ -1247,7 +1247,7 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "viewSchedule";
-            this.Text = "viewSchedule";
+            this.Text = "日程查看";
             this.Load += new System.EventHandler(this.viewSchedule_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.viewSchedule_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.viewSchedule_MouseMove);

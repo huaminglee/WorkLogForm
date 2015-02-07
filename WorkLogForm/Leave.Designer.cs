@@ -209,10 +209,6 @@
             this.columnHeader30 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.label27 = new System.Windows.Forms.Label();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -224,6 +220,10 @@
             this.label33 = new System.Windows.Forms.Label();
             this.dateTimePicker9 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker10 = new System.Windows.Forms.DateTimePicker();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
             this.listView5 = new System.Windows.Forms.ListView();
             this.columnHeader31 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader32 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -253,8 +253,8 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel5.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1733,54 +1733,6 @@
             this.panel5.Size = new System.Drawing.Size(982, 612);
             this.panel5.TabIndex = 234;
             // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.label27);
-            this.groupBox7.Controls.Add(this.button15);
-            this.groupBox7.Controls.Add(this.button16);
-            this.groupBox7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox7.Location = new System.Drawing.Point(662, 450);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(299, 130);
-            this.groupBox7.TabIndex = 226;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = " 审批修改";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.BackColor = System.Drawing.Color.Transparent;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label27.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label27.Location = new System.Drawing.Point(55, 33);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(0, 20);
-            this.label27.TabIndex = 218;
-            // 
-            // button15
-            // 
-            this.button15.BackColor = System.Drawing.SystemColors.Control;
-            this.button15.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button15.ForeColor = System.Drawing.Color.Black;
-            this.button15.Location = new System.Drawing.Point(20, 51);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(83, 32);
-            this.button15.TabIndex = 220;
-            this.button15.Text = "通过";
-            this.button15.UseVisualStyleBackColor = true;
-            // 
-            // button16
-            // 
-            this.button16.BackColor = System.Drawing.SystemColors.Control;
-            this.button16.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button16.ForeColor = System.Drawing.Color.Black;
-            this.button16.Location = new System.Drawing.Point(194, 51);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(83, 32);
-            this.button16.TabIndex = 220;
-            this.button16.Text = "不通过";
-            this.button16.UseVisualStyleBackColor = true;
-            // 
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.comboBox7);
@@ -1926,6 +1878,54 @@
             this.dateTimePicker10.Size = new System.Drawing.Size(98, 21);
             this.dateTimePicker10.TabIndex = 216;
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label27);
+            this.groupBox7.Controls.Add(this.button15);
+            this.groupBox7.Controls.Add(this.button16);
+            this.groupBox7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox7.Location = new System.Drawing.Point(662, 450);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(299, 130);
+            this.groupBox7.TabIndex = 226;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = " 审批修改";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.Color.Transparent;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label27.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.label27.Location = new System.Drawing.Point(55, 33);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(0, 20);
+            this.label27.TabIndex = 218;
+            // 
+            // button15
+            // 
+            this.button15.BackColor = System.Drawing.SystemColors.Control;
+            this.button15.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button15.ForeColor = System.Drawing.Color.Black;
+            this.button15.Location = new System.Drawing.Point(20, 51);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(83, 32);
+            this.button15.TabIndex = 220;
+            this.button15.Text = "通过";
+            this.button15.UseVisualStyleBackColor = true;
+            // 
+            // button16
+            // 
+            this.button16.BackColor = System.Drawing.SystemColors.Control;
+            this.button16.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button16.ForeColor = System.Drawing.Color.Black;
+            this.button16.Location = new System.Drawing.Point(194, 51);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(83, 32);
+            this.button16.TabIndex = 220;
+            this.button16.Text = "不通过";
+            this.button16.UseVisualStyleBackColor = true;
+            // 
             // listView5
             // 
             this.listView5.CheckBoxes = true;
@@ -2043,7 +2043,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Leave";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Leave";
+            this.Text = "请假管理";
             this.Load += new System.EventHandler(this.Leave_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Leave_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Leave_MouseMove);
@@ -2072,10 +2072,10 @@
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel5.ResumeLayout(false);
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

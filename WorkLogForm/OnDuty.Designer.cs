@@ -307,13 +307,13 @@
             this.label246 = new System.Windows.Forms.Label();
             this.label655 = new System.Windows.Forms.Label();
             this.panel66 = new System.Windows.Forms.Panel();
+            this.label666 = new System.Windows.Forms.Label();
             this.label234 = new System.Windows.Forms.Label();
             this.label235 = new System.Windows.Forms.Label();
             this.label236 = new System.Windows.Forms.Label();
             this.label237 = new System.Windows.Forms.Label();
             this.label238 = new System.Windows.Forms.Label();
             this.label239 = new System.Windows.Forms.Label();
-            this.label666 = new System.Windows.Forms.Label();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
@@ -3340,6 +3340,17 @@
             this.panel66.Size = new System.Drawing.Size(140, 90);
             this.panel66.TabIndex = 374;
             // 
+            // label666
+            // 
+            this.label666.AutoSize = true;
+            this.label666.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label666.Location = new System.Drawing.Point(7, -1);
+            this.label666.Name = "label666";
+            this.label666.Size = new System.Drawing.Size(25, 28);
+            this.label666.TabIndex = 0;
+            this.label666.Text = "7";
+            this.label666.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label234
             // 
             this.label234.AutoSize = true;
@@ -3405,17 +3416,6 @@
             this.label239.Size = new System.Drawing.Size(44, 17);
             this.label239.TabIndex = 12;
             this.label239.Text = "行政班";
-            // 
-            // label666
-            // 
-            this.label666.AutoSize = true;
-            this.label666.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label666.Location = new System.Drawing.Point(7, -1);
-            this.label666.Name = "label666";
-            this.label666.Size = new System.Drawing.Size(25, 28);
-            this.label666.TabIndex = 0;
-            this.label666.Text = "7";
-            this.label666.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBox5
             // 
@@ -5325,7 +5325,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "OnDuty";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OnDuty";
+            this.Text = "值班管理";
             this.Load += new System.EventHandler(this.OnDuty_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Leave_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Leave_MouseMove);

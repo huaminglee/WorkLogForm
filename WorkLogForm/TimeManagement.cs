@@ -1005,7 +1005,23 @@ namespace WorkLogForm
                 this.dataGridView4.Rows[this.dataGridView4.Rows.Count - 1].Tag = tgm;
             }
         }
+        /// <summary>
+        /// 删除功能
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == 5 && this.dataGridView4.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == "删除")
+            {
+                TimeArrangeForManager t = (TimeArrangeForManager)this.dataGridView4.Rows[e.RowIndex].Tag;
+                t.State = (int)IEntity.stateEnum.Deleted;
+                baseService.SaveOrUpdateEntity(t);
+                this.dataGridView4.Rows.RemoveAt(e.RowIndex);
+            }
 
+
+        }
 
         /// <summary>
         /// 选择值班更换界面时候发生的事件
@@ -1147,7 +1163,7 @@ namespace WorkLogForm
 
         }
 
-
+     
         #endregion
 
         
@@ -1323,6 +1339,8 @@ namespace WorkLogForm
             button9.Enabled = false;
         }
         #endregion
+
+       
 
       
 

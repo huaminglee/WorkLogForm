@@ -4248,7 +4248,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "shou_ye";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "首页";
+            this.Text = "我的日历";
             this.Load += new System.EventHandler(this.shou_ye_Load);
             this.SizeChanged += new System.EventHandler(this.shou_ye_SizeChanged);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.shou_ye_MouseDown);

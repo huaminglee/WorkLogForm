@@ -900,7 +900,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "WorkOvertime";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "WorkOvertime";
+            this.Text = "加班管理";
             this.Load += new System.EventHandler(this.WorkOvertime_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WorkOvertime_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.WorkOvertime_MouseMove);

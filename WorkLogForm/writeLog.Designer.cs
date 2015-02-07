@@ -446,7 +446,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "writeLog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "日志管理";
+            this.Text = "日志编写";
             this.Load += new System.EventHandler(this.writeLog_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.writeLog_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.writeLog_MouseMove);
