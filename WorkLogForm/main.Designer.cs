@@ -91,6 +91,7 @@
             this.schedule_listen_timer = new System.Windows.Forms.Timer(this.components);
             this.tong_xun_pictureBox = new System.Windows.Forms.PictureBox();
             this.SuiBi_flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.Show_SuiBi_flowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.SuiBi_SeeMore = new System.Windows.Forms.Panel();
             this.write_SuiBi = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
@@ -100,7 +101,6 @@
             this.linkLabel11 = new System.Windows.Forms.LinkLabel();
             this.linkLabel12 = new System.Windows.Forms.LinkLabel();
             this.linkLabel10 = new System.Windows.Forms.LinkLabel();
-            this.Show_SuiBi_flowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.RemindwriteLog = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
@@ -362,7 +362,7 @@
             this.sjgl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.sjgl_pictureBox.TabIndex = 11;
             this.sjgl_pictureBox.TabStop = false;
-            this.toolTip1.SetToolTip(this.sjgl_pictureBox, "时间管理");
+            this.toolTip1.SetToolTip(this.sjgl_pictureBox, "综合办管理");
             this.sjgl_pictureBox.Click += new System.EventHandler(this.sjgl_pictureBox_Click);
             this.sjgl_pictureBox.MouseLeave += new System.EventHandler(this.sjgl_pictureBox_MouseLeave);
             this.sjgl_pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.sjgl_pictureBox_MouseMove);
@@ -825,6 +825,15 @@
             this.SuiBi_flowLayoutPanel.Visible = false;
             this.SuiBi_flowLayoutPanel.MouseEnter += new System.EventHandler(this.rc_flowLayoutPanel_MouseEnter);
             // 
+            // Show_SuiBi_flowPanel
+            // 
+            this.Show_SuiBi_flowPanel.AutoScroll = true;
+            this.Show_SuiBi_flowPanel.Location = new System.Drawing.Point(3, 3);
+            this.Show_SuiBi_flowPanel.Name = "Show_SuiBi_flowPanel";
+            this.Show_SuiBi_flowPanel.Size = new System.Drawing.Size(238, 293);
+            this.Show_SuiBi_flowPanel.TabIndex = 3;
+            this.Show_SuiBi_flowPanel.MouseEnter += new System.EventHandler(this.rc_flowLayoutPanel_MouseEnter);
+            // 
             // SuiBi_SeeMore
             // 
             this.SuiBi_SeeMore.Controls.Add(this.write_SuiBi);
@@ -916,15 +925,6 @@
             this.linkLabel10.TabStop = true;
             this.linkLabel10.Text = "点击查看更多";
             this.linkLabel10.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel10_LinkClicked);
-            // 
-            // Show_SuiBi_flowPanel
-            // 
-            this.Show_SuiBi_flowPanel.AutoScroll = true;
-            this.Show_SuiBi_flowPanel.Location = new System.Drawing.Point(3, 3);
-            this.Show_SuiBi_flowPanel.Name = "Show_SuiBi_flowPanel";
-            this.Show_SuiBi_flowPanel.Size = new System.Drawing.Size(238, 293);
-            this.Show_SuiBi_flowPanel.TabIndex = 3;
-            this.Show_SuiBi_flowPanel.MouseEnter += new System.EventHandler(this.rc_flowLayoutPanel_MouseEnter);
             // 
             // RemindwriteLog
             // 

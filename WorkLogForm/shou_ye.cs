@@ -634,7 +634,7 @@ namespace WorkLogForm
         private void initUsuallyday()
         {
             IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where STATE=" + (int)IEntity.stateEnum.Normal + " and StartTime<=" + DateTime.Now.Ticks + " order by StartTime desc");
-            if (usuallyDayList != null && usuallyDayList.Count == 1)
+            if (usuallyDayList != null && usuallyDayList.Count != 0)
             {
                 UsuallyDay u = (UsuallyDay)usuallyDayList[0];
                 usuallyDay = u.WorkDay.ToCharArray();

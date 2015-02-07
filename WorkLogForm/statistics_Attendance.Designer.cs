@@ -2343,8 +2343,8 @@
             this.Controls.Add(this.all_static_pictureBox);
             this.Controls.Add(this.close_pictureBox);
             this.Controls.Add(this.min_pictureBox);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "statistics_Attendance";

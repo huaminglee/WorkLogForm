@@ -90,7 +90,7 @@ namespace WorkLogForm
                 title_label.Text = "查看日程-" + scheduleDate.Year + "年" + scheduleDate.Month + "月" + scheduleDate.Day + "日";
                 long thisDay = scheduleDate.Date.Ticks;
                 long nextDay = scheduleDate.Date.Ticks + new DateTime(1, 1, 2).Ticks;
-                IList ssList = baseService.loadEntityList("from StaffSchedule where State=" + (int)IEntity.stateEnum.Normal + " and ScheduleTime>=" + thisDay + " ScheduleTime<" + nextDay + " and Staff=" + user.Id + " order by ScheduleTime asc");
+                IList ssList = baseService.loadEntityList("from StaffSchedule where State=" + (int)IEntity.stateEnum.Normal + " and ScheduleTime>=" + thisDay + "and ScheduleTime<" + nextDay + " and Staff=" + user.Id + " order by ScheduleTime asc");
                 if (ssList != null && ssList.Count > 0)
                 {
                     foreach (StaffSchedule s in ssList)

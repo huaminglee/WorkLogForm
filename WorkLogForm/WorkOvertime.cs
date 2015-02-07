@@ -330,7 +330,7 @@ namespace WorkLogForm
         private void button1_Click(object sender, EventArgs e)
         {
             TimeSpan ts=dateTimePicker5.Value.AddSeconds(1).TimeOfDay-dateTimePicker2.Value.TimeOfDay;
-            if (ts.Hours >= 3)
+            if (ts.Hours > 3||(ts.Hours ==3&&ts.Minutes>=0))
             {
                 MessageBox.Show("超过加班时长限制");
                 return;

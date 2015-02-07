@@ -255,7 +255,7 @@ namespace WorkLogForm
                 workDayList = baseService.loadEntityList("from WorkDay where STATE=" + (int)IEntity.stateEnum.Normal + " and workDateTime>=" + startTime.Date.Ticks + " and workDateTime<=" + endTime.Date.Ticks);
                 leaveList = baseService.loadEntityList("from LeaveManage l where l.State=" + (int)IEntity.stateEnum.Normal + " and l.Ku_Id.KuName like '%" +comboBox2.Text.Trim()+ "%' and ((l.StartTime>=" + startTime.Date.Ticks + " and l.StartTime<=" + endTime.Date.Ticks + ") or (l.EndTime>=" + startTime.Date.Ticks + " and l.EndTime<=" + endTime.Date.Ticks + ") or (l.StartTime>=" + startTime.Date.Ticks + " and l.EndTime<=" + endTime.Date.Ticks + ") or (l.StartTime<=" + startTime.Date.Ticks + " and l.EndTime>=" + endTime.Date.Ticks + "))");
                 IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where STATE=" + (int)IEntity.stateEnum.Normal + " and StartTime<=" + dateTimePicker5.Value.Date.Ticks + " order by StartTime desc");
-                if (usuallyDayList != null && usuallyDayList.Count == 1)
+                if (usuallyDayList != null && usuallyDayList.Count != 0)
                 {
                     usuallyDay = (UsuallyDay)usuallyDayList[0];
                     usuallyDayChar = usuallyDay.WorkDay.ToCharArray();
