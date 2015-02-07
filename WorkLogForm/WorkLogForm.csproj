@@ -42,6 +42,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>29.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2">
       <HintPath>lib\DevComponents.DotNetBar2.dll</HintPath>
@@ -419,6 +422,7 @@
   <ItemGroup>
     <None Include="resources\日历小方块_周末.png" />
     <None Include="resources\refresh.jpg" />
+    <Content Include="29.ico" />
     <Content Include="resources\个人考勤.png" />
     <Content Include="resources\个人考勤副本.png" />
     <Content Include="resources\代签审批.png" />

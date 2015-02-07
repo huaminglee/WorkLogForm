@@ -477,7 +477,7 @@ namespace WorkLogForm
             DateTime t=dateTimePicker6.Value;
             DateTime st=t.Date.AddDays(-t.Day+1);
             DateTime ed = st.AddMonths(1);
-            string query = "from WorkOverTime wkot where wkot.StartTime>" + st.Ticks + " and wkot.EndTime<" + ed.Ticks + "and wkot.State="+(int)WorkOverTime.stateEnum.Normal+" order by wkot.Date" ;
+            string query = "from WorkOverTime wkot where wkot.StartTime>" + st.Ticks + " and wkot.EndTime<=" + ed.Ticks + "and wkot.State="+(int)WorkOverTime.stateEnum.Normal+" order by wkot.Date" ;
             IList oList=baseService.loadEntityList(query);
             foreach (WorkOverTime o in oList)
             {

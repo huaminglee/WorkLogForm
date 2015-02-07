@@ -323,5 +323,18 @@ namespace WorkLogForm
             MessageBox.Show("保存成功！");
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            IniReadAndWrite.IniWriteValue("temp", "auto", CommonStaticParameter.YES);
+            MessageBox.Show("设置自动登录成功！");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            IniReadAndWrite.IniWriteValue("temp", "auto", CommonStaticParameter.NO);
+            MessageBox.Show("取消自动登录成功！");
+
+        }
+
     }
 }
