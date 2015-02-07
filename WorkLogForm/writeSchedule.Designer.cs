@@ -328,18 +328,18 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.CustomFormat = "HH:mm";
+            this.dateTimePicker2.CustomFormat = "yyyy-MM-dd HH:mm";
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker2.Location = new System.Drawing.Point(95, 293);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.ShowUpDown = true;
-            this.dateTimePicker2.Size = new System.Drawing.Size(226, 21);
+            this.dateTimePicker2.Size = new System.Drawing.Size(138, 21);
             this.dateTimePicker2.TabIndex = 178;
-            this.dateTimePicker2.Value = new System.DateTime(2014, 3, 30, 15, 29, 0, 0);
+            this.dateTimePicker2.Value = new System.DateTime(2015, 2, 7, 0, 0, 0, 0);
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.CustomFormat = "HH:mm";
+            this.dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(95, 325);
             this.dateTimePicker1.Name = "dateTimePicker1";

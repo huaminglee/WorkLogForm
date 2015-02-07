@@ -83,6 +83,8 @@ namespace WorkLogForm
             }
         }
         #endregion
+
+
         private void initData()
         {
             if (scheduleDate != null && !scheduleDate.Equals(new DateTime(0)))
@@ -140,7 +142,14 @@ namespace WorkLogForm
             if (ssList.Count > 0)
             {
                 label.Tag = ssList;
-                label.Text = ssList[0].Content.Length > 14 ? ssList[0].Content.Substring(0, 14) + "..." : ssList[0].Content;
+                string str = "";
+                foreach (StaffSchedule s in ssList)
+                {
+                    str = str+s.Content+"  ";
+                }
+               
+                label.Text = str.Length > 14 ? str.Substring(0, 14) + "..." : str;
+                
             }
         }
         private void viewSchedule_Load(object sender, EventArgs e)
