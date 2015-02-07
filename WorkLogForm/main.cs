@@ -1196,6 +1196,7 @@ namespace WorkLogForm
                         else
                         {
                             sec.Focus();
+                            sec.SetLabelInfo();
                         }
                         
                         if (scheduleList.Contains(ss))
@@ -1471,7 +1472,7 @@ namespace WorkLogForm
         }
         #endregion
 
-        #region
+        #region 提醒写日志
         /// <summary>
         /// 提醒写日志
         /// </summary>
@@ -1489,6 +1490,7 @@ namespace WorkLogForm
                 else
                 {
                     sec.Focus();
+                    sec.SetLabelInfo();
                 }
             }
         }

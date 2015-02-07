@@ -46,7 +46,14 @@ namespace WorkLogForm
             return result;
 
         }
+        public void SetLabelInfo()
+        {
+            toolTip1.Active = false;
+            toolTip1.SetToolTip(label1, logToolTip(logtooltipString));
+            toolTip1.Active = true; toolTip1.OwnerDraw = false;
+            toolTip1.Show(logtooltipString, label1, -100, -20, 100000);
 
+        }
         private void Secretary_Load(object sender, EventArgs e)
         {
             base.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width - base.Width, Screen.PrimaryScreen.WorkingArea.Height - base.Height);

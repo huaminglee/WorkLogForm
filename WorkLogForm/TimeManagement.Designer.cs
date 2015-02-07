@@ -417,9 +417,9 @@
             this.delete_button.BackColor = System.Drawing.SystemColors.Menu;
             this.delete_button.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.delete_button.ForeColor = System.Drawing.Color.Navy;
-            this.delete_button.Location = new System.Drawing.Point(198, 238);
+            this.delete_button.Location = new System.Drawing.Point(77, 233);
             this.delete_button.Name = "delete_button";
-            this.delete_button.Size = new System.Drawing.Size(65, 31);
+            this.delete_button.Size = new System.Drawing.Size(45, 31);
             this.delete_button.TabIndex = 17;
             this.delete_button.Text = "删除";
             this.delete_button.UseVisualStyleBackColor = false;
@@ -430,9 +430,9 @@
             this.submit_button.BackColor = System.Drawing.SystemColors.Menu;
             this.submit_button.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.submit_button.ForeColor = System.Drawing.Color.Navy;
-            this.submit_button.Location = new System.Drawing.Point(53, 238);
+            this.submit_button.Location = new System.Drawing.Point(12, 233);
             this.submit_button.Name = "submit_button";
-            this.submit_button.Size = new System.Drawing.Size(65, 31);
+            this.submit_button.Size = new System.Drawing.Size(49, 31);
             this.submit_button.TabIndex = 16;
             this.submit_button.Text = "提交";
             this.submit_button.UseVisualStyleBackColor = false;
