@@ -235,7 +235,7 @@ namespace WorkLogForm
             if (user != null)
             {
 
-                string sql = "from SuiBi  where STATE=" + (int)IEntity.stateEnum.Normal + " and WkTUserId = " + user.Id + " and WriteTime > " + this.dateTimePicker1.Value.Ticks + " and WriteTime < " + this.dateTimePicker2.Value.Ticks + "and Contents like '%" + this.textBox1.Text + "%'";
+                string sql = "from SuiBi  where STATE=" + (int)IEntity.stateEnum.Normal + " and WkTUserId = " + user.Id + " and WriteTime > " + this.dateTimePicker1.Value.Ticks + " and WriteTime <= " + this.dateTimePicker2.Value.Ticks + "and Contents like '%" + this.textBox1.Text + "%'";
                 IList suibilist = baseService.loadEntityList(sql);
                 ShowInFlowPanel(suibilist);
             }
@@ -265,7 +265,7 @@ namespace WorkLogForm
                     + textBox3.Text.Trim() + "%' and s.STATE = "
                     + (int)IEntity.stateEnum.Normal +
                     " and s.WriteTime > " + this.dateTimePicker3.Value.Ticks +
-                    "  and s.WriteTime < " + this.dateTimePicker4.Value.Ticks +
+                    "  and s.WriteTime <= " + this.dateTimePicker4.Value.Ticks +
                     " and s.Contents like '%"+this.textBox2.Text+"%'";
 
 
@@ -282,7 +282,7 @@ namespace WorkLogForm
                     " WK_T_DEPT.KD_ID = w.KD_ID where KD_NAME like '%" + this.comboBox1.Text.Trim()
                     + "%') t  on s.WkTUserId = t.id where name like '%" + textBox3.Text.Trim() + "%'"+
                     " and s.WriteTime > " + this.dateTimePicker3.Value.Ticks +
-                    "  and s.WriteTime < " + this.dateTimePicker4.Value.Ticks+
+                    "  and s.WriteTime <= " + this.dateTimePicker4.Value.Ticks+
                     " and s.Contents like '%"+this.textBox2.Text+"%'";
 
 

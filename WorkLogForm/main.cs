@@ -261,7 +261,7 @@ namespace WorkLogForm
                 }
                 long thisDay = DateTime.Now.Date.Ticks;
                 long nextDay = DateTime.Now.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
-                IList staffScheduleList = baseService.loadEntityList("from StaffSchedule where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + thisDay + " and ScheduleTime<" + nextDay + " order by ScheduleTime asc");
+                IList staffScheduleList = baseService.loadEntityList("from StaffSchedule where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + thisDay + " order by ScheduleTime asc");
                 if (scheduleList != null)
                 {
                     scheduleList.Clear();
@@ -319,7 +319,7 @@ namespace WorkLogForm
                     l4Content.Location = new Point(2, 90);
                     l4Content.AutoSize = false;
                     l4Content.Text = ss.Content;
-                    int height = ((ss.Content.Length / 14) + 1) * 18;
+                    int height = ((ss.Content.Length / 14) + 1) * 20;
                     l4Content.Size = new Size(210, height);
                     l4Content.Parent = p;
 
@@ -1169,7 +1169,7 @@ namespace WorkLogForm
             //MessageBox.Show(e.Info.ToString());
             long thisDay = DateTime.Now.Ticks;
             long nextDay = DateTime.Now.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
-            scheduleList = baseService.loadEntityList("from StaffSchedule where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + thisDay + " and ScheduleTime<" + nextDay + " order by ScheduleTime asc");
+            scheduleList = baseService.loadEntityList("from StaffSchedule where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + thisDay + "  order by ScheduleTime asc");
             
             //循环监测
             listen_ri_cheng();
@@ -1185,7 +1185,7 @@ namespace WorkLogForm
                 foreach (StaffSchedule ss in sl)
                 {
                     DateTime scheduleTime = new DateTime(ss.ScheduleTime);
-                    if (scheduleTime.Hour == DateTime.Now.Hour && scheduleTime.Minute == DateTime.Now.Minute)
+                    if (scheduleTime.Hour ==DateTime.Now.Hour && scheduleTime.Minute == DateTime.Now.Minute &&DateTime.Now.Year == scheduleTime.Year)
                     {
                         //MessageBox.Show(ss.Content);
                         sec.LogtooltipString = ss.Content;
@@ -1499,23 +1499,6 @@ namespace WorkLogForm
             Panel p = (Panel)sender;
             p.Focus();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

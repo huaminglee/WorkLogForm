@@ -171,7 +171,7 @@ namespace WorkLogForm
         #region 个人日志 已处理
         private void personal_search_button_Click(object sender, EventArgs e)
         {
-            IList logList = baseService.loadEntityList("from StaffLog where State=" + (int)IEntity.stateEnum.Normal + " and WriteTime>=" + dateTimePicker1.Value.Ticks + " and WriteTime<" + dateTimePicker2.Value.Ticks + " and Staff=" + user.Id + " and Content like '%"+this.textBox1.Text.Trim()+"%' order by WriteTime desc");
+            IList logList = baseService.loadEntityList("from StaffLog where State=" + (int)IEntity.stateEnum.Normal + " and WriteTime>=" + dateTimePicker1.Value.Ticks + " and WriteTime<=" + dateTimePicker2.Value.Ticks + " and Staff=" + user.Id + " and Content like '%"+this.textBox1.Text.Trim()+"%' order by WriteTime desc");
             personal_dataGridView.Rows.Clear();
             initPersonalDataGridView(logList);
         }
@@ -382,7 +382,7 @@ namespace WorkLogForm
                                 + "%' and  log.Content like '%"
                                 + this.textBox4.Text.Trim() + "%' and " +
                                 " log.WriteTime > " + this.dateTimePicker3.Value.Ticks +
-                                " and log.WriteTime < " + this.dateTimePicker4.Value.Ticks
+                                " and log.WriteTime <= " + this.dateTimePicker4.Value.Ticks
                                  + " and log.State = " + (int)IEntity.stateEnum.Normal;
                             IList thelist = baseService.loadEntityList(sql);
 
@@ -432,7 +432,7 @@ namespace WorkLogForm
                                    + "%' and  log.Content like '%"
                                    + this.textBox4.Text.Trim() + "%' and " +
                                    " log.WriteTime > " + this.dateTimePicker3.Value.Ticks +
-                                   " log.WriteTime < " + this.dateTimePicker4.Value.Ticks
+                                   " log.WriteTime <= " + this.dateTimePicker4.Value.Ticks
                                     + " log.State = " + (int)IEntity.stateEnum.Normal;
 
                     }
@@ -444,7 +444,7 @@ namespace WorkLogForm
                                       + "%' and  log.Content like '%"
                                       + this.textBox4.Text.Trim() + "%' and " +
                                       " log.WriteTime > " + this.dateTimePicker3.Value.Ticks +
-                                      " log.WriteTime < " + this.dateTimePicker4.Value.Ticks
+                                      " log.WriteTime <= " + this.dateTimePicker4.Value.Ticks
                                       + " log.State = " + (int)IEntity.stateEnum.Normal;
                     }
                     IList thelist = baseService.loadEntityList(sql);

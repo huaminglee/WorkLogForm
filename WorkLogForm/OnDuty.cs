@@ -620,7 +620,7 @@ namespace WorkLogForm
 
             string sql1 = "Select u from OnDutyTable u where u.State = "+(int)IEntity.stateEnum.Normal+
                 " and u.Time > " + tt.AddDays(-16).Ticks+
-                " and u.Time < " + tt.AddDays(16).Ticks;
+                " and u.Time <= " + tt.AddDays(16).Ticks;
             dutyDayLis = baseService.loadEntityList(sql1);
 
             dateTimePicker1.Cursor = Cursors.WaitCursor;

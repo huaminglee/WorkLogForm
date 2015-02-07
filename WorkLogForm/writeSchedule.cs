@@ -146,9 +146,9 @@ namespace WorkLogForm
             StaffSchedule staffSchedule = new StaffSchedule();
             staffSchedule.IfRemind = checkBox1.Checked ? (int)StaffSchedule.IfRemindEnum.Renmind : (int)StaffSchedule.IfRemindEnum.NotRemind;
             //会议时间
-            staffSchedule.ScheduleTime = scheduleDate.Date.Ticks + dateTimePicker1.Value.TimeOfDay.Ticks;
+            staffSchedule.ScheduleTime = this.dateTimePicker2.Value.Ticks;//scheduleDate.Date.Ticks + dateTimePicker1.Value.TimeOfDay.Ticks;
             //提醒时间
-            staffSchedule.RemindTime = scheduleDate.Date.Ticks + dateTimePicker2.Value.TimeOfDay.Ticks;
+            staffSchedule.RemindTime = this.dateTimePicker1.Value.Ticks;//scheduleDate.Date.Ticks + dateTimePicker2.Value.TimeOfDay.Ticks;
             staffSchedule.Staff = this.user;
             staffSchedule.StaffScheduleStaffs = sharedUser;
             staffSchedule.Subject = comboBox1.Text.Trim();

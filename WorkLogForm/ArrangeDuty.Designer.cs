@@ -34,8 +34,8 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -132,15 +132,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "带班人选择";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 44);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 20);
-            this.label2.TabIndex = 282;
-            this.label2.Text = "部门：";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -149,6 +140,15 @@
             this.label3.Size = new System.Drawing.Size(51, 20);
             this.label3.TabIndex = 283;
             this.label3.Text = "姓名：";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 44);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 20);
+            this.label2.TabIndex = 282;
+            this.label2.Text = "部门：";
             // 
             // groupBox2
             // 
@@ -296,7 +296,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ArrangeDuty";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ArrangeDuty";
+            this.Text = "安排值班人";
             this.Load += new System.EventHandler(this.ArrangeDuty_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Leave_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Leave_MouseMove);
