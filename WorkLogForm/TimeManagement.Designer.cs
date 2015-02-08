@@ -188,6 +188,14 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.comboBox8 = new System.Windows.Forms.ComboBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.button12 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -213,6 +221,7 @@
             this.tabPage8.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage9.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -806,6 +815,7 @@
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Controls.Add(this.tabPage8);
+            this.tabControl1.Controls.Add(this.tabPage9);
             this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(-1, 76);
             this.tabControl1.Name = "tabControl1";
@@ -1930,6 +1940,85 @@
             this.label24.Size = new System.Drawing.Size(0, 20);
             this.label24.TabIndex = 218;
             // 
+            // tabPage9
+            // 
+            this.tabPage9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(221)))), ((int)(((byte)(208)))));
+            this.tabPage9.Controls.Add(this.button12);
+            this.tabPage9.Controls.Add(this.label38);
+            this.tabPage9.Controls.Add(this.label37);
+            this.tabPage9.Controls.Add(this.label32);
+            this.tabPage9.Controls.Add(this.comboBox8);
+            this.tabPage9.Controls.Add(this.comboBox7);
+            this.tabPage9.Controls.Add(this.comboBox6);
+            this.tabPage9.Location = new System.Drawing.Point(4, 30);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Size = new System.Drawing.Size(984, 580);
+            this.tabPage9.TabIndex = 6;
+            this.tabPage9.Text = "人员管理";
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(555, 128);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(121, 29);
+            this.comboBox6.TabIndex = 0;
+            // 
+            // comboBox7
+            // 
+            this.comboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox7.FormattingEnabled = true;
+            this.comboBox7.Location = new System.Drawing.Point(90, 126);
+            this.comboBox7.Name = "comboBox7";
+            this.comboBox7.Size = new System.Drawing.Size(171, 29);
+            this.comboBox7.TabIndex = 1;
+            // 
+            // comboBox8
+            // 
+            this.comboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox8.FormattingEnabled = true;
+            this.comboBox8.Location = new System.Drawing.Point(343, 129);
+            this.comboBox8.Name = "comboBox8";
+            this.comboBox8.Size = new System.Drawing.Size(121, 29);
+            this.comboBox8.TabIndex = 2;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(26, 132);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(58, 21);
+            this.label32.TabIndex = 3;
+            this.label32.Text = "部门：";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(279, 130);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(58, 21);
+            this.label37.TabIndex = 4;
+            this.label37.Text = "姓名：";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(491, 132);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(58, 21);
+            this.label38.TabIndex = 5;
+            this.label38.Text = "职位：";
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(705, 124);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(108, 37);
+            this.button12.TabIndex = 6;
+            this.button12.Text = "添加";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
             // TimeManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1984,6 +2073,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage9.ResumeLayout(false);
+            this.tabPage9.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2150,5 +2241,13 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.ComboBox comboBox8;
+        private System.Windows.Forms.ComboBox comboBox7;
+        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label32;
     }
 }

@@ -42,6 +42,8 @@ namespace WorkLogForm
         private List<WkTDept> thedepts;
         private List<WkTUser> theusers;
 
+        private List<WkTDept> AdddeptsPage6;
+        private List<WkTUser> AddUserPage6;
         /// <summary>
         /// 部门管理中一个变量
         /// </summary>
@@ -872,14 +874,37 @@ namespace WorkLogForm
                
             }
 
-            if (tabControl1.SelectedIndex == 4)
+            else if (tabControl1.SelectedIndex == 4)
             {
                 listView2.Items.Clear();
             }
-            if (tabControl1.SelectedIndex == 5)
+            else if (tabControl1.SelectedIndex == 5)
             {
                 initPage8();
             }
+            else if (this.tabControl1.SelectedIndex == 6)
+            {
+                string sql = "select u from WkTDept u";
+                IList AddPersonDepts = baseService.loadEntityList(sql);
+                if (AdddeptsPage6 == null)
+                {
+                    AdddeptsPage6 = new List<WkTDept>();
+                }
+                if(AddPersonDepts != null && AddPersonDepts.Count>0)
+                {
+                    foreach (WkTDept w in AddPersonDepts)
+                    {
+                        this.comboBox7.Items.Add(w.KdName);
+                        this.AdddeptsPage6.Add(w);
+                    }
+                }
+
+                WkTRole u = new WkTRole ();
+                //u.KrDESC
+                string sql1 = "select u from WkTRole u where u."
+            }
+
+
         }
 
         public void AddDeptsInCombox(ComboBox cb)
