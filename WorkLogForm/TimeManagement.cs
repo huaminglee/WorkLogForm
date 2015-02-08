@@ -1235,7 +1235,7 @@ namespace WorkLogForm
         private void button5_Click(object sender, EventArgs e)
         {
             Business b = new Business();
-            if (listView2.SelectedItems != null)
+            if (listView2.SelectedItems != null && listView2.SelectedItems.Count != 0)
             {
                 b = (Business)listView2.SelectedItems[0].Tag;
                 string query1 = "update LOG_T_BUSINESS set State="+(int)Business.stateEnum.Deleted+"where Id="+b.Id;

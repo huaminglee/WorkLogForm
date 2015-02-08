@@ -196,8 +196,20 @@ namespace WorkLogForm
                 return;
             }
 
+           
             lev.StartTime = dateTimePicker1.Value.Date.Ticks;
             lev.EndTime = dateTimePicker2.Value.Date.Ticks;
+            LeaveManage leave;
+
+            string query = "from LeaveManage leave where leave.Ku_Id="+this.Leaveman.Id+" and ((leave.StartTime>=" + lev.StartTime + " and leave.StartTime<=" + lev.EndTime + ") or (leave.EndTime>=" + lev.StartTime + " and leave.EndTime<=" + lev.EndTime + ")) and leave.State=" + (int)LeaveManage.stateEnum.Normal;
+            IList levList=baseService.loadEntityList(query);
+            if(levList!=null&&levList.Count!=0)
+            {
+                MessageBox.Show("此时间段已有请假记录");
+                return;
+            }
+
+
             lev.LeaveType = comboBox2.Text.Trim();//请假类型
             lev.LeaveReason = textBox7.Text.Trim();//请假原因
            // role.KrOrder含义，0：院长，1：副院长，2：负责人，3：员工
