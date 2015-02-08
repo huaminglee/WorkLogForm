@@ -189,13 +189,13 @@
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
             this.button12 = new System.Windows.Forms.Button();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.comboBox8 = new System.Windows.Forms.ComboBox();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -1956,50 +1956,15 @@
             this.tabPage9.TabIndex = 6;
             this.tabPage9.Text = "人员管理";
             // 
-            // comboBox6
+            // button12
             // 
-            this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(555, 128);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(121, 29);
-            this.comboBox6.TabIndex = 0;
-            // 
-            // comboBox7
-            // 
-            this.comboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(90, 126);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(171, 29);
-            this.comboBox7.TabIndex = 1;
-            // 
-            // comboBox8
-            // 
-            this.comboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(343, 129);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(121, 29);
-            this.comboBox8.TabIndex = 2;
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(26, 132);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(58, 21);
-            this.label32.TabIndex = 3;
-            this.label32.Text = "部门：";
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(279, 130);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(58, 21);
-            this.label37.TabIndex = 4;
-            this.label37.Text = "姓名：";
+            this.button12.Location = new System.Drawing.Point(705, 124);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(108, 37);
+            this.button12.TabIndex = 6;
+            this.button12.Text = "添加";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // label38
             // 
@@ -2010,14 +1975,51 @@
             this.label38.TabIndex = 5;
             this.label38.Text = "职位：";
             // 
-            // button12
+            // label37
             // 
-            this.button12.Location = new System.Drawing.Point(705, 124);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(108, 37);
-            this.button12.TabIndex = 6;
-            this.button12.Text = "添加";
-            this.button12.UseVisualStyleBackColor = true;
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(279, 130);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(58, 21);
+            this.label37.TabIndex = 4;
+            this.label37.Text = "姓名：";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(26, 132);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(58, 21);
+            this.label32.TabIndex = 3;
+            this.label32.Text = "部门：";
+            // 
+            // comboBox8
+            // 
+            this.comboBox8.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox8.FormattingEnabled = true;
+            this.comboBox8.Location = new System.Drawing.Point(343, 129);
+            this.comboBox8.Name = "comboBox8";
+            this.comboBox8.Size = new System.Drawing.Size(121, 29);
+            this.comboBox8.TabIndex = 2;
+            // 
+            // comboBox7
+            // 
+            this.comboBox7.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox7.FormattingEnabled = true;
+            this.comboBox7.Location = new System.Drawing.Point(90, 126);
+            this.comboBox7.Name = "comboBox7";
+            this.comboBox7.Size = new System.Drawing.Size(171, 29);
+            this.comboBox7.TabIndex = 1;
+            this.comboBox7.SelectedIndexChanged += new System.EventHandler(this.comboBox7_SelectedIndexChanged);
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(555, 128);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(121, 29);
+            this.comboBox6.TabIndex = 0;
             // 
             // TimeManagement
             // 

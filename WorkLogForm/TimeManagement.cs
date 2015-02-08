@@ -44,6 +44,7 @@ namespace WorkLogForm
 
         private List<WkTDept> AdddeptsPage6;
         private List<WkTUser> AddUserPage6;
+        private List<WkTRole> AddrolePage6;
         /// <summary>
         /// 部门管理中一个变量
         /// </summary>
@@ -884,24 +885,45 @@ namespace WorkLogForm
             }
             else if (this.tabControl1.SelectedIndex == 6)
             {
-                string sql = "select u from WkTDept u";
-                IList AddPersonDepts = baseService.loadEntityList(sql);
-                if (AdddeptsPage6 == null)
+                if (this.comboBox7.Items.Count == 0)
                 {
-                    AdddeptsPage6 = new List<WkTDept>();
-                }
-                if(AddPersonDepts != null && AddPersonDepts.Count>0)
-                {
-                    foreach (WkTDept w in AddPersonDepts)
-                    {
-                        this.comboBox7.Items.Add(w.KdName);
-                        this.AdddeptsPage6.Add(w);
-                    }
-                }
 
-                WkTRole u = new WkTRole ();
-                //u.KrDESC
-                string sql1 = "select u from WkTRole u where u."
+                    string sql = "select u from WkTDept u";
+                    IList AddPersonDepts = baseService.loadEntityList(sql);
+                    if (AdddeptsPage6 == null)
+                    {
+                        AdddeptsPage6 = new List<WkTDept>();
+                    }
+                    if (AddPersonDepts != null && AddPersonDepts.Count > 0)
+                    {
+                        foreach (WkTDept w in AddPersonDepts)
+                        {
+                            this.comboBox7.Items.Add(w.KdName);
+                            this.AdddeptsPage6.Add(w);
+                        }
+                    }
+
+                    WkTRole u = new WkTRole();
+                    //u.KrDESC
+                    string sql1 = "select u from WkTRole u where u.KrDESC = '工作小秘书角色'";
+                    if (AddrolePage6 == null)
+                    {
+                        AddrolePage6 = new List<WkTRole>();
+
+                    }
+                    IList roles = baseService.loadEntityList(sql1);
+                    if (roles != null && roles.Count > 0)
+                    {
+                        foreach (WkTRole r in roles)
+                        {
+                            this.comboBox6.Items.Add(r.KrName);
+                            this.AddrolePage6.Add(r);
+                        }
+                    }
+
+                }
+              
+                
             }
 
 
@@ -1037,7 +1059,7 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void dataGridView4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 5 && this.dataGridView4.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == "删除")
+            if(e.ColumnIndex == 5 && this.dataGridView4.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "删除")
             {
                 TimeArrangeForManager t = (TimeArrangeForManager)this.dataGridView4.Rows[e.RowIndex].Tag;
                 t.State = (int)IEntity.stateEnum.Deleted;
@@ -1364,18 +1386,96 @@ namespace WorkLogForm
             button9.Enabled = false;
         }
         #endregion
+        #region 人员管理
+        /// <summary>
+        /// 人员管理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            WkTUser w = new WkTUser();
+            //w.UserRole
+            //w.Kdid
+            string sql = "select u from WkTUser u left join u.Kdid dept where u.Kdid.Id = " + this.AdddeptsPage6[this.comboBox7.SelectedIndex].Id;
+            this.comboBox8.Items.Clear();
+            IList users = baseService.loadEntityList(sql);
+            if(AddUserPage6 == null)
+            {
+                AddUserPage6 = new List<WkTUser>();
+            }
+            AddUserPage6.Clear();
+            if(users != null && users.Count > 0)
+            {
+               
+                foreach (WkTUser u in users)
+                {
+                    if (IsInRole(u.UserRole))
+                    {
+                        this.comboBox8.Items.Add(u.KuName);
+                        this.AddUserPage6.Add(u);
+                    }
+                }
+            }
+        }
 
-       
+        public bool IsInRole(IList<WkTRole> r)
+        {
+            bool re = true;
+            if(r == null)
+            {
+                return true;
+            }
+            foreach(WkTRole rr in r)
+            {
+                if (rr.KrDESC == "工作小秘书角色")
+                {
+                    return false;
+                }
+            }
+
+            return re;
+        }
+
+        /// <summary>
+        /// 查询按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (this.comboBox8.Text != "" && this.comboBox6.Text != "")
+            {
+                WkTRole r = this.AddrolePage6[this.comboBox6.SelectedIndex];
+                WkTUser u = this.AddUserPage6[this.comboBox8.SelectedIndex];
+                u.UserRole.Add(r);
+                baseService.SaveOrUpdateEntity(u);
+                MessageBox.Show("添加成功！");
+                this.AddUserPage6.RemoveAt(this.comboBox8.SelectedIndex);
+                this.comboBox8.Items.RemoveAt(this.comboBox8.SelectedIndex);
+            }
+            else
+            {
+                MessageBox.Show("您有没选择的项！");
+            }
+
+        }
+        #endregion
 
       
 
-       
 
-        
 
-       
 
-      
+
+
+
+
+
+
+
+
 
     }
 }
