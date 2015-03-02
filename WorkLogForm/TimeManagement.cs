@@ -757,7 +757,27 @@ namespace WorkLogForm
             }
         }
 
+        /// <summary>
+        /// 添加新部门
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button15_Click(object sender, EventArgs e)
+        {
+            if(this.textBox4.Text.Trim() != "")
+            {
+                if (MessageBox.Show("确定要添加吗？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    WkTDept newdept = new WkTDept();
+                    newdept.KdName = this.textBox4.Text.Trim();
+                    baseService.SaveOrUpdateEntity(newdept);
+                    MessageBox.Show("添加成功！");
+                }
+            
+            }
 
+
+        }
         /// <summary>
         /// 设置按钮
         /// </summary>
@@ -899,6 +919,7 @@ namespace WorkLogForm
                         foreach (WkTDept w in AddPersonDepts)
                         {
                             this.comboBox7.Items.Add(w.KdName);
+                            this.comboBox13.Items.Add(w.KdName);
                             this.AdddeptsPage6.Add(w);
                         }
                     }
@@ -1445,24 +1466,80 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void button12_Click(object sender, EventArgs e)
         {
-            if (this.comboBox8.Text != "" && this.comboBox6.Text != "")
+            if (MessageBox.Show("确实要这样做吗？", "提示信息", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                WkTRole r = this.AddrolePage6[this.comboBox6.SelectedIndex];
-                WkTUser u = this.AddUserPage6[this.comboBox8.SelectedIndex];
-                u.UserRole.Add(r);
-                baseService.SaveOrUpdateEntity(u);
-                MessageBox.Show("添加成功！");
-                this.AddUserPage6.RemoveAt(this.comboBox8.SelectedIndex);
-                this.comboBox8.Items.RemoveAt(this.comboBox8.SelectedIndex);
+                if (this.comboBox8.Text != "" && this.comboBox6.Text != "")
+                {
+                    WkTRole r = this.AddrolePage6[this.comboBox6.SelectedIndex];
+                    WkTUser u = this.AddUserPage6[this.comboBox8.SelectedIndex];
+                    u.UserRole.Add(r);
+                    baseService.SaveOrUpdateEntity(u);
+                    MessageBox.Show("添加成功！");
+                    this.AddUserPage6.RemoveAt(this.comboBox8.SelectedIndex);
+                    this.comboBox8.Items.RemoveAt(this.comboBox8.SelectedIndex);
+                }
+                else
+                {
+                    MessageBox.Show("您有没选择的项！");
+                }
             }
-            else
-            {
-                MessageBox.Show("您有没选择的项！");
-            }
-
         }
+        /// <summary>
+        ///添加人员确定按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button13_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确实要这样做吗？", "提示信息", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                if (this.textBox5.Text.Trim() != "" && this.textBox6.Text.Trim() != "" && this.comboBox13.Text != "")
+                {
+                    string sql = "select u from WkTUser u where u.KuLid = '" + this.textBox6.Text.Trim() + "'";
+                    IList ul = baseService.loadEntityList(sql);
+                    if (ul.Count > 0)
+                    {
+                        MessageBox.Show("登录账号已存在！");
+                        this.textBox6.Text = "";
+                        return;
+                    }
+                    else
+                    {
+                        this.button13.Cursor = Cursors.WaitCursor;
+                        WkTUser newuser = new WkTUser();
+                        newuser.KuName = this.textBox5.Text.Trim();
+                        newuser.KuLid = this.textBox6.Text.Trim();
+                        newuser.Kdid = this.AdddeptsPage6[this.comboBox13.SelectedIndex];
+                        newuser.KuRegDate = DateTime.Now.Ticks.ToString();
+                        IList pwd = baseService.ExecuteSQL("select right(sys.fn_VarBinToHexStr(hashbytes('MD5', '" + "123456" + "')),32)"); // 数据库属性，跟具体表无关
+                        if (pwd == null || pwd.Count <= 0)
+                        {
+                            MessageBox.Show("登录异常！");
+                            return;
+                        }
+                        object[] pwdArray = (object[])pwd[0];
+                        newuser.KuPassWD = pwdArray[0].ToString();
+                        baseService.SaveOrUpdateEntity(newuser);
+                        this.textBox6.Text = "";
+                        this.button13.Cursor = Cursors.Hand;
+                        MessageBox.Show("添加成功，默认密码：123456，请在分配职位栏中为新人员添加职位");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("您有未填写的选项");
+                    return;
+                }
+
+
+            }
+        }
+
         #endregion
 
+       
+
+       
       
 
 
