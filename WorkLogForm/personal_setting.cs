@@ -323,6 +323,8 @@ namespace WorkLogForm
             MessageBox.Show("保存成功！");
         }
 
+
+        #region 取消自动登录
         private void button2_Click(object sender, EventArgs e)
         {
             IniReadAndWrite.IniWriteValue("temp", "auto", CommonStaticParameter.YES);
@@ -335,6 +337,62 @@ namespace WorkLogForm
             MessageBox.Show("取消自动登录成功！");
 
         }
+        #endregion
+
+        #region 更改密码
+        
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+            IList pwd = baseService.ExecuteSQL("select right(sys.fn_VarBinToHexStr(hashbytes('MD5', '" + textBox1.Text.Trim() + "')),32)"); // 数据库属性，跟具体表无关
+            if (pwd == null || pwd.Count <= 0)
+            {
+                MessageBox.Show("登录异常！");
+                return;
+            }
+            object[] pwdArray = (object[])pwd[0];
+            //因为是共用表 选择是工作小秘书相关的角色
+            IList userList = baseService.loadEntityList("select u from WkTUser u right join u.UserRole role where role.KrDESC='工作小秘书角色' and u.KuLid='" + user.KuLid + "' and u.KuPassWD='" + pwdArray[0] + "'");
+            if (userList == null || userList.Count <= 0)
+            {
+                MessageBox.Show("密码错误！");
+                return;
+            }
+            else if (userList.Count > 1)
+            {
+                MessageBox.Show("用户异常，请联系管理员！");
+                return;
+            }
+            else
+            {
+                if (this.textBox2.Text.Trim() == this.textBox3.Text.Trim() && this.textBox2.Text.Trim() != "" && this.textBox3.Text.Trim() != "")
+                {
+                    
+                    IList newpwd = baseService.ExecuteSQL("select right(sys.fn_VarBinToHexStr(hashbytes('MD5', '" + textBox2.Text.Trim() + "')),32)");
+                    object[] newpwdArray = (object[])newpwd[0];
+                    if (newpwd == null || newpwd.Count <= 0)
+                    {
+                        MessageBox.Show("异常！");
+                        return;
+                    }
+                    user.KuPassWD = newpwdArray[0].ToString();
+                    baseService.SaveOrUpdateEntity(user);
+                    this.textBox1.Text = "";
+                    this.textBox2.Text = "";
+                    this.textBox3.Text = "";
+                    MessageBox.Show("修改成功！");
+                }
+                else
+                {
+                    MessageBox.Show("两次输入的密码不一致！");
+                    this.textBox2.Text = "";
+                    this.textBox3.Text = "";
+                    return;
+                }
+            }
+        }
+
+        #endregion
 
     }
 }
