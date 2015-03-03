@@ -44,6 +44,7 @@ namespace WorkLogForm
 
         private List<WkTDept> AdddeptsPage6;
         private List<WkTUser> AddUserPage6;
+        private List<WkTUser> AddUserPage6_2;
         private List<WkTRole> AddrolePage6;
         /// <summary>
         /// 部门管理中一个变量
@@ -920,6 +921,8 @@ namespace WorkLogForm
                         {
                             this.comboBox7.Items.Add(w.KdName);
                             this.comboBox13.Items.Add(w.KdName);
+                            this.comboBox14.Items.Add(w.KdName);
+                            this.comboBox16.Items.Add(w.KdName);
                             this.AdddeptsPage6.Add(w);
                         }
                     }
@@ -938,6 +941,7 @@ namespace WorkLogForm
                         foreach (WkTRole r in roles)
                         {
                             this.comboBox6.Items.Add(r.KrName);
+                            this.comboBox12.Items.Add(r.KrName);
                             this.AddrolePage6.Add(r);
                         }
                     }
@@ -1535,7 +1539,72 @@ namespace WorkLogForm
             }
         }
 
+        /// <summary>
+        /// 修改人员的下拉条
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox14_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            WkTUser w = new WkTUser();
+            //w.UserRole
+            //w.Kdid
+            string sql = "select u from WkTUser u left join u.Kdid dept where u.Kdid.Id = " + this.AdddeptsPage6[this.comboBox14.SelectedIndex].Id;
+            this.comboBox15.Items.Clear();
+            IList users = baseService.loadEntityList(sql);
+            if (AddUserPage6_2 == null)
+            {
+                AddUserPage6_2 = new List<WkTUser>();
+            }
+            AddUserPage6_2.Clear();
+            if (users != null && users.Count > 0)
+            {
+
+                foreach (WkTUser u in users)
+                {
+
+                    this.comboBox15.Items.Add(u.KuName);
+                    this.AddUserPage6_2.Add(u);
+
+                }
+            }
+        }
+
+        /// <summary>
+        /// 修改按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (this.comboBox14.Text != "" && this.comboBox15.Text != "" && this.comboBox16.Text != "" && this.comboBox12.Text != "")
+            {
+                if (this.comboBox14.SelectedIndex != this.comboBox16.SelectedIndex)
+                {
+                    this.button14.Cursor = Cursors.WaitCursor;
+                    WkTUser u = this.AddUserPage6_2[this.comboBox15.SelectedIndex];
+                    u.UserRole.Clear();
+                    WkTRole r = this.AddrolePage6[this.comboBox12.SelectedIndex];
+                    u.UserRole.Add(r);
+                    u.Kdid = this.AdddeptsPage6[this.comboBox16.SelectedIndex];
+                    baseService.SaveOrUpdateEntity(u);
+                    this.button14.Cursor = Cursors.Hand;
+                    MessageBox.Show("修改成功！");
+
+                }
+                else 
+                {
+                    MessageBox.Show("请选择新部门");
+                }
+            
+            }
+        }
+            
         #endregion
+
+        
+
+       
 
        
 
