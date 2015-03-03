@@ -66,6 +66,7 @@ namespace WorkLogForm
         private BusinessManagement businessManagement;
         private WorkOvertime workOvertime;
         private SuiBiGuanLi_New suibiguanli;
+        private NewMessageWindow newMessageWindow;
         #endregion
         
         public main()
@@ -505,6 +506,11 @@ namespace WorkLogForm
                     personalSetting.Top = MousePosition.Y - y;
                     personalSetting.Left = MousePosition.X - x - personalSetting.Width;
                 }
+                if (newMessageWindow != null && newMessageWindow.Created)
+                {
+                    newMessageWindow.Top = MousePosition.Y - y;
+                    newMessageWindow.Left = MousePosition.X - x - newMessageWindow.Width;
+                }
                 Top = MousePosition.Y - y;
                 Left = MousePosition.X - x;
             }
@@ -514,6 +520,11 @@ namespace WorkLogForm
                 {
                     personalSetting.Top = MousePosition.Y - y;
                     personalSetting.Left = MousePosition.X - x - personalSetting.Width;
+                }
+                if (newMessageWindow != null && newMessageWindow.Created)
+                {
+                    newMessageWindow.Top = MousePosition.Y - y;
+                    newMessageWindow.Left = MousePosition.X - x - personalSetting.Width;
                 }
                 Top = MousePosition.Y - y;
                 Left = MousePosition.X - x;
@@ -1501,6 +1512,30 @@ namespace WorkLogForm
             Panel p = (Panel)sender;
             p.Focus();
         }
+
+        #region 消息推送
+        private void panelNewMessage_Click(object sender, EventArgs e)
+        {
+
+            panelNewMessage.Cursor = Cursors.WaitCursor;
+            if (newMessageWindow == null || newMessageWindow.IsDisposed)
+            {
+                newMessageWindow = new NewMessageWindow();
+            }
+            if (!newMessageWindow.Created)
+            {
+                newMessageWindow.FormLocation = new Point(this.Location.X - newMessageWindow.Width, this.Location.Y);
+                newMessageWindow.Show();
+            }
+            else
+            {
+                newMessageWindow.WindowState = FormWindowState.Normal;
+                newMessageWindow.Focus();
+            }
+            panelNewMessage.Cursor = Cursors.Hand;
+        }
+        #endregion
+
 
 
 

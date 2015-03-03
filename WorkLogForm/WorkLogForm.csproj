@@ -125,6 +125,12 @@
     <Compile Include="BusinessRedo.Designer.cs">
       <DependentUpon>BusinessRedo.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewMessageWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewMessageWindow.Designer.cs">
+      <DependentUpon>NewMessageWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="redoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -334,6 +340,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="main.resx">
       <DependentUpon>main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewMessageWindow.resx">
+      <DependentUpon>NewMessageWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OnDuty.resx">
       <DependentUpon>OnDuty.cs</DependentUpon>

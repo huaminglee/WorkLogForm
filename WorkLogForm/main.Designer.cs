@@ -103,6 +103,8 @@
             this.linkLabel10 = new System.Windows.Forms.LinkLabel();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.RemindwriteLog = new System.Windows.Forms.Timer(this.components);
+            this.panelNewMessage = new System.Windows.Forms.Panel();
+            this.labelNewMEssageCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wdrl_pictureBox)).BeginInit();
@@ -140,6 +142,7 @@
             this.SuiBi_SeeMore.SuspendLayout();
             this.write_SuiBi.SuspendLayout();
             this.panel8.SuspendLayout();
+            this.panelNewMessage.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -932,6 +935,27 @@
             this.RemindwriteLog.Interval = 60000;
             this.RemindwriteLog.Tick += new System.EventHandler(this.RemindwriteLog_Tick);
             // 
+            // panelNewMessage
+            // 
+            this.panelNewMessage.BackColor = System.Drawing.Color.Transparent;
+            this.panelNewMessage.Controls.Add(this.labelNewMEssageCount);
+            this.panelNewMessage.Location = new System.Drawing.Point(4, 35);
+            this.panelNewMessage.Name = "panelNewMessage";
+            this.panelNewMessage.Size = new System.Drawing.Size(47, 39);
+            this.panelNewMessage.TabIndex = 27;
+            this.panelNewMessage.Click += new System.EventHandler(this.panelNewMessage_Click);
+            // 
+            // labelNewMEssageCount
+            // 
+            this.labelNewMEssageCount.AutoSize = true;
+            this.labelNewMEssageCount.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelNewMEssageCount.ForeColor = System.Drawing.Color.Red;
+            this.labelNewMEssageCount.Location = new System.Drawing.Point(25, 2);
+            this.labelNewMEssageCount.Name = "labelNewMEssageCount";
+            this.labelNewMEssageCount.Size = new System.Drawing.Size(22, 17);
+            this.labelNewMEssageCount.TabIndex = 0;
+            this.labelNewMEssageCount.Text = "99";
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -940,6 +964,7 @@
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.首页背景2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(295, 600);
+            this.Controls.Add(this.panelNewMessage);
             this.Controls.Add(this.SuiBi_flowLayoutPanel);
             this.Controls.Add(this.pictureBoxOfrefresh);
             this.Controls.Add(this.SuiBiGuanLi_pictureBox);
@@ -1022,6 +1047,8 @@
             this.write_SuiBi.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
+            this.panelNewMessage.ResumeLayout(false);
+            this.panelNewMessage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1102,5 +1129,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.PictureBox pictureBoxOfrefresh;
         private System.Windows.Forms.Timer RemindwriteLog;
+        private System.Windows.Forms.Panel panelNewMessage;
+        private System.Windows.Forms.Label labelNewMEssageCount;
     }
 }
