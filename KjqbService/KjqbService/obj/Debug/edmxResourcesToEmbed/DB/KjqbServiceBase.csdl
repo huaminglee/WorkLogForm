@@ -13,5 +13,6 @@
     <Property Name="UserId" Type="Int64" />
     <Property Name="TimeStamp" Type="Decimal" Precision="18" Scale="0" />
     <Property Type="Int32" Name="State" />
+    <Property Type="Int32" Name="IsRead" />
   </EntityType>
 </Schema>

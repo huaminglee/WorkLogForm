@@ -18,6 +18,7 @@
           <Property Name="UserId" Type="bigint" />
           <Property Name="TimeStamp" Type="numeric" />
           <Property Name="State" Type="int" />
+          <Property Name="IsRead" Type="int" />
         </EntityType>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -36,6 +37,7 @@
           <Property Name="UserId" Type="Int64" />
           <Property Name="TimeStamp" Type="Decimal" Precision="18" Scale="0" />
           <Property Type="Int32" Name="State" />
+          <Property Type="Int32" Name="IsRead" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -46,6 +48,7 @@
           <EntitySetMapping Name="LogMessages">
             <EntityTypeMapping TypeName="KjqbServiceModel.LogMessage">
               <MappingFragment StoreEntitySet="LogMessage">
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="LogId" ColumnName="LogId" />

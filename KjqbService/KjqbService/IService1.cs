@@ -17,6 +17,11 @@ namespace KjqbService
         [OperationContract]
         List<LogInService> SearchShareLog(int Id);
 
-       
+        [OperationContract]
+        void SetShareLogIsRead(int Id);
+
+        [OperationContract]
+        List<LogInService> SearchShareLogUnRead(int Id);
+
     }
 }

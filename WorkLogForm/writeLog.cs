@@ -344,25 +344,38 @@ namespace WorkLogForm
             staffLog.TimeStamp = DateTime.Now.Ticks;
             staffLog.Staff = user;
             staffLog.SharedStaffs = sharedUser;
-            KjqbService.Service1Client ser = new KjqbService.Service1Client();
-            if (sharedUser != null && sharedUser.Count > 0)
-            {
-                if (sharedUser != null && sharedUser.Count > 0)
-                {
-                    foreach (WkTUser u in sharedUser)
-                    {
-                        KjqbService.LogInService ll = new KjqbService.LogInService();
-                        ll.LogId = 1;
-                        ll.WriteUserId = this.user.Id;
-                        ll.ShareUserId = u.Id;
-                        ll.TimeStamp = DateTime.Now.Ticks;
-                        ser.SaveInLogListInService(ll);
-                    }
-                }
-            }
+           
             try
             {
-                baseService.SaveOrUpdateEntity(staffLog);
+                if (staffLog.Id == 0)
+                {
+                   BaseEntity be =  baseService.saveEntity(staffLog);
+                   staffLog.Id = be.Id;
+                }
+                else if (staffLog.Id != 0)
+                {
+                    baseService.SaveOrUpdateEntity(staffLog);
+                }
+
+                #region 向服务中发送数据
+                KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                if (sharedUser != null && sharedUser.Count > 0)
+                {
+                    if (sharedUser != null && sharedUser.Count > 0)
+                    {
+                        foreach (WkTUser u in sharedUser)
+                        {
+                            KjqbService.LogInService ll = new KjqbService.LogInService();
+                            ll.LogId = staffLog.Id;
+                            ll.WriteUserId = this.user.Id;
+                            ll.ShareUserId = u.Id;
+                            ll.TimeStamp = DateTime.Now.Ticks;
+                            ser.SaveInLogListInService(ll);
+                        }
+                    }
+                }
+                #endregion
+
             }
             catch
             {

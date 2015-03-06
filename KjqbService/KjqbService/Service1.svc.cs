@@ -24,8 +24,8 @@ namespace KjqbService
        public List<LogInService> SearchShareLog(int Id)
         {
             List<LogInService> l = new List<LogInService>();
-            
-           List<LogMessage> lm =  lop.SearchLog(Id);
+
+            List<LogMessage> lm = lop.SendSharedLog(Id);
 
            foreach (LogMessage lo in lm)
            {
@@ -40,8 +40,30 @@ namespace KjqbService
             return l;
         }
 
+       public void SetShareLogIsRead(int Id)
+       {
+           lop.ChangeSharedLogIsRead(Id);
+       }
+
+       public List<LogInService> SearchShareLogUnRead(int Id)
+       {
+           List<LogInService> l = new List<LogInService>();
+
+           List<LogMessage> lm = lop.SendSharedLogUnRead(Id);
+
+           foreach (LogMessage lo in lm)
+           {
+               LogInService ll = new LogInService();
+               ll.LogId = (long)lo.LogId;
+               ll.ShareUserId = (long)lo.ShareUserId;
+               ll.TimeStamp = (long)lo.TimeStamp;
+               ll.WriteUserId = (long)lo.UserId;
+               l.Add(ll);
+           }
+
+           return l;
        
-       
+       }
         
     }
 }

@@ -953,9 +953,9 @@
             this.labelNewMEssageCount.ForeColor = System.Drawing.Color.Red;
             this.labelNewMEssageCount.Location = new System.Drawing.Point(25, 2);
             this.labelNewMEssageCount.Name = "labelNewMEssageCount";
-            this.labelNewMEssageCount.Size = new System.Drawing.Size(22, 17);
+            this.labelNewMEssageCount.Size = new System.Drawing.Size(15, 17);
             this.labelNewMEssageCount.TabIndex = 0;
-            this.labelNewMEssageCount.Text = "99";
+            this.labelNewMEssageCount.Text = "0";
             // 
             // timerMessageSend
             // 

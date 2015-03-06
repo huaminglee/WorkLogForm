@@ -20,5 +20,6 @@ namespace KjqbService.DB
         public Nullable<long> UserId { get; set; }
         public Nullable<decimal> TimeStamp { get; set; }
         public Nullable<int> State { get; set; }
+        public Nullable<int> IsRead { get; set; }
     }
 }

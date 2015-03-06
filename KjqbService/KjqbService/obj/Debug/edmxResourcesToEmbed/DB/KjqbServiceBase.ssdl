@@ -13,5 +13,6 @@
     <Property Name="UserId" Type="bigint" />
     <Property Name="TimeStamp" Type="numeric" />
     <Property Name="State" Type="int" />
+    <Property Name="IsRead" Type="int" />
   </EntityType>
 </Schema>

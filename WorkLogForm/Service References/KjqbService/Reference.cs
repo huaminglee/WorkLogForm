@@ -115,6 +115,12 @@ namespace WorkLogForm.KjqbService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchShareLog", ReplyAction="http://tempuri.org/IService1/SearchShareLogResponse")]
         WorkLogForm.KjqbService.LogInService[] SearchShareLog(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SetShareLogIsRead", ReplyAction="http://tempuri.org/IService1/SetShareLogIsReadResponse")]
+        void SetShareLogIsRead(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchShareLogUnRead", ReplyAction="http://tempuri.org/IService1/SearchShareLogUnReadResponse")]
+        WorkLogForm.KjqbService.LogInService[] SearchShareLogUnRead(int Id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -150,6 +156,14 @@ namespace WorkLogForm.KjqbService {
         
         public WorkLogForm.KjqbService.LogInService[] SearchShareLog(int Id) {
             return base.Channel.SearchShareLog(Id);
+        }
+        
+        public void SetShareLogIsRead(int Id) {
+            base.Channel.SetShareLogIsRead(Id);
+        }
+        
+        public WorkLogForm.KjqbService.LogInService[] SearchShareLogUnRead(int Id) {
+            return base.Channel.SearchShareLogUnRead(Id);
         }
     }
 }

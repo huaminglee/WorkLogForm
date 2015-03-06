@@ -67,6 +67,7 @@ namespace WorkLogForm
         private WorkOvertime workOvertime;
         private SuiBiGuanLi_New suibiguanli;
         private NewMessageWindow newMessageWindow;
+        KjqbService.Service1Client ser = new KjqbService.Service1Client();
         #endregion
         
         public main()
@@ -137,7 +138,17 @@ namespace WorkLogForm
              {
                  IsWriteLog = 1;
              }
-            
+            #region 开启时读取未读的推送信息
+            ////////////////////////////////
+
+          
+             KjqbService.LogInService[] lists;
+             lists = ser.SearchShareLogUnRead((int)this.user.Id);
+             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
+
+            #endregion
+
+
         }
 
         #region 自定义窗体初始化方法
@@ -1533,15 +1544,19 @@ namespace WorkLogForm
                 newMessageWindow.Focus();
             }
 
+            this.labelNewMEssageCount.Text = "0";
+
+            ser.SetShareLogIsRead((int)this.user.Id);
+
             panelNewMessage.Cursor = Cursors.Hand;
         }
 
         private void timerMessageSend_Tick(object sender, EventArgs e)
         {
-            KjqbService.Service1Client ser = new KjqbService.Service1Client();
+           
             KjqbService.LogInService[] lists;//= new KjqbService.LogInService[]();
             lists = ser.SearchShareLog((int)this.user.Id);
-            this.labelNewMEssageCount.Text = lists.Length.ToString();
+            this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text)+lists.Length).ToString();
         }
         #endregion
 

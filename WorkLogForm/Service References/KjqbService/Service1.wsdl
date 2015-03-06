@@ -31,6 +31,32 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="SetShareLogIsRead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetShareLogIsReadResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchShareLogUnRead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchShareLogUnReadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchShareLogUnReadResult" nillable="true" type="q3:ArrayOfLogInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="anyType" nillable="true" type="xs:anyType" />
@@ -103,6 +129,18 @@
   <wsdl:message name="IService1_SearchShareLog_OutputMessage">
     <wsdl:part name="parameters" element="tns:SearchShareLogResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SetShareLogIsRead_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetShareLogIsRead" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SetShareLogIsRead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetShareLogIsReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchShareLogUnRead_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchShareLogUnRead" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchShareLogUnRead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchShareLogUnReadResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="SaveInLogListInService">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInLogListInService" message="tns:IService1_SaveInLogListInService_InputMessage" />
@@ -111,6 +149,14 @@
     <wsdl:operation name="SearchShareLog">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchShareLog" message="tns:IService1_SearchShareLog_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchShareLogResponse" message="tns:IService1_SearchShareLog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetShareLogIsRead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SetShareLogIsRead" message="tns:IService1_SetShareLogIsRead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SetShareLogIsReadResponse" message="tns:IService1_SetShareLogIsRead_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchShareLogUnRead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchShareLogUnRead" message="tns:IService1_SearchShareLogUnRead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchShareLogUnReadResponse" message="tns:IService1_SearchShareLogUnRead_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -126,6 +172,24 @@
     </wsdl:operation>
     <wsdl:operation name="SearchShareLog">
       <soap:operation soapAction="http://tempuri.org/IService1/SearchShareLog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetShareLogIsRead">
+      <soap:operation soapAction="http://tempuri.org/IService1/SetShareLogIsRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchShareLogUnRead">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchShareLogUnRead" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

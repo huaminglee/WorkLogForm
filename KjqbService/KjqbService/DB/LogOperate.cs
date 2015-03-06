@@ -16,14 +16,15 @@ namespace KjqbService.DB
             lm.UserId = l.WriteUserId;
             lm.TimeStamp = l.TimeStamp;
             lm.State = 0;
+            lm.IsRead = 0;
             context.LogMessages.Add(lm);
             context.SaveChanges();
             return lm.Id;
         }
-        public List<LogMessage> SearchLog(long l)
+        public List<LogMessage> SendSharedLog(long l)
         {
             List<LogMessage> loglists = new List<LogMessage>();
-            loglists = context.LogMessages.Where(m => m.UserId == l&&m.State == 0).ToList();
+            loglists = context.LogMessages.Where(m => m.ShareUserId == l&&m.State == 0).ToList();
             foreach (LogMessage lll in loglists)
             {
                 lll.State = 1;
@@ -31,5 +32,26 @@ namespace KjqbService.DB
             }
             return loglists;
         }
+
+        public List<LogMessage> SendSharedLogUnRead(long l)
+        {
+            List<LogMessage> loglists = new List<LogMessage>();
+            loglists = context.LogMessages.Where(m => m.ShareUserId == l && m.IsRead == 0).ToList();
+           
+            return loglists;
+        }
+
+        public List<LogMessage> ChangeSharedLogIsRead(long l)
+        {
+            List<LogMessage> loglists = new List<LogMessage>();
+            loglists = context.LogMessages.Where(m => m.ShareUserId == l && m.IsRead == 0).ToList();
+            foreach (LogMessage lll in loglists)
+            {
+                lll.IsRead = 1;
+                context.SaveChanges();
+            }
+            return loglists;
+        }
+
     }
 }
