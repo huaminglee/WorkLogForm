@@ -1,0 +1,8 @@
+F:\Test\KjqbService\KjqbService\bin\KjqbService.dll
+F:\Test\KjqbService\KjqbService\bin\KjqbService.pdb
+F:\Test\KjqbService\KjqbService\bin\EntityFramework.dll
+F:\Test\KjqbService\KjqbService\bin\EntityFramework.xml
+F:\Test\KjqbService\KjqbService\bin\zh-Hans\EntityFramework.resources.dll
+F:\Test\KjqbService\KjqbService\obj\Release\KjqbService.csprojResolveAssemblyReference.cache
+F:\Test\KjqbService\KjqbService\obj\Release\KjqbService.dll
+F:\Test\KjqbService\KjqbService\obj\Release\KjqbService.pdb
