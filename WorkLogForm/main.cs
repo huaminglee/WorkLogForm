@@ -1532,9 +1532,20 @@ namespace WorkLogForm
                 newMessageWindow.WindowState = FormWindowState.Normal;
                 newMessageWindow.Focus();
             }
+
             panelNewMessage.Cursor = Cursors.Hand;
         }
+
+        private void timerMessageSend_Tick(object sender, EventArgs e)
+        {
+            KjqbService.Service1Client ser = new KjqbService.Service1Client();
+            KjqbService.LogInService[] lists;//= new KjqbService.LogInService[]();
+            lists = ser.SearchShareLog((int)this.user.Id);
+            this.labelNewMEssageCount.Text = lists.Length.ToString();
+        }
         #endregion
+
+       
 
 
 

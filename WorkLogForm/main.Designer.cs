@@ -105,6 +105,7 @@
             this.RemindwriteLog = new System.Windows.Forms.Timer(this.components);
             this.panelNewMessage = new System.Windows.Forms.Panel();
             this.labelNewMEssageCount = new System.Windows.Forms.Label();
+            this.timerMessageSend = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wdrl_pictureBox)).BeginInit();
@@ -956,6 +957,12 @@
             this.labelNewMEssageCount.TabIndex = 0;
             this.labelNewMEssageCount.Text = "99";
             // 
+            // timerMessageSend
+            // 
+            this.timerMessageSend.Enabled = true;
+            this.timerMessageSend.Interval = 3000;
+            this.timerMessageSend.Tick += new System.EventHandler(this.timerMessageSend_Tick);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1131,5 +1138,6 @@
         private System.Windows.Forms.Timer RemindwriteLog;
         private System.Windows.Forms.Panel panelNewMessage;
         private System.Windows.Forms.Label labelNewMEssageCount;
+        private System.Windows.Forms.Timer timerMessageSend;
     }
 }

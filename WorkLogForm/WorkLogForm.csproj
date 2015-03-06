@@ -148,6 +148,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\KjqbService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\WeatherService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -426,9 +431,19 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Service References\IPService\IpAddressSearchWebService.wsdl" />
+    <None Include="Service References\KjqbService\Service1.wsdl" />
+    <None Include="Service References\KjqbService\WorkLogForm.KjqbService.LogInService.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\WeatherService\WeatherWebService.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\KjqbService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\KjqbService\configuration.svcinfo" />
+    <None Include="Service References\KjqbService\configuration91.svcinfo" />
     <None Include="resources\日历小方块_周末.png" />
     <None Include="resources\refresh.jpg" />
     <Content Include="29.ico" />
@@ -916,6 +931,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\IPService\" />
+    <WCFMetadataStorage Include="Service References\KjqbService\" />
     <WCFMetadataStorage Include="Service References\WeatherService\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
