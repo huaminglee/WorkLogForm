@@ -17,9 +17,9 @@ namespace WorkLogForm.Service
     class BaseService
     {
 
-        public BaseEntity saveEntity(BaseEntity entity)
+        public object saveEntity(BaseEntity entity)
         {
-            BaseEntity newentity = new BaseEntity(); ;
+            object newentity = new object();
             if (entity.Id != 0)
             {
                 //throw new Exception("id不为空,应使用update方法");
@@ -35,7 +35,7 @@ namespace WorkLogForm.Service
                 factory = Connection.Connection.getConfiguration().BuildSessionFactory();
                 session = factory.OpenSession();
                 transaction = session.BeginTransaction();
-                newentity = (BaseEntity)session.Save(session.Merge(entity));
+                newentity = session.Save(session.Merge(entity));
                 // commit all of the changes to the DB and close the ISession
                 transaction.Commit();
                // MessageBox.Show("保存成功");

@@ -349,8 +349,8 @@ namespace WorkLogForm
             {
                 if (staffLog.Id == 0)
                 {
-                   BaseEntity be =  baseService.saveEntity(staffLog);
-                   staffLog.Id = be.Id;
+                   object be =  baseService.saveEntity(staffLog);
+                   staffLog.Id = int.Parse(be.ToString());
                 }
                 else if (staffLog.Id != 0)
                 {
