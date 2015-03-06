@@ -4,7 +4,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-
+using System.Timers;
+using KjqbService.DB;
 namespace KjqbService
 {
     // 注意: 使用“重构”菜单上的“重命名”命令，可以同时更改代码、svc 和配置文件中的类名“Service1”。
@@ -12,27 +13,35 @@ namespace KjqbService
     public class Service1 : IService1
     {
 
-        public static List<LogInService> loglist = new List<LogInService>();
-       
+        KjqbService.DB.LogOperate lop = new LogOperate();
         public bool SaveInLogListInService(LogInService log)
         {
-            loglist.Add(log);
+            lop.InsertIntoEntity(log);
             return true;
         }
 
+
        public List<LogInService> SearchShareLog(int Id)
         {
-            List<LogInService> list1 = new List<LogInService>();
-            foreach(LogInService l in loglist)
-            {
-                if (l.ShareUserId == Id)
-                {
-                    list1.Add(l);
-                    //loglist.Remove(l);
-                }
-            }
-            return list1;
+            List<LogInService> l = new List<LogInService>();
+            
+           List<LogMessage> lm =  lop.SearchLog(Id);
+
+           foreach (LogMessage lo in lm)
+           {
+               LogInService ll = new LogInService();
+               ll.LogId = (long)lo.LogId;
+               ll.ShareUserId = (long)lo.ShareUserId;
+               ll.TimeStamp = (long)lo.TimeStamp;
+               ll.WriteUserId = (long)lo.UserId;
+               l.Add(ll);
+           }
+
+            return l;
         }
+
+       
+       
         
     }
 }

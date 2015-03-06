@@ -22,11 +22,17 @@ namespace KjqbService
             set { shareUserId = value; }
         }
         private long logId;
-
         public long LogId
         {
             get { return logId; }
             set { logId = value; }
+        }
+
+        private long timeStamp;
+        public long TimeStamp
+        {
+            get { return timeStamp; }
+            set { timeStamp = value; }
         }
 
     }

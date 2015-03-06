@@ -347,17 +347,18 @@ namespace WorkLogForm
             KjqbService.Service1Client ser = new KjqbService.Service1Client();
             if (sharedUser != null && sharedUser.Count > 0)
             {
-                foreach (WkTUser u in sharedUser)
+                if (sharedUser != null && sharedUser.Count > 0)
                 {
-                    KjqbService.LogInService ll = new KjqbService.LogInService();
-                    ll.LogId = 1;
-                    ll.WriteUserId = this.user.Id;
-                    ll.ShareUserId = u.Id;
-                    ser.SaveInLogListInService(ll);
+                    foreach (WkTUser u in sharedUser)
+                    {
+                        KjqbService.LogInService ll = new KjqbService.LogInService();
+                        ll.LogId = 1;
+                        ll.WriteUserId = this.user.Id;
+                        ll.ShareUserId = u.Id;
+                        ll.TimeStamp = DateTime.Now.Ticks;
+                        ser.SaveInLogListInService(ll);
+                    }
                 }
-                
-            
-            
             }
             try
             {

@@ -78,6 +78,7 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="LogId" type="xs:long" />
           <xs:element minOccurs="0" name="ShareUserId" type="xs:long" />
+          <xs:element minOccurs="0" name="TimeStamp" type="xs:long" />
           <xs:element minOccurs="0" name="WriteUserId" type="xs:long" />
         </xs:sequence>
       </xs:complexType>

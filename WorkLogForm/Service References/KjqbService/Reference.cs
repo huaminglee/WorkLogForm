@@ -29,6 +29,9 @@ namespace WorkLogForm.KjqbService {
         private long ShareUserIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long TimeStampField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long WriteUserIdField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -63,6 +66,19 @@ namespace WorkLogForm.KjqbService {
                 if ((this.ShareUserIdField.Equals(value) != true)) {
                     this.ShareUserIdField = value;
                     this.RaisePropertyChanged("ShareUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long TimeStamp {
+            get {
+                return this.TimeStampField;
+            }
+            set {
+                if ((this.TimeStampField.Equals(value) != true)) {
+                    this.TimeStampField = value;
+                    this.RaisePropertyChanged("TimeStamp");
                 }
             }
         }

@@ -6,3 +6,10 @@ F:\Test\KjqbService\KjqbService\bin\EntityFramework.xml
 F:\Test\KjqbService\KjqbService\bin\zh-Hans\EntityFramework.resources.dll
 F:\Test\KjqbService\KjqbService\obj\Debug\KjqbService.dll
 F:\Test\KjqbService\KjqbService\obj\Debug\KjqbService.pdb
+E:\WorkLogForm1\WorkLogForm\KjqbService\KjqbService\bin\KjqbService.dll
+E:\WorkLogForm1\WorkLogForm\KjqbService\KjqbService\bin\KjqbService.pdb
+E:\WorkLogForm1\WorkLogForm\KjqbService\KjqbService\bin\EntityFramework.dll
+E:\WorkLogForm1\WorkLogForm\KjqbService\KjqbService\bin\EntityFramework.xml
+E:\WorkLogForm1\WorkLogForm\KjqbService\KjqbService\bin\zh-Hans\EntityFramework.resources.dll
+E:\WorkLogForm1\WorkLogForm\KjqbService\KjqbService\obj\Debug\KjqbService.dll
+E:\WorkLogForm1\WorkLogForm\KjqbService\KjqbService\obj\Debug\KjqbService.pdb
