@@ -36,7 +36,7 @@ namespace KjqbService.DB
         public List<LogMessage> SendSharedLogUnRead(long l)
         {
             List<LogMessage> loglists = new List<LogMessage>();
-            loglists = context.LogMessages.Where(m => m.ShareUserId == l && m.IsRead == 0).ToList();
+            loglists = context.LogMessages.Where(m => m.ShareUserId == l && m.IsRead == 0&&m.State == 1).ToList();
            
             return loglists;
         }
