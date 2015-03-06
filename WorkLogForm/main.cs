@@ -20,6 +20,8 @@ namespace WorkLogForm
 
     public partial class main : Form
     {
+
+        private List<KjqbService.LogInService> loglistfromService;
         private IList scheduleList;
         private EventHandler mouseLeave;
         private EventHandler mouseEnter;
@@ -141,11 +143,14 @@ namespace WorkLogForm
             #region 开启时读取未读的推送信息
             ////////////////////////////////
 
-          
+             loglistfromService = new List<KjqbService.LogInService>();
              KjqbService.LogInService[] lists;
              lists = ser.SearchShareLogUnRead((int)this.user.Id);
              this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
-
+             for (int i = 0; i < lists.Length; i++)
+             {
+                 loglistfromService.Add(lists[i]);
+             }
             #endregion
 
 
@@ -1529,6 +1534,10 @@ namespace WorkLogForm
         {
 
             panelNewMessage.Cursor = Cursors.WaitCursor;
+
+            this.labelNewMEssageCount.Text = "0";
+            ser.SetShareLogIsRead((int)this.user.Id);
+            
             if (newMessageWindow == null || newMessageWindow.IsDisposed)
             {
                 newMessageWindow = new NewMessageWindow();
@@ -1536,7 +1545,10 @@ namespace WorkLogForm
             if (!newMessageWindow.Created)
             {
                 newMessageWindow.FormLocation = new Point(this.Location.X - newMessageWindow.Width, this.Location.Y);
+                newMessageWindow.Loglist = loglistfromService;
+                newMessageWindow.User = this.user;
                 newMessageWindow.Show();
+
             }
             else
             {
@@ -1544,9 +1556,7 @@ namespace WorkLogForm
                 newMessageWindow.Focus();
             }
 
-            this.labelNewMEssageCount.Text = "0";
-
-            ser.SetShareLogIsRead((int)this.user.Id);
+            
 
             panelNewMessage.Cursor = Cursors.Hand;
         }
@@ -1556,6 +1566,11 @@ namespace WorkLogForm
            
             KjqbService.LogInService[] lists;//= new KjqbService.LogInService[]();
             lists = ser.SearchShareLog((int)this.user.Id);
+            for (int i = 0; i < lists.Length;i++ )
+            {
+                loglistfromService.Add(lists[i]);
+            }
+
             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text)+lists.Length).ToString();
         }
         #endregion

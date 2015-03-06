@@ -940,6 +940,7 @@
             // 
             this.panelNewMessage.BackColor = System.Drawing.Color.Transparent;
             this.panelNewMessage.Controls.Add(this.labelNewMEssageCount);
+            this.panelNewMessage.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panelNewMessage.Location = new System.Drawing.Point(4, 35);
             this.panelNewMessage.Name = "panelNewMessage";
             this.panelNewMessage.Size = new System.Drawing.Size(47, 39);
