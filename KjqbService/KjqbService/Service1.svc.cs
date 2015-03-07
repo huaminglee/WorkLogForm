@@ -15,109 +15,164 @@ namespace KjqbService
 
         KjqbService.DB.LogOperate lop = new LogOperate();
         KjqbService.DB.ScheduleOperate sop = new ScheduleOperate();
+        KjqbService.DB.CommentOperate cop = new CommentOperate();
+        #region 分享日志推送
         public bool SaveInLogListInService(LogInService log)
         {
             lop.InsertIntoEntity(log);
             return true;
         }
 
-
-       public List<LogInService> SearchShareLog(int Id)
+        public List<LogInService> SearchShareLog(int Id)
         {
             List<LogInService> l = new List<LogInService>();
 
             List<LogMessage> lm = lop.SendSharedLog(Id);
 
-           foreach (LogMessage lo in lm)
-           {
-               LogInService ll = new LogInService();
-               ll.LogId = (long)lo.LogId;
-               ll.ShareUserId = (long)lo.ShareUserId;
-               ll.TimeStamp = (long)lo.TimeStamp;
-               ll.WriteUserId = (long)lo.UserId;
-               l.Add(ll);
-           }
+            foreach (LogMessage lo in lm)
+            {
+                LogInService ll = new LogInService();
+                ll.LogId = (long)lo.LogId;
+                ll.ShareUserId = (long)lo.ShareUserId;
+                ll.TimeStamp = (long)lo.TimeStamp;
+                ll.WriteUserId = (long)lo.UserId;
+                l.Add(ll);
+            }
 
             return l;
         }
 
-       public void SetShareLogIsRead(int Id)
-       {
-           lop.ChangeSharedLogIsRead(Id);
-       }
+        public void SetShareLogIsRead(int Id)
+        {
+            lop.ChangeSharedLogIsRead(Id);
+        }
 
-       public List<LogInService> SearchShareLogUnRead(int Id)
-       {
-           List<LogInService> l = new List<LogInService>();
+        public List<LogInService> SearchShareLogUnRead(int Id)
+        {
+            List<LogInService> l = new List<LogInService>();
 
-           List<LogMessage> lm = lop.SendSharedLogUnRead(Id);
+            List<LogMessage> lm = lop.SendSharedLogUnRead(Id);
 
-           foreach (LogMessage lo in lm)
-           {
-               LogInService ll = new LogInService();
-               ll.LogId = (long)lo.LogId;
-               ll.ShareUserId = (long)lo.ShareUserId;
-               ll.TimeStamp = (long)lo.TimeStamp;
-               ll.WriteUserId = (long)lo.UserId;
-               l.Add(ll);
-           }
+            foreach (LogMessage lo in lm)
+            {
+                LogInService ll = new LogInService();
+                ll.LogId = (long)lo.LogId;
+                ll.ShareUserId = (long)lo.ShareUserId;
+                ll.TimeStamp = (long)lo.TimeStamp;
+                ll.WriteUserId = (long)lo.UserId;
+                l.Add(ll);
+            }
 
-           return l;
-       
-       }
+            return l;
+
+        }
+        #endregion
+
+        #region 分享安排日程推送
+
+        public bool SaveInScheduleListInService(ScheduleInService log)
+        {
+            sop.InsertIntoScheduleEntity(log);
+            return true;
+        }
 
 
-       public bool SaveInScheduleListInService(ScheduleInService log)
-       {
-           sop.InsertIntoScheduleEntity(log);
-           return true;
-       }
+        public List<ScheduleInService> SearchShareSchedule(int Id)
+        {
+            List<ScheduleInService> l = new List<ScheduleInService>();
 
+            List<ScheduleMessage> lm = sop.SendSharedSchedule(Id);
 
-       public List<ScheduleInService> SearchShareSchedule(int Id)
-       {
-           List<ScheduleInService> l = new List<ScheduleInService>();
+            foreach (ScheduleMessage lo in lm)
+            {
+                ScheduleInService ll = new ScheduleInService();
+                ll.ScheduleId = (long)lo.ScheduleID;
+                ll.ShareUserId = (long)lo.ShareUserID;
+                ll.TimeStamp = (long)lo.TimeStamp;
+                ll.WriteUserId = (long)lo.UserID;
+                l.Add(ll);
+            }
 
-           List<ScheduleMessage> lm = sop.SendSharedSchedule(Id);
+            return l;
 
-           foreach (ScheduleMessage lo in lm)
-           {
-               ScheduleInService ll = new ScheduleInService();
-               ll.ScheduleId = (long)lo.ScheduleID;
-               ll.ShareUserId = (long)lo.ShareUserID;
-               ll.TimeStamp = (long)lo.TimeStamp;
-               ll.WriteUserId = (long)lo.UserID;
-               l.Add(ll);
-           }
+        }
 
-           return l;
+        public void SetShareScheduleIsRead(int Id)
+        {
+            sop.ChangeSharedScheduleIsRead(Id);
+        }
 
-       }
+        public List<ScheduleInService> SearchShareScheduleUnRead(int Id)
+        {
 
-       public void SetShareScheduleIsRead(int Id)
-       {
-           sop.ChangeSharedScheduleIsRead(Id);
-       }
+            List<ScheduleInService> l = new List<ScheduleInService>();
 
-       public List<ScheduleInService> SearchShareScheduleUnRead(int Id)
-       {
+            List<ScheduleMessage> lm = sop.SendSharedScheduleUnRead(Id);
 
-           List<ScheduleInService> l = new List<ScheduleInService>();
+            foreach (ScheduleMessage lo in lm)
+            {
+                ScheduleInService ll = new ScheduleInService();
+                ll.ScheduleId = (long)lo.ScheduleID;
+                ll.ShareUserId = (long)lo.ShareUserID;
+                ll.TimeStamp = (long)lo.TimeStamp;
+                ll.WriteUserId = (long)lo.UserID;
+                l.Add(ll);
+            }
 
-           List<ScheduleMessage> lm = sop.SendSharedScheduleUnRead(Id);
+            return l;
+        }
+        #endregion
 
-           foreach (ScheduleMessage lo in lm)
-           {
-               ScheduleInService ll = new ScheduleInService();
-               ll.ScheduleId = (long)lo.ScheduleID;
-               ll.ShareUserId = (long)lo.ShareUserID;
-               ll.TimeStamp = (long)lo.TimeStamp;
-               ll.WriteUserId = (long)lo.UserID;
-               l.Add(ll);
-           }
+        #region 评论日志推送
 
-           return l;
-       }
-        
+        public bool SaveInCommentListInService(CommentInService log)
+        {
+            cop.InsertIntoCommentEntity(log);
+            return true;
+        }
+
+        public List<CommentInService> SearchCommentlog(int Id)
+        {
+            List<CommentInService> l = new List<CommentInService>();
+
+            List<CommentMessage> lm = cop.SendComment(Id);
+
+            foreach (CommentMessage lo in lm)
+            {
+                CommentInService ll = new CommentInService();
+                ll.LogUserId = (long)lo.UserId;
+                ll.CommentUserName = lo.CommentUserName;
+                ll.TimeStamp = (long)lo.TimeStamp;
+                ll.LogId = (long)lo.LogId;
+                l.Add(ll);
+            }
+
+            return l;
+
+        }
+        public void SetCommentLogIsRead(int Id)
+        {
+            cop.ChangeCommnentLogIsRead(Id);
+        }
+
+        public List<CommentInService> SearchCommentlogUnRead(int Id)
+        {
+            List<CommentInService> l = new List<CommentInService>();
+
+            List<CommentMessage> lm = cop.SendCommentLogUnRead(Id);
+
+            foreach (CommentMessage lo in lm)
+            {
+                CommentInService ll = new CommentInService();
+                ll.LogUserId = (long)lo.UserId;
+                ll.CommentUserName = lo.CommentUserName;
+                ll.TimeStamp = (long)lo.TimeStamp;
+                ll.LogId = (long)lo.LogId;
+                l.Add(ll);
+            }
+            return l;
+        }
+
+        #endregion
     }
 }

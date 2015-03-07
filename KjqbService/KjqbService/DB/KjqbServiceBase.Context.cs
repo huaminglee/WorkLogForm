@@ -27,5 +27,6 @@ namespace KjqbService.DB
     
         public DbSet<LogMessage> LogMessages { get; set; }
         public DbSet<ScheduleMessage> ScheduleMessages { get; set; }
+        public DbSet<CommentMessage> CommentMessages { get; set; }
     }
 }

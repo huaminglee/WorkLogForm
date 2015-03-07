@@ -423,6 +423,22 @@ namespace WorkLogForm
             baseService.SaveOrUpdateEntity(staffLog);
             initCommentList(staffLog.Comments);
             this.comment_textBox.Text = "";
+
+
+            #region 向服务中发送数据
+            KjqbService.Service1Client ser = new KjqbService.Service1Client();
+            if (comment.CommentPersonName != "")
+            {
+                KjqbService.CommentInService ll = new KjqbService.CommentInService();
+                ll.LogId = staffLog.Id;
+                ll.CommentUserName = this.CommentPersonName; 
+                ll.LogUserId = staffLog.Staff.Id;
+                ll.TimeStamp = DateTime.Now.Ticks;
+                ser.SaveInCommentListInService(ll);
+
+            }
+            #endregion
+
         }      
     }
 }

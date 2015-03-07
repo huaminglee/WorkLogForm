@@ -16,7 +16,13 @@ namespace WorkLogForm
         private BaseService baseService = new BaseService();
         private List<KjqbService.LogInService> loglist;
         private List<KjqbService.ScheduleInService> schedulelist;
+        private List<KjqbService.CommentInService> commentList;
 
+        public List<KjqbService.CommentInService> CommentList
+        {
+            get { return commentList; }
+            set { commentList = value; }
+        }
         public List<KjqbService.ScheduleInService> Schedulelist
         {
             get { return schedulelist; }
@@ -115,7 +121,23 @@ namespace WorkLogForm
                 }
             }
 
-
+            if (commentList != null && commentList.Count > 0)
+            {
+                foreach (KjqbService.CommentInService ll in commentList)
+                {
+                    StaffLog ss = new StaffLog();
+                    //string sql = "select u from StaffLog u where u.Id = " + ll.LogId;
+                    ss = (StaffLog)baseService.loadEntity(ss, ll.LogId);
+                    LinkLabel l1 = new LinkLabel();
+                    l1.Text = ll.CommentUserName + "评论了您的日志";
+                    l1.Width = 150;
+                    l1.Height = 30;
+                    l1.Top = 10;
+                    l1.Tag = ss;
+                    l1.Click += l1_Click;
+                    l1.Parent = flowLayoutPanel1;
+                }
+            }
 
 
         }

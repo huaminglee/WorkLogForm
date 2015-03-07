@@ -111,6 +111,60 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="SaveInCommentListInService">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="log" nillable="true" type="q7:CommentInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SaveInCommentListInServiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="SaveInCommentListInServiceResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchCommentlog">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchCommentlogResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchCommentlogResult" nillable="true" type="q8:ArrayOfCommentInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetCommentLogIsRead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetCommentLogIsReadResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchCommentlogUnRead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchCommentlogUnReadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchCommentlogUnReadResult" nillable="true" type="q9:ArrayOfCommentInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="anyType" nillable="true" type="xs:anyType" />
@@ -184,6 +238,21 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="ArrayOfScheduleInService" nillable="true" type="tns:ArrayOfScheduleInService" />
+      <xs:complexType name="CommentInService">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CommentUserName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LogId" type="xs:long" />
+          <xs:element minOccurs="0" name="LogUserId" type="xs:long" />
+          <xs:element minOccurs="0" name="TimeStamp" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="CommentInService" nillable="true" type="tns:CommentInService" />
+      <xs:complexType name="ArrayOfCommentInService">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="CommentInService" nillable="true" type="tns:CommentInService" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfCommentInService" nillable="true" type="tns:ArrayOfCommentInService" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IService1_SaveInLogListInService_InputMessage">
@@ -234,6 +303,30 @@
   <wsdl:message name="IService1_SearchShareScheduleUnRead_OutputMessage">
     <wsdl:part name="parameters" element="tns:SearchShareScheduleUnReadResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SaveInCommentListInService_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveInCommentListInService" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SaveInCommentListInService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveInCommentListInServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchCommentlog_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchCommentlog" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchCommentlog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchCommentlogResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SetCommentLogIsRead_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetCommentLogIsRead" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SetCommentLogIsRead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetCommentLogIsReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchCommentlogUnRead_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchCommentlogUnRead" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchCommentlogUnRead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchCommentlogUnReadResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="SaveInLogListInService">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInLogListInService" message="tns:IService1_SaveInLogListInService_InputMessage" />
@@ -266,6 +359,22 @@
     <wsdl:operation name="SearchShareScheduleUnRead">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchShareScheduleUnRead" message="tns:IService1_SearchShareScheduleUnRead_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchShareScheduleUnReadResponse" message="tns:IService1_SearchShareScheduleUnRead_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveInCommentListInService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInCommentListInService" message="tns:IService1_SaveInCommentListInService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SaveInCommentListInServiceResponse" message="tns:IService1_SaveInCommentListInService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchCommentlog">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchCommentlog" message="tns:IService1_SearchCommentlog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchCommentlogResponse" message="tns:IService1_SearchCommentlog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCommentLogIsRead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SetCommentLogIsRead" message="tns:IService1_SetCommentLogIsRead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SetCommentLogIsReadResponse" message="tns:IService1_SetCommentLogIsRead_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchCommentlogUnRead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchCommentlogUnRead" message="tns:IService1_SearchCommentlogUnRead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchCommentlogUnReadResponse" message="tns:IService1_SearchCommentlogUnRead_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -335,6 +444,42 @@
     </wsdl:operation>
     <wsdl:operation name="SearchShareScheduleUnRead">
       <soap:operation soapAction="http://tempuri.org/IService1/SearchShareScheduleUnRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveInCommentListInService">
+      <soap:operation soapAction="http://tempuri.org/IService1/SaveInCommentListInService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchCommentlog">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchCommentlog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCommentLogIsRead">
+      <soap:operation soapAction="http://tempuri.org/IService1/SetCommentLogIsRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchCommentlogUnRead">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchCommentlogUnRead" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -199,6 +199,99 @@ namespace WorkLogForm.KjqbService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CommentInService", Namespace="http://schemas.datacontract.org/2004/07/KjqbService")]
+    [System.SerializableAttribute()]
+    public partial class CommentInService : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CommentUserNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long LogIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long LogUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long TimeStampField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CommentUserName {
+            get {
+                return this.CommentUserNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CommentUserNameField, value) != true)) {
+                    this.CommentUserNameField = value;
+                    this.RaisePropertyChanged("CommentUserName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long LogId {
+            get {
+                return this.LogIdField;
+            }
+            set {
+                if ((this.LogIdField.Equals(value) != true)) {
+                    this.LogIdField = value;
+                    this.RaisePropertyChanged("LogId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long LogUserId {
+            get {
+                return this.LogUserIdField;
+            }
+            set {
+                if ((this.LogUserIdField.Equals(value) != true)) {
+                    this.LogUserIdField = value;
+                    this.RaisePropertyChanged("LogUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long TimeStamp {
+            get {
+                return this.TimeStampField;
+            }
+            set {
+                if ((this.TimeStampField.Equals(value) != true)) {
+                    this.TimeStampField = value;
+                    this.RaisePropertyChanged("TimeStamp");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="KjqbService.IService1")]
     public interface IService1 {
@@ -226,6 +319,18 @@ namespace WorkLogForm.KjqbService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchShareScheduleUnRead", ReplyAction="http://tempuri.org/IService1/SearchShareScheduleUnReadResponse")]
         WorkLogForm.KjqbService.ScheduleInService[] SearchShareScheduleUnRead(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveInCommentListInService", ReplyAction="http://tempuri.org/IService1/SaveInCommentListInServiceResponse")]
+        bool SaveInCommentListInService(WorkLogForm.KjqbService.CommentInService log);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchCommentlog", ReplyAction="http://tempuri.org/IService1/SearchCommentlogResponse")]
+        WorkLogForm.KjqbService.CommentInService[] SearchCommentlog(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SetCommentLogIsRead", ReplyAction="http://tempuri.org/IService1/SetCommentLogIsReadResponse")]
+        void SetCommentLogIsRead(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchCommentlogUnRead", ReplyAction="http://tempuri.org/IService1/SearchCommentlogUnReadResponse")]
+        WorkLogForm.KjqbService.CommentInService[] SearchCommentlogUnRead(int Id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -285,6 +390,22 @@ namespace WorkLogForm.KjqbService {
         
         public WorkLogForm.KjqbService.ScheduleInService[] SearchShareScheduleUnRead(int Id) {
             return base.Channel.SearchShareScheduleUnRead(Id);
+        }
+        
+        public bool SaveInCommentListInService(WorkLogForm.KjqbService.CommentInService log) {
+            return base.Channel.SaveInCommentListInService(log);
+        }
+        
+        public WorkLogForm.KjqbService.CommentInService[] SearchCommentlog(int Id) {
+            return base.Channel.SearchCommentlog(Id);
+        }
+        
+        public void SetCommentLogIsRead(int Id) {
+            base.Channel.SetCommentLogIsRead(Id);
+        }
+        
+        public WorkLogForm.KjqbService.CommentInService[] SearchCommentlogUnRead(int Id) {
+            return base.Channel.SearchCommentlogUnRead(Id);
         }
     }
 }

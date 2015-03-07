@@ -23,6 +23,7 @@ namespace WorkLogForm
 
         private List<KjqbService.LogInService> loglistfromService;
         private List<KjqbService.ScheduleInService> schedulelistfromService;
+        private List<KjqbService.CommentInService> commentlistfromService;
         private IList scheduleList;
         private EventHandler mouseLeave;
         private EventHandler mouseEnter;
@@ -146,6 +147,7 @@ namespace WorkLogForm
 
              loglistfromService = new List<KjqbService.LogInService>();
              schedulelistfromService = new List<KjqbService.ScheduleInService>();
+             commentlistfromService = new List<KjqbService.CommentInService>();
              KjqbService.LogInService[] lists;
              lists = ser.SearchShareLogUnRead((int)this.user.Id);
              this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
@@ -161,6 +163,15 @@ namespace WorkLogForm
              {
                  schedulelistfromService.Add(list2[i]);
              }
+
+             KjqbService.CommentInService[] list3;
+             list3 = ser.SearchCommentlogUnRead((int)this.user.Id);
+             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list3.Length).ToString();
+             for (int i = 0; i < list3.Length; i++)
+             {
+                 commentlistfromService.Add(list3[i]);
+             }
+
 
             #endregion
 
@@ -1549,7 +1560,7 @@ namespace WorkLogForm
             this.labelNewMEssageCount.Text = "0";
             ser.SetShareLogIsRead((int)this.user.Id);
             ser.SetShareScheduleIsRead((int)this.user.Id);
-
+            ser.SetCommentLogIsRead((int)this.user.Id);
 
             if (newMessageWindow == null || newMessageWindow.IsDisposed)
             {
@@ -1560,6 +1571,7 @@ namespace WorkLogForm
                 newMessageWindow.FormLocation = new Point(this.Location.X - newMessageWindow.Width, this.Location.Y);
                 newMessageWindow.Loglist = loglistfromService;
                 newMessageWindow.Schedulelist = schedulelistfromService;
+                newMessageWindow.CommentList = commentlistfromService;
                 newMessageWindow.User = this.user;
                 newMessageWindow.Show();
 
@@ -1596,6 +1608,14 @@ namespace WorkLogForm
 
             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists2.Length).ToString();
 
+            KjqbService.CommentInService[] lists3;
+            lists3 = ser.SearchCommentlog((int)this.user.Id);
+            for (int i = 0; i < lists3.Length; i++)
+            {
+                commentlistfromService.Add(lists3[i]);
+            }
+
+            this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists3.Length).ToString();
 
 
 

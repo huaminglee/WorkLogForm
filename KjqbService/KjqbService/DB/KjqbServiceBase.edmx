@@ -6,9 +6,22 @@
     <edmx:StorageModels>
     <Schema Namespace="KjqbServiceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="KjqbServiceModelStoreContainer">
+          <EntitySet Name="CommentMessage" EntityType="KjqbServiceModel.Store.CommentMessage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LogMessage" EntityType="KjqbServiceModel.Store.LogMessage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ScheduleMessage" EntityType="KjqbServiceModel.Store.ScheduleMessage" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
+        <EntityType Name="CommentMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LogId" Type="bigint" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="CommentUserName" Type="varchar" MaxLength="50" />
+          <Property Name="TimeStamp" Type="numeric" />
+          <Property Name="State" Type="int" />
+          <Property Name="IsRead" Type="int" />
+        </EntityType>
         <EntityType Name="LogMessage">
           <Key>
             <PropertyRef Name="Id" />
@@ -40,6 +53,7 @@
         <EntityContainer Name="KjqbServiceEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="LogMessages" EntityType="KjqbServiceModel.LogMessage" />
           <EntitySet Name="ScheduleMessages" EntityType="KjqbServiceModel.ScheduleMessage" />
+          <EntitySet Name="CommentMessages" EntityType="KjqbServiceModel.CommentMessage" />
         </EntityContainer>
         <EntityType Name="LogMessage">
           <Key>
@@ -63,6 +77,18 @@
           <Property Type="Int64" Name="ShareUserID" />
           <Property Type="Int32" Name="State" />
           <Property Type="Decimal" Name="TimeStamp" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IsRead" />
+        </EntityType>
+        <EntityType Name="CommentMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="LogId" />
+          <Property Type="Int64" Name="UserId" />
+          <Property Type="String" Name="CommentUserName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="TimeStamp" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="State" />
           <Property Type="Int32" Name="IsRead" />
         </EntityType>
       </Schema>
@@ -93,6 +119,19 @@
                 <ScalarProperty Name="ShareUserID" ColumnName="ShareUserID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommentMessages">
+            <EntityTypeMapping TypeName="KjqbServiceModel.CommentMessage">
+              <MappingFragment StoreEntitySet="CommentMessage">
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="CommentUserName" ColumnName="CommentUserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

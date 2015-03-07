@@ -11,6 +11,7 @@ namespace KjqbService
     [ServiceContract]
     public interface IService1
     {
+        #region 分享日志推送
         [OperationContract]
         bool SaveInLogListInService(LogInService log);
 
@@ -22,7 +23,10 @@ namespace KjqbService
 
         [OperationContract]
         List<LogInService> SearchShareLogUnRead(int Id);
+        #endregion
 
+
+        #region 分享日程推送
         [OperationContract]
         bool SaveInScheduleListInService(ScheduleInService log);
 
@@ -34,6 +38,22 @@ namespace KjqbService
 
         [OperationContract]
         List<ScheduleInService> SearchShareScheduleUnRead(int Id);
+        #endregion
+
+        #region 评论日志推送
+        [OperationContract]
+        bool SaveInCommentListInService(CommentInService log);
+
+        [OperationContract]
+        List<CommentInService> SearchCommentlog(int Id);
+
+        [OperationContract]
+        void SetCommentLogIsRead(int Id);
+
+        [OperationContract]
+        List<CommentInService> SearchCommentlogUnRead(int Id);
+        
+        #endregion
 
     }
 }
