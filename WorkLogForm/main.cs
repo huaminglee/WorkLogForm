@@ -22,6 +22,7 @@ namespace WorkLogForm
     {
 
         private List<KjqbService.LogInService> loglistfromService;
+        private List<KjqbService.ScheduleInService> schedulelistfromService;
         private IList scheduleList;
         private EventHandler mouseLeave;
         private EventHandler mouseEnter;
@@ -144,6 +145,7 @@ namespace WorkLogForm
             ////////////////////////////////
 
              loglistfromService = new List<KjqbService.LogInService>();
+             schedulelistfromService = new List<KjqbService.ScheduleInService>();
              KjqbService.LogInService[] lists;
              lists = ser.SearchShareLogUnRead((int)this.user.Id);
              this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
@@ -151,6 +153,15 @@ namespace WorkLogForm
              {
                  loglistfromService.Add(lists[i]);
              }
+
+             KjqbService.ScheduleInService[] list2;
+             list2 = ser.SearchShareScheduleUnRead((int)this.user.Id);
+             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list2.Length).ToString();
+             for (int i = 0; i < list2.Length; i++)
+             {
+                 schedulelistfromService.Add(list2[i]);
+             }
+
             #endregion
 
 
@@ -1537,7 +1548,9 @@ namespace WorkLogForm
 
             this.labelNewMEssageCount.Text = "0";
             ser.SetShareLogIsRead((int)this.user.Id);
-            
+            ser.SetShareScheduleIsRead((int)this.user.Id);
+
+
             if (newMessageWindow == null || newMessageWindow.IsDisposed)
             {
                 newMessageWindow = new NewMessageWindow();
@@ -1546,6 +1559,7 @@ namespace WorkLogForm
             {
                 newMessageWindow.FormLocation = new Point(this.Location.X - newMessageWindow.Width, this.Location.Y);
                 newMessageWindow.Loglist = loglistfromService;
+                newMessageWindow.Schedulelist = schedulelistfromService;
                 newMessageWindow.User = this.user;
                 newMessageWindow.Show();
 
@@ -1564,7 +1578,7 @@ namespace WorkLogForm
         private void timerMessageSend_Tick(object sender, EventArgs e)
         {
            
-            KjqbService.LogInService[] lists;//= new KjqbService.LogInService[]();
+            KjqbService.LogInService[] lists;
             lists = ser.SearchShareLog((int)this.user.Id);
             for (int i = 0; i < lists.Length;i++ )
             {
@@ -1572,6 +1586,19 @@ namespace WorkLogForm
             }
 
             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text)+lists.Length).ToString();
+
+            KjqbService.ScheduleInService[] lists2;
+            lists2 = ser.SearchShareSchedule((int)this.user.Id);
+            for (int i = 0; i < lists2.Length; i++)
+            {
+                schedulelistfromService.Add(lists2[i]);
+            }
+
+            this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists2.Length).ToString();
+
+
+
+
         }
         #endregion
 

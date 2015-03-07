@@ -57,6 +57,60 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="SaveInScheduleListInService">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="log" nillable="true" type="q4:ScheduleInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SaveInScheduleListInServiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="SaveInScheduleListInServiceResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchShareSchedule">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchShareScheduleResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchShareScheduleResult" nillable="true" type="q5:ArrayOfScheduleInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetShareScheduleIsRead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetShareScheduleIsReadResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchShareScheduleUnRead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchShareScheduleUnReadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchShareScheduleUnReadResult" nillable="true" type="q6:ArrayOfScheduleInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="anyType" nillable="true" type="xs:anyType" />
@@ -115,6 +169,21 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="ArrayOfLogInService" nillable="true" type="tns:ArrayOfLogInService" />
+      <xs:complexType name="ScheduleInService">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ScheduleId" type="xs:long" />
+          <xs:element minOccurs="0" name="ShareUserId" type="xs:long" />
+          <xs:element minOccurs="0" name="TimeStamp" type="xs:long" />
+          <xs:element minOccurs="0" name="WriteUserId" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ScheduleInService" nillable="true" type="tns:ScheduleInService" />
+      <xs:complexType name="ArrayOfScheduleInService">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ScheduleInService" nillable="true" type="tns:ScheduleInService" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfScheduleInService" nillable="true" type="tns:ArrayOfScheduleInService" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IService1_SaveInLogListInService_InputMessage">
@@ -141,6 +210,30 @@
   <wsdl:message name="IService1_SearchShareLogUnRead_OutputMessage">
     <wsdl:part name="parameters" element="tns:SearchShareLogUnReadResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SaveInScheduleListInService_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveInScheduleListInService" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SaveInScheduleListInService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveInScheduleListInServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchShareSchedule_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchShareSchedule" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchShareSchedule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchShareScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SetShareScheduleIsRead_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetShareScheduleIsRead" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SetShareScheduleIsRead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetShareScheduleIsReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchShareScheduleUnRead_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchShareScheduleUnRead" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchShareScheduleUnRead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchShareScheduleUnReadResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="SaveInLogListInService">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInLogListInService" message="tns:IService1_SaveInLogListInService_InputMessage" />
@@ -157,6 +250,22 @@
     <wsdl:operation name="SearchShareLogUnRead">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchShareLogUnRead" message="tns:IService1_SearchShareLogUnRead_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchShareLogUnReadResponse" message="tns:IService1_SearchShareLogUnRead_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveInScheduleListInService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInScheduleListInService" message="tns:IService1_SaveInScheduleListInService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SaveInScheduleListInServiceResponse" message="tns:IService1_SaveInScheduleListInService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchShareSchedule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchShareSchedule" message="tns:IService1_SearchShareSchedule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchShareScheduleResponse" message="tns:IService1_SearchShareSchedule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetShareScheduleIsRead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SetShareScheduleIsRead" message="tns:IService1_SetShareScheduleIsRead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SetShareScheduleIsReadResponse" message="tns:IService1_SetShareScheduleIsRead_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchShareScheduleUnRead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchShareScheduleUnRead" message="tns:IService1_SearchShareScheduleUnRead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchShareScheduleUnReadResponse" message="tns:IService1_SearchShareScheduleUnRead_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -190,6 +299,42 @@
     </wsdl:operation>
     <wsdl:operation name="SearchShareLogUnRead">
       <soap:operation soapAction="http://tempuri.org/IService1/SearchShareLogUnRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveInScheduleListInService">
+      <soap:operation soapAction="http://tempuri.org/IService1/SaveInScheduleListInService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchShareSchedule">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchShareSchedule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetShareScheduleIsRead">
+      <soap:operation soapAction="http://tempuri.org/IService1/SetShareScheduleIsRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchShareScheduleUnRead">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchShareScheduleUnRead" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

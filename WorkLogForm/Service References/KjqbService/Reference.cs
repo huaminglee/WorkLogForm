@@ -106,6 +106,99 @@ namespace WorkLogForm.KjqbService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ScheduleInService", Namespace="http://schemas.datacontract.org/2004/07/KjqbService")]
+    [System.SerializableAttribute()]
+    public partial class ScheduleInService : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long ScheduleIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long ShareUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long TimeStampField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long WriteUserIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ScheduleId {
+            get {
+                return this.ScheduleIdField;
+            }
+            set {
+                if ((this.ScheduleIdField.Equals(value) != true)) {
+                    this.ScheduleIdField = value;
+                    this.RaisePropertyChanged("ScheduleId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ShareUserId {
+            get {
+                return this.ShareUserIdField;
+            }
+            set {
+                if ((this.ShareUserIdField.Equals(value) != true)) {
+                    this.ShareUserIdField = value;
+                    this.RaisePropertyChanged("ShareUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long TimeStamp {
+            get {
+                return this.TimeStampField;
+            }
+            set {
+                if ((this.TimeStampField.Equals(value) != true)) {
+                    this.TimeStampField = value;
+                    this.RaisePropertyChanged("TimeStamp");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long WriteUserId {
+            get {
+                return this.WriteUserIdField;
+            }
+            set {
+                if ((this.WriteUserIdField.Equals(value) != true)) {
+                    this.WriteUserIdField = value;
+                    this.RaisePropertyChanged("WriteUserId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="KjqbService.IService1")]
     public interface IService1 {
@@ -121,6 +214,18 @@ namespace WorkLogForm.KjqbService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchShareLogUnRead", ReplyAction="http://tempuri.org/IService1/SearchShareLogUnReadResponse")]
         WorkLogForm.KjqbService.LogInService[] SearchShareLogUnRead(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveInScheduleListInService", ReplyAction="http://tempuri.org/IService1/SaveInScheduleListInServiceResponse")]
+        bool SaveInScheduleListInService(WorkLogForm.KjqbService.ScheduleInService log);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchShareSchedule", ReplyAction="http://tempuri.org/IService1/SearchShareScheduleResponse")]
+        WorkLogForm.KjqbService.ScheduleInService[] SearchShareSchedule(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SetShareScheduleIsRead", ReplyAction="http://tempuri.org/IService1/SetShareScheduleIsReadResponse")]
+        void SetShareScheduleIsRead(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchShareScheduleUnRead", ReplyAction="http://tempuri.org/IService1/SearchShareScheduleUnReadResponse")]
+        WorkLogForm.KjqbService.ScheduleInService[] SearchShareScheduleUnRead(int Id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -164,6 +269,22 @@ namespace WorkLogForm.KjqbService {
         
         public WorkLogForm.KjqbService.LogInService[] SearchShareLogUnRead(int Id) {
             return base.Channel.SearchShareLogUnRead(Id);
+        }
+        
+        public bool SaveInScheduleListInService(WorkLogForm.KjqbService.ScheduleInService log) {
+            return base.Channel.SaveInScheduleListInService(log);
+        }
+        
+        public WorkLogForm.KjqbService.ScheduleInService[] SearchShareSchedule(int Id) {
+            return base.Channel.SearchShareSchedule(Id);
+        }
+        
+        public void SetShareScheduleIsRead(int Id) {
+            base.Channel.SetShareScheduleIsRead(Id);
+        }
+        
+        public WorkLogForm.KjqbService.ScheduleInService[] SearchShareScheduleUnRead(int Id) {
+            return base.Channel.SearchShareScheduleUnRead(Id);
         }
     }
 }

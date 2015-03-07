@@ -14,6 +14,7 @@ namespace KjqbService
     {
 
         KjqbService.DB.LogOperate lop = new LogOperate();
+        KjqbService.DB.ScheduleOperate sop = new ScheduleOperate();
         public bool SaveInLogListInService(LogInService log)
         {
             lop.InsertIntoEntity(log);
@@ -63,6 +64,59 @@ namespace KjqbService
 
            return l;
        
+       }
+
+
+       public bool SaveInScheduleListInService(ScheduleInService log)
+       {
+           sop.InsertIntoScheduleEntity(log);
+           return true;
+       }
+
+
+       public List<ScheduleInService> SearchShareSchedule(int Id)
+       {
+           List<ScheduleInService> l = new List<ScheduleInService>();
+
+           List<ScheduleMessage> lm = sop.SendSharedSchedule(Id);
+
+           foreach (ScheduleMessage lo in lm)
+           {
+               ScheduleInService ll = new ScheduleInService();
+               ll.ScheduleId = (long)lo.ScheduleID;
+               ll.ShareUserId = (long)lo.ShareUserID;
+               ll.TimeStamp = (long)lo.TimeStamp;
+               ll.WriteUserId = (long)lo.UserID;
+               l.Add(ll);
+           }
+
+           return l;
+
+       }
+
+       public void SetShareScheduleIsRead(int Id)
+       {
+           sop.ChangeSharedScheduleIsRead(Id);
+       }
+
+       public List<ScheduleInService> SearchShareScheduleUnRead(int Id)
+       {
+
+           List<ScheduleInService> l = new List<ScheduleInService>();
+
+           List<ScheduleMessage> lm = sop.SendSharedScheduleUnRead(Id);
+
+           foreach (ScheduleMessage lo in lm)
+           {
+               ScheduleInService ll = new ScheduleInService();
+               ll.ScheduleId = (long)lo.ScheduleID;
+               ll.ShareUserId = (long)lo.ShareUserID;
+               ll.TimeStamp = (long)lo.TimeStamp;
+               ll.WriteUserId = (long)lo.UserID;
+               l.Add(ll);
+           }
+
+           return l;
        }
         
     }

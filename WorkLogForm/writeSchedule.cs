@@ -158,7 +158,22 @@ namespace WorkLogForm
             staffSchedule.ArrangeMan = user;
             try
             {
-                baseService.SaveOrUpdateEntity(staffSchedule);
+                object be =  baseService.saveEntity(staffSchedule);
+
+                if (staffSchedule.StaffScheduleStaffs != null && staffSchedule.StaffScheduleStaffs.Count > 0)
+                {
+                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                    foreach (WkTUser u in sharedUser)
+                    {
+                        KjqbService.ScheduleInService ll = new KjqbService.ScheduleInService();
+                        ll.ScheduleId = int.Parse(be.ToString());
+                        ll.WriteUserId = this.user.Id;
+                        ll.ShareUserId = u.Id;
+                        ll.TimeStamp = DateTime.Now.Ticks;
+                        ser.SaveInScheduleListInService(ll);
+                    }
+                }
+
             }
             catch
             {
@@ -334,7 +349,20 @@ namespace WorkLogForm
                         staffSchedule.ArrangeMan = user;
                         try
                         {
-                            baseService.SaveOrUpdateEntity(staffSchedule);
+                            object  be = baseService.saveEntity(staffSchedule);
+
+                            if (staffSchedule.ArrangeMan != null)
+                            {
+                                KjqbService.Service1Client ser = new KjqbService.Service1Client();
+
+                                KjqbService.ScheduleInService ll = new KjqbService.ScheduleInService();
+                                ll.ScheduleId = int.Parse(be.ToString());
+                                ll.WriteUserId = staffSchedule.ArrangeMan.Id;
+                                ll.ShareUserId = staffSchedule.Staff.Id;
+                                ll.TimeStamp = DateTime.Now.Ticks;
+                                ser.SaveInScheduleListInService(ll);
+                            }
+
                         }
                         catch
                         {

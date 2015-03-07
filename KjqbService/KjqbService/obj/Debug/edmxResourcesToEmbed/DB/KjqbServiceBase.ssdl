@@ -2,6 +2,7 @@
 <Schema Namespace="KjqbServiceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="KjqbServiceModelStoreContainer">
     <EntitySet Name="LogMessage" EntityType="KjqbServiceModel.Store.LogMessage" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ScheduleMessage" EntityType="KjqbServiceModel.Store.ScheduleMessage" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
   <EntityType Name="LogMessage">
     <Key>
@@ -13,6 +14,18 @@
     <Property Name="UserId" Type="bigint" />
     <Property Name="TimeStamp" Type="numeric" />
     <Property Name="State" Type="int" />
+    <Property Name="IsRead" Type="int" />
+  </EntityType>
+  <EntityType Name="ScheduleMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="bigint" />
+    <Property Name="ShareUserID" Type="bigint" />
+    <Property Name="ScheduleID" Type="bigint" />
+    <Property Name="State" Type="int" />
+    <Property Name="TimeStamp" Type="numeric" />
     <Property Name="IsRead" Type="int" />
   </EntityType>
 </Schema>

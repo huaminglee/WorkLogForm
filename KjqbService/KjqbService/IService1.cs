@@ -23,5 +23,17 @@ namespace KjqbService
         [OperationContract]
         List<LogInService> SearchShareLogUnRead(int Id);
 
+        [OperationContract]
+        bool SaveInScheduleListInService(ScheduleInService log);
+
+        [OperationContract]
+        List<ScheduleInService> SearchShareSchedule(int Id);
+
+        [OperationContract]
+        void SetShareScheduleIsRead(int Id);
+
+        [OperationContract]
+        List<ScheduleInService> SearchShareScheduleUnRead(int Id);
+
     }
 }
