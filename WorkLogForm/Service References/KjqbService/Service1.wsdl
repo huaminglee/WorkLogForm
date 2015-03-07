@@ -165,6 +165,60 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="SaveInTimeArrangeForManagerInService">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="log" nillable="true" type="q10:TimeArrangeForManagerInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SaveInTimeArrangeForManagerInServiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="SaveInTimeArrangeForManagerInServiceResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchTimeArrangeForManager">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchTimeArrangeForManagerResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchTimeArrangeForManagerResult" nillable="true" type="q11:ArrayOfTimeArrangeForManagerInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetTimeArrangeForManagerIsRead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetTimeArrangeForManagerIsReadResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchTimeArrangeForManagerUnRead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchTimeArrangeForManagerUnReadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchTimeArrangeForManagerUnReadResult" nillable="true" type="q12:ArrayOfTimeArrangeForManagerInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="anyType" nillable="true" type="xs:anyType" />
@@ -253,6 +307,21 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="ArrayOfCommentInService" nillable="true" type="tns:ArrayOfCommentInService" />
+      <xs:complexType name="TimeArrangeForManagerInService">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ExamineOrExamineresult" type="xs:int" />
+          <xs:element minOccurs="0" name="SendUserId" type="xs:long" />
+          <xs:element minOccurs="0" name="TimeArrangeForManagerId" type="xs:long" />
+          <xs:element minOccurs="0" name="UserId" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="TimeArrangeForManagerInService" nillable="true" type="tns:TimeArrangeForManagerInService" />
+      <xs:complexType name="ArrayOfTimeArrangeForManagerInService">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="TimeArrangeForManagerInService" nillable="true" type="tns:TimeArrangeForManagerInService" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfTimeArrangeForManagerInService" nillable="true" type="tns:ArrayOfTimeArrangeForManagerInService" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IService1_SaveInLogListInService_InputMessage">
@@ -327,6 +396,30 @@
   <wsdl:message name="IService1_SearchCommentlogUnRead_OutputMessage">
     <wsdl:part name="parameters" element="tns:SearchCommentlogUnReadResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SaveInTimeArrangeForManagerInService_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveInTimeArrangeForManagerInService" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SaveInTimeArrangeForManagerInService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveInTimeArrangeForManagerInServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchTimeArrangeForManager_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchTimeArrangeForManager" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchTimeArrangeForManager_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchTimeArrangeForManagerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SetTimeArrangeForManagerIsRead_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetTimeArrangeForManagerIsRead" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SetTimeArrangeForManagerIsRead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetTimeArrangeForManagerIsReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchTimeArrangeForManagerUnRead_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchTimeArrangeForManagerUnRead" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchTimeArrangeForManagerUnRead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchTimeArrangeForManagerUnReadResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="SaveInLogListInService">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInLogListInService" message="tns:IService1_SaveInLogListInService_InputMessage" />
@@ -375,6 +468,22 @@
     <wsdl:operation name="SearchCommentlogUnRead">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchCommentlogUnRead" message="tns:IService1_SearchCommentlogUnRead_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchCommentlogUnReadResponse" message="tns:IService1_SearchCommentlogUnRead_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveInTimeArrangeForManagerInService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInTimeArrangeForManagerInService" message="tns:IService1_SaveInTimeArrangeForManagerInService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SaveInTimeArrangeForManagerInServiceResponse" message="tns:IService1_SaveInTimeArrangeForManagerInService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchTimeArrangeForManager">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchTimeArrangeForManager" message="tns:IService1_SearchTimeArrangeForManager_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchTimeArrangeForManagerResponse" message="tns:IService1_SearchTimeArrangeForManager_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTimeArrangeForManagerIsRead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SetTimeArrangeForManagerIsRead" message="tns:IService1_SetTimeArrangeForManagerIsRead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SetTimeArrangeForManagerIsReadResponse" message="tns:IService1_SetTimeArrangeForManagerIsRead_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchTimeArrangeForManagerUnRead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnRead" message="tns:IService1_SearchTimeArrangeForManagerUnRead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnReadResponse" message="tns:IService1_SearchTimeArrangeForManagerUnRead_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -480,6 +589,42 @@
     </wsdl:operation>
     <wsdl:operation name="SearchCommentlogUnRead">
       <soap:operation soapAction="http://tempuri.org/IService1/SearchCommentlogUnRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveInTimeArrangeForManagerInService">
+      <soap:operation soapAction="http://tempuri.org/IService1/SaveInTimeArrangeForManagerInService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchTimeArrangeForManager">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchTimeArrangeForManager" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTimeArrangeForManagerIsRead">
+      <soap:operation soapAction="http://tempuri.org/IService1/SetTimeArrangeForManagerIsRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchTimeArrangeForManagerUnRead">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnRead" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

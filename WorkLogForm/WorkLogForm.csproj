@@ -441,6 +441,9 @@
     <None Include="Service References\KjqbService\WorkLogForm.KjqbService.ScheduleInService.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\KjqbService\WorkLogForm.KjqbService.TimeArrangeForManagerInService.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\WeatherService\WeatherWebService.wsdl" />
   </ItemGroup>
   <ItemGroup>

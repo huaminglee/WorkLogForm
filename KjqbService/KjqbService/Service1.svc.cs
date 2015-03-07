@@ -16,6 +16,7 @@ namespace KjqbService
         KjqbService.DB.LogOperate lop = new LogOperate();
         KjqbService.DB.ScheduleOperate sop = new ScheduleOperate();
         KjqbService.DB.CommentOperate cop = new CommentOperate();
+        KjqbService.DB.TimeArrangeForManagerOperate top = new TimeArrangeForManagerOperate();
         #region 分享日志推送
         public bool SaveInLogListInService(LogInService log)
         {
@@ -172,6 +173,65 @@ namespace KjqbService
             }
             return l;
         }
+
+        #endregion
+
+        #region 值班审批推送
+
+       public bool SaveInTimeArrangeForManagerInService(TimeArrangeForManagerInService log)
+       {
+           top.InsertIntoTFMEntity(log);
+           return true;
+       }
+
+        public List<TimeArrangeForManagerInService> SearchTimeArrangeForManager(int Id)
+        {
+
+            List<TimeArrangeForManagerInService> l = new List<TimeArrangeForManagerInService>();
+
+            List<TimeArrangeForManagerMessage> lm = top.SendTimeArrangeForManager(Id);
+
+            foreach (TimeArrangeForManagerMessage lo in lm)
+            {
+                TimeArrangeForManagerInService ll = new TimeArrangeForManagerInService();
+                ll.TimeArrangeForManagerId = (long)lo.TimeArrangeForManagerId;
+                ll.UserId = (long)lo.UserId;
+                ll.SendUserId = (long)lo.SendUserId;
+                ll.ExamineOrExamineresult = (int)lo.ExamineOrExamineResult;
+                
+                l.Add(ll);
+            }
+
+            return l;
+        }
+
+       public  void SetTimeArrangeForManagerIsRead(int Id)
+       {
+           top.ChangeTimeArrangeForManagerIsRead(Id);
+       }
+
+       public List<TimeArrangeForManagerInService> SearchTimeArrangeForManagerUnRead(int Id)
+       {
+           List<TimeArrangeForManagerInService> l = new List<TimeArrangeForManagerInService>();
+
+           List<TimeArrangeForManagerMessage> lm = top.SendTimeArrangeForManagerUnRead(Id);
+
+           foreach (TimeArrangeForManagerMessage lo in lm)
+           {
+               TimeArrangeForManagerInService ll = new TimeArrangeForManagerInService();
+               ll.TimeArrangeForManagerId = (long)lo.TimeArrangeForManagerId;
+               ll.UserId = (long)lo.UserId;
+               ll.SendUserId = (long)lo.SendUserId;
+               ll.ExamineOrExamineresult = (int)lo.ExamineOrExamineResult;
+
+               l.Add(ll);
+           }
+
+           return l;
+       
+       }
+       
+
 
         #endregion
     }

@@ -872,7 +872,7 @@ namespace WorkLogForm
         {
 
             this.comboBox3.SelectedIndex = 0;
-            if(this.tabControl1.SelectedIndex == 3)
+            if(this.tabControl1.SelectedIndex == 2)
             {
                 //加载以往加载的安排事件
                 if(this.dataGridView4.Rows.Count == 0)
@@ -896,15 +896,15 @@ namespace WorkLogForm
                
             }
 
-            else if (tabControl1.SelectedIndex == 4)
+            else if (tabControl1.SelectedIndex == 3)
             {
                 listView2.Items.Clear();
             }
-            else if (tabControl1.SelectedIndex == 5)
+            else if (tabControl1.SelectedIndex == 4)
             {
                 initPage8();
             }
-            else if (this.tabControl1.SelectedIndex == 6)
+            else if (this.tabControl1.SelectedIndex == 5)
             {
                 if (this.comboBox7.Items.Count == 0)
                 {
@@ -1049,7 +1049,18 @@ namespace WorkLogForm
                 tgm.IsDone = 0;
                 tgm.DutyType = this.comboBox3.SelectedIndex;
                 tgm.ExamineState = 0;
-                baseService.SaveOrUpdateEntity(tgm);
+                object be = baseService.saveEntity(tgm);
+
+                KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                KjqbService.TimeArrangeForManagerInService tfmservice = new KjqbService.TimeArrangeForManagerInService();
+                tfmservice.TimeArrangeForManagerId = int.Parse(be.ToString());
+                tfmservice.UserId = tgm.UserId.Id;
+                tfmservice.SendUserId = user.Id;
+                tfmservice.ExamineOrExamineresult = 3;
+                ser.SaveInTimeArrangeForManagerInService(tfmservice);
+
+
+
                 DataGridView4RowsAdd(tgm);
                 MessageBox.Show("添加成功！");
             }
@@ -1090,6 +1101,7 @@ namespace WorkLogForm
                 t.State = (int)IEntity.stateEnum.Deleted;
                 baseService.SaveOrUpdateEntity(t);
                 this.dataGridView4.Rows.RemoveAt(e.RowIndex);
+                MessageBox.Show("删除成功！");
             }
 
 

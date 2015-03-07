@@ -24,6 +24,7 @@ namespace WorkLogForm
         private List<KjqbService.LogInService> loglistfromService;
         private List<KjqbService.ScheduleInService> schedulelistfromService;
         private List<KjqbService.CommentInService> commentlistfromService;
+        private List<KjqbService.TimeArrangeForManagerInService> tfmListfromservice;
         private IList scheduleList;
         private EventHandler mouseLeave;
         private EventHandler mouseEnter;
@@ -148,6 +149,8 @@ namespace WorkLogForm
              loglistfromService = new List<KjqbService.LogInService>();
              schedulelistfromService = new List<KjqbService.ScheduleInService>();
              commentlistfromService = new List<KjqbService.CommentInService>();
+             tfmListfromservice = new List<KjqbService.TimeArrangeForManagerInService>();
+
              KjqbService.LogInService[] lists;
              lists = ser.SearchShareLogUnRead((int)this.user.Id);
              this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
@@ -171,6 +174,16 @@ namespace WorkLogForm
              {
                  commentlistfromService.Add(list3[i]);
              }
+             KjqbService.TimeArrangeForManagerInService[] list4;
+             list4 = ser.SearchTimeArrangeForManagerUnRead((int)this.user.Id);
+             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list4.Length).ToString();
+             for (int i = 0; i < list4.Length; i++)
+             {
+                 tfmListfromservice.Add(list4[i]);
+             }
+
+
+
 
 
             #endregion
@@ -1561,6 +1574,7 @@ namespace WorkLogForm
             ser.SetShareLogIsRead((int)this.user.Id);
             ser.SetShareScheduleIsRead((int)this.user.Id);
             ser.SetCommentLogIsRead((int)this.user.Id);
+            ser.SetTimeArrangeForManagerIsRead((int)this.user.Id);
 
             if (newMessageWindow == null || newMessageWindow.IsDisposed)
             {
@@ -1572,6 +1586,7 @@ namespace WorkLogForm
                 newMessageWindow.Loglist = loglistfromService;
                 newMessageWindow.Schedulelist = schedulelistfromService;
                 newMessageWindow.CommentList = commentlistfromService;
+                newMessageWindow.Tfmlist = tfmListfromservice;
                 newMessageWindow.User = this.user;
                 newMessageWindow.Show();
 
@@ -1616,6 +1631,16 @@ namespace WorkLogForm
             }
 
             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists3.Length).ToString();
+
+            KjqbService.TimeArrangeForManagerInService[] lists4;
+            lists4 = ser.SearchTimeArrangeForManager((int)this.user.Id);
+            for (int i = 0; i < lists4.Length; i++)
+            {
+                tfmListfromservice.Add(lists4[i]);
+            }
+
+            this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists4.Length).ToString();
+
 
 
 

@@ -13,3 +13,4 @@ E:\WorkLogForm1\WorkLogForm\KjqbService\KjqbService\bin\EntityFramework.xml
 E:\WorkLogForm1\WorkLogForm\KjqbService\KjqbService\bin\zh-Hans\EntityFramework.resources.dll
 E:\WorkLogForm1\WorkLogForm\KjqbService\KjqbService\obj\Debug\KjqbService.dll
 E:\WorkLogForm1\WorkLogForm\KjqbService\KjqbService\obj\Debug\KjqbService.pdb
+E:\WorkLogForm1\WorkLogForm\KjqbService\KjqbService\obj\Debug\KjqbService.csprojResolveAssemblyReference.cache

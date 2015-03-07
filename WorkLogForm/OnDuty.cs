@@ -550,6 +550,38 @@ namespace WorkLogForm
 
                     baseService.SaveOrUpdateEntity(TfM);
 
+                    #region 向服务器发送消息
+                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                    string ssql1 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%综合办公室%') ";
+                    string ssql2 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%科技信息资源研究所%') ";
+                    if (TfM.DutyType == 0)
+                    {
+                        IList users = baseService.loadEntityList(ssql1);
+                        KjqbService.TimeArrangeForManagerInService tfminservice = new KjqbService.TimeArrangeForManagerInService();
+                        tfminservice.ExamineOrExamineresult = 0;
+                        tfminservice.UserId = ((WkTUser)users[0]).Id;
+                        tfminservice.SendUserId = this.user.Id;
+                        tfminservice.TimeArrangeForManagerId = TfM.Id;
+                        ser.SaveInTimeArrangeForManagerInService(tfminservice);
+                    }
+                    else if (TfM.DutyType == 1)
+                    {
+                        IList users = baseService.loadEntityList(ssql2);
+                        KjqbService.TimeArrangeForManagerInService tfminservice = new KjqbService.TimeArrangeForManagerInService();
+                        tfminservice.ExamineOrExamineresult = 0;
+                        tfminservice.UserId = ((WkTUser)users[0]).Id;
+                        tfminservice.SendUserId = this.user.Id;
+                        tfminservice.TimeArrangeForManagerId = TfM.Id;
+                        ser.SaveInTimeArrangeForManagerInService(tfminservice);
+                    }
+                    
+
+
+
+
+                    #endregion
+
+
                     #region 行政班
                     if (TfM.DutyType == 0) //行政班
                     {
@@ -658,15 +690,28 @@ namespace WorkLogForm
 
                 if (Therole != 0)
                 {
-                    this.PanelOfTwoButtons.Visible = true; switch (TfM.ExamineState)
+                    string sqll = "select u from TimeArrangeForManager u where u.TimeMonth = " + tt.Ticks +
+                    " and u.State = " + (int)IEntity.stateEnum.Normal;
+                    IList listss = baseService.loadEntityList(sqll);
+
+                    if (listss != null && listss.Count > 0)
                     {
-                        case 0:
-                            this.CheckState.Text = "审核状态：未审核"; break;
-                        case 1:
-                            this.CheckState.Text = "审核状态：审核通过"; break;
-                        case 2:
-                            this.CheckState.Text = "审核状态：审核未通过"; break;
+                        this.PanelOfTwoButtons.Visible = true;
+                        switch (TfM.ExamineState)
+                        {
+                            case 0:
+                                this.CheckState.Text = "审核状态：未审核"; break;
+                            case 1:
+                                this.CheckState.Text = "审核状态：审核通过"; break;
+                            case 2:
+                                this.CheckState.Text = "审核状态：审核未通过"; break;
+                        }
                     }
+                    else
+                    {
+                        this.PanelOfTwoButtons.Visible = false;
+                    }
+                    
                 }
 
 
@@ -697,26 +742,39 @@ namespace WorkLogForm
              " and u.IsDone = 1 ";
 
             IList timemananer = baseService.loadEntityList(sql);
-             if(timemananer != null && timemananer.Count > 0)
-             {
-                 TimeArrangeForManager timeman = (TimeArrangeForManager)timemananer[0];
-                 if (timeman.ExamineState == 0)
-                 {
-                     if (MessageBox.Show("确定要通过吗？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                     {
+            if (timemananer != null && timemananer.Count > 0)
+            {
+                TimeArrangeForManager timeman = (TimeArrangeForManager)timemananer[0];
+                if (timeman.ExamineState == 0)
+                {
+                    if (MessageBox.Show("确定要通过吗？", "提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
 
-                         timeman.ExamineState = 1;
-                         baseService.SaveOrUpdateEntity(timeman);
+                        timeman.ExamineState = 1;
+                        baseService.SaveOrUpdateEntity(timeman);
 
-                         this.CheckState.Text = "审核状态：审核通过";
-                     }
-                 }
-                 else
-                 {
-                     MessageBox.Show("您已经审核过了");
-                 }
-                
-             }
+                        KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                        KjqbService.TimeArrangeForManagerInService tfmservice = new KjqbService.TimeArrangeForManagerInService();
+                        tfmservice.ExamineOrExamineresult = 1;
+                        tfmservice.SendUserId = this.user.Id;
+                        tfmservice.UserId = timeman.UserId.Id;
+                        tfmservice.TimeArrangeForManagerId = timeman.Id;
+                        ser.SaveInTimeArrangeForManagerInService(tfmservice);
+
+
+                        this.CheckState.Text = "审核状态：审核通过";
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("您已经审核过了");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("值班尚未安排！");
+            }
                
             
 
@@ -747,6 +805,18 @@ namespace WorkLogForm
                         timeman.ExamineState = 2;
                         baseService.SaveOrUpdateEntity(timeman);
 
+                        KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                        KjqbService.TimeArrangeForManagerInService tfmservice = new KjqbService.TimeArrangeForManagerInService();
+                        tfmservice.ExamineOrExamineresult = 2;
+                        tfmservice.SendUserId = this.user.Id;
+                        tfmservice.UserId = timeman.UserId.Id;
+                        tfmservice.TimeArrangeForManagerId = timeman.Id;
+                        ser.SaveInTimeArrangeForManagerInService(tfmservice);
+
+
+
+
+
                         this.CheckState.Text = "审核状态：审核不通过";
                     }
                 }
@@ -756,7 +826,18 @@ namespace WorkLogForm
                 }
 
             }
+            else
+            {
+                MessageBox.Show("值班尚未安排！");
+ 
+            
+            
+            }
         }
+
+
+
+
         /*-----------------值班统计---------------------------*/
 
         #region 统计自己

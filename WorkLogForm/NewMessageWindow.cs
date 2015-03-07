@@ -17,6 +17,13 @@ namespace WorkLogForm
         private List<KjqbService.LogInService> loglist;
         private List<KjqbService.ScheduleInService> schedulelist;
         private List<KjqbService.CommentInService> commentList;
+        private List<KjqbService.TimeArrangeForManagerInService> tfmlist;
+
+        public List<KjqbService.TimeArrangeForManagerInService> Tfmlist
+        {
+            get { return tfmlist; }
+            set { tfmlist = value; }
+        }
 
         public List<KjqbService.CommentInService> CommentList
         {
@@ -138,7 +145,41 @@ namespace WorkLogForm
                     l1.Parent = flowLayoutPanel1;
                 }
             }
-
+            if(tfmlist != null && tfmlist.Count >0)
+            {
+                foreach(KjqbService.TimeArrangeForManagerInService tfm in tfmlist)
+                {
+                    TimeArrangeForManager tt = new TimeArrangeForManager();
+                    tt = (TimeArrangeForManager)baseService.loadEntity(tt,tfm.TimeArrangeForManagerId);
+                    LinkLabel l1 = new LinkLabel();
+                                        l1.Width = 150;
+                    l1.Height = 30;
+                    l1.Top = 10;
+                    //l1.Tag = ss;
+                    l1.Click += l1_Click;
+                    l1.Parent = flowLayoutPanel1;
+                    DateTime dt = new DateTime(tt.TimeMonth);
+                    if (tfm.ExamineOrExamineresult == 0)
+                    {
+                        l1.Text = dt.ToString("yyyy年MM月")+" "+"排班待您审核";
+                    }
+                    if (tfm.ExamineOrExamineresult == 1)
+                    {
+                        l1.Text = dt.ToString("yyyy年MM月") + " " + "排班审核通过";
+                    }
+                    if (tfm.ExamineOrExamineresult == 2)
+                    {
+                        l1.Text = dt.ToString("yyyy年MM月") + " " + "排班审核未通过";
+                    }
+                    if (tfm.ExamineOrExamineresult == 3)
+                    {
+                        l1.Text = "请您安排"+dt.ToString("yyyy年MM月")+"的值班";
+                    }
+                
+                }
+            
+            
+            }
 
         }
 

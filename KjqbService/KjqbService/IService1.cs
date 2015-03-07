@@ -55,5 +55,20 @@ namespace KjqbService
         
         #endregion
 
+        #region 值班审批推送
+        [OperationContract]
+        bool SaveInTimeArrangeForManagerInService(TimeArrangeForManagerInService log);
+
+        [OperationContract]
+        List<TimeArrangeForManagerInService> SearchTimeArrangeForManager(int Id);
+
+        [OperationContract]
+        void SetTimeArrangeForManagerIsRead(int Id);
+
+        [OperationContract]
+        List<TimeArrangeForManagerInService> SearchTimeArrangeForManagerUnRead(int Id);
+       
+        #endregion
+
     }
 }

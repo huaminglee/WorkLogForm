@@ -40,5 +40,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TimeArrangeForManagerMessages">
+      <EntityTypeMapping TypeName="KjqbServiceModel.TimeArrangeForManagerMessage">
+        <MappingFragment StoreEntitySet="TimeArrangeForManagerMessage">
+          <ScalarProperty Name="ExamineOrExamineResult" ColumnName="ExamineOrExamineResult" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="SendUserId" ColumnName="SendUserId" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="TimeArrangeForManagerId" ColumnName="TimeArrangeForManagerId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -292,6 +292,99 @@ namespace WorkLogForm.KjqbService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TimeArrangeForManagerInService", Namespace="http://schemas.datacontract.org/2004/07/KjqbService")]
+    [System.SerializableAttribute()]
+    public partial class TimeArrangeForManagerInService : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ExamineOrExamineresultField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SendUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long TimeArrangeForManagerIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long UserIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ExamineOrExamineresult {
+            get {
+                return this.ExamineOrExamineresultField;
+            }
+            set {
+                if ((this.ExamineOrExamineresultField.Equals(value) != true)) {
+                    this.ExamineOrExamineresultField = value;
+                    this.RaisePropertyChanged("ExamineOrExamineresult");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SendUserId {
+            get {
+                return this.SendUserIdField;
+            }
+            set {
+                if ((this.SendUserIdField.Equals(value) != true)) {
+                    this.SendUserIdField = value;
+                    this.RaisePropertyChanged("SendUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long TimeArrangeForManagerId {
+            get {
+                return this.TimeArrangeForManagerIdField;
+            }
+            set {
+                if ((this.TimeArrangeForManagerIdField.Equals(value) != true)) {
+                    this.TimeArrangeForManagerIdField = value;
+                    this.RaisePropertyChanged("TimeArrangeForManagerId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="KjqbService.IService1")]
     public interface IService1 {
@@ -331,6 +424,18 @@ namespace WorkLogForm.KjqbService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchCommentlogUnRead", ReplyAction="http://tempuri.org/IService1/SearchCommentlogUnReadResponse")]
         WorkLogForm.KjqbService.CommentInService[] SearchCommentlogUnRead(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveInTimeArrangeForManagerInService", ReplyAction="http://tempuri.org/IService1/SaveInTimeArrangeForManagerInServiceResponse")]
+        bool SaveInTimeArrangeForManagerInService(WorkLogForm.KjqbService.TimeArrangeForManagerInService log);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchTimeArrangeForManager", ReplyAction="http://tempuri.org/IService1/SearchTimeArrangeForManagerResponse")]
+        WorkLogForm.KjqbService.TimeArrangeForManagerInService[] SearchTimeArrangeForManager(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SetTimeArrangeForManagerIsRead", ReplyAction="http://tempuri.org/IService1/SetTimeArrangeForManagerIsReadResponse")]
+        void SetTimeArrangeForManagerIsRead(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnRead", ReplyAction="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnReadResponse")]
+        WorkLogForm.KjqbService.TimeArrangeForManagerInService[] SearchTimeArrangeForManagerUnRead(int Id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -406,6 +511,22 @@ namespace WorkLogForm.KjqbService {
         
         public WorkLogForm.KjqbService.CommentInService[] SearchCommentlogUnRead(int Id) {
             return base.Channel.SearchCommentlogUnRead(Id);
+        }
+        
+        public bool SaveInTimeArrangeForManagerInService(WorkLogForm.KjqbService.TimeArrangeForManagerInService log) {
+            return base.Channel.SaveInTimeArrangeForManagerInService(log);
+        }
+        
+        public WorkLogForm.KjqbService.TimeArrangeForManagerInService[] SearchTimeArrangeForManager(int Id) {
+            return base.Channel.SearchTimeArrangeForManager(Id);
+        }
+        
+        public void SetTimeArrangeForManagerIsRead(int Id) {
+            base.Channel.SetTimeArrangeForManagerIsRead(Id);
+        }
+        
+        public WorkLogForm.KjqbService.TimeArrangeForManagerInService[] SearchTimeArrangeForManagerUnRead(int Id) {
+            return base.Channel.SearchTimeArrangeForManagerUnRead(Id);
         }
     }
 }

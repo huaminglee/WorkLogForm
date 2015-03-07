@@ -9,6 +9,7 @@
           <EntitySet Name="CommentMessage" EntityType="KjqbServiceModel.Store.CommentMessage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LogMessage" EntityType="KjqbServiceModel.Store.LogMessage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ScheduleMessage" EntityType="KjqbServiceModel.Store.ScheduleMessage" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TimeArrangeForManagerMessage" EntityType="KjqbServiceModel.Store.TimeArrangeForManagerMessage" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
         <EntityType Name="CommentMessage">
           <Key>
@@ -46,6 +47,19 @@
           <Property Name="TimeStamp" Type="numeric" />
           <Property Name="IsRead" Type="int" />
         </EntityType>
+        <EntityType Name="TimeArrangeForManagerMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TimeArrangeForManagerId" Type="bigint" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="State" Type="int" />
+          <Property Name="IsRead" Type="int" />
+          <Property Name="SendUserId" Type="bigint" />
+          <Property Name="TimeStamp" Type="numeric" />
+          <Property Name="ExamineOrExamineResult" Type="int" />
+        </EntityType>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -54,6 +68,7 @@
           <EntitySet Name="LogMessages" EntityType="KjqbServiceModel.LogMessage" />
           <EntitySet Name="ScheduleMessages" EntityType="KjqbServiceModel.ScheduleMessage" />
           <EntitySet Name="CommentMessages" EntityType="KjqbServiceModel.CommentMessage" />
+          <EntitySet Name="TimeArrangeForManagerMessages" EntityType="KjqbServiceModel.TimeArrangeForManagerMessage" />
         </EntityContainer>
         <EntityType Name="LogMessage">
           <Key>
@@ -90,6 +105,19 @@
           <Property Type="Decimal" Name="TimeStamp" Precision="18" Scale="0" />
           <Property Type="Int32" Name="State" />
           <Property Type="Int32" Name="IsRead" />
+        </EntityType>
+        <EntityType Name="TimeArrangeForManagerMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="TimeArrangeForManagerId" />
+          <Property Type="Int64" Name="UserId" />
+          <Property Type="Int32" Name="State" />
+          <Property Type="Int32" Name="IsRead" />
+          <Property Type="Int64" Name="SendUserId" />
+          <Property Type="Decimal" Name="TimeStamp" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="ExamineOrExamineResult" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -132,6 +160,20 @@
                 <ScalarProperty Name="CommentUserName" ColumnName="CommentUserName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="LogId" ColumnName="LogId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeArrangeForManagerMessages">
+            <EntityTypeMapping TypeName="KjqbServiceModel.TimeArrangeForManagerMessage">
+              <MappingFragment StoreEntitySet="TimeArrangeForManagerMessage">
+                <ScalarProperty Name="ExamineOrExamineResult" ColumnName="ExamineOrExamineResult" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="SendUserId" ColumnName="SendUserId" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TimeArrangeForManagerId" ColumnName="TimeArrangeForManagerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

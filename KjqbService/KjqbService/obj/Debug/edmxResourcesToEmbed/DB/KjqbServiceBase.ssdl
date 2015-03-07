@@ -4,6 +4,7 @@
     <EntitySet Name="CommentMessage" EntityType="KjqbServiceModel.Store.CommentMessage" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="LogMessage" EntityType="KjqbServiceModel.Store.LogMessage" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ScheduleMessage" EntityType="KjqbServiceModel.Store.ScheduleMessage" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TimeArrangeForManagerMessage" EntityType="KjqbServiceModel.Store.TimeArrangeForManagerMessage" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
   <EntityType Name="CommentMessage">
     <Key>
@@ -40,5 +41,18 @@
     <Property Name="State" Type="int" />
     <Property Name="TimeStamp" Type="numeric" />
     <Property Name="IsRead" Type="int" />
+  </EntityType>
+  <EntityType Name="TimeArrangeForManagerMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TimeArrangeForManagerId" Type="bigint" />
+    <Property Name="UserId" Type="bigint" />
+    <Property Name="State" Type="int" />
+    <Property Name="IsRead" Type="int" />
+    <Property Name="SendUserId" Type="bigint" />
+    <Property Name="TimeStamp" Type="numeric" />
+    <Property Name="ExamineOrExamineResult" Type="int" />
   </EntityType>
 </Schema>

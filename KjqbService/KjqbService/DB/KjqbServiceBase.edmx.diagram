@@ -8,6 +8,7 @@
         <EntityTypeShape EntityType="KjqbServiceModel.LogMessage" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KjqbServiceModel.ScheduleMessage" Width="1.5" PointX="0.066785858975158013" PointY="14.822660050737978" />
         <EntityTypeShape EntityType="KjqbServiceModel.CommentMessage" Width="1.5" PointX="5.375" PointY="2.125" />
+        <EntityTypeShape EntityType="KjqbServiceModel.TimeArrangeForManagerMessage" Width="2.125" PointX="7.125" PointY="1.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
