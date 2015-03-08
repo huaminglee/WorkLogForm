@@ -7,8 +7,9 @@
       <Diagram DiagramId="bb66e91f03fe4da39f5dc66082b34255" Name="关系图1">
         <EntityTypeShape EntityType="KjqbServiceModel.LogMessage" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="KjqbServiceModel.ScheduleMessage" Width="1.5" PointX="0.066785858975158013" PointY="14.822660050737978" />
-        <EntityTypeShape EntityType="KjqbServiceModel.CommentMessage" Width="1.5" PointX="5.375" PointY="2.125" />
-        <EntityTypeShape EntityType="KjqbServiceModel.TimeArrangeForManagerMessage" Width="2.125" PointX="7.125" PointY="1.875" />
+        <EntityTypeShape EntityType="KjqbServiceModel.CommentMessage" Width="1.5" PointX="2.5" PointY="0.75" />
+        <EntityTypeShape EntityType="KjqbServiceModel.TimeArrangeForManagerMessage" Width="2.125" PointX="4.25" PointY="0.75" />
+        <EntityTypeShape EntityType="KjqbServiceModel.LeaveMessage" Width="1.5" PointX="6.625" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
