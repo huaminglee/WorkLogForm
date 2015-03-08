@@ -44,7 +44,7 @@ namespace KjqbService
 
         private int type;
 
-        public int Type
+        public int Type//0：审批 1：退回  2：撤销 3：通过
         {
             get { return type; }
             set { type = value; }

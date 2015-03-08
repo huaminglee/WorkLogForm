@@ -16,6 +16,7 @@ namespace KjqbService.DB
             bm.TimeStamp = b.TimeStamp;
             bm.State = 0;
             bm.IsRead = 0;
+            bm.Type = b.Type;
             context.BusinessMessages.Add(bm);
             context.SaveChanges();
             return bm.Id;

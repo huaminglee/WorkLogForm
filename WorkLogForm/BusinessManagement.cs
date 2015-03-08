@@ -461,6 +461,18 @@ namespace WorkLogForm
             }
             b.WaitingNum = -1;
             baseService.SaveOrUpdateEntity(b);
+
+            #region 服务器通信
+            KjqbService.Service1Client ser = new KjqbService.Service1Client();
+
+            KjqbService.BusinessService bs = new KjqbService.BusinessService();
+            bs.BusinessID = b.Id;
+            bs.ReceiveID = b.Ku_Id.Id;
+            bs.Type = 2;
+            bs.TimeStamp = DateTime.Now.Ticks;
+            ser.SaveInBusinessListInService(bs);
+
+            #endregion
             initTabPage4();
         }
         private void button4_Click(object sender, EventArgs e)//人员修改
@@ -532,6 +544,18 @@ namespace WorkLogForm
                 }
                 b.PassExam = (int)Business.ExamState.done;
                 baseService.SaveOrUpdateEntity(b);
+
+                #region 服务器通信
+                KjqbService.Service1Client ser = new KjqbService.Service1Client();
+
+                KjqbService.BusinessService bs = new KjqbService.BusinessService();
+                bs.BusinessID = b.Id;
+                bs.ReceiveID = b.Ku_Id.Id;
+                bs.Type = 3;
+                bs.TimeStamp = DateTime.Now.Ticks;
+                ser.SaveInBusinessListInService(bs);
+
+                #endregion
             }
             initTabPage3();
         }
@@ -546,6 +570,19 @@ namespace WorkLogForm
                 }
                 b.PassExam = (int)Business.ExamState.npass;
                 baseService.SaveOrUpdateEntity(b);
+
+                #region 服务器通信
+                KjqbService.Service1Client ser = new KjqbService.Service1Client();
+
+                KjqbService.BusinessService bs = new KjqbService.BusinessService();
+                bs.BusinessID = b.Id;
+                bs.ReceiveID = b.Ku_Id.Id;
+                bs.Type = 2;
+                bs.TimeStamp = DateTime.Now.Ticks;
+                ser.SaveInBusinessListInService(bs);
+
+                #endregion
+
             }
             initTabPage3();
         }
