@@ -219,10 +219,24 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="SaveInBusinessListInService">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="bs" nillable="true" type="q13:BusinessService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SaveInBusinessListInServiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="SaveInBusinessListInServiceResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="SaveInLeaveInfoInService">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="log" nillable="true" type="q13:LeaveInService" />
+            <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="log" nillable="true" type="q14:LeaveInService" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -243,7 +257,7 @@
       <xs:element name="SearchLeaveInfoResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchLeaveInfoResult" nillable="true" type="q14:ArrayOfLeaveInService" />
+            <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchLeaveInfoResult" nillable="true" type="q15:ArrayOfLeaveInService" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -269,7 +283,7 @@
       <xs:element name="SearchLeaveInfoUnReadResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchLeaveInfoUnReadResult" nillable="true" type="q15:ArrayOfLeaveInService" />
+            <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchLeaveInfoUnReadResult" nillable="true" type="q16:ArrayOfLeaveInService" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -376,6 +390,15 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="ArrayOfTimeArrangeForManagerInService" nillable="true" type="tns:ArrayOfTimeArrangeForManagerInService" />
+      <xs:complexType name="BusinessService">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BusinessID" type="xs:long" />
+          <xs:element minOccurs="0" name="ReceiveID" type="xs:long" />
+          <xs:element minOccurs="0" name="TimeStamp" type="xs:long" />
+          <xs:element minOccurs="0" name="Type" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="BusinessService" nillable="true" type="tns:BusinessService" />
       <xs:complexType name="LeaveInService">
         <xs:sequence>
           <xs:element minOccurs="0" name="ExamineOrExamineresult" type="xs:int" />
@@ -489,6 +512,12 @@
   <wsdl:message name="IService1_SearchTimeArrangeForManagerUnRead_OutputMessage">
     <wsdl:part name="parameters" element="tns:SearchTimeArrangeForManagerUnReadResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SaveInBusinessListInService_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveInBusinessListInService" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SaveInBusinessListInService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveInBusinessListInServiceResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_SaveInLeaveInfoInService_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveInLeaveInfoInService" />
   </wsdl:message>
@@ -577,6 +606,10 @@
     <wsdl:operation name="SearchTimeArrangeForManagerUnRead">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnRead" message="tns:IService1_SearchTimeArrangeForManagerUnRead_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnReadResponse" message="tns:IService1_SearchTimeArrangeForManagerUnRead_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveInBusinessListInService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInBusinessListInService" message="tns:IService1_SaveInBusinessListInService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SaveInBusinessListInServiceResponse" message="tns:IService1_SaveInBusinessListInService_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SaveInLeaveInfoInService">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInLeaveInfoInService" message="tns:IService1_SaveInLeaveInfoInService_InputMessage" />
@@ -734,6 +767,15 @@
     </wsdl:operation>
     <wsdl:operation name="SearchTimeArrangeForManagerUnRead">
       <soap:operation soapAction="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveInBusinessListInService">
+      <soap:operation soapAction="http://tempuri.org/IService1/SaveInBusinessListInService" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
