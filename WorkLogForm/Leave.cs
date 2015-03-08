@@ -155,22 +155,21 @@ namespace WorkLogForm
         private void button4_Click(object sender, EventArgs e)
         {
             //保存指定的负责人到对应的请假表，先暂存在一个list中，最后界面信息提交的时候再保存信息；
-
-            if (listView1.CheckedItems.Count == 0)
+            if (Leave_listView.CheckedItems.Count == 0)
             {
                 MessageBox.Show("请勾选您要指定的负责人！");
             }
             else
             {
 
-                while (listView1.CheckedItems.Count > 0)
+                while (Leave_listView.CheckedItems.Count > 0)
                 {
                     if (chargeman == null)
                     {
                         chargeman = new List<WkTUser>();
                     }
 
-                    ListViewItem item = listView1.CheckedItems[0];
+                    ListViewItem item = Leave_listView.CheckedItems[0];
                     chargeman.Add((WkTUser)item.Tag);
                     item.Checked = false;
                 }
@@ -592,7 +591,7 @@ namespace WorkLogForm
         {
             listView1.Items.Clear();
 
-            String sql = "select u from WkTUser u left join u.Kdid where u.KuName like '%" + textBox3.Text.Trim() + "%'and u.Kdid.KdName like '%" + comboBox4.Text.Trim() + "%'";
+            String sql = "select u from WkTUser u left join u.Kdid where u.KuName like '%" + leave_nametextBox.Text.Trim() + "%'and u.Kdid.KdName like '%" + leave_departmentcomboBox.Text.Trim() + "%'";
 
             IList leaveList = baseService.loadEntityList(sql);
             if (leaveList != null && leaveList.Count > 0)
@@ -647,10 +646,10 @@ namespace WorkLogForm
                 MessageBox.Show("请选择请假类型！");
                 return;
             }
-            levchange.StartTime = dateTimePicker1.Value.Date.Ticks;
-            levchange.EndTime = dateTimePicker2.Value.Date.Ticks;
-            levchange.LeaveType = comboBox2.Text.Trim();//请假类型
-            levchange.LeaveReason = textBox7.Text.Trim();//请假原因
+            levchange.StartTime = dateTimePicker5.Value.Date.Ticks;
+            levchange.EndTime = dateTimePicker6.Value.Date.Ticks;
+            levchange.LeaveType = comboBox3.Text.Trim();//请假类型
+            levchange.LeaveReason = textBox2.Text.Trim();//请假原因
            
 
             levchange.Ku_Id = leaveman;//请假人信息
@@ -678,8 +677,6 @@ namespace WorkLogForm
             //重新指定负责人
             panel3.Visible = true;
             initdata3();
-
-
         }
         private void initdata3()
         {
@@ -714,7 +711,7 @@ namespace WorkLogForm
                     ListViewItem item = listView3.CheckedItems[0];
                     chargeman.Add((WkTUser)item.Tag);
                     item.Checked = false;
-                    this.label21.Text = this.label21.Text + "" + ((WkTUser)item.Tag).KuName;
+                    this.label21.Text =  ((WkTUser)item.Tag).KuName+"";
                 }
                 
 
@@ -1143,18 +1140,32 @@ namespace WorkLogForm
             ListViewItem item = this.listView2.SelectedItems[0];//请假查看-listview2中的数据被选中
             if (item == null) return;
             LeaveManage u = (LeaveManage)item.Tag;
-            if (u.Ku_Id.Id == this.leaveman.Id)
+
+            if (u.LeaveResult.Trim() == "3" || (u.LeaveResult.Trim() == "1" && (u.LeaveStage.Trim() == "1" || u.LeaveStage.Trim() == "2")))
             {
-                linkLabel1.Visible = true;
+                if (u.Ku_Id.Id == this.leaveman.Id)
+                {
+                    this.dateTimePicker5.Enabled = true;
+                    this.dateTimePicker6.Enabled = true;
+                    this.comboBox3.Enabled = true;
+                    this.textBox2.Enabled = true;
+                    linkLabel1.Visible = true;
+                    button8.Visible = true;
+                    button9.Visible = true;
+                }
             }
             else
             {
+                this.dateTimePicker5.Enabled = false;
+                this.dateTimePicker6.Enabled = false;
+                this.comboBox3.Enabled = false;
+                this.textBox2.Enabled = false;
                 linkLabel1.Visible = false;
+                button8.Visible = false;
+                button9.Visible = false;
             }
-
-
-            button8.Visible = false;
-            button9.Visible = false;
+          
+           
             label21.Text = item.SubItems[6].Text;//负责人
             comboBox3.Text = item.SubItems[3].Text;//请假类别
             textBox2.Text = item.SubItems[8].Text;//请假原因
