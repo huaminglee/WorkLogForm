@@ -219,6 +219,60 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="SaveInLeaveInfoInService">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="log" nillable="true" type="q13:LeaveInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SaveInLeaveInfoInServiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="SaveInLeaveInfoInServiceResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchLeaveInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchLeaveInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchLeaveInfoResult" nillable="true" type="q14:ArrayOfLeaveInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetLeaveInfoIsRead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetLeaveInfoIsReadResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchLeaveInfoUnRead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchLeaveInfoUnReadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchLeaveInfoUnReadResult" nillable="true" type="q15:ArrayOfLeaveInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="anyType" nillable="true" type="xs:anyType" />
@@ -322,6 +376,21 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="ArrayOfTimeArrangeForManagerInService" nillable="true" type="tns:ArrayOfTimeArrangeForManagerInService" />
+      <xs:complexType name="LeaveInService">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ExamineOrExamineresult" type="xs:int" />
+          <xs:element minOccurs="0" name="LeaveId" type="xs:long" />
+          <xs:element minOccurs="0" name="SendUserId" type="xs:long" />
+          <xs:element minOccurs="0" name="UserId" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="LeaveInService" nillable="true" type="tns:LeaveInService" />
+      <xs:complexType name="ArrayOfLeaveInService">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="LeaveInService" nillable="true" type="tns:LeaveInService" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfLeaveInService" nillable="true" type="tns:ArrayOfLeaveInService" />
     </xs:schema>
   </wsdl:types>
   <wsdl:message name="IService1_SaveInLogListInService_InputMessage">
@@ -420,6 +489,30 @@
   <wsdl:message name="IService1_SearchTimeArrangeForManagerUnRead_OutputMessage">
     <wsdl:part name="parameters" element="tns:SearchTimeArrangeForManagerUnReadResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SaveInLeaveInfoInService_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveInLeaveInfoInService" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SaveInLeaveInfoInService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveInLeaveInfoInServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchLeaveInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchLeaveInfo" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchLeaveInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchLeaveInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SetLeaveInfoIsRead_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetLeaveInfoIsRead" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SetLeaveInfoIsRead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetLeaveInfoIsReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchLeaveInfoUnRead_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchLeaveInfoUnRead" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchLeaveInfoUnRead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchLeaveInfoUnReadResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="SaveInLogListInService">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInLogListInService" message="tns:IService1_SaveInLogListInService_InputMessage" />
@@ -484,6 +577,22 @@
     <wsdl:operation name="SearchTimeArrangeForManagerUnRead">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnRead" message="tns:IService1_SearchTimeArrangeForManagerUnRead_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnReadResponse" message="tns:IService1_SearchTimeArrangeForManagerUnRead_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveInLeaveInfoInService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInLeaveInfoInService" message="tns:IService1_SaveInLeaveInfoInService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SaveInLeaveInfoInServiceResponse" message="tns:IService1_SaveInLeaveInfoInService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchLeaveInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchLeaveInfo" message="tns:IService1_SearchLeaveInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchLeaveInfoResponse" message="tns:IService1_SearchLeaveInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetLeaveInfoIsRead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SetLeaveInfoIsRead" message="tns:IService1_SetLeaveInfoIsRead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SetLeaveInfoIsReadResponse" message="tns:IService1_SetLeaveInfoIsRead_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchLeaveInfoUnRead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchLeaveInfoUnRead" message="tns:IService1_SearchLeaveInfoUnRead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchLeaveInfoUnReadResponse" message="tns:IService1_SearchLeaveInfoUnRead_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -625,6 +734,42 @@
     </wsdl:operation>
     <wsdl:operation name="SearchTimeArrangeForManagerUnRead">
       <soap:operation soapAction="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveInLeaveInfoInService">
+      <soap:operation soapAction="http://tempuri.org/IService1/SaveInLeaveInfoInService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchLeaveInfo">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchLeaveInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetLeaveInfoIsRead">
+      <soap:operation soapAction="http://tempuri.org/IService1/SetLeaveInfoIsRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchLeaveInfoUnRead">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchLeaveInfoUnRead" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

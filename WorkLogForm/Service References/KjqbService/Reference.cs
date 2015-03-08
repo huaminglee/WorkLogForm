@@ -385,6 +385,99 @@ namespace WorkLogForm.KjqbService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LeaveInService", Namespace="http://schemas.datacontract.org/2004/07/KjqbService")]
+    [System.SerializableAttribute()]
+    public partial class LeaveInService : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ExamineOrExamineresultField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long LeaveIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SendUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long UserIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ExamineOrExamineresult {
+            get {
+                return this.ExamineOrExamineresultField;
+            }
+            set {
+                if ((this.ExamineOrExamineresultField.Equals(value) != true)) {
+                    this.ExamineOrExamineresultField = value;
+                    this.RaisePropertyChanged("ExamineOrExamineresult");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long LeaveId {
+            get {
+                return this.LeaveIdField;
+            }
+            set {
+                if ((this.LeaveIdField.Equals(value) != true)) {
+                    this.LeaveIdField = value;
+                    this.RaisePropertyChanged("LeaveId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SendUserId {
+            get {
+                return this.SendUserIdField;
+            }
+            set {
+                if ((this.SendUserIdField.Equals(value) != true)) {
+                    this.SendUserIdField = value;
+                    this.RaisePropertyChanged("SendUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long UserId {
+            get {
+                return this.UserIdField;
+            }
+            set {
+                if ((this.UserIdField.Equals(value) != true)) {
+                    this.UserIdField = value;
+                    this.RaisePropertyChanged("UserId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="KjqbService.IService1")]
     public interface IService1 {
@@ -436,6 +529,18 @@ namespace WorkLogForm.KjqbService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnRead", ReplyAction="http://tempuri.org/IService1/SearchTimeArrangeForManagerUnReadResponse")]
         WorkLogForm.KjqbService.TimeArrangeForManagerInService[] SearchTimeArrangeForManagerUnRead(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveInLeaveInfoInService", ReplyAction="http://tempuri.org/IService1/SaveInLeaveInfoInServiceResponse")]
+        bool SaveInLeaveInfoInService(WorkLogForm.KjqbService.LeaveInService log);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchLeaveInfo", ReplyAction="http://tempuri.org/IService1/SearchLeaveInfoResponse")]
+        WorkLogForm.KjqbService.LeaveInService[] SearchLeaveInfo(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SetLeaveInfoIsRead", ReplyAction="http://tempuri.org/IService1/SetLeaveInfoIsReadResponse")]
+        void SetLeaveInfoIsRead(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchLeaveInfoUnRead", ReplyAction="http://tempuri.org/IService1/SearchLeaveInfoUnReadResponse")]
+        WorkLogForm.KjqbService.LeaveInService[] SearchLeaveInfoUnRead(int Id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -527,6 +632,22 @@ namespace WorkLogForm.KjqbService {
         
         public WorkLogForm.KjqbService.TimeArrangeForManagerInService[] SearchTimeArrangeForManagerUnRead(int Id) {
             return base.Channel.SearchTimeArrangeForManagerUnRead(Id);
+        }
+        
+        public bool SaveInLeaveInfoInService(WorkLogForm.KjqbService.LeaveInService log) {
+            return base.Channel.SaveInLeaveInfoInService(log);
+        }
+        
+        public WorkLogForm.KjqbService.LeaveInService[] SearchLeaveInfo(int Id) {
+            return base.Channel.SearchLeaveInfo(Id);
+        }
+        
+        public void SetLeaveInfoIsRead(int Id) {
+            base.Channel.SetLeaveInfoIsRead(Id);
+        }
+        
+        public WorkLogForm.KjqbService.LeaveInService[] SearchLeaveInfoUnRead(int Id) {
+            return base.Channel.SearchLeaveInfoUnRead(Id);
         }
     }
 }

@@ -30,5 +30,6 @@ namespace KjqbService.DB
         public DbSet<CommentMessage> CommentMessages { get; set; }
         public DbSet<TimeArrangeForManagerMessage> TimeArrangeForManagerMessages { get; set; }
         public DbSet<LeaveMessage> LeaveMessages { get; set; }
+        public DbSet<BusinessMessage> BusinessMessages { get; set; }
     }
 }
