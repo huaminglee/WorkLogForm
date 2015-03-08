@@ -1590,23 +1590,22 @@ namespace WorkLogForm
         private void button14_Click(object sender, EventArgs e)
         {
             if (this.comboBox14.Text != "" && this.comboBox15.Text != "" && this.comboBox16.Text != "" && this.comboBox12.Text != "")
-            {
-                if (this.comboBox14.SelectedIndex != this.comboBox16.SelectedIndex)
+            { 
+                WkTUser u = this.AddUserPage6_2[this.comboBox15.SelectedIndex];
+                WkTRole r = this.AddrolePage6[this.comboBox12.SelectedIndex];
+                if (this.comboBox14.SelectedIndex != this.comboBox16.SelectedIndex || !u.UserRole.Contains(r) )
                 {
                     this.button14.Cursor = Cursors.WaitCursor;
-                    WkTUser u = this.AddUserPage6_2[this.comboBox15.SelectedIndex];
                     u.UserRole.Clear();
-                    WkTRole r = this.AddrolePage6[this.comboBox12.SelectedIndex];
                     u.UserRole.Add(r);
                     u.Kdid = this.AdddeptsPage6[this.comboBox16.SelectedIndex];
                     baseService.SaveOrUpdateEntity(u);
                     this.button14.Cursor = Cursors.Hand;
                     MessageBox.Show("修改成功！");
-
                 }
                 else 
                 {
-                    MessageBox.Show("请选择新部门");
+                    MessageBox.Show("请选择新部门或职位");
                 }
             
             }
