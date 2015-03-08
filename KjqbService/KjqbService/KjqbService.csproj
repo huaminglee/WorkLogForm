@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="BusinessService.cs" />
     <Compile Include="CommentInService.cs" />
+    <Compile Include="DB\BusinessOperate.cs" />
     <Compile Include="DB\CommentMessage.cs">
       <DependentUpon>KjqbServiceBase.tt</DependentUpon>
     </Compile>

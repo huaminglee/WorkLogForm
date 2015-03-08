@@ -10,6 +10,7 @@
         <EntityTypeShape EntityType="KjqbServiceModel.CommentMessage" Width="1.5" PointX="2.5" PointY="0.75" />
         <EntityTypeShape EntityType="KjqbServiceModel.TimeArrangeForManagerMessage" Width="2.125" PointX="4.25" PointY="0.75" />
         <EntityTypeShape EntityType="KjqbServiceModel.LeaveMessage" Width="1.5" PointX="6.625" PointY="0.75" />
+        <EntityTypeShape EntityType="KjqbServiceModel.BusinessMessage" Width="1.5" PointX="8.5" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

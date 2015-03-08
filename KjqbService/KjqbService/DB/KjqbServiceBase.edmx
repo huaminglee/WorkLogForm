@@ -6,12 +6,26 @@
     <edmx:StorageModels>
     <Schema Namespace="KjqbServiceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="KjqbServiceModelStoreContainer">
+          <EntitySet Name="BusinessMessage" EntityType="KjqbServiceModel.Store.BusinessMessage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CommentMessage" EntityType="KjqbServiceModel.Store.CommentMessage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LeaveMessage" EntityType="KjqbServiceModel.Store.LeaveMessage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LogMessage" EntityType="KjqbServiceModel.Store.LogMessage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ScheduleMessage" EntityType="KjqbServiceModel.Store.ScheduleMessage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="TimeArrangeForManagerMessage" EntityType="KjqbServiceModel.Store.TimeArrangeForManagerMessage" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
+        <EntityType Name="BusinessMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="StarterID" Type="bigint" />
+          <Property Name="ReceiveID" Type="bigint" />
+          <Property Name="BusinessID" Type="bigint" />
+          <Property Name="TimeStamp" Type="numeric" />
+          <Property Name="Type" Type="int" />
+          <Property Name="State" Type="int" />
+          <Property Name="IsRead" Type="int" />
+        </EntityType>
         <EntityType Name="CommentMessage">
           <Key>
             <PropertyRef Name="Id" />
@@ -84,6 +98,7 @@
           <EntitySet Name="CommentMessages" EntityType="KjqbServiceModel.CommentMessage" />
           <EntitySet Name="TimeArrangeForManagerMessages" EntityType="KjqbServiceModel.TimeArrangeForManagerMessage" />
           <EntitySet Name="LeaveMessages" EntityType="KjqbServiceModel.LeaveMessage" />
+          <EntitySet Name="BusinessMessages" EntityType="KjqbServiceModel.BusinessMessage" />
         </EntityContainer>
         <EntityType Name="LogMessage">
           <Key>
@@ -146,6 +161,19 @@
           <Property Type="Int32" Name="IsRead" />
           <Property Type="Decimal" Name="TimeStamp" Precision="18" Scale="0" />
           <Property Type="Int32" Name="ExamineOrExamineResult" />
+        </EntityType>
+        <EntityType Name="BusinessMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="StarterID" />
+          <Property Type="Int64" Name="ReceiveID" />
+          <Property Type="Int64" Name="BusinessID" />
+          <Property Type="Decimal" Name="TimeStamp" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="Type" />
+          <Property Type="Int32" Name="State" />
+          <Property Type="Int32" Name="IsRead" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -216,6 +244,20 @@
                 <ScalarProperty Name="SendUserId" ColumnName="SendUserId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="LeaveId" ColumnName="LeaveId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusinessMessages">
+            <EntityTypeMapping TypeName="KjqbServiceModel.BusinessMessage">
+              <MappingFragment StoreEntitySet="BusinessMessage">
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
+                <ScalarProperty Name="ReceiveID" ColumnName="ReceiveID" />
+                <ScalarProperty Name="StarterID" ColumnName="StarterID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
