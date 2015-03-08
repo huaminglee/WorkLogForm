@@ -18,6 +18,7 @@ namespace KjqbService.DB
             lm.UserId = l.UserId;
             lm.SendUserId = l.SendUserId;
             lm.ExamineOrExamineResult = l.ExamineOrExamineresult;
+            lm.LeaveId = l.LeaveId;
             context.LeaveMessages.Add(lm);
             context.SaveChanges();
 

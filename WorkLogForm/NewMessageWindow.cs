@@ -18,6 +18,26 @@ namespace WorkLogForm
         private List<KjqbService.ScheduleInService> schedulelist;
         private List<KjqbService.CommentInService> commentList;
         private List<KjqbService.TimeArrangeForManagerInService> tfmlist;
+        private List<KjqbService.LeaveInService> levlist;
+        Leave leaveWindow;
+        WkTRole role;
+        public WkTRole Role
+        {
+            get { return role; }
+            set { role = value; }
+        }
+
+        public Leave LeaveWindow
+        {
+            get { return leaveWindow; }
+            set { leaveWindow = value; }
+        }
+        public List<KjqbService.LeaveInService> Levlist
+        {
+            get { return levlist; }
+            set { levlist = value; }
+        }
+
 
         public List<KjqbService.TimeArrangeForManagerInService> Tfmlist
         {
@@ -60,6 +80,10 @@ namespace WorkLogForm
         {
             InitializeComponent();
             loglist = new List<KjqbService.LogInService>();
+            schedulelist = new List<KjqbService.ScheduleInService>();
+            commentList = new List<KjqbService.CommentInService>();
+            tfmlist = new List<KjqbService.TimeArrangeForManagerInService>();
+            levlist = new List<KjqbService.LeaveInService>();
             user = new WkTUser();
 
         }
@@ -80,14 +104,14 @@ namespace WorkLogForm
 
             if (loglist != null && loglist.Count > 0)
             {
+                loglist.Reverse();
                 foreach (KjqbService.LogInService ll in Loglist)
                 {
                     StaffLog ss = new StaffLog();
-                    //string sql = "select u from StaffLog u where u.Id = " + ll.LogId;
                     ss = (StaffLog)baseService.loadEntity(ss, ll.LogId);
                     LinkLabel l1 = new LinkLabel();
                     l1.Text = ss.Staff.KuName + "分享给您的日志";
-                    l1.Width = 150;
+                    l1.Width = this.flowLayoutPanel1.Width - 10;
                     l1.Height = 30;
                     l1.Top = 10;
                     l1.Tag = ss;
@@ -98,6 +122,7 @@ namespace WorkLogForm
 
             if (schedulelist != null && schedulelist.Count > 0)
             {
+                schedulelist.Reverse();
                 foreach (KjqbService.ScheduleInService ll in schedulelist)
                 {
                     StaffSchedule ss = new StaffSchedule();
@@ -107,7 +132,7 @@ namespace WorkLogForm
                     if(ss.Staff.Id  == ss.ArrangeMan.Id)
                     {
                         l1.Text = ss.Staff.KuName + "分享给您的日程";
-                        l1.Width = 150;
+                        l1.Width = this.flowLayoutPanel1.Width - 10;
                         l1.Height = 30;
                         l1.Top = 10;
                         l1.Tag = ss;
@@ -117,7 +142,7 @@ namespace WorkLogForm
                     else if (ss.Staff.Id != ss.ArrangeMan.Id)
                     {
                         l1.Text = ss.ArrangeMan.KuName + "给您安排的日程";
-                        l1.Width = 150;
+                        l1.Width = this.flowLayoutPanel1.Width - 10;
                         l1.Height = 30;
                         l1.Top = 10;
                         l1.Tag = ss;
@@ -130,6 +155,7 @@ namespace WorkLogForm
 
             if (commentList != null && commentList.Count > 0)
             {
+                commentList.Reverse();
                 foreach (KjqbService.CommentInService ll in commentList)
                 {
                     StaffLog ss = new StaffLog();
@@ -137,7 +163,7 @@ namespace WorkLogForm
                     ss = (StaffLog)baseService.loadEntity(ss, ll.LogId);
                     LinkLabel l1 = new LinkLabel();
                     l1.Text = ll.CommentUserName + "评论了您的日志";
-                    l1.Width = 150;
+                    l1.Width = this.flowLayoutPanel1.Width - 10;
                     l1.Height = 30;
                     l1.Top = 10;
                     l1.Tag = ss;
@@ -145,17 +171,19 @@ namespace WorkLogForm
                     l1.Parent = flowLayoutPanel1;
                 }
             }
+
             if(tfmlist != null && tfmlist.Count >0)
             {
+                tfmlist.Reverse();
                 foreach(KjqbService.TimeArrangeForManagerInService tfm in tfmlist)
                 {
                     TimeArrangeForManager tt = new TimeArrangeForManager();
                     tt = (TimeArrangeForManager)baseService.loadEntity(tt,tfm.TimeArrangeForManagerId);
                     LinkLabel l1 = new LinkLabel();
-                                        l1.Width = 150;
+                    l1.Width = this.flowLayoutPanel1.Width - 10;
                     l1.Height = 30;
                     l1.Top = 10;
-                    //l1.Tag = ss;
+                    l1.Tag = tt;
                     l1.Click += l1_Click;
                     l1.Parent = flowLayoutPanel1;
                     DateTime dt = new DateTime(tt.TimeMonth);
@@ -178,9 +206,42 @@ namespace WorkLogForm
                 
                 }
             
-            
             }
 
+            if (levlist != null && levlist.Count > 0)
+            {
+                levlist.Reverse();
+                foreach (KjqbService.LeaveInService tfm in levlist)
+                {
+                    LeaveManage tt = new LeaveManage();
+                    tt = (LeaveManage)baseService.loadEntity(tt, tfm.LeaveId);
+                    LinkLabel l1 = new LinkLabel();
+                    l1.Width = this.flowLayoutPanel1.Width - 10;
+                    l1.Height = 30;
+                    l1.Top = 10;
+                    l1.Tag = tt;
+                    l1.Click += l1_Click;
+                    l1.Parent = flowLayoutPanel1;
+                   
+                    if (tfm.ExamineOrExamineresult == 0)
+                    {
+                        l1.Text = tt.Ku_Id.KuName + "请假申请待您审核";
+                    }
+                    DateTime dt1 = new DateTime(tt.StartTime);
+                    DateTime dt2 = new DateTime(tt.EndTime);
+
+                    if (tfm.ExamineOrExamineresult == 1)
+                    {
+                        l1.Text = "您提交的"+tt.LeaveType+"申请审核通过";
+                    }
+                    if (tfm.ExamineOrExamineresult == 2)
+                    {
+                        l1.Text = "您提交的" + tt.LeaveType + "申请审核未通过";
+                    }
+
+                }
+            }
+          
         }
 
         void l1_Click(object sender, EventArgs e)
@@ -203,7 +264,25 @@ namespace WorkLogForm
                 DateTime dt = new DateTime(ss.ScheduleTime);
                 MessageBox.Show(dt.ToString("yyyy-MM-dd HH:mm:ss")+" :"+ss.Content);
             }
-            
+            else if (l1.Tag.GetType() == typeof(LeaveManage))
+            {
+                if (leaveWindow == null || leaveWindow.IsDisposed)
+                {
+                    leaveWindow = new Leave();
+                    leaveWindow.Leaveman = this.user;
+                    leaveWindow.Role = role;
+                }
+                if (!leaveWindow.Created)
+                {
+                    leaveWindow.Show();
+                }
+                else
+                {
+                    leaveWindow.WindowState = FormWindowState.Normal;
+                    leaveWindow.Focus();
+                }
+            }
+
         }
         #endregion
 

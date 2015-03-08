@@ -279,10 +279,7 @@ namespace KjqbService
 
        public void SetLeaveInfoIsRead(int Id)
        {
-
            leop.ChangeLeaveInfoIsRead(Id);
-       
-       
        }
 
        public List<LeaveInService> SearchLeaveInfoUnRead(int Id)

@@ -25,6 +25,9 @@ namespace WorkLogForm
         private List<KjqbService.ScheduleInService> schedulelistfromService;
         private List<KjqbService.CommentInService> commentlistfromService;
         private List<KjqbService.TimeArrangeForManagerInService> tfmListfromservice;
+        private List<KjqbService.LeaveInService> levlistfromservice;
+
+
         private IList scheduleList;
         private EventHandler mouseLeave;
         private EventHandler mouseEnter;
@@ -150,6 +153,7 @@ namespace WorkLogForm
              schedulelistfromService = new List<KjqbService.ScheduleInService>();
              commentlistfromService = new List<KjqbService.CommentInService>();
              tfmListfromservice = new List<KjqbService.TimeArrangeForManagerInService>();
+             levlistfromservice = new List<KjqbService.LeaveInService>();
 
              KjqbService.LogInService[] lists;
              lists = ser.SearchShareLogUnRead((int)this.user.Id);
@@ -174,6 +178,7 @@ namespace WorkLogForm
              {
                  commentlistfromService.Add(list3[i]);
              }
+
              KjqbService.TimeArrangeForManagerInService[] list4;
              list4 = ser.SearchTimeArrangeForManagerUnRead((int)this.user.Id);
              this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list4.Length).ToString();
@@ -182,6 +187,14 @@ namespace WorkLogForm
                  tfmListfromservice.Add(list4[i]);
              }
 
+             KjqbService.LeaveInService[] lists5;
+             lists5 = ser.SearchLeaveInfoUnRead((int)this.user.Id);
+             for (int i = 0; i < lists5.Length; i++)
+             {
+                 levlistfromservice.Add(lists5[i]);
+             }
+
+             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
 
 
 
@@ -1575,6 +1588,7 @@ namespace WorkLogForm
             ser.SetShareScheduleIsRead((int)this.user.Id);
             ser.SetCommentLogIsRead((int)this.user.Id);
             ser.SetTimeArrangeForManagerIsRead((int)this.user.Id);
+            ser.SetLeaveInfoIsRead((int)this.user.Id);
 
             if (newMessageWindow == null || newMessageWindow.IsDisposed)
             {
@@ -1583,11 +1597,17 @@ namespace WorkLogForm
             if (!newMessageWindow.Created)
             {
                 newMessageWindow.FormLocation = new Point(this.Location.X - newMessageWindow.Width, this.Location.Y);
+
+                 
                 newMessageWindow.Loglist = loglistfromService;
                 newMessageWindow.Schedulelist = schedulelistfromService;
                 newMessageWindow.CommentList = commentlistfromService;
                 newMessageWindow.Tfmlist = tfmListfromservice;
+                newMessageWindow.Levlist = levlistfromservice;
                 newMessageWindow.User = this.user;
+                newMessageWindow.Role = this.role;
+                newMessageWindow.LeaveWindow = leave;
+                
                 newMessageWindow.Show();
 
             }
@@ -1641,9 +1661,14 @@ namespace WorkLogForm
 
             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists4.Length).ToString();
 
+            KjqbService.LeaveInService[] lists5;
+            lists5 = ser.SearchLeaveInfo((int)this.user.Id);
+            for (int i = 0; i < lists5.Length; i++)
+            {
+                levlistfromservice.Add(lists5[i]);
+            }
 
-
-
+            this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
         }
         #endregion
 

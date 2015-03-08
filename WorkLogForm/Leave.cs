@@ -312,13 +312,11 @@ namespace WorkLogForm
 
             try
             {
-                baseService.SaveOrUpdateEntity(lev);
+                object be = baseService.saveEntity(lev);
 
                 #region 向服务器推送消息
-               
-               
-
-
+                levinser.LeaveId = int.Parse(be.ToString());
+                ser.SaveInLeaveInfoInService(levinser);
 
                 #endregion
 
@@ -378,7 +376,6 @@ namespace WorkLogForm
         private void Leave_Load(object sender, EventArgs e)
         {
             groupBox4.Enabled = false;
-            pictureBox5.Visible = false;
             if(role.KrOrder==2)
             {
                 //如果当前用户是负责人，那么请假审批的-部门以及部门选择框都不显示，该用户只能查看本部门的请假申请
@@ -391,12 +388,9 @@ namespace WorkLogForm
             { 
                 //当前用户为员工，没有请假审批和审批修改等功能
                 pictureBox4.Visible = false;
-                pictureBox5.Visible = false;
+              
             }
-            if (!Leaveman.Kdid.KdName.Contains("综合办公室"))
-            {
-                pictureBox5.Visible = false;
-            }
+           
 
             try
             {
@@ -523,12 +517,10 @@ namespace WorkLogForm
             pictureBox2.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_请假申请_副本;
             pictureBox3.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_请假查看;
             pictureBox4.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_请假审批_;
-            pictureBox5.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_审批修改_;
 
             panel1.Visible = true;//请假申请
             panel2.Visible = false;//请假查看
             panel4.Visible = false;
-            panel5.Visible = false;
 
             this.label34.Text = "请假申请";
 
@@ -542,12 +534,10 @@ namespace WorkLogForm
             pictureBox2.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_请假申请;
             pictureBox3.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_请假查看_副本;
             pictureBox4.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_请假审批_;
-            pictureBox5.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_审批修改_;
             
             panel1.Visible = false;
             panel2.Visible = true;
             panel4.Visible = false;
-            panel5.Visible = false;
 
             this.label34.Text = "请假查看";
 
@@ -560,34 +550,16 @@ namespace WorkLogForm
             pictureBox2.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_请假申请;
             pictureBox3.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_请假查看;
             pictureBox4.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_请假审批__副本;
-            pictureBox5.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_审批修改_;
 
             panel1.Visible = false;
             panel2.Visible = false;
             panel4.Visible = true;
-            panel5.Visible = false;
             this.label34.Text = "请假审批";
             initdata4();
 
 
         }
 
-        private void pictureBox5_Click(object sender, EventArgs e)
-        {
-            
-            pictureBox2.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_请假申请;
-            pictureBox3.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_请假查看;
-            pictureBox4.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_请假审批_;
-            pictureBox5.BackgroundImage = WorkLogForm.Properties.Resources.请假管理_审批修改__副本;
-
-            panel1.Visible = false;
-            panel2.Visible = false;
-            panel4.Visible =false;
-            panel5.Visible = true;
-
-            this.label34.Text = "审批修改";
-            initdata5();
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -625,7 +597,7 @@ namespace WorkLogForm
             IList leaveList = baseService.loadEntityList(sql);
             if (leaveList != null && leaveList.Count > 0)
             {
-                initLeaveListView(leaveList, listView1);
+                initLeaveListView(leaveList, Leave_listView);
                 comboBox4.Text = "";
                 textBox3.Text = "";
             }
@@ -638,40 +610,19 @@ namespace WorkLogForm
             }
         }
 
-        private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)//双击listview,更改被选中数据的信息，弹出修改框，完成修改保存到数据库
-        {
-            //if (this.listView2.SelectedItems == null) return;
-            //ListViewItem item = this.listView2.SelectedItems[0];//请假查看-listview2中的数据被选中
-            //if (item == null) return;
-            
-            //LeaveManage u = (LeaveManage)item.Tag;
-            //if (u.LeaveResult.Trim() == "3")
-            //{
-            //    //取出item中的数据，在请假修改groupbox3中显示
-
-            //    groupBox3.Visible = true;
-
-
-            //    label21.Text = item.SubItems[6].Text;//负责人
-            //    comboBox3.Text = item.SubItems[3].Text;//请假类别
-            //    textBox2.Text = item.SubItems[8].Text;//请假原因
-
-            //    dateTimePicker5.Value = new DateTime(u.StartTime);//开始时间
-            //    dateTimePicker6.Value = new DateTime(u.EndTime);//结束时间
-
-            //}
-            //else
-            //    groupBox3.Visible = false;
-
-
-;
-        }
+       
 
         private void button9_Click(object sender, EventArgs e)
         {
             groupBox3.Visible = false;//隐藏请假修改
         }
 
+
+        /// <summary>
+        /// 修改提交
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button8_Click(object sender, EventArgs e)
         {
             //请假修改提交；首先修改界面上listview2中选中数据显示信息，然后再将更改的数据保存到数据库中
@@ -763,8 +714,13 @@ namespace WorkLogForm
                     ListViewItem item = listView3.CheckedItems[0];
                     chargeman.Add((WkTUser)item.Tag);
                     item.Checked = false;
+                    this.label21.Text = this.label21.Text + "" + ((WkTUser)item.Tag).KuName;
                 }
+                
+
                 MessageBox.Show("负责人列表已保存");
+                this.button8.Visible = true;
+                this.button9.Visible = true;
             }
             panel3.Visible = false;
 
@@ -929,74 +885,88 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void button13_Click(object sender, EventArgs e)
         {
-            while (listView4.CheckedItems.Count > 0)
+            if (listView4.CheckedItems.Count > 0)
             {
-                if (leaveobject == null)
+                while (listView4.CheckedItems.Count > 0)
                 {
-                    leaveobject = new LeaveManage();
-                }
-
-                ListViewItem item = listView4.CheckedItems[0];
-                leaveobject = (LeaveManage)item.Tag;
-                if(role.KrOrder==0)
-                {
-                    //院长审批阶段
-                    leaveobject.LeaveStage = "3";
-                    leaveobject.LeaveResult ="2";
-                }
-                else if (role.KrOrder == 1)
-                {
-                    //副院长审批
-                    if (leaveobject.LeaveType == "病假" || leaveobject.LeaveType == "事假")
+                    if (leaveobject == null)
                     {
-                       //判断请假天数，如果小于10的话，可以直接审批通过，无需院长继续审批
-                        if (((leaveobject.EndTime - leaveobject.StartTime) / 864000000000 + 1) <= 10)
+                        leaveobject = new LeaveManage();
+                    }
+
+                    ListViewItem item = listView4.CheckedItems[0];
+                    leaveobject = (LeaveManage)item.Tag;
+                    if (role.KrOrder == 0)
+                    {
+                        //院长审批阶段
+                        leaveobject.LeaveStage = "3";
+                        leaveobject.LeaveResult = "2";
+                    }
+                    else if (role.KrOrder == 1)
+                    {
+                        //副院长审批
+                        if (leaveobject.LeaveType == "病假" || leaveobject.LeaveType == "事假")
+                        {
+                            //判断请假天数，如果小于10的话，可以直接审批通过，无需院长继续审批
+                            if (((leaveobject.EndTime - leaveobject.StartTime) / 864000000000 + 1) <= 10)
+                            {
+                                leaveobject.LeaveStage = "2";
+                                leaveobject.LeaveResult = "2";//审批完全通过
+                            }
+                        }
+                        else
                         {
                             leaveobject.LeaveStage = "2";
-                            leaveobject.LeaveResult = "2";//审批完全通过
+                            leaveobject.LeaveResult = "1";
                         }
+
                     }
-                    else
+                    else if (role.KrOrder == 2)
                     {
-                        leaveobject.LeaveStage = "2";
-                        leaveobject.LeaveResult = "1";
-                    }
-                
-                }
-                else if (role.KrOrder == 2)
-                { 
-                //负责人审批
-                    if (leaveobject.LeaveType == "病假" || leaveobject.LeaveType == "事假")
-                    {
-                        //判断请假天数，如果小于3的话，可以直接审批通过，无需副院长继续审批
-                        if (((leaveobject.EndTime - leaveobject.StartTime) / 864000000000 + 1) <= 3)
+                        //负责人审批
+                        if (leaveobject.LeaveType == "病假" || leaveobject.LeaveType == "事假")
+                        {
+                            //判断请假天数，如果小于3的话，可以直接审批通过，无需副院长继续审批
+                            if (((leaveobject.EndTime - leaveobject.StartTime) / 864000000000 + 1) <= 3)
+                            {
+                                leaveobject.LeaveStage = "1";
+                                leaveobject.LeaveResult = "2";//审批完全通过
+                            }
+                        }
+                        else
                         {
                             leaveobject.LeaveStage = "1";
-                            leaveobject.LeaveResult = "2";//审批完全通过
+                            leaveobject.LeaveResult = "1";
                         }
+
                     }
-                    else
+                    try
                     {
-                        leaveobject.LeaveStage = "1";
-                        leaveobject.LeaveResult = "1";
+                        baseService.SaveOrUpdateEntity(leaveobject);
+                        KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                        KjqbService.LeaveInService levin = new KjqbService.LeaveInService();
+                        levin.LeaveId = leaveobject.Id;
+                        levin.UserId = leaveobject.Ku_Id.Id;
+                        levin.SendUserId = Leaveman.Id;
+                        levin.ExamineOrExamineresult = 1;
+                        ser.SaveInLeaveInfoInService(levin);
+
                     }
-                
+                    catch
+                    {
+                        MessageBox.Show("审批失败！");
+                        return;
+                    }
+
+                    item.Checked = false;
+                    listView4.Items.Remove(item);
                 }
-                try
-                {
-                    baseService.SaveOrUpdateEntity(leaveobject);
-                }
-                catch
-                {
-                    MessageBox.Show("审批失败！");
-                    return;
-                }
-               
-                item.Checked = false;
-                listView4.Items.Remove(item);
+                MessageBox.Show("审批成功！");
             }
-            
-            MessageBox.Show("审批成功！");
+            else 
+            {
+                MessageBox.Show("您尚未选择审批条目！");
+            }
             
         }
 
@@ -1007,53 +977,69 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void button14_Click(object sender, EventArgs e)
         {
-            while (listView4.CheckedItems.Count > 0)
+            if (listView4.CheckedItems.Count > 0)
             {
-                if (leaveobject == null)
-                {
-                    leaveobject = new LeaveManage();
-                }
 
-                ListViewItem item = listView4.CheckedItems[0];
-                leaveobject = (LeaveManage)item.Tag;
-                if (role.KrOrder == 0)
+
+                while (listView4.CheckedItems.Count > 0)
                 {
-                    //院长审批未通过
-                    leaveobject.LeaveStage = "3";
-                    leaveobject.LeaveResult = "0";
-                }
-                else if (role.KrOrder == 1)
-                {
-                    //副院长审批未通过
-                   
+                    if (leaveobject == null)
+                    {
+                        leaveobject = new LeaveManage();
+                    }
+
+                    ListViewItem item = listView4.CheckedItems[0];
+                    leaveobject = (LeaveManage)item.Tag;
+                    if (role.KrOrder == 0)
+                    {
+                        //院长审批未通过
+                        leaveobject.LeaveStage = "3";
+                        leaveobject.LeaveResult = "0";
+                    }
+                    else if (role.KrOrder == 1)
+                    {
+                        //副院长审批未通过
+
                         leaveobject.LeaveStage = "2";
-                        leaveobject.LeaveResult = "0";   
+                        leaveobject.LeaveResult = "0";
 
-                }
-                else if (role.KrOrder == 2)
-                {
-                    
-                    
+                    }
+                    else if (role.KrOrder == 2)
+                    {
+
+
                         leaveobject.LeaveStage = "1";
                         leaveobject.LeaveResult = "0";
-                    
-                }
-                try
-                {
-                    baseService.SaveOrUpdateEntity(leaveobject);
-                }
-                catch
-                {
-                    MessageBox.Show("审批失败！");
-                    return;
+
+                    }
+                    try
+                    {
+                        baseService.SaveOrUpdateEntity(leaveobject);
+                        KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                        KjqbService.LeaveInService levin = new KjqbService.LeaveInService();
+                        levin.LeaveId = leaveobject.Id;
+                        levin.UserId = leaveobject.Ku_Id.Id;
+                        levin.SendUserId = Leaveman.Id;
+                        levin.ExamineOrExamineresult = 2;
+                        ser.SaveInLeaveInfoInService(levin);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("审批失败！");
+                        return;
+                    }
+
+                    item.Checked = false;
+                    //item.SubItems.Clear();
+                    listView4.Items.Remove(item);
                 }
 
-                item.Checked = false;
-                //item.SubItems.Clear();
-                listView4.Items.Remove(item);
+                MessageBox.Show("审批成功！");
             }
-
-            MessageBox.Show("审批成功！");
+            else
+            {
+                MessageBox.Show("您尚未选择条目！");
+            }
         }
        
 #endregion
@@ -1062,7 +1048,6 @@ namespace WorkLogForm
         private void initdata5() //请假审批-加载listview5中的数据，只显示已经审批的请假申请
         {
             //根据当前用户角色的不同，加载不同的审批数据；
-            listView5.Items.Clear();
             
             String sql = "";
             if (role.KrOrder == 0)
@@ -1081,8 +1066,7 @@ namespace WorkLogForm
                 sql = "from LeaveManage where STATE=" + (int)IEntity.stateEnum.Normal + "and LeaveResult=" + 1 + "and Ku_Id.Kdid.KdName like '%" + leaveman.Kdid.KdName+"%'";
             }
             IList list5 = baseService.loadEntityList(sql);
-            if (list5 != null)
-            { initexaminedata1(list5, listView5); }
+            
 
         }
 
@@ -1154,18 +1138,23 @@ namespace WorkLogForm
 
         private void listView2_MouseClick(object sender, MouseEventArgs e)
         {
+            groupBox3.Visible = true;
             if (this.listView2.SelectedItems == null) return;
             ListViewItem item = this.listView2.SelectedItems[0];//请假查看-listview2中的数据被选中
             if (item == null) return;
-
             LeaveManage u = (LeaveManage)item.Tag;
-          
+            if (u.Ku_Id.Id == this.leaveman.Id)
+            {
+                linkLabel1.Visible = true;
+            }
+            else
+            {
+                linkLabel1.Visible = false;
+            }
 
-            groupBox3.Visible = true;
 
             button8.Visible = false;
             button9.Visible = false;
-            linkLabel1.Visible = false;
             label21.Text = item.SubItems[6].Text;//负责人
             comboBox3.Text = item.SubItems[3].Text;//请假类别
             textBox2.Text = item.SubItems[8].Text;//请假原因
