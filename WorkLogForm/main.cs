@@ -26,7 +26,7 @@ namespace WorkLogForm
         private List<KjqbService.CommentInService> commentlistfromService;
         private List<KjqbService.TimeArrangeForManagerInService> tfmListfromservice;
         private List<KjqbService.LeaveInService> levlistfromservice;
-
+        private List<KjqbService.BusinessService> businessfromservice;
 
         private IList scheduleList;
         private EventHandler mouseLeave;
@@ -154,7 +154,7 @@ namespace WorkLogForm
              commentlistfromService = new List<KjqbService.CommentInService>();
              tfmListfromservice = new List<KjqbService.TimeArrangeForManagerInService>();
              levlistfromservice = new List<KjqbService.LeaveInService>();
-
+             businessfromservice = new List<KjqbService.BusinessService>();
              KjqbService.LogInService[] lists;
              lists = ser.SearchShareLogUnRead((int)this.user.Id);
              this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
@@ -195,6 +195,14 @@ namespace WorkLogForm
              }
 
              this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
+             KjqbService.BusinessService[] lists6;
+             lists6 = ser.SearchBusinessInfoUnRead((int)this.user.Id);
+             for (int i = 0; i < lists6.Length; i++)
+             {
+                 businessfromservice.Add(lists6[i]);
+             }
+
+             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
 
 
 
@@ -1604,10 +1612,11 @@ namespace WorkLogForm
                 newMessageWindow.CommentList = commentlistfromService;
                 newMessageWindow.Tfmlist = tfmListfromservice;
                 newMessageWindow.Levlist = levlistfromservice;
+                newMessageWindow.Buslist = businessfromservice;
                 newMessageWindow.User = this.user;
                 newMessageWindow.Role = this.role;
                 newMessageWindow.LeaveWindow = leave;
-                
+                newMessageWindow.BusinessManagement = businessManagement;
                 newMessageWindow.Show();
 
             }
@@ -1669,6 +1678,16 @@ namespace WorkLogForm
             }
 
             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
+
+            KjqbService.BusinessService[] lists6;
+            lists6 = ser.SearchBusinessInfo((int)this.user.Id);
+            for (int i = 0; i < lists6.Length; i++)
+            {
+                businessfromservice.Add(lists6[i]);
+            }
+
+            this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
+
         }
         #endregion
 

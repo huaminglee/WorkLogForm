@@ -19,7 +19,21 @@ namespace WorkLogForm
         private List<KjqbService.CommentInService> commentList;
         private List<KjqbService.TimeArrangeForManagerInService> tfmlist;
         private List<KjqbService.LeaveInService> levlist;
+        private List<KjqbService.BusinessService> buslist;
+
+        public List<KjqbService.BusinessService> Buslist
+        {
+            get { return buslist; }
+            set { buslist = value; }
+        }
         Leave leaveWindow;
+        BusinessManagement businessManagement;
+
+        public BusinessManagement BusinessManagement
+        {
+            get { return businessManagement; }
+            set { businessManagement = value; }
+        }
         WkTRole role;
         public WkTRole Role
         {
@@ -84,6 +98,7 @@ namespace WorkLogForm
             commentList = new List<KjqbService.CommentInService>();
             tfmlist = new List<KjqbService.TimeArrangeForManagerInService>();
             levlist = new List<KjqbService.LeaveInService>();
+            buslist = new List<KjqbService.BusinessService>();
             user = new WkTUser();
 
         }
@@ -249,6 +264,44 @@ namespace WorkLogForm
 
                 }
             }
+            if (buslist != null && buslist.Count > 0)
+            {
+                buslist.Reverse();
+                foreach (KjqbService.BusinessService tfm in buslist)
+                {
+                    // tt = new LeaveManage();
+                    //tt = (LeaveManage)baseService.loadEntity(tt, tfm.LeaveId);
+
+                    LinkLabel l1 = new LinkLabel();
+                    l1.Width = this.flowLayoutPanel1.Width - 10;
+                    l1.Height = 30;
+                    l1.Top = 10;
+                    l1.Tag = tfm;
+                    l1.Click += l1_Click;
+                    l1.DoubleClick += l1_DoubleClick;
+                    l1.Parent = flowLayoutPanel1;
+
+                    if (tfm.Type == 0)
+                    {
+                        l1.Text = "您有一条出差信息待审批";
+                    }
+                    else if(tfm.Type == 1)
+                    {
+                          l1.Text = "您的出差申请被退回";
+                    
+                    }
+                    else if(tfm.Type == 2)
+                    {
+                        l1.Text = "您的出差申请被撤销";
+                    }
+                    else if(tfm.Type == 3)
+                    {
+                        l1.Text = "您的出差申请审核通过";
+                    }
+                   
+
+                }
+            }
           
         }
 
@@ -293,7 +346,7 @@ namespace WorkLogForm
                 KjqbService.LogInService ll = (KjqbService.LogInService)l1.Tag;
                 StaffLog ss = new StaffLog();
                 ss = (StaffLog)baseService.loadEntity(ss, ll.LogId);
-                
+
                 writeLog wl = new writeLog();
                 wl.User = ss.Staff;
                 wl.LogDate = new DateTime(ss.WriteTime);
@@ -343,7 +396,24 @@ namespace WorkLogForm
                     leaveWindow.Focus();
                 }
             }
-
+            else if (l1.Tag.GetType() == typeof(KjqbService.BusinessService))
+            {
+                if (businessManagement == null || businessManagement.IsDisposed)
+                {
+                    businessManagement = new BusinessManagement();
+                }
+                if (!businessManagement.Created)
+                {
+                    businessManagement.User = this.User;
+                    businessManagement.Role = this.Role;
+                    businessManagement.Show();
+                }
+                else
+                {
+                    businessManagement.WindowState = FormWindowState.Normal;
+                    businessManagement.Focus();
+                }
+            }
         }
         #endregion
 

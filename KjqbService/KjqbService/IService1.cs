@@ -72,9 +72,12 @@ namespace KjqbService
         #region 出差审批推送
         [OperationContract]
         bool SaveInBusinessListInService(BusinessService bs);
-
-
-
+        [OperationContract]
+        List<BusinessService> SearchBusinessInfo(long Id);
+        [OperationContract]
+        void SetBusinessInfoIsRead(long Id);
+        [OperationContract]
+        List<BusinessService> SearchBusinessInfoUnRead(long Id);
 
         #endregion
         #region 请假推送

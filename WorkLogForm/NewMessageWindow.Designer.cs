@@ -31,7 +31,6 @@
             this.close_pictureBox = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,17 +67,6 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(202, 295);
             this.flowLayoutPanel1.TabIndex = 172;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(127, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 17);
-            this.label2.TabIndex = 173;
-            this.label2.Text = "双击删除消息";
-            // 
             // NewMessageWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -87,7 +75,6 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(209, 350);
             this.ControlBox = false;
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.close_pictureBox);
@@ -108,6 +95,5 @@
         private System.Windows.Forms.PictureBox close_pictureBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label label2;
     }
 }

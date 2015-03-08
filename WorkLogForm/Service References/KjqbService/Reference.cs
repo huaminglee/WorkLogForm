@@ -626,6 +626,15 @@ namespace WorkLogForm.KjqbService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveInBusinessListInService", ReplyAction="http://tempuri.org/IService1/SaveInBusinessListInServiceResponse")]
         bool SaveInBusinessListInService(WorkLogForm.KjqbService.BusinessService bs);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchBusinessInfo", ReplyAction="http://tempuri.org/IService1/SearchBusinessInfoResponse")]
+        WorkLogForm.KjqbService.BusinessService[] SearchBusinessInfo(long Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SetBusinessInfoIsRead", ReplyAction="http://tempuri.org/IService1/SetBusinessInfoIsReadResponse")]
+        void SetBusinessInfoIsRead(long Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchBusinessInfoUnRead", ReplyAction="http://tempuri.org/IService1/SearchBusinessInfoUnReadResponse")]
+        WorkLogForm.KjqbService.BusinessService[] SearchBusinessInfoUnRead(long Id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveInLeaveInfoInService", ReplyAction="http://tempuri.org/IService1/SaveInLeaveInfoInServiceResponse")]
         bool SaveInLeaveInfoInService(WorkLogForm.KjqbService.LeaveInService log);
         
@@ -732,6 +741,18 @@ namespace WorkLogForm.KjqbService {
         
         public bool SaveInBusinessListInService(WorkLogForm.KjqbService.BusinessService bs) {
             return base.Channel.SaveInBusinessListInService(bs);
+        }
+        
+        public WorkLogForm.KjqbService.BusinessService[] SearchBusinessInfo(long Id) {
+            return base.Channel.SearchBusinessInfo(Id);
+        }
+        
+        public void SetBusinessInfoIsRead(long Id) {
+            base.Channel.SetBusinessInfoIsRead(Id);
+        }
+        
+        public WorkLogForm.KjqbService.BusinessService[] SearchBusinessInfoUnRead(long Id) {
+            return base.Channel.SearchBusinessInfoUnRead(Id);
         }
         
         public bool SaveInLeaveInfoInService(WorkLogForm.KjqbService.LeaveInService log) {

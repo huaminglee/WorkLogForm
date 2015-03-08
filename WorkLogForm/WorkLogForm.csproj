@@ -432,6 +432,9 @@
     </Compile>
     <None Include="Service References\IPService\IpAddressSearchWebService.wsdl" />
     <None Include="Service References\KjqbService\Service1.wsdl" />
+    <None Include="Service References\KjqbService\WorkLogForm.KjqbService.BusinessService.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\KjqbService\WorkLogForm.KjqbService.CommentInService.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

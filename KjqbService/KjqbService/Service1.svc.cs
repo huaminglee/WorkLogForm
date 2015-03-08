@@ -244,6 +244,48 @@ namespace KjqbService
            return true;
        }
 
+
+       public List<BusinessService> SearchBusinessInfo(long Id)
+       {
+           List<BusinessService> l = new List<BusinessService>();
+
+           List<BusinessMessage> lm = bop.SendBusinessInfo(Id);
+
+           foreach (BusinessMessage lo in lm)
+           {
+               BusinessService ll = new BusinessService();
+               ll.ReceiveID = (long)lo.ReceiveID;
+               ll.Type = (int)lo.Type;
+               ll.BusinessID = (long)lo.BusinessID;
+               l.Add(ll);
+           }
+
+           return l;
+       }
+       public void SetBusinessInfoIsRead(long Id)
+       {
+           bop.ChangeIsRead(Id);
+       }
+       public List<BusinessService> SearchBusinessInfoUnRead(long Id)
+       {
+           List<BusinessService> l = new List<BusinessService>();
+
+           List<BusinessMessage> lm = bop.SendBusinessUnRead(Id);
+
+           foreach (BusinessMessage lo in lm)
+           {
+               BusinessService ll = new BusinessService();
+               ll.ReceiveID = (long)lo.ReceiveID;
+               ll.Type = (int)lo.Type;
+               ll.BusinessID = (long)lo.BusinessID;
+               l.Add(ll);
+           }
+
+           return l;
+       
+       }
+
+
        #endregion
 
 

@@ -233,10 +233,50 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="SearchBusinessInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:long" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchBusinessInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchBusinessInfoResult" nillable="true" type="q14:ArrayOfBusinessService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetBusinessInfoIsRead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:long" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetBusinessInfoIsReadResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchBusinessInfoUnRead">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" type="xs:long" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchBusinessInfoUnReadResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchBusinessInfoUnReadResult" nillable="true" type="q15:ArrayOfBusinessService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="SaveInLeaveInfoInService">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="log" nillable="true" type="q14:LeaveInService" />
+            <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="log" nillable="true" type="q16:LeaveInService" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -257,7 +297,7 @@
       <xs:element name="SearchLeaveInfoResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchLeaveInfoResult" nillable="true" type="q15:ArrayOfLeaveInService" />
+            <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchLeaveInfoResult" nillable="true" type="q17:ArrayOfLeaveInService" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -283,7 +323,7 @@
       <xs:element name="SearchLeaveInfoUnReadResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchLeaveInfoUnReadResult" nillable="true" type="q16:ArrayOfLeaveInService" />
+            <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchLeaveInfoUnReadResult" nillable="true" type="q18:ArrayOfLeaveInService" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -399,6 +439,12 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="BusinessService" nillable="true" type="tns:BusinessService" />
+      <xs:complexType name="ArrayOfBusinessService">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="BusinessService" nillable="true" type="tns:BusinessService" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfBusinessService" nillable="true" type="tns:ArrayOfBusinessService" />
       <xs:complexType name="LeaveInService">
         <xs:sequence>
           <xs:element minOccurs="0" name="ExamineOrExamineresult" type="xs:int" />
@@ -518,6 +564,24 @@
   <wsdl:message name="IService1_SaveInBusinessListInService_OutputMessage">
     <wsdl:part name="parameters" element="tns:SaveInBusinessListInServiceResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SearchBusinessInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchBusinessInfo" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchBusinessInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchBusinessInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SetBusinessInfoIsRead_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetBusinessInfoIsRead" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SetBusinessInfoIsRead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetBusinessInfoIsReadResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchBusinessInfoUnRead_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchBusinessInfoUnRead" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchBusinessInfoUnRead_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchBusinessInfoUnReadResponse" />
+  </wsdl:message>
   <wsdl:message name="IService1_SaveInLeaveInfoInService_InputMessage">
     <wsdl:part name="parameters" element="tns:SaveInLeaveInfoInService" />
   </wsdl:message>
@@ -610,6 +674,18 @@
     <wsdl:operation name="SaveInBusinessListInService">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInBusinessListInService" message="tns:IService1_SaveInBusinessListInService_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SaveInBusinessListInServiceResponse" message="tns:IService1_SaveInBusinessListInService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBusinessInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchBusinessInfo" message="tns:IService1_SearchBusinessInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchBusinessInfoResponse" message="tns:IService1_SearchBusinessInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetBusinessInfoIsRead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SetBusinessInfoIsRead" message="tns:IService1_SetBusinessInfoIsRead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SetBusinessInfoIsReadResponse" message="tns:IService1_SetBusinessInfoIsRead_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchBusinessInfoUnRead">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchBusinessInfoUnRead" message="tns:IService1_SearchBusinessInfoUnRead_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchBusinessInfoUnReadResponse" message="tns:IService1_SearchBusinessInfoUnRead_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SaveInLeaveInfoInService">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInLeaveInfoInService" message="tns:IService1_SaveInLeaveInfoInService_InputMessage" />
@@ -776,6 +852,33 @@
     </wsdl:operation>
     <wsdl:operation name="SaveInBusinessListInService">
       <soap:operation soapAction="http://tempuri.org/IService1/SaveInBusinessListInService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBusinessInfo">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchBusinessInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetBusinessInfoIsRead">
+      <soap:operation soapAction="http://tempuri.org/IService1/SetBusinessInfoIsRead" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchBusinessInfoUnRead">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchBusinessInfoUnRead" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
