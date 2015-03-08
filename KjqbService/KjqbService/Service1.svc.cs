@@ -17,6 +17,7 @@ namespace KjqbService
         KjqbService.DB.ScheduleOperate sop = new ScheduleOperate();
         KjqbService.DB.CommentOperate cop = new CommentOperate();
         KjqbService.DB.TimeArrangeForManagerOperate top = new TimeArrangeForManagerOperate();
+        KjqbService.DB.BusinessOperate bop = new BusinessOperate();
         KjqbService.DB.LeaveOperate leop = new LeaveOperate();
         #region 分享日志推送
         public bool SaveInLogListInService(LogInService log)
@@ -236,9 +237,17 @@ namespace KjqbService
 
         #endregion
 
+       #region  出差审批推送
+       public bool SaveInBusinessListInService(BusinessService bs)
+       {
+           bop.InsertIntoEntity(bs);
+           return true;
+       }
+
+       #endregion
 
 
-        #region 请假推送
+       #region 请假推送
 
 
        public bool SaveInLeaveInfoInService(LeaveInService log)

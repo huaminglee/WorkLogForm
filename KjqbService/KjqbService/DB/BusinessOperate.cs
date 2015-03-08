@@ -29,16 +29,16 @@ namespace KjqbService.DB
             return lists;
         }
 
-        public List<LogMessage> ChangeSharedLogIsRead(long l)
+        public List<BusinessMessage> ChangeIsRead(long u)
         {
-            List<LogMessage> loglists = new List<LogMessage>();
-            loglists = context.LogMessages.Where(m => m.ShareUserId == l && m.IsRead == 0).ToList();
-            foreach (LogMessage lll in loglists)
+            List<BusinessMessage> lists = new List<BusinessMessage>();
+            lists = context.BusinessMessages.Where(m => m.ReceiveID == u && m.IsRead == 0).ToList();
+            foreach (BusinessMessage lll in lists)
             {
                 lll.IsRead = 1;
                 context.SaveChanges();
             }
-            return loglists;
+            return lists;
         }
     }
 }
