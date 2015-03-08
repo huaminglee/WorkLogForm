@@ -29,5 +29,6 @@ namespace KjqbService.DB
         public DbSet<ScheduleMessage> ScheduleMessages { get; set; }
         public DbSet<CommentMessage> CommentMessages { get; set; }
         public DbSet<TimeArrangeForManagerMessage> TimeArrangeForManagerMessages { get; set; }
+        public DbSet<LeaveMessage> LeaveMessages { get; set; }
     }
 }

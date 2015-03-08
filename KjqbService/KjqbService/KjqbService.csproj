@@ -76,6 +76,9 @@
     </Compile>
     <Compile Include="DB\CommentOperate.cs" />
     <Compile Include="DB\DBoperate.cs" />
+    <Compile Include="DB\LeaveMessage.cs">
+      <DependentUpon>KjqbServiceBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\LogOperate.cs" />
     <Compile Include="DB\ScheduleMessage.cs">
       <DependentUpon>KjqbServiceBase.tt</DependentUpon>
