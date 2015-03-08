@@ -71,7 +71,7 @@ namespace KjqbService
 
         #region 出差审批推送
         [OperationContract]
-        public bool SaveInBusinessListInService(BusinessService bs);
+        bool SaveInBusinessListInService(BusinessService bs);
 
         #endregion
         #region 请假推送

@@ -147,6 +147,11 @@ namespace WorkLogForm
         
 
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
             //保存指定的负责人到对应的请假表，先暂存在一个list中，最后界面信息提交的时候再保存信息；
@@ -173,10 +178,21 @@ namespace WorkLogForm
             }
         }
 
+
+
+        /// <summary>
+        /// 提交请假信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             //提交请假信息
             LeaveManage lev = new LeaveManage();
+            KjqbService.LeaveInService levinser = new KjqbService.LeaveInService();
+            KjqbService.Service1Client ser = new KjqbService.Service1Client();
+            levinser.SendUserId = leaveman.Id;
+            levinser.ExamineOrExamineresult = 0;
 
             //对请假信息的填写状况进行判断
             if (dateTimePicker1.Value.Date.Ticks > dateTimePicker2.Value.Date.Ticks)
@@ -199,8 +215,7 @@ namespace WorkLogForm
            
             lev.StartTime = dateTimePicker1.Value.Date.Ticks;
             lev.EndTime = dateTimePicker2.Value.Date.Ticks;
-            LeaveManage leave;
-
+           
             string query = "from LeaveManage leave where leave.Ku_Id="+this.Leaveman.Id+" and ((leave.StartTime>=" + lev.StartTime + " and leave.StartTime<=" + lev.EndTime + ") or (leave.EndTime>=" + lev.StartTime + " and leave.EndTime<=" + lev.EndTime + ")) and leave.State=" + (int)LeaveManage.stateEnum.Normal;
             IList levList=baseService.loadEntityList(query);
             if(levList!=null&&levList.Count!=0)
@@ -217,6 +232,18 @@ namespace WorkLogForm
             {
                 lev.LeaveResult = "3";//审核结果,3表示未审核的
                 lev.LeaveStage = "0";//审批阶段，属于未审批
+                string ssql1 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and u.Kdid.Id = "+leaveman.Kdid.Id;
+                IList list =  baseService.loadEntityList(ssql1);
+                if (list != null && list.Count > 0)
+                {
+                    WkTUser theuser = (WkTUser)list[0];
+                    levinser.UserId = theuser.Id;
+                }
+                else
+                {
+                    levinser.UserId = 0;
+                }
+                
             }
             else if (role.KrOrder == 2)//负责人提交请假
             {
@@ -225,11 +252,39 @@ namespace WorkLogForm
                 {
                     lev.LeaveResult = "1";
                     lev.LeaveStage = "1";
+                    Wktuser_M_Dept wmd = new Wktuser_M_Dept();
+                    //wmd.DeptId.Id
+                    string ssql1 = "select u from Wktuser_M_Dept u where u.DeptId.Id = "+leaveman.Kdid.Id;
+                    IList ll = baseService.loadEntityList(ssql1);
+                    if (ll != null && ll.Count > 0)
+                    {
+                        wmd = (Wktuser_M_Dept)ll[0];
+                        levinser.UserId = wmd.WktuserId.Id;
+                    }
+                    else
+                    {
+                        levinser.UserId = 0;
+                    }
+
+
                 }
                 else
                 {   //婚假、产假、年休假、探亲假；负责人请假后，由院长直接审批就可以
                     lev.LeaveResult = "1";
                     lev.LeaveStage = "2";
+
+                    string ssql1 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 0";
+                    IList list = baseService.loadEntityList(ssql1);
+                    if (list != null && list.Count > 0)
+                    {
+                        WkTUser theuser = (WkTUser)list[0];
+                        levinser.UserId = theuser.Id;
+                    }
+                    else
+                    {
+                        levinser.UserId = 0;
+                    }
+                    
                 }
             }
             else if (role.KrOrder == 1 || role.KrOrder == 0)//副院长和院长提交请假,都由院长审批
@@ -237,6 +292,17 @@ namespace WorkLogForm
                 //默认负责人审批通过，待副院长审批
                 lev.LeaveResult = "1";
                 lev.LeaveStage = "2";
+                string ssql1 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 0";
+                IList list = baseService.loadEntityList(ssql1);
+                if (list != null && list.Count > 0)
+                {
+                    WkTUser theuser = (WkTUser)list[0];
+                    levinser.UserId = theuser.Id;
+                }
+                else
+                {
+                    levinser.UserId = 0;
+                }
             }
 
             lev.Ku_Id = leaveman;//请假人信息
@@ -247,6 +313,15 @@ namespace WorkLogForm
             try
             {
                 baseService.SaveOrUpdateEntity(lev);
+
+                #region 向服务器推送消息
+               
+               
+
+
+
+                #endregion
+
             }
             catch
             {
@@ -717,7 +792,7 @@ namespace WorkLogForm
 
         }
 
-        #region//请假修改
+        #region 请假修改
 
         private void initdata4() //请假审批-加载listview4中的数据，只显示未审批的请假申请
         {
@@ -811,10 +886,13 @@ namespace WorkLogForm
 
         }
 
+        /// <summary>
+        /// 请假审批查询按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button12_Click(object sender, EventArgs e)
         {
-            //请假审批查询按钮
-
             listView4.Items.Clear();
             String sql="";
             if (role.KrOrder == 0)
@@ -844,11 +922,13 @@ namespace WorkLogForm
             }
 
         }
-
+        /// <summary>
+        ///请假审批-通过按钮 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button13_Click(object sender, EventArgs e)
         {
-            //请假审批-通过按钮
-
             while (listView4.CheckedItems.Count > 0)
             {
                 if (leaveobject == null)
@@ -920,10 +1000,13 @@ namespace WorkLogForm
             
         }
 
+        /// <summary>
+        ///请假审批-未通过按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button14_Click(object sender, EventArgs e)
         {
-            //请假审批-通过按钮
-
             while (listView4.CheckedItems.Count > 0)
             {
                 if (leaveobject == null)
@@ -973,7 +1056,7 @@ namespace WorkLogForm
             MessageBox.Show("审批成功！");
         }
        
-#endregion//
+#endregion
 
 
         private void initdata5() //请假审批-加载listview5中的数据，只显示已经审批的请假申请

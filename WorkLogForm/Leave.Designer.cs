@@ -209,17 +209,6 @@
             this.columnHeader30 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.button17 = new System.Windows.Forms.Button();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.dateTimePicker9 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker10 = new System.Windows.Forms.DateTimePicker();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label27 = new System.Windows.Forms.Label();
             this.button15 = new System.Windows.Forms.Button();
@@ -234,6 +223,17 @@
             this.columnHeader37 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader38 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader39 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.button17 = new System.Windows.Forms.Button();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.dateTimePicker9 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker10 = new System.Windows.Forms.DateTimePicker();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label34 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
@@ -253,8 +253,8 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panel5.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1727,13 +1727,135 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.panel5.Controls.Add(this.groupBox8);
             this.panel5.Controls.Add(this.groupBox7);
             this.panel5.Controls.Add(this.listView5);
+            this.panel5.Controls.Add(this.groupBox8);
             this.panel5.Location = new System.Drawing.Point(13, 78);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(982, 612);
             this.panel5.TabIndex = 234;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label27);
+            this.groupBox7.Controls.Add(this.button15);
+            this.groupBox7.Controls.Add(this.button16);
+            this.groupBox7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox7.Location = new System.Drawing.Point(662, 450);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(299, 130);
+            this.groupBox7.TabIndex = 226;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = " 审批修改";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.Color.Transparent;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label27.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.label27.Location = new System.Drawing.Point(55, 33);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(0, 20);
+            this.label27.TabIndex = 218;
+            // 
+            // button15
+            // 
+            this.button15.BackColor = System.Drawing.SystemColors.Control;
+            this.button15.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button15.ForeColor = System.Drawing.Color.Black;
+            this.button15.Location = new System.Drawing.Point(20, 51);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(83, 32);
+            this.button15.TabIndex = 220;
+            this.button15.Text = "通过";
+            this.button15.UseVisualStyleBackColor = true;
+            // 
+            // button16
+            // 
+            this.button16.BackColor = System.Drawing.SystemColors.Control;
+            this.button16.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button16.ForeColor = System.Drawing.Color.Black;
+            this.button16.Location = new System.Drawing.Point(194, 51);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(83, 32);
+            this.button16.TabIndex = 220;
+            this.button16.Text = "不通过";
+            this.button16.UseVisualStyleBackColor = true;
+            // 
+            // listView5
+            // 
+            this.listView5.CheckBoxes = true;
+            this.listView5.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader31,
+            this.columnHeader32,
+            this.columnHeader33,
+            this.columnHeader34,
+            this.columnHeader35,
+            this.columnHeader36,
+            this.columnHeader37,
+            this.columnHeader38,
+            this.columnHeader39});
+            this.listView5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.listView5.Location = new System.Drawing.Point(22, 27);
+            this.listView5.Name = "listView5";
+            this.listView5.ShowItemToolTips = true;
+            this.listView5.Size = new System.Drawing.Size(617, 559);
+            this.listView5.TabIndex = 224;
+            this.listView5.UseCompatibleStateImageBehavior = false;
+            this.listView5.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader31
+            // 
+            this.columnHeader31.Text = "";
+            this.columnHeader31.Width = 36;
+            // 
+            // columnHeader32
+            // 
+            this.columnHeader32.Text = "请假人";
+            this.columnHeader32.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader32.Width = 55;
+            // 
+            // columnHeader33
+            // 
+            this.columnHeader33.Text = "部门";
+            this.columnHeader33.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader33.Width = 82;
+            // 
+            // columnHeader34
+            // 
+            this.columnHeader34.Text = "类型";
+            this.columnHeader34.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader34.Width = 52;
+            // 
+            // columnHeader35
+            // 
+            this.columnHeader35.Text = "请假天数";
+            this.columnHeader35.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // columnHeader36
+            // 
+            this.columnHeader36.Text = "起止时间";
+            this.columnHeader36.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader36.Width = 158;
+            // 
+            // columnHeader37
+            // 
+            this.columnHeader37.Text = "负责人";
+            this.columnHeader37.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader37.Width = 55;
+            // 
+            // columnHeader38
+            // 
+            this.columnHeader38.Text = "审批结果";
+            this.columnHeader38.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader38.Width = 115;
+            // 
+            // columnHeader39
+            // 
+            this.columnHeader39.Text = "请假原因";
+            this.columnHeader39.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader39.Width = 200;
             // 
             // groupBox8
             // 
@@ -1880,128 +2002,6 @@
             this.dateTimePicker10.Size = new System.Drawing.Size(98, 21);
             this.dateTimePicker10.TabIndex = 216;
             // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.label27);
-            this.groupBox7.Controls.Add(this.button15);
-            this.groupBox7.Controls.Add(this.button16);
-            this.groupBox7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox7.Location = new System.Drawing.Point(662, 450);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(299, 130);
-            this.groupBox7.TabIndex = 226;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = " 审批修改";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.BackColor = System.Drawing.Color.Transparent;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label27.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.label27.Location = new System.Drawing.Point(55, 33);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(0, 20);
-            this.label27.TabIndex = 218;
-            // 
-            // button15
-            // 
-            this.button15.BackColor = System.Drawing.SystemColors.Control;
-            this.button15.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button15.ForeColor = System.Drawing.Color.Black;
-            this.button15.Location = new System.Drawing.Point(20, 51);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(83, 32);
-            this.button15.TabIndex = 220;
-            this.button15.Text = "通过";
-            this.button15.UseVisualStyleBackColor = true;
-            // 
-            // button16
-            // 
-            this.button16.BackColor = System.Drawing.SystemColors.Control;
-            this.button16.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button16.ForeColor = System.Drawing.Color.Black;
-            this.button16.Location = new System.Drawing.Point(194, 51);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(83, 32);
-            this.button16.TabIndex = 220;
-            this.button16.Text = "不通过";
-            this.button16.UseVisualStyleBackColor = true;
-            // 
-            // listView5
-            // 
-            this.listView5.CheckBoxes = true;
-            this.listView5.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader31,
-            this.columnHeader32,
-            this.columnHeader33,
-            this.columnHeader34,
-            this.columnHeader35,
-            this.columnHeader36,
-            this.columnHeader37,
-            this.columnHeader38,
-            this.columnHeader39});
-            this.listView5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.listView5.Location = new System.Drawing.Point(22, 27);
-            this.listView5.Name = "listView5";
-            this.listView5.ShowItemToolTips = true;
-            this.listView5.Size = new System.Drawing.Size(617, 559);
-            this.listView5.TabIndex = 224;
-            this.listView5.UseCompatibleStateImageBehavior = false;
-            this.listView5.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader31
-            // 
-            this.columnHeader31.Text = "";
-            this.columnHeader31.Width = 36;
-            // 
-            // columnHeader32
-            // 
-            this.columnHeader32.Text = "请假人";
-            this.columnHeader32.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader32.Width = 55;
-            // 
-            // columnHeader33
-            // 
-            this.columnHeader33.Text = "部门";
-            this.columnHeader33.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader33.Width = 82;
-            // 
-            // columnHeader34
-            // 
-            this.columnHeader34.Text = "类型";
-            this.columnHeader34.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader34.Width = 52;
-            // 
-            // columnHeader35
-            // 
-            this.columnHeader35.Text = "请假天数";
-            this.columnHeader35.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // columnHeader36
-            // 
-            this.columnHeader36.Text = "起止时间";
-            this.columnHeader36.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader36.Width = 158;
-            // 
-            // columnHeader37
-            // 
-            this.columnHeader37.Text = "负责人";
-            this.columnHeader37.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader37.Width = 55;
-            // 
-            // columnHeader38
-            // 
-            this.columnHeader38.Text = "审批结果";
-            this.columnHeader38.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader38.Width = 115;
-            // 
-            // columnHeader39
-            // 
-            this.columnHeader39.Text = "请假原因";
-            this.columnHeader39.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader39.Width = 200;
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
@@ -2074,10 +2074,10 @@
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.panel5.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
