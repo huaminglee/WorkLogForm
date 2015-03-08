@@ -57,6 +57,18 @@ namespace WorkLogForm
                 }
                 string query2 = "update LOG_T_BUSINESS set PASSEXAM=" + (int)Business.ExamState.redo + " where Id=" + business.Id;
                 baseService.ExecuteSQL(query2);
+
+                #region 服务器通信
+                KjqbService.Service1Client ser = new KjqbService.Service1Client();
+
+                KjqbService.BusinessService bs = new KjqbService.BusinessService();
+                bs.BusinessID = business.Id;
+                bs.ReceiveID = business.Ku_Id.Id;
+                bs.Type = 1;
+                bs.TimeStamp = DateTime.Now.Ticks;
+                ser.SaveInBusinessListInService(bs);
+
+                #endregion
                 this.DialogResult = DialogResult.OK;
                 MessageBox.Show("退回成功");
             }

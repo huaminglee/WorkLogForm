@@ -214,7 +214,53 @@ namespace WorkLogForm
                     be.BusinessId = buss;
                     buss.BusinessEmployee.Add(be);
                 }
-                baseService.SaveOrUpdateEntity(buss);
+                Object id=baseService.saveEntity(buss);
+
+
+                #region 服务器通信
+                List<WkTDept> depList=new List<WkTDept>();
+                List<WkTUser> uList = new List<WkTUser>();
+                foreach (BusinessEmployee be in buss.BusinessEmployee)
+                {
+                    if (depList.Count == 0)
+                    {
+                        depList.Add(be.EmployeeId.Kdid);
+                    }
+                    if(!depList.Contains(be.EmployeeId.Kdid))
+                    {
+                        depList.Add(be.EmployeeId.Kdid);
+                    }
+                }
+                foreach (WkTDept dep in depList)
+                {
+                    string sql = "from WkTUser u where u.Kdid="+dep.Id;
+                    IList ul= baseService.loadEntityList(sql);
+                    foreach (WkTUser u in ul)
+                    {
+                        foreach (WkTRole r in u.UserRole)
+                        {
+                            if (r.KrOrder == 2)
+                                uList.Add(u);
+                        }
+                    }
+                }
+
+                KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                if (uList != null && uList.Count != 0)
+                {
+                    foreach (WkTUser u in uList)
+                    {
+                        KjqbService.BusinessService bs = new KjqbService.BusinessService();
+                        bs.BusinessID = Convert.ToInt32(id.ToString());
+                        bs.ReceiveID = u.Id;
+                        bs.Type = 0;
+                        bs.TimeStamp = DateTime.Now.Ticks;
+                        ser.SaveInBusinessListInService(bs);
+                    }
+                }
+
+                #endregion
+
 
                 MessageBox.Show("添加成功！");
                 listView9.SelectedItems.Clear();
@@ -223,8 +269,7 @@ namespace WorkLogForm
                 textBox5.Clear();
                 listView4.Items.Clear();
                 listView1.Items.Clear();
-            }
-           
+            }    
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)//选择部门
@@ -275,8 +320,7 @@ namespace WorkLogForm
             listView6.Items.Clear();
             if (roleInUser(this.User, "部门主任"))
             {
-                
-                string query = "from Business b where " + Dept.Id + "in (select be.BusinessId.Ku_Id.Kdid from  BusinessEmployee be where be.BusinessId=b.Id) and b.PassExam=" + (int)Business.ExamState.waiting + " order by b.StartTime desc";
+                string query = "from Business b where " + Dept.Id + "in (select be.EmployeeId.Kdid from  BusinessEmployee be where be.BusinessId=b.Id) and b.PassExam=" + (int)Business.ExamState.waiting + " order by b.StartTime desc";
                 IList depList = baseService.loadEntityList(query);
                 int i = 1;
                 if (depList != null)
@@ -386,6 +430,20 @@ namespace WorkLogForm
                 {
                     string query3 = "update LOG_T_BUSINESS set PASSEXAM=" + (int)Business.ExamState.pass + " where Id=" + selectedBusiness.Id;//修改出差审核状态为通过
                     baseService.ExecuteSQL(query3);
+
+                    #region 服务器通信
+                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                   
+                    KjqbService.BusinessService bs = new KjqbService.BusinessService();
+                    bs.BusinessID =selectedBusiness.Id;
+                    bs.ReceiveID = selectedBusiness.Boss.Id;
+                    bs.Type = 0;
+                    bs.TimeStamp = DateTime.Now.Ticks;
+                    ser.SaveInBusinessListInService(bs);
+
+                    #endregion
+
+
                 }
                 MessageBox.Show("审核通过！");
                 initTabPage4();
