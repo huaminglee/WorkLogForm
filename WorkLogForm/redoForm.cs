@@ -133,6 +133,19 @@ namespace WorkLogForm
                 }
                 business.PassExam = (int)Business.ExamState.pass;
                 baseService.SaveOrUpdateEntity(business);
+
+                #region 服务器通信
+                KjqbService.Service1Client ser = new KjqbService.Service1Client();
+
+                KjqbService.BusinessService bs = new KjqbService.BusinessService();
+                bs.BusinessID = business.Id;
+                bs.ReceiveID = business.Boss.Id;
+                bs.Type = 0;
+                bs.TimeStamp = DateTime.Now.Ticks;
+                ser.SaveInBusinessListInService(bs);
+
+                #endregion
+
                 MessageBox.Show("成功提交");
                 this.DialogResult = DialogResult.OK;
             }
