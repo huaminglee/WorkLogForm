@@ -7,13 +7,13 @@ namespace KjqbService
 {
     public class BusinessService
     {
-        private long staterID;
+        //private long staterID;
 
-        public long StaterID
-        {
-            get { return staterID; }
-            set { staterID = value; }
-        }
+        //public long StaterID
+        //{
+        //    get { return staterID; }
+        //    set { staterID = value; }
+        //}
 
 
         private long receiveID;

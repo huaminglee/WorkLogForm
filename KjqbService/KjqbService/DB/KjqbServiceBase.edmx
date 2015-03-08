@@ -17,8 +17,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="StarterID" Type="bigint" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="ReceiveID" Type="bigint" />
           <Property Name="BusinessID" Type="bigint" />
           <Property Name="TimeStamp" Type="numeric" />
@@ -167,7 +166,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="Int64" Name="StarterID" />
           <Property Type="Int64" Name="ReceiveID" />
           <Property Type="Int64" Name="BusinessID" />
           <Property Type="Decimal" Name="TimeStamp" Precision="18" Scale="0" />
@@ -257,7 +255,6 @@
                 <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
                 <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
                 <ScalarProperty Name="ReceiveID" ColumnName="ReceiveID" />
-                <ScalarProperty Name="StarterID" ColumnName="StarterID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
