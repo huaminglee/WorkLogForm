@@ -79,6 +79,7 @@
     <Compile Include="DB\LeaveMessage.cs">
       <DependentUpon>KjqbServiceBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\LeaveOperate.cs" />
     <Compile Include="DB\LogOperate.cs" />
     <Compile Include="DB\ScheduleMessage.cs">
       <DependentUpon>KjqbServiceBase.tt</DependentUpon>
@@ -104,6 +105,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>KjqbServiceBase.edmx</DependentUpon>
     </Compile>
+    <Compile Include="LeaveInService.cs" />
     <Compile Include="LogInService.cs" />
     <Compile Include="DB\LogMessage.cs">
       <DependentUpon>KjqbServiceBase.tt</DependentUpon>

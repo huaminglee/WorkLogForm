@@ -67,8 +67,28 @@ namespace KjqbService
 
         [OperationContract]
         List<TimeArrangeForManagerInService> SearchTimeArrangeForManagerUnRead(int Id);
-       
         #endregion
+
+
+        #region 请假推送
+
+
+        [OperationContract]
+        bool SaveInLeaveInfoInService(LeaveInService log);
+
+        [OperationContract]
+        List<LeaveInService> SearchLeaveInfo(int Id);
+
+        [OperationContract]
+        void SetLeaveInfoIsRead(int Id);
+
+        [OperationContract]
+        List<LeaveInService> SearchLeaveInfoUnRead(int Id);
+
+
+
+        #endregion
+
 
     }
 }

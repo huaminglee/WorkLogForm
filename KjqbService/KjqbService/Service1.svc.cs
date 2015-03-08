@@ -17,6 +17,7 @@ namespace KjqbService
         KjqbService.DB.ScheduleOperate sop = new ScheduleOperate();
         KjqbService.DB.CommentOperate cop = new CommentOperate();
         KjqbService.DB.TimeArrangeForManagerOperate top = new TimeArrangeForManagerOperate();
+        KjqbService.DB.LeaveOperate leop = new LeaveOperate();
         #region 分享日志推送
         public bool SaveInLogListInService(LogInService log)
         {
@@ -231,6 +232,72 @@ namespace KjqbService
        
        }
        
+
+
+        #endregion
+
+
+
+        #region 请假推送
+
+
+       public bool SaveInLeaveInfoInService(LeaveInService log)
+       {
+           leop.InsertIntoLeaveEntity(log);
+           return true;
+       }
+
+       public List<LeaveInService> SearchLeaveInfo(int Id)
+       {
+           List<LeaveInService> l = new List<LeaveInService>();
+
+           List<LeaveMessage> lm = leop.SendLeaveInfo(Id);
+
+           foreach (LeaveMessage lo in lm)
+           {
+               LeaveInService ll = new LeaveInService();
+               ll.LeaveId = (long)lo.LeaveId;
+               ll.UserId = (long)lo.UserId;
+               ll.SendUserId = (long)lo.SendUserId;
+               ll.ExamineOrExamineresult = (int)lo.ExamineOrExamineResult;
+
+               l.Add(ll);
+           }
+
+           return l;
+       
+       }
+
+       public void SetLeaveInfoIsRead(int Id)
+       {
+
+           leop.ChangeLeaveInfoIsRead(Id);
+       
+       
+       }
+
+       public List<LeaveInService> SearchLeaveInfoUnRead(int Id)
+       {
+
+           List<LeaveInService> l = new List<LeaveInService>();
+
+           List<LeaveMessage> lm = leop.SendLeaveInfoUnRead(Id);
+
+           foreach (LeaveMessage lo in lm)
+           {
+               LeaveInService ll = new LeaveInService();
+               ll.LeaveId = (long)lo.LeaveId;
+               ll.UserId = (long)lo.UserId;
+               ll.SendUserId = (long)lo.SendUserId;
+               ll.ExamineOrExamineresult = (int)lo.ExamineOrExamineResult;
+
+               l.Add(ll);
+           }
+
+           return l;
+       }
+
+
 
 
         #endregion
