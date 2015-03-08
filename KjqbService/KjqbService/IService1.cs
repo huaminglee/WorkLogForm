@@ -73,6 +73,9 @@ namespace KjqbService
         [OperationContract]
         bool SaveInBusinessListInService(BusinessService bs);
 
+
+
+
         #endregion
         #region 请假推送
 
