@@ -12,14 +12,14 @@ namespace KjqbService.DB
     using System;
     using System.Collections.Generic;
     
-    public partial class BusinessMessage
+    public partial class ChatMessage
     {
-        public int Id { get; set; }
-        public Nullable<long> ReceiveID { get; set; }
-        public Nullable<long> BusinessID { get; set; }
-        public Nullable<decimal> TimeStamp { get; set; }
-        public Nullable<int> Type { get; set; }
+        public decimal Id { get; set; }
         public Nullable<int> State { get; set; }
         public Nullable<int> IsRead { get; set; }
+        public Nullable<decimal> ReceiveUserId { get; set; }
+        public Nullable<decimal> SendUserId { get; set; }
+        public string ChatContent { get; set; }
+        public Nullable<decimal> TimeStamp { get; set; }
     }
 }

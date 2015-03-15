@@ -110,9 +110,9 @@ namespace ClassLibrary
             get { return kuLastAddr; }
             set { kuLastAddr = value; }
         }
-        private string kuOnline;
+        private int kuOnline;
 
-        public virtual string KuOnline
+        public virtual int KuOnline
         {
             get { return kuOnline; }
             set { kuOnline = value; }

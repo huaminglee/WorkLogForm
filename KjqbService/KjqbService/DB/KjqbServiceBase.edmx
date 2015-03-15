@@ -7,6 +7,7 @@
     <Schema Namespace="KjqbServiceModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="KjqbServiceModelStoreContainer">
           <EntitySet Name="BusinessMessage" EntityType="KjqbServiceModel.Store.BusinessMessage" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ChatMessage" EntityType="KjqbServiceModel.Store.ChatMessage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="CommentMessage" EntityType="KjqbServiceModel.Store.CommentMessage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LeaveMessage" EntityType="KjqbServiceModel.Store.LeaveMessage" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="LogMessage" EntityType="KjqbServiceModel.Store.LogMessage" store:Type="Tables" Schema="dbo" />
@@ -24,6 +25,18 @@
           <Property Name="Type" Type="int" />
           <Property Name="State" Type="int" />
           <Property Name="IsRead" Type="int" />
+        </EntityType>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="State" Type="int" />
+          <Property Name="IsRead" Type="int" />
+          <Property Name="ReceiveUserId" Type="numeric" />
+          <Property Name="SendUserId" Type="numeric" />
+          <Property Name="ChatContent" Type="varchar(max)" />
+          <Property Name="TimeStamp" Type="numeric" />
         </EntityType>
         <EntityType Name="CommentMessage">
           <Key>
@@ -98,6 +111,7 @@
           <EntitySet Name="TimeArrangeForManagerMessages" EntityType="KjqbServiceModel.TimeArrangeForManagerMessage" />
           <EntitySet Name="LeaveMessages" EntityType="KjqbServiceModel.LeaveMessage" />
           <EntitySet Name="BusinessMessages" EntityType="KjqbServiceModel.BusinessMessage" />
+          <EntitySet Name="ChatMessages" EntityType="KjqbServiceModel.ChatMessage" />
         </EntityContainer>
         <EntityType Name="LogMessage">
           <Key>
@@ -172,6 +186,18 @@
           <Property Type="Int32" Name="Type" />
           <Property Type="Int32" Name="State" />
           <Property Type="Int32" Name="IsRead" />
+        </EntityType>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="State" />
+          <Property Type="Int32" Name="IsRead" />
+          <Property Type="Decimal" Name="ReceiveUserId" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="SendUserId" Precision="18" Scale="0" />
+          <Property Type="String" Name="ChatContent" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="TimeStamp" Precision="18" Scale="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -255,6 +281,19 @@
                 <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
                 <ScalarProperty Name="BusinessID" ColumnName="BusinessID" />
                 <ScalarProperty Name="ReceiveID" ColumnName="ReceiveID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatMessages">
+            <EntityTypeMapping TypeName="KjqbServiceModel.ChatMessage">
+              <MappingFragment StoreEntitySet="ChatMessage">
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="ChatContent" ColumnName="ChatContent" />
+                <ScalarProperty Name="SendUserId" ColumnName="SendUserId" />
+                <ScalarProperty Name="ReceiveUserId" ColumnName="ReceiveUserId" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

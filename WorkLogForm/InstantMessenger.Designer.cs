@@ -30,6 +30,7 @@
         {
             this.close_pictureBox = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,20 +58,31 @@
             this.label1.TabIndex = 172;
             this.label1.Text = "联系人列表";
             // 
+            // treeView1
+            // 
+            this.treeView1.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.treeView1.Location = new System.Drawing.Point(4, 40);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(243, 548);
+            this.treeView1.TabIndex = 173;
+            this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
+            // 
             // InstantMessenger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.日志管理系统背景小;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(252, 493);
+            this.ClientSize = new System.Drawing.Size(252, 600);
             this.ControlBox = false;
+            this.Controls.Add(this.treeView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.close_pictureBox);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "InstantMessenger";
-            this.Text = "InstantMessenger";
+            this.ShowInTaskbar = false;
+            this.Text = "联系人列表";
             this.Load += new System.EventHandler(this.InstantMessenger_Load);
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).EndInit();
             this.ResumeLayout(false);
@@ -82,5 +94,6 @@
 
         private System.Windows.Forms.PictureBox close_pictureBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }

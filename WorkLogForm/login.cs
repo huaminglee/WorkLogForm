@@ -145,8 +145,8 @@ namespace WorkLogForm
                     #region 登陆效果
                     if (textBox1.Text.Trim() == "" || textBox1.Text.Trim() == "输入用户名" || textBox2.Text.Trim() == "" || textBox2.Text.Trim() == "输入密码")
                     {
-                        //MessageBox.Show("用户名和密码不能为空!");
-                        //return; //不在执行下面的函数
+                        MessageBox.Show("用户名和密码不能为空!");
+                        return; //不在执行下面的函数
                     }
                     timer1.Start(); //登录窗收起效果
                     #endregion

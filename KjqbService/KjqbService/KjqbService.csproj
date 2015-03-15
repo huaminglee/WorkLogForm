@@ -75,6 +75,9 @@
       <DependentUpon>KjqbServiceBase.tt</DependentUpon>
     </Compile>
     <Compile Include="DB\BusinessOperate.cs" />
+    <Compile Include="DB\ChatMessage.cs">
+      <DependentUpon>KjqbServiceBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="DB\CommentMessage.cs">
       <DependentUpon>KjqbServiceBase.tt</DependentUpon>
     </Compile>

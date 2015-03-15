@@ -124,6 +124,7 @@ namespace WorkLogForm
 
         private void main_Load(object sender, EventArgs e)
         {
+
             initialWindow();
             initialData();//显示日程 日志 考勤
             schedule_listen_timer.Start();//监听日程提醒
@@ -247,8 +248,14 @@ namespace WorkLogForm
         {
             if (user != null)
             {
+                #region 向数据库发送登陆信息
+                user.KuOnline = 1;
+                baseService.SaveOrUpdateEntity(user);
+
+                #endregion
+
                 #region 登陆签到及显示考勤
-                
+
 
                 DateTime today ;
                 try
@@ -873,6 +880,7 @@ namespace WorkLogForm
 
         private void pictureBoxOfInstantMessenger_Click(object sender, EventArgs e)
         {
+            pictureBoxOfInstantMessenger.Cursor = Cursors.WaitCursor;
             if (InstantMessengerWindows == null || InstantMessengerWindows.IsDisposed)
             {
                 InstantMessengerWindows = new InstantMessenger();
@@ -880,6 +888,7 @@ namespace WorkLogForm
             if (!InstantMessengerWindows.Created)
             {
                 InstantMessengerWindows.FormLocation = new Point(this.Location.X - InstantMessengerWindows.Width, this.Location.Y);
+                InstantMessengerWindows.User = this.user;
                 InstantMessengerWindows.Show();
 
             }
@@ -888,9 +897,7 @@ namespace WorkLogForm
                 InstantMessengerWindows.WindowState = FormWindowState.Normal;
                 InstantMessengerWindows.Focus();
             }
-
-
-
+            pictureBoxOfInstantMessenger.Cursor = Cursors.Hand;
 
         }
          private void spgl_pictureBox_Click(object sender, EventArgs e)
@@ -1204,6 +1211,9 @@ namespace WorkLogForm
         {
             if (user != null)
             {
+                user.KuOnline = 0 ;
+                baseService.SaveOrUpdateEntity(user);
+
                 DateTime today;
                 try
                 {

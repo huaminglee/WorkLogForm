@@ -125,6 +125,12 @@
     <Compile Include="BusinessRedo.Designer.cs">
       <DependentUpon>BusinessRedo.cs</DependentUpon>
     </Compile>
+    <Compile Include="ChatWindows.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChatWindows.Designer.cs">
+      <DependentUpon>ChatWindows.cs</DependentUpon>
+    </Compile>
     <Compile Include="InstantMessenger.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -336,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BusinessRedo.resx">
       <DependentUpon>BusinessRedo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChatWindows.resx">
+      <DependentUpon>ChatWindows.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="checkAttendance.resx">
       <DependentUpon>checkAttendance.cs</DependentUpon>
