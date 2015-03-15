@@ -75,6 +75,7 @@ namespace WorkLogForm
         private WorkOvertime workOvertime;
         private SuiBiGuanLi_New suibiguanli;
         private NewMessageWindow newMessageWindow;
+        private InstantMessenger InstantMessengerWindows;
         KjqbService.Service1Client ser = new KjqbService.Service1Client();
         #endregion
         
@@ -608,6 +609,11 @@ namespace WorkLogForm
                     newMessageWindow.Top = MousePosition.Y - y;
                     newMessageWindow.Left = MousePosition.X - x - newMessageWindow.Width;
                 }
+                if (InstantMessengerWindows != null && InstantMessengerWindows.Created)
+                {
+                    InstantMessengerWindows.Top = MousePosition.Y - y;
+                    InstantMessengerWindows.Left = MousePosition.X - x - InstantMessengerWindows.Width;
+                }
                 Top = MousePosition.Y - y;
                 Left = MousePosition.X - x;
             }
@@ -864,6 +870,29 @@ namespace WorkLogForm
 
 
         #region 业务逻辑控件事件
+
+        private void pictureBoxOfInstantMessenger_Click(object sender, EventArgs e)
+        {
+            if (InstantMessengerWindows == null || InstantMessengerWindows.IsDisposed)
+            {
+                InstantMessengerWindows = new InstantMessenger();
+            }
+            if (!InstantMessengerWindows.Created)
+            {
+                InstantMessengerWindows.FormLocation = new Point(this.Location.X - InstantMessengerWindows.Width, this.Location.Y);
+                InstantMessengerWindows.Show();
+
+            }
+            else
+            {
+                InstantMessengerWindows.WindowState = FormWindowState.Normal;
+                InstantMessengerWindows.Focus();
+            }
+
+
+
+
+        }
          private void spgl_pictureBox_Click(object sender, EventArgs e)
         {
             if (statisticsAttendance == null || statisticsAttendance.IsDisposed)
@@ -1770,6 +1799,8 @@ namespace WorkLogForm
 
         }
         #endregion
+
+     
 
       
 

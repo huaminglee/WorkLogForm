@@ -125,6 +125,12 @@
     <Compile Include="BusinessRedo.Designer.cs">
       <DependentUpon>BusinessRedo.cs</DependentUpon>
     </Compile>
+    <Compile Include="InstantMessenger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InstantMessenger.Designer.cs">
+      <DependentUpon>InstantMessenger.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewMessageWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -334,6 +340,9 @@
     <EmbeddedResource Include="checkAttendance.resx">
       <DependentUpon>checkAttendance.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InstantMessenger.resx">
+      <DependentUpon>InstantMessenger.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InterimHead.resx">
       <DependentUpon>InterimHead.cs</DependentUpon>
     </EmbeddedResource>
@@ -462,6 +471,7 @@
     <None Include="resources\日历小方块_周末.png" />
     <None Include="resources\refresh.jpg" />
     <Content Include="29.ico" />
+    <None Include="resources\InstantMessengerLogo.png" />
     <Content Include="resources\个人考勤.png" />
     <Content Include="resources\个人考勤副本.png" />
     <Content Include="resources\代签审批.png" />
