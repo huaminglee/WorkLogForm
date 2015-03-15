@@ -149,62 +149,68 @@ namespace WorkLogForm
             #region 开启时读取未读的推送信息
             ////////////////////////////////
 
-             loglistfromService = new List<KjqbService.LogInService>();
-             schedulelistfromService = new List<KjqbService.ScheduleInService>();
-             commentlistfromService = new List<KjqbService.CommentInService>();
-             tfmListfromservice = new List<KjqbService.TimeArrangeForManagerInService>();
-             levlistfromservice = new List<KjqbService.LeaveInService>();
-             businessfromservice = new List<KjqbService.BusinessService>();
-             KjqbService.LogInService[] lists;
-             lists = ser.SearchShareLogUnRead((int)this.user.Id);
-             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
-             for (int i = 0; i < lists.Length; i++)
+             try
              {
-                 loglistfromService.Add(lists[i]);
-             }
+                 loglistfromService = new List<KjqbService.LogInService>();
+                 schedulelistfromService = new List<KjqbService.ScheduleInService>();
+                 commentlistfromService = new List<KjqbService.CommentInService>();
+                 tfmListfromservice = new List<KjqbService.TimeArrangeForManagerInService>();
+                 levlistfromservice = new List<KjqbService.LeaveInService>();
+                 businessfromservice = new List<KjqbService.BusinessService>();
+                 KjqbService.LogInService[] lists;
+                 lists = ser.SearchShareLogUnRead((int)this.user.Id);
+                 this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
+                 for (int i = 0; i < lists.Length; i++)
+                 {
+                     loglistfromService.Add(lists[i]);
+                 }
 
-             KjqbService.ScheduleInService[] list2;
-             list2 = ser.SearchShareScheduleUnRead((int)this.user.Id);
-             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list2.Length).ToString();
-             for (int i = 0; i < list2.Length; i++)
+                 KjqbService.ScheduleInService[] list2;
+                 list2 = ser.SearchShareScheduleUnRead((int)this.user.Id);
+                 this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list2.Length).ToString();
+                 for (int i = 0; i < list2.Length; i++)
+                 {
+                     schedulelistfromService.Add(list2[i]);
+                 }
+
+                 KjqbService.CommentInService[] list3;
+                 list3 = ser.SearchCommentlogUnRead((int)this.user.Id);
+                 this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list3.Length).ToString();
+                 for (int i = 0; i < list3.Length; i++)
+                 {
+                     commentlistfromService.Add(list3[i]);
+                 }
+
+                 KjqbService.TimeArrangeForManagerInService[] list4;
+                 list4 = ser.SearchTimeArrangeForManagerUnRead((int)this.user.Id);
+                 this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list4.Length).ToString();
+                 for (int i = 0; i < list4.Length; i++)
+                 {
+                     tfmListfromservice.Add(list4[i]);
+                 }
+
+                 KjqbService.LeaveInService[] lists5;
+                 lists5 = ser.SearchLeaveInfoUnRead((int)this.user.Id);
+                 for (int i = 0; i < lists5.Length; i++)
+                 {
+                     levlistfromservice.Add(lists5[i]);
+                 }
+
+                 this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
+                 KjqbService.BusinessService[] lists6;
+                 lists6 = ser.SearchBusinessInfoUnRead((int)this.user.Id);
+                 for (int i = 0; i < lists6.Length; i++)
+                 {
+                     businessfromservice.Add(lists6[i]);
+                 }
+
+                 this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
+
+             }
+             catch
              {
-                 schedulelistfromService.Add(list2[i]);
+                 MessageBox.Show("推送程序出错");
              }
-
-             KjqbService.CommentInService[] list3;
-             list3 = ser.SearchCommentlogUnRead((int)this.user.Id);
-             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list3.Length).ToString();
-             for (int i = 0; i < list3.Length; i++)
-             {
-                 commentlistfromService.Add(list3[i]);
-             }
-
-             KjqbService.TimeArrangeForManagerInService[] list4;
-             list4 = ser.SearchTimeArrangeForManagerUnRead((int)this.user.Id);
-             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list4.Length).ToString();
-             for (int i = 0; i < list4.Length; i++)
-             {
-                 tfmListfromservice.Add(list4[i]);
-             }
-
-             KjqbService.LeaveInService[] lists5;
-             lists5 = ser.SearchLeaveInfoUnRead((int)this.user.Id);
-             for (int i = 0; i < lists5.Length; i++)
-             {
-                 levlistfromservice.Add(lists5[i]);
-             }
-
-             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
-             KjqbService.BusinessService[] lists6;
-             lists6 = ser.SearchBusinessInfoUnRead((int)this.user.Id);
-             for (int i = 0; i < lists6.Length; i++)
-             {
-                 businessfromservice.Add(lists6[i]);
-             }
-
-             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
-
-
 
 
             #endregion
@@ -232,7 +238,7 @@ namespace WorkLogForm
             //sec.Show();
         }
 
-
+       
         /// <summary>
         /// 
         /// </summary>
@@ -241,7 +247,19 @@ namespace WorkLogForm
             if (user != null)
             {
                 #region 登陆签到及显示考勤
-                DateTime today = DateTime.Now;
+                
+
+                DateTime today ;
+                try
+                {
+                    today = ser.GetServiceTime();
+
+                }
+                catch
+                {
+                    today = DateTime.Now;
+                }
+
                 this.user_label.Text = "欢迎登陆，" + user.KuName;
                 if (CNDate.isworkDay(today.Date.Ticks))//工作日登录
                 {
@@ -281,7 +299,14 @@ namespace WorkLogForm
                         todaySignStart.SignMonth = today.Month;
                         todaySignStart.SignYear = today.Year;
                         todaySignStart.State = (int)IEntity.stateEnum.Normal;
-                        todaySignStart.TimeStamp = DateTime.Now.Ticks;
+                        try
+                        {
+                            todaySignStart.TimeStamp = ser.GetServiceTime().Ticks;
+                        }
+                        catch
+                        {
+                            todaySignStart.TimeStamp = DateTime.Now.Ticks;
+                        }
                         todaySignStart.User = this.user;
                         try
                         {
@@ -804,6 +829,8 @@ namespace WorkLogForm
             rc_flowLayoutPanel.Visible = true;
             SuiBi_flowLayoutPanel.Visible = false;
             tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人随笔1;
+            init_rc_Panel();
+          
             
         }
         private void ri_zhi_pictureBox_Click(object sender, EventArgs e)
@@ -813,6 +840,8 @@ namespace WorkLogForm
             rc_flowLayoutPanel.Visible = false;
             SuiBi_flowLayoutPanel.Visible = false;
             tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人随笔1;
+            init_rz_Panel();
+          
         }
 
         private void tong_xun_pictureBox_Click(object sender, EventArgs e)
@@ -823,6 +852,7 @@ namespace WorkLogForm
             SuiBi_flowLayoutPanel.Visible = true;
             ri_zhi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日志分享;
             ri_cheng_pictureBox1.BackgroundImage = WorkLogForm.Properties.Resources.我的日程;
+            RefreshSuiBi();
 
         }
 
@@ -1145,7 +1175,17 @@ namespace WorkLogForm
         {
             if (user != null)
             {
-                DateTime today = DateTime.Now;
+                DateTime today;
+                try
+                {
+                today = ser.GetServiceTime();
+                }
+                catch
+                {
+                    today = DateTime.Now;
+                
+                }
+                
                 if (CNDate.isworkDay(today.Date.Ticks))
                 {
                     IList attendanceList = baseService.loadEntityList("from Attendance where STATE=" + (int)IEntity.stateEnum.Normal + " and User=" + user.Id + " and SignDate=" + today.Date.Ticks);
@@ -1512,6 +1552,12 @@ namespace WorkLogForm
             ShowSuiBiInFlowPanel(10);
             this.linkLabel10.Enabled = true;
         }
+        private void RefreshSuiBi()
+        {
+            this.Show_SuiBi_flowPanel.Controls.Clear();
+            ShowSuiBiInFlowPanel(10);
+            this.linkLabel10.Enabled = true;
+        }
 
         /// <summary>
         /// 写随笔
@@ -1547,13 +1593,33 @@ namespace WorkLogForm
         #endregion
 
 
-        #region 刷新
+        #region 刷新 
+        /// <summary>
+        /// 手动更新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pictureBoxOfrefresh_Click(object sender, EventArgs e)
         {
             init_rc_Panel();
             init_rz_Panel();
+            RefreshSuiBi();
         }
+        /// <summary>
+        ///自动更新 //更新之后无法记录看到什么位置了，会回到最顶端 暂时搁置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RefreshAll_Tick(object sender, EventArgs e)
+        {
+            //init_rc_Panel();
+            //init_rz_Panel();
+            //RefreshSuiBi();
+        }
+
         #endregion
+
+        
 
         #region 提醒写日志
         /// <summary>
@@ -1592,11 +1658,25 @@ namespace WorkLogForm
             panelNewMessage.Cursor = Cursors.WaitCursor;
 
             this.labelNewMEssageCount.Text = "0";
-            ser.SetShareLogIsRead((int)this.user.Id);
-            ser.SetShareScheduleIsRead((int)this.user.Id);
-            ser.SetCommentLogIsRead((int)this.user.Id);
-            ser.SetTimeArrangeForManagerIsRead((int)this.user.Id);
-            ser.SetLeaveInfoIsRead((int)this.user.Id);
+
+            try
+            {
+                ser.SetShareLogIsRead((int)this.user.Id);
+                ser.SetShareScheduleIsRead((int)this.user.Id);
+                ser.SetCommentLogIsRead((int)this.user.Id);
+                ser.SetTimeArrangeForManagerIsRead((int)this.user.Id);
+                ser.SetLeaveInfoIsRead((int)this.user.Id);
+                ser.SetBusinessInfoIsRead((long)this.user.Id);
+            }
+            catch
+            {
+                
+            }
+            
+            //同时刷新窗体
+            init_rc_Panel();
+            init_rz_Panel();
+            RefreshSuiBi();
 
             if (newMessageWindow == null || newMessageWindow.IsDisposed)
             {
@@ -1690,6 +1770,8 @@ namespace WorkLogForm
 
         }
         #endregion
+
+      
 
        
 

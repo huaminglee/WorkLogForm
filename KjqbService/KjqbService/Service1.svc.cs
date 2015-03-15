@@ -237,7 +237,7 @@ namespace KjqbService
 
         #endregion
 
-       #region  出差审批推送
+        #region  出差审批推送
        public bool SaveInBusinessListInService(BusinessService bs)
        {
            bop.InsertIntoEntity(bs);
@@ -288,8 +288,7 @@ namespace KjqbService
 
        #endregion
 
-
-       #region 请假推送
+        #region 请假推送
 
 
        public bool SaveInLeaveInfoInService(LeaveInService log)
@@ -349,5 +348,12 @@ namespace KjqbService
 
 
         #endregion
+
+       public DateTime GetServiceTime()
+       {
+           DateTime time = DateTime.Now;
+           return time;
+       }
+
     }
 }

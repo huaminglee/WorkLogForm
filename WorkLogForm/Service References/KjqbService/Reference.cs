@@ -646,6 +646,9 @@ namespace WorkLogForm.KjqbService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchLeaveInfoUnRead", ReplyAction="http://tempuri.org/IService1/SearchLeaveInfoUnReadResponse")]
         WorkLogForm.KjqbService.LeaveInService[] SearchLeaveInfoUnRead(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetServiceTime", ReplyAction="http://tempuri.org/IService1/GetServiceTimeResponse")]
+        System.DateTime GetServiceTime();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -769,6 +772,10 @@ namespace WorkLogForm.KjqbService {
         
         public WorkLogForm.KjqbService.LeaveInService[] SearchLeaveInfoUnRead(int Id) {
             return base.Channel.SearchLeaveInfoUnRead(Id);
+        }
+        
+        public System.DateTime GetServiceTime() {
+            return base.Channel.GetServiceTime();
         }
     }
 }

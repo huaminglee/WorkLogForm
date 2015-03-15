@@ -25,7 +25,6 @@ namespace KjqbService
         List<LogInService> SearchShareLogUnRead(int Id);
         #endregion
 
-
         #region 分享日程推送
         [OperationContract]
         bool SaveInScheduleListInService(ScheduleInService log);
@@ -80,6 +79,7 @@ namespace KjqbService
         List<BusinessService> SearchBusinessInfoUnRead(long Id);
 
         #endregion
+
         #region 请假推送
 
 
@@ -99,6 +99,8 @@ namespace KjqbService
 
         #endregion
 
+        [OperationContract]
+        DateTime GetServiceTime();
 
     }
 }

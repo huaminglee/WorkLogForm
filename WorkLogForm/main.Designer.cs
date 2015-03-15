@@ -106,6 +106,8 @@
             this.panelNewMessage = new System.Windows.Forms.Panel();
             this.labelNewMEssageCount = new System.Windows.Forms.Label();
             this.timerMessageSend = new System.Windows.Forms.Timer(this.components);
+            this.RefreshAll = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wdrl_pictureBox)).BeginInit();
@@ -144,6 +146,7 @@
             this.write_SuiBi.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panelNewMessage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -249,7 +252,7 @@
             this.wdrl_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.我的日历;
             this.wdrl_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.wdrl_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.wdrl_pictureBox.Location = new System.Drawing.Point(0, 80);
+            this.wdrl_pictureBox.Location = new System.Drawing.Point(1, 119);
             this.wdrl_pictureBox.Name = "wdrl_pictureBox";
             this.wdrl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.wdrl_pictureBox.TabIndex = 11;
@@ -265,7 +268,7 @@
             this.rzgl_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.统计考勤2;
             this.rzgl_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.rzgl_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rzgl_pictureBox.Location = new System.Drawing.Point(0, 160);
+            this.rzgl_pictureBox.Location = new System.Drawing.Point(1, 199);
             this.rzgl_pictureBox.Name = "rzgl_pictureBox";
             this.rzgl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.rzgl_pictureBox.TabIndex = 11;
@@ -281,7 +284,7 @@
             this.spgl_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.个人考勤;
             this.spgl_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.spgl_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.spgl_pictureBox.Location = new System.Drawing.Point(0, 405);
+            this.spgl_pictureBox.Location = new System.Drawing.Point(1, 444);
             this.spgl_pictureBox.Name = "spgl_pictureBox";
             this.spgl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.spgl_pictureBox.TabIndex = 11;
@@ -297,7 +300,7 @@
             this.qjgl_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.请假管理1;
             this.qjgl_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.qjgl_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.qjgl_pictureBox.Location = new System.Drawing.Point(0, 245);
+            this.qjgl_pictureBox.Location = new System.Drawing.Point(1, 284);
             this.qjgl_pictureBox.Name = "qjgl_pictureBox";
             this.qjgl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.qjgl_pictureBox.TabIndex = 11;
@@ -313,7 +316,7 @@
             this.jbgl_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.加班管理1;
             this.jbgl_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.jbgl_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.jbgl_pictureBox.Location = new System.Drawing.Point(0, 285);
+            this.jbgl_pictureBox.Location = new System.Drawing.Point(1, 324);
             this.jbgl_pictureBox.Name = "jbgl_pictureBox";
             this.jbgl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.jbgl_pictureBox.TabIndex = 11;
@@ -329,7 +332,7 @@
             this.zbgl_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.值班管理22;
             this.zbgl_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.zbgl_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.zbgl_pictureBox.Location = new System.Drawing.Point(0, 325);
+            this.zbgl_pictureBox.Location = new System.Drawing.Point(1, 364);
             this.zbgl_pictureBox.Name = "zbgl_pictureBox";
             this.zbgl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.zbgl_pictureBox.TabIndex = 11;
@@ -345,7 +348,7 @@
             this.ccgl_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.出差管理;
             this.ccgl_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ccgl_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ccgl_pictureBox.Location = new System.Drawing.Point(0, 365);
+            this.ccgl_pictureBox.Location = new System.Drawing.Point(1, 404);
             this.ccgl_pictureBox.Name = "ccgl_pictureBox";
             this.ccgl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.ccgl_pictureBox.TabIndex = 11;
@@ -361,7 +364,7 @@
             this.sjgl_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.系统管理;
             this.sjgl_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.sjgl_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.sjgl_pictureBox.Location = new System.Drawing.Point(0, 445);
+            this.sjgl_pictureBox.Location = new System.Drawing.Point(1, 484);
             this.sjgl_pictureBox.Name = "sjgl_pictureBox";
             this.sjgl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.sjgl_pictureBox.TabIndex = 11;
@@ -405,7 +408,7 @@
             this.rcgl_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.日程管理;
             this.rcgl_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.rcgl_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rcgl_pictureBox.Location = new System.Drawing.Point(1, 120);
+            this.rcgl_pictureBox.Location = new System.Drawing.Point(2, 159);
             this.rcgl_pictureBox.Name = "rcgl_pictureBox";
             this.rcgl_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.rcgl_pictureBox.TabIndex = 11;
@@ -421,7 +424,7 @@
             this.SuiBiGuanLi_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.随笔;
             this.SuiBiGuanLi_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.SuiBiGuanLi_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.SuiBiGuanLi_pictureBox.Location = new System.Drawing.Point(1, 202);
+            this.SuiBiGuanLi_pictureBox.Location = new System.Drawing.Point(2, 241);
             this.SuiBiGuanLi_pictureBox.Name = "SuiBiGuanLi_pictureBox";
             this.SuiBiGuanLi_pictureBox.Size = new System.Drawing.Size(41, 40);
             this.SuiBiGuanLi_pictureBox.TabIndex = 25;
@@ -964,6 +967,24 @@
             this.timerMessageSend.Interval = 3000;
             this.timerMessageSend.Tick += new System.EventHandler(this.timerMessageSend_Tick);
             // 
+            // RefreshAll
+            // 
+            this.RefreshAll.Interval = 5000;
+            this.RefreshAll.Tick += new System.EventHandler(this.RefreshAll_Tick);
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox4.BackgroundImage = global::WorkLogForm.Properties.Resources.我的日历;
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox4.Location = new System.Drawing.Point(1, 80);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(41, 40);
+            this.pictureBox4.TabIndex = 28;
+            this.pictureBox4.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox4, "我的日历");
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -972,6 +993,7 @@
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.首页背景2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(295, 600);
+            this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.panelNewMessage);
             this.Controls.Add(this.SuiBi_flowLayoutPanel);
             this.Controls.Add(this.pictureBoxOfrefresh);
@@ -1057,6 +1079,7 @@
             this.panel8.PerformLayout();
             this.panelNewMessage.ResumeLayout(false);
             this.panelNewMessage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1140,5 +1163,7 @@
         private System.Windows.Forms.Panel panelNewMessage;
         private System.Windows.Forms.Label labelNewMEssageCount;
         private System.Windows.Forms.Timer timerMessageSend;
+        private System.Windows.Forms.Timer RefreshAll;
+        private System.Windows.Forms.PictureBox pictureBox4;
     }
 }

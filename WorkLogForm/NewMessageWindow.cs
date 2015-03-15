@@ -346,25 +346,41 @@ namespace WorkLogForm
                 KjqbService.LogInService ll = (KjqbService.LogInService)l1.Tag;
                 StaffLog ss = new StaffLog();
                 ss = (StaffLog)baseService.loadEntity(ss, ll.LogId);
+                if (ss.State == 0)
+                {
+                    writeLog wl = new writeLog();
+                    wl.User = ss.Staff;
+                    wl.LogDate = new DateTime(ss.WriteTime);
+                    wl.IsComment = true;
+                    wl.CommentPersonName = this.User.KuName;
+                    wl.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("该篇日志作者已经删除");
+                }
+                
 
-                writeLog wl = new writeLog();
-                wl.User = ss.Staff;
-                wl.LogDate = new DateTime(ss.WriteTime);
-                wl.IsComment = true;
-                wl.CommentPersonName = this.User.KuName;
-                wl.ShowDialog();
+              
             }
             else if (l1.Tag.GetType() == typeof(KjqbService.CommentInService))
             {
                 KjqbService.CommentInService ll = (KjqbService.CommentInService)l1.Tag;
                 StaffLog ss = new StaffLog();
                 ss = (StaffLog)baseService.loadEntity(ss, ll.LogId);
-                writeLog wl = new writeLog();
-                wl.User = ss.Staff;
-                wl.LogDate = new DateTime(ss.WriteTime);
-                wl.IsComment = true;
-                wl.CommentPersonName = this.User.KuName;
-                wl.ShowDialog();
+                if (ss.State == 0)
+                {
+                    writeLog wl = new writeLog();
+                    wl.User = ss.Staff;
+                    wl.LogDate = new DateTime(ss.WriteTime);
+                    wl.IsComment = true;
+                    wl.CommentPersonName = this.User.KuName;
+                    wl.ShowDialog();
+                }
+                else 
+                {
+                    MessageBox.Show("该篇日志作者已经删除");
+                }
             }
             else if (l1.Tag.GetType() == typeof(KjqbService.ScheduleInService))
             {

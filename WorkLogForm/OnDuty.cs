@@ -551,34 +551,34 @@ namespace WorkLogForm
                     baseService.SaveOrUpdateEntity(TfM);
 
                     #region 向服务器发送消息
-                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
-                    string ssql1 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%综合办公室%') ";
-                    string ssql2 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%科技信息资源研究所%') ";
-                    if (TfM.DutyType == 0)
+
+                    try
                     {
-                        IList users = baseService.loadEntityList(ssql1);
-                        KjqbService.TimeArrangeForManagerInService tfminservice = new KjqbService.TimeArrangeForManagerInService();
-                        tfminservice.ExamineOrExamineresult = 0;
-                        tfminservice.UserId = ((WkTUser)users[0]).Id;
-                        tfminservice.SendUserId = this.user.Id;
-                        tfminservice.TimeArrangeForManagerId = TfM.Id;
-                        ser.SaveInTimeArrangeForManagerInService(tfminservice);
+                        KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                        string ssql1 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%综合办公室%') ";
+                        string ssql2 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%科技信息资源研究所%') ";
+                        if (TfM.DutyType == 0)
+                        {
+                            IList users = baseService.loadEntityList(ssql1);
+                            KjqbService.TimeArrangeForManagerInService tfminservice = new KjqbService.TimeArrangeForManagerInService();
+                            tfminservice.ExamineOrExamineresult = 0;
+                            tfminservice.UserId = ((WkTUser)users[0]).Id;
+                            tfminservice.SendUserId = this.user.Id;
+                            tfminservice.TimeArrangeForManagerId = TfM.Id;
+                            ser.SaveInTimeArrangeForManagerInService(tfminservice);
+                        }
+                        else if (TfM.DutyType == 1)
+                        {
+                            IList users = baseService.loadEntityList(ssql2);
+                            KjqbService.TimeArrangeForManagerInService tfminservice = new KjqbService.TimeArrangeForManagerInService();
+                            tfminservice.ExamineOrExamineresult = 0;
+                            tfminservice.UserId = ((WkTUser)users[0]).Id;
+                            tfminservice.SendUserId = this.user.Id;
+                            tfminservice.TimeArrangeForManagerId = TfM.Id;
+                            ser.SaveInTimeArrangeForManagerInService(tfminservice);
+                        }
                     }
-                    else if (TfM.DutyType == 1)
-                    {
-                        IList users = baseService.loadEntityList(ssql2);
-                        KjqbService.TimeArrangeForManagerInService tfminservice = new KjqbService.TimeArrangeForManagerInService();
-                        tfminservice.ExamineOrExamineresult = 0;
-                        tfminservice.UserId = ((WkTUser)users[0]).Id;
-                        tfminservice.SendUserId = this.user.Id;
-                        tfminservice.TimeArrangeForManagerId = TfM.Id;
-                        ser.SaveInTimeArrangeForManagerInService(tfminservice);
-                    }
-                    
-
-
-
-
+                    catch { }
                     #endregion
 
 
@@ -753,14 +753,17 @@ namespace WorkLogForm
                         timeman.ExamineState = 1;
                         baseService.SaveOrUpdateEntity(timeman);
 
-                        KjqbService.Service1Client ser = new KjqbService.Service1Client();
-                        KjqbService.TimeArrangeForManagerInService tfmservice = new KjqbService.TimeArrangeForManagerInService();
-                        tfmservice.ExamineOrExamineresult = 1;
-                        tfmservice.SendUserId = this.user.Id;
-                        tfmservice.UserId = timeman.UserId.Id;
-                        tfmservice.TimeArrangeForManagerId = timeman.Id;
-                        ser.SaveInTimeArrangeForManagerInService(tfmservice);
-
+                        try
+                        {
+                            KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                            KjqbService.TimeArrangeForManagerInService tfmservice = new KjqbService.TimeArrangeForManagerInService();
+                            tfmservice.ExamineOrExamineresult = 1;
+                            tfmservice.SendUserId = this.user.Id;
+                            tfmservice.UserId = timeman.UserId.Id;
+                            tfmservice.TimeArrangeForManagerId = timeman.Id;
+                            ser.SaveInTimeArrangeForManagerInService(tfmservice);
+                        }
+                        catch { }
 
                         this.CheckState.Text = "审核状态：审核通过";
                     }
@@ -805,14 +808,17 @@ namespace WorkLogForm
                         timeman.ExamineState = 2;
                         baseService.SaveOrUpdateEntity(timeman);
 
-                        KjqbService.Service1Client ser = new KjqbService.Service1Client();
-                        KjqbService.TimeArrangeForManagerInService tfmservice = new KjqbService.TimeArrangeForManagerInService();
-                        tfmservice.ExamineOrExamineresult = 2;
-                        tfmservice.SendUserId = this.user.Id;
-                        tfmservice.UserId = timeman.UserId.Id;
-                        tfmservice.TimeArrangeForManagerId = timeman.Id;
-                        ser.SaveInTimeArrangeForManagerInService(tfmservice);
-
+                        try
+                        {
+                            KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                            KjqbService.TimeArrangeForManagerInService tfmservice = new KjqbService.TimeArrangeForManagerInService();
+                            tfmservice.ExamineOrExamineresult = 2;
+                            tfmservice.SendUserId = this.user.Id;
+                            tfmservice.UserId = timeman.UserId.Id;
+                            tfmservice.TimeArrangeForManagerId = timeman.Id;
+                            ser.SaveInTimeArrangeForManagerInService(tfmservice);
+                        }
+                        catch { }
 
 
 

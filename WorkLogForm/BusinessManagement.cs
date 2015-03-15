@@ -218,47 +218,51 @@ namespace WorkLogForm
 
 
                 #region 服务器通信
-                List<WkTDept> depList=new List<WkTDept>();
-                List<WkTUser> uList = new List<WkTUser>();
-                foreach (BusinessEmployee be in buss.BusinessEmployee)
+
+                try
                 {
-                    if (depList.Count == 0)
+                    List<WkTDept> depList = new List<WkTDept>();
+                    List<WkTUser> uList = new List<WkTUser>();
+                    foreach (BusinessEmployee be in buss.BusinessEmployee)
                     {
-                        depList.Add(be.EmployeeId.Kdid);
-                    }
-                    if(!depList.Contains(be.EmployeeId.Kdid))
-                    {
-                        depList.Add(be.EmployeeId.Kdid);
-                    }
-                }
-                foreach (WkTDept dep in depList)
-                {
-                    string sql = "from WkTUser u where u.Kdid="+dep.Id;
-                    IList ul= baseService.loadEntityList(sql);
-                    foreach (WkTUser u in ul)
-                    {
-                        foreach (WkTRole r in u.UserRole)
+                        if (depList.Count == 0)
                         {
-                            if (r.KrOrder == 2)
-                                uList.Add(u);
+                            depList.Add(be.EmployeeId.Kdid);
+                        }
+                        if (!depList.Contains(be.EmployeeId.Kdid))
+                        {
+                            depList.Add(be.EmployeeId.Kdid);
+                        }
+                    }
+                    foreach (WkTDept dep in depList)
+                    {
+                        string sql = "from WkTUser u where u.Kdid=" + dep.Id;
+                        IList ul = baseService.loadEntityList(sql);
+                        foreach (WkTUser u in ul)
+                        {
+                            foreach (WkTRole r in u.UserRole)
+                            {
+                                if (r.KrOrder == 2)
+                                    uList.Add(u);
+                            }
+                        }
+                    }
+
+                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                    if (uList != null && uList.Count != 0)
+                    {
+                        foreach (WkTUser u in uList)
+                        {
+                            KjqbService.BusinessService bs = new KjqbService.BusinessService();
+                            bs.BusinessID = Convert.ToInt32(id.ToString());
+                            bs.ReceiveID = u.Id;
+                            bs.Type = 0;
+                            bs.TimeStamp = DateTime.Now.Ticks;
+                            ser.SaveInBusinessListInService(bs);
                         }
                     }
                 }
-
-                KjqbService.Service1Client ser = new KjqbService.Service1Client();
-                if (uList != null && uList.Count != 0)
-                {
-                    foreach (WkTUser u in uList)
-                    {
-                        KjqbService.BusinessService bs = new KjqbService.BusinessService();
-                        bs.BusinessID = Convert.ToInt32(id.ToString());
-                        bs.ReceiveID = u.Id;
-                        bs.Type = 0;
-                        bs.TimeStamp = DateTime.Now.Ticks;
-                        ser.SaveInBusinessListInService(bs);
-                    }
-                }
-
+                catch { }
                 #endregion
 
 
@@ -432,15 +436,18 @@ namespace WorkLogForm
                     baseService.ExecuteSQL(query3);
 
                     #region 服务器通信
-                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
-                   
-                    KjqbService.BusinessService bs = new KjqbService.BusinessService();
-                    bs.BusinessID =selectedBusiness.Id;
-                    bs.ReceiveID = selectedBusiness.Boss.Id;
-                    bs.Type = 0;
-                    bs.TimeStamp = DateTime.Now.Ticks;
-                    ser.SaveInBusinessListInService(bs);
+                    try
+                    {
+                        KjqbService.Service1Client ser = new KjqbService.Service1Client();
 
+                        KjqbService.BusinessService bs = new KjqbService.BusinessService();
+                        bs.BusinessID = selectedBusiness.Id;
+                        bs.ReceiveID = selectedBusiness.Boss.Id;
+                        bs.Type = 0;
+                        bs.TimeStamp = DateTime.Now.Ticks;
+                        ser.SaveInBusinessListInService(bs);
+                    }
+                    catch { }
                     #endregion
 
 
@@ -463,15 +470,18 @@ namespace WorkLogForm
             baseService.SaveOrUpdateEntity(b);
 
             #region 服务器通信
-            KjqbService.Service1Client ser = new KjqbService.Service1Client();
+            try
+            {
+                KjqbService.Service1Client ser = new KjqbService.Service1Client();
 
-            KjqbService.BusinessService bs = new KjqbService.BusinessService();
-            bs.BusinessID = b.Id;
-            bs.ReceiveID = b.Ku_Id.Id;
-            bs.Type = 2;
-            bs.TimeStamp = DateTime.Now.Ticks;
-            ser.SaveInBusinessListInService(bs);
-
+                KjqbService.BusinessService bs = new KjqbService.BusinessService();
+                bs.BusinessID = b.Id;
+                bs.ReceiveID = b.Ku_Id.Id;
+                bs.Type = 2;
+                bs.TimeStamp = DateTime.Now.Ticks;
+                ser.SaveInBusinessListInService(bs);
+            }
+            catch { }
             #endregion
             initTabPage4();
         }
@@ -545,16 +555,19 @@ namespace WorkLogForm
                 b.PassExam = (int)Business.ExamState.done;
                 baseService.SaveOrUpdateEntity(b);
 
-                #region 服务器通信
-                KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                #region 服务器通信  
+                try
+                {
+                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
 
-                KjqbService.BusinessService bs = new KjqbService.BusinessService();
-                bs.BusinessID = b.Id;
-                bs.ReceiveID = b.Ku_Id.Id;
-                bs.Type = 3;
-                bs.TimeStamp = DateTime.Now.Ticks;
-                ser.SaveInBusinessListInService(bs);
-
+                    KjqbService.BusinessService bs = new KjqbService.BusinessService();
+                    bs.BusinessID = b.Id;
+                    bs.ReceiveID = b.Ku_Id.Id;
+                    bs.Type = 3;
+                    bs.TimeStamp = DateTime.Now.Ticks;
+                    ser.SaveInBusinessListInService(bs);
+                }
+                catch { }
                 #endregion
             }
             initTabPage3();
@@ -572,15 +585,18 @@ namespace WorkLogForm
                 baseService.SaveOrUpdateEntity(b);
 
                 #region 服务器通信
-                KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                try
+                {
+                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
 
-                KjqbService.BusinessService bs = new KjqbService.BusinessService();
-                bs.BusinessID = b.Id;
-                bs.ReceiveID = b.Ku_Id.Id;
-                bs.Type = 2;
-                bs.TimeStamp = DateTime.Now.Ticks;
-                ser.SaveInBusinessListInService(bs);
-
+                    KjqbService.BusinessService bs = new KjqbService.BusinessService();
+                    bs.BusinessID = b.Id;
+                    bs.ReceiveID = b.Ku_Id.Id;
+                    bs.Type = 2;
+                    bs.TimeStamp = DateTime.Now.Ticks;
+                    ser.SaveInBusinessListInService(bs);
+                }
+                catch { }
                 #endregion
 
             }

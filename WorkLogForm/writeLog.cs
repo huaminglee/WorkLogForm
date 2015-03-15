@@ -358,20 +358,28 @@ namespace WorkLogForm
                 }
 
                 #region 向服务中发送数据
-                KjqbService.Service1Client ser = new KjqbService.Service1Client();
-                if (sharedUser != null && sharedUser.Count > 0)
+
+                try
                 {
-
-                    foreach (WkTUser u in sharedUser)
+                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                    if (sharedUser != null && sharedUser.Count > 0)
                     {
-                        KjqbService.LogInService ll = new KjqbService.LogInService();
-                        ll.LogId = staffLog.Id;
-                        ll.WriteUserId = this.user.Id;
-                        ll.ShareUserId = u.Id;
-                        ll.TimeStamp = DateTime.Now.Ticks;
-                        ser.SaveInLogListInService(ll);
-                    }
 
+                        foreach (WkTUser u in sharedUser)
+                        {
+                            KjqbService.LogInService ll = new KjqbService.LogInService();
+                            ll.LogId = staffLog.Id;
+                            ll.WriteUserId = this.user.Id;
+                            ll.ShareUserId = u.Id;
+                            ll.TimeStamp = DateTime.Now.Ticks;
+                            ser.SaveInLogListInService(ll);
+                        }
+
+                    }
+                }
+                catch 
+                {
+                
                 }
                 #endregion
 
@@ -426,16 +434,24 @@ namespace WorkLogForm
 
 
             #region 向服务中发送数据
-            KjqbService.Service1Client ser = new KjqbService.Service1Client();
-            if (comment.CommentPersonName != "")
+            try
             {
-                KjqbService.CommentInService ll = new KjqbService.CommentInService();
-                ll.LogId = staffLog.Id;
-                ll.CommentUserName = this.CommentPersonName; 
-                ll.LogUserId = staffLog.Staff.Id;
-                ll.TimeStamp = DateTime.Now.Ticks;
-                ser.SaveInCommentListInService(ll);
+                KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                if (comment.CommentPersonName != "")
+                {
+                    KjqbService.CommentInService ll = new KjqbService.CommentInService();
+                    ll.LogId = staffLog.Id;
+                    ll.CommentUserName = this.CommentPersonName;
+                    ll.LogUserId = staffLog.Staff.Id;
+                    ll.TimeStamp = DateTime.Now.Ticks;
+                    ser.SaveInCommentListInService(ll);
 
+                }
+            }
+            catch
+            {
+ 
+            
             }
             #endregion
 

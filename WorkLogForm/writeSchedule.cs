@@ -162,16 +162,20 @@ namespace WorkLogForm
 
                 if (staffSchedule.StaffScheduleStaffs != null && staffSchedule.StaffScheduleStaffs.Count > 0)
                 {
-                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
-                    foreach (WkTUser u in sharedUser)
+                    try
                     {
-                        KjqbService.ScheduleInService ll = new KjqbService.ScheduleInService();
-                        ll.ScheduleId = int.Parse(be.ToString());
-                        ll.WriteUserId = this.user.Id;
-                        ll.ShareUserId = u.Id;
-                        ll.TimeStamp = DateTime.Now.Ticks;
-                        ser.SaveInScheduleListInService(ll);
+                        KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                        foreach (WkTUser u in sharedUser)
+                        {
+                            KjqbService.ScheduleInService ll = new KjqbService.ScheduleInService();
+                            ll.ScheduleId = int.Parse(be.ToString());
+                            ll.WriteUserId = this.user.Id;
+                            ll.ShareUserId = u.Id;
+                            ll.TimeStamp = DateTime.Now.Ticks;
+                            ser.SaveInScheduleListInService(ll);
+                        }
                     }
+                    catch { }
                 }
 
             }
@@ -353,16 +357,19 @@ namespace WorkLogForm
 
                             if (staffSchedule.ArrangeMan != null)
                             {
-                                KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                                try
+                                {
+                                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
 
-                                KjqbService.ScheduleInService ll = new KjqbService.ScheduleInService();
-                                ll.ScheduleId = int.Parse(be.ToString());
-                                ll.WriteUserId = staffSchedule.ArrangeMan.Id;
-                                ll.ShareUserId = staffSchedule.Staff.Id;
-                                ll.TimeStamp = DateTime.Now.Ticks;
-                                ser.SaveInScheduleListInService(ll);
+                                    KjqbService.ScheduleInService ll = new KjqbService.ScheduleInService();
+                                    ll.ScheduleId = int.Parse(be.ToString());
+                                    ll.WriteUserId = staffSchedule.ArrangeMan.Id;
+                                    ll.ShareUserId = staffSchedule.Staff.Id;
+                                    ll.TimeStamp = DateTime.Now.Ticks;
+                                    ser.SaveInScheduleListInService(ll);
+                                }
+                                catch { }
                             }
-
                         }
                         catch
                         {

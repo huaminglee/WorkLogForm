@@ -344,13 +344,13 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(992, 681);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.other_panel);
-            this.Controls.Add(this.MyOwnSuiBi_panel);
             this.Controls.Add(this.OtherSuiBi_pictureBox);
             this.Controls.Add(this.MyOwnSuiBi_pictureBox);
             this.Controls.Add(this.label45);
             this.Controls.Add(this.close_pictureBox);
             this.Controls.Add(this.min_pictureBox);
+            this.Controls.Add(this.other_panel);
+            this.Controls.Add(this.MyOwnSuiBi_panel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.ImeMode = System.Windows.Forms.ImeMode.Close;

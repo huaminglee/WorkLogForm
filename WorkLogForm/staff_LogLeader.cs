@@ -271,7 +271,7 @@ namespace WorkLogForm
 " (select l.Id id ,l.Contents con ,l.WriteTime thetime ," +
 " l.WkTUserId fuser   from StaffLog_M_WkTUser m, LOG_T_STAFFLOG l,WK_T_USER w " +
 " where m.StaffLogId = l.Id and m.KU_ID = w.KU_ID and w.KU_ID = "+this.user.Id+" and " +
-" l.Contents like '%" + this.textBox3.Text.Trim() + "%' and l.STATE = " + (int)IEntity.stateEnum.Normal + " and l.WriteTime > " + this.share_dateTimePicker.Value.Ticks + " and l.WriteTime<= " + this.share_dateTimePicker_end.Value.Ticks + ") t " +
+" l.Contents like '%" + this.textBox3.Text.Trim() + "%' and l.STATE = " + (int)IEntity.stateEnum.Normal + " and l.WriteTime >=" + this.share_dateTimePicker.Value.Ticks + " and l.WriteTime<= " + this.share_dateTimePicker_end.Value.Ticks + ") t " +
 " where t.fuser = ww.KU_ID and ww.KU_NAME like '%"+this.share_name_textBox.Text+"%') tt where tt.depid = dept.KD_ID " +
 " and dept.KD_NAME like '%" + this.share_dept_comboBox.Text + "%'  order by dept.KD_ID; ";
 
@@ -280,7 +280,7 @@ namespace WorkLogForm
 " (select l.Id id ,l.Contents con ,l.WriteTime thetime ," +
 " l.WkTUserId fuser   from StaffLog_M_WkTUser m, LOG_T_STAFFLOG l,WK_T_USER w " +
 " where m.StaffLogId = l.Id and m.KU_ID = w.KU_ID and w.KU_ID = " + this.user.Id + " and " +
-" l.Contents like '%" + this.textBox3.Text.Trim() + "%' and l.STATE = "+(int)IEntity.stateEnum.Normal+" and l.WriteTime > " + this.share_dateTimePicker.Value.Ticks + " and l.WriteTime<= " + this.share_dateTimePicker_end.Value.Ticks + ") t " +
+" l.Contents like '%" + this.textBox3.Text.Trim() + "%' and l.STATE = "+(int)IEntity.stateEnum.Normal+" and l.WriteTime >= " + this.share_dateTimePicker.Value.Ticks + " and l.WriteTime<= " + this.share_dateTimePicker_end.Value.Ticks + ") t " +
 " where t.fuser = ww.KU_ID and ww.KU_NAME like '%" + this.share_name_textBox.Text + "%') tt where tt.depid = dept.KD_ID  order by dept.KD_ID;";
 
             IList logList;
@@ -381,7 +381,7 @@ namespace WorkLogForm
                                 + this.textBox2.Text.Trim()
                                 + "%' and  log.Content like '%"
                                 + this.textBox4.Text.Trim() + "%' and " +
-                                " log.WriteTime > " + this.dateTimePicker3.Value.Ticks +
+                                " log.WriteTime >= " + this.dateTimePicker3.Value.Ticks +
                                 " and log.WriteTime <= " + this.dateTimePicker4.Value.Ticks
                                  + " and log.State = " + (int)IEntity.stateEnum.Normal;
                             IList thelist = baseService.loadEntityList(sql);
@@ -431,7 +431,7 @@ namespace WorkLogForm
                                    + this.textBox2.Text.Trim()
                                    + "%' and  log.Content like '%"
                                    + this.textBox4.Text.Trim() + "%' and " +
-                                   " log.WriteTime > " + this.dateTimePicker3.Value.Ticks +
+                                   " log.WriteTime >= " + this.dateTimePicker3.Value.Ticks +
                                    " log.WriteTime <= " + this.dateTimePicker4.Value.Ticks
                                     + " log.State = " + (int)IEntity.stateEnum.Normal;
 
@@ -443,7 +443,7 @@ namespace WorkLogForm
                                       + this.textBox2.Text.Trim()
                                       + "%' and  log.Content like '%"
                                       + this.textBox4.Text.Trim() + "%' and " +
-                                      " log.WriteTime > " + this.dateTimePicker3.Value.Ticks +
+                                      " log.WriteTime >=" + this.dateTimePicker3.Value.Ticks +
                                       " log.WriteTime <= " + this.dateTimePicker4.Value.Ticks
                                       + " log.State = " + (int)IEntity.stateEnum.Normal;
                     }

@@ -1051,15 +1051,18 @@ namespace WorkLogForm
                 tgm.ExamineState = 0;
                 object be = baseService.saveEntity(tgm);
 
-                KjqbService.Service1Client ser = new KjqbService.Service1Client();
-                KjqbService.TimeArrangeForManagerInService tfmservice = new KjqbService.TimeArrangeForManagerInService();
-                tfmservice.TimeArrangeForManagerId = int.Parse(be.ToString());
-                tfmservice.UserId = tgm.UserId.Id;
-                tfmservice.SendUserId = user.Id;
-                tfmservice.ExamineOrExamineresult = 3;
-                ser.SaveInTimeArrangeForManagerInService(tfmservice);
+                try
+                {
+                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                    KjqbService.TimeArrangeForManagerInService tfmservice = new KjqbService.TimeArrangeForManagerInService();
+                    tfmservice.TimeArrangeForManagerId = int.Parse(be.ToString());
+                    tfmservice.UserId = tgm.UserId.Id;
+                    tfmservice.SendUserId = user.Id;
+                    tfmservice.ExamineOrExamineresult = 3;
+                    ser.SaveInTimeArrangeForManagerInService(tfmservice);
 
-
+                }
+                catch { }
 
                 DataGridView4RowsAdd(tgm);
                 MessageBox.Show("添加成功！");

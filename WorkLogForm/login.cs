@@ -7,6 +7,7 @@ using WorkLogForm.WindowUiClass;
 using WorkLogForm.CommonClass;
 using System.Drawing;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace WorkLogForm
 {
@@ -118,13 +119,66 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text.Trim() == "" || textBox1.Text.Trim() == "输入用户名" || textBox2.Text.Trim() == "" || textBox2.Text.Trim() == "输入密码")
+            string IpAdress;
+            IpAdress = GetIP();
+            if (IpAdress == "未成功获取IP地址")
             {
-                MessageBox.Show("用户名和密码不能为空!");
-                return; //不在执行下面的函数
+                MessageBox.Show("未成功获取IP地址");
+                return;
             }
-            timer1.Start(); //登录窗收起效果
+            else
+            {
+                //http://www.txt2re.com/index-csharp.php3?s=10.1.15.100&-6&-21&-11&-22&-18&20&-23&5 用的是这个网站生成的正则表达式
+                string re1 = "(10)";	// Integer Number 1
+                string re2 = "(\\.)";	// Any Single Character 1
+                string re3 = "(1)";	// Integer Number 2
+                string re4 = "(\\.)";	// Any Single Character 2
+                string re5 = "(1)";	// Any Single Digit 1
+                string re6 = "(\\d)";	// Any Single Digit 2
+                string re7 = "(\\.)";	// Any Single Character 3
+                string re8 = "(\\d+)";	// Integer Number 3
+
+                Regex r = new Regex(re1 + re2 + re3 + re4 + re5 + re6 + re7 + re8, RegexOptions.IgnoreCase | RegexOptions.Singleline);
+                Match m = r.Match(IpAdress);
+                if (m.Success)
+                {
+                    #region 登陆效果
+                    if (textBox1.Text.Trim() == "" || textBox1.Text.Trim() == "输入用户名" || textBox2.Text.Trim() == "" || textBox2.Text.Trim() == "输入密码")
+                    {
+                        //MessageBox.Show("用户名和密码不能为空!");
+                        //return; //不在执行下面的函数
+                    }
+                    timer1.Start(); //登录窗收起效果
+                    #endregion
+                }
+                else
+                {
+                    MessageBox.Show("您未在正确地点登录！");
+                    return;
+                }
+                    
+            }
+
         }
+
+
+        protected string GetIP()   //获取本地IP
+        {
+            System.Net.IPHostEntry IpEntry = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
+            for (int i = 0; i != IpEntry.AddressList.Length; i++)
+            {
+                if (IpEntry.AddressList[i].AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                {
+                    return IpEntry.AddressList[i].ToString();
+                }
+            }
+            return "未成功获取IP地址";
+        }
+
+
+
+
+
 
         /// <summary>
         /// 登陆框收起的效果
@@ -306,6 +360,10 @@ namespace WorkLogForm
         {
             pictureBox1.Focus();
         }
+
+     
+
+       
 
 
 
