@@ -99,8 +99,25 @@ namespace KjqbService
 
         #endregion
 
+        #region 获取服务器时间
         [OperationContract]
         DateTime GetServiceTime();
+        #endregion
 
+        #region 聊天相关
+
+        [OperationContract]
+        bool SaveInChatInfoInService(ChatInService chat);
+
+        [OperationContract]
+        List<ChatInService> SearchChatInfo(int Id);
+
+        [OperationContract]
+        void SetChatInfoIsRead(int Id);
+
+        [OperationContract]
+        List<ChatInService> SearchChatInfoUnRead(int Id);
+
+        #endregion
     }
 }

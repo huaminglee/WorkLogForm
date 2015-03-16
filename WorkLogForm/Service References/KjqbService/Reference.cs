@@ -571,6 +571,99 @@ namespace WorkLogForm.KjqbService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ChatInService", Namespace="http://schemas.datacontract.org/2004/07/KjqbService")]
+    [System.SerializableAttribute()]
+    public partial class ChatInService : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ChatContentField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long ReceiveUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SendUserIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime TimeStampField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ChatContent {
+            get {
+                return this.ChatContentField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ChatContentField, value) != true)) {
+                    this.ChatContentField = value;
+                    this.RaisePropertyChanged("ChatContent");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long ReceiveUserId {
+            get {
+                return this.ReceiveUserIdField;
+            }
+            set {
+                if ((this.ReceiveUserIdField.Equals(value) != true)) {
+                    this.ReceiveUserIdField = value;
+                    this.RaisePropertyChanged("ReceiveUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long SendUserId {
+            get {
+                return this.SendUserIdField;
+            }
+            set {
+                if ((this.SendUserIdField.Equals(value) != true)) {
+                    this.SendUserIdField = value;
+                    this.RaisePropertyChanged("SendUserId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime TimeStamp {
+            get {
+                return this.TimeStampField;
+            }
+            set {
+                if ((this.TimeStampField.Equals(value) != true)) {
+                    this.TimeStampField = value;
+                    this.RaisePropertyChanged("TimeStamp");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="KjqbService.IService1")]
     public interface IService1 {
@@ -649,6 +742,18 @@ namespace WorkLogForm.KjqbService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetServiceTime", ReplyAction="http://tempuri.org/IService1/GetServiceTimeResponse")]
         System.DateTime GetServiceTime();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SaveInChatInfoInService", ReplyAction="http://tempuri.org/IService1/SaveInChatInfoInServiceResponse")]
+        bool SaveInChatInfoInService(WorkLogForm.KjqbService.ChatInService chat);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchChatInfo", ReplyAction="http://tempuri.org/IService1/SearchChatInfoResponse")]
+        WorkLogForm.KjqbService.ChatInService[] SearchChatInfo(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SetChatInfoIsRead", ReplyAction="http://tempuri.org/IService1/SetChatInfoIsReadResponse")]
+        void SetChatInfoIsRead(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchChatInfoUnRead", ReplyAction="http://tempuri.org/IService1/SearchChatInfoUnReadResponse")]
+        WorkLogForm.KjqbService.ChatInService[] SearchChatInfoUnRead(int Id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -776,6 +881,22 @@ namespace WorkLogForm.KjqbService {
         
         public System.DateTime GetServiceTime() {
             return base.Channel.GetServiceTime();
+        }
+        
+        public bool SaveInChatInfoInService(WorkLogForm.KjqbService.ChatInService chat) {
+            return base.Channel.SaveInChatInfoInService(chat);
+        }
+        
+        public WorkLogForm.KjqbService.ChatInService[] SearchChatInfo(int Id) {
+            return base.Channel.SearchChatInfo(Id);
+        }
+        
+        public void SetChatInfoIsRead(int Id) {
+            base.Channel.SetChatInfoIsRead(Id);
+        }
+        
+        public WorkLogForm.KjqbService.ChatInService[] SearchChatInfoUnRead(int Id) {
+            return base.Channel.SearchChatInfoUnRead(Id);
         }
     }
 }

@@ -19,6 +19,8 @@ namespace KjqbService
         KjqbService.DB.TimeArrangeForManagerOperate top = new TimeArrangeForManagerOperate();
         KjqbService.DB.BusinessOperate bop = new BusinessOperate();
         KjqbService.DB.LeaveOperate leop = new LeaveOperate();
+        KjqbService.DB.ChatOperate chatop = new ChatOperate();
+
         #region 分享日志推送
         public bool SaveInLogListInService(LogInService log)
         {
@@ -349,11 +351,73 @@ namespace KjqbService
 
         #endregion
 
+        #region 获取服务器时间
        public DateTime GetServiceTime()
        {
            DateTime time = DateTime.Now;
            return time;
        }
+       #endregion
+
+        #region 聊天实时通讯
+
+       public bool SaveInChatInfoInService(ChatInService chat)
+       {
+           chatop.InsertIntoEntity(chat);
+           return true;
+       }
+
+       public List<ChatInService> SearchChatInfo(int Id)
+       {
+           List<ChatInService> chat = new List<ChatInService>();
+
+
+           List<ChatMessage> lm = chatop.SendChat(Id);
+
+           foreach (ChatMessage lo in lm)
+           {
+               ChatInService ll = new ChatInService();
+               ll.SendUserId = (long)lo.SendUserId;
+               ll.ReceiveUserId =(long)lo.ReceiveUserId;
+               ll.ChatContent = lo.ChatContent;
+               ll.TimeStamp = new DateTime((long)lo.TimeStamp);
+
+               chat.Add(ll);
+           }
+
+           return chat;
+       
+
+       }
+       public void SetChatInfoIsRead(int Id)
+       {
+           chatop.ChangeChatIsRead(Id);
+       }
+       public List<ChatInService> SearchChatInfoUnRead(int Id)
+       {
+           List<ChatInService> chat = new List<ChatInService>();
+
+
+           List<ChatMessage> lm = chatop.SendChatUnRead(Id);
+
+           foreach (ChatMessage lo in lm)
+           {
+               ChatInService ll = new ChatInService();
+               ll.SendUserId = (long)lo.SendUserId;
+               ll.ReceiveUserId = (long)lo.ReceiveUserId;
+               ll.ChatContent = lo.ChatContent;
+               ll.TimeStamp = new DateTime((long)lo.TimeStamp);
+
+               chat.Add(ll);
+           }
+
+
+           return chat;
+       
+
+       }
+        #endregion
+
 
     }
 }

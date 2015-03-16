@@ -15,6 +15,8 @@ namespace WorkLogForm
     public partial class ChatWindows : Form
     {
         BaseService baseService = new BaseService();
+        KjqbService.Service1Client ser = new KjqbService.Service1Client();
+
         private WkTUser sendUser;
         /// <summary>
         /// 由谁发送的也就是当前系统登录人
@@ -77,7 +79,79 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+            if (this.textBox1.Text.Trim() != "")
+            {
+                createChatPanel(this.textBox1.Text.Trim(), sendUser.KuName,DateTime.Now);
+               
 
+                #region 向服务器发送数据
+                try
+                {
+                    KjqbService.ChatInService chat = new KjqbService.ChatInService();
+                    chat.ChatContent = this.textBox1.Text.Trim();
+                    chat.SendUserId = sendUser.Id;
+                    chat.ReceiveUserId = receiveUser.Id;
+                    chat.TimeStamp = DateTime.Now;
+                    ser.SaveInChatInfoInService(chat);
+                }
+                catch { }
+
+                #endregion
+
+
+
+                //滚动条显示最后
+                Point newPoint = new Point(0, this.flowLayoutPanel1.Height - flowLayoutPanel1.AutoScrollPosition.Y);
+                flowLayoutPanel1.AutoScrollPosition = newPoint;
+
+                this.textBox1.Text = "";
+                 
+            }
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            #region 向服务器发送数据
+            try
+            {
+                KjqbService.ChatInService[]  chat ;//= new KjqbService.ChatInService()[];
+                chat =  ser.SearchChatInfo((int)sendUser.Id);
+                for(int i = 0; i<chat.Length ;i++)
+                {
+                    createChatPanel(chat[i].ChatContent,receiveUser.KuName,chat[i].TimeStamp);
+                }
+                Point newPoint = new Point(0, this.flowLayoutPanel1.Height - flowLayoutPanel1.AutoScrollPosition.Y);
+                flowLayoutPanel1.AutoScrollPosition = newPoint;
+            }
+            catch { }
+
+            #endregion
+        }
+
+        private void createChatPanel(string chatContent,string userName,DateTime dt)
+        {
+            Panel p1 = new Panel();
+            p1.Width = 534;
+
+            Label l1 = new Label();
+            l1.AutoSize = true;
+            l1.Text = userName + "     " + dt.ToString("HH:mm") ;
+            l1.Font = new Font("微软雅黑", 12, FontStyle.Bold);
+            l1.Location = new Point(10,8);
+            l1.Parent = p1;
+
+            Label l2 = new Label();
+            l2.AutoSize = false;
+            l2.Width = 519;
+            l2.Text = chatContent;
+            l2.Height = ((chatContent.Length / 36) + 1) * 23;
+            l2.Font = new Font("微软雅黑", 12, FontStyle.Regular);
+            l2.Location = new Point(12, 34);
+            l2.Parent = p1;
+
+            p1.Height = l2.Location.Y + l2.Height + 15;
+
+            p1.Parent = flowLayoutPanel1;
+        
         }
 
         #region 窗体移动代码
@@ -105,5 +179,10 @@ namespace WorkLogForm
             }
         }
         #endregion
+
+       
+
+
+    
     }
 }

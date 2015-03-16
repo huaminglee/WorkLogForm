@@ -453,6 +453,9 @@
     <None Include="Service References\KjqbService\WorkLogForm.KjqbService.BusinessService.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\KjqbService\WorkLogForm.KjqbService.ChatInService.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\KjqbService\WorkLogForm.KjqbService.CommentInService.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

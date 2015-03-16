@@ -572,6 +572,8 @@ namespace WorkLogForm
             }
             panel.Parent.Controls.Remove(panel);
             creat_ri_zhi_Panel(rzList);
+            Point newPoint = new Point(0, this.rz_flowLayoutPanel.Height - rz_flowLayoutPanel.AutoScrollPosition.Y);
+            rz_flowLayoutPanel.AutoScrollPosition = newPoint;
         }
 
        

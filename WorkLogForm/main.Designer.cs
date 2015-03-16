@@ -996,7 +996,6 @@
             this.ClientSize = new System.Drawing.Size(295, 600);
             this.Controls.Add(this.pictureBoxOfInstantMessenger);
             this.Controls.Add(this.panelNewMessage);
-            this.Controls.Add(this.SuiBi_flowLayoutPanel);
             this.Controls.Add(this.pictureBoxOfrefresh);
             this.Controls.Add(this.SuiBiGuanLi_pictureBox);
             this.Controls.Add(this.setting_pictureBox);
@@ -1023,6 +1022,7 @@
             this.Controls.Add(this.user_label);
             this.Controls.Add(this.rz_flowLayoutPanel);
             this.Controls.Add(this.rc_flowLayoutPanel);
+            this.Controls.Add(this.SuiBi_flowLayoutPanel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "main";

@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessService.cs" />
+    <Compile Include="ChatInService.cs" />
     <Compile Include="CommentInService.cs" />
     <Compile Include="DB\BusinessMessage.cs">
       <DependentUpon>KjqbServiceBase.tt</DependentUpon>
@@ -78,6 +79,7 @@
     <Compile Include="DB\ChatMessage.cs">
       <DependentUpon>KjqbServiceBase.tt</DependentUpon>
     </Compile>
+    <Compile Include="DB\ChatOperate.cs" />
     <Compile Include="DB\CommentMessage.cs">
       <DependentUpon>KjqbServiceBase.tt</DependentUpon>
     </Compile>
