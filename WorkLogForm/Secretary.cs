@@ -76,7 +76,7 @@ namespace WorkLogForm
 
         private void Secretary_DoubleClick(object sender, EventArgs e)
         {
-            MessageBox.Show("");
+            //MessageBox.Show("");
         }
     }
 }

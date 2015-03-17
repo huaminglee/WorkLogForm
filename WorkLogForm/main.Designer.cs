@@ -108,6 +108,9 @@
             this.labelNewMEssageCount = new System.Windows.Forms.Label();
             this.timerMessageSend = new System.Windows.Forms.Timer(this.components);
             this.RefreshAll = new System.Windows.Forms.Timer(this.components);
+            this.LabelofChatttingCount = new System.Windows.Forms.Label();
+            this.timerchattingflesh = new System.Windows.Forms.Timer(this.components);
+            this.timerOfReceiveChattingMessage = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.wdrl_pictureBox)).BeginInit();
@@ -986,6 +989,28 @@
             this.RefreshAll.Interval = 5000;
             this.RefreshAll.Tick += new System.EventHandler(this.RefreshAll_Tick);
             // 
+            // LabelofChatttingCount
+            // 
+            this.LabelofChatttingCount.AutoSize = true;
+            this.LabelofChatttingCount.BackColor = System.Drawing.Color.Transparent;
+            this.LabelofChatttingCount.Font = new System.Drawing.Font("微软雅黑", 6F, System.Drawing.FontStyle.Bold);
+            this.LabelofChatttingCount.ForeColor = System.Drawing.Color.Red;
+            this.LabelofChatttingCount.Location = new System.Drawing.Point(25, 108);
+            this.LabelofChatttingCount.Name = "LabelofChatttingCount";
+            this.LabelofChatttingCount.Size = new System.Drawing.Size(0, 11);
+            this.LabelofChatttingCount.TabIndex = 29;
+            // 
+            // timerchattingflesh
+            // 
+            this.timerchattingflesh.Interval = 500;
+            this.timerchattingflesh.Tick += new System.EventHandler(this.timerchattingflesh_Tick);
+            // 
+            // timerOfReceiveChattingMessage
+            // 
+            this.timerOfReceiveChattingMessage.Enabled = true;
+            this.timerOfReceiveChattingMessage.Interval = 2000;
+            this.timerOfReceiveChattingMessage.Tick += new System.EventHandler(this.timerOfReceiveChattingMessage_Tick);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -994,6 +1019,7 @@
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.首页背景2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(295, 600);
+            this.Controls.Add(this.LabelofChatttingCount);
             this.Controls.Add(this.pictureBoxOfInstantMessenger);
             this.Controls.Add(this.panelNewMessage);
             this.Controls.Add(this.pictureBoxOfrefresh);
@@ -1166,5 +1192,8 @@
         private System.Windows.Forms.Timer timerMessageSend;
         private System.Windows.Forms.Timer RefreshAll;
         private System.Windows.Forms.PictureBox pictureBoxOfInstantMessenger;
+        private System.Windows.Forms.Label LabelofChatttingCount;
+        private System.Windows.Forms.Timer timerchattingflesh;
+        private System.Windows.Forms.Timer timerOfReceiveChattingMessage;
     }
 }

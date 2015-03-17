@@ -27,6 +27,9 @@ namespace WorkLogForm
         private List<KjqbService.TimeArrangeForManagerInService> tfmListfromservice;
         private List<KjqbService.LeaveInService> levlistfromservice;
         private List<KjqbService.BusinessService> businessfromservice;
+        private List<KjqbService.ChatInService> chatinservice;
+
+        private List<WkTUser> chattinguserlist = new List<WkTUser>();
 
         private IList scheduleList;
         private EventHandler mouseLeave;
@@ -159,6 +162,7 @@ namespace WorkLogForm
                  tfmListfromservice = new List<KjqbService.TimeArrangeForManagerInService>();
                  levlistfromservice = new List<KjqbService.LeaveInService>();
                  businessfromservice = new List<KjqbService.BusinessService>();
+                 chatinservice = new List<KjqbService.ChatInService>();
                  KjqbService.LogInService[] lists;
                  lists = ser.SearchShareLogUnRead((int)this.user.Id);
                  this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
@@ -207,6 +211,29 @@ namespace WorkLogForm
                  }
 
                  this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
+
+                 #region 接受聊天信息
+                 try
+                 {
+                     KjqbService.ChatInService[] lists7;
+                     lists7 = ser.SearchChatInfoUnRead((int)this.user.Id);
+                     for (int i = 0; i < lists7.Length; i++)
+                     {
+                         chatinservice.Add(lists7[i]);
+
+                     }
+                     if (this.LabelofChatttingCount.Text == "")
+                         this.LabelofChatttingCount.Text = lists7.Length == 0 ? "" : lists7.Length.ToString();
+                     else
+                         this.LabelofChatttingCount.Text = (int.Parse(this.LabelofChatttingCount.Text) + lists7.Length).ToString();
+
+                     if (lists7.Length > 0)
+                     {
+                         timerchattingflesh.Enabled = true;
+                     }
+                 }
+                 catch { }
+                 #endregion
 
              }
              catch
@@ -710,7 +737,9 @@ namespace WorkLogForm
         }
         private void close_pictureBox_Click(object sender, EventArgs e)
         {
+
             this.Close();
+        
         }
         private void close_pictureBox_MouseEnter(object sender, EventArgs e)
         {
@@ -883,6 +912,11 @@ namespace WorkLogForm
         private void pictureBoxOfInstantMessenger_Click(object sender, EventArgs e)
         {
             pictureBoxOfInstantMessenger.Cursor = Cursors.WaitCursor;
+            this.timerOfReceiveChattingMessage.Enabled = false;
+
+            this.timerchattingflesh.Enabled = false;
+            this.pictureBoxOfInstantMessenger.BackgroundImage = WorkLogForm.Properties.Resources.InstantMessengerLogo;
+            this.LabelofChatttingCount.Text = "";
             if (InstantMessengerWindows == null || InstantMessengerWindows.IsDisposed)
             {
                 InstantMessengerWindows = new InstantMessenger();
@@ -891,13 +925,17 @@ namespace WorkLogForm
             {
                 InstantMessengerWindows.FormLocation = new Point(this.Location.X - InstantMessengerWindows.Width, this.Location.Y);
                 InstantMessengerWindows.User = this.user;
+                InstantMessengerWindows.MainReceiveMessage = this.timerOfReceiveChattingMessage;
+                InstantMessengerWindows.Chattinguserlist = this.chatinservice;
                 InstantMessengerWindows.Show();
 
             }
             else
             {
                 InstantMessengerWindows.WindowState = FormWindowState.Normal;
-                InstantMessengerWindows.Focus();
+                InstantMessengerWindows.Chattinguserlist = this.chatinservice;
+                InstantMessengerWindows.Visible = true;
+                
             }
             pictureBoxOfInstantMessenger.Cursor = Cursors.Hand;
 
@@ -1747,8 +1785,6 @@ namespace WorkLogForm
                 newMessageWindow.Focus();
             }
 
-            
-
             panelNewMessage.Cursor = Cursors.Hand;
         }
 
@@ -1808,15 +1844,80 @@ namespace WorkLogForm
             }
 
             this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
+           
 
+        }
+        /// <summary>
+        /// 图标闪烁
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timerchattingflesh_Tick(object sender, EventArgs e)
+        {
+            if (this.pictureBoxOfInstantMessenger.BackgroundImage != null)
+            this.pictureBoxOfInstantMessenger.BackgroundImage = null;
+            else
+                this.pictureBoxOfInstantMessenger.BackgroundImage = WorkLogForm.Properties.Resources.InstantMessengerLogo;
+        }
+
+
+
+        private bool IsInChatUserlist(long id)
+        {
+            if (chattinguserlist != null && chattinguserlist.Count > 0)
+            {
+                foreach (WkTUser w in chattinguserlist)
+                {
+                    if (w.Id == id)
+                        return true;
+                }
+                return false;
+            }
+            else
+            {
+                return false;
+            }
+        
         }
         #endregion
 
-     
 
-      
 
-       
+        #region 接受聊天信息
+        private void timerOfReceiveChattingMessage_Tick(object sender, EventArgs e)
+        {
+            #region 接受聊天信息
+            try
+            {
+                KjqbService.ChatInService[] lists7;
+                lists7 = ser.SearchChatInfo((int)this.user.Id);
+                for (int i = 0; i < lists7.Length; i++)
+                {
+                    chatinservice.Add(lists7[i]);
+                    
+                }
+                if (this.LabelofChatttingCount.Text == "")
+                    this.LabelofChatttingCount.Text = lists7.Length == 0 ? "" : lists7.Length.ToString();
+                else
+                    this.LabelofChatttingCount.Text = (int.Parse(this.LabelofChatttingCount.Text) + lists7.Length).ToString();
+
+                if (lists7.Length > 0)
+                {
+                    timerchattingflesh.Enabled = true;
+                }
+            }
+            catch { }
+            #endregion
+        }
+        
+        #endregion
+
+
+
+
+
+
+
 
 
 

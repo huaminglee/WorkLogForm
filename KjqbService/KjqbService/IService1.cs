@@ -118,6 +118,7 @@ namespace KjqbService
         [OperationContract]
         List<ChatInService> SearchChatInfoUnRead(int Id);
 
+
         #endregion
     }
 }

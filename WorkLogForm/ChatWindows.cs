@@ -17,6 +17,13 @@ namespace WorkLogForm
         BaseService baseService = new BaseService();
         KjqbService.Service1Client ser = new KjqbService.Service1Client();
 
+        List<WkTUser> chatwindwosuser;
+
+        public List<WkTUser> Chatwindwosuser
+        {
+            get { return chatwindwosuser; }
+            set { chatwindwosuser = value; }
+        }
         private WkTUser sendUser;
         /// <summary>
         /// 由谁发送的也就是当前系统登录人
@@ -61,10 +68,25 @@ namespace WorkLogForm
         {
             this.Text = ReceiveUser.KuName;
             this.labelOfReceiveUser.Text = ReceiveUser.Kdid.KdName.Trim() +"  "+ReceiveUser.KuName;
+
+            try
+            {
+                KjqbService.ChatInService[] chat;//= new KjqbService.ChatInService()[];
+                chat = ser.SearchChatInfoUnRead((int)sendUser.Id);
+                for (int i = 0; i < chat.Length; i++)
+                {
+                    createChatPanel(chat[i].ChatContent, receiveUser.KuName, chat[i].TimeStamp);
+                }
+                Point newPoint = new Point(0, this.flowLayoutPanel1.Height - flowLayoutPanel1.AutoScrollPosition.Y);
+                flowLayoutPanel1.AutoScrollPosition = newPoint;
+            }
+            catch { }
         }
 
         private void close_pictureBox_Click(object sender, EventArgs e)
         {
+            this.chatwindwosuser.Remove(receiveUser);
+            this.ser.SetChatInfoIsRead((int)this.sendUser.Id);
             this.Close();
         }
 
@@ -93,6 +115,7 @@ namespace WorkLogForm
                     chat.ReceiveUserId = receiveUser.Id;
                     chat.TimeStamp = DateTime.Now;
                     ser.SaveInChatInfoInService(chat);
+
                 }
                 catch { }
 
