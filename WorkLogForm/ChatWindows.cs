@@ -73,6 +73,7 @@ namespace WorkLogForm
             {
                 KjqbService.ChatInService[] chat;//= new KjqbService.ChatInService()[];
                 chat = ser.SearchChatInfoUnRead((int)sendUser.Id);
+                System.Array.Reverse(chat);
                 for (int i = 0; i < chat.Length; i++)
                 {
                     createChatPanel(chat[i].ChatContent, receiveUser.KuName, chat[i].TimeStamp);
@@ -138,12 +139,17 @@ namespace WorkLogForm
             {
                 KjqbService.ChatInService[]  chat ;//= new KjqbService.ChatInService()[];
                 chat =  ser.SearchChatInfo((int)sendUser.Id);
+                System.Array.Reverse(chat);
                 for(int i = 0; i<chat.Length ;i++)
                 {
                     createChatPanel(chat[i].ChatContent,receiveUser.KuName,chat[i].TimeStamp);
                 }
-                Point newPoint = new Point(0, this.flowLayoutPanel1.Height - flowLayoutPanel1.AutoScrollPosition.Y);
-                flowLayoutPanel1.AutoScrollPosition = newPoint;
+                if (chat.Length > 0)
+                {
+                    Point newPoint = new Point(0, this.flowLayoutPanel1.Height - flowLayoutPanel1.AutoScrollPosition.Y);
+                    flowLayoutPanel1.AutoScrollPosition = newPoint;
+                }
+               
             }
             catch { }
 
