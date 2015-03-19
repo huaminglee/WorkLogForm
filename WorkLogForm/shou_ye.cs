@@ -660,7 +660,7 @@ namespace WorkLogForm
         private void initDutyInfo()
         {
             leaveList = baseService.loadEntityList("from LeaveManage where State=" + (int)IEntity.stateEnum.Normal + " and Ku_Id=" + user.Id + " and LeaveResult=2 and ((StartTime>=" + startTime.Date.Ticks + " and StartTime<=" + endTime.Date.Ticks + ") or (EndTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime>=" + startTime.Date.Ticks + " and EndTime<=" + endTime.Date.Ticks + ") or (StartTime<=" + startTime.Date.Ticks + " and EndTime>=" + endTime.Date.Ticks + "))");
-            attendanceList = baseService.loadEntityList("from Attendance where STATE=" + (int)IEntity.stateEnum.Normal + " and User=" + user.Id + " and SignDate>=" + startTime.Date.Ticks + " and SignDate<=" + endTime.Date.Ticks + " and LateOrLeaveEarly!="+(int)Attendance.lateOrLeaveEarlyEnum.Normal);
+            attendanceList = baseService.loadEntityList("from Attendance where STATE=" + (int)IEntity.stateEnum.Normal + " and User=" + user.Id + " and SignDate>=" + startTime.Date.Ticks + " and SignDate<=" + endTime.Date.Ticks);// + " and LateOrLeaveEarly!="+(int)Attendance.lateOrLeaveEarlyEnum.Normal);
             updateDutyInfo();
         }
 
