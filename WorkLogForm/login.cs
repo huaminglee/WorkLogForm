@@ -210,72 +210,81 @@ namespace WorkLogForm
         /// </summary>
         private void loginMethod()
         {
-            loginErrorDelegate led = new loginErrorDelegate(loginMethod);
-            if (this.InvokeRequired == true)
+            try
             {
-                this.BeginInvoke(led);
-            }
-            else
-            {
-                #region 将用户信息存入临时文件
-                if (rem_checkBox.Checked)
+                loginErrorDelegate led = new loginErrorDelegate(loginMethod);
+                if (this.InvokeRequired == true)
                 {
-                    IniReadAndWrite.IniWriteValue("temp", "rem", CommonStaticParameter.YES);
+                    this.BeginInvoke(led);
                 }
                 else
                 {
-                    IniReadAndWrite.IniWriteValue("temp", "rem", CommonStaticParameter.NO);
-                }
-                if (auto_checkBox.Checked)
-                {
-                    IniReadAndWrite.IniWriteValue("temp", "auto", CommonStaticParameter.YES);
-                }
-                else
-                {
-                    IniReadAndWrite.IniWriteValue("temp", "auto", CommonStaticParameter.NO);
-                }
-                IniReadAndWrite.IniWriteValue("temp", "un", Securit.DES(textBox1.Text.Trim()));
-                IniReadAndWrite.IniWriteValue("temp", "pw", Securit.DES(textBox2.Text.Trim()));
-                #endregion
-
-                //判断是否加密成功
-                IList pwd = baseService.ExecuteSQL("select right(sys.fn_VarBinToHexStr(hashbytes('MD5', '" + textBox2.Text.Trim() + "')),32)"); // 数据库属性，跟具体表无关
-                if (pwd == null || pwd.Count <= 0)
-                {
-                    MessageBox.Show("登录异常！");
-                    loginError();
-                    return;
-                }
-                object[] pwdArray = (object[])pwd[0];
-                //因为是共用表 选择是工作小秘书相关的角色
-                IList userList = baseService.loadEntityList("select u from WkTUser u right join u.UserRole role where role.KrDESC='工作小秘书角色' and u.KuLid='" + textBox1.Text.Trim() + "' and u.KuPassWD='" + pwdArray[0] + "'");
-                if (userList == null || userList.Count <= 0)
-                {
-                    MessageBox.Show("用户名或密码错误！");
-                    loginError();
-                    return;
-                }
-                else if (userList.Count > 1)
-                {
-                    MessageBox.Show("用户异常，请联系管理员！");
-                    loginError();
-                    return;
-                }
-                else
-                {
-                    WkTUser u = (WkTUser)userList[0];
-                    foreach (WkTRole r in u.UserRole)
+                    #region 将用户信息存入临时文件
+                    if (rem_checkBox.Checked)
                     {
-                        if (r.KrDESC.Trim().Equals("工作小秘书角色"))//是本系统的用户角色
-                        {
-                            role = r;
-                        }
+                        IniReadAndWrite.IniWriteValue("temp", "rem", CommonStaticParameter.YES);
                     }
-                    this.User = (WkTUser)userList[0];
-                    this.DialogResult = DialogResult.OK;
-                    loginThread.Abort();
+                    else
+                    {
+                        IniReadAndWrite.IniWriteValue("temp", "rem", CommonStaticParameter.NO);
+                    }
+                    if (auto_checkBox.Checked)
+                    {
+                        IniReadAndWrite.IniWriteValue("temp", "auto", CommonStaticParameter.YES);
+                    }
+                    else
+                    {
+                        IniReadAndWrite.IniWriteValue("temp", "auto", CommonStaticParameter.NO);
+                    }
+                    IniReadAndWrite.IniWriteValue("temp", "un", Securit.DES(textBox1.Text.Trim()));
+                    IniReadAndWrite.IniWriteValue("temp", "pw", Securit.DES(textBox2.Text.Trim()));
+                    #endregion
+
+                    //判断是否加密成功
+                    IList pwd = baseService.ExecuteSQL("select right(sys.fn_VarBinToHexStr(hashbytes('MD5', '" + textBox2.Text.Trim() + "')),32)"); // 数据库属性，跟具体表无关
+                    if (pwd == null || pwd.Count <= 0)
+                    {
+                        MessageBox.Show("登录异常！");
+                        loginError();
+                        return;
+                    }
+                    object[] pwdArray = (object[])pwd[0];
+                    //因为是共用表 选择是工作小秘书相关的角色
+                    IList userList = baseService.loadEntityList("select u from WkTUser u right join u.UserRole role where role.KrDESC='工作小秘书角色' and u.KuLid='" + textBox1.Text.Trim() + "' and u.KuPassWD='" + pwdArray[0] + "'");
+                    if (userList == null || userList.Count <= 0)
+                    {
+                        MessageBox.Show("用户名或密码错误！");
+                        loginError();
+                        return;
+                    }
+                    else if (userList.Count > 1)
+                    {
+                        MessageBox.Show("用户异常，请联系管理员！");
+                        loginError();
+                        return;
+                    }
+                    else
+                    {
+                        WkTUser u = (WkTUser)userList[0];
+                        foreach (WkTRole r in u.UserRole)
+                        {
+                            if (r.KrDESC.Trim().Equals("工作小秘书角色"))//是本系统的用户角色
+                            {
+                                role = r;
+                            }
+                        }
+                        this.User = (WkTUser)userList[0];
+                        this.DialogResult = DialogResult.OK;
+                        loginThread.Abort();
+                    }
                 }
             }
+            catch
+            {
+                MessageBox.Show("未能与服务器建立连接……");
+                this.Close();
+            }
+
         }
 
 

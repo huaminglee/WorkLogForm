@@ -238,7 +238,7 @@ namespace WorkLogForm
              }
              catch
              {
-                 MessageBox.Show("推送程序出错");
+                 MessageBox.Show("未能与服务器建立连接……");
              }
 
 
@@ -1249,79 +1249,86 @@ namespace WorkLogForm
         /// </summary>
         private void signExit()
         {
-            if (user != null)
+            try
             {
-                user.KuOnline = 0 ;
-                baseService.SaveOrUpdateEntity(user);
+                if (user != null)
+                {
+                    user.KuOnline = 0;
+                    baseService.SaveOrUpdateEntity(user);
 
-                DateTime today;
-                try
-                {
-                today = ser.GetServiceTime();
-                }
-                catch
-                {
-                    today = DateTime.Now;
-                
-                }
-                
-                if (CNDate.isworkDay(today.Date.Ticks))
-                {
-                    IList attendanceList = baseService.loadEntityList("from Attendance where STATE=" + (int)IEntity.stateEnum.Normal + " and User=" + user.Id + " and SignDate=" + today.Date.Ticks);
-                    if (attendanceList != null && attendanceList.Count == 1)
+                    DateTime today;
+                    try
                     {
-                        Attendance todaySignStart = (Attendance)attendanceList[0];
-                        IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where STATE=" + (int)IEntity.stateEnum.Normal + " and StartTime<=" + today.Date.Ticks + " order by StartTime desc");
-                        if (usuallyDayList != null && usuallyDayList.Count == 1)
-                        {
-                            UsuallyDay u = (UsuallyDay)usuallyDayList[0];
+                        today = ser.GetServiceTime();
+                    }
+                    catch
+                    {
+                        today = DateTime.Now;
 
-                            if (u.WorkTimeEnd <= today.TimeOfDay.Ticks)//未早退
+                    }
+
+                    if (CNDate.isworkDay(today.Date.Ticks))
+                    {
+                        IList attendanceList = baseService.loadEntityList("from Attendance where STATE=" + (int)IEntity.stateEnum.Normal + " and User=" + user.Id + " and SignDate=" + today.Date.Ticks);
+                        if (attendanceList != null && attendanceList.Count == 1)
+                        {
+                            Attendance todaySignStart = (Attendance)attendanceList[0];
+                            IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where STATE=" + (int)IEntity.stateEnum.Normal + " and StartTime<=" + today.Date.Ticks + " order by StartTime desc");
+                            if (usuallyDayList != null && usuallyDayList.Count == 1)
                             {
-                                if (todaySignStart.LateOrLeaveEarly == (int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly)  //登陆为LateAndEarly表示迟到
+                                UsuallyDay u = (UsuallyDay)usuallyDayList[0];
+
+                                if (u.WorkTimeEnd <= today.TimeOfDay.Ticks)//未早退
                                 {
-                                    todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.Late; // 只是迟到
+                                    if (todaySignStart.LateOrLeaveEarly == (int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly)  //登陆为LateAndEarly表示迟到
+                                    {
+                                        todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.Late; // 只是迟到
+                                    }
+                                    else
+                                    {
+                                        todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.Normal;  //  正常签到
+                                    }
                                 }
-                                else
+
+
+                                else //早退
                                 {
-                                    todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.Normal;  //  正常签到
+                                    if (todaySignStart.LateOrLeaveEarly == (int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly)
+                                    {
+                                        todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly; //迟到并且早退
+                                    }
+                                    else
+                                    {
+                                        todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.Early; //只是早退
+                                    }
                                 }
+
                             }
-
-
-                            else //早退
+                            todaySignStart.SignEndTime = today.TimeOfDay.Ticks;
+                            todaySignStart.SignDate = today.Date.Ticks;
+                            todaySignStart.SignDay = today.Day;
+                            todaySignStart.SignMonth = today.Month;
+                            todaySignStart.SignYear = today.Year;
+                            todaySignStart.State = (int)IEntity.stateEnum.Normal;
+                            todaySignStart.TimeStamp = DateTime.Now.Ticks;
+                            todaySignStart.User = this.user;
+                            try
                             {
-                                if (todaySignStart.LateOrLeaveEarly == (int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly)
-                                {
-                                    todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly; //迟到并且早退
-                                }
-                                else
-                                {
-                                    todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.Early; //只是早退
-                                }
+                                baseService.SaveOrUpdateEntity(todaySignStart);
                             }
-                            
+                            catch
+                            {
+                                MessageBox.Show("签退失败！");
+                                return;
+                            }
+                            attendance_label.Text = CNDate.getTimeByTimeTicks(todaySignStart.SignStartTime) + "~";
                         }
-                        todaySignStart.SignEndTime = today.TimeOfDay.Ticks;
-                        todaySignStart.SignDate = today.Date.Ticks;
-                        todaySignStart.SignDay = today.Day;
-                        todaySignStart.SignMonth = today.Month;
-                        todaySignStart.SignYear = today.Year;
-                        todaySignStart.State = (int)IEntity.stateEnum.Normal;
-                        todaySignStart.TimeStamp = DateTime.Now.Ticks;
-                        todaySignStart.User = this.user;
-                        try
-                        {
-                            baseService.SaveOrUpdateEntity(todaySignStart);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("签退失败！");
-                            return;
-                        }
-                        attendance_label.Text = CNDate.getTimeByTimeTicks(todaySignStart.SignStartTime) + "~";
                     }
                 }
+            }
+            catch 
+            {
+            
             }
         }
         public const int WM_QUERYENDSESSION = 0x11;
@@ -1359,22 +1366,37 @@ namespace WorkLogForm
         #region 监测日程更新
         private void listen_ri_cheng()
         {
-            long thisDay = DateTime.Now.Ticks;
-            long nextDay = DateTime.Now.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
+            try
+            {
+                long thisDay = DateTime.Now.Ticks;
+                long nextDay = DateTime.Now.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
 
-            //设置监测
-            OnChangeEventHandler onChange = new OnChangeEventHandler(ri_cheng_onChange);
-            BaseService.autoUpdateForm(onChange, "select ID from [dbo].LOG_T_STAFFSCHEDULE where WkTUserId=" + user.Id + " and STATE=" + (int)IEntity.stateEnum.Normal + " and IfRemind=" + (int)StaffSchedule.IfRemindEnum.Renmind+" and ScheduleTime>="+thisDay+" and ShceduleTime<"+nextDay);
+                //设置监测
+                OnChangeEventHandler onChange = new OnChangeEventHandler(ri_cheng_onChange);
+                BaseService.autoUpdateForm(onChange, "select ID from [dbo].LOG_T_STAFFSCHEDULE where WkTUserId=" + user.Id + " and STATE=" + (int)IEntity.stateEnum.Normal + " and IfRemind=" + (int)StaffSchedule.IfRemindEnum.Renmind + " and ScheduleTime>=" + thisDay + " and ShceduleTime<" + nextDay);
+            }
+            catch 
+            { 
+            
+            }
         }
         private void ri_cheng_onChange(object sender, SqlNotificationEventArgs e)
         {
-            //MessageBox.Show(e.Info.ToString());
-            long thisDay = DateTime.Now.Ticks;
-            long nextDay = DateTime.Now.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
-            scheduleList = baseService.loadEntityList("from StaffSchedule where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + thisDay + "  order by ScheduleTime asc");
+            try
+            {
+                //MessageBox.Show(e.Info.ToString());
+                long thisDay = DateTime.Now.Ticks;
+                long nextDay = DateTime.Now.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
+                scheduleList = baseService.loadEntityList("from StaffSchedule where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + thisDay + "  order by ScheduleTime asc");
+
+                //循环监测
+                listen_ri_cheng();
+            }
+            catch
+            {
+ 
             
-            //循环监测
-            listen_ri_cheng();
+            }
         }
         #endregion
 
@@ -1790,62 +1812,70 @@ namespace WorkLogForm
 
         private void timerMessageSend_Tick(object sender, EventArgs e)
         {
-           
-            KjqbService.LogInService[] lists;
-            lists = ser.SearchShareLog((int)this.user.Id);
-            for (int i = 0; i < lists.Length;i++ )
+            try
             {
-                loglistfromService.Add(lists[i]);
+                KjqbService.LogInService[] lists;
+                lists = ser.SearchShareLog((int)this.user.Id);
+                for (int i = 0; i < lists.Length; i++)
+                {
+                    loglistfromService.Add(lists[i]);
+                }
+
+                this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
+
+                KjqbService.ScheduleInService[] lists2;
+                lists2 = ser.SearchShareSchedule((int)this.user.Id);
+                for (int i = 0; i < lists2.Length; i++)
+                {
+                    schedulelistfromService.Add(lists2[i]);
+                }
+
+                this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists2.Length).ToString();
+
+                KjqbService.CommentInService[] lists3;
+                lists3 = ser.SearchCommentlog((int)this.user.Id);
+                for (int i = 0; i < lists3.Length; i++)
+                {
+                    commentlistfromService.Add(lists3[i]);
+                }
+
+                this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists3.Length).ToString();
+
+                KjqbService.TimeArrangeForManagerInService[] lists4;
+                lists4 = ser.SearchTimeArrangeForManager((int)this.user.Id);
+                for (int i = 0; i < lists4.Length; i++)
+                {
+                    tfmListfromservice.Add(lists4[i]);
+                }
+
+                this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists4.Length).ToString();
+
+                KjqbService.LeaveInService[] lists5;
+                lists5 = ser.SearchLeaveInfo((int)this.user.Id);
+                for (int i = 0; i < lists5.Length; i++)
+                {
+                    levlistfromservice.Add(lists5[i]);
+                }
+
+                this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
+
+                KjqbService.BusinessService[] lists6;
+                lists6 = ser.SearchBusinessInfo((int)this.user.Id);
+                for (int i = 0; i < lists6.Length; i++)
+                {
+                    businessfromservice.Add(lists6[i]);
+                }
+
+                this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
             }
-
-            this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text)+lists.Length).ToString();
-
-            KjqbService.ScheduleInService[] lists2;
-            lists2 = ser.SearchShareSchedule((int)this.user.Id);
-            for (int i = 0; i < lists2.Length; i++)
+            catch
             {
-                schedulelistfromService.Add(lists2[i]);
+
+                this.timerMessageSend.Stop();
+                MessageBox.Show("与服务器失去建立连接，可能是由于网络原因，程序将退出，未记录本次签退时间，请在网络正常后再次登录。");
+                this.Close();
+            
             }
-
-            this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists2.Length).ToString();
-
-            KjqbService.CommentInService[] lists3;
-            lists3 = ser.SearchCommentlog((int)this.user.Id);
-            for (int i = 0; i < lists3.Length; i++)
-            {
-                commentlistfromService.Add(lists3[i]);
-            }
-
-            this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists3.Length).ToString();
-
-            KjqbService.TimeArrangeForManagerInService[] lists4;
-            lists4 = ser.SearchTimeArrangeForManager((int)this.user.Id);
-            for (int i = 0; i < lists4.Length; i++)
-            {
-                tfmListfromservice.Add(lists4[i]);
-            }
-
-            this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists4.Length).ToString();
-
-            KjqbService.LeaveInService[] lists5;
-            lists5 = ser.SearchLeaveInfo((int)this.user.Id);
-            for (int i = 0; i < lists5.Length; i++)
-            {
-                levlistfromservice.Add(lists5[i]);
-            }
-
-            this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
-
-            KjqbService.BusinessService[] lists6;
-            lists6 = ser.SearchBusinessInfo((int)this.user.Id);
-            for (int i = 0; i < lists6.Length; i++)
-            {
-                businessfromservice.Add(lists6[i]);
-            }
-
-            this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
-           
-
         }
         /// <summary>
         /// 图标闪烁
