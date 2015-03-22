@@ -92,6 +92,19 @@ namespace WorkLogForm
 
         private void InterimHead_Load(object sender, EventArgs e)
         {
+
+            #region 向combox中加载部门
+
+            string sql = "select u from WkTDept u";
+            IList depts = baseService.loadEntityList(sql);
+
+            foreach (WkTDept w in depts)
+            {
+                this.comboBox1.Items.Add(w.KdName);
+            }
+
+
+            #endregion
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 2 - this.Width / 2, Screen.PrimaryScreen.WorkingArea.Height / 2 - this.Height / 2);
             initialData();
             initListView(listView2, shareList);

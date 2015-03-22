@@ -374,6 +374,25 @@ namespace WorkLogForm
         #endregion
         private void Leave_Load(object sender, EventArgs e)
         {
+
+
+            #region 向combox中加载部门
+
+            string sql = "select u from WkTDept u";
+            IList depts = baseService.loadEntityList(sql);
+
+            foreach (WkTDept w in depts)
+            {
+                this.comboBox1.Items.Add(w.KdName);
+                this.comboBox4.Items.Add(w.KdName);
+                this.comboBox5.Items.Add(w.KdName);
+                this.comboBox6.Items.Add(w.KdName);
+                this.leave_departmentcomboBox.Items.Add(w.KdName);
+
+            }
+
+
+            #endregion
             groupBox4.Enabled = false;
             if(role.KrOrder==2)
             {

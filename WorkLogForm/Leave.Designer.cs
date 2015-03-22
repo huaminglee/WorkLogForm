@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem(new System.Windows.Forms.ListViewItem.ListViewSubItem[] {
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new System.Windows.Forms.ListViewItem.ListViewSubItem[] {
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "", System.Drawing.SystemColors.WindowText, System.Drawing.Color.WhiteSmoke, new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)))),
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "20156120", System.Drawing.SystemColors.WindowText, System.Drawing.SystemColors.Window, new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)))),
             new System.Windows.Forms.ListViewItem.ListViewSubItem(null, "张婷", System.Drawing.SystemColors.WindowText, System.Drawing.SystemColors.Window, new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))))}, -1);
-            System.Windows.Forms.ListViewItem listViewItem23 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "20156120",
             "王亮"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.Empty, new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))));
-            System.Windows.Forms.ListViewItem listViewItem24 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "20152222",
             "王新"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.WhiteSmoke, new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134))));
@@ -110,6 +110,18 @@
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button7 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.listView3 = new System.Windows.Forms.ListView();
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label21 = new System.Windows.Forms.Label();
@@ -145,18 +157,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.listView3 = new System.Windows.Forms.ListView();
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.label31 = new System.Windows.Forms.Label();
@@ -194,9 +194,9 @@
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -321,26 +321,9 @@
             // 
             // leave_departmentcomboBox
             // 
+            this.leave_departmentcomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.leave_departmentcomboBox.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.leave_departmentcomboBox.FormattingEnabled = true;
-            this.leave_departmentcomboBox.Items.AddRange(new object[] {
-            "组织结构",
-            "综合办公室",
-            "后勤服务中心",
-            "院领导",
-            "科技信息资源研究所",
-            "科技发展战略研究所",
-            "科技宣传教育中心",
-            "科技统计评估中心",
-            "科技查新咨询中心",
-            "科学技术情报研究院",
-            "科技文献馆",
-            "技术转移中心",
-            "河北省科技信息处理实验室",
-            "河北省科学技术情报学会",
-            "河北省翻译工作者协会",
-            "区域科技发展研究中心",
-            ""});
             this.leave_departmentcomboBox.Location = new System.Drawing.Point(191, 38);
             this.leave_departmentcomboBox.Name = "leave_departmentcomboBox";
             this.leave_departmentcomboBox.Size = new System.Drawing.Size(186, 20);
@@ -577,6 +560,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.BackgroundImage = global::WorkLogForm.Properties.Resources.请假管理_请假申请;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox2.Location = new System.Drawing.Point(3, 3);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 3, 30, 3);
             this.pictureBox2.Name = "pictureBox2";
@@ -592,6 +576,7 @@
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.BackgroundImage = global::WorkLogForm.Properties.Resources.请假管理_请假查看;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox3.Location = new System.Drawing.Point(259, 3);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 3, 30, 3);
             this.pictureBox3.Name = "pictureBox3";
@@ -607,6 +592,7 @@
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4.BackgroundImage = global::WorkLogForm.Properties.Resources.请假管理_请假审批_;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox4.Location = new System.Drawing.Point(131, 3);
             this.pictureBox4.Margin = new System.Windows.Forms.Padding(3, 3, 30, 3);
             this.pictureBox4.Name = "pictureBox4";
@@ -716,26 +702,9 @@
             // 
             // comboBox4
             // 
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Items.AddRange(new object[] {
-            "组织结构",
-            "综合办公室",
-            "后勤服务中心",
-            "院领导",
-            "科技信息资源研究所",
-            "科技发展战略研究所",
-            "科技宣传教育中心",
-            "科技统计评估中心",
-            "科技查新咨询中心",
-            "科学技术情报研究院",
-            "科技文献馆",
-            "技术转移中心",
-            "河北省科技信息处理实验室",
-            "河北省科学技术情报学会",
-            "河北省翻译工作者协会",
-            "区域科技发展研究中心",
-            ""});
             this.comboBox4.Location = new System.Drawing.Point(57, 40);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(169, 20);
@@ -760,13 +729,13 @@
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader7});
-            listViewItem22.StateImageIndex = 0;
-            listViewItem23.StateImageIndex = 0;
-            listViewItem24.StateImageIndex = 0;
+            listViewItem7.StateImageIndex = 0;
+            listViewItem8.StateImageIndex = 0;
+            listViewItem9.StateImageIndex = 0;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem22,
-            listViewItem23,
-            listViewItem24});
+            listViewItem7,
+            listViewItem8,
+            listViewItem9});
             this.listView1.Location = new System.Drawing.Point(19, 75);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(438, 399);
@@ -819,6 +788,123 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(982, 612);
             this.panel2.TabIndex = 220;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.button10);
+            this.panel3.Controls.Add(this.button11);
+            this.panel3.Controls.Add(this.textBox4);
+            this.panel3.Controls.Add(this.listView3);
+            this.panel3.Controls.Add(this.comboBox5);
+            this.panel3.Controls.Add(this.label18);
+            this.panel3.Location = new System.Drawing.Point(275, 221);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(380, 367);
+            this.panel3.TabIndex = 232;
+            this.panel3.Visible = false;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label16.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label16.Location = new System.Drawing.Point(187, 23);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(42, 16);
+            this.label16.TabIndex = 108;
+            this.label16.Text = "姓名";
+            // 
+            // button10
+            // 
+            this.button10.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button10.Location = new System.Drawing.Point(310, 330);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(52, 29);
+            this.button10.TabIndex = 113;
+            this.button10.Text = "确定";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button11.Location = new System.Drawing.Point(310, 17);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(52, 29);
+            this.button11.TabIndex = 113;
+            this.button11.Text = "查询";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // textBox4
+            // 
+            this.textBox4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textBox4.Location = new System.Drawing.Point(230, 21);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(76, 21);
+            this.textBox4.TabIndex = 109;
+            // 
+            // listView3
+            // 
+            this.listView3.CheckBoxes = true;
+            this.listView3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader9,
+            this.columnHeader11,
+            this.columnHeader12,
+            this.columnHeader21});
+            this.listView3.Location = new System.Drawing.Point(16, 54);
+            this.listView3.Name = "listView3";
+            this.listView3.Size = new System.Drawing.Size(346, 271);
+            this.listView3.TabIndex = 107;
+            this.listView3.UseCompatibleStateImageBehavior = false;
+            this.listView3.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "";
+            this.columnHeader9.Width = 25;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "姓名";
+            this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader11.Width = 85;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "部门";
+            this.columnHeader12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader12.Width = 138;
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "职务";
+            this.columnHeader21.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader21.Width = 94;
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(56, 21);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(130, 20);
+            this.comboBox5.TabIndex = 218;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label18.Location = new System.Drawing.Point(13, 22);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(42, 16);
+            this.label18.TabIndex = 110;
+            this.label18.Text = "部门";
             // 
             // groupBox3
             // 
@@ -1105,24 +1191,6 @@
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "组织结构",
-            "综合办公室",
-            "后勤服务中心",
-            "院领导",
-            "科技信息资源研究所",
-            "科技发展战略研究所",
-            "科技宣传教育中心",
-            "科技统计评估中心",
-            "科技查新咨询中心",
-            "科学技术情报研究院",
-            "科技文献馆",
-            "技术转移中心",
-            "河北省科技信息处理实验室",
-            "河北省科学技术情报学会",
-            "河北省翻译工作者协会",
-            "区域科技发展研究中心",
-            ""});
             this.comboBox1.Location = new System.Drawing.Point(82, 64);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(221, 20);
@@ -1226,140 +1294,6 @@
             this.dateTimePicker3.Size = new System.Drawing.Size(98, 21);
             this.dateTimePicker3.TabIndex = 216;
             // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.label16);
-            this.panel3.Controls.Add(this.button10);
-            this.panel3.Controls.Add(this.button11);
-            this.panel3.Controls.Add(this.textBox4);
-            this.panel3.Controls.Add(this.listView3);
-            this.panel3.Controls.Add(this.comboBox5);
-            this.panel3.Controls.Add(this.label18);
-            this.panel3.Location = new System.Drawing.Point(275, 221);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(380, 367);
-            this.panel3.TabIndex = 232;
-            this.panel3.Visible = false;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label16.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label16.Location = new System.Drawing.Point(187, 23);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(42, 16);
-            this.label16.TabIndex = 108;
-            this.label16.Text = "姓名";
-            // 
-            // button10
-            // 
-            this.button10.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button10.Location = new System.Drawing.Point(310, 330);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(52, 29);
-            this.button10.TabIndex = 113;
-            this.button10.Text = "确定";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // button11
-            // 
-            this.button11.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button11.Location = new System.Drawing.Point(310, 17);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(52, 29);
-            this.button11.TabIndex = 113;
-            this.button11.Text = "查询";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
-            // textBox4
-            // 
-            this.textBox4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textBox4.Location = new System.Drawing.Point(230, 21);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(76, 21);
-            this.textBox4.TabIndex = 109;
-            // 
-            // listView3
-            // 
-            this.listView3.CheckBoxes = true;
-            this.listView3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader9,
-            this.columnHeader11,
-            this.columnHeader12,
-            this.columnHeader21});
-            this.listView3.Location = new System.Drawing.Point(16, 54);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(346, 271);
-            this.listView3.TabIndex = 107;
-            this.listView3.UseCompatibleStateImageBehavior = false;
-            this.listView3.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "";
-            this.columnHeader9.Width = 25;
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "姓名";
-            this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader11.Width = 85;
-            // 
-            // columnHeader12
-            // 
-            this.columnHeader12.Text = "部门";
-            this.columnHeader12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader12.Width = 138;
-            // 
-            // columnHeader21
-            // 
-            this.columnHeader21.Text = "职务";
-            this.columnHeader21.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader21.Width = 94;
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Items.AddRange(new object[] {
-            "组织结构",
-            "综合办公室",
-            "后勤服务中心",
-            "院领导",
-            "科技信息资源研究所",
-            "科技发展战略研究所",
-            "科技宣传教育中心",
-            "科技统计评估中心",
-            "科技查新咨询中心",
-            "科学技术情报研究院",
-            "科技文献馆",
-            "技术转移中心",
-            "河北省科技信息处理实验室",
-            "河北省科学技术情报学会",
-            "河北省翻译工作者协会",
-            "区域科技发展研究中心",
-            ""});
-            this.comboBox5.Location = new System.Drawing.Point(56, 21);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(130, 20);
-            this.comboBox5.TabIndex = 218;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label18.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label18.Location = new System.Drawing.Point(13, 22);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(42, 16);
-            this.label18.TabIndex = 110;
-            this.label18.Text = "部门";
-            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -1446,24 +1380,6 @@
             this.comboBox6.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Items.AddRange(new object[] {
-            "组织结构",
-            "综合办公室",
-            "后勤服务中心",
-            "院领导",
-            "科技信息资源研究所",
-            "科技发展战略研究所",
-            "科技宣传教育中心",
-            "科技统计评估中心",
-            "科技查新咨询中心",
-            "科学技术情报研究院",
-            "科技文献馆",
-            "技术转移中心",
-            "河北省科技信息处理实验室",
-            "河北省科学技术情报学会",
-            "河北省翻译工作者协会",
-            "区域科技发展研究中心",
-            ""});
             this.comboBox6.Location = new System.Drawing.Point(53, 39);
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(221, 20);
@@ -1699,12 +1615,12 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();

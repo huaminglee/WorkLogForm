@@ -339,24 +339,8 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "组织结构",
-            "综合办公室",
-            "后勤服务中心",
-            "院领导",
-            "科技信息资源研究所",
-            "科技发展战略研究所",
-            "科技宣传教育中心",
-            "科技统计评估中心",
-            "科技查新咨询中心",
-            "科学技术情报研究院",
-            "科技文献馆",
-            "技术转移中心",
-            "河北省科技信息处理实验室",
-            "河北省科学技术情报学会",
-            "河北省翻译工作者协会",
-            "区域科技发展研究中心"});
             this.comboBox1.Location = new System.Drawing.Point(213, 18);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(165, 20);
