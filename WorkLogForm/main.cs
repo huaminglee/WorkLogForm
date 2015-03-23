@@ -720,8 +720,15 @@ namespace WorkLogForm
         }
         private void notifyIcon1_Click(object sender, EventArgs e)
         {
-            this.Visible = true;
-            this.Activate();
+            //EventArgs继承自MouseEventArgs,所以可以强转  
+            MouseEventArgs Mouse_e = (MouseEventArgs)e;
+
+            //点鼠标右键,return  
+            if (Mouse_e.Button == MouseButtons.Left)
+            {
+                this.Visible = true;
+                this.Activate();
+            }  
         }
         private void min_pictureBox_MouseEnter(object sender, EventArgs e)
         {
@@ -1941,6 +1948,27 @@ namespace WorkLogForm
         }
         
         #endregion
+
+        /// <summary>
+        /// 右键退出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// 右键还原
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            this.Visible = true;
+            this.Activate();
+        }
 
 
 

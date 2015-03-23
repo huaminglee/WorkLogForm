@@ -407,10 +407,7 @@ namespace KjqbService
 
                chat.Add(ll);
            }
-
            return chat;
-      
-
        }
 
        public void SetChatInfoIsRead(int Id)
