@@ -389,10 +389,37 @@ namespace KjqbService
        
 
        }
+
+        public List<ChatInService> SearchChatInfoContainSendId(int receiveId , int sendId)
+       {
+           List<ChatInService> chat = new List<ChatInService>();
+
+
+           List<ChatMessage> lm = chatop.SendChat(receiveId,sendId);
+
+           foreach (ChatMessage lo in lm)
+           {
+               ChatInService ll = new ChatInService();
+               ll.SendUserId = (long)lo.SendUserId;
+               ll.ReceiveUserId =(long)lo.ReceiveUserId;
+               ll.ChatContent = lo.ChatContent;
+               ll.TimeStamp = new DateTime((long)lo.TimeStamp);
+
+               chat.Add(ll);
+           }
+
+           return chat;
+      
+
+       }
+
        public void SetChatInfoIsRead(int Id)
        {
            chatop.ChangeChatIsRead(Id);
        }
+
+
+
        public List<ChatInService> SearchChatInfoUnRead(int Id)
        {
            List<ChatInService> chat = new List<ChatInService>();
@@ -416,6 +443,60 @@ namespace KjqbService
        
 
        }
+
+       public void SetChatInfoIsReadContainSendId(int receiveId, int sendId)
+       {
+           chatop.ChangeChatIsRead(receiveId, sendId);
+       }
+
+
+       public List<ChatInService> SearchChatInfoUnReadContainSendId(int receiveId, int sendId)
+       {
+           List<ChatInService> chat = new List<ChatInService>();
+
+
+           List<ChatMessage> lm = chatop.SendChatUnRead(receiveId, sendId);
+
+           foreach (ChatMessage lo in lm)
+           {
+               ChatInService ll = new ChatInService();
+               ll.SendUserId = (long)lo.SendUserId;
+               ll.ReceiveUserId = (long)lo.ReceiveUserId;
+               ll.ChatContent = lo.ChatContent;
+               ll.TimeStamp = new DateTime((long)lo.TimeStamp);
+
+               chat.Add(ll);
+           }
+
+           return chat;
+
+       }
+
+
+       public List<ChatInService> SearchChatHistory(int receiveId, int sendid, DateTime endtime)
+       {
+
+           List<ChatInService> chat = new List<ChatInService>();
+
+
+           List<ChatMessage> lm = chatop.SearchChattingHistory(receiveId, sendid, endtime);
+
+           foreach (ChatMessage lo in lm)
+           {
+               ChatInService ll = new ChatInService();
+               ll.SendUserId = (long)lo.SendUserId;
+               ll.ReceiveUserId = (long)lo.ReceiveUserId;
+               ll.ChatContent = lo.ChatContent;
+               ll.TimeStamp = new DateTime((long)lo.TimeStamp);
+
+               chat.Add(ll);
+           }
+
+           return chat;
+       
+       }
+
+
         #endregion
 
 

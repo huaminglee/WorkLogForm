@@ -17,7 +17,12 @@ namespace WorkLogForm
     {
         BaseService baseService = new BaseService();
         KjqbService.Service1Client ser = new KjqbService.Service1Client();
+
+        /// <summary>
+        ///  接收方又主页传过来的发送消息的人的列表
+        /// </summary>
         List<KjqbService.ChatInService> chattinguserlist;
+        
         private WkTUser user;
 
         public WkTUser User

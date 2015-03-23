@@ -73,7 +73,7 @@ namespace WorkLogForm
                       //[0]人的Id [1]部门id [2] 姓名 [3]文章数量 [4] 部门名称
                       foreach (object[] oo in thenames)
                       {
-                          this.dataGridView1.Rows.Add(oo[2], oo[4], oo[3], "查看");
+                          this.dataGridView1.Rows.Add(oo[2], oo[4].ToString().Trim(), oo[3], "查看");
                           this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Tag = oo[0];
                       }
 

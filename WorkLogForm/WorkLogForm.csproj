@@ -449,7 +449,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Service References\IPService\IpAddressSearchWebService.wsdl" />
-    <None Include="Service References\KjqbService\Service1.wsdl" />
+    <None Include="Service References\KjqbService\Service11.wsdl" />
     <None Include="Service References\KjqbService\WorkLogForm.KjqbService.BusinessService.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

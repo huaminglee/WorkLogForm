@@ -140,7 +140,7 @@ namespace WorkLogForm
 
                 Regex r = new Regex(re1 + re2 + re3 + re4 + re5 + re6 + re7 + re8, RegexOptions.IgnoreCase | RegexOptions.Singleline);
                 Match m = r.Match(IpAdress);
-                if (m.Success)
+                //if (m.Success)
                 {
                     #region 登陆效果
                     if (textBox1.Text.Trim() == "" || textBox1.Text.Trim() == "输入用户名" || textBox2.Text.Trim() == "" || textBox2.Text.Trim() == "输入密码")
@@ -151,10 +151,10 @@ namespace WorkLogForm
                     timer1.Start(); //登录窗收起效果
                     #endregion
                 }
-                else
+                //else
                 {
-                    MessageBox.Show("您未在正确地点登录！");
-                    return;
+                    //MessageBox.Show("您未在正确地点登录！");
+                    //return;
                 }
                     
             }

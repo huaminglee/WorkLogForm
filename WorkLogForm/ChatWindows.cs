@@ -17,6 +17,10 @@ namespace WorkLogForm
         BaseService baseService = new BaseService();
         KjqbService.Service1Client ser = new KjqbService.Service1Client();
 
+        /// <summary>
+        /// 获取当前服务器时间查询连天记录时候用
+        /// </summary>
+        private DateTime serviceTime;
         List<WkTUser> chatwindwosuser;
 
         public List<WkTUser> Chatwindwosuser
@@ -51,7 +55,7 @@ namespace WorkLogForm
         /// </summary>
         private void initialWindow()
         {
-            creatWindow.SetFormRoundRectRgn(this, 15);
+            //creatWindow.SetFormRoundRectRgn(this, 15);
             creatWindow.SetFormShadow(this);
         }
         #endregion
@@ -62,24 +66,40 @@ namespace WorkLogForm
             initialWindow();
             receiveUser = new WkTUser();
             sendUser = new WkTUser();
+            
         }
 
         private void ChatWindows_Load(object sender, EventArgs e)
         {
+
             this.Text = ReceiveUser.KuName;
             this.labelOfReceiveUser.Text = ReceiveUser.Kdid.KdName.Trim() +"  "+ReceiveUser.KuName;
 
             try
             {
                 KjqbService.ChatInService[] chat;//= new KjqbService.ChatInService()[];
-                chat = ser.SearchChatInfoUnRead((int)sendUser.Id);
+                chat = ser.SearchChatInfoUnReadContainSendId((int)sendUser.Id,(int)receiveUser.Id);
+                //List<KjqbService.ChatInService> chatlist =  chat.ToList();
+
+                //var resultList = from item in chatlist
+                //                 where item.SendUserId == ReceiveUser.Id
+                //                 select item;
+
+                //var escortList = resultList.ToList();
+
+                //chatlist = escortList;
+                //chatlist.Reverse();
                 System.Array.Reverse(chat);
+
                 for (int i = 0; i < chat.Length; i++)
                 {
                     createChatPanel(chat[i].ChatContent, receiveUser.KuName, chat[i].TimeStamp);
                 }
                 Point newPoint = new Point(0, this.flowLayoutPanel1.Height - flowLayoutPanel1.AutoScrollPosition.Y);
                 flowLayoutPanel1.AutoScrollPosition = newPoint;
+
+                serviceTime = new DateTime();
+                serviceTime = ser.GetServiceTime();
             }
             catch { }
         }
@@ -87,7 +107,7 @@ namespace WorkLogForm
         private void close_pictureBox_Click(object sender, EventArgs e)
         {
             this.chatwindwosuser.Remove(receiveUser);
-            this.ser.SetChatInfoIsRead((int)this.sendUser.Id);
+            this.ser.SetChatInfoIsReadContainSendId((int)this.sendUser.Id, (int)this.receiveUser.Id);
             this.Close();
         }
 
@@ -102,6 +122,7 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+           
             if (this.textBox1.Text.Trim() != "")
             {
                 createChatPanel(this.textBox1.Text.Trim(), sendUser.KuName,DateTime.Now);
@@ -138,7 +159,7 @@ namespace WorkLogForm
             try
             {
                 KjqbService.ChatInService[]  chat ;//= new KjqbService.ChatInService()[];
-                chat =  ser.SearchChatInfo((int)sendUser.Id);
+                chat =  ser.SearchChatInfoContainSendId((int)sendUser.Id,(int)receiveUser.Id);
                 System.Array.Reverse(chat);
                 for(int i = 0; i<chat.Length ;i++)
                 {
@@ -163,7 +184,7 @@ namespace WorkLogForm
 
             Label l1 = new Label();
             l1.AutoSize = true;
-            l1.Text = userName + "     " + dt.ToString("HH:mm") ;
+            l1.Text = userName + "     " + dt.ToString("yyyy-MM-dd HH:mm") ;
             l1.Font = new Font("微软雅黑", 12, FontStyle.Bold);
             l1.Location = new Point(10,8);
             l1.Parent = p1;
@@ -178,11 +199,37 @@ namespace WorkLogForm
             l2.Parent = p1;
 
             p1.Height = l2.Location.Y + l2.Height + 15;
-
+      
             p1.Parent = flowLayoutPanel1;
         
         }
 
+        private void createChatPanelOfflowlayout2(string chatContent, string userName, DateTime dt)
+        {
+            Panel p1 = new Panel();
+            p1.Width = 290;
+
+            Label l1 = new Label();
+            l1.AutoSize = true;
+            l1.Text = userName + "     " + dt.ToString("yyyy-MM-dd HH:mm");
+            l1.Font = new Font("微软雅黑", 9, FontStyle.Bold);
+            l1.Location = new Point(10, 8);
+            l1.Parent = p1;
+
+            Label l2 = new Label();
+            l2.AutoSize = false;
+            l2.Width = 285;
+            l2.Text = chatContent;
+            l2.Height = ((chatContent.Length / 23) + 1) * 17;
+            l2.Font = new Font("微软雅黑", 9, FontStyle.Regular);
+            l2.Location = new Point(10, 34);
+            l2.Parent = p1;
+
+            p1.Height = l2.Location.Y + l2.Height + 8;
+
+            p1.Parent = flowLayoutPanel2;
+
+        }
         #region 窗体移动代码
         private int x_point, y_point;
         private void Leave_MouseDown(object sender, MouseEventArgs e)
@@ -208,6 +255,69 @@ namespace WorkLogForm
             }
         }
         #endregion
+
+
+        /// <summary>
+        /// 点击查看聊天记录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (this.panel1.Visible == false)
+            {
+                this.Width = 934;
+                this.panel1.Visible = true;
+            }
+            else 
+            {
+                this.Width = 592;
+                this.panel1.Visible = false;
+            }
+
+        }
+
+
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel2.Cursor = Cursors.WaitCursor;
+            try
+            {
+                KjqbService.ChatInService[] chat;
+
+                chat = ser.SearchChatHistory((int)sendUser.Id, (int)receiveUser.Id, serviceTime);
+                //System.Array.Reverse(chat);
+                for (int i = 0; i < chat.Length; i++)
+                {
+                    if (chat[i].ReceiveUserId == sendUser.Id)
+                    {
+                        createChatPanelOfflowlayout2(chat[i].ChatContent, receiveUser.KuName, chat[i].TimeStamp);
+                    }
+                    else if (chat[i].ReceiveUserId == receiveUser.Id)
+                    {
+                        createChatPanelOfflowlayout2(chat[i].ChatContent, sendUser.KuName, chat[i].TimeStamp);
+                    }
+                }
+
+                serviceTime = chat[chat.Length -1].TimeStamp;
+
+                if (chat.Length > 0)
+                {
+                    //Point newPoint = new Point(0, 0);
+                    //flowLayoutPanel1.AutoScrollPosition = newPoint;
+                }
+                else
+                {
+                    this.linkLabel2.Text = serviceTime.ToString("没有了……");
+                }
+            }
+            catch { }
+
+            this.linkLabel2.Cursor = Cursors.Hand;
+        }
+
+       
 
        
 

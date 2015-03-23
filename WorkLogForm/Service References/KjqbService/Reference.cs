@@ -754,6 +754,18 @@ namespace WorkLogForm.KjqbService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchChatInfoUnRead", ReplyAction="http://tempuri.org/IService1/SearchChatInfoUnReadResponse")]
         WorkLogForm.KjqbService.ChatInService[] SearchChatInfoUnRead(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SetChatInfoIsReadContainSendId", ReplyAction="http://tempuri.org/IService1/SetChatInfoIsReadContainSendIdResponse")]
+        void SetChatInfoIsReadContainSendId(int receiveId, int sendId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchChatInfoUnReadContainSendId", ReplyAction="http://tempuri.org/IService1/SearchChatInfoUnReadContainSendIdResponse")]
+        WorkLogForm.KjqbService.ChatInService[] SearchChatInfoUnReadContainSendId(int receiveId, int sendId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchChatInfoContainSendId", ReplyAction="http://tempuri.org/IService1/SearchChatInfoContainSendIdResponse")]
+        WorkLogForm.KjqbService.ChatInService[] SearchChatInfoContainSendId(int receiveId, int sendId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SearchChatHistory", ReplyAction="http://tempuri.org/IService1/SearchChatHistoryResponse")]
+        WorkLogForm.KjqbService.ChatInService[] SearchChatHistory(int receiveId, int sendid, System.DateTime endtime);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -897,6 +909,22 @@ namespace WorkLogForm.KjqbService {
         
         public WorkLogForm.KjqbService.ChatInService[] SearchChatInfoUnRead(int Id) {
             return base.Channel.SearchChatInfoUnRead(Id);
+        }
+        
+        public void SetChatInfoIsReadContainSendId(int receiveId, int sendId) {
+            base.Channel.SetChatInfoIsReadContainSendId(receiveId, sendId);
+        }
+        
+        public WorkLogForm.KjqbService.ChatInService[] SearchChatInfoUnReadContainSendId(int receiveId, int sendId) {
+            return base.Channel.SearchChatInfoUnReadContainSendId(receiveId, sendId);
+        }
+        
+        public WorkLogForm.KjqbService.ChatInService[] SearchChatInfoContainSendId(int receiveId, int sendId) {
+            return base.Channel.SearchChatInfoContainSendId(receiveId, sendId);
+        }
+        
+        public WorkLogForm.KjqbService.ChatInService[] SearchChatHistory(int receiveId, int sendid, System.DateTime endtime) {
+            return base.Channel.SearchChatHistory(receiveId, sendid, endtime);
         }
     }
 }

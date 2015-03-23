@@ -393,6 +393,65 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="SetChatInfoIsReadContainSendId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="receiveId" type="xs:int" />
+            <xs:element minOccurs="0" name="sendId" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SetChatInfoIsReadContainSendIdResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchChatInfoUnReadContainSendId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="receiveId" type="xs:int" />
+            <xs:element minOccurs="0" name="sendId" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchChatInfoUnReadContainSendIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchChatInfoUnReadContainSendIdResult" nillable="true" type="q22:ArrayOfChatInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchChatInfoContainSendId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="receiveId" type="xs:int" />
+            <xs:element minOccurs="0" name="sendId" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchChatInfoContainSendIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchChatInfoContainSendIdResult" nillable="true" type="q23:ArrayOfChatInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchChatHistory">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="receiveId" type="xs:int" />
+            <xs:element minOccurs="0" name="sendid" type="xs:int" />
+            <xs:element minOccurs="0" name="endtime" type="xs:dateTime" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchChatHistoryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/KjqbService" minOccurs="0" name="SearchChatHistoryResult" nillable="true" type="q24:ArrayOfChatInService" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:schema>
     <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="anyType" nillable="true" type="xs:anyType" />
@@ -717,6 +776,30 @@
   <wsdl:message name="IService1_SearchChatInfoUnRead_OutputMessage">
     <wsdl:part name="parameters" element="tns:SearchChatInfoUnReadResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_SetChatInfoIsReadContainSendId_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetChatInfoIsReadContainSendId" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SetChatInfoIsReadContainSendId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetChatInfoIsReadContainSendIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchChatInfoUnReadContainSendId_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchChatInfoUnReadContainSendId" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchChatInfoUnReadContainSendId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchChatInfoUnReadContainSendIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchChatInfoContainSendId_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchChatInfoContainSendId" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchChatInfoContainSendId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchChatInfoContainSendIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchChatHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:SearchChatHistory" />
+  </wsdl:message>
+  <wsdl:message name="IService1_SearchChatHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SearchChatHistoryResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="SaveInLogListInService">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SaveInLogListInService" message="tns:IService1_SaveInLogListInService_InputMessage" />
@@ -833,6 +916,22 @@
     <wsdl:operation name="SearchChatInfoUnRead">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchChatInfoUnRead" message="tns:IService1_SearchChatInfoUnRead_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchChatInfoUnReadResponse" message="tns:IService1_SearchChatInfoUnRead_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetChatInfoIsReadContainSendId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SetChatInfoIsReadContainSendId" message="tns:IService1_SetChatInfoIsReadContainSendId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SetChatInfoIsReadContainSendIdResponse" message="tns:IService1_SetChatInfoIsReadContainSendId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchChatInfoUnReadContainSendId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchChatInfoUnReadContainSendId" message="tns:IService1_SearchChatInfoUnReadContainSendId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchChatInfoUnReadContainSendIdResponse" message="tns:IService1_SearchChatInfoUnReadContainSendId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchChatInfoContainSendId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchChatInfoContainSendId" message="tns:IService1_SearchChatInfoContainSendId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchChatInfoContainSendIdResponse" message="tns:IService1_SearchChatInfoContainSendId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchChatHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/SearchChatHistory" message="tns:IService1_SearchChatHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/SearchChatHistoryResponse" message="tns:IService1_SearchChatHistory_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
@@ -1098,10 +1197,46 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SetChatInfoIsReadContainSendId">
+      <soap:operation soapAction="http://tempuri.org/IService1/SetChatInfoIsReadContainSendId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchChatInfoUnReadContainSendId">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchChatInfoUnReadContainSendId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchChatInfoContainSendId">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchChatInfoContainSendId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchChatHistory">
+      <soap:operation soapAction="http://tempuri.org/IService1/SearchChatHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Service1">
     <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
-      <soap:address location="http://10.1.14.230/Service1.svc" />
+      <soap:address location="http://localhost/Service1.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

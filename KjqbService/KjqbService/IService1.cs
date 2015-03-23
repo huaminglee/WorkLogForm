@@ -117,7 +117,20 @@ namespace KjqbService
 
         [OperationContract]
         List<ChatInService> SearchChatInfoUnRead(int Id);
+        
 
+        [OperationContract]
+        void SetChatInfoIsReadContainSendId(int receiveId, int sendId);
+
+        [OperationContract]
+        List<ChatInService> SearchChatInfoUnReadContainSendId(int receiveId, int sendId);
+
+        
+        [OperationContract]
+        List<ChatInService> SearchChatInfoContainSendId(int receiveId, int sendId);
+
+        [OperationContract]
+        List<ChatInService> SearchChatHistory(int receiveId, int sendid, DateTime endtime);
 
         #endregion
     }
