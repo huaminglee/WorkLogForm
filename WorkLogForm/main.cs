@@ -621,6 +621,8 @@ namespace WorkLogForm
         #endregion
        
         
+
+
         #region 窗体特效事件：窗口拖拽到最上端自动隐藏
         private int x, y;
         private void main_MouseDown(object sender, MouseEventArgs e)
@@ -718,18 +720,30 @@ namespace WorkLogForm
                 this.Height = h;
             }
         }
-        private void notifyIcon1_Click(object sender, EventArgs e)
-        {
-            //EventArgs继承自MouseEventArgs,所以可以强转  
-            MouseEventArgs Mouse_e = (MouseEventArgs)e;
 
-            //点鼠标右键,return  
-            if (Mouse_e.Button == MouseButtons.Left)
-            {
-                this.Visible = true;
-                this.Activate();
-            }  
+
+
+
+        
+
+        #endregion
+
+        #region 最小化关闭按钮
+        private void min_pictureBox_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
         }
+        private void close_pictureBox_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确定要退出吗？", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                this.Close();
+            }
+        }
+        #endregion
+
+        #region 图片渐变效果
+
         private void min_pictureBox_MouseEnter(object sender, EventArgs e)
         {
             min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.最小化渐变;
@@ -738,16 +752,7 @@ namespace WorkLogForm
         {
             min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.最小化2;
         }
-        private void min_pictureBox_Click(object sender, EventArgs e)
-        {
-            this.Visible = false;
-        }
-        private void close_pictureBox_Click(object sender, EventArgs e)
-        {
-
-            this.Close();
-        
-        }
+      
         private void close_pictureBox_MouseEnter(object sender, EventArgs e)
         {
             close_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.关闭渐变;
@@ -833,7 +838,23 @@ namespace WorkLogForm
             ccgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.出差管理;
         }
         #endregion
-        
+
+        #region 右下角的图标点击事件
+        private void notifyIcon1_Click(object sender, EventArgs e)
+        {
+            //EventArgs继承自MouseEventArgs,所以可以强转  
+            MouseEventArgs Mouse_e = (MouseEventArgs)e;
+
+            //点鼠标右键,return  
+            if (Mouse_e.Button == MouseButtons.Left)
+            {
+                this.Visible = true;
+                this.Activate();
+            }
+        }
+        #endregion
+
+
         #region 主界面切换按钮
         private void ri_zhi_pictureBox_MouseEnter(object sender, EventArgs e)
         {
