@@ -49,6 +49,10 @@
     <Reference Include="DevComponents.DotNetBar2">
       <HintPath>lib\DevComponents.DotNetBar2.dll</HintPath>
     </Reference>
+    <Reference Include="f_in_box__lib">
+      <HintPath>..\..\..\WIN8\ChromeDownload\Irregular\Irregular\SkinForm\bin\Debug\f_in_box__lib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\Administrator\Desktop\NHibernate-3.1.0.GA-bin\Required_Bins\Iesi.Collections.dll</HintPath>
@@ -74,6 +78,9 @@
     </Reference>
     <Reference Include="NHibernate.Mapping.Attributes">
       <HintPath>C:\Users\Administrator\Desktop\NHibernateContrib-1.0.2.0\bin\NHibernate.Mapping.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="SkinForm">
+      <HintPath>..\..\..\WIN8\ChromeDownload\Irregular\Irregular\SkinForm\bin\Debug\SkinForm.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -484,6 +491,9 @@
     <None Include="resources\refresh.jpg" />
     <Content Include="29.ico" />
     <None Include="resources\InstantMessengerLogo.png" />
+    <None Include="resources\BigMaxMessageLeft.png" />
+    <None Include="resources\BigMaxMessageBoxRight.png" />
+    <None Include="resources\BigMax.png" />
     <Content Include="resources\个人考勤.png" />
     <Content Include="resources\个人考勤副本.png" />
     <Content Include="resources\代签审批.png" />

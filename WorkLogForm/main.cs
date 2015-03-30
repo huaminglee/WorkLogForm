@@ -39,10 +39,16 @@ namespace WorkLogForm
         private WkTUser user;
         private WkTRole role;
         Secretary sec;
+       
+        int isWriteLog;
         /// <summary>
         ///判断是否写过日志
         /// </summary>
-        int IsWriteLog;
+        public int IsWriteLog
+        {
+            get { return isWriteLog; }
+            set { isWriteLog = value; }
+        }
         /// <summary>
         /// 存储用户角色 用来传值
         /// </summary>
@@ -149,7 +155,7 @@ namespace WorkLogForm
 
              if (staffLogList != null && staffLogList.Count > 0)
              {
-                 IsWriteLog = 1;
+                 isWriteLog = 1;
              }
             #region 开启时读取未读的推送信息
             ////////////////////////////////
@@ -262,9 +268,7 @@ namespace WorkLogForm
             creatWindow.SetFormRoundRectRgn(this, 15);
             creatWindow.SetFormShadow(this);
             this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width * 3 / 4, Screen.PrimaryScreen.WorkingArea.Height / 8);
-            sec = new Secretary(); //右下角的
-            //sec.LogtooltipString ="ceshi" ;
-            //sec.Show();
+            //sec = new Secretary(); //右下角的
         }
 
        
@@ -665,7 +669,7 @@ namespace WorkLogForm
                 if (newMessageWindow != null && newMessageWindow.Created)
                 {
                     newMessageWindow.Top = MousePosition.Y - y;
-                    newMessageWindow.Left = MousePosition.X - x - personalSetting.Width;
+                    newMessageWindow.Left = MousePosition.X - x - newMessageWindow.Width;
                 }
                 Top = MousePosition.Y - y;
                 Left = MousePosition.X - x;
@@ -895,7 +899,28 @@ namespace WorkLogForm
 
         #region 主界面切换
         private void ri_cheng_pictureBox1_Click(object sender, EventArgs e)
-        {
+        {   /*************测试代码*************************/
+            //if (sec == null)
+            //{
+            //    sec = new Secretary(this);
+            //    sec.Show();
+            //    sec.AddMessageLabelInFlowPanel1("程倩");
+            //    sec.AddRiChengInFlow2(DateTime.Now.ToString("MM-dd HH:mm"), "测0试大白！！！！");
+            //}
+            //else
+            //{
+            //    if (sec.IsDisposed)
+            //    {
+            //        sec = new Secretary(this);
+            //        sec.Show();
+            //    }
+            //    sec.AddMessageLabelInFlowPanel1("程倩1");
+            //    sec.AddMessageLabelInFlowPanel1("程倩2");
+            //    sec.AddMessageLabelInFlowPanel1("程倩3");
+            //    sec.AddRiChengInFlow2(DateTime.Now.ToString("MM-dd HH:mm"), "测1试大白！！！！");
+            //}
+           /*************测试代码*************************/
+
             ri_zhi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日志分享;
             rz_flowLayoutPanel.Visible = false;
             rc_flowLayoutPanel.Visible = true;
@@ -907,6 +932,7 @@ namespace WorkLogForm
         }
         private void ri_zhi_pictureBox_Click(object sender, EventArgs e)
         {
+
             ri_cheng_pictureBox1.BackgroundImage = WorkLogForm.Properties.Resources.我的日程;
             rz_flowLayoutPanel.Visible = true;
             rc_flowLayoutPanel.Visible = false;
@@ -939,6 +965,11 @@ namespace WorkLogForm
 
         private void pictureBoxOfInstantMessenger_Click(object sender, EventArgs e)
         {
+            if(sec != null)
+            {
+                sec.ClearMessagePanel();
+                this.chattinguserlist.Clear();
+            }
             pictureBoxOfInstantMessenger.Cursor = Cursors.WaitCursor;
             this.timerOfReceiveChattingMessage.Enabled = false;
 
@@ -1062,9 +1093,9 @@ namespace WorkLogForm
             }
             if (write_log.DialogResult == DialogResult.OK)
             {
-                if (IsWriteLog == 0)
+                if (isWriteLog == 0)
                 {
-                    IsWriteLog = 1;
+                    isWriteLog = 1;
                 }
             }
         }
@@ -1439,16 +1470,20 @@ namespace WorkLogForm
                     DateTime scheduleTime = new DateTime(ss.ScheduleTime);
                     if (scheduleTime.Hour ==DateTime.Now.Hour && scheduleTime.Minute == DateTime.Now.Minute &&DateTime.Now.Year == scheduleTime.Year)
                     {
-                        //MessageBox.Show(ss.Content);
-                        sec.LogtooltipString = ss.Content;
-                        if (!sec.Created)
+                        if (sec == null)
                         {
+                            sec = new Secretary(this);
                             sec.Show();
+                            sec.AddRiChengInFlow2(scheduleTime.ToString("MM-dd HH:mm"), ss.Subject);
                         }
                         else
                         {
-                            sec.Focus();
-                            sec.SetLabelInfo();
+                            if (sec.IsDisposed)
+                            {
+                                sec = new Secretary(this);
+                                sec.Show();
+                            }
+                            sec.AddRiChengInFlow2(scheduleTime.ToString("MM-dd HH:mm"), ss.Subject);
                         }
                         
                         if (scheduleList.Contains(ss))
@@ -1760,15 +1795,20 @@ namespace WorkLogForm
         {
             if(DateTime.Now.Hour == 17 && DateTime.Now.Minute == 10)
             {
-                sec.LogtooltipString = "要写日志了！";
-                if (!sec.Created)
+                if (sec == null)
                 {
+                    sec = new Secretary(this);
                     sec.Show();
+                    sec.SetWriteIsVis();
                 }
                 else
                 {
-                    sec.Focus();
-                    sec.SetLabelInfo();
+                    if (sec.IsDisposed)
+                    {
+                        sec = new Secretary(this);
+                        sec.Show();
+                    }
+                    sec.SetWriteIsVis();
                 }
             }
         }
@@ -1783,7 +1823,6 @@ namespace WorkLogForm
         #region 消息推送
         private void panelNewMessage_Click(object sender, EventArgs e)
         {
-
             panelNewMessage.Cursor = Cursors.WaitCursor;
 
             this.labelNewMEssageCount.Text = "0";
@@ -1952,6 +1991,29 @@ namespace WorkLogForm
                 for (int i = 0; i < lists7.Length; i++)
                 {
                     chatinservice.Add(lists7[i]);
+                    if(!IsInChatUserlist(lists7[i].SendUserId))
+                    {
+                        WkTUser w = new WkTUser(); ;
+                        w = (WkTUser)baseService.loadEntity(w, lists7[i].SendUserId);
+                        this.chattinguserlist.Add(w);
+                        if (sec == null)
+                        {
+                            sec = new Secretary(this);
+                            sec.Show();
+                            sec.AddMessageLabelInFlowPanel1(w.KuName);
+                        }
+                        else
+                        {
+                            if (sec.IsDisposed)
+                            {
+                                sec = new Secretary(this);
+                                sec.Show();
+                            }
+                            sec.AddMessageLabelInFlowPanel1(w.KuName);
+                        }
+                        this.chattinguserlist.Add(w);
+                    }
+
                     
                 }
                 if (this.LabelofChatttingCount.Text == "")

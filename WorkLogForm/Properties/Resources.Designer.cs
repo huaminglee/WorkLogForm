@@ -83,6 +83,16 @@ namespace WorkLogForm.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap BigMax {
+            get {
+                object obj = ResourceManager.GetObject("BigMax", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap InstantMessengerLogo {
             get {
                 object obj = ResourceManager.GetObject("InstantMessengerLogo", resourceCulture);

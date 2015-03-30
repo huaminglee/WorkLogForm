@@ -36,6 +36,9 @@
             this.min_pictureBox = new System.Windows.Forms.PictureBox();
             this.close_pictureBox = new System.Windows.Forms.PictureBox();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.attendance_label = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -111,11 +114,9 @@
             this.LabelofChatttingCount = new System.Windows.Forms.Label();
             this.timerchattingflesh = new System.Windows.Forms.Timer(this.components);
             this.timerOfReceiveChattingMessage = new System.Windows.Forms.Timer(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wdrl_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rzgl_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spgl_pictureBox)).BeginInit();
@@ -153,7 +154,6 @@
             this.write_SuiBi.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panelNewMessage.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -216,6 +216,29 @@
             this.notifyIcon1.Text = "工作小秘书";
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(99, 48);
+            this.contextMenuStrip1.Text = "菜单";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(98, 22);
+            this.toolStripMenuItem1.Text = "退出";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(98, 22);
+            this.toolStripMenuItem2.Text = "还原";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // label2
             // 
@@ -1016,29 +1039,6 @@
             this.timerOfReceiveChattingMessage.Interval = 2000;
             this.timerOfReceiveChattingMessage.Tick += new System.EventHandler(this.timerOfReceiveChattingMessage_Tick);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 70);
-            this.contextMenuStrip1.Text = "菜单";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem1.Text = "退出";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem2.Text = "还原";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
-            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1090,6 +1090,7 @@
             this.Move += new System.EventHandler(this.main_Move);
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.wdrl_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rzgl_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spgl_pictureBox)).EndInit();
@@ -1135,7 +1136,6 @@
             this.panel8.PerformLayout();
             this.panelNewMessage.ResumeLayout(false);
             this.panelNewMessage.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
