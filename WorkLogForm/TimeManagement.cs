@@ -36,6 +36,7 @@ namespace WorkLogForm
             initialWindow();
             initWorkDayData();
             initHolidayData();
+            AddDeptsInCombox(comboBox4);
         }
 
 

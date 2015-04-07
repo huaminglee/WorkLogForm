@@ -386,9 +386,10 @@ namespace WorkLogForm
             textBox12.Text = b.BusinessNote;
             textBox21.Text = b.Boss.KuName;
 
-
+            string affairsDept = IniReadAndWrite.IniReadValue("AdministrationSection", "affairs");
+            string netDept = IniReadAndWrite.IniReadValue("AdministrationSection", "net");
             string queryEmp;
-            if (User.Kdid.KdName.Trim() != "综合办公室")
+            if (User.Kdid.KdName.Trim() != affairsDept)
             {
                 queryEmp = "from BusinessEmployee be where be.BusinessId=" + b.Id + "and be.EmployeeId.Kdid=" + User.Kdid.Id + "and  be.PassExam=" + (int)BusinessEmployee.ExamState.waiting + " and be.State=" + (int)BusinessEmployee.stateEnum.Normal;
             }

@@ -21,7 +21,14 @@ namespace WorkLogForm
             get { return role; }
             set { role = value; }
         }
-
+        /// <summary>
+        /// 获取配置文件中的行政管理部门
+        /// </summary>
+        string affairsDept; 
+        /// <summary>
+        /// 获取配置文件中的网络管理部门
+        /// </summary>
+        string netDept; 
 
         private List<WkTDept> theDepts = new List<WkTDept> () ;
 
@@ -151,18 +158,20 @@ namespace WorkLogForm
 
             //查询综合办与网络中心的主任
             Therole = 0;
-            string sql = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%科技信息资源研究所%' or u.Kdid.KdName like '%综合办公室%') ";
+             affairsDept = IniReadAndWrite.IniReadValue("AdministrationSection", "affairs");
+             netDept = IniReadAndWrite.IniReadValue("AdministrationSection", "net");
+            string sql = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%"+netDept+"%' or u.Kdid.KdName like '%"+affairsDept+"%') ";
             IList i = baseService.loadEntityList(sql);
             foreach (WkTUser o in i)
             {
-                if (o.Kdid.KdName.Trim() == "科技信息资源研究所")
+                if (o.Kdid.KdName.Trim() == netDept)
                 {
                     if(user.Id == o.Id)
                     {
                         Therole = 2;
                     }
                 }
-                else if (o.Kdid.KdName.Trim() == "综合办公室")
+                else if (o.Kdid.KdName.Trim() == affairsDept)
                 {
                     if (user.Id == o.Id)
                     {
@@ -554,9 +563,10 @@ namespace WorkLogForm
 
                     try
                     {
+                        
                         KjqbService.Service1Client ser = new KjqbService.Service1Client();
-                        string ssql1 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%综合办公室%') ";
-                        string ssql2 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%科技信息资源研究所%') ";
+                        string ssql1 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%"+affairsDept+"%') ";
+                        string ssql2 = "select u from WkTUser u  left join u.UserRole role where role.KrDESC='工作小秘书角色' and role.KrOrder = 2  and (u.Kdid.KdName like '%"+netDept+"%') ";
                         if (TfM.DutyType == 0)
                         {
                             IList users = baseService.loadEntityList(ssql1);

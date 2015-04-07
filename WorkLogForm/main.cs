@@ -155,11 +155,14 @@ namespace WorkLogForm
             schedule_listen_timer.Start();//监听日程提醒
             listen_ri_cheng();//监测日程表变动
 
+
             this.rc_flowLayoutPanel.MouseWheel += new MouseEventHandler(MouseWeelTest);
             this.rz_flowLayoutPanel.MouseWheel += new MouseEventHandler(MouseWeelTest);
             this.Show_SuiBi_flowPanel.MouseWheel += new MouseEventHandler(MouseWeelTest);
 
-            if(this.user.Kdid.KdName.Trim() != "综合办公室" )
+            string affairsDept = IniReadAndWrite.IniReadValue("AdministrationSection", "affairs");
+
+            if (this.user.Kdid.KdName.Trim() != affairsDept)
             {
                 sjgl_pictureBox.Visible = false;
             }
