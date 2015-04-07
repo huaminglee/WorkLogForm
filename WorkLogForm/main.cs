@@ -21,6 +21,22 @@ namespace WorkLogForm
     public partial class main : Form
     {
 
+
+
+        #region 鼠标不动关闭系统用到字段
+
+        private DCIEngine.FrameWork.Snap.Hook.KeyboardMouseHook keyboardHook = new DCIEngine.FrameWork.Snap.Hook.KeyboardMouseHook(DCIEngine.FrameWork.Snap.Hook.HookTypeEnum.KeyboardHook);
+        private DCIEngine.FrameWork.Snap.Hook.KeyboardMouseHook mouseHook = new DCIEngine.FrameWork.Snap.Hook.KeyboardMouseHook(DCIEngine.FrameWork.Snap.Hook.HookTypeEnum.MouseHook);
+
+        private int theXPosition = -100;
+        /// <summary>
+        /// 用于计时;
+        /// </summary>
+        private int timeCount;
+
+        #endregion
+
+
         private List<KjqbService.LogInService> loglistfromService;
         private List<KjqbService.ScheduleInService> schedulelistfromService;
         private List<KjqbService.CommentInService> commentlistfromService;
@@ -250,7 +266,8 @@ namespace WorkLogForm
 
             #endregion
 
-
+             mouseHook.InstallHook(OnMousePress);
+             keyboardHook.InstallHook(OnKeyboardPress);
         }
 
         #region 自定义窗体初始化方法
@@ -1508,26 +1525,6 @@ namespace WorkLogForm
             spgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人考勤;
         }
 
-        //private void dai_qian_sp_pictureBox_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    dai_qian_sp_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.代签审批副本;
-        //}
-
-        //private void dai_qian_sp_pictureBox_MouseLeave(object sender, EventArgs e)
-        //{
-        //    dai_qian_sp_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.代签审批;
-        //}
-
-        //private void dai_qian_pictureBox_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    dai_qian_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.补签1;
-        //}
-
-        //private void dai_qian_pictureBox_MouseLeave(object sender, EventArgs e)
-        //{
-        //    dai_qian_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.补签;
-        //}
-
         private void sjgl_pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             sjgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.系统管理1;
@@ -2051,6 +2048,78 @@ namespace WorkLogForm
         {
             this.Visible = true;
             this.Activate();
+        }
+
+
+
+
+        public void OnKeyboardPress(WorkLogForm.DCIEngine.FrameWork.Snap.Hook.KeyboardMouseHook.KeyboardHookStruct hookStruct, out bool isNeedStop)
+        {
+
+            isNeedStop = false;
+
+            if (hookStruct.vkCode >= (int)Keys.A && hookStruct.vkCode <= (int)Keys.Z)
+            {
+                // 读取
+                Keys key = (Keys)hookStruct.vkCode;
+                //MessageBox.Show("你输入了 " + (key == Keys.None ? "" : key.ToString()) + " 键");
+                this.timeCount = 0;
+                this.theXPosition = -100;
+
+                // 修改
+                //hookStruct.vkCode = (int)Keys.NumPad0;
+
+                // 拦截
+                //isNeedStop = true;
+            }
+        }
+
+        public void OnMousePress(WorkLogForm.DCIEngine.FrameWork.Snap.Hook.KeyboardMouseHook.MouseHookStruct hookStruct, out bool isNeedStop)
+        {
+            isNeedStop = false;
+
+            // 读取鼠标坐标
+            //this.user_label.Text = "（" + hookStruct.pt.x.ToString() + "，" + hookStruct.pt.y.ToString() + "）";
+
+            if (hookStruct.pt.x != this.theXPosition)
+            {
+                theXPosition = hookStruct.pt.x;
+                timeCount = 0;
+                this.timerOfMouseOrKeyUnDo.Stop();
+            }
+            else
+            {
+                this.timerOfMouseOrKeyUnDo.Start();
+            }
+
+            if (hookStruct.mouseAction == WorkLogForm.DCIEngine.FrameWork.Snap.Hook.KeyboardMouseHook.MouseHookStruct.MouseActionEnum.RightButtonUp)
+            {
+                //读取鼠标动作
+                //MessageBox.Show("右击");
+
+                //TODO:修改捕获的鼠标消息
+
+                //慎用，如果同时屏蔽键盘所有键，则只能重启才能退出
+                //可以修改成定时自动退出或捕获一定次数后自动退出。。。
+                //isNeedStop = true; 
+            }
+        }
+
+
+        /// <summary>
+        /// 1秒执行一次
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void timerOfMouseOrKeyUnDo_Tick(object sender, EventArgs e)
+        {
+            timeCount++;
+            if (this.timeCount > 6)//timecount单位秒 40分钟
+            {
+                //MessageBox.Show("……");
+                this.timerOfMouseOrKeyUnDo.Stop();
+                this.Close();
+            }
         }
 
 

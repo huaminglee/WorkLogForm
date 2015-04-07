@@ -296,13 +296,15 @@ namespace WorkLogForm
         private void button1_Click(object sender, EventArgs e)
         {
             #region 上传图片并生成新html
-            Regex r = new Regex("<IMG src=\".*\">");
+            Regex r = new Regex("<IMG[\\s\\S]*?>");
             MatchCollection mc = r.Matches(htmlEditor1.BodyInnerHTML);
+            ///string[] mc = CommonClass.HtmlUtility.GetElementsByTagName(htmlEditor1.BodyInnerHTML, "IMG");
+
             String html = htmlEditor1.BodyInnerHTML;
             Uri endpoint = new Uri(Securit.DeDES(IniReadAndWrite.IniReadValue("fileManage", "filePath")));
             for (int i = 0; i < mc.Count; i++)
             {
-                if (mc[i].Value.Contains("<IMG src=\"http://"))
+                if (mc[i].Value.Contains("src=\"http://"))
                 {
                     continue;
                 }
@@ -310,16 +312,24 @@ namespace WorkLogForm
                 {
                     myWebClient.UploadFileCompleted += new UploadFileCompletedEventHandler(uploadCompleted);
                     String imgHtml = mc[i].Value;
-                    int startIndex = imgHtml.IndexOf("\"file:///") + 9;
-                    string inPath = imgHtml.Substring(startIndex, imgHtml.LastIndexOf("\"") - startIndex);
+
+                    string inPath = HtmlUtility.GetTitleContent(imgHtml, "img", "src");  //imgHtml.Substring(startIndex, imgHtml.LastIndexOf("\"") - startIndex);
+
                     try
                     {
                         String newName = user.Id + "_" + DateTime.Now.Ticks + inPath.Substring(inPath.LastIndexOf("."));
                         String tempPath = Application.StartupPath.ToString() + "\\temp\\" + newName;
                         File.Copy(inPath, tempPath, true);
+
                         myWebClient.UploadFileAsync(endpoint, tempPath);
-                        String newString = "<IMG src=\"" + Securit.DeDES(IniReadAndWrite.IniReadValue("fileManage", "savePath")) + newName + "\">";
+
+                        String newString2 = imgHtml.Remove(imgHtml.IndexOf("src"), inPath.Length + 6);//.Remove(imgHtml.LastIndexOf('>'))+" src=\"" + Securit.DeDES(IniReadAndWrite.IniReadValue("fileManage", "savePath")) + newName + "\">";
+                        string newString1 = newString2.Remove(newString2.LastIndexOf('>'));
+                        string newString = newString1 + " src=\"" + Securit.DeDES(IniReadAndWrite.IniReadValue("fileManage", "savePath")) + newName + "\">";
+                        //html
+
                         html = html.Replace(mc[i].Value, newString);
+
                     }
                     catch (Exception exp)
                     {

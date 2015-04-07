@@ -114,6 +114,8 @@
             this.LabelofChatttingCount = new System.Windows.Forms.Label();
             this.timerchattingflesh = new System.Windows.Forms.Timer(this.components);
             this.timerOfReceiveChattingMessage = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.timerOfMouseOrKeyUnDo = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -1039,6 +1041,12 @@
             this.timerOfReceiveChattingMessage.Interval = 2000;
             this.timerOfReceiveChattingMessage.Tick += new System.EventHandler(this.timerOfReceiveChattingMessage_Tick);
             // 
+            // timerOfMouseOrKeyUnDo
+            // 
+            this.timerOfMouseOrKeyUnDo.Enabled = true;
+            this.timerOfMouseOrKeyUnDo.Interval = 1000;
+            this.timerOfMouseOrKeyUnDo.Tick += new System.EventHandler(this.timerOfMouseOrKeyUnDo_Tick);
+            // 
             // main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1227,5 +1235,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Timer timerOfMouseOrKeyUnDo;
     }
 }
