@@ -2117,11 +2117,20 @@ namespace WorkLogForm
         private void timerOfMouseOrKeyUnDo_Tick(object sender, EventArgs e)
         {
             timeCount++;
-            if (this.timeCount > 6)//timecount单位秒 40分钟
+            if (this.timeCount > 60*40)//timecount单位秒 40分钟
             {
-                //MessageBox.Show("……");
                 this.timerOfMouseOrKeyUnDo.Stop();
-                this.Close();
+                ShowMsg showmsg = new ShowMsg();
+                showmsg.ShowDialog();
+                if (showmsg.DialogResult == DialogResult.OK)
+                {
+                    this.Close();
+                }
+                else
+                {
+                    timeCount = 0;
+                    this.timerOfMouseOrKeyUnDo.Start();
+                }
             }
         }
 

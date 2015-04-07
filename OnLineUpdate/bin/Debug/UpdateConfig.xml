@@ -1,0 +1,93 @@
+﻿<AutoUpdater>
+<URLAddres URL="http://222.222.251.168/EnergyEquipment/"/>
+//升级文件所在服务器端的网址
+<UpdateInfo>
+<UpdateTime Date="2014-11-15"/>
+//升级文件的更新日期
+<Version Num="1.2.2"/>
+//升级文件的版本号
+</UpdateInfo>
+<UpdateFileList>
+//升级文件列表
+
+<UpdateFile FileName="/EnergyEquipmentProject.exe" DestPath="\"/>
+
+<UpdateFile FileName="/CommonControl.dll" DestPath="\"/>
+
+<UpdateFile FileName="/CommonMethod.dll" DestPath="\"/>
+
+<UpdateFile FileName="/EnergyEquipmentProject.exe.config" DestPath="\"/>
+
+<UpdateFile FileName="/EntityClassLibrary.dll" DestPath="\"/>
+
+
+<UpdateFile FileName="/SQLProvider.dll" DestPath="\"/>
+
+<UpdateFile FileName="/stdole.dll" DestPath="\"/>
+
+
+
+
+
+
+<UpdateFile FileName="/lib/CaiGouXiTong.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/CheChuKu.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/CheRuKu.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/CommonControl.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/CommonMethod.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/CommonWindow.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/CustomManageWindow.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/EntityClassLibrary.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/GongYiGuanLi.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/HeTongGuanLi.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/JianJian.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/KuGuanXiTong.dll" DestPath="\lib\"/>
+
+
+
+
+
+<UpdateFile FileName="/lib/SQLProvider.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/StatisticalReport.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/SystemManageWindow.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/TiaoShi.dll" DestPath="\lib\"/>
+
+
+
+<UpdateFile FileName="/lib/WeiXiu.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/WinHtmlEditor.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/WorkProcedure.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/XinXiGuanLi.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/YanChe.dll" DestPath="\lib\"/>
+
+<UpdateFile FileName="/lib/ZhuangCheHouJianYan.dll" DestPath="\lib\"/>
+
+
+
+
+</UpdateFileList>
+<RestartApp>
+<ReStart Allow="Yes"/>
+//允许重新启动应用程序
+<AppName Name="EnergyEquipmentProject.exe"/>
+//启动的应用程序名
+</RestartApp>
+</AutoUpdater>

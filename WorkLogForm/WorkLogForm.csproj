@@ -134,6 +134,8 @@
     <Compile Include="ChatWindows.Designer.cs">
       <DependentUpon>ChatWindows.cs</DependentUpon>
     </Compile>
+    <Compile Include="CommonClass\FileReadAndWrite.cs" />
+    <Compile Include="CommonClass\FileUpDown.cs" />
     <Compile Include="CommonClass\HtmlUtility.cs" />
     <Compile Include="DCIEngine.FrameWork.Snap\Hook.cs" />
     <Compile Include="InstantMessenger.cs">
@@ -215,6 +217,12 @@
       <DependentUpon>Secretary.cs</DependentUpon>
     </Compile>
     <Compile Include="Service\OpOndutyDateBase.cs" />
+    <Compile Include="ShowMsg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowMsg.Designer.cs">
+      <DependentUpon>ShowMsg.cs</DependentUpon>
+    </Compile>
     <Compile Include="staff_LogLeader.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -395,6 +403,9 @@
     <EmbeddedResource Include="shou_ye.resx">
       <DependentUpon>shou_ye.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ShowMsg.resx">
+      <DependentUpon>ShowMsg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="staff_LogLeader.resx">
       <DependentUpon>staff_LogLeader.cs</DependentUpon>
     </EmbeddedResource>
@@ -454,7 +465,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Service References\IPService\IpAddressSearchWebService.wsdl" />
-    <None Include="Service References\KjqbService\Service11.wsdl" />
+    <None Include="Service References\KjqbService\Service1.wsdl" />
     <None Include="Service References\KjqbService\WorkLogForm.KjqbService.BusinessService.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -965,19 +976,19 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
-      <Project>{EB82119B-0737-4A23-A13E-D702690A347E}</Project>
-      <Name>ClassLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WinHtmlEditor\WinHtmlEditor.csproj">
-      <Project>{1D1EF0A4-1D49-4D42-9295-E3B28359389A}</Project>
-      <Name>WinHtmlEditor</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadataStorage Include="Service References\IPService\" />
     <WCFMetadataStorage Include="Service References\KjqbService\" />
     <WCFMetadataStorage Include="Service References\WeatherService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
+      <Project>{eb82119b-0737-4a23-a13e-d702690a347e}</Project>
+      <Name>ClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinHtmlEditor\WinHtmlEditor.csproj">
+      <Project>{1d1ef0a4-1d49-4d42-9295-e3b28359389a}</Project>
+      <Name>WinHtmlEditor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1236,7 +1236,7 @@
   </wsdl:binding>
   <wsdl:service name="Service1">
     <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
-      <soap:address location="http://localhost/Service1.svc" />
+      <soap:address location="http://202.113.127.142/Service1.svc" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

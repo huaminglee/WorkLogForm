@@ -5,6 +5,9 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Data.SqlClient;
 using WorkLogForm.CommonClass;
+using CommonClass;
+using System.IO;
+using System.Xml;
 
 namespace WorkLogForm
 {
@@ -16,6 +19,43 @@ namespace WorkLogForm
         [STAThread]
         static void Main()
         {
+
+            #region 在线更新
+
+            string _ip = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "ip"));
+            string _id = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "id"));
+            string _pwd = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "pwd"));
+            FileUpDown fileUpDown = new FileUpDown(_ip, _id, _pwd);
+         
+            string theLastsUpdateVersionNumber = GetTheUpdateVersionNum(System.Environment.CurrentDirectory);//上次的版本号
+
+
+            try
+            {
+                fileUpDown.Download(CommonStaticParameter.TEMP, "UpdateConfig.xml", "WorkLog");
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            
+            }
+            string thePreUpdateDate = GetTheUpdateVersionNum(CommonStaticParameter.TEMP);//这次的版本号
+            if (thePreUpdateDate != "")
+            {
+                //如果客户端将升级的应用程序的更新版本号与服务器上的不一致则进行更新    
+                if (thePreUpdateDate != theLastsUpdateVersionNumber)
+                {
+                    MessageBox.Show("当前软件不是最新的，请更新后登陆！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    {
+                        System.Diagnostics.Process.Start(Application.StartupPath + "\\" + "OnLineUpdate.exe");
+                        return;
+                    }
+                }
+            }
+
+            #endregion
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             SetSelfStarting();
@@ -29,10 +69,37 @@ namespace WorkLogForm
                 main mainForm = new main();
                 mainForm.User = login.User;
                 mainForm.Role = login.Role;
-                SqlDependency.Start("UID=" + Securit.DeDES(id) + ";PWD=" + Securit.DeDES(pwd) + ";Database=" + Securit.DeDES(db) + ";server=" + Securit.DeDES(ip));
+                SqlDependency.Start("UID=" + WorkLogForm.CommonClass.Securit.DeDES(id) + ";PWD=" + WorkLogForm.CommonClass.Securit.DeDES(pwd) + ";Database=" + WorkLogForm.CommonClass.Securit.DeDES(db) + ";server=" + WorkLogForm.CommonClass.Securit.DeDES(ip));
                 Application.Run(mainForm);
             }
             //Application.Run(new TimeManagement());
+        }
+
+
+        /// <summary>
+        /// 获取上一次的版本号
+        /// </summary>
+        /// <param name="Dir"></param>
+        /// <returns></returns>
+        private static string GetTheUpdateVersionNum(string Dir)
+        {
+            string LastUpdateTime = "";
+            string AutoUpdaterFileName = Dir + @"\UpdateConfig.xml";
+            if (!File.Exists(AutoUpdaterFileName))
+                return LastUpdateTime;//打开xml文件     
+            FileStream myFile = new FileStream(AutoUpdaterFileName, FileMode.Open);//xml文件阅读器     
+            XmlTextReader xml = new XmlTextReader(myFile);
+            while (xml.Read())
+            {
+                if (xml.Name == "Version")
+                {
+                    //获取版本号   
+                    LastUpdateTime = xml.GetAttribute("Num"); break;
+                }
+            }
+            xml.Close();
+            myFile.Close();
+            return LastUpdateTime;
         }
 
 
@@ -62,6 +129,8 @@ namespace WorkLogForm
                 Console.WriteLine(ex.ToString());
                 return false;
             }
-        } 
+        }
+
+       
     }
 }
