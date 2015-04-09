@@ -49,9 +49,9 @@ namespace OnLineUpdate
         {
             try
             {
-                if (!File.Exists(System.Environment.CurrentDirectory + "\\UpdateConfig.xml"))
+                if (!File.Exists(System.Windows.Forms.Application.StartupPath + "\\UpdateConfig.xml"))
                     return;//打开xml文件     
-                FileStream myFile = new FileStream(System.Environment.CurrentDirectory + "\\UpdateConfig.xml", FileMode.Open);//xml文件阅读器     
+                FileStream myFile = new FileStream(System.Windows.Forms.Application.StartupPath + "\\UpdateConfig.xml", FileMode.Open);//xml文件阅读器     
                 XmlTextReader xml = new XmlTextReader(myFile);
                 IList<string[]> fileList = new List<string[]>();
                 while (xml.Read())
@@ -73,7 +73,7 @@ namespace OnLineUpdate
                     string FilePath = SourceFile[0].Substring(0, SourceFile[0].LastIndexOf("/"));//取更新文件名
                     fileUpDown.Download(CommonStaticParameter.TEMP + FilePath, SourceFile[0], "WorkLog");
                     string source = CommonStaticParameter.TEMP + FilePath.Replace('/', '\\') + "\\" + FileName;
-                    string destFile = System.Environment.CurrentDirectory + SourceFile[1];
+                    string destFile = System.Windows.Forms.Application.StartupPath + SourceFile[1];
                     while (File.Exists(source) != true)
                     {
                         fileUpDown.Download(CommonStaticParameter.TEMP + FilePath, SourceFile[0], "WorkLog");
@@ -106,7 +106,7 @@ namespace OnLineUpdate
             fileUpDown = new FileUpDown(_ip, _id, _pwd);
             string thePreUpdateDate = GetThetUpdateVersionNum(CommonStaticParameter.TEMP);
 
-            File.Copy(CommonStaticParameter.TEMP + "\\UpdateConfig.xml", System.Environment.CurrentDirectory + "\\UpdateConfig.xml", true);
+            File.Copy(CommonStaticParameter.TEMP + "\\UpdateConfig.xml", System.Windows.Forms.Application.StartupPath + "\\UpdateConfig.xml", true);
 
             //关闭原有的应用程序     
             this.labDownFile.Text = "正在关闭程序....";

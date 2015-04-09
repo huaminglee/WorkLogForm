@@ -22,6 +22,12 @@ namespace WorkLogForm
     {
 
 
+        #region
+        /// <summary>
+        /// 版本号
+        /// </summary>
+        private string versionNum;
+        #endregion
 
         #region 鼠标不动关闭系统用到字段
 
@@ -104,13 +110,15 @@ namespace WorkLogForm
         KjqbService.Service1Client ser = new KjqbService.Service1Client();
         #endregion
         
-        public main()
+        public main(string versionNum)
         {
             InitializeComponent();
             this.Visible = false;
             this.Opacity = 0;
             timer_show.Start();
+            this.versionNum = versionNum;
         }
+
         #region 界面滚动
         private void MouseWeelTest(object sender, MouseEventArgs e)
         {
@@ -149,6 +157,7 @@ namespace WorkLogForm
 
         private void main_Load(object sender, EventArgs e)
         {
+            this.labelVersionNum.Text = versionNum;
 
             initialWindow();
             initialData();//显示日程 日志 考勤

@@ -12,13 +12,14 @@ namespace OnLineUpdate
         public static string YES = "0";
         public static string NO = "1";
 
-        public static string BASE_PATH = System.Environment.CurrentDirectory + @"\lib\";
+        public static string BASE_PATH = System.Windows.Forms.Application.StartupPath + @"\lib\";
 
         public static string TITLE_RSOURCE = "titleResource";
         public static string NEWS_RSOURCE = "newsResource";
         public static string LETTER_RSOURCE = "letterResource";
-        public static string TEMP = System.Environment.CurrentDirectory + @"\temp";
 
-        public static string Weather = System.Environment.CurrentDirectory + @"\Weather\";
+        public static string TEMP = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"temp";
+
+        public static string Weather = System.Windows.Forms.Application.StartupPath + @"\Weather\";
     }
 }

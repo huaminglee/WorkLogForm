@@ -13,7 +13,7 @@ namespace WorkLogForm.CommonClass
         public static string NO = "1";
         public static string RoleDesc = "工作小秘书角色";
 
-        public static string TEMP = System.Environment.CurrentDirectory + @"\temp";
+        public static string TEMP = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"temp";
 
     }
 }

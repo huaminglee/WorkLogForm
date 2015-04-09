@@ -64,19 +64,21 @@ namespace WorkLogForm
                       comboBox1.Items.Add(dept.KdName.Trim());
                       theDepts.Add(dept);
 
-                      string sql1 = "select t.*,dept.KD_NAME from kjqbtest.dbo.WK_T_DEPT dept, " +
+                      string sql1 = "select t.*,dept.KD_NAME from WK_T_DEPT dept, " +
                          " (select u.KU_ID id ,u.KD_ID did ,u.KU_NAME name ,COUNT(l.Id) num  " +
                          " from WK_T_USER u left join (select ll.WkTUserId,ll.Id from LOG_T_STAFFSCHEDULE ll where ll.STATE = " + (int)IEntity.stateEnum.Normal
                          + ") l on u.KU_ID = l.WkTUserId " +
                           " where u.KD_ID = " + dept.Id + " group by u.KU_ID,u.KU_NAME,u.KD_ID) t where dept.KD_ID = t.did ;";
                       IList thenames = baseService.ExecuteSQL(sql1);
                       //[0]人的Id [1]部门id [2] 姓名 [3]文章数量 [4] 部门名称
-                      foreach (object[] oo in thenames)
+                      if (thenames != null)
                       {
-                          this.dataGridView1.Rows.Add(oo[2], oo[4].ToString().Trim(), oo[3], "查看");
-                          this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Tag = oo[0];
+                          foreach (object[] oo in thenames)
+                          {
+                              this.dataGridView1.Rows.Add(oo[2], oo[4].ToString().Trim(), oo[3], "查看");
+                              this.dataGridView1.Rows[this.dataGridView1.Rows.Count - 1].Tag = oo[0];
+                          }
                       }
-
                   }
                   comboBox1.SelectedIndex = 0;
               }

@@ -21,38 +21,38 @@ namespace WorkLogForm
         {
 
             #region 在线更新
-
-            string _ip = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "ip"));
-            string _id = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "id"));
-            string _pwd = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "pwd"));
-            FileUpDown fileUpDown = new FileUpDown(_ip, _id, _pwd);
-         
-            string theLastsUpdateVersionNumber = GetTheUpdateVersionNum(System.Environment.CurrentDirectory);//上次的版本号
-
-
+            string thePreUpdateDate = "";
             try
             {
+                string _ip = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "ip"));
+                string _id = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "id"));
+                string _pwd = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "pwd"));
+                FileUpDown fileUpDown = new FileUpDown(_ip, _id, _pwd);
+
+                string theLastsUpdateVersionNumber = GetTheUpdateVersionNum(System.Windows.Forms.Application.StartupPath);//上次的版本号
+
+
+
                 fileUpDown.Download(CommonStaticParameter.TEMP, "UpdateConfig.xml", "WorkLog");
-            }
-            catch(Exception ex)
-            {
-                throw ex;
-            
-            }
-            string thePreUpdateDate = GetTheUpdateVersionNum(CommonStaticParameter.TEMP);//这次的版本号
-            if (thePreUpdateDate != "")
-            {
-                //如果客户端将升级的应用程序的更新版本号与服务器上的不一致则进行更新    
-                if (thePreUpdateDate != theLastsUpdateVersionNumber)
+              
+                thePreUpdateDate = GetTheUpdateVersionNum(CommonStaticParameter.TEMP);//这次的版本号
+                if (thePreUpdateDate != "")
                 {
-                    MessageBox.Show("当前软件不是最新的，请更新后登陆！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //如果客户端将升级的应用程序的更新版本号与服务器上的不一致则进行更新    
+                    if (thePreUpdateDate != theLastsUpdateVersionNumber)
                     {
-                        System.Diagnostics.Process.Start(Application.StartupPath + "\\" + "OnLineUpdate.exe");
-                        return;
+                        MessageBox.Show("当前软件不是最新的，请更新后登陆！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        {
+                            System.Diagnostics.Process.Start(Application.StartupPath + "\\" + "OnLineUpdate.exe");
+                            return;
+                        }
                     }
                 }
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("程序出错 原因：" + ex.Message.ToString());
+            }
             #endregion
 
 
@@ -66,7 +66,7 @@ namespace WorkLogForm
                 string id = IniReadAndWrite.IniReadValue("connect", "id");
                 string pwd = IniReadAndWrite.IniReadValue("connect", "pwd");
                 string db = IniReadAndWrite.IniReadValue("connect", "db");
-                main mainForm = new main();
+                main mainForm = new main(thePreUpdateDate);
                 mainForm.User = login.User;
                 mainForm.Role = login.Role;
                 SqlDependency.Start("UID=" + WorkLogForm.CommonClass.Securit.DeDES(id) + ";PWD=" + WorkLogForm.CommonClass.Securit.DeDES(pwd) + ";Database=" + WorkLogForm.CommonClass.Securit.DeDES(db) + ";server=" + WorkLogForm.CommonClass.Securit.DeDES(ip));
