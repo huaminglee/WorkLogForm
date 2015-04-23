@@ -68,20 +68,32 @@
             this.button1 = new System.Windows.Forms.Button();
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button5 = new System.Windows.Forms.Button();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.button6 = new System.Windows.Forms.Button();
+            this.pb_photo_cut = new System.Windows.Forms.PictureBox();
+            this.pb_photo_original = new System.Windows.Forms.PictureBox();
+            this.panel_shade = new System.Windows.Forms.Panel();
+            this.btn_photo_done = new System.Windows.Forms.Button();
+            this.btn_photo_make = new System.Windows.Forms.Button();
             this.close_pictureBox = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.backgroundWorkerOfLoadTheTree = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_photo_cut)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_photo_original)).BeginInit();
+            this.pb_photo_original.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -217,29 +229,32 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 19);
             this.label4.TabIndex = 159;
-            this.label4.Text = "偏好设置";
+            this.label4.Text = "个人设置";
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabControl1.Location = new System.Drawing.Point(12, 48);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(376, 493);
             this.tabControl1.TabIndex = 164;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_TabIndexChanged);
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.treeView1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(368, 467);
+            this.tabPage2.Size = new System.Drawing.Size(368, 460);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "日志分享偏好";
+            this.tabPage2.Text = "日志默认分享人设置";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // button3
@@ -265,11 +280,11 @@
             // 
             this.tabPage3.Controls.Add(this.button1);
             this.tabPage3.Controls.Add(this.treeView2);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 26);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(368, 467);
+            this.tabPage3.Size = new System.Drawing.Size(368, 463);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "日程偏好设置";
+            this.tabPage3.Text = "日程默认分享人设置";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // button1
@@ -302,12 +317,77 @@
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.button4);
             this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(368, 467);
+            this.tabPage1.Size = new System.Drawing.Size(368, 460);
             this.tabPage1.TabIndex = 3;
             this.tabPage1.Text = "登录设置";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.button5.Location = new System.Drawing.Point(138, 340);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(78, 29);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "确定";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(138, 272);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.PasswordChar = '*';
+            this.textBox3.Size = new System.Drawing.Size(166, 23);
+            this.textBox3.TabIndex = 7;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(138, 230);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.PasswordChar = '*';
+            this.textBox2.Size = new System.Drawing.Size(166, 23);
+            this.textBox2.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(34, 269);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(93, 20);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "重复新密码：";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(61, 227);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 20);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "新密码：";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(138, 180);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.PasswordChar = '*';
+            this.textBox1.Size = new System.Drawing.Size(166, 23);
+            this.textBox1.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(48, 178);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 20);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "原始密码：";
             // 
             // button4
             // 
@@ -331,6 +411,86 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.button6);
+            this.tabPage4.Controls.Add(this.pb_photo_cut);
+            this.tabPage4.Controls.Add(this.pb_photo_original);
+            this.tabPage4.Controls.Add(this.btn_photo_done);
+            this.tabPage4.Controls.Add(this.btn_photo_make);
+            this.tabPage4.Location = new System.Drawing.Point(4, 26);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(368, 463);
+            this.tabPage4.TabIndex = 4;
+            this.tabPage4.Text = "头像设置";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button6.Location = new System.Drawing.Point(190, 414);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(143, 31);
+            this.button6.TabIndex = 7;
+            this.button6.Text = "上传头像";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // pb_photo_cut
+            // 
+            this.pb_photo_cut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pb_photo_cut.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb_photo_cut.Location = new System.Drawing.Point(35, 321);
+            this.pb_photo_cut.Name = "pb_photo_cut";
+            this.pb_photo_cut.Size = new System.Drawing.Size(115, 115);
+            this.pb_photo_cut.TabIndex = 6;
+            this.pb_photo_cut.TabStop = false;
+            // 
+            // pb_photo_original
+            // 
+            this.pb_photo_original.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb_photo_original.Controls.Add(this.panel_shade);
+            this.pb_photo_original.Location = new System.Drawing.Point(33, 6);
+            this.pb_photo_original.Name = "pb_photo_original";
+            this.pb_photo_original.Size = new System.Drawing.Size(300, 300);
+            this.pb_photo_original.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pb_photo_original.TabIndex = 3;
+            this.pb_photo_original.TabStop = false;
+            // 
+            // panel_shade
+            // 
+            this.panel_shade.BackColor = System.Drawing.Color.Transparent;
+            this.panel_shade.Location = new System.Drawing.Point(-1, 0);
+            this.panel_shade.Name = "panel_shade";
+            this.panel_shade.Size = new System.Drawing.Size(300, 300);
+            this.panel_shade.TabIndex = 4;
+            this.panel_shade.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_shade_Paint);
+            this.panel_shade.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_shade_MouseDown);
+            this.panel_shade.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_shade_MouseMove);
+            // 
+            // btn_photo_done
+            // 
+            this.btn_photo_done.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_photo_done.Location = new System.Drawing.Point(190, 364);
+            this.btn_photo_done.Name = "btn_photo_done";
+            this.btn_photo_done.Size = new System.Drawing.Size(143, 33);
+            this.btn_photo_done.TabIndex = 5;
+            this.btn_photo_done.Text = "生成头像";
+            this.btn_photo_done.UseVisualStyleBackColor = true;
+            this.btn_photo_done.Click += new System.EventHandler(this.btn_photo_done_Click);
+            // 
+            // btn_photo_make
+            // 
+            this.btn_photo_make.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btn_photo_make.Location = new System.Drawing.Point(190, 320);
+            this.btn_photo_make.Name = "btn_photo_make";
+            this.btn_photo_make.Size = new System.Drawing.Size(143, 33);
+            this.btn_photo_make.TabIndex = 4;
+            this.btn_photo_make.Text = "选择照片...";
+            this.btn_photo_make.UseVisualStyleBackColor = true;
+            this.btn_photo_make.Click += new System.EventHandler(this.btn_photo_make_Click);
+            // 
             // close_pictureBox
             // 
             this.close_pictureBox.BackColor = System.Drawing.Color.Transparent;
@@ -344,70 +504,9 @@
             this.close_pictureBox.TabStop = false;
             this.close_pictureBox.Click += new System.EventHandler(this.close_pictureBox_Click);
             // 
-            // label1
+            // backgroundWorkerOfLoadTheTree
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(48, 178);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 20);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "原始密码：";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(138, 180);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PasswordChar = '*';
-            this.textBox1.Size = new System.Drawing.Size(166, 21);
-            this.textBox1.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(61, 227);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 20);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "新密码：";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(34, 269);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 20);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "重复新密码：";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(138, 230);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(166, 21);
-            this.textBox2.TabIndex = 6;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(138, 272);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.PasswordChar = '*';
-            this.textBox3.Size = new System.Drawing.Size(166, 21);
-            this.textBox3.TabIndex = 7;
-            // 
-            // button5
-            // 
-            this.button5.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.button5.Location = new System.Drawing.Point(138, 340);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(78, 29);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "确定";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.backgroundWorkerOfLoadTheTree.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerOfLoadTheTree_DoWork);
             // 
             // personal_setting
             // 
@@ -430,6 +529,10 @@
             this.tabPage3.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_photo_cut)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_photo_original)).EndInit();
+            this.pb_photo_original.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -487,5 +590,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.PictureBox pb_photo_cut;
+        private System.Windows.Forms.PictureBox pb_photo_original;
+        private System.Windows.Forms.Panel panel_shade;
+        private System.Windows.Forms.Button btn_photo_done;
+        private System.Windows.Forms.Button btn_photo_make;
+        private System.Windows.Forms.Button button6;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerOfLoadTheTree;
     }
 }

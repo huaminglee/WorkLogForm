@@ -90,7 +90,7 @@ namespace WorkLogForm
         /// </summary>
         public void SetWriteIsVis()
         {
-            this.linkLabel1.Visible = true;
+            this.linkLabel2.Visible = true;
         }
 
         #region 设定窗体的初始化位置

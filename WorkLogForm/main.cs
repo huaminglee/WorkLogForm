@@ -13,12 +13,18 @@ using System.Collections;
 using WorkLogForm.CommonClass;
 using System.Text.RegularExpressions;
 using System.Data.SqlClient;
+using CCWin;
+using ChattingCtrl._ChatListBox;
+using System.Net;
+using CommonClass;
+using System.IO;
+using ChattingCtrl;
 
 namespace WorkLogForm
 {
 
 
-    public partial class main : Form
+    public partial class main : SkinMain
     {
 
 
@@ -43,6 +49,7 @@ namespace WorkLogForm
         #endregion
 
 
+        FileUpDown fileUpDown;
         private List<KjqbService.LogInService> loglistfromService;
         private List<KjqbService.ScheduleInService> schedulelistfromService;
         private List<KjqbService.CommentInService> commentlistfromService;
@@ -61,7 +68,9 @@ namespace WorkLogForm
         private WkTUser user;
         private WkTRole role;
         Secretary sec;
-       
+        int WheelCount = 0;
+
+
         int isWriteLog;
         /// <summary>
         ///判断是否写过日志
@@ -89,10 +98,18 @@ namespace WorkLogForm
             set { user = value; }
         }
 
+        private delegate void LoadUserlistDele();
+        private delegate void LoadBaseInfoDele();
+        private delegate void LoadUnreadMessage();
+        private delegate void LoadOtherDele();
+
+
+        System.Timers.Timer timerofOnline = new System.Timers.Timer(1);
+        System.Timers.Timer CreativeFileUpDownClass = new System.Timers.Timer(1);
+    
+      
         #region 子功能窗体变量
         private statistics_Attendance statisticsAttendance;
-        private Examine_Allograph examineAllograph;
-        private Apply_Allograph applyAllorapg;
         private writeLog write_log;
         private writeSchedule write_schedule;
         private personal_setting personalSetting;
@@ -108,16 +125,50 @@ namespace WorkLogForm
         private NewMessageWindow newMessageWindow;
         private InstantMessenger InstantMessengerWindows;
         KjqbService.Service1Client ser = new KjqbService.Service1Client();
+        int loadCount;
         #endregion
         
         public main(string versionNum)
         {
             InitializeComponent();
-            this.Visible = false;
-            this.Opacity = 0;
-            timer_show.Start();
+            loadCount = 0;
+            //CheckForIllegalCrossThreadCalls = false;  
+            
+            timerofOnline.Elapsed += timerofOnline_Elapsed;
+            CreativeFileUpDownClass.Elapsed += CreativeFileUpDownClass_Elapsed;
+           
+            
+
+            timerofOnline.AutoReset = false;
+            timerofOnline.Enabled = true;
+          
+           
+
+
+            CreativeFileUpDownClass.AutoReset = false;
+            CreativeFileUpDownClass.Enabled = true;
+            
             this.versionNum = versionNum;
         }
+
+       
+
+        private void TimerOfShowWindow_Elapsed(object sender, EventArgs e)
+        {
+            #region 页面渐显
+            if (this.Opacity != 1)
+            {
+                this.Opacity = this.Opacity + 0.1;  //((double)(255 - this.SkinOpacity) / (double)255);
+                //this.SkinOpacity = this.SkinOpacity - 1;
+            }
+            else
+            {
+                this.TimerOfShowWindow.Stop();
+                this.TimerOfShowWindow.Enabled = false;
+            }
+            #endregion
+        }
+
 
         #region 界面滚动
         private void MouseWeelTest(object sender, MouseEventArgs e)
@@ -138,6 +189,7 @@ namespace WorkLogForm
             else if ((mVSValue - pScrollValueDelta) >= panel.VerticalScroll.Maximum)
             {
                 panel.VerticalScroll.Value = panel.VerticalScroll.Maximum;
+
             }
             else
             {
@@ -148,6 +200,33 @@ namespace WorkLogForm
             {
                 return;
             }
+
+            int i1 = panel.VerticalScroll.Value + panel.Height;
+            int i2 = panel.VerticalScroll.Maximum;
+            if (i1 /i2 ==1)
+            {
+                WheelCount++;
+                if (WheelCount == 3)
+                {
+                    panel.Cursor = Cursors.WaitCursor;
+                    if (panel.Name == "Show_SuiBi_flowPanel")
+                    {
+                        ToSeeMoreSuiBi();
+                    }
+                    else if (panel.Name == "rc_flowLayoutPanel")
+                    {
+                        init_rc_Panel();
+                    }
+                    else if (panel.Name == "rz_flowLayoutPanel")
+                    {
+                        init_rz_Panel();
+                    }
+                    WheelCount = 0;
+                    panel.Cursor = Cursors.Default;
+                }
+               
+            }
+
             panel.Refresh();
             panel.Invalidate();
             panel.Update();
@@ -155,136 +234,247 @@ namespace WorkLogForm
 
         #endregion
 
+
+        #region 窗体加载函数
         private void main_Load(object sender, EventArgs e)
         {
+            this.Opacity = 0;
             this.labelVersionNum.Text = versionNum;
-
             initialWindow();
-            initialData();//显示日程 日志 考勤
+           
+            this.backgroundWorkerLoadBaseInfo.RunWorkerAsync();
+            this.backgroundWorkerofOtherWork.RunWorkerAsync();
+            this.backgroundWorkerLoadUnreadMessage.RunWorkerAsync();
+            this.backgroundWorkerLoadUserList.RunWorkerAsync();
+            
+            
             schedule_listen_timer.Start();//监听日程提醒
+            
             listen_ri_cheng();//监测日程表变动
-
-
-            this.rc_flowLayoutPanel.MouseWheel += new MouseEventHandler(MouseWeelTest);
-            this.rz_flowLayoutPanel.MouseWheel += new MouseEventHandler(MouseWeelTest);
-            this.Show_SuiBi_flowPanel.MouseWheel += new MouseEventHandler(MouseWeelTest);
-
-            string affairsDept = IniReadAndWrite.IniReadValue("AdministrationSection", "affairs");
-
-            if (this.user.Kdid.KdName.Trim() != affairsDept)
-            {
-                sjgl_pictureBox.Visible = false;
-            }
-
-             IList staffLogList = baseService.loadEntityList
-                 ("from StaffLog where State=" 
-                 + (int)IEntity.stateEnum.Normal + 
-                 " and WriteTime=" + DateTime.Now.Date.Ticks + " and Staff=" + user.Id);
-
-             if (staffLogList != null && staffLogList.Count > 0)
-             {
-                 isWriteLog = 1;
-             }
-            #region 开启时读取未读的推送信息
-            ////////////////////////////////
-
-             try
-             {
-                 loglistfromService = new List<KjqbService.LogInService>();
-                 schedulelistfromService = new List<KjqbService.ScheduleInService>();
-                 commentlistfromService = new List<KjqbService.CommentInService>();
-                 tfmListfromservice = new List<KjqbService.TimeArrangeForManagerInService>();
-                 levlistfromservice = new List<KjqbService.LeaveInService>();
-                 businessfromservice = new List<KjqbService.BusinessService>();
-                 chatinservice = new List<KjqbService.ChatInService>();
-                 KjqbService.LogInService[] lists;
-                 lists = ser.SearchShareLogUnRead((int)this.user.Id);
-                 this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
-                 for (int i = 0; i < lists.Length; i++)
-                 {
-                     loglistfromService.Add(lists[i]);
-                 }
-
-                 KjqbService.ScheduleInService[] list2;
-                 list2 = ser.SearchShareScheduleUnRead((int)this.user.Id);
-                 this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list2.Length).ToString();
-                 for (int i = 0; i < list2.Length; i++)
-                 {
-                     schedulelistfromService.Add(list2[i]);
-                 }
-
-                 KjqbService.CommentInService[] list3;
-                 list3 = ser.SearchCommentlogUnRead((int)this.user.Id);
-                 this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list3.Length).ToString();
-                 for (int i = 0; i < list3.Length; i++)
-                 {
-                     commentlistfromService.Add(list3[i]);
-                 }
-
-                 KjqbService.TimeArrangeForManagerInService[] list4;
-                 list4 = ser.SearchTimeArrangeForManagerUnRead((int)this.user.Id);
-                 this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list4.Length).ToString();
-                 for (int i = 0; i < list4.Length; i++)
-                 {
-                     tfmListfromservice.Add(list4[i]);
-                 }
-
-                 KjqbService.LeaveInService[] lists5;
-                 lists5 = ser.SearchLeaveInfoUnRead((int)this.user.Id);
-                 for (int i = 0; i < lists5.Length; i++)
-                 {
-                     levlistfromservice.Add(lists5[i]);
-                 }
-
-                 this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
-                 KjqbService.BusinessService[] lists6;
-                 lists6 = ser.SearchBusinessInfoUnRead((int)this.user.Id);
-                 for (int i = 0; i < lists6.Length; i++)
-                 {
-                     businessfromservice.Add(lists6[i]);
-                 }
-
-                 this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
-
-                 #region 接受聊天信息
-                 try
-                 {
-                     KjqbService.ChatInService[] lists7;
-                     lists7 = ser.SearchChatInfoUnRead((int)this.user.Id);
-                     for (int i = 0; i < lists7.Length; i++)
-                     {
-                         chatinservice.Add(lists7[i]);
-
-                     }
-                     if (this.LabelofChatttingCount.Text == "")
-                         this.LabelofChatttingCount.Text = lists7.Length == 0 ? "" : lists7.Length.ToString();
-                     else
-                         this.LabelofChatttingCount.Text = (int.Parse(this.LabelofChatttingCount.Text) + lists7.Length).ToString();
-
-                     if (lists7.Length > 0)
-                     {
-                         timerchattingflesh.Enabled = true;
-                     }
-                 }
-                 catch { }
-                 #endregion
-
-             }
-             catch
-             {
-                 MessageBox.Show("未能与服务器建立连接……");
-             }
-
-
-            #endregion
-
-             mouseHook.InstallHook(OnMousePress);
-             keyboardHook.InstallHook(OnKeyboardPress);
+            backgroundWorkerOfDownPicture.RunWorkerAsync();
+           
+            //LoadUnReadMessage();
+            //initialData();
+            //LoadUserList();
+            //LoadofInstallHookAndReadDeptAndIsWriteLog();//安装钩子 判断部门 添加滚轮事件 判断是否写日志
+           
         }
+
+       
+
+    
+
+        #endregion
+
+        private void LoadUnReadMessage()
+        {
+
+            if (this.InvokeRequired)
+            {
+                LoadUnreadMessage d = new LoadUnreadMessage(LoadUnReadMessage);
+                this.Invoke(d);
+            }
+            else
+            {
+                #region 开启时读取未读的推送信息
+                ////////////////////////////////
+
+                try
+                {
+                    loglistfromService = new List<KjqbService.LogInService>();
+                    schedulelistfromService = new List<KjqbService.ScheduleInService>();
+                    commentlistfromService = new List<KjqbService.CommentInService>();
+                    tfmListfromservice = new List<KjqbService.TimeArrangeForManagerInService>();
+                    levlistfromservice = new List<KjqbService.LeaveInService>();
+                    businessfromservice = new List<KjqbService.BusinessService>();
+                    chatinservice = new List<KjqbService.ChatInService>();
+
+
+                    KjqbService.LogInService[] lists;
+                    lists = ser.SearchShareLogUnRead((int)this.user.Id);
+
+
+                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
+
+
+                    for (int i = 0; i < lists.Length; i++)
+                    {
+                        loglistfromService.Add(lists[i]);
+                    }
+
+                    KjqbService.ScheduleInService[] list2;
+                    list2 = ser.SearchShareScheduleUnRead((int)this.user.Id);
+
+                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list2.Length).ToString();
+
+                    for (int i = 0; i < list2.Length; i++)
+                    {
+                        schedulelistfromService.Add(list2[i]);
+                    }
+
+                    KjqbService.CommentInService[] list3;
+                    list3 = ser.SearchCommentlogUnRead((int)this.user.Id);
+                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list3.Length).ToString();
+                    for (int i = 0; i < list3.Length; i++)
+                    {
+                        commentlistfromService.Add(list3[i]);
+                    }
+
+                    KjqbService.TimeArrangeForManagerInService[] list4;
+                    list4 = ser.SearchTimeArrangeForManagerUnRead((int)this.user.Id);
+                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list4.Length).ToString();
+                    for (int i = 0; i < list4.Length; i++)
+                    {
+                        tfmListfromservice.Add(list4[i]);
+                    }
+
+                    KjqbService.LeaveInService[] lists5;
+                    lists5 = ser.SearchLeaveInfoUnRead((int)this.user.Id);
+                    for (int i = 0; i < lists5.Length; i++)
+                    {
+                        levlistfromservice.Add(lists5[i]);
+                    }
+
+                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
+
+                    KjqbService.BusinessService[] lists6;
+                    lists6 = ser.SearchBusinessInfoUnRead((int)this.user.Id);
+                    for (int i = 0; i < lists6.Length; i++)
+                    {
+                        businessfromservice.Add(lists6[i]);
+                    }
+
+                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
+
+
+                    SetMessageCount(meaaageCountLabelOfRiZhi, lists.Length);
+
+                    SetMessageCount(this.meaaageCountLabelOfRicheng, list2.Length);
+
+                    SetMessageCount(this.meaaageCountLabelOfZhiBan, list4.Length);
+
+
+                    SetMessageCount(this.messageCountLabelOfCommentLog, list3.Length);
+
+
+                    SetMessageCount(this.meaaageCountLabelOFQingJia, lists5.Length);
+
+                    SetMessageCount(this.meaaageCountLabelCHuChai, lists6.Length);
+
+
+                    #region 接受聊天信息
+                    this.ReceiveChattingMessage();
+                    #endregion
+
+                }
+                catch
+                {
+                    MessageBox.Show("未能与服务器建立连接……");
+                }
+
+
+                #endregion
+            }
+        }
+
 
         #region 自定义窗体初始化方法
 
 
+        private void backgroundWorkerLoadUserList_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            LoadUserList();
+        }
+
+
+
+        private void backgroundWorkerLoadBaseInfo_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            initialData();
+        }
+
+        private void backgroundWorkerLoadUnreadMessage_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            LoadUnReadMessage();
+        }
+
+        private void backgroundWorkerofOtherWork_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            LoadofInstallHookAndReadDeptAndIsWriteLog();//安装钩子 判断部门 添加滚轮事件 判断是否写日志
+        }
+
+
+        private void backgroundWorkerLoad_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            loadCount++;
+            whenLoadDone();
+        }
+
+        private void whenLoadDone()
+        {
+            if (loadCount == 4)
+            {
+                this.TimerOfShowWindow.Enabled = true;
+                this.TimerOfShowWindow.Start();
+            }
+
+        }
+
+        void CreativeFileUpDownClass_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            string _ip = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "ip"));
+            string _id = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "id"));
+            string _pwd = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "pwd"));
+            fileUpDown = new FileUpDown(_ip, _id, _pwd);
+        }
+
+        void timerofOnline_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            #region 向数据库发送登陆信息
+
+            user.KuOnline = 1;
+            baseService.SaveOrUpdateEntity(user);
+
+            #endregion
+        }
+
+
+        private void LoadofInstallHookAndReadDeptAndIsWriteLog()
+        {
+            if (this.InvokeRequired)
+            {
+                LoadOtherDele d = new LoadOtherDele(LoadofInstallHookAndReadDeptAndIsWriteLog);
+                this.BeginInvoke(d);
+            }
+            else
+            {
+
+                this.rc_flowLayoutPanel.MouseWheel += new MouseEventHandler(MouseWeelTest);
+                this.rz_flowLayoutPanel.MouseWheel += new MouseEventHandler(MouseWeelTest);
+                this.Show_SuiBi_flowPanel.MouseWheel += new MouseEventHandler(MouseWeelTest);
+
+                string affairsDept = IniReadAndWrite.IniReadValue("AdministrationSection", "affairs");
+
+                if (this.user.Kdid.KdName.Trim() != affairsDept)
+                {
+                    sjgl_pictureBox.Visible = false;
+                }
+
+
+                IList staffLogList = baseService.loadEntityList
+                    ("from StaffLog where State="
+                    + (int)IEntity.stateEnum.Normal +
+                    " and WriteTime=" + DateTime.Now.Date.Ticks + " and Staff=" + user.Id);
+
+                if (staffLogList != null && staffLogList.Count > 0)
+                {
+                    isWriteLog = 1;
+                }
+
+                //mouseHook.InstallHook(OnMousePress);
+                //keyboardHook.InstallHook(OnKeyboardPress);
+            }
+        }
         /// <summary>
         /// 初始化window（界面效果）
         /// </summary>
@@ -295,365 +485,166 @@ namespace WorkLogForm
             height = this.Height;
             width = this.Width;
             creatWindow.SetFormRoundRectRgn(this, 15);
-            creatWindow.SetFormShadow(this);
-            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width * 3 / 4, Screen.PrimaryScreen.WorkingArea.Height / 8);
-            //sec = new Secretary(); //右下角的
+            //creatWindow.SetFormShadow(this);
+            //this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width * 3 / 5, Screen.PrimaryScreen.WorkingArea.Height / 8);
+            
         }
 
        
-        /// <summary>
-        /// 
-        /// </summary>
+        
         private void initialData()
-        {
-            if (user != null)
-            {
-                #region 向数据库发送登陆信息
-                user.KuOnline = 1;
-                baseService.SaveOrUpdateEntity(user);
-
-                #endregion
-
-                #region 登陆签到及显示考勤
-
-
-                DateTime today ;
-                try
-                {
-                    today = ser.GetServiceTime();
-
-                }
-                catch
-                {
-                    today = DateTime.Now;
-                }
-
-                this.user_label.Text = "欢迎登陆，" + user.KuName;
-                if (CNDate.isworkDay(today.Date.Ticks))//工作日登录
-                {
-                    //查询最近的工作起始时间安排
-                    IList attendanceList = baseService.loadEntityList("from Attendance where STATE=" + (int)IEntity.stateEnum.Normal + " and User=" + user.Id + " and SignDate=" + today.Date.Ticks);
-                    
-                    if (attendanceList != null && attendanceList.Count == 1)//今天登录过
-                    {
-                        Attendance atd = (Attendance)attendanceList[0];
-                        attendance_label.Text += atd.SignStartTime != 0 ? CNDate.getTimeByTimeTicks(atd.SignStartTime) : "";
-                        attendance_label.Text += "~";
-                        attendance_label.Text += atd.SignEndTime != 0 ? CNDate.getTimeByTimeTicks(atd.SignEndTime) : "";
-                    }
-
-
-                    else // 今天没有登陆过
-                    {
-                        Attendance todaySignStart = new Attendance();//用于记录考勤信息
-                        IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where STATE=" 
-                            + (int)IEntity.stateEnum.Normal + " and StartTime<=" + today.Date.Ticks +
-                            " order by StartTime desc"); //查询作息时间
-                        if (usuallyDayList != null && usuallyDayList.Count == 1) //存在作息时间设置
-                        {
-                            UsuallyDay u = (UsuallyDay)usuallyDayList[0];
-                            if (u.WorkTimeStart >= today.TimeOfDay.Ticks)
-                            {
-                                todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.Early; // 正常签到
-                            }
-                            else
-                            {
-                                todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly; // 迟到
-                            }
-                        }
-                        todaySignStart.SignStartTime = today.TimeOfDay.Ticks;
-                        todaySignStart.SignDate = today.Date.Ticks;
-                        todaySignStart.SignDay = today.Day;
-                        todaySignStart.SignMonth = today.Month;
-                        todaySignStart.SignYear = today.Year;
-                        todaySignStart.State = (int)IEntity.stateEnum.Normal;
-                        try
-                        {
-                            todaySignStart.TimeStamp = ser.GetServiceTime().Ticks;
-                        }
-                        catch
-                        {
-                            todaySignStart.TimeStamp = DateTime.Now.Ticks;
-                        }
-                        todaySignStart.User = this.user;
-                        try
-                        {
-                            baseService.SaveOrUpdateEntity(todaySignStart);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("签到失败！");
-                            return;
-                        }
-                        attendance_label.Text = CNDate.getTimeByTimeTicks(todaySignStart.SignStartTime) + "~";
-                    }
-                }
-                #endregion
-
-                #region 调用日程显示页
-                init_rc_Panel();
-                #endregion
-
-                #region 调用日志显示页
-                init_rz_Panel();
-                #endregion
-
-                #region 调用随笔显示
-                ChangeLocationAftercancel();
-                ShowSuiBiInFlowPanel(10);
-                #endregion
-            }
-        }
-
-
-      
-        #endregion
-
-        #region 日程显示页
-        public void init_rc_Panel()
         {
             if (this.InvokeRequired)
             {
-                writeSchedule.ParentFormChange formChangeDelegate = new writeSchedule.ParentFormChange(init_rc_Panel);
-                this.Invoke(formChangeDelegate);
+                LoadBaseInfoDele d = new LoadBaseInfoDele(initialData);
+                this.BeginInvoke(d);
             }
             else
             {
-                bool rcVisible = rc_flowLayoutPanel.Visible;
-                rc_flowLayoutPanel.Visible = false;
-                while (rc_flowLayoutPanel.Controls.Count > 0)
+                LoadHeadIcon();
+                if (user != null)
                 {
-                    rc_flowLayoutPanel.Controls.RemoveAt(0); // 删除所有日程消息
-                }
-                long thisDay = DateTime.Now.Date.Ticks;
-                long nextDay = DateTime.Now.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
-                IList staffScheduleList = baseService.loadEntityList("from StaffSchedule where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + thisDay + " order by ScheduleTime asc");
-                if (scheduleList != null)
-                {
-                    scheduleList.Clear();
-                }
-                scheduleList = staffScheduleList; //把查询出来的日程列表付给全局变量
-                creat_ri_cheng_Panel(staffScheduleList);
-                rc_flowLayoutPanel.Visible = rcVisible;
-            }
-        }
-        /// <summary>
-        /// 把日程附加到panel中
-        /// </summary>
-        /// <param name="rcList"></param>
-        private void creat_ri_cheng_Panel(IList rcList)
-        {
-            rc_flowLayoutPanel.Controls.Clear();
-            if (rcList != null && rcList.Count > 0)
-            {
+                    #region 登陆签到及显示考勤
 
-                foreach (StaffSchedule ss in rcList)
-                {
-                    Panel p = new Panel();
 
-                    Label l1Time = new Label();
-                    l1Time.AutoSize = true;
-                    //l1.Size = new System.Drawing.Size(127, 26);
-                    l1Time.Font = new System.Drawing.Font("微软雅黑", 15, FontStyle.Bold);
-                    l1Time.Location = new Point(7, 5);
-                    l1Time.Text = new DateTime(ss.ScheduleTime).ToString("yyyy-MM-dd HH:mm");
-                    l1Time.Parent = p;
-                    l1Time.ForeColor = Color.FromArgb(128, 128, 255);
-                    
-                    if (ss.ArrangeMan.Id != user.Id)
+                    DateTime today;
+                    try
                     {
-                        l1Time.ForeColor = Color.Red;
+                        today = ser.GetServiceTime();
+
+                    }
+                    catch
+                    {
+                        today = DateTime.Now;
                     }
 
-
-                    Label l2Name = new Label();
-                    l2Name.AutoSize = false;
-                    l2Name.Size = new System.Drawing.Size(206, 21);
-                    l2Name.Font = new System.Drawing.Font("微软雅黑", 10);
-                    l2Name.Text = "安排人:" + ss.ArrangeMan.KuName + "   执行人:"+ ss.Staff.KuName;
-                    l2Name.Location = new Point(6, 35);
-                    l2Name.Parent = p;
-
-                    Label l3Title = new Label();
-                    l3Title.Location = new Point(4, 61);
-                    l3Title.Font = new System.Drawing.Font("微软雅黑", 15);
-                    l3Title.Parent = p;
-                    l3Title.Text = ss.Subject.ToString();
-
-                    Label l4Content = new Label();
-                    l4Content.Font = new Font("微软雅黑", 10);
-                    l4Content.Location = new Point(2, 90);
-                    l4Content.AutoSize = false;
-                    l4Content.Text = ss.Content;
-                    int height = ((ss.Content.Length / 14) + 1) * 20;
-                    l4Content.Size = new Size(210, height);
-                    l4Content.Parent = p;
-
-                    p.Size = new Size(219, l4Content.Location.Y + l4Content.Height + 10);
-
-                    p.BorderStyle = BorderStyle.FixedSingle;
-                    p.BackColor = Color.FromArgb(224, 224, 224);
-
-                    p.Parent = rc_flowLayoutPanel;
-
-                }
-
-            }
-        }
-        private void onDeleteLinkLabelClickEventHandler(object sender, EventArgs e)
-        {
-            LinkLabel linkLabel = (LinkLabel)sender;
-            StaffSchedule ss = (StaffSchedule)linkLabel.Tag;
-            baseService.deleteEntity(ss);
-            init_rc_Panel();
-        }
-        #endregion
-
-        #region   日志显示页
-        public void init_rz_Panel()//mainpage日志显示
-        {
-            //if (this.InvokeRequired)
-            //{
-            //    writeSchedule.ParentFormChange formChangeDelegate = new writeSchedule.ParentFormChange(init_rc_Panel);
-            //    this.Invoke(formChangeDelegate);
-            //}
-            //else
-            //{
-            bool rzVisible = rz_flowLayoutPanel.Visible;
-            rz_flowLayoutPanel.Visible = false;
-            while (rz_flowLayoutPanel.Controls.Count > 0)
-            {
-                rz_flowLayoutPanel.Controls.RemoveAt(0);
-            }
-
-            string sql = "select t.c,t.t ,w.KU_NAME,t.id  from WK_T_USER w right join " +
-                        "(select sl.Contents c,sl.WriteTime t,u.KU_NAME n ,sl.id id,sl.WkTUserId from  " +
-                        "StaffLog_M_WkTUser m,LOG_T_STAFFLOG sl,WK_T_USER u where m.KU_ID=u.KU_ID " +
-                        "and m.StaffLogId=sl.id and m.KU_ID= " + user.Id + " ) t on t.WkTUserId = w.KU_ID order by t.t desc";
-            IList staffLogList = baseService.ExecuteSQL(sql); //查询自己的日志与其他人分享的日志
-            creat_ri_zhi_Panel(staffLogList);
-            rz_flowLayoutPanel.Visible = rzVisible;
-            //}
-        }
-
-
-        private void creat_ri_zhi_Panel(IList rzList)
-        {
-            if (rzList != null && rzList.Count > 0)
-            {
-                Font contentLabelFont = new Font("微软雅黑", (float)9, FontStyle.Regular);
-                Font otherLabelFont = new Font("宋体", (float)9, FontStyle.Regular);
-                for (int i = 0; (i < 3) && (i < rzList.Count); i++)
-                {
-                    object[] sf = (object[])rzList[i];
-                    Panel bgPanel = new Panel();
-                    bgPanel.BackColor = System.Drawing.Color.Transparent;
-                    bgPanel.BorderStyle = BorderStyle.FixedSingle;
-                    bgPanel.Size = new Size(221, 143);
-                   
-                    PictureBox personImage = new PictureBox();
-                    personImage.Size = new Size(44, 44);
-                    personImage.Location = new Point(7, 1);
-                    personImage.Parent = bgPanel;
-                    Label nameLabel = new Label();
-                    nameLabel.Font = otherLabelFont;
-                    nameLabel.Size = new System.Drawing.Size(41,12);
-                    nameLabel.Text = sf[2].ToString();
-                    nameLabel.Location = new Point(58, 9);
-                    nameLabel.Parent = bgPanel;
-                    Label timeLabel = new Label();
-                    timeLabel.Font = otherLabelFont;
-                    DateTime writeTime = new DateTime(Convert.ToInt64(sf[1].ToString()));
-                    timeLabel.Text = writeTime.Year + "年" + writeTime.Month + "月" + writeTime.Day + "日" + " " + CNDate.getTimeByTimeTicks(writeTime.TimeOfDay.Ticks);
-                    timeLabel.Location = new Point(58, 28);
-                    timeLabel.Parent = bgPanel;
-                    Panel contentPanel = new Panel();
-                    contentPanel.Size = new Size(213, 69);
-                    contentPanel.Location = new Point(2, 51);
-                    contentPanel.BackColor = System.Drawing.Color.Transparent;
-                    contentPanel.Parent = bgPanel;
-                    Label contentLabel = new Label();
-                     Regex r = new Regex("<[^<]*>");
-                    MatchCollection mc = r.Matches(sf[0].ToString());
-                    String contentText = sf[0].ToString().Replace("&nbsp;", " ");
-                    for (int j = 0; j < mc.Count; j++)
+                    this.user_label.Text = "你好，" + user.KuName;
+                    if (CNDate.isworkDay(today.Date.Ticks))//工作日登录
                     {
-                        contentText = contentText.Replace(mc[j].Value, "");
+                        //查询最近的工作起始时间安排
+                        IList attendanceList = baseService.loadEntityList("from Attendance where STATE=" + (int)IEntity.stateEnum.Normal + " and User=" + user.Id + " and SignDate=" + today.Date.Ticks);
+
+                        if (attendanceList != null && attendanceList.Count == 1)//今天登录过
+                        {
+                            Attendance atd = (Attendance)attendanceList[0];
+                            attendance_label.Text += atd.SignStartTime != 0 ? CNDate.getTimeByTimeTicks(atd.SignStartTime) : "";
+                            attendance_label.Text += "-";
+                            attendance_label.Text += atd.SignEndTime != 0 ? CNDate.getTimeByTimeTicks(atd.SignEndTime) : "";
+                        }
+
+
+                        else // 今天没有登陆过
+                        {
+                            Attendance todaySignStart = new Attendance();//用于记录考勤信息
+                            IList usuallyDayList = baseService.loadEntityList("from UsuallyDay where STATE="
+                                + (int)IEntity.stateEnum.Normal + " and StartTime<=" + today.Date.Ticks +
+                                " order by StartTime desc"); //查询作息时间
+                            if (usuallyDayList != null && usuallyDayList.Count == 1) //存在作息时间设置
+                            {
+                                UsuallyDay u = (UsuallyDay)usuallyDayList[0];
+                                if (u.WorkTimeStart >= today.TimeOfDay.Ticks)
+                                {
+                                    todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.Early; // 正常签到
+                                }
+                                else
+                                {
+                                    todaySignStart.LateOrLeaveEarly = (int)Attendance.lateOrLeaveEarlyEnum.LateAndEarly; // 迟到
+                                }
+                            }
+                            todaySignStart.SignStartTime = today.TimeOfDay.Ticks;
+                            todaySignStart.SignDate = today.Date.Ticks;
+                            todaySignStart.SignDay = today.Day;
+                            todaySignStart.SignMonth = today.Month;
+                            todaySignStart.SignYear = today.Year;
+                            todaySignStart.State = (int)IEntity.stateEnum.Normal;
+                            try
+                            {
+                                todaySignStart.TimeStamp = ser.GetServiceTime().Ticks;
+                            }
+                            catch
+                            {
+                                todaySignStart.TimeStamp = DateTime.Now.Ticks;
+                            }
+                            todaySignStart.User = this.user;
+                            try
+                            {
+                                baseService.SaveOrUpdateEntity(todaySignStart);
+                            }
+                            catch
+                            {
+                                MessageBox.Show("签到失败！");
+                                return;
+                            }
+                            attendance_label.Text = CNDate.getTimeByTimeTicks(todaySignStart.SignStartTime) + "-";
+                        }
                     }
-                    contentLabel.Text = contentText;
-                    contentLabel.Dock = DockStyle.Fill;
-                    contentLabel.AutoSize = false;
-                    contentLabel.Font = contentLabelFont;
-                    contentLabel.Padding = new Padding(5, 5, 5, 5);
-                    contentLabel.Parent = contentPanel;
-                    LinkLabel moreLink = new LinkLabel();
-                    moreLink.Text = "点击查看全文";
-                    moreLink.Location = new Point(140, 123);
-                    moreLink.Parent = bgPanel;
-                    moreLink.Click += onMoreLinkLabelClickEventHandler;
-                    moreLink.Tag = sf;
+                    else
+                    {
+                        this.attendance_label.Text = "今天是休息日";
 
-                    bgPanel.Parent = rz_flowLayoutPanel;
-                }
-                if (rzList.Count > 0)
-                    rzList.RemoveAt(0);
-                if (rzList.Count > 0)
-                    rzList.RemoveAt(0);
-                if (rzList.Count > 0)
-                    rzList.RemoveAt(0);
-                if (rzList.Count > 0)
-                {
-                    Panel morePanel = new Panel();
-                    morePanel.Size = new Size(220, 25); //rz_flowLayoutPanel.Controls.Count == 3 ? new Size(2, 25) : new Size(223, 25);
-                    morePanel.Parent = rz_flowLayoutPanel;
-                    morePanel.BackColor = System.Drawing.Color.Transparent;
-                    morePanel.Tag = rzList;
-                    
-                    LinkLabel moreLinkLabel = new LinkLabel();
-                    moreLinkLabel.Text = "点击查看更多";
-                    moreLinkLabel.Location = rz_flowLayoutPanel.Controls.Count == 3 ? new Point(75, 12) : new Point(75, 7);
-                    moreLinkLabel.Parent = morePanel;
-                    moreLinkLabel.Click += moreLinkLabel_Click;
-                    //moreLinkLabel.Tag = rzList;
-                    //moreLinkLabel.Left = 75;
+                    }
+                    #endregion
                 }
             }
         }
 
-        void moreLinkLabel_Click(object sender, EventArgs e)
+        private void LoadUserList()
         {
-            Panel panel = (Panel)((LinkLabel)sender).Parent;
-            IList rzList = (IList)panel.Tag;
-            if (panel.Parent.Controls.Count == 4)
+            if (this.InvokeRequired)
             {
-                panel.Parent.Controls[0].Size = new Size(221, 143);
-                panel.Parent.Controls[1].Size = new Size(221, 143);
-                panel.Parent.Controls[2].Size = new Size(221, 143);
+                LoadUserlistDele d = new LoadUserlistDele(LoadUserList);
+                this.BeginInvoke(d);
             }
-            panel.Parent.Controls.Remove(panel);
-            creat_ri_zhi_Panel(rzList);
-            Point newPoint = new Point(0, this.rz_flowLayoutPanel.Height - rz_flowLayoutPanel.AutoScrollPosition.Y);
-            rz_flowLayoutPanel.AutoScrollPosition = newPoint;
+            else
+            {
+
+                this.pictureBoxOfInstantMessenger.Cursor = Cursors.WaitCursor;
+                SetTheContent5ButtonIsGray();
+                SetTheContent4PanelIsUnvisible();
+
+                Showcontacts();
+
+                pictureBoxOfInstantMessenger.BackgroundImage = WorkLogForm.Properties.Resources.消息白;
+                panelofMessage.Visible = true;
+                this.pictureBoxOfInstantMessenger.Cursor = Cursors.Hand;
+            }
         }
 
-       
-        private void onMoreLinkLabelClickEventHandler(object sender, EventArgs e)
+        #region 加载自己的头像
+        private void LoadHeadIcon()
         {
-            LinkLabel ll = (LinkLabel)sender;
-            Object[] obj = (Object[])ll.Tag;
-            StaffLog sl = new StaffLog();
-            baseService.loadEntity(sl,Convert.ToInt64(obj[3].ToString()));
-            writeLog log = new writeLog();
-            log.IsComment = true;
-            log.User = sl.Staff;
-            log.CommentPersonName = User.KuName;
-            log.LogDate = new DateTime(sl.WriteTime);
-            log.ShowDialog();
+            //string address = CommonStaticParameter.ICONS + @"\" + this.user.Id.ToString() + ".png";
+            string[] files = Directory.GetFiles(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"icons", this.user.Id.ToString() + "myicon" + "*.png", System.IO.SearchOption.AllDirectories);
+            if (files.Length > 0)
+            {
+                if (File.Exists(files[files.Length -1]))
+                {
+                    string filename = files[files.Length - 1];
+                    System.Drawing.Bitmap ybitmap = new System.Drawing.Bitmap(filename);
+                    this.pictureBoxofHeadIcon.BackgroundImage = ybitmap;
+                }
+            }
+           
+            else
+            {
+                this.pictureBoxofHeadIcon.BackgroundImage = WorkLogForm.Properties.Resources.AutoIconBigWhite;
+            }
         }
-      
+        public void RefreshHeaderPic()
+        {
+            string address = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"icons" + @"\" + this.user.Id.ToString() + ".png";
+            string[] files = Directory.GetFiles(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"icons", this.user.Id.ToString() + "__" + "*.png", System.IO.SearchOption.AllDirectories);
+            if (files.Length > 0)
+            {
+                string myicon = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"icons" + @"\" + this.user.Id.ToString() + "myicon" + DateTime.Now.Ticks.ToString() + ".png";
+                File.Copy(files[0], myicon, true);
+                this.pictureBoxofHeadIcon.BackgroundImage = new Bitmap(myicon);
+            }
+        }
+
         #endregion
-       
-        
+
+        #endregion
 
 
         #region 窗体特效事件：窗口拖拽到最上端自动隐藏
@@ -761,7 +752,12 @@ namespace WorkLogForm
 
         #endregion
 
-        #region 最小化关闭按钮
+
+        #region  关闭最小化设置按钮
+
+
+
+        #region 按钮功能
         private void min_pictureBox_Click(object sender, EventArgs e)
         {
             this.Visible = false;
@@ -773,323 +769,15 @@ namespace WorkLogForm
                 this.Close();
             }
         }
-        #endregion
-
-        #region 图片渐变效果
-
-        private void min_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.最小化渐变;
-        }
-        private void min_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.最小化2;
-        }
-      
-        private void close_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            close_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.关闭渐变;
-        }
-        private void close_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            close_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.关闭1;
-        }
-        private void setting_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            setting_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.设置;
-        }
-        private void setting_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            setting_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.设置1;
-        }
-        private void wdrl_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            wdrl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.我的日历1;
-        }
-        private void wdrl_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            wdrl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.我的日历;
-        }
-        private void rcgl_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            rcgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日程管理1;
-        }
-        private void rcgl_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            rcgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日程管理;
-        }
-        private void rzgl_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            rzgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.统计考勤1;
-        }
-
-        private void SuiBiGuanLi_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            SuiBiGuanLi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.随笔1;
-        }
-
-        private void SuiBiGuanLi_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            SuiBiGuanLi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.随笔;
-        }
-
-
-        private void rzgl_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            rzgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.统计考勤2;
-        }
-        private void qjgl_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            qjgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.请假管理11;
-        }
-        private void qjgl_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            qjgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.请假管理1;
-        }
-        private void jbgl_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            jbgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.加班管理11;
-        }
-        private void jbgl_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            jbgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.加班管理1;
-        }
-        private void zbgl_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            zbgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.值班管理11;
-        }
-        private void zbgl_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            zbgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.值班管理22;
-        }
-        private void ccgl_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            ccgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.出差管理1;
-        }
-        private void ccgl_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            ccgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.出差管理;
-        }
-        #endregion
-
-        #region 右下角的图标点击事件
-        private void notifyIcon1_Click(object sender, EventArgs e)
-        {
-            //EventArgs继承自MouseEventArgs,所以可以强转  
-            MouseEventArgs Mouse_e = (MouseEventArgs)e;
-
-            //点鼠标右键,return  
-            if (Mouse_e.Button == MouseButtons.Left)
-            {
-                this.Visible = true;
-                this.Activate();
-            }
-        }
-        #endregion
-
-
-        #region 主界面切换按钮
-        private void ri_zhi_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            ri_zhi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日志分享_副本;
-        }
-        private void ri_zhi_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            if (rz_flowLayoutPanel.Visible == true)
-            {
-                return;
-            }
-            ri_zhi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日志分享;
-        }
-        private void ri_cheng_pictureBox1_MouseEnter(object sender, EventArgs e)
-        {
-            ri_cheng_pictureBox1.BackgroundImage = WorkLogForm.Properties.Resources.我的日程_副本;
-        }
-        private void ri_cheng_pictureBox1_MouseLeave(object sender, EventArgs e)
-        {
-            if (rc_flowLayoutPanel.Visible == true)
-            {
-                return;
-            }
-            ri_cheng_pictureBox1.BackgroundImage = WorkLogForm.Properties.Resources.我的日程;
-        }
-        private void tong_xun_pictureBox_MouseEnter(object sender, EventArgs e)
-        {
-            tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人随笔_副本;
-        }
-        private void tong_xun_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            if (SuiBi_flowLayoutPanel.Visible == false)
-            {
-                tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人随笔1;
-            }
-        }
-        #endregion  
-
-        #region 主界面切换
-        private void ri_cheng_pictureBox1_Click(object sender, EventArgs e)
-        {   /*************测试代码*************************/
-            //if (sec == null)
-            //{
-            //    sec = new Secretary(this);
-            //    sec.Show();
-            //    sec.AddMessageLabelInFlowPanel1("程倩");
-            //    sec.AddRiChengInFlow2(DateTime.Now.ToString("MM-dd HH:mm"), "测0试大白！！！！");
-            //}
-            //else
-            //{
-            //    if (sec.IsDisposed)
-            //    {
-            //        sec = new Secretary(this);
-            //        sec.Show();
-            //    }
-            //    sec.AddMessageLabelInFlowPanel1("程倩1");
-            //    sec.AddMessageLabelInFlowPanel1("程倩2");
-            //    sec.AddMessageLabelInFlowPanel1("程倩3");
-            //    sec.AddRiChengInFlow2(DateTime.Now.ToString("MM-dd HH:mm"), "测1试大白！！！！");
-            //}
-           /*************测试代码*************************/
-
-            ri_zhi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日志分享;
-            rz_flowLayoutPanel.Visible = false;
-            rc_flowLayoutPanel.Visible = true;
-            SuiBi_flowLayoutPanel.Visible = false;
-            tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人随笔1;
-            init_rc_Panel();
-          
-            
-        }
-        private void ri_zhi_pictureBox_Click(object sender, EventArgs e)
-        {
-
-            ri_cheng_pictureBox1.BackgroundImage = WorkLogForm.Properties.Resources.我的日程;
-            rz_flowLayoutPanel.Visible = true;
-            rc_flowLayoutPanel.Visible = false;
-            SuiBi_flowLayoutPanel.Visible = false;
-            tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人随笔1;
-            init_rz_Panel();
-          
-        }
-
-        private void tong_xun_pictureBox_Click(object sender, EventArgs e)
-        {
-            tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人随笔_副本;
-            rz_flowLayoutPanel.Visible = false;
-            rc_flowLayoutPanel.Visible = false;
-            SuiBi_flowLayoutPanel.Visible = true;
-            ri_zhi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日志分享;
-            ri_cheng_pictureBox1.BackgroundImage = WorkLogForm.Properties.Resources.我的日程;
-            RefreshSuiBi();
-
-        }
-
-
-
-
-        #endregion
-
-
-
-        #region 业务逻辑控件事件
-
-        private void pictureBoxOfInstantMessenger_Click(object sender, EventArgs e)
-        {
-            if(sec != null)
-            {
-                sec.ClearMessagePanel();
-                this.chattinguserlist.Clear();
-            }
-            pictureBoxOfInstantMessenger.Cursor = Cursors.WaitCursor;
-            this.timerOfReceiveChattingMessage.Enabled = false;
-
-            this.timerchattingflesh.Enabled = false;
-            this.pictureBoxOfInstantMessenger.BackgroundImage = WorkLogForm.Properties.Resources.InstantMessengerLogo;
-            this.LabelofChatttingCount.Text = "";
-            if (InstantMessengerWindows == null || InstantMessengerWindows.IsDisposed)
-            {
-                InstantMessengerWindows = new InstantMessenger();
-            }
-            if (!InstantMessengerWindows.Created)
-            {
-                InstantMessengerWindows.FormLocation = new Point(this.Location.X - InstantMessengerWindows.Width, this.Location.Y);
-                InstantMessengerWindows.User = this.user;
-                InstantMessengerWindows.MainReceiveMessage = this.timerOfReceiveChattingMessage;
-                InstantMessengerWindows.Chattinguserlist = this.chatinservice;
-                InstantMessengerWindows.Show();
-
-            }
-            else
-            {
-                InstantMessengerWindows.WindowState = FormWindowState.Normal;
-                InstantMessengerWindows.Chattinguserlist = this.chatinservice;
-                InstantMessengerWindows.Visible = true;
-                
-            }
-            pictureBoxOfInstantMessenger.Cursor = Cursors.Hand;
-
-        }
-         private void spgl_pictureBox_Click(object sender, EventArgs e)
-        {
-            if (statisticsAttendance == null || statisticsAttendance.IsDisposed)
-            {
-                statisticsAttendance = new statistics_Attendance();
-                statisticsAttendance.User = this.user;
-                statisticsAttendance.Role = role;
-            }
-            if (!statisticsAttendance.Created)
-            {
-                statisticsAttendance.Show();
-            }
-            else
-            {
-                statisticsAttendance.WindowState = FormWindowState.Normal;
-                statisticsAttendance.Focus();
-            }
-        }
-        private void dai_qian_pictureBox_Click(object sender, EventArgs e)
-        {
-            if (applyAllorapg == null || applyAllorapg.IsDisposed)
-            {
-                applyAllorapg = new Apply_Allograph();
-                applyAllorapg.User = this.user;
-                applyAllorapg.Role = role;
-            }
-            if (!applyAllorapg.Created)
-            {
-                applyAllorapg.Show();
-            }
-            else
-            {
-                applyAllorapg.WindowState = FormWindowState.Normal;
-                applyAllorapg.Focus();
-            }
-        }
-        private void dai_qian_sp_pictureBox_Click(object sender, EventArgs e)
-        {
-            if (examineAllograph == null || examineAllograph.IsDisposed)
-            {
-                examineAllograph = new Examine_Allograph();
-                examineAllograph.User = this.user;
-                examineAllograph.Role = role;
-            }
-            if (!examineAllograph.Created)
-            {
-                examineAllograph.Show();
-            }
-            else
-            {
-                examineAllograph.WindowState = FormWindowState.Normal;
-                examineAllograph.Focus();
-            }
-        }
         private void setting_pictureBox_Click(object sender, EventArgs e)
         {
             setting_pictureBox.Cursor = Cursors.WaitCursor;
-            if (personalSetting==null||personalSetting.IsDisposed)
+            if (personalSetting == null || personalSetting.IsDisposed)
             {
                 personalSetting = new personal_setting();
                 personalSetting.User = user;
                 personalSetting.Role = role;
+                personalSetting.themain = this;
             }
             if (!personalSetting.Created)
             {
@@ -1103,69 +791,6 @@ namespace WorkLogForm
             }
             setting_pictureBox.Cursor = Cursors.Hand;
 
-        }
-        private void log_pictureBox_Click(object sender, EventArgs e)
-        {
-            if (write_log == null || write_log.IsDisposed)
-            {
-                write_log = new writeLog();
-                write_log.User = this.user;
-            }
-            if (!write_log.Created)
-            {
-                write_log.Show();
-            }
-            else
-            {
-                write_log.WindowState = FormWindowState.Normal;
-                write_log.Focus();
-            }
-            if (write_log.DialogResult == DialogResult.OK)
-            {
-                if (isWriteLog == 0)
-                {
-                    isWriteLog = 1;
-                }
-            }
-        }
-        private void schedule_pictureBox_Click(object sender, EventArgs e)
-        {
-            if (write_schedule == null || write_schedule.IsDisposed)
-            {
-                writeSchedule.ParentFormChange formChangeDelegate = new writeSchedule.ParentFormChange(init_rc_Panel);
-                write_schedule = new writeSchedule(formChangeDelegate);
-                write_schedule.User = this.user;
-                write_schedule.Role = this.role;
-                write_schedule.ScheduleDate = DateTime.Now;
-            }
-            if (!write_schedule.Created)
-            {
-                write_schedule.Show();
-            }
-            else
-            {
-                write_schedule.WindowState = FormWindowState.Normal;
-                write_schedule.Focus();
-            }
-        }
-        private void wdrl_pictureBox_Click(object sender, EventArgs e)
-        {
-            wdrl_pictureBox.Cursor = Cursors.WaitCursor;
-            if (shouYe == null || shouYe.IsDisposed)
-            {
-                shouYe = new shou_ye();
-            }
-            if (!shouYe.Created)
-            {
-                shouYe.User = this.user;
-                shouYe.Show();
-            }
-            else
-            {
-                shouYe.WindowState = FormWindowState.Normal;
-                shouYe.Focus();
-            }
-            wdrl_pictureBox.Cursor = Cursors.Hand;
         }
         private void sjgl_pictureBox_Click(object sender, EventArgs e)
         {
@@ -1186,8 +811,1007 @@ namespace WorkLogForm
             }
             sjgl_pictureBox.Cursor = Cursors.Hand;
         }
+
+        #endregion //end最小化关闭按钮功能
+
+        #region 按钮效果
+
+        #region 最小化按钮效果
+        private void min_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.Minenter;
+        }
+        private void min_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            min_pictureBox.BackgroundImage = null;
+        }
+        #endregion
+
+        #region 关闭按钮效果
+        private void close_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            close_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.Closeenter;
+        }
+        private void close_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            close_pictureBox.BackgroundImage = null;
+        }
+        #endregion
+
+        #region 个人设置效果
+        private void setting_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            setting_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.Minenter;
+        }
+        private void setting_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            setting_pictureBox.BackgroundImage = null;
+        }
+        #endregion
+
+        #region 系统设置效果
+        private void sjgl_pictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            sjgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.Minenter;
+        }
+        private void sjgl_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            sjgl_pictureBox.BackgroundImage = null;
+        }
+        #endregion
+
+        #endregion end按钮效果
+
+
+        #endregion end 关闭最小化设置按钮
+
+
+        #region 右下角的图标点击事件
+        private void notifyIcon1_Click(object sender, EventArgs e)
+        {
+            //EventArgs继承自MouseEventArgs,所以可以强转  
+            MouseEventArgs Mouse_e = (MouseEventArgs)e;
+
+            //点鼠标右键,return  
+            if (Mouse_e.Button == MouseButtons.Left)
+            {
+                this.Visible = true;
+                this.Activate();
+            }
+        }
+        #endregion
+
+
+        #region 主界面四个按钮
+
+        #region 主界面按钮效果的效果
+
+        private void ri_zhi_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            ri_zhi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日志白;
+        }
+        private void ri_zhi_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            if (panelOfRiZhi.Visible == true)
+            {
+                return;
+            }
+            ri_zhi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日志;
+        }
+
+
+        private void ri_cheng_pictureBox1_MouseEnter(object sender, EventArgs e)
+        {
+            ri_cheng_pictureBox1.BackgroundImage = WorkLogForm.Properties.Resources.日程白;
+        }
+
+        private void ri_cheng_pictureBox1_MouseLeave(object sender, EventArgs e)
+        {
+            if (paneOfRiCheng.Visible == true)
+            {
+                return;
+            }
+            ri_cheng_pictureBox1.BackgroundImage = WorkLogForm.Properties.Resources.日程;
+        }
+
+
+        private void tong_xun_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.随笔白;
+        }
+        private void tong_xun_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            
+            if (panelOfSuibi.Visible == false)
+            {
+                tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.随笔;
+            }
+        }
+
+        private void pictureBoxOfrefresh_MouseEnter(object sender, EventArgs e)
+        {
+            pictureBoxOfrefresh.BackgroundImage = WorkLogForm.Properties.Resources.刷新白;
+        }
+
+        private void pictureBoxOfrefresh_MouseLeave(object sender, EventArgs e)
+        {
+            pictureBoxOfrefresh.BackgroundImage = WorkLogForm.Properties.Resources.刷新;
+        }
+
+        private void pictureBoxOfInstantMessenger_MouseLeave(object sender, EventArgs e)
+        {
+            if(panelofMessage.Visible == false)
+            pictureBoxOfInstantMessenger.BackgroundImage = WorkLogForm.Properties.Resources.消息;
+        }
+
+        private void pictureBoxOfInstantMessenger_MouseEnter(object sender, EventArgs e)
+        {
+            pictureBoxOfInstantMessenger.BackgroundImage = WorkLogForm.Properties.Resources.消息白;
+
+        }
+
+
+
+
+        #endregion  
+
+        #region 主界面切换
+        
+        /// <summary>
+        /// 设置中间五个按钮全部变成灰色
+        /// </summary>
+        private void SetTheContent5ButtonIsGray()
+        {
+            pictureBoxOfInstantMessenger.BackgroundImage = WorkLogForm.Properties.Resources.消息;
+            ri_zhi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日志;
+            ri_cheng_pictureBox1.BackgroundImage = WorkLogForm.Properties.Resources.日程;
+            tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.随笔;
+            pictureBoxOfrefresh.BackgroundImage = WorkLogForm.Properties.Resources.刷新;
+        }
+
+        /// <summary>
+        /// 设置四个模块全部看不见
+        /// </summary>
+        private void SetTheContent4PanelIsUnvisible()
+        {
+            panelOfRiZhi.Visible = false;
+            paneOfRiCheng.Visible = false;
+            panelOfSuibi.Visible = false;
+            panelofMessage.Visible = false;
+        }
+
+        private void ri_cheng_pictureBox1_Click(object sender, EventArgs e)
+        {
+            #region 测试代码
+            /*************测试代码*************************/
+            //if (sec == null)
+            //{
+            //    sec = new Secretary(this);
+            //    sec.Show();
+            //    sec.AddMessageLabelInFlowPanel1("程倩");
+            //    sec.AddRiChengInFlow2(DateTime.Now.ToString("MM-dd HH:mm"), "测0试大白！！！！");
+            //}
+            //else
+            //{
+            //    if (sec.IsDisposed)
+            //    {
+            //        sec = new Secretary(this);
+            //        sec.Show();
+            //    }
+            //    sec.AddMessageLabelInFlowPanel1("程倩1");
+            //    sec.AddMessageLabelInFlowPanel1("程倩2");
+            //    sec.AddMessageLabelInFlowPanel1("程倩3");
+            //    sec.AddRiChengInFlow2(DateTime.Now.ToString("MM-dd HH:mm"), "测1试大白！！！！");
+            //}
+            /*************测试代码*************************/
+            #endregion 测试代码
+
+            if (paneOfRiCheng.Visible == false)
+            {
+                SetTheContent5ButtonIsGray();
+                SetTheContent4PanelIsUnvisible();
+
+                init_rc_Panel();
+
+                this.schedulelistfromService.Clear();
+                this.meaaageCountLabelOfRicheng.MessageCount = 0;
+                ser.SetShareScheduleIsRead((int)this.user.Id);
+
+                ri_cheng_pictureBox1.BackgroundImage = WorkLogForm.Properties.Resources.日程白;
+                paneOfRiCheng.Visible = true;
+            }
+        }
+
+        private void ri_zhi_pictureBox_Click(object sender, EventArgs e)
+        {
+            if (panelOfRiZhi.Visible == false)
+            {
+                SetTheContent5ButtonIsGray();
+                SetTheContent4PanelIsUnvisible();
+
+                ser.SetCommentLogIsRead((int)this.user.Id);
+                ser.SetShareLogIsRead((int)this.user.Id);
+                this.loglistfromService.Clear();
+                
+                this.messageCountLabelOfCommentLog.MessageCount = 0;
+                this.meaaageCountLabelOfRiZhi.MessageCount = 0;
+
+                AddInPanelOfLogCommentMessage();
+
+                this.commentlistfromService.Clear();
+                this.rz_flowLayoutPanel.Tag = null;
+                this.rz_flowLayoutPanel.Controls.Clear();
+                init_rz_Panel();
+
+                ri_zhi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.日志白;
+
+
+                panelOfRiZhi.Visible = true;
+            }
+            else 
+            {
+                if(this.panelOfLogCommentMessage1.ItemsCount >0)
+                {
+                    this.panelOfLogCommentMessage1.Visible = true;
+                }
+            }
+        }
+
+
+
+        private void tong_xun_pictureBox_Click(object sender, EventArgs e)
+        {
+            if (panelOfSuibi.Visible == false)
+            {
+                SetTheContent5ButtonIsGray();
+                SetTheContent4PanelIsUnvisible();
+
+                RefreshSuiBi();
+
+                tong_xun_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.随笔白;
+                panelOfSuibi.Visible = true;
+            }
+        }
+
+        private void pictureBoxOfInstantMessenger_Click(object sender, EventArgs e)
+        {
+            #region 注视的代码
+            //if (sec != null)
+            //{
+            //    sec.ClearMessagePanel();
+            //    this.chattinguserlist.Clear();
+            //}
+            //pictureBoxOfInstantMessenger.Cursor = Cursors.WaitCursor;
+            //this.timerOfReceiveChattingMessage.Enabled = false;
+
+            //this.timerchattingflesh.Enabled = false;
+            //this.pictureBoxOfInstantMessenger.BackgroundImage = WorkLogForm.Properties.Resources.InstantMessengerLogo;
+            //this.LabelofChatttingCount.Text = "";
+            //if (InstantMessengerWindows == null || InstantMessengerWindows.IsDisposed)
+            //{
+            //    InstantMessengerWindows = new InstantMessenger();
+            //}
+            //if (!InstantMessengerWindows.Created)
+            //{
+            //    InstantMessengerWindows.FormLocation = new Point(this.Location.X - InstantMessengerWindows.Width, this.Location.Y);
+            //    InstantMessengerWindows.User = this.user;
+            //    InstantMessengerWindows.MainReceiveMessage = this.timerOfReceiveChattingMessage;
+            //    InstantMessengerWindows.Chattinguserlist = this.chatinservice;
+            //    InstantMessengerWindows.Show();
+
+            //}
+            //else
+            //{
+            //    InstantMessengerWindows.WindowState = FormWindowState.Normal;
+            //    InstantMessengerWindows.Chattinguserlist = this.chatinservice;
+            //    InstantMessengerWindows.Visible = true;
+
+            //}
+            //pictureBoxOfInstantMessenger.Cursor = Cursors.Hand;
+
+
+            #endregion
+
+
+            if (panelofMessage.Visible == false)
+            {
+                this.pictureBoxOfInstantMessenger.Cursor = Cursors.WaitCursor;
+                SetTheContent5ButtonIsGray();
+                SetTheContent4PanelIsUnvisible();
+                
+
+                pictureBoxOfInstantMessenger.BackgroundImage = WorkLogForm.Properties.Resources.消息白;
+                panelofMessage.Visible = true;
+                this.pictureBoxOfInstantMessenger.Cursor = Cursors.Hand;
+            }
+
+        }
+
+        #endregion
+
+        #region 界面的实现
+
+
+        #region 日程显示页
+        public void init_rc_Panel()
+        {
+            if (this.InvokeRequired)
+            {
+                writeSchedule.ParentFormChange formChangeDelegate = new writeSchedule.ParentFormChange(init_rc_Panel);
+                this.Invoke(formChangeDelegate);
+            }
+            else
+            {
+                bool rcVisible = panelOfSuibi.Visible;
+                panelOfSuibi.Visible = false;
+               
+                long thisDay = DateTime.Now.Date.Ticks;
+                long nextDay = DateTime.Now.Date.Ticks + new DateTime(1, 1, 2).Date.Ticks;
+                IList staffScheduleList = baseService.loadEntityList("from StaffSchedule where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and ScheduleTime>=" + thisDay + " order by ScheduleTime asc");
+                if (staffScheduleList.Count > rc_flowLayoutPanel.Controls.Count)
+                {
+                    while (rc_flowLayoutPanel.Controls.Count > 0)
+                    {
+                        rc_flowLayoutPanel.Controls.RemoveAt(0); // 删除所有日程消息
+                    }
+                    if (scheduleList != null)
+                    {
+                        scheduleList.Clear();
+                    }
+                    scheduleList = staffScheduleList; //把查询出来的日程列表付给全局变量
+                    creat_ri_cheng_Panel(staffScheduleList);
+                }
+                if (this.rc_flowLayoutPanel.Controls.Count == 0)
+                {
+                    this.rc_flowLayoutPanel.BackgroundImage = WorkLogForm.Properties.Resources.NoCntentBg;
+                }
+                else
+                {
+                    this.rc_flowLayoutPanel.BackgroundImage = null; 
+                }
+                panelOfSuibi.Visible = rcVisible;
+            }
+        }
+        /// <summary>
+        /// 把日程附加到panel中
+        /// </summary>
+        /// <param name="rcList"></param>
+        private void creat_ri_cheng_Panel(IList rcList)
+        {
+            rc_flowLayoutPanel.Controls.Clear();
+            if (rcList != null && rcList.Count > 0)
+            {
+
+                foreach (StaffSchedule ss in rcList)
+                {
+                    RiChengRect r1 = new RiChengRect();
+                    r1.HeaderId = int.Parse(ss.ArrangeMan.Id.ToString());
+                    r1.ArrangePersonNameText = ss.ArrangeMan.KuName.Trim();
+                    r1.SubTitleText = ss.Subject.ToString();
+                    r1.TimeText = new DateTime(ss.ScheduleTime).ToString("yyyy-MM-dd HH:mm");
+                    if (ss.Content.Length > 140)
+                    {
+                        r1.ContentText = ss.Content.Substring(0, 140) + "……";
+                        r1.ContentClicked += r1_ContentClicked;
+                        r1.Tag = ss;
+                    }
+                    else
+                    {
+                        r1.ContentText = ss.Content;
+                    }
+                    r1.Parent = rc_flowLayoutPanel;
+                }
+
+            }
+        }
+
+        void r1_ContentClicked(object sender, EventArgs e)
+        {
+            this.panelOfRIchengAllInfo1.Visible = true;
+            //if (this.panelOfRIchengAllInfo1.RechengREct != null)
+            //{
+                //this.panelOfRIchengAllInfo1.RechengREct = null;
+            //}
+            Label l = (Label)sender;
+            StaffSchedule ss = l.Parent.Parent.Tag as StaffSchedule;
+            RiChengRect r1 = new RiChengRect();
+            r1.HeaderId = int.Parse(ss.ArrangeMan.Id.ToString());
+            r1.ArrangePersonNameText = ss.ArrangeMan.KuName.Trim();
+            r1.SubTitleText = ss.Subject.ToString();
+            r1.TimeText = new DateTime(ss.ScheduleTime).ToString("yyyy-MM-dd HH:mm");
+            r1.ContentText = ss.Content;
+
+            this.panelOfRIchengAllInfo1.SetRechengREct(r1);
+
+        }
+        private void onDeleteLinkLabelClickEventHandler(object sender, EventArgs e)
+        {
+            LinkLabel linkLabel = (LinkLabel)sender;
+            StaffSchedule ss = (StaffSchedule)linkLabel.Tag;
+            baseService.deleteEntity(ss);
+            init_rc_Panel();
+        }
+        #endregion
+
+        #region   日志显示页
+        public void init_rz_Panel()//mainpage日志显示
+        {
+            //if (this.InvokeRequired)
+            //{
+            //    writeSchedule.ParentFormChange formChangeDelegate = new writeSchedule.ParentFormChange(init_rc_Panel);
+            //    this.Invoke(formChangeDelegate);
+            //}
+            //else
+            //{
+            
+            int logid = 0;
+            if (rz_flowLayoutPanel.Tag!= null)
+            {
+                logid = int.Parse(rz_flowLayoutPanel.Tag.ToString());
+            }
+
+
+            string sql = "with cte as " +
+                            "( " +
+                            " select row=row_number()over(order by getdate()), * from WktuserShareUserId where SharePresonid =  " + user.Id.ToString() + " and WktuserShareUserId.STATE = 0 and Id > " +  logid.ToString()+
+                            ") " +
+                            " select * from cte where row between "+"1"+" and "+"10";
+
+            IList staffLogList = baseService.ExecuteSQL(sql); //查询自己的日志与其他人分享的日志
+            creat_ri_zhi_Panel(staffLogList);
+            if (this.rz_flowLayoutPanel.Controls.Count > 0)
+            {
+                this.rz_flowLayoutPanel.BackgroundImage = null;
+
+            }
+            else 
+            {
+                this.rz_flowLayoutPanel.BackgroundImage = WorkLogForm.Properties.Resources.NoCntentBg;
+            
+            }
+
+            //}
+        }
+
+
+        private void creat_ri_zhi_Panel(IList rzList)
+        {
+            if (rzList != null && rzList.Count > 0)
+            {
+                for (int i = 0; i < rzList.Count; i++)
+                {
+                    object[] sf = (object[])rzList[i];
+                    RiZhiRect rizhi = new RiZhiRect();
+                    rizhi.HeaderId = int.Parse(sf[3].ToString());//谁分享的
+                    rizhi.Name = sf[6].ToString();//分享人的姓名
+                    rizhi.Contenttext = CommonClass.CommonUtil.HtmlToReguFormat(sf[5].ToString());
+                    rizhi.TimeText = new DateTime(Convert.ToInt64(sf[4].ToString())).ToString("yyyy年MM月dd日 HH:mm");
+                   
+                    rizhi.Tag = sf[7]; //日志id
+                    rizhi.ContentClicked += rizhi_ContentClicked;
+                    rizhi.Parent = rz_flowLayoutPanel;
+                    rz_flowLayoutPanel.Tag = sf[1];//Id号;
+                }
+            }
+        }
+
+        #region 查看全部内容日志
+        void rizhi_ContentClicked(object sender, EventArgs e)
+        {
+            Label p = (Label)sender;
+            long logid = long.Parse(p.Parent.Parent.Tag.ToString());
+            p.Parent.Parent.Cursor = Cursors.WaitCursor;
+            StaffLog sl = new StaffLog();
+            baseService.loadEntity(sl, logid);
+            writeLog log = new writeLog();
+            log.IsComment = true;
+            log.User = sl.Staff;
+            log.CommentPersonName = User.KuName;
+            log.LogDate = new DateTime(sl.WriteTime);
+            log.ShowDialog();
+            p.Parent.Parent.Cursor = Cursors.Hand;
+        }
+        #endregion
+        #endregion
+
+        #region 随笔功能
+        private void Write_SUiBi_textBox_TextChanged(object sender, EventArgs e)
+        {
+            if (this.Write_SUiBi_textBox.Text.Length > 140 && this.Write_SUiBi_textBox.Text.Length == 0)
+            {
+                this.pictureBox7.Enabled = false;
+            }
+            else
+            {
+                this.pictureBox7.Enabled = true;
+
+            }
+        }
+
+      
+        /// <summary>
+        /// 点击查看更多
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ToSeeMoreSuiBi()
+        {
+            ShowSuiBiInFlowPanel(this.Show_SuiBi_flowPanel.Controls.Count + 10);
+        }
+
+        public void ShowSuiBiInFlowPanel(int end)
+        {
+            //从数据库中查出区间内容
+            String listCountSql = "select COUNT(*) from SuiBi;";
+
+            IList CountSuibi = baseService.ExecuteSQL(listCountSql);
+            int count = 0;
+            foreach (object[] o in CountSuibi)
+            {
+                count = Convert.ToInt32(o[0].ToString());
+            }
+            string sql;
+            if (end < count)
+            {
+
+                sql = "select * from ( " +
+                             "select top 10 * from ( " +
+                             "select top " + end.ToString() + " * from  " +
+                             "(Select  WK_T_USER.KU_NAME as name , _t.Contents as content, " +
+                             "_t.WriteTime as time , _t.Id as id ,WK_T_USER.KU_ID as userid from (select top 100 percent * " +
+                             "from SuiBi where SuiBi.STATE = 0 order by SuiBi.WriteTime desc) as _t left join " +
+                             "WK_T_USER on _t.WkTUserId = WK_T_USER.KU_ID ) as t order by t.time desc ) as tt order by tt.time asc ) as ttt order by ttt.time desc";
+
+            }
+            else
+            {
+
+                sql = "select * from ( " +
+                                "select top " + (count % 10).ToString() + " * from ( " +
+                                "select top " + (count + 10).ToString() + " * from  " +
+                                "(Select  WK_T_USER.KU_NAME as name , _t.Contents as content, " +
+                                "_t.WriteTime as time , _t.Id as id ,WK_T_USER.KU_ID as userid from (select top 100 percent * " +
+                                "from SuiBi order by SuiBi.WriteTime desc) as _t left join " +
+                                "WK_T_USER on _t.WkTUserId = WK_T_USER.KU_ID ) as t order by t.time desc ) as tt order by tt.time asc ) as ttt order by ttt.time desc";
+
+
+            }
+
+
+
+            IList SuiBiList = baseService.ExecuteSQL(sql);
+
+
+            if (SuiBiList != null && SuiBiList.Count != 0)
+            {
+                foreach (object[] o in SuiBiList)
+                {
+                    //造控件
+
+                    SuibiRect suibi = new SuibiRect();
+                    suibi.HeaderId = int.Parse(o[4].ToString());
+                    suibi.Name = o[0].ToString();
+                    suibi.TimeText = new DateTime(Convert.ToInt64(o[2].ToString())).ToString("yyyy年MM月dd日 HH:mm");
+                    suibi.Contenttext = o[1].ToString();
+
+                    suibi.Parent = Show_SuiBi_flowPanel;
+                }
+            }
+
+        }
+
+        private void RefreshSuiBi()
+        {
+            this.Show_SuiBi_flowPanel.Controls.Clear();
+            ShowSuiBiInFlowPanel(10);
+            if (this.Show_SuiBi_flowPanel.Controls.Count > 0)
+            {
+                this.Show_SuiBi_flowPanel.BackgroundImage = null;
+            }
+            else 
+            {
+                this.Show_SuiBi_flowPanel.BackgroundImage = WorkLogForm.Properties.Resources.NoCntentBg;
+            }
+        }
+
+        #region 对勾按钮
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+            if (this.Write_SUiBi_textBox.Text.Length == 0)
+            {
+                this.labelMessageBox1.MessageageShow("您还没有输入内容！");
+                //MessageBox.Show("");
+            }
+            else
+            {
+                //注入数据
+                SuiBi newsuibi = new SuiBi();
+                newsuibi.WkTUserId = user;
+                newsuibi.WriteTime = DateTime.Now.Ticks;
+                newsuibi.Contents = this.Write_SUiBi_textBox.Text;
+                newsuibi.State = (int)IEntity.stateEnum.Normal;
+                newsuibi.TimeStamp = DateTime.Now.Ticks;
+
+                //插入数据库
+
+                try
+                {
+                    baseService.SaveOrUpdateEntity(newsuibi);
+                }
+                catch
+                {
+                    this.labelMessageBox1.MessageageShow("发布随笔失败！");
+                    //MessageBox.Show("");
+                    return;
+                }
+                //清空内容
+                this.Write_SUiBi_textBox.Text = "";
+                this.labelMessageBox1.MessageageShow("发布成功！");
+
+                //更新展示栏中内容
+
+                while (Show_SuiBi_flowPanel.Controls.Count > 0)
+                {
+                    Show_SuiBi_flowPanel.Controls.RemoveAt(0); //
+                }
+                ShowSuiBiInFlowPanel(10);
+
+               
+            }
+        }
+
+        private void pictureBox7_MouseEnter(object sender, EventArgs e)
+        {
+            this.pictureBox7.Image = WorkLogForm.Properties.Resources.DuiGouDarkBlack;
+        }
+
+        private void pictureBox7_MouseLeave(object sender, EventArgs e)
+        {
+            this.pictureBox7.Image = WorkLogForm.Properties.Resources.DuigouLightBlack;
+        }
+
+        
+
+
+
+        #endregion
+
+
+
+        #region 写日志按钮
+        private void pictureBox6_MouseEnter(object sender, EventArgs e)
+        {
+            if (this.pictureBox6.Image != null)
+                this.pictureBox6.Image = WorkLogForm.Properties.Resources.WritesuibiOn;
+            else
+            {
+                this.pictureBox6.BackgroundImage = WorkLogForm.Properties.Resources.ChahaoDB;
+            }
+        }
+
+        private void pictureBox6_MouseLeave(object sender, EventArgs e)
+        {
+            if (this.pictureBox6.Image != null)
+                this.pictureBox6.Image = WorkLogForm.Properties.Resources.WriteSuibi;
+            else
+            {
+                this.pictureBox6.BackgroundImage = WorkLogForm.Properties.Resources.ChahaoLB;
+            }
+        }
+
+        private void pictureBox6_Click(object sender, EventArgs e)
+        {
+            if (this.panel12.Visible == false)
+            {
+                this.panel12.Visible = true;
+                this.write_SuiBi.Visible = true;
+                this.pictureBox6.Image = null;
+                this.pictureBox6.BackgroundImage = WorkLogForm.Properties.Resources.ChahaoDB;
+
+            }
+            else if (this.panel12.Visible == true)
+            {
+                this.panel12.Visible = false;
+                this.write_SuiBi.Visible = false;
+                this.pictureBox6.Image =  WorkLogForm.Properties.Resources.WriteSuibi;
+                this.pictureBox6.BackgroundImage = null;
+            }
+
+            //this.Show_SuiBi_flowPanel.Height = 293;
+            //this.SuiBi_SeeMore.Height = 169;
+            //this.write_SuiBi.Visible = true;
+            //this.panel8.Location = new Point(panel8.Location.X, write_SuiBi.Height + 5);
+        }
+
+        #endregion
+
+
+        #endregion
+
+        #region 刷新
+        /// <summary>
+        /// 手动更新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pictureBoxOfrefresh_Click(object sender, EventArgs e)
+        {
+            this.rz_flowLayoutPanel.Tag = null; //更新从0开始查库
+            init_rc_Panel();
+
+            init_rz_Panel();
+            RefreshSuiBi();
+
+            if (this.backgroundWorkerOfDownPicture.IsBusy == false)
+            {
+                this.backgroundWorkerOfDownPicture.RunWorkerAsync();
+            }
+        }
+        /// <summary>
+        ///自动更新 //更新之后无法记录看到什么位置了，会回到最顶端 暂时搁置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RefreshAll_Tick(object sender, EventArgs e)
+        {
+            //init_rc_Panel();
+            //init_rz_Panel();
+            //RefreshSuiBi();
+        }
+
+        /// <summary>
+        /// 后台下载图片
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void backgroundWorkerOfDownPicture_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            string mysql = "select w.KU_ID,w.KU_ONLINE from WK_T_USER w";
+            IList userList = baseService.ExecuteSQL(mysql);
+            if (userList != null && userList.Count > 0)
+            {
+                foreach (object[] obj in userList)
+                {
+                    string address = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"icons" + @"\" + obj[0].ToString() + ".png";
+
+                    if (fileUpDown.DirectoryExist(obj[0].ToString() + ".png", "Iconpics")) //服务器里是否有他的图片
+                    {
+                        if (File.Exists(address))//本地是否存在 存在
+                        {
+                            FileInfo fi = new FileInfo(address);
+                            if (fi.CreationTime.Ticks < fileUpDown.GetFileModifyDateTime(obj[0].ToString() + ".png", "Iconpics").Ticks)//与本地图片比对时间 本地创建时间晚于服务器则下载
+                            {
+                                //fi.Delete();
+                                string[] files = Directory.GetFiles(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"icons", obj[0].ToString() + "__" + "*.png", System.IO.SearchOption.AllDirectories);
+                                if (files.Length > 0) //删除原来的临时文件
+                                {
+                                    for (int i = 0; i < files.Length;i++ )
+                                    {
+                                        FileInfo oldfi = new FileInfo(files[i]);
+                                        oldfi.Delete();
+                                    }
+                                }
+
+                                fileUpDown.Download(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"icons", obj[0].ToString() +"__"+DateTime.Now.Ticks.ToString()+".png", "Iconpics");
+                            }
+                        }
+                        else
+                        {
+                            fileUpDown.Download(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"icons", obj[0].ToString() + ".png", "Iconpics");
+                        }
+                    }
+                }
+            }
+        }
+        private void backgroundWorkerOfDownPicture_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            //MessageBox.Show("");
+        }
+
+
+        #endregion
+
+        #region 联系人列表显示
+
+        private void Showcontacts()
+        {
+            chatListBox1.Items.Clear();
+            
+            string sql = "select u from WkTDept u";
+            IList depts = baseService.loadEntityList(sql);
+            if (depts != null && depts.Count > 0)
+            {
+                foreach (WkTDept o in depts)
+                {
+                    ChatListItem item = new ChatListItem(o.KdName.Trim());
+                    string sql1 = "select u from WkTUser u left join u.Kdid dept where dept.Id = " + o.Id + " order by u.KuOnline desc";
+                    IList userlist = baseService.loadEntityList(sql1);
+
+                    if (userlist != null && userlist.Count > 0)
+                    {
+                        #region 二层循环
+                        foreach (WkTUser oo in userlist)
+                        {
+                            if (oo.Id != user.Id)
+                            {
+                                ChatListSubItem subItem = new ChatListSubItem("", oo.KuName.Trim(), "");
+                                subItem.userid =int.Parse(oo.Id.ToString());
+                              
+                                if (oo.KuOnline == 1)
+                                {
+                                    subItem.Status = (ChatListSubItem.UserStatus)(1);
+                                }
+                                else
+                                {
+                                    subItem.Status = (ChatListSubItem.UserStatus)(5);
+                                }
+                                //subItem.ta
+
+                                item.SubItems.AddAccordingToStatus(subItem);
+                            }
+
+                        }
+                        #endregion end 二层循环
+
+                        item.SubItems.Sort();
+
+                        chatListBox1.Items.Add(item);
+                    }
+                   
+                    
+                }
+            }
+            this.timerOfRefreshOnline.Enabled = true; ;
+            this.timerOfRefreshOnline.Start();
+        }
+
+        private void RefreshUserOnling()
+        {
+            string mysql = "select w.KU_ID,w.KU_ONLINE from WK_T_USER w";
+            IList userList = baseService.ExecuteSQL(mysql);
+            if (userList != null)
+            {
+                foreach (object[] o in userList)
+                {
+                    ChatListSubItem cha = GetTheUserById(int.Parse(o[0].ToString()));
+                    if (cha != null)
+                    {
+                        if (o[1].ToString() == "1")
+                        {
+                            cha.Status = (ChatListSubItem.UserStatus)(1);
+                        }
+                        else
+                        {
+                            cha.Status = (ChatListSubItem.UserStatus)(5);
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+        private ChatListSubItem GetTheUserById(int theuserid)
+        {
+            foreach (ChatListItem group in chatListBox1.Items)
+            {
+                foreach (ChatListSubItem user in group.SubItems)
+                {
+                    if (user.userid == theuserid)
+                    {
+                        return user; 
+                    }
+                
+                }
+            }
+
+            return null;
+        }
+
+        private void timerOfRefreshOnline_Tick(object sender, EventArgs e)
+        {
+            RefreshUserOnling();
+        }
+
+        #endregion
+
+        #endregion //end界面的现实
+
+        #region 
+        private void AddInPanelOfLogCommentMessage()
+        {
+            if (commentlistfromService.Count > 0)
+            {
+                foreach (KjqbService.CommentInService com in commentlistfromService)
+                {
+                    string sql = "select u from WkTUser u where u.KuName = '" + com.CommentUserName + "'";
+
+                    WkTUser commentuser = (WkTUser)baseService.loadEntityList(sql)[0];
+
+                    panelOfLogCommentMessageItem item = new panelOfLogCommentMessageItem();
+                    item.HeaderUserid = int.Parse(commentuser.Id.ToString());
+                    item.NameContent = com.CommentUserName;
+                    item.ContentClicked += item_ContentClicked;
+                    item.Tag = com.LogId;
+                    this.panelOfLogCommentMessage1.AddCommentItem(item);
+                }
+                this.panelOfLogCommentMessage1.Visible = true;
+            }
+            else
+            {
+                this.panelOfLogCommentMessage1.Visible = false;
+            }
+
+        }
+
+        void item_ContentClicked(object sender, EventArgs e)
+        {
+            Label p = (Label)sender;
+            long logid = long.Parse(p.Parent.Tag.ToString());
+            p.Parent.Cursor = Cursors.WaitCursor;
+            StaffLog sl = new StaffLog();
+            baseService.loadEntity(sl, logid);
+            writeLog log = new writeLog();
+            log.IsComment = true;
+            log.User = sl.Staff;
+            log.CommentPersonName = User.KuName;
+            log.LogDate = new DateTime(sl.WriteTime);
+            log.ShowDialog();
+            panelOfLogCommentMessageItem item = (panelOfLogCommentMessageItem)p.Parent;
+            this.panelOfLogCommentMessage1.RemoveCommentItem(item);
+
+            p.Parent.Cursor = Cursors.Hand;
+
+        }
+
+
+        public void SetMessageCount(MessageCountLabel m, int count)
+        {
+            if (m.MessageCount == 0)
+                m.MessageCount = count == 0 ? 0 : count;
+            else
+                m.MessageCount = m.MessageCount + count;
+        }
+
+        #endregion
+
+
+        #endregion //主界面四个按钮
+
+        #region 底部按钮
+        #region 底部按钮功能
+
+
+
+        //我的日历
+        private void wdrl_pictureBox_Click(object sender, EventArgs e)
+        {
+            wdrl_pictureBox.Cursor = Cursors.WaitCursor;
+            if (shouYe == null || shouYe.IsDisposed)
+            {
+                shouYe = new shou_ye();
+            }
+            if (!shouYe.Created)
+            {
+                shouYe.User = this.user;
+                shouYe.Show();
+            }
+            else
+            {
+                shouYe.WindowState = FormWindowState.Normal;
+                shouYe.Focus();
+            }
+            wdrl_pictureBox.Cursor = Cursors.Hand;
+        }
+        //请假管理
         private void qjgl_pictureBox_Click(object sender, EventArgs e)
         {
+            if (levlistfromservice.Count > 0)
+            {
+                ser.SetLeaveInfoIsRead((int)this.user.Id);
+                this.levlistfromservice.Clear();
+                this.meaaageCountLabelOFQingJia.MessageCount = 0;
+            }
             if (leave == null || leave.IsDisposed)
             {
                 leave = new Leave();
@@ -1204,6 +1828,7 @@ namespace WorkLogForm
                 leave.Focus();
             }
         }
+        //日志管理
         private void rzgl_pictureBox_Click(object sender, EventArgs e)
         {
             if (staffLogLeader == null || staffLogLeader.IsDisposed)
@@ -1222,6 +1847,7 @@ namespace WorkLogForm
                 staffLogLeader.Focus();
             }
         }
+        //日程管理
         private void rcgl_pictureBox_Click(object sender, EventArgs e)
         {
             if (scheduleManage == null || scheduleManage.IsDisposed)
@@ -1241,6 +1867,7 @@ namespace WorkLogForm
             }
             
         }
+        //加班管理
         private void jbgl_pictureBox_Click(object sender, EventArgs e)
         {
             if (workOvertime == null || workOvertime.IsDisposed)
@@ -1259,8 +1886,15 @@ namespace WorkLogForm
                 workOvertime.Focus();
             }
         }
+        //值班管理
         private void zbgl_pictureBox_Click(object sender, EventArgs e)
         {
+            if (tfmListfromservice.Count > 0)
+            {
+                ser.SetTimeArrangeForManagerIsRead((int)this.user.Id);
+                this.meaaageCountLabelOfZhiBan.MessageCount = 0;
+                this.tfmListfromservice.Clear();
+            }
             zbgl_pictureBox.Cursor = Cursors.WaitCursor;
             if (onDuty == null || onDuty.IsDisposed)
             {
@@ -1282,8 +1916,17 @@ namespace WorkLogForm
             zbgl_pictureBox.Cursor = Cursors.Hand;
 
         }
+        //出差管理
         private void ccgl_pictureBox_Click(object sender, EventArgs e)
         {
+
+            if(this.businessfromservice.Count>0)
+            {
+                ser.SetBusinessInfoIsRead((long)this.user.Id);
+                this.businessfromservice.Clear();
+                this.meaaageCountLabelCHuChai.MessageCount = 0;
+            }
+
             if (businessManagement == null || businessManagement.IsDisposed)
             {
                 businessManagement = new BusinessManagement();
@@ -1300,7 +1943,7 @@ namespace WorkLogForm
                 businessManagement.Focus();
             }
         }
-       
+        //随笔管理
         private void SuiBiGuanLi_pictureBox_Click(object sender, EventArgs e)
         {
             SuiBiGuanLi_pictureBox.Cursor = Cursors.WaitCursor;
@@ -1324,12 +1967,133 @@ namespace WorkLogForm
            // suibiguanli.User = this.user;
             //suibiguanli.ShowDialog();
         }
+        //系统设置
+        private void spgl_pictureBox_Click(object sender, EventArgs e)
+        {
+            if (statisticsAttendance == null || statisticsAttendance.IsDisposed)
+            {
+                statisticsAttendance = new statistics_Attendance();
+                statisticsAttendance.User = this.user;
+                statisticsAttendance.Role = role;
+            }
+            if (!statisticsAttendance.Created)
+            {
+                statisticsAttendance.Show();
+            }
+            else
+            {
+                statisticsAttendance.WindowState = FormWindowState.Normal;
+                statisticsAttendance.Focus();
+            }
+        }
+        #endregion
+        #region 底部图标选中效果
+        #region 我的日历
+        private void wdrl_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            wdrl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.底部椭圆背景选中;
+        }
+        private void wdrl_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            wdrl_pictureBox.BackgroundImage = null;
+        }
+        #endregion
 
+        #region 日程管理
+        private void rcgl_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            rcgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.底部椭圆背景选中;
+        }
+        private void rcgl_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            rcgl_pictureBox.BackgroundImage = null;
+        }
+        #endregion
+
+        #region 日志管理
+        private void rzgl_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            rzgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.底部椭圆背景选中;
+        }
+        private void rzgl_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            rzgl_pictureBox.BackgroundImage = null;
+        }
         #endregion
 
 
+        #region 随笔管理
+        private void SuiBiGuanLi_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            SuiBiGuanLi_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.底部椭圆背景选中;
+        }
 
+        private void SuiBiGuanLi_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            SuiBiGuanLi_pictureBox.BackgroundImage = null;
+        }
 
+        #endregion
+
+        #region 请假管理
+
+        private void qjgl_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            qjgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.底部椭圆背景选中;
+        }
+        private void qjgl_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            qjgl_pictureBox.BackgroundImage = null;
+        }
+        #endregion
+
+        #region 加班管理
+        private void jbgl_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            jbgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.底部椭圆背景选中;
+        }
+        private void jbgl_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            jbgl_pictureBox.BackgroundImage = null;
+        }
+        #endregion
+
+        #region 值班管理
+        private void zbgl_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            zbgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.底部椭圆背景选中;
+        }
+        private void zbgl_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            zbgl_pictureBox.BackgroundImage = null;
+        }
+        #endregion
+
+        #region 出差管理
+        private void ccgl_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            ccgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.底部椭圆背景选中;
+        }
+        private void ccgl_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            ccgl_pictureBox.BackgroundImage = null;
+        }
+        #endregion
+
+        #region 综合统计
+        private void spgl_pictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            spgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.底部椭圆背景选中;
+        }
+
+        private void spgl_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            spgl_pictureBox.BackgroundImage = null;
+        }
+        #endregion
+
+        #endregion
+        #endregion
 
         #region 退出时签到相关事件及方法
         /// <summary>
@@ -1339,6 +2103,14 @@ namespace WorkLogForm
         {
             try
             {
+
+                if (this.backgroundWorkerOfDownPicture.IsBusy == true)
+                {
+                    this.backgroundWorkerOfDownPicture.CancelAsync();
+                    this.backgroundWorkerOfDownPicture.Dispose();
+                
+                }
+
                 if (user != null)
                 {
                     user.KuOnline = 0;
@@ -1409,7 +2181,7 @@ namespace WorkLogForm
                                 MessageBox.Show("签退失败！");
                                 return;
                             }
-                            attendance_label.Text = CNDate.getTimeByTimeTicks(todaySignStart.SignStartTime) + "~";
+                            attendance_label.Text = CNDate.getTimeByTimeTicks(todaySignStart.SignStartTime) + "-";
                         }
                     }
                 }
@@ -1442,12 +2214,7 @@ namespace WorkLogForm
         #endregion
 
 
-        private void timer_show_Tick(object sender, EventArgs e)//显示界面
-        {
-            this.Visible = true;
-            this.Opacity = 1;
-            timer_show.Stop();
-        }
+        
 
 
 
@@ -1526,274 +2293,6 @@ namespace WorkLogForm
         }
         #endregion
 
-        #region 边栏图片效果
-        private void spgl_pictureBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            spgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人考勤副本;
-        }
-
-        private void spgl_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            spgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.个人考勤;
-        }
-
-        private void sjgl_pictureBox_MouseMove(object sender, MouseEventArgs e)
-        {
-            sjgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.系统管理1;
-        }
-
-        private void sjgl_pictureBox_MouseLeave(object sender, EventArgs e)
-        {
-            sjgl_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.系统管理;
-        }
-        #endregion
-
-
-        #region 随笔功能
-        private void Write_SUiBi_textBox_TextChanged(object sender, EventArgs e)
-        {
-            if (this.Write_SUiBi_textBox.Text.Length > 140 && this.Write_SUiBi_textBox.Text.Length == 0)
-            {
-                this.Pulish_button.Enabled = false;
-            }
-            else
-            {
-                this.Pulish_button.Enabled = true;
-            
-            }
-        }
-
-        /// <summary>
-        /// 在库中插入一条随笔
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Pulish_button_Click(object sender, EventArgs e)
-        {
-            if (this.Write_SUiBi_textBox.Text.Length == 0)
-            {
-                MessageBox.Show("您还没有输入内容！");
-            }
-            else
-            {
-                //注入数据
-                SuiBi newsuibi = new SuiBi();
-                newsuibi.WkTUserId = user;
-                newsuibi.WriteTime = DateTime.Now.Ticks;
-                newsuibi.Contents = this.Write_SUiBi_textBox.Text;
-                newsuibi.State = (int)IEntity.stateEnum.Normal;
-                newsuibi.TimeStamp = DateTime.Now.Ticks;
-
-                //插入数据库
-
-                try
-                {
-                    baseService.SaveOrUpdateEntity(newsuibi);
-                }
-                catch
-                {
-                    MessageBox.Show("发布随笔失败！");
-                    return;
-                }
-                //清空内容
-                this.Write_SUiBi_textBox.Text = "";
-                MessageBox.Show("发布成功！");
-
-
-                //更新展示栏中内容
-
-                while (Show_SuiBi_flowPanel.Controls.Count > 0)
-                {
-                    Show_SuiBi_flowPanel.Controls.RemoveAt(0); // 删除所有日程消息
-                }
-                ShowSuiBiInFlowPanel(10);
-                this.linkLabel10.Enabled = true;
-                ChangeLocationAftercancel();
-            }
-
-        }
-
-        /// <summary>
-        /// 点击查看更多
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void linkLabel10_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            ShowSuiBiInFlowPanel(this.Show_SuiBi_flowPanel.Controls.Count+10);
-
-        }
-
-        public void ShowSuiBiInFlowPanel(int end)
-        { 
-           
-
-            //从数据库中查出区间内容
-
-            String listCountSql = "select COUNT(*) from SuiBi;";
-
-            IList CountSuibi = baseService.ExecuteSQL(listCountSql);
-            int count  = 0;
-            foreach (object[] o in CountSuibi)
-            {
-                count = Convert.ToInt32(o[0].ToString());
-            }
-            string sql;
-            if (end < count)
-            {
-
-                sql = "select * from ( " +
-                             "select top 10 * from ( " +
-                             "select top " + end.ToString() + " * from  " +
-                             "(Select  WK_T_USER.KU_NAME as name , _t.Contents as content, " +
-                             "_t.WriteTime as time , _t.Id as id  from (select top 100 percent * " +
-                             "from SuiBi where SuiBi.STATE = 0 order by SuiBi.WriteTime desc) as _t left join " +
-                             "WK_T_USER on _t.WkTUserId = WK_T_USER.KU_ID ) as t order by t.time desc ) as tt order by tt.time asc ) as ttt order by ttt.time desc";
-
-            }
-            else
-            {
-
-                sql = "select * from ( " +
-                                "select top " + (count % 10).ToString() + " * from ( " +
-                                "select top " + (count+10).ToString() + " * from  " +
-                                "(Select  WK_T_USER.KU_NAME as name , _t.Contents as content, " +
-                                "_t.WriteTime as time , _t.Id as id  from (select top 100 percent * " +
-                                "from SuiBi order by SuiBi.WriteTime desc) as _t left join " +
-                                "WK_T_USER on _t.WkTUserId = WK_T_USER.KU_ID ) as t order by t.time desc ) as tt order by tt.time asc ) as ttt order by ttt.time desc";
-
-               
-                this.linkLabel10.Enabled = false;
-            }
-
-
-            
-            IList SuiBiList = baseService.ExecuteSQL(sql);
-            
-
-            if(SuiBiList!= null && SuiBiList.Count != 0)
-            {
-                foreach (object[] o in SuiBiList)
-                {
-                   //造控件
-
-                    Panel newpanel = new Panel();
-                    
-                    Label Name = new Label();
-                    Name.Font = new Font(new FontFamily("微软雅黑"), 12, FontStyle.Bold);
-                    Name.AutoSize = true;
-                    Name.Text = o[0].ToString();
-                    Name.Location = new Point(5, 5);
-
-                    Label content = new Label();
-                    content.Font = new Font(new FontFamily("微软雅黑"), 10);
-                    content.AutoSize = false;
-                    
-                    
-                    int contentheight = ((o[1].ToString().Length /14)+1) * 21;
-                    content.Size = new Size(209, contentheight);
-                    content.Text = o[1].ToString();
-                    content.Location = new Point(5 , 5 + Name.Height);
-
-                    Label time = new Label();
-                    time.Font = new Font(new FontFamily("微软雅黑"), 9);
-                    time.AutoSize = true;
-                    time.Location = new Point(68, Name.Height + content.Height + 15);
-                    time.Text = new DateTime(Convert.ToInt64(o[2].ToString())).ToString("yyyy年MM月dd日 HH:mm");
-
-                    newpanel.Size = new Size(215, Name.Height + content.Height + time.Height + 25);
-                    newpanel.Parent = Show_SuiBi_flowPanel;
-
-                    Name.Parent = newpanel;
-                    content.Parent = newpanel;
-                    time.Parent = newpanel;
-
-                   
-                }
-            }
-        
-        }
-
-        /// <summary>
-        /// 随笔刷新功能
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void linkLabel11_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            this.Show_SuiBi_flowPanel.Controls.Clear();
-            ShowSuiBiInFlowPanel(10);
-            this.linkLabel10.Enabled = true;
-        }
-        private void RefreshSuiBi()
-        {
-            this.Show_SuiBi_flowPanel.Controls.Clear();
-            ShowSuiBiInFlowPanel(10);
-            this.linkLabel10.Enabled = true;
-        }
-
-        /// <summary>
-        /// 写随笔
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void linkLabel12_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            this.Show_SuiBi_flowPanel.Height = 293;
-            this.SuiBi_SeeMore.Height = 169;
-            this.write_SuiBi.Visible = true;
-            this.panel8.Location = new Point(panel8.Location.X, write_SuiBi.Height+5);
-        }
-
-        /// <summary>
-        /// 取消发布按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ChangeLocationAftercancel();
-        }
-
-        public void ChangeLocationAftercancel()
-        {
-            this.SuiBi_SeeMore.Height = 45;
-            this.Show_SuiBi_flowPanel.Height = 420;
-            this.write_SuiBi.Visible = false;
-            this.panel8.Location = new Point(this.panel8.Location.X, 7);
-        }
-
-        #endregion
-
-
-        #region 刷新 
-        /// <summary>
-        /// 手动更新
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pictureBoxOfrefresh_Click(object sender, EventArgs e)
-        {
-            init_rc_Panel();
-            init_rz_Panel();
-            RefreshSuiBi();
-        }
-        /// <summary>
-        ///自动更新 //更新之后无法记录看到什么位置了，会回到最顶端 暂时搁置
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RefreshAll_Tick(object sender, EventArgs e)
-        {
-            //init_rc_Panel();
-            //init_rz_Panel();
-            //RefreshSuiBi();
-        }
-
-        #endregion
-
-        
-
         #region 提醒写日志
         /// <summary>
         /// 提醒写日志
@@ -1829,62 +2328,8 @@ namespace WorkLogForm
             p.Focus();
         }
 
-        #region 消息推送
-        private void panelNewMessage_Click(object sender, EventArgs e)
-        {
-            panelNewMessage.Cursor = Cursors.WaitCursor;
+      
 
-            this.labelNewMEssageCount.Text = "0";
-
-            try
-            {
-                ser.SetShareLogIsRead((int)this.user.Id);
-                ser.SetShareScheduleIsRead((int)this.user.Id);
-                ser.SetCommentLogIsRead((int)this.user.Id);
-                ser.SetTimeArrangeForManagerIsRead((int)this.user.Id);
-                ser.SetLeaveInfoIsRead((int)this.user.Id);
-                ser.SetBusinessInfoIsRead((long)this.user.Id);
-            }
-            catch
-            {
-                
-            }
-            
-            //同时刷新窗体
-            init_rc_Panel();
-            init_rz_Panel();
-            RefreshSuiBi();
-
-            if (newMessageWindow == null || newMessageWindow.IsDisposed)
-            {
-                newMessageWindow = new NewMessageWindow();
-            }
-            if (!newMessageWindow.Created)
-            {
-                newMessageWindow.FormLocation = new Point(this.Location.X - newMessageWindow.Width, this.Location.Y);
-
-                 
-                newMessageWindow.Loglist = loglistfromService;
-                newMessageWindow.Schedulelist = schedulelistfromService;
-                newMessageWindow.CommentList = commentlistfromService;
-                newMessageWindow.Tfmlist = tfmListfromservice;
-                newMessageWindow.Levlist = levlistfromservice;
-                newMessageWindow.Buslist = businessfromservice;
-                newMessageWindow.User = this.user;
-                newMessageWindow.Role = this.role;
-                newMessageWindow.LeaveWindow = leave;
-                newMessageWindow.BusinessManagement = businessManagement;
-                newMessageWindow.Show();
-
-            }
-            else
-            {
-                newMessageWindow.WindowState = FormWindowState.Normal;
-                newMessageWindow.Focus();
-            }
-
-            panelNewMessage.Cursor = Cursors.Hand;
-        }
 
         private void timerMessageSend_Tick(object sender, EventArgs e)
         {
@@ -1897,7 +2342,6 @@ namespace WorkLogForm
                     loglistfromService.Add(lists[i]);
                 }
 
-                this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
 
                 KjqbService.ScheduleInService[] lists2;
                 lists2 = ser.SearchShareSchedule((int)this.user.Id);
@@ -1906,7 +2350,8 @@ namespace WorkLogForm
                     schedulelistfromService.Add(lists2[i]);
                 }
 
-                this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists2.Length).ToString();
+                
+                //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists2.Length).ToString();
 
                 KjqbService.CommentInService[] lists3;
                 lists3 = ser.SearchCommentlog((int)this.user.Id);
@@ -1914,9 +2359,10 @@ namespace WorkLogForm
                 {
                     commentlistfromService.Add(lists3[i]);
                 }
-
-                this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists3.Length).ToString();
-
+                
+                //SetMessageCount(this.meaaageCountLabelOfRicheng, lists2.Length);
+                //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists3.Length).ToString();
+                
                 KjqbService.TimeArrangeForManagerInService[] lists4;
                 lists4 = ser.SearchTimeArrangeForManager((int)this.user.Id);
                 for (int i = 0; i < lists4.Length; i++)
@@ -1924,7 +2370,7 @@ namespace WorkLogForm
                     tfmListfromservice.Add(lists4[i]);
                 }
 
-                this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists4.Length).ToString();
+                //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists4.Length).ToString();
 
                 KjqbService.LeaveInService[] lists5;
                 lists5 = ser.SearchLeaveInfo((int)this.user.Id);
@@ -1933,7 +2379,8 @@ namespace WorkLogForm
                     levlistfromservice.Add(lists5[i]);
                 }
 
-                this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
+
+                //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
 
                 KjqbService.BusinessService[] lists6;
                 lists6 = ser.SearchBusinessInfo((int)this.user.Id);
@@ -1942,30 +2389,36 @@ namespace WorkLogForm
                     businessfromservice.Add(lists6[i]);
                 }
 
-                this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
+                SetMessageCount(meaaageCountLabelOfRiZhi, lists.Length);
+
+                SetMessageCount(this.meaaageCountLabelOfRicheng, lists2.Length);
+
+                SetMessageCount(this.meaaageCountLabelOfZhiBan, lists4.Length);
+
+                SetMessageCount(this.meaaageCountLabelOFQingJia, lists5.Length);
+
+                SetMessageCount(this.meaaageCountLabelCHuChai, lists6.Length);
+               
+                SetMessageCount(this.messageCountLabelOfCommentLog, lists3.Length);
+
             }
             catch
             {
-
                 this.timerMessageSend.Stop();
                 MessageBox.Show("与服务器失去建立连接，可能是由于网络原因，程序将退出，未记录本次签退时间，请在网络正常后再次登录。");
                 this.Close();
             
             }
         }
-        /// <summary>
-        /// 图标闪烁
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void timerchattingflesh_Tick(object sender, EventArgs e)
-        {
-            if (this.pictureBoxOfInstantMessenger.BackgroundImage != null)
-            this.pictureBoxOfInstantMessenger.BackgroundImage = null;
-            else
-                this.pictureBoxOfInstantMessenger.BackgroundImage = WorkLogForm.Properties.Resources.InstantMessengerLogo;
-        }
 
+      
+
+
+     
+        
+
+
+        #region 接受聊天信息
 
 
         private bool IsInChatUserlist(long id)
@@ -1983,14 +2436,64 @@ namespace WorkLogForm
             {
                 return false;
             }
-        
+
         }
-        #endregion
 
+        /// <summary>
+        /// 如果已经在和这个人聊天则不能再创建窗体
+        /// </summary>
+        List<WkTUser> chatwindowsusers;
 
+        private void chatListBox1_DoubleClickSubItem(object sender, ChatListEventArgs e)
+        {
+            ChatListSubItem cha = e.SelectSubItem;
+            if (cha.IsTwinkle)
+            {
+                cha.IsTwinkle = !cha.IsTwinkle;
+                RemoveFromChaterList(cha.userid);
+            }
 
-        #region 接受聊天信息
+            WkTUser w = new WkTUser();
+            w = (WkTUser)baseService.loadEntity(w, cha.userid);
+
+            if (chatwindowsusers == null)
+            {
+                chatwindowsusers = new List<WkTUser>();
+            }
+            if (!chatwindowsusers.Contains(w))
+            {
+
+                ChatWindows chat = new ChatWindows();
+                chat.ReceiveUser = w;
+                chat.SendUser = this.user;
+                chat.Chatwindwosuser = chatwindowsusers;
+                chat.Show();
+            }
+            else
+            {
+
+            }
+        }
+        private void RemoveFromChaterList(int id)
+        {
+
+            if (chattinguserlist !=null&& this.chattinguserlist.Count > 0)
+            {
+                foreach (WkTUser u in chattinguserlist)
+                {
+                    if (u.Id == id)
+                    {
+                        chattinguserlist.Remove(u);
+                    }
+                }
+            }
+        }
         private void timerOfReceiveChattingMessage_Tick(object sender, EventArgs e)
+        {
+            ReceiveChattingMessage();
+        }
+
+        private void ReceiveChattingMessage()
         {
             #region 接受聊天信息
             try
@@ -2000,17 +2503,19 @@ namespace WorkLogForm
                 for (int i = 0; i < lists7.Length; i++)
                 {
                     chatinservice.Add(lists7[i]);
-                    if(!IsInChatUserlist(lists7[i].SendUserId))
+                    if (!IsInChatUserlist(lists7[i].SendUserId))
                     {
-                        WkTUser w = new WkTUser(); ;
+                        WkTUser w = new WkTUser();
                         w = (WkTUser)baseService.loadEntity(w, lists7[i].SendUserId);
                         this.chattinguserlist.Add(w);
+
                         if (sec == null)
                         {
                             sec = new Secretary(this);
                             sec.Show();
                             sec.AddMessageLabelInFlowPanel1(w.KuName);
                         }
+
                         else
                         {
                             if (sec.IsDisposed)
@@ -2020,27 +2525,41 @@ namespace WorkLogForm
                             }
                             sec.AddMessageLabelInFlowPanel1(w.KuName);
                         }
+
                         this.chattinguserlist.Add(w);
                     }
 
-                    
-                }
-                if (this.LabelofChatttingCount.Text == "")
-                    this.LabelofChatttingCount.Text = lists7.Length == 0 ? "" : lists7.Length.ToString();
-                else
-                    this.LabelofChatttingCount.Text = (int.Parse(this.LabelofChatttingCount.Text) + lists7.Length).ToString();
 
-                if (lists7.Length > 0)
-                {
-                    timerchattingflesh.Enabled = true;
                 }
+                SetMessageCount(meaaageCountLabelOfXiaoXI, lists7.Length);
             }
             catch { }
+            SetthechatingUserIsTwinkle();
             #endregion
-        }
         
+        }
+
+        private void SetthechatingUserIsTwinkle()
+        {
+
+            if (chattinguserlist.Count > 0 && chattinguserlist != null)
+            {
+                foreach (WkTUser user in chattinguserlist)
+                {
+                    ChatListSubItem cha = this.GetTheUserById(int.Parse(user.Id.ToString()));
+                    if (cha != null)
+                    {
+                        cha.IsTwinkle = true;
+                    }
+                }
+            }
+        }
+
+
         #endregion
 
+
+        #region 任务栏右下角图标右键项
         /// <summary>
         /// 右键退出
         /// </summary>
@@ -2061,10 +2580,10 @@ namespace WorkLogForm
             this.Visible = true;
             this.Activate();
         }
+        #endregion 
 
 
-
-
+        #region 钩子事件判定鼠标未操作时间
         public void OnKeyboardPress(WorkLogForm.DCIEngine.FrameWork.Snap.Hook.KeyboardMouseHook.KeyboardHookStruct hookStruct, out bool isNeedStop)
         {
 
@@ -2125,6 +2644,7 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void timerOfMouseOrKeyUnDo_Tick(object sender, EventArgs e)
         {
+            
             timeCount++;
             if (this.timeCount > 60*40)//timecount单位秒 40分钟
             {
@@ -2143,14 +2663,90 @@ namespace WorkLogForm
             }
         }
 
+        #endregion
 
 
+        #region 写日志写日程按钮
+        #region 写日志写日程按钮滑动效果
+
+        private void log_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            this.log_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.WriteLog;
+        }
+
+        private void log_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            this.log_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.WritelogUnChecked;
+        }
+        private void schedule_pictureBox_MouseEnter(object sender, EventArgs e)
+        {
+            this.schedule_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.writeSch;
+        }
+
+        private void schedule_pictureBox_MouseLeave(object sender, EventArgs e)
+        {
+            this.schedule_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.writeSchUnchecked;
+        }
 
 
+        #endregion
+        #region 写日志写日程按钮功能
+        //写日志
+        private void log_pictureBox_Click(object sender, EventArgs e)
+        {
+            if (write_log == null || write_log.IsDisposed)
+            {
+                write_log = new writeLog();
+                write_log.User = this.user;
+            }
+            if (!write_log.Created)
+            {
+                write_log.Show();
+            }
+            else
+            {
+                write_log.WindowState = FormWindowState.Normal;
+                write_log.Focus();
+            }
+            if (write_log.DialogResult == DialogResult.OK)
+            {
+                if (isWriteLog == 0)
+                {
+                    isWriteLog = 1;
+                }
+            }
+        }
+        //写日程
+        private void schedule_pictureBox_Click(object sender, EventArgs e)
+        {
+            if (write_schedule == null || write_schedule.IsDisposed)
+            {
+                writeSchedule.ParentFormChange formChangeDelegate = new writeSchedule.ParentFormChange(init_rc_Panel);
+                write_schedule = new writeSchedule(formChangeDelegate);
+                write_schedule.User = this.user;
+                write_schedule.Role = this.role;
+                write_schedule.ScheduleDate = DateTime.Now;
+            }
+            if (!write_schedule.Created)
+            {
+                write_schedule.Show();
+            }
+            else
+            {
+                write_schedule.WindowState = FormWindowState.Normal;
+                write_schedule.Focus();
+            }
+        }
+        #endregion
 
+        
 
+       
 
+       
 
+        #endregion
+      
 
 
     }

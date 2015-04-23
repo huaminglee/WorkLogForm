@@ -14,6 +14,7 @@ namespace WorkLogForm.CommonClass
         public static string RoleDesc = "工作小秘书角色";
 
         public static string TEMP = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"temp";
+        public static string ICONS = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"icons";
 
     }
 }

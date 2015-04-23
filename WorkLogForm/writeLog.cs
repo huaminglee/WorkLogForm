@@ -325,7 +325,7 @@ namespace WorkLogForm
 
                         String newString2 = imgHtml.Remove(imgHtml.IndexOf("src"), inPath.Length + 6);//.Remove(imgHtml.LastIndexOf('>'))+" src=\"" + Securit.DeDES(IniReadAndWrite.IniReadValue("fileManage", "savePath")) + newName + "\">";
                         string newString1 = newString2.Remove(newString2.LastIndexOf('>'));
-                        string newString = newString1 + " src=\"" + Securit.DeDES(IniReadAndWrite.IniReadValue("fileManage", "savePath")) + newName + "\">";
+                        string newString = newString1 + " src=\"" + Securit.DeDES(IniReadAndWrite.IniReadValue("fileManage", "savePath"))+@"LogPic\" + newName + "\">";
                         //html
 
                         html = html.Replace(mc[i].Value, newString);
@@ -350,7 +350,7 @@ namespace WorkLogForm
             }
             staffLog.Content = html;
             staffLog.State = (int)IEntity.stateEnum.Normal;
-            staffLog.WriteTime = DateTime.Now.Date.Ticks;
+            staffLog.WriteTime = DateTime.Now.Ticks;
             staffLog.TimeStamp = DateTime.Now.Ticks;
             staffLog.Staff = user;
             staffLog.SharedStaffs = sharedUser;

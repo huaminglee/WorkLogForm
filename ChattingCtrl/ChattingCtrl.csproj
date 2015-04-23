@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{94288E94-B44E-4644-BCA6-68FE4CBDDFD5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChattingCtrl</RootNamespace>
+    <AssemblyName>ChattingCtrl</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlphaBlendTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HeaderIconPicturebox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HeaderIconPicturebox.Designer.cs">
+      <DependentUpon>HeaderIconPicturebox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LabelMessageBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LabelMessageBox.Designer.cs">
+      <DependentUpon>LabelMessageBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoadPicture.cs" />
+    <Compile Include="MessageCountLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MessageCountLabel.Designer.cs">
+      <DependentUpon>MessageCountLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelOfLogCommentMessage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelOfLogCommentMessage.Designer.cs">
+      <DependentUpon>PanelOfLogCommentMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="panelOfLogCommentMessageItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="panelOfLogCommentMessageItem.Designer.cs">
+      <DependentUpon>panelOfLogCommentMessageItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PanelOfRIchengAllInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PanelOfRIchengAllInfo.Designer.cs">
+      <DependentUpon>PanelOfRIchengAllInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RiChengRect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RiChengRect.Designer.cs">
+      <DependentUpon>RiChengRect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RiZhiRect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RiZhiRect.Designer.cs">
+      <DependentUpon>RiZhiRect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SuibiRect.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SuibiRect.Designer.cs">
+      <DependentUpon>SuibiRect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="win32.cs" />
+    <Compile Include="_ChatListBox\ChatListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="_ChatListBox\ChatListBox.designer.cs">
+      <DependentUpon>ChatListBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_ChatListBox\ChatListEventArgs.cs" />
+    <Compile Include="_ChatListBox\ChatListItem.cs" />
+    <Compile Include="_ChatListBox\ChatListItemConverter.cs" />
+    <Compile Include="_ChatListBox\ChatListItemIcon.cs" />
+    <Compile Include="_ChatListBox\ChatListSubItem.cs" />
+    <Compile Include="_ChatListBox\ChatListSubItemConverter.cs" />
+    <Compile Include="_ChatListBox\ChatListVScroll.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MessageCountLabel.resx">
+      <DependentUpon>MessageCountLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelOfLogCommentMessage.resx">
+      <DependentUpon>PanelOfLogCommentMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="panelOfLogCommentMessageItem.resx">
+      <DependentUpon>panelOfLogCommentMessageItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PanelOfRIchengAllInfo.resx">
+      <DependentUpon>PanelOfRIchengAllInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RiChengRect.resx">
+      <DependentUpon>RiChengRect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RiZhiRect.resx">
+      <DependentUpon>RiZhiRect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SuibiRect.resx">
+      <DependentUpon>SuibiRect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_ChatListBox\ChatListBox.resx">
+      <DependentUpon>ChatListBox.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Away.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\QMe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Busy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dont Disturb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Invisible.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\null.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OffLine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OnLine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AutoIconBigWhite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChahaoDB.png" />
+    <None Include="Resources\ChahaoLB.png" />
+    <None Include="Resources\WriteSuibiBg.png" />
+    <None Include="Resources\GrayRect.png" />
+    <None Include="Resources\GrayLine.png" />
+    <None Include="Resources\GrayRectBgOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OnLineUpdate\OnLineUpdate.csproj">
+      <Project>{c0283241-07ea-447f-8ccc-7aa14f67c494}</Project>
+      <Name>OnLineUpdate</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -18,7 +18,7 @@ namespace OnLineUpdate
         {
             InitializeComponent();
         }
-        FileUpDown fileUpDown ;
+        FileUpDown fileUpDown;
         private string GetThetUpdateVersionNum(string Dir)
         {
             string LastUpdateTime = "";

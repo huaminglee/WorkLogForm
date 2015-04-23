@@ -66,6 +66,8 @@ namespace WorkLogForm
             initialWindow();
             chatwindowsusers = new List<WkTUser>();
         }
+
+
         #region 自定义窗体初始化方法
         /// <summary>
         /// 初始化window（界面效果）
@@ -76,6 +78,8 @@ namespace WorkLogForm
             creatWindow.SetFormShadow(this);
         }
         #endregion
+
+
 
         private void InstantMessenger_Load(object sender, EventArgs e)
         {

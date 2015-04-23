@@ -92,7 +92,7 @@ namespace CommonClass
         public string Upload(string filename,string floder) //上面的代码实现了从ftp服务器上载文件的功能  
         {
             FileInfo fileInf = new FileInfo(filename);
-            string uri = "ftp://" + ftpServerIP + "/" + floder + "/" + DateTime.Now.Ticks.ToString()+fileInf.Name.Substring(fileInf.Name.LastIndexOf('.'));
+            string uri = "ftp://" + ftpServerIP + "/" + floder + "/" +fileInf.Name;
             Connect(uri);//连接           
             // 默认为true，连接不会被关闭  
             // 在一个命令之后被执行  
@@ -181,12 +181,12 @@ namespace CommonClass
             }
         }
         //删除文件  
-        public void DeleteFileName(string fileName)
+        public void DeleteFileName(string fileName, string floder)
         {
             try
             {
                 FileInfo fileInf = new FileInfo(fileName);
-                string uri = "ftp://" + ftpServerIP + "/" + fileInf.Name;
+                string uri = "ftp://" + ftpServerIP + "/" + floder +"/"+fileInf.Name;
                 Connect(uri);//连接           
                 // 默认为true，连接不会被关闭  
                 // 在一个命令之后被执行  
@@ -254,13 +254,61 @@ namespace CommonClass
             }
             return fileSize;
         }
+        
+        /// <summary>
+        /// 获取ftp文件最后更改时间
+        /// </summary>
+        /// <param name="filename">文件名</param>
+        /// <param name="floder">文件夹</param>
+        /// <returns>DateTime</returns>
+        public DateTime GetFileModifyDateTime(string filename, string floder)
+        {
+            FileInfo fileInf = new FileInfo(filename);
+            string url = "ftp://" + ftpServerIP + "/" + floder + "/" + fileInf.Name; ;
+            Connect(url);//连接       
+            reqFTP.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+
+            FtpWebResponse response = (FtpWebResponse)reqFTP.GetResponse();
+
+            DateTime dt = response.LastModified;
+
+            response.Close();
+            response = null;
+
+            return dt;
+        }
+
+        
+        /// <summary>
+        /// ftp上文件是否存在
+        /// </summary>
+        /// <param name="filename">文件名</param>
+        /// <param name="floder">文件所在文件夹</param>
+        /// <returns>bool true=〉存在</returns>
+        public bool DirectoryExist(string filename, string floder)
+        {
+            FileInfo fileInf = new FileInfo(filename);
+            string url = "ftp://" + ftpServerIP + "/" + floder + "/" + fileInf.Name; ;
+            Connect(url);//连接     
+            try
+            {
+                FtpWebResponse response = (FtpWebResponse)reqFTP.GetResponse();
+                response.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                string e = ex.Message;
+                return false;
+            }
+        }
         //文件改名  
-        public void Rename(string currentFilename, string newFilename)
+        public void Rename(string currentFilename, string newFilename, string floder)
         {
             try
             {
                 FileInfo fileInf = new FileInfo(currentFilename);
-                string uri = "ftp://" + ftpServerIP + "/" + fileInf.Name;
+                string uri = "ftp://" + ftpServerIP + "/" + floder +"/"+ fileInf.Name;
                 Connect(uri);//连接  
                 reqFTP.Method = WebRequestMethods.Ftp.Rename;
                 reqFTP.RenameTo = newFilename;

@@ -11,18 +11,37 @@ using System.Collections;
 using ClassLibrary;
 using WorkLogForm.Service;
 using WorkLogForm.CommonClass;
+using CommonClass;
+using System.Net;
+using System.IO;
 
 namespace WorkLogForm
 {
     public partial class personal_setting : Form
     {
+        #region 头像制作
+        private Point m_LastMSPoint;
+        private Rectangle newCutRect;
+        private Rectangle oldCutRect;
+
+        
+
+
+        #endregion
+
+
+        private delegate void loadTreedle();
         BaseService baseService = new BaseService();
         private Hobby ri_zhi_hobby;
         private Hobby ri_cheng_hobby;
         //private Hobby sui_bi_hobby;
         private WkTRole role;
 
-   
+        private List<WkTUser> users = new List<WkTUser>();
+        private List<WkTDept> deptperts = new List<WkTDept>();
+        IList<WkTUser> shares = new List<WkTUser>();
+        IList<WkTUser> sharesRicheng = new List<WkTUser>();
+
         public WkTRole Role
         {
             get { return role; }
@@ -46,7 +65,12 @@ namespace WorkLogForm
         {
             InitializeComponent();
             initialWindow();
+            this.MouseWheel += personal_setting_MouseWheel;
         }
+
+        public main themain;
+
+        private FileUpDown fileop;
         IList hobbysList;
         IList hobbysRiChenglist;
         #region 自定义窗体初始化方法
@@ -56,49 +80,21 @@ namespace WorkLogForm
         private void initialWindow()
         {
             creatWindow.SetFormRoundRectRgn(this, 15);
-            creatWindow.SetFormShadow(this);
+            //creatWindow.SetFormShadow(this);
         }
         #endregion
 
         private void personal_setting_Load(object sender, EventArgs e)
         {
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
+            this.UpdateStyles();
+            newCutRect = new Rectangle(86, 70, 114, 114);
+            oldCutRect = newCutRect;
             if (this.formLocation != null)
             {
                 this.Location = formLocation;
             }
-
-            hobbysList = baseService.loadEntityList("from Hobby where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and TypeFlag = " + (int)Hobby.hobbyTypeEnum.RiZhi);
-            hobbysRiChenglist = baseService.loadEntityList("from Hobby where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and TypeFlag = " + (int)Hobby.hobbyTypeEnum.RiCheng);
-
-
-            IList<WkTUser> shares = new List<WkTUser>();
-            IList<WkTUser> sharesRicheng = new List<WkTUser>();
-
-
-            if (hobbysList != null && hobbysList.Count != 0)
-            {
-                foreach (Hobby oo in hobbysList)
-                {
-                    
-                    shares = oo.SharedStaffs;
-                }
-            }
-
-            if (hobbysRiChenglist != null && hobbysRiChenglist.Count != 0)
-            {
-                foreach (Hobby oo in hobbysRiChenglist)
-                {
-
-                    sharesRicheng = oo.SharedStaffs;
-                }
-            }
-
-
-            createTree(treeView1,shares);
-            createTree( treeView2,sharesRicheng);
-
-
-
+            this.backgroundWorkerOfLoadTheTree.RunWorkerAsync();
         }
 
         public void createTree(TreeView tv, IList<WkTUser> shares)
@@ -107,40 +103,39 @@ namespace WorkLogForm
             TreeNode Gt = new TreeNode();
             Gt.Text = "部门";
             tv.Nodes.Add(Gt);
-            string sql = "select u from WkTDept u";
-            IList depts = baseService.loadEntityList(sql);
-            if (depts != null && depts.Count > 0)
+           
+            if (this.deptperts.Count > 0)
             {
-                foreach (WkTDept o in depts)
+                foreach (WkTDept o in deptperts)
                 {
                     TreeNode t1 = new TreeNode();
                     t1.Tag = o;
                     t1.Text = o.KdName;
-
-                    string sql1 = "select u from WkTUser u left join u.Kdid dept where dept.Id = " + o.Id;
-                    IList userlist = baseService.loadEntityList(sql1);
-
-                    if (userlist != null && userlist.Count > 0)
+                   
+                    if (this.users.Count > 0)
                     {
-                        foreach (WkTUser oo in userlist)
+                        foreach (WkTUser oo in users)
                         {
                             if (oo.Id != user.Id)
                             {
-                                TreeNode t2 = new TreeNode();
-                                t2.Text = oo.KuName;
-                                t2.Tag = oo;
-                                if (shares != null && shares.Count > 0)
+                                if(oo.Kdid.Id == o.Id)
                                 {
-                                    foreach (WkTUser n in shares)
+                                    TreeNode t2 = new TreeNode();
+                                    t2.Text = oo.KuName;
+                                    t2.Tag = oo;
+                                    if (shares != null && shares.Count > 0)
                                     {
-                                        if (n.Id == oo.Id)
+                                        foreach (WkTUser n in shares)
                                         {
-                                            t2.Checked = true;
+                                            if (n.Id == oo.Id)
+                                            {
+                                                t2.Checked = true;
+                                            }
                                         }
                                     }
-                                }
 
-                                t1.Nodes.Add(t2);
+                                    t1.Nodes.Add(t2);
+                                }
                             }
                         }
                     }
@@ -394,5 +389,307 @@ namespace WorkLogForm
 
         #endregion
 
+
+       
+
+
+        #region 头像制作
+
+        void personal_setting_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (this.tabControl1.SelectedIndex == 0)
+            {
+                var t = newCutRect.Size;
+                t.Width += (e.Delta / 120) * 3;
+                t.Height += (e.Delta / 120) * 3;
+                newCutRect.Size = t;
+                if (newCutRect.Width < 114)
+                {
+                    newCutRect.Width = 114;
+                    newCutRect.Height = 114;
+                }
+                if (newCutRect.Width > 300)
+                {
+                    newCutRect.Width = 300;
+                    newCutRect.Height = 300;
+                }
+
+                oldCutRect.Width = newCutRect.Width;
+                oldCutRect.Height = newCutRect.Height;
+                pb_photo_original.Refresh();
+            }
+        }
+
+        private void tabControl1_TabIndexChanged(object sender, EventArgs e)
+        {
+            if (this.tabControl1.SelectedIndex == 0)
+            {
+              
+            }
+            if (this.tabControl1.SelectedIndex == 1 )//|| this.tabControl1.SelectedIndex == 2)
+            {
+                createTree(treeView1,shares);
+            }
+            if (this.tabControl1.SelectedIndex == 2)
+            {
+                createTree(treeView2,sharesRicheng);
+            }
+
+        }
+
+        private void btn_photo_make_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog opdialog = new OpenFileDialog();
+            opdialog.InitialDirectory = @"C:\";
+            opdialog.FilterIndex = 1;
+            opdialog.Filter = "Image   Files(*.BMP;*.JPG;*.PNG)|*.BMP;*.JPG;*.PNG";
+            if (opdialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                this.pb_photo_original.Image = Image.FromFile(opdialog.FileName);
+        }
+
+
+      
+
+        private void btn_photo_done_Click(object sender, EventArgs e)
+        {
+            if (this.pb_photo_original.Image != null)
+            {
+                this.btn_photo_done.Cursor = Cursors.WaitCursor;
+                this.pb_photo_cut.BackgroundImage = null;
+                Bitmap bitmap = new Bitmap(newCutRect.Width, newCutRect.Height);
+                //创建作图区域   
+                Graphics graphic = Graphics.FromImage(bitmap);
+                Point p = this.pb_photo_original.PointToScreen(this.oldCutRect.Location);
+                //截取原图相应区域写入作图区   
+                //graphic.DrawImage(this.pb_photo_original.Image, new Rectangle(0, 0, 128, 160), oldCutRect, GraphicsUnit.Pixel);
+                graphic.CopyFromScreen(p.X, p.Y, 0, 0, newCutRect.Size);
+
+
+
+                Bitmap zoomBitmap = new Bitmap(bitmap, newCutRect.Size);
+
+                string tmpname = CommonStaticParameter.ICONS + @"\tmp" + DateTime.Now.Ticks.ToString() + ".png";
+                CommonClass.OperateImage.CutForSquare(zoomBitmap, tmpname, 114, 100);
+
+
+                this.pb_photo_cut.BackgroundImage = ToRoundPic(tmpname);
+                
+                zoomBitmap.Dispose();
+                bitmap.Dispose();
+                graphic.Dispose();
+            }
+            else
+            {
+                MessageBox.Show("您还未选择头像！");
+            }
+            this.btn_photo_done.Cursor = Cursors.Hand;
+        }
+
+        private Bitmap ToRoundPic(string addd)
+        {
+            //保存图象   
+            string filename = addd;//如果不是png类型，须转换
+            System.Drawing.Bitmap ybitmap = new System.Drawing.Bitmap(filename);
+            for (int y = 0; y < ybitmap.Width; y++)
+            {
+                for (int x = 0; x < ybitmap.Height; x++)
+                {
+                    if ((x - ybitmap.Width / 2) * (x - ybitmap.Width / 2) + (y - ybitmap.Width / 2) * (y - ybitmap.Width / 2) > ybitmap.Width / 2 * ybitmap.Width / 2)
+                    {
+                        ybitmap.SetPixel(x, y, System.Drawing.Color.FromArgb(0, 255, 255, 255));
+                    }
+                }
+            }
+
+            Graphics g = Graphics.FromImage(ybitmap);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.DrawImage(ybitmap, new Point(0, 0));
+            g.DrawEllipse(new Pen(Color.White), 0, 0, ybitmap.Width, ybitmap.Width);
+            g.Dispose();
+
+           
+
+            return ybitmap;
+        }
+
+       
+
+        private void SaveAndUploadHeadPic()
+        {
+            if (this.pb_photo_cut.BackgroundImage != null)
+            {
+                Bitmap savpic = new Bitmap(this.pb_photo_cut.BackgroundImage);
+                string addressonlyid = CommonStaticParameter.ICONS + @"\" + this.user.Id.ToString() + ".png";
+                string address = CommonStaticParameter.ICONS + @"\" + this.user.Id.ToString() + "__" + DateTime.Now.Ticks.ToString() + ".png";
+
+                if (!Directory.Exists(CommonStaticParameter.ICONS))
+                    Directory.CreateDirectory(CommonStaticParameter.ICONS);
+
+                //删除原来的临时文件
+                string[] files = Directory.GetFiles(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + @"icons", this.user.Id.ToString() + "__" + "*.png", System.IO.SearchOption.AllDirectories);
+                if (files.Length > 0)
+                {
+                    for (int i = 0; i < files.Length; i++)
+                    {
+                        FileInfo oldfi = new FileInfo(files[i]);
+                        oldfi.Delete();
+                    }
+                }
+                savpic.Save(address); //保存临时文件
+                //ToRoundPic(address).Save(address);
+                if (fileop == null)
+                {
+                    string _ip = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "ip"));
+                    string _id = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "id"));
+                    string _pwd = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "pwd"));
+                    fileop = new FileUpDown(_ip, _id, _pwd);
+                }
+                try
+                {
+                    if (fileop.DirectoryExist(this.user.Id.ToString() + ".png", "Iconpics"))
+                    {
+                        fileop.DeleteFileName(this.user.Id.ToString() + ".png", "Iconpics");
+                    }
+                    fileop.Upload(address, "Iconpics");
+                    fileop.Rename(address, this.user.Id.ToString() + ".png", "Iconpics");
+                    themain.RefreshHeaderPic();
+                    MessageBox.Show("上传成功！");
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show("上传失败"+exp.ToString());
+                    return;
+                }
+            
+            }
+        }
+
+
+        private void panel_shade_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (oldCutRect.Contains(e.Location))
+                this.m_LastMSPoint = e.Location;
+        }
+
+        private void panel_shade_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            if (e.Button != MouseButtons.Left)
+                return;
+
+
+
+            if (oldCutRect.Contains(e.Location))
+            {
+                this.newCutRect.Offset(e.Location.X - this.m_LastMSPoint.X, e.Location.Y - this.m_LastMSPoint.Y);
+                if (newCutRect.Location.X < 0)
+                    newCutRect.X = 0;
+                if (newCutRect.Location.Y < 0)
+                    newCutRect.Y = 0;
+                if (newCutRect.Location.X + 114 > 300)
+                    newCutRect.X = 300 - 114;
+                if (newCutRect.Location.Y + 114 > 300)
+                    newCutRect.Y = 300 - 114;
+
+                this.panel_shade.Invalidate(oldCutRect, false);
+                this.panel_shade.Invalidate(newCutRect, false);
+                this.m_LastMSPoint = e.Location;
+                oldCutRect = newCutRect;
+            }
+
+        }
+        private void panel_shade_Paint(object sender, PaintEventArgs e)
+        {
+            if (this.pb_photo_original.Image == null)
+                return;
+
+            // Set clipping region to exclude rectangle.
+            e.Graphics.ExcludeClip(newCutRect);
+
+            // Fill large rectangle to show clipping region.
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(168, Color.Black)), this.panel_shade.ClientRectangle);
+       
+        }
+
+
+        /// <summary>
+        /// 上传头像
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.button6.Cursor = Cursors.WaitCursor;
+            this.SaveAndUploadHeadPic();
+            this.button6.Cursor = Cursors.Hand;
+
+        }
+
+        #endregion
+        private void loadThetree()
+        {
+            
+                hobbysList = baseService.loadEntityList("from Hobby where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and TypeFlag = " + (int)Hobby.hobbyTypeEnum.RiZhi);
+                hobbysRiChenglist = baseService.loadEntityList("from Hobby where STATE=" + (int)IEntity.stateEnum.Normal + " and Staff=" + user.Id + " and TypeFlag = " + (int)Hobby.hobbyTypeEnum.RiCheng);
+
+
+                if (hobbysList != null && hobbysList.Count != 0)
+                {
+                    foreach (Hobby oo in hobbysList)
+                    {
+                        if(oo.SharedStaffs != null && oo.SharedStaffs.Count>0)
+                        {
+                            foreach (WkTUser w in oo.SharedStaffs)
+                            {
+                                shares.Add(w);
+                            }
+                        }
+                    }
+                }
+
+                if (hobbysRiChenglist != null && hobbysRiChenglist.Count != 0)
+                {
+                    foreach (Hobby oo in hobbysRiChenglist)
+                    {
+                        if (oo.SharedStaffs != null && oo.SharedStaffs.Count > 0)
+                        {
+                            foreach (WkTUser w in oo.SharedStaffs)
+                            {
+                                sharesRicheng.Add(w);
+                            }
+                        }
+                    }
+                }
+
+                string sql = "select u from WkTDept u";
+                IList depts = baseService.loadEntityList(sql);
+                if (depts !=null&& depts.Count > 0)
+                {
+                    foreach (WkTDept de in depts)
+                    {
+                        this.deptperts.Add(de);
+                    }
+                }
+
+                string sql1 = "select u from WkTUser u";
+                IList userlist = baseService.loadEntityList(sql1);
+                if (userlist != null && userlist.Count > 0)
+                {
+                    foreach (WkTUser u in userlist)
+                    {
+                        this.users.Add(u);
+                    }
+                }
+
+                //createTree(treeView1, shares);
+                //createTree(treeView2, sharesRicheng);
+            //}
+
+        }
+
+        private void backgroundWorkerOfLoadTheTree_DoWork(object sender, DoWorkEventArgs e)
+        {
+            loadThetree();
+        }
     }
 }

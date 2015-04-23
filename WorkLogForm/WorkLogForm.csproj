@@ -22,6 +22,21 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -43,7 +58,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>29.ico</ApplicationIcon>
+    <ApplicationIcon>iconBlue64X64.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2">
@@ -75,8 +90,8 @@
     <Reference Include="NHibernate.Mapping.Attributes">
       <HintPath>C:\Users\Administrator\Desktop\NHibernateContrib-1.0.2.0\bin\NHibernate.Mapping.Attributes.dll</HintPath>
     </Reference>
-    <Reference Include="SkinForm">
-      <HintPath>..\..\..\WIN8\ChromeDownload\Irregular\Irregular\SkinForm\bin\Debug\SkinForm.dll</HintPath>
+    <Reference Include="SideBar">
+      <HintPath>D:\Users\Administrator\Downloads\SideBar.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -137,6 +152,7 @@
     <Compile Include="CommonClass\FileReadAndWrite.cs" />
     <Compile Include="CommonClass\FileUpDown.cs" />
     <Compile Include="CommonClass\HtmlUtility.cs" />
+    <Compile Include="CommonClass\OperateImage.cs" />
     <Compile Include="DCIEngine.FrameWork.Snap\Hook.cs" />
     <Compile Include="InstantMessenger.cs">
       <SubType>Form</SubType>
@@ -149,6 +165,11 @@
     </Compile>
     <Compile Include="NewMessageWindow.Designer.cs">
       <DependentUpon>NewMessageWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="redoForm.cs">
       <SubType>Form</SubType>
@@ -198,11 +219,6 @@
     </Compile>
     <Compile Include="OnDuty.designer.cs">
       <DependentUpon>OnDuty.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Examine_Allograph.cs">
       <SubType>Form</SubType>
@@ -385,8 +401,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Examine_Allograph.resx">
       <DependentUpon>Examine_Allograph.cs</DependentUpon>
@@ -490,6 +506,28 @@
     <None Include="Service References\WeatherService\WeatherWebService.wsdl" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\日历小方块2_事.png" />
+    <None Include="resources\消息.png" />
+    <None Include="resources\消息白.png" />
+    <None Include="resources\日程.png" />
+    <None Include="resources\日程白.png" />
+    <None Include="resources\日志.png" />
+    <None Include="resources\日志白.png" />
+    <None Include="resources\随笔.png" />
+    <None Include="resources\随笔白.png" />
+    <None Include="resources\刷新白.png" />
+    <None Include="resources\刷新.png" />
+    <None Include="resources\日程管理.png" />
+    <None Include="resources\我的日历.png" />
+    <None Include="resources\日志管理.png" />
+    <None Include="resources\随笔管理.png" />
+    <None Include="resources\请假管理.png" />
+    <None Include="resources\加班管理.png" />
+    <None Include="resources\值班管理.png" />
+    <None Include="resources\出差管理.png" />
+    <None Include="resources\底部椭圆背景选中.png" />
+    <None Include="resources\系统设置.png" />
+    <None Include="resources\考勤统计.png" />
     <None Include="Service References\KjqbService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -503,14 +541,46 @@
     <None Include="resources\BigMaxMessageLeft.png" />
     <None Include="resources\BigMaxMessageBoxRight.png" />
     <None Include="resources\BigMax.png" />
-    <Content Include="resources\个人考勤.png" />
+    <None Include="resources\LoginBg.png" />
+    <None Include="resources\LoginButton.png" />
+    <None Include="resources\MainPageBg.png" />
+    <None Include="resources\writeSchUnchecked.png" />
+    <None Include="resources\WriteLog.png" />
+    <None Include="resources\WritelogUnChecked.png" />
+    <None Include="resources\writeSch.png" />
+    <None Include="resources\个人考勤.png" />
+    <None Include="resources\attence.png" />
+    <None Include="resources\logo.png" />
+    <None Include="resources\LoginbuttonEnter.png" />
+    <None Include="resources\logo4535.png" />
+    <None Include="resources\Checked.png" />
+    <None Include="resources\Closeenter.png" />
+    <None Include="resources\Min.png" />
+    <None Include="resources\Minenter.png" />
+    <None Include="resources\close.png" />
+    <None Include="resources\setting.png" />
+    <None Include="iconBlue128X128.ico" />
+    <None Include="iconBlue16X16.ico" />
+    <None Include="iconBlue32X32.ico" />
+    <None Include="iconBlue48X48.ico" />
+    <None Include="iconBlue64X64.ico" />
+    <None Include="bin\Release\icons\AutoIconBigWhite.png" />
+    <None Include="resources\GrayRect.png" />
+    <None Include="resources\GrayLine.png" />
+    <None Include="resources\WriteSuibi.png" />
+    <None Include="resources\WritesuibiOn.png" />
+    <None Include="resources\DuigouLightBlack.png" />
+    <None Include="resources\DuiGouDarkBlack.png" />
+    <None Include="resources\ChahaoLB.png" />
+    <None Include="resources\ChahaoDB.png" />
+    <None Include="resources\WriteSuibiBg.png" />
+    <None Include="resources\NoCntentBg.png" />
     <Content Include="resources\个人考勤副本.png" />
     <Content Include="resources\代签审批.png" />
     <Content Include="resources\代签审批副本.png" />
     <None Include="resources\首页背景2.png" />
     <None Include="resources\我的随笔.png" />
     <None Include="resources\随笔查询.png" />
-    <None Include="resources\随笔.png" />
     <None Include="resources\随笔1.png" />
     <None Include="resources\值班管理22.png" />
     <None Include="resources\员工日志.png" />
@@ -526,7 +596,6 @@
     <None Include="resources\橘色圆角2.png" />
     <None Include="resources\橘色圆角1.png" />
     <None Include="resources\橘色圆角.png" />
-    <None Include="resources\0.gif" />
     <None Include="Service References\IPService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -541,15 +610,7 @@
     <None Include="Service References\WeatherService\configuration.svcinfo" />
     <None Include="Service References\WeatherService\configuration91.svcinfo" />
     <None Include="Service References\WeatherService\WeatherWebService.disco" />
-    <None Include="resources\日历小方块2_事.png" />
-    <None Include="resources\日历小方块2_亲.png" />
-    <None Include="resources\日历小方块2_年.png" />
-    <None Include="resources\日历小方块2_婚.png" />
-    <None Include="resources\日历小方块2_产.png" />
-    <None Include="resources\日历小方块2_病.png" />
-    <None Include="resources\日历小方块2_今.png" />
     <None Include="resources\休.png" />
-    <None Include="resources\日历小方块2_休.png" />
     <None Include="resources\白.png" />
     <None Include="resources\休5.png" />
     <None Include="resources\日志管理系统首页3.png" />
@@ -563,7 +624,6 @@
     <None Include="resources\综合统计.png" />
     <None Include="resources\考勤统计1.png" />
     <None Include="resources\xitongbackground1.png" />
-    <None Include="resources\1.png" />
     <None Include="resources\阴天1.png" />
     <None Include="resources\退出.png" />
     <None Include="resources\请假管理11.png" />
@@ -577,30 +637,6 @@
     <None Include="resources\最小化2.png" />
     <None Include="resources\最小化.png" />
     <None Include="resources\普通背景.png" />
-    <None Include="resources\日历背景3.png" />
-    <None Include="resources\日历背景2.png" />
-    <None Include="resources\日历小方块选中2.png" />
-    <None Include="resources\日历小方块选中11.png" />
-    <None Include="resources\日历小方块21.png" />
-    <None Include="resources\日历小方块2.png" />
-    <None Include="resources\日历小方块1.png" />
-    <None Include="resources\日历小方块_阴影3.png" />
-    <None Include="resources\日历小方块_阴影1.png" />
-    <None Include="resources\日历小方块_阴影.png" />
-    <None Include="resources\日历小方块_病.png" />
-    <None Include="resources\日历小方块_年.png" />
-    <None Include="resources\日历小方块_喜1.png" />
-    <None Include="resources\日历小方块_喜.png" />
-    <None Include="resources\日历小方块_休.png" />
-    <None Include="resources\日历小方块_今选中2.png" />
-    <None Include="resources\日历小方块_今选中1.png" />
-    <None Include="resources\日历小方块_今选中.png" />
-    <None Include="resources\日历小方块_今1.png" />
-    <None Include="resources\日历小方块_今.png" />
-    <None Include="resources\日历小方块_亲.png" />
-    <None Include="resources\日历小方块_产.png" />
-    <None Include="resources\日历小方块_事.png" />
-    <None Include="resources\日历小方块.png" />
     <None Include="resources\整体效果副本.png" />
     <None Include="resources\带边线背景.png" />
     <None Include="resources\左箭头.png" />
@@ -629,36 +665,18 @@
     <None Include="resources\search.gif" />
     <None Include="resources\save.gif" />
     <None Include="resources\pass.gif" />
-    <None Include="resources\263.png" />
-    <None Include="resources\257.png" />
-    <None Include="resources\bg33.png" />
-    <None Include="resources\bg32.png" />
-    <None Include="resources\bg31.png" />
-    <None Include="resources\bg21.png" />
-    <None Include="resources\bg11.png" />
-    <None Include="resources\bg3.png" />
-    <None Include="resources\bg2.png" />
     <None Include="resources\rcBG.png" />
     <None Include="resources\rcBG1.png" />
     <None Include="resources\rcOn.png" />
     <None Include="resources\rzOn.png" />
-    <None Include="resources\257.ico" />
-    <None Include="resources\263.ico" />
     <None Include="resources\logined3.jpg" />
     <None Include="resources\logined2.jpg" />
     <None Include="resources\logined1.jpg" />
     <None Include="resources\logined.jpg" />
     <None Include="resources\Up.jpg" />
-    <None Include="resources\Down.jpg" />
-    <None Include="resources\login14.jpg" />
     <None Include="resources\loginButton11.jpg" />
     <None Include="resources\loginButton1.jpg" />
-    <None Include="resources\login13.jpg" />
-    <None Include="resources\login12.jpg" />
     <None Include="resources\loginButton.jpg" />
-    <None Include="resources\login11.jpg" />
-    <None Include="resources\login1.jpg" />
-    <None Include="resources\login.jpg" />
     <None Include="resources\1.jpg" />
     <None Include="resources\背景.jpg" />
     <None Include="resources\背景1.jpg" />
@@ -830,11 +848,9 @@
     <None Include="resources\查看考勤2.png" />
     <None Include="resources\查看考勤.png" />
     <None Include="resources\工作日历.png" />
-    <None Include="resources\考勤统计.png" />
     <None Include="resources\领导补签.png" />
     <None Include="resources\领导审批.png" />
     <None Include="resources\排班管理.png" />
-    <None Include="resources\请假管理.png" />
     <None Include="resources\时间管理.png" />
     <None Include="resources\闭合.png" />
     <None Include="resources\展开1.png" />
@@ -845,13 +861,10 @@
     <None Include="resources\日历小方块选中1.png" />
     <None Include="resources\首页背景.png" />
     <None Include="resources\首页背景1.png" />
-    <None Include="resources\日志分享_副本.png" />
     <None Include="resources\我的日程_副本.png" />
     <None Include="resources\实时通讯_副本.png" />
-    <None Include="resources\日志分享.png" />
     <None Include="resources\实时通讯.png" />
     <None Include="resources\我的日程.png" />
-    <None Include="resources\48540923dd54564ee21be3d8b2de9c82d0584fd0.jpg" />
     <None Include="resources\设置1.png" />
     <None Include="resources\设置.png" />
     <None Include="resources\管理员2副本.png" />
@@ -859,16 +872,11 @@
     <None Include="resources\29.ico" />
     <None Include="resources\个人随笔.png" />
     <None Include="resources\个人随笔_副本.png" />
-    <None Include="resources\值班管理.png" />
     <None Include="resources\值班管理1.png" />
     <None Include="resources\偏好设置.png" />
     <None Include="resources\偏好设置1.png" />
-    <None Include="resources\出差管理.png" />
     <None Include="resources\出差管理1.png" />
-    <None Include="resources\加班管理.png" />
     <None Include="resources\加班管理1.png" />
-    <None Include="resources\我的日历.png" />
-    <None Include="resources\日程管理.png" />
     <None Include="resources\我的日历1.png" />
     <None Include="resources\日程管理1.png" />
     <None Include="resources\活动安排.png" />
@@ -981,14 +989,44 @@
     <WCFMetadataStorage Include="Service References\WeatherService\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ChattingCtrl\ChattingCtrl.csproj">
+      <Project>{94288e94-b44e-4644-bca6-68fe4cbddfd5}</Project>
+      <Name>ChattingCtrl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
       <Project>{eb82119b-0737-4a23-a13e-d702690a347e}</Project>
       <Name>ClassLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SkinForm\SkinForm.csproj">
+      <Project>{7f988dda-955f-42f2-82eb-d6058fb7ff75}</Project>
+      <Name>SkinForm</Name>
     </ProjectReference>
     <ProjectReference Include="..\WinHtmlEditor\WinHtmlEditor.csproj">
       <Project>{1d1ef0a4-1d49-4d42-9295-e3b28359389a}</Project>
       <Name>WinHtmlEditor</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
