@@ -37,11 +37,12 @@ namespace CommonClass
         {
             // 根据uri创建FtpWebRequest对象  
             reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(path));
+           
+            // ftp用户名和密码  
+            reqFTP.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
             // 指定数据传输类型  
             reqFTP.UseBinary = true;
             reqFTP.UsePassive = false;
-            // ftp用户名和密码  
-            reqFTP.Credentials = new NetworkCredential(ftpUserID, ftpPassword);
         }
         public FileUpDown(string ftpServerIP, string ftpUserID, string ftpPassword)
         {
@@ -290,14 +291,19 @@ namespace CommonClass
             FileInfo fileInf = new FileInfo(filename);
             string url = "ftp://" + ftpServerIP + "/" + floder + "/" + fileInf.Name; ;
             Connect(url);//连接     
+
+
             try
             {
-                FtpWebResponse response = (FtpWebResponse)reqFTP.GetResponse();
+                FtpWebResponse response;
+                response = (FtpWebResponse)reqFTP.GetResponse();
                 response.Close();
+
                 return true;
             }
             catch (Exception ex)
             {
+
                 string e = ex.Message;
                 return false;
             }
@@ -319,9 +325,32 @@ namespace CommonClass
             }
             catch (Exception ex)
             {
+
                 MessageBox.Show(ex.Message);
             }
         }
+        //链接是否成功
+        public void IsConnectSucceed(string currentFilename, string floder)
+        {
+            FileInfo fileInf = new FileInfo(currentFilename);
+            string url = "ftp://" + ftpServerIP + "/"+floder + "/" + fileInf.Name;
+            Connect(url);//连接     
+            try
+            {
+                FtpWebResponse response;
+                response = (FtpWebResponse)reqFTP.GetResponse();
+                response.Close();
+                return;
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("基础连接已经关闭"))
+                {
+                    IsConnectSucceed(currentFilename, floder);
+                }
+            }
+        }
+
         //获得文件明晰  
         public string[] GetFilesDetailList()
         {

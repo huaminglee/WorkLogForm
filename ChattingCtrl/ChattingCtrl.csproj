@@ -46,6 +46,24 @@
     <Compile Include="AlphaBlendTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ChatintSubItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChatintSubItem.Designer.cs">
+      <DependentUpon>ChatintSubItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChattingPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChattingPanel.Designer.cs">
+      <DependentUpon>ChattingPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChattingTimePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ChattingTimePanel.Designer.cs">
+      <DependentUpon>ChattingTimePanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="HeaderIconPicturebox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -124,6 +142,15 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ChatintSubItem.resx">
+      <DependentUpon>ChatintSubItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChattingPanel.resx">
+      <DependentUpon>ChattingPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChattingTimePanel.resx">
+      <DependentUpon>ChattingTimePanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MessageCountLabel.resx">
       <DependentUpon>MessageCountLabel.cs</DependentUpon>
     </EmbeddedResource>
@@ -193,6 +220,9 @@
       <Project>{c0283241-07ea-447f-8ccc-7aa14f67c494}</Project>
       <Name>OnLineUpdate</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChattingMessageBg.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,6 +15,16 @@ namespace WorkLogForm
 {
     public partial class login : SkinMain
     {
+
+        //声明一个更新Address的委托
+    public delegate void IsLoginSucceedHandler(object sender, LoginEventArgs e);
+
+    //声明一个更新Address的事件
+    public event IsLoginSucceedHandler ShowMain;
+
+    private delegate void CloseDele();
+
+
         private Size formSize = new Size(363, 300);
         
         private BaseService baseService = new BaseService();
@@ -34,14 +44,14 @@ namespace WorkLogForm
         }
         public delegate void loginErrorDelegate();
         public delegate void LoadDele();
-        public delegate void LogInDele();
+        public delegate string LogInDele();
 
         public login()
         {
             InitializeComponent();
             
         }
-        
+        public string loginMessage;
         private void login_Load(object sender, EventArgs e)
         {
             this.backgroundWorkerOfLoad.RunWorkerAsync();
@@ -135,6 +145,11 @@ namespace WorkLogForm
         }
         private void close_pictureBox_Click(object sender, EventArgs e)
         {
+            if(this.backgroundWorkerOfLoginSucceed.IsBusy)
+            {
+                this.backgroundWorkerOfLoginSucceed.CancelAsync();
+                this.backgroundWorkerOfLoginSucceed.Dispose();
+            }
             this.Close();
         }
         private void close_pictureBox_MouseEnter(object sender, EventArgs e)
@@ -155,27 +170,28 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+            LoginLoading();
             backgroundWorker1.RunWorkerAsync();
         }
 
 
 
 
-        private void Tologin()
+        private string Tologin()
         {
 
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new LogInDele(Tologin));
-            }
-            else
-            {
+            //if (this.InvokeRequired)
+            //{
+            //    this.Invoke(new LogInDele(Tologin));
+            //}
+            //else
+            //{
                 string IpAdress;
                 IpAdress = GetIP();
                 if (IpAdress == "未成功获取IP地址")
                 {
-                    ShowLabelMessage("未成功获取IP地址");
-                    return;
+                    //ShowLabelMessage("未成功获取IP地址");
+                    return "未成功获取IP地址";
                 }
                 else
                 {
@@ -196,13 +212,13 @@ namespace WorkLogForm
                         #region 登陆效果
                         if (textBox1.Text.Trim() == "" || textBox1.Text.Trim() == "请输入用户名" || textBox2.Text.Trim() == "" || textBox2.Text.Trim() == "请输入密码")
                         {
-                            this.ShowLabelMessage("用户名和密码不能为空!");
-                            return; //不在执行下面的函数
+                            return "用户名和密码不能为空!"; //不在执行下面的函数
                         }
-                        LoginLoading();
 
-                        loginMethod();
-                      
+
+                        string str = loginMethod();
+                        return str;
+
                         #endregion
                     }
                     //else
@@ -211,9 +227,9 @@ namespace WorkLogForm
                         //return;
                     }
 
-                }
+                    //}
 
-            }
+                }
         }
 
         protected string GetIP()   //获取本地IP
@@ -260,20 +276,10 @@ namespace WorkLogForm
         /// <summary>
         /// 登录函数 其中包括查库操作
         /// </summary>
-        private void loginMethod()
+        private string loginMethod()
         {
             try
             {
-                //loginErrorDelegate led = new loginErrorDelegate(loginMethod);
-                //if (this.InvokeRequired == true)
-                //{
-                //    this.BeginInvoke(led);
-                //}
-                //else
-                //{
-                    this.pictureBox1.Cursor = Cursors.WaitCursor;
-                    this.label1.Cursor = Cursors.WaitCursor;
-                    SetLabel1location("正在登录…");
                     #region 将用户信息存入临时文件
                     if (pictureBoxOfRememberPwd.BackgroundImage != null)
                     {
@@ -299,24 +305,18 @@ namespace WorkLogForm
                     IList pwd = baseService.ExecuteSQL("select right(sys.fn_VarBinToHexStr(hashbytes('MD5', '" + textBox2.Text.Trim() + "')),32)"); // 数据库属性，跟具体表无关
                     if (pwd == null || pwd.Count <= 0)
                     {
-                        ShowLabelMessage("登录异常！");
-                        loginError();
-                        return;
+                        return "登录异常！";
                     }
                     object[] pwdArray = (object[])pwd[0];
                     //因为是共用表 选择是工作小秘书相关的角色
                     IList userList = baseService.loadEntityList("select u from WkTUser u right join u.UserRole role where role.KrDESC='工作小秘书角色' and u.KuLid='" + textBox1.Text.Trim() + "' and u.KuPassWD='" + pwdArray[0] + "'");
                     if (userList == null || userList.Count <= 0)
                     {
-                        ShowLabelMessage("用户名或密码错误！");
-                        loginError();
-                        return;
+                        return "用户名或密码错误！";
                     }
                     else if (userList.Count > 1)
                     {
-                        ShowLabelMessage("用户异常，请联系管理员！");
-                        loginError();
-                        return;
+                        return "用户异常，请联系管理员！";
                     }
                     else
                     {
@@ -330,17 +330,15 @@ namespace WorkLogForm
                         }
                         this.User = (WkTUser)userList[0];
                         IniReadAndWrite.IniWriteValue("temp", "myid", User.Id.ToString());
-                        this.DialogResult = DialogResult.OK;
-                        //loginThread.Abort();
+                        
+                        return "登录成功！";
                     }
-                    this.pictureBox1.Cursor = Cursors.Hand;
-                    this.label1.Cursor = Cursors.Hand;
+                   
                // }
             }
             catch
             {
-                ShowLabelMessage("未能与服务器建立连接……");
-                this.Close();
+                return "未能与服务器建立连接……";
             }
 
         }
@@ -351,7 +349,9 @@ namespace WorkLogForm
         /// </summary>
         private void loginError() 
         {
-            SetLabel1location("登  录");
+            this.label1.Cursor = Cursors.Hand;
+            this.pictureBox1.Cursor = Cursors.Hand;
+            SetLabel1location("登   录");
             this.LoginButtonNoOn();
             this.pictureBox1.Cursor = Cursors.Hand;
             this.label1.Cursor = Cursors.Hand;
@@ -362,6 +362,8 @@ namespace WorkLogForm
         /// </summary>
         private void LoginLoading()
         {
+            this.pictureBox1.Cursor = Cursors.WaitCursor;
+            this.label1.Cursor = Cursors.WaitCursor;
             SetLabel1location("正在登录…");
             this.LoginButtonOn();
             this.label1.ForeColor = Color.White;
@@ -505,6 +507,7 @@ namespace WorkLogForm
             string str = this.textBox2.Text;
             if (e.KeyCode == Keys.Enter)
             {
+                LoginLoading();
                 backgroundWorker1.RunWorkerAsync();
             }
         }
@@ -532,13 +535,23 @@ namespace WorkLogForm
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            Tologin();
+            loginMessage = Tologin();
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
-           
-            //MessageBox.Show("");
+            this.ShowLabelMessage(loginMessage);
+            loginError();
+            if (loginMessage == "登录成功！")
+            {
+                SetLabel1location("正在绘制主界面…");
+                this.ShowLabelMessage("登录成功！");
+                this.pictureBox1.Enabled = false;
+                this.label1.Enabled = false;
+                this.close_pictureBox.Enabled = false;
+                this.pictureBox1.Cursor = Cursors.WaitCursor;
+                this.backgroundWorkerOfLoginSucceed.RunWorkerAsync();
+            }
         }
 
 
@@ -547,11 +560,36 @@ namespace WorkLogForm
             initialData();
         }
 
-        
 
+        public void CloseLogin()
+        {
+            if (this.InvokeRequired)
+            {
+                CloseDele d = new CloseDele(CloseLogin);
+                this.Invoke(d);
+            }
+            else
+            {
+                this.Close();
+                //SetLabel1location("出现主界面");
+            }
+        }
 
-
-
-
+        private void backgroundWorkerOfLoginSucceed_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            var args = new LoginEventArgs(loginMessage);
+            ShowMain(this, args);
+        }
     }
+
+    public class LoginEventArgs : System.EventArgs
+    {
+        private string _loginMess;
+        public LoginEventArgs(string mloginMessage)
+        {
+            this._loginMess = mloginMessage;
+        }
+        public string LoginMess { get { return _loginMess; } }
+    }
+
 }

@@ -48,6 +48,7 @@ namespace WorkLogForm
 
         #endregion
 
+        public login loginForm;
 
         FileUpDown fileUpDown;
         private List<KjqbService.LogInService> loglistfromService;
@@ -414,6 +415,7 @@ namespace WorkLogForm
         {
             if (loadCount == 4)
             {
+                loginForm.CloseLogin();
                 this.TimerOfShowWindow.Enabled = true;
                 this.TimerOfShowWindow.Start();
             }
@@ -760,7 +762,7 @@ namespace WorkLogForm
         #region 按钮功能
         private void min_pictureBox_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
+            this.WindowState = FormWindowState.Minimized;
         }
         private void close_pictureBox_Click(object sender, EventArgs e)
         {
@@ -875,7 +877,7 @@ namespace WorkLogForm
             //点鼠标右键,return  
             if (Mouse_e.Button == MouseButtons.Left)
             {
-                this.Visible = true;
+                this.WindowState = FormWindowState.Normal;
                 this.Activate();
             }
         }
@@ -2451,6 +2453,7 @@ namespace WorkLogForm
             {
                 cha.IsTwinkle = !cha.IsTwinkle;
                 RemoveFromChaterList(cha.userid);
+                this.meaaageCountLabelOfXiaoXI.MessageCount = 0;
             }
 
             WkTUser w = new WkTUser();
@@ -2479,13 +2482,14 @@ namespace WorkLogForm
 
             if (chattinguserlist !=null&& this.chattinguserlist.Count > 0)
             {
-                foreach (WkTUser u in chattinguserlist)
-                {
-                    if (u.Id == id)
-                    {
-                        chattinguserlist.Remove(u);
-                    }
-                }
+                //foreach (WkTUser u in chattinguserlist)
+                //{
+                    //if (u.Id == id)
+                    //{
+                        //chattinguserlist.Remove(u);
+                chattinguserlist.Clear();
+                    //}
+                //}
             }
         }
         private void timerOfReceiveChattingMessage_Tick(object sender, EventArgs e)
@@ -2577,7 +2581,7 @@ namespace WorkLogForm
         /// <param name="e"></param>
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            this.Visible = true;
+            this.WindowState = FormWindowState.Normal;
             this.Activate();
         }
         #endregion 

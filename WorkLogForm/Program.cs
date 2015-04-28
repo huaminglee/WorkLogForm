@@ -11,6 +11,7 @@ using System.Xml;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Reflection;
+using System.Threading;
 
 namespace WorkLogForm
 {
@@ -37,7 +38,11 @@ namespace WorkLogForm
 
 
 
-
+        static string loginmessage;
+        static main MyMainfrom;
+        static login login;
+        static string thePreUpdateDate;
+        static System.Threading.Thread mainthread;
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -52,7 +57,7 @@ namespace WorkLogForm
 
 
                 #region 在线更新
-                string thePreUpdateDate = "";
+                thePreUpdateDate = "";
                 try
                 {
                     string _ip = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "ip"));
@@ -90,23 +95,23 @@ namespace WorkLogForm
                 //Application.EnableVisualStyles();
                 //Application.SetCompatibleTextRenderingDefault(false);
                 SetSelfStarting();
-                login login = new login();
-                if (login.ShowDialog() == DialogResult.OK)
-                {
-                    string ip = IniReadAndWrite.IniReadValue("connect", "ip");
-                    string id = IniReadAndWrite.IniReadValue("connect", "id");
-                    string pwd = IniReadAndWrite.IniReadValue("connect", "pwd");
-                    string db = IniReadAndWrite.IniReadValue("connect", "db");
-                    main mainForm = new main(thePreUpdateDate);
-                    mainForm.User = login.User;
-                    mainForm.Role = login.Role;
-                    SqlDependency.Start("UID=" + WorkLogForm.CommonClass.Securit.DeDES(id) + ";PWD=" + WorkLogForm.CommonClass.Securit.DeDES(pwd) + ";Database=" + WorkLogForm.CommonClass.Securit.DeDES(db) + ";server=" + WorkLogForm.CommonClass.Securit.DeDES(ip));
-                    Application.Run(mainForm);
+
+
+                
+                login = new login();
+                login.ShowMain += login_ShowMain;
+                login.ShowDialog();
+
+                //loginmessage = login.loginMessage;
+                //if (login.loginMessage == "")
+                { 
+                
+                //}
+                //if (login.ShowDialog() == DialogResult.OK)
+                //{
+                   
                 }
                 //Application.Run(new TimeManagement());
-
-
-
 
             }
             else
@@ -116,6 +121,32 @@ namespace WorkLogForm
 
 
         }
+        [STAThread]
+        static void MainThread()
+        {
+            string ip = IniReadAndWrite.IniReadValue("connect", "ip");
+            string id = IniReadAndWrite.IniReadValue("connect", "id");
+            string pwd = IniReadAndWrite.IniReadValue("connect", "pwd");
+            string db = IniReadAndWrite.IniReadValue("connect", "db");
+            main mainForm = new main(thePreUpdateDate);
+            mainForm.User = login.User;
+            mainForm.Role = login.Role;
+            mainForm.loginForm = login;
+            SqlDependency.Start("UID=" + WorkLogForm.CommonClass.Securit.DeDES(id) + ";PWD=" + WorkLogForm.CommonClass.Securit.DeDES(pwd) + ";Database=" + WorkLogForm.CommonClass.Securit.DeDES(db) + ";server=" + WorkLogForm.CommonClass.Securit.DeDES(ip));
+            //mainForm.ShowDialog();
+            Application.Run(mainForm);
+        }
+
+        static void login_ShowMain(object sender, LoginEventArgs e)
+        {
+            mainthread = new System.Threading.Thread(new System.Threading.ThreadStart(MainThread));
+            mainthread.ApartmentState = ApartmentState.STA;
+            //mainthread.SetApartmentState(ApartmentState.STA); 
+            mainthread.Start();
+           
+        }
+
+    
 
 
         /// <summary>

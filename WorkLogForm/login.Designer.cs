@@ -45,6 +45,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.close_pictureBox = new System.Windows.Forms.PictureBox();
             this.min_pictureBox = new System.Windows.Forms.PictureBox();
+            this.backgroundWorkerOfLoginSucceed = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOfHeadIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxofAutoLogin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxOfRememberPwd)).BeginInit();
@@ -225,6 +226,10 @@
             this.min_pictureBox.MouseEnter += new System.EventHandler(this.min_pictureBox_MouseEnter);
             this.min_pictureBox.MouseLeave += new System.EventHandler(this.min_pictureBox_MouseLeave);
             // 
+            // backgroundWorkerOfLoginSucceed
+            // 
+            this.backgroundWorkerOfLoginSucceed.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerOfLoginSucceed_DoWork);
+            // 
             // login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -291,5 +296,6 @@
         private System.Windows.Forms.PictureBox pictureBoxOfHeadIcon;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorkerOfLoad;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerOfLoginSucceed;
     }
 }

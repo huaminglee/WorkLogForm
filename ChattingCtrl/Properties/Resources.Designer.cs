@@ -123,6 +123,16 @@ namespace ChattingCtrl.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap ChattingMessageBg {
+            get {
+                object obj = ResourceManager.GetObject("ChattingMessageBg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Dont_Disturb {
             get {
                 object obj = ResourceManager.GetObject("Dont_Disturb", resourceCulture);

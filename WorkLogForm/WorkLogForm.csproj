@@ -575,6 +575,8 @@
     <None Include="resources\ChahaoDB.png" />
     <None Include="resources\WriteSuibiBg.png" />
     <None Include="resources\NoCntentBg.png" />
+    <None Include="resources\ChattingBg.png" />
+    <None Include="resources\AutoIconBigWhite.png" />
     <Content Include="resources\个人考勤副本.png" />
     <Content Include="resources\代签审批.png" />
     <Content Include="resources\代签审批副本.png" />

@@ -1227,7 +1227,7 @@
             this.title_label.BackColor = System.Drawing.Color.Transparent;
             this.title_label.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.title_label.ForeColor = System.Drawing.Color.Black;
-            this.title_label.Location = new System.Drawing.Point(7, 2);
+            this.title_label.Location = new System.Drawing.Point(9, 5);
             this.title_label.Name = "title_label";
             this.title_label.Size = new System.Drawing.Size(185, 19);
             this.title_label.TabIndex = 6;

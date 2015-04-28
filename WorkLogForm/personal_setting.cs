@@ -428,11 +428,17 @@ namespace WorkLogForm
             }
             if (this.tabControl1.SelectedIndex == 1 )//|| this.tabControl1.SelectedIndex == 2)
             {
-                createTree(treeView1,shares);
+                if (treeView1.Nodes.Count == 0)
+                {
+                    createTree(treeView1, shares);
+                }
             }
             if (this.tabControl1.SelectedIndex == 2)
             {
-                createTree(treeView2,sharesRicheng);
+                if (treeView2.Nodes.Count == 0)
+                {
+                    createTree(treeView2, shares);
+                }
             }
 
         }
@@ -442,7 +448,7 @@ namespace WorkLogForm
             OpenFileDialog opdialog = new OpenFileDialog();
             opdialog.InitialDirectory = @"C:\";
             opdialog.FilterIndex = 1;
-            opdialog.Filter = "Image   Files(*.BMP;*.JPG;*.PNG)|*.BMP;*.JPG;*.PNG";
+            opdialog.Filter = "Image   Files(*.PNG)|*.PNG";
             if (opdialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 this.pb_photo_original.Image = Image.FromFile(opdialog.FileName);
         }
@@ -546,7 +552,9 @@ namespace WorkLogForm
                 }
                 try
                 {
-                    if (fileop.DirectoryExist(this.user.Id.ToString() + ".png", "Iconpics"))
+                    fileop.IsConnectSucceed( this.user.Id.ToString() + ".png", "Iconpics");
+                    bool isxe = fileop.DirectoryExist(this.user.Id.ToString() + ".png", "Iconpics");
+                    if (isxe)
                     {
                         fileop.DeleteFileName(this.user.Id.ToString() + ".png", "Iconpics");
                     }

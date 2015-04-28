@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(writeSchedule));
             this.comboItem12 = new DevComponents.Editors.ComboItem();
             this.comboItem27 = new DevComponents.Editors.ComboItem();
             this.comboItem28 = new DevComponents.Editors.ComboItem();
@@ -224,7 +225,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label4.Location = new System.Drawing.Point(2, 0);
+            this.label4.Location = new System.Drawing.Point(9, 5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 22);
             this.label4.TabIndex = 159;
@@ -581,6 +582,7 @@
             this.Controls.Add(this.label4);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "writeSchedule";
             this.ShowInTaskbar = false;
             this.Text = "日程编写";
