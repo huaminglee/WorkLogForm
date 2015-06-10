@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="ClassLibrary" assembly="ClassLibrary">
+
+  <class name="WkTDept" table="WK_T_DEPT" >
+    <id name="Id" column="KD_ID" type="long"  length="10" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property name="KdName" column="KD_NAME" type="String" length="40" not-null="true"/>
+    <property name="KdDESC" column="KD_DESC" type="String" length="200" />
+    <property name="KdOrder" column="KD_ORDER" type="long" length="10" />
+    <property name="KdType" column="KD_TYPE" type="String" length="20"/>
+    <property name="KdPid" column="KD_PID" type="long" length="10" not-null="true"/>
+  </class>
+
+</hibernate-mapping>

@@ -14,6 +14,7 @@ using WorkLogForm.CommonClass;
 using CommonClass;
 using System.Net;
 using System.IO;
+using System.Xml;
 
 namespace WorkLogForm
 {
@@ -698,6 +699,100 @@ namespace WorkLogForm
         private void backgroundWorkerOfLoadTheTree_DoWork(object sender, DoWorkEventArgs e)
         {
             loadThetree();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            IniReadAndWrite.IniWriteValue("temp", "isSelfStarting", CommonStaticParameter.YES);
+            MessageBox.Show("设置开机启动成功！");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            IniReadAndWrite.IniWriteValue("temp", "isSelfStarting", CommonStaticParameter.NO);
+            MessageBox.Show("取消开机启动成功！");
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            this.button9.Cursor = Cursors.WaitCursor;
+            onlineUpDate();
+            this.button9.Cursor = Cursors.Hand;
+
+        }
+
+        private void onlineUpDate()
+        {
+            #region 在线更新
+            string thePreUpdateDate = "";
+            try
+            {
+                string _ip = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "ip"));
+                string _id = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "id"));
+                string _pwd = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "pwd"));
+                FileUpDown fileUpDown = new FileUpDown(_ip, _id, _pwd);
+
+                string theLastsUpdateVersionNumber = GetTheUpdateVersionNum(System.Windows.Forms.Application.StartupPath);//上次的版本号
+
+
+                fileUpDown.Download(CommonStaticParameter.TEMP, "UpdateConfig.xml", "WorkLog");
+
+                thePreUpdateDate = GetTheUpdateVersionNum(CommonStaticParameter.TEMP);//这次的版本号
+                if (thePreUpdateDate != "")
+                {
+                    //如果客户端将升级的应用程序的更新版本号与服务器上的不一致则进行更新    
+                    if (thePreUpdateDate != theLastsUpdateVersionNumber)
+                    {
+                        MessageBox.Show("有可更新的版本，程序将关闭…", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        {
+                            this.Close();
+                            themain.DialogResult = DialogResult.OK;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("当前版本为最新版" + thePreUpdateDate + "，无需更新");
+                        return;
+                    }
+                }
+                else
+                {
+                    onlineUpDate();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("程序出错 原因：" + ex.Message.ToString());
+            }
+            #endregion
+        
+        }
+
+        /// <summary>
+        /// 获取上一次的版本号
+        /// </summary>
+        /// <param name="Dir"></param>
+        /// <returns></returns>
+        private static string GetTheUpdateVersionNum(string Dir)
+        {
+            string LastUpdateTime = "";
+            string AutoUpdaterFileName = Dir + @"\UpdateConfig.xml";
+            if (!File.Exists(AutoUpdaterFileName))
+                return LastUpdateTime;//打开xml文件     
+            FileStream myFile = new FileStream(AutoUpdaterFileName, FileMode.Open);//xml文件阅读器     
+            XmlTextReader xml = new XmlTextReader(myFile);
+            while (xml.Read())
+            {
+                if (xml.Name == "Version")
+                {
+                    //获取版本号   
+                    LastUpdateTime = xml.GetAttribute("Num"); break;
+                }
+            }
+            xml.Close();
+            myFile.Close();
+            return LastUpdateTime;
         }
     }
 }

@@ -343,6 +343,8 @@
             this.today_label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.today_label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel13.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13z)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13c)).BeginInit();
@@ -684,7 +686,7 @@
             this.comboItem44,
             this.comboItem45,
             this.comboItem46});
-            this.month_comboBoxEx.Location = new System.Drawing.Point(398, 82);
+            this.month_comboBoxEx.Location = new System.Drawing.Point(134, 49);
             this.month_comboBoxEx.Name = "month_comboBoxEx";
             this.month_comboBoxEx.Size = new System.Drawing.Size(60, 21);
             this.month_comboBoxEx.TabIndex = 3;
@@ -723,7 +725,7 @@
             this.comboItem32,
             this.comboItem33,
             this.comboItem34});
-            this.year_comboBoxEx.Location = new System.Drawing.Point(337, 81);
+            this.year_comboBoxEx.Location = new System.Drawing.Point(43, 49);
             this.year_comboBoxEx.Name = "year_comboBoxEx";
             this.year_comboBoxEx.Size = new System.Drawing.Size(56, 21);
             this.year_comboBoxEx.TabIndex = 4;
@@ -747,7 +749,7 @@
             this.calendar_ovalShape_right.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.calendar_ovalShape_right.BorderColor = System.Drawing.Color.Transparent;
             this.calendar_ovalShape_right.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.calendar_ovalShape_right.Location = new System.Drawing.Point(463, 79);
+            this.calendar_ovalShape_right.Location = new System.Drawing.Point(220, 47);
             this.calendar_ovalShape_right.Name = "calendar_ovalShape_right";
             this.calendar_ovalShape_right.SelectionColor = System.Drawing.Color.Transparent;
             this.calendar_ovalShape_right.Size = new System.Drawing.Size(25, 25);
@@ -759,7 +761,7 @@
             this.calendar_ovalShape_left.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.calendar_ovalShape_left.BorderColor = System.Drawing.Color.Transparent;
             this.calendar_ovalShape_left.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.calendar_ovalShape_left.Location = new System.Drawing.Point(305, 79);
+            this.calendar_ovalShape_left.Location = new System.Drawing.Point(18, 47);
             this.calendar_ovalShape_left.Name = "calendar_ovalShape_left";
             this.calendar_ovalShape_left.Size = new System.Drawing.Size(25, 25);
             this.calendar_ovalShape_left.Click += new System.EventHandler(this.calendar_ovalShape_left_Click);
@@ -776,7 +778,7 @@
             this.panel13.Controls.Add(this.label133);
             this.panel13.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel13.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.panel13.Location = new System.Drawing.Point(235, 135);
+            this.panel13.Location = new System.Drawing.Point(235, 111);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(110, 90);
             this.panel13.TabIndex = 111;
@@ -853,7 +855,7 @@
             this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox5.BackgroundImage = global::WorkLogForm.Properties.Resources.周六1;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox5.Location = new System.Drawing.Point(671, 108);
+            this.pictureBox5.Location = new System.Drawing.Point(673, 84);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(108, 28);
             this.pictureBox5.TabIndex = 155;
@@ -864,7 +866,7 @@
             this.pictureBox6.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox6.BackgroundImage = global::WorkLogForm.Properties.Resources.周五1;
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox6.Location = new System.Drawing.Point(562, 108);
+            this.pictureBox6.Location = new System.Drawing.Point(563, 84);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(108, 28);
             this.pictureBox6.TabIndex = 154;
@@ -875,7 +877,7 @@
             this.pictureBox7.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox7.BackgroundImage = global::WorkLogForm.Properties.Resources.周四1;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox7.Location = new System.Drawing.Point(453, 108);
+            this.pictureBox7.Location = new System.Drawing.Point(454, 84);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(108, 28);
             this.pictureBox7.TabIndex = 153;
@@ -886,7 +888,7 @@
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.BackgroundImage = global::WorkLogForm.Properties.Resources.周三1;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox3.Location = new System.Drawing.Point(344, 108);
+            this.pictureBox3.Location = new System.Drawing.Point(345, 84);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(108, 28);
             this.pictureBox3.TabIndex = 152;
@@ -897,7 +899,7 @@
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4.BackgroundImage = global::WorkLogForm.Properties.Resources.周二1;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox4.Location = new System.Drawing.Point(235, 108);
+            this.pictureBox4.Location = new System.Drawing.Point(235, 84);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(108, 28);
             this.pictureBox4.TabIndex = 151;
@@ -908,7 +910,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.BackgroundImage = global::WorkLogForm.Properties.Resources.周一1;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox2.Location = new System.Drawing.Point(126, 108);
+            this.pictureBox2.Location = new System.Drawing.Point(126, 84);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(108, 28);
             this.pictureBox2.TabIndex = 150;
@@ -919,7 +921,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImage = global::WorkLogForm.Properties.Resources.周日1;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(16, 108);
+            this.pictureBox1.Location = new System.Drawing.Point(16, 84);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(108, 28);
             this.pictureBox1.TabIndex = 149;
@@ -937,7 +939,7 @@
             this.panel67.Controls.Add(this.label677);
             this.panel67.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel67.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel67.Location = new System.Drawing.Point(671, 580);
+            this.panel67.Location = new System.Drawing.Point(671, 558);
             this.panel67.Name = "panel67";
             this.panel67.Size = new System.Drawing.Size(110, 90);
             this.panel67.TabIndex = 148;
@@ -1005,7 +1007,7 @@
             this.panel66.Controls.Add(this.label666);
             this.panel66.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel66.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel66.Location = new System.Drawing.Point(562, 580);
+            this.panel66.Location = new System.Drawing.Point(562, 558);
             this.panel66.Name = "panel66";
             this.panel66.Size = new System.Drawing.Size(110, 90);
             this.panel66.TabIndex = 146;
@@ -1073,7 +1075,7 @@
             this.panel65.Controls.Add(this.label655);
             this.panel65.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel65.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel65.Location = new System.Drawing.Point(453, 580);
+            this.panel65.Location = new System.Drawing.Point(453, 558);
             this.panel65.Name = "panel65";
             this.panel65.Size = new System.Drawing.Size(110, 90);
             this.panel65.TabIndex = 145;
@@ -1141,7 +1143,7 @@
             this.panel64.Controls.Add(this.label644);
             this.panel64.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel64.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel64.Location = new System.Drawing.Point(344, 580);
+            this.panel64.Location = new System.Drawing.Point(344, 558);
             this.panel64.Name = "panel64";
             this.panel64.Size = new System.Drawing.Size(110, 90);
             this.panel64.TabIndex = 147;
@@ -1209,7 +1211,7 @@
             this.panel63.Controls.Add(this.label633);
             this.panel63.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel63.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel63.Location = new System.Drawing.Point(235, 580);
+            this.panel63.Location = new System.Drawing.Point(235, 558);
             this.panel63.Name = "panel63";
             this.panel63.Size = new System.Drawing.Size(110, 90);
             this.panel63.TabIndex = 144;
@@ -1277,7 +1279,7 @@
             this.panel62.Controls.Add(this.label622);
             this.panel62.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel62.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel62.Location = new System.Drawing.Point(126, 580);
+            this.panel62.Location = new System.Drawing.Point(126, 558);
             this.panel62.Name = "panel62";
             this.panel62.Size = new System.Drawing.Size(110, 90);
             this.panel62.TabIndex = 143;
@@ -1345,7 +1347,7 @@
             this.panel61.Controls.Add(this.label611);
             this.panel61.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel61.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel61.Location = new System.Drawing.Point(17, 580);
+            this.panel61.Location = new System.Drawing.Point(17, 558);
             this.panel61.Name = "panel61";
             this.panel61.Size = new System.Drawing.Size(110, 90);
             this.panel61.TabIndex = 142;
@@ -1412,7 +1414,7 @@
             this.panel31.Controls.Add(this.label31);
             this.panel31.Controls.Add(this.label311);
             this.panel31.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel31.Location = new System.Drawing.Point(17, 313);
+            this.panel31.Location = new System.Drawing.Point(17, 289);
             this.panel31.Name = "panel31";
             this.panel31.Size = new System.Drawing.Size(110, 90);
             this.panel31.TabIndex = 121;
@@ -1479,7 +1481,7 @@
             this.panel32.Controls.Add(this.label32);
             this.panel32.Controls.Add(this.label322);
             this.panel32.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel32.Location = new System.Drawing.Point(126, 313);
+            this.panel32.Location = new System.Drawing.Point(126, 289);
             this.panel32.Name = "panel32";
             this.panel32.Size = new System.Drawing.Size(110, 90);
             this.panel32.TabIndex = 122;
@@ -1546,7 +1548,7 @@
             this.panel37.Controls.Add(this.label37);
             this.panel37.Controls.Add(this.label377);
             this.panel37.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel37.Location = new System.Drawing.Point(671, 313);
+            this.panel37.Location = new System.Drawing.Point(671, 289);
             this.panel37.Name = "panel37";
             this.panel37.Size = new System.Drawing.Size(110, 90);
             this.panel37.TabIndex = 127;
@@ -1613,7 +1615,7 @@
             this.panel36.Controls.Add(this.label36);
             this.panel36.Controls.Add(this.label366);
             this.panel36.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel36.Location = new System.Drawing.Point(562, 313);
+            this.panel36.Location = new System.Drawing.Point(562, 289);
             this.panel36.Name = "panel36";
             this.panel36.Size = new System.Drawing.Size(110, 90);
             this.panel36.TabIndex = 125;
@@ -1680,7 +1682,7 @@
             this.panel33.Controls.Add(this.label33);
             this.panel33.Controls.Add(this.label333);
             this.panel33.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel33.Location = new System.Drawing.Point(235, 313);
+            this.panel33.Location = new System.Drawing.Point(235, 289);
             this.panel33.Name = "panel33";
             this.panel33.Size = new System.Drawing.Size(110, 90);
             this.panel33.TabIndex = 123;
@@ -1747,7 +1749,7 @@
             this.panel35.Controls.Add(this.label35);
             this.panel35.Controls.Add(this.label355);
             this.panel35.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel35.Location = new System.Drawing.Point(453, 313);
+            this.panel35.Location = new System.Drawing.Point(453, 289);
             this.panel35.Name = "panel35";
             this.panel35.Size = new System.Drawing.Size(110, 90);
             this.panel35.TabIndex = 124;
@@ -1814,7 +1816,7 @@
             this.panel34.Controls.Add(this.label34);
             this.panel34.Controls.Add(this.label344);
             this.panel34.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel34.Location = new System.Drawing.Point(344, 313);
+            this.panel34.Location = new System.Drawing.Point(344, 289);
             this.panel34.Name = "panel34";
             this.panel34.Size = new System.Drawing.Size(110, 90);
             this.panel34.TabIndex = 126;
@@ -1882,7 +1884,7 @@
             this.panel57.Controls.Add(this.label577);
             this.panel57.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel57.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.panel57.Location = new System.Drawing.Point(671, 491);
+            this.panel57.Location = new System.Drawing.Point(671, 467);
             this.panel57.Name = "panel57";
             this.panel57.Size = new System.Drawing.Size(110, 90);
             this.panel57.TabIndex = 141;
@@ -1949,7 +1951,7 @@
             this.panel56.Controls.Add(this.label56);
             this.panel56.Controls.Add(this.label566);
             this.panel56.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel56.Location = new System.Drawing.Point(562, 491);
+            this.panel56.Location = new System.Drawing.Point(562, 467);
             this.panel56.Name = "panel56";
             this.panel56.Size = new System.Drawing.Size(110, 90);
             this.panel56.TabIndex = 139;
@@ -2016,7 +2018,7 @@
             this.panel55.Controls.Add(this.label55);
             this.panel55.Controls.Add(this.label555);
             this.panel55.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel55.Location = new System.Drawing.Point(453, 491);
+            this.panel55.Location = new System.Drawing.Point(453, 467);
             this.panel55.Name = "panel55";
             this.panel55.Size = new System.Drawing.Size(110, 90);
             this.panel55.TabIndex = 138;
@@ -2083,7 +2085,7 @@
             this.panel54.Controls.Add(this.label54);
             this.panel54.Controls.Add(this.label544);
             this.panel54.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel54.Location = new System.Drawing.Point(344, 491);
+            this.panel54.Location = new System.Drawing.Point(344, 467);
             this.panel54.Name = "panel54";
             this.panel54.Size = new System.Drawing.Size(110, 90);
             this.panel54.TabIndex = 140;
@@ -2150,7 +2152,7 @@
             this.panel53.Controls.Add(this.label53);
             this.panel53.Controls.Add(this.label533);
             this.panel53.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel53.Location = new System.Drawing.Point(235, 491);
+            this.panel53.Location = new System.Drawing.Point(235, 467);
             this.panel53.Name = "panel53";
             this.panel53.Size = new System.Drawing.Size(110, 90);
             this.panel53.TabIndex = 137;
@@ -2213,7 +2215,7 @@
             this.panel52.Controls.Add(this.label52);
             this.panel52.Controls.Add(this.label522);
             this.panel52.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel52.Location = new System.Drawing.Point(126, 491);
+            this.panel52.Location = new System.Drawing.Point(126, 467);
             this.panel52.Name = "panel52";
             this.panel52.Size = new System.Drawing.Size(110, 90);
             this.panel52.TabIndex = 136;
@@ -2280,7 +2282,7 @@
             this.panel51.Controls.Add(this.label51);
             this.panel51.Controls.Add(this.label511);
             this.panel51.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel51.Location = new System.Drawing.Point(17, 491);
+            this.panel51.Location = new System.Drawing.Point(17, 467);
             this.panel51.Name = "panel51";
             this.panel51.Size = new System.Drawing.Size(110, 90);
             this.panel51.TabIndex = 135;
@@ -2347,7 +2349,7 @@
             this.panel47.Controls.Add(this.label47);
             this.panel47.Controls.Add(this.label477);
             this.panel47.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel47.Location = new System.Drawing.Point(671, 402);
+            this.panel47.Location = new System.Drawing.Point(671, 378);
             this.panel47.Name = "panel47";
             this.panel47.Size = new System.Drawing.Size(110, 90);
             this.panel47.TabIndex = 134;
@@ -2414,7 +2416,7 @@
             this.panel46.Controls.Add(this.label46);
             this.panel46.Controls.Add(this.label466);
             this.panel46.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel46.Location = new System.Drawing.Point(562, 402);
+            this.panel46.Location = new System.Drawing.Point(562, 378);
             this.panel46.Name = "panel46";
             this.panel46.Size = new System.Drawing.Size(110, 90);
             this.panel46.TabIndex = 132;
@@ -2481,7 +2483,7 @@
             this.panel45.Controls.Add(this.label45);
             this.panel45.Controls.Add(this.label455);
             this.panel45.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel45.Location = new System.Drawing.Point(453, 402);
+            this.panel45.Location = new System.Drawing.Point(453, 378);
             this.panel45.Name = "panel45";
             this.panel45.Size = new System.Drawing.Size(110, 90);
             this.panel45.TabIndex = 131;
@@ -2548,7 +2550,7 @@
             this.panel44.Controls.Add(this.label44);
             this.panel44.Controls.Add(this.label444);
             this.panel44.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel44.Location = new System.Drawing.Point(344, 402);
+            this.panel44.Location = new System.Drawing.Point(344, 378);
             this.panel44.Name = "panel44";
             this.panel44.Size = new System.Drawing.Size(110, 90);
             this.panel44.TabIndex = 133;
@@ -2615,7 +2617,7 @@
             this.panel43.Controls.Add(this.label43);
             this.panel43.Controls.Add(this.label433);
             this.panel43.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel43.Location = new System.Drawing.Point(235, 402);
+            this.panel43.Location = new System.Drawing.Point(235, 378);
             this.panel43.Name = "panel43";
             this.panel43.Size = new System.Drawing.Size(110, 90);
             this.panel43.TabIndex = 130;
@@ -2682,7 +2684,7 @@
             this.panel42.Controls.Add(this.label42);
             this.panel42.Controls.Add(this.label422);
             this.panel42.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel42.Location = new System.Drawing.Point(126, 402);
+            this.panel42.Location = new System.Drawing.Point(126, 378);
             this.panel42.Name = "panel42";
             this.panel42.Size = new System.Drawing.Size(110, 90);
             this.panel42.TabIndex = 129;
@@ -2749,7 +2751,7 @@
             this.panel41.Controls.Add(this.label41);
             this.panel41.Controls.Add(this.label411);
             this.panel41.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel41.Location = new System.Drawing.Point(17, 402);
+            this.panel41.Location = new System.Drawing.Point(17, 378);
             this.panel41.Name = "panel41";
             this.panel41.Size = new System.Drawing.Size(110, 90);
             this.panel41.TabIndex = 128;
@@ -2816,7 +2818,7 @@
             this.panel27.Controls.Add(this.label27);
             this.panel27.Controls.Add(this.label277);
             this.panel27.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel27.Location = new System.Drawing.Point(671, 224);
+            this.panel27.Location = new System.Drawing.Point(671, 200);
             this.panel27.Name = "panel27";
             this.panel27.Size = new System.Drawing.Size(110, 90);
             this.panel27.TabIndex = 120;
@@ -2883,7 +2885,7 @@
             this.panel26.Controls.Add(this.label26);
             this.panel26.Controls.Add(this.label266);
             this.panel26.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel26.Location = new System.Drawing.Point(562, 224);
+            this.panel26.Location = new System.Drawing.Point(562, 200);
             this.panel26.Name = "panel26";
             this.panel26.Size = new System.Drawing.Size(110, 90);
             this.panel26.TabIndex = 118;
@@ -2950,7 +2952,7 @@
             this.panel25.Controls.Add(this.label25);
             this.panel25.Controls.Add(this.label255);
             this.panel25.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel25.Location = new System.Drawing.Point(453, 224);
+            this.panel25.Location = new System.Drawing.Point(453, 200);
             this.panel25.Name = "panel25";
             this.panel25.Size = new System.Drawing.Size(110, 90);
             this.panel25.TabIndex = 117;
@@ -3017,7 +3019,7 @@
             this.panel24.Controls.Add(this.label24);
             this.panel24.Controls.Add(this.label244);
             this.panel24.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel24.Location = new System.Drawing.Point(344, 224);
+            this.panel24.Location = new System.Drawing.Point(344, 200);
             this.panel24.Name = "panel24";
             this.panel24.Size = new System.Drawing.Size(110, 90);
             this.panel24.TabIndex = 119;
@@ -3084,7 +3086,7 @@
             this.panel23.Controls.Add(this.label23);
             this.panel23.Controls.Add(this.label233);
             this.panel23.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel23.Location = new System.Drawing.Point(235, 224);
+            this.panel23.Location = new System.Drawing.Point(235, 200);
             this.panel23.Name = "panel23";
             this.panel23.Size = new System.Drawing.Size(110, 90);
             this.panel23.TabIndex = 116;
@@ -3151,7 +3153,7 @@
             this.panel22.Controls.Add(this.label22);
             this.panel22.Controls.Add(this.label222);
             this.panel22.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel22.Location = new System.Drawing.Point(126, 224);
+            this.panel22.Location = new System.Drawing.Point(126, 200);
             this.panel22.Name = "panel22";
             this.panel22.Size = new System.Drawing.Size(110, 90);
             this.panel22.TabIndex = 115;
@@ -3218,7 +3220,7 @@
             this.panel21.Controls.Add(this.label21);
             this.panel21.Controls.Add(this.label211);
             this.panel21.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel21.Location = new System.Drawing.Point(17, 224);
+            this.panel21.Location = new System.Drawing.Point(17, 200);
             this.panel21.Name = "panel21";
             this.panel21.Size = new System.Drawing.Size(110, 90);
             this.panel21.TabIndex = 114;
@@ -3285,7 +3287,7 @@
             this.panel17.Controls.Add(this.label17);
             this.panel17.Controls.Add(this.label177);
             this.panel17.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel17.Location = new System.Drawing.Point(671, 135);
+            this.panel17.Location = new System.Drawing.Point(671, 111);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(110, 90);
             this.panel17.TabIndex = 113;
@@ -3353,7 +3355,7 @@
             this.panel15.Controls.Add(this.label15);
             this.panel15.Controls.Add(this.label155);
             this.panel15.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel15.Location = new System.Drawing.Point(453, 135);
+            this.panel15.Location = new System.Drawing.Point(453, 111);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(110, 90);
             this.panel15.TabIndex = 112;
@@ -3420,7 +3422,7 @@
             this.panel16.Controls.Add(this.label16);
             this.panel16.Controls.Add(this.label166);
             this.panel16.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel16.Location = new System.Drawing.Point(562, 135);
+            this.panel16.Location = new System.Drawing.Point(562, 111);
             this.panel16.Name = "panel16";
             this.panel16.Size = new System.Drawing.Size(110, 90);
             this.panel16.TabIndex = 109;
@@ -3487,7 +3489,7 @@
             this.panel14.Controls.Add(this.label14);
             this.panel14.Controls.Add(this.label144);
             this.panel14.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panel14.Location = new System.Drawing.Point(344, 135);
+            this.panel14.Location = new System.Drawing.Point(344, 111);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(110, 90);
             this.panel14.TabIndex = 110;
@@ -3540,7 +3542,7 @@
             this.panel12.Controls.Add(this.label122);
             this.panel12.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel12.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.panel12.Location = new System.Drawing.Point(126, 135);
+            this.panel12.Location = new System.Drawing.Point(126, 111);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(110, 90);
             this.panel12.TabIndex = 108;
@@ -3613,7 +3615,7 @@
             this.panel11.Controls.Add(this.label111);
             this.panel11.Cursor = System.Windows.Forms.Cursors.Default;
             this.panel11.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.panel11.Location = new System.Drawing.Point(17, 135);
+            this.panel11.Location = new System.Drawing.Point(17, 111);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(110, 90);
             this.panel11.TabIndex = 107;
@@ -3676,7 +3678,7 @@
             this.label_title.BackColor = System.Drawing.Color.Transparent;
             this.label_title.Font = new System.Drawing.Font("微软雅黑", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_title.ForeColor = System.Drawing.Color.White;
-            this.label_title.Location = new System.Drawing.Point(761, 45);
+            this.label_title.Location = new System.Drawing.Point(66, 7);
             this.label_title.Name = "label_title";
             this.label_title.Size = new System.Drawing.Size(110, 31);
             this.label_title.TabIndex = 156;
@@ -3685,12 +3687,12 @@
             // close_pictureBox
             // 
             this.close_pictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.close_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.关闭渐变;
             this.close_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.close_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.close_pictureBox.Location = new System.Drawing.Point(983, 0);
+            this.close_pictureBox.Image = global::WorkLogForm.Properties.Resources.close;
+            this.close_pictureBox.Location = new System.Drawing.Point(975, 0);
             this.close_pictureBox.Name = "close_pictureBox";
-            this.close_pictureBox.Size = new System.Drawing.Size(25, 20);
+            this.close_pictureBox.Size = new System.Drawing.Size(31, 30);
             this.close_pictureBox.TabIndex = 158;
             this.close_pictureBox.TabStop = false;
             this.close_pictureBox.Click += new System.EventHandler(this.close_pictureBox_Click);
@@ -3700,12 +3702,12 @@
             // min_pictureBox
             // 
             this.min_pictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.min_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.最小化渐变;
             this.min_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.min_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.min_pictureBox.Location = new System.Drawing.Point(958, 0);
+            this.min_pictureBox.Image = global::WorkLogForm.Properties.Resources.Min;
+            this.min_pictureBox.Location = new System.Drawing.Point(943, 0);
             this.min_pictureBox.Name = "min_pictureBox";
-            this.min_pictureBox.Size = new System.Drawing.Size(25, 20);
+            this.min_pictureBox.Size = new System.Drawing.Size(31, 30);
             this.min_pictureBox.TabIndex = 157;
             this.min_pictureBox.TabStop = false;
             this.min_pictureBox.Click += new System.EventHandler(this.min_pictureBox_Click);
@@ -3719,20 +3721,19 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.SkyBlue;
+            this.panel1.BackColor = System.Drawing.Color.LightBlue;
             this.panel1.Controls.Add(this.panel10);
             this.panel1.Controls.Add(this.panel5);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.today_label1);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Location = new System.Drawing.Point(785, 108);
+            this.panel1.Location = new System.Drawing.Point(785, 84);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(204, 562);
             this.panel1.TabIndex = 159;
             // 
             // panel10
             // 
-            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel10.Controls.Add(this.groupBox2);
             this.panel10.Controls.Add(this.button1);
             this.panel10.Location = new System.Drawing.Point(1, 201);
@@ -4180,6 +4181,30 @@
             this.today_label2.Text = "27";
             this.today_label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(105, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(23, 20);
+            this.label1.TabIndex = 160;
+            this.label1.Text = "年";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(199, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(23, 20);
+            this.label2.TabIndex = 161;
+            this.label2.Text = "月";
+            // 
             // shou_ye
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -4188,6 +4213,8 @@
             this.BackgroundImage = global::WorkLogForm.Properties.Resources.日志管理系统首页3;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1008, 702);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.panel12);
             this.Controls.Add(this.panel11);
             this.Controls.Add(this.panel1);
@@ -4729,6 +4756,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox8;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
 
     }
 }

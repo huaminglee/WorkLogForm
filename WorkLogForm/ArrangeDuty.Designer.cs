@@ -58,7 +58,7 @@
             // close_pictureBox
             // 
             this.close_pictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.close_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.关闭渐变;
+            this.close_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.close;
             this.close_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.close_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this.close_pictureBox.Location = new System.Drawing.Point(495, 0);
@@ -73,7 +73,7 @@
             // pictureBox9
             // 
             this.pictureBox9.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox9.BackgroundImage = global::WorkLogForm.Properties.Resources.最小化渐变;
+            this.pictureBox9.BackgroundImage = global::WorkLogForm.Properties.Resources.Min;
             this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBox9.Location = new System.Drawing.Point(467, -1);

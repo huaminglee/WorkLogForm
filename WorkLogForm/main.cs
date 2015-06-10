@@ -66,9 +66,11 @@ namespace WorkLogForm
         private EventHandler mouseEnter;
         private int height,width;
         private BaseService baseService = new BaseService();
-        private WkTUser user;
+        public WkTUser user;
         private WkTRole role;
         Secretary sec;
+        List<WkTUser> userlistUser = new List<WkTUser> ();
+        List<WkTDept> userlistDept = new List<WkTDept>();
         int WheelCount = 0;
 
 
@@ -267,116 +269,7 @@ namespace WorkLogForm
 
         #endregion
 
-        private void LoadUnReadMessage()
-        {
-
-            if (this.InvokeRequired)
-            {
-                LoadUnreadMessage d = new LoadUnreadMessage(LoadUnReadMessage);
-                this.Invoke(d);
-            }
-            else
-            {
-                #region 开启时读取未读的推送信息
-                ////////////////////////////////
-
-                try
-                {
-                    loglistfromService = new List<KjqbService.LogInService>();
-                    schedulelistfromService = new List<KjqbService.ScheduleInService>();
-                    commentlistfromService = new List<KjqbService.CommentInService>();
-                    tfmListfromservice = new List<KjqbService.TimeArrangeForManagerInService>();
-                    levlistfromservice = new List<KjqbService.LeaveInService>();
-                    businessfromservice = new List<KjqbService.BusinessService>();
-                    chatinservice = new List<KjqbService.ChatInService>();
-
-
-                    KjqbService.LogInService[] lists;
-                    lists = ser.SearchShareLogUnRead((int)this.user.Id);
-
-
-                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
-
-
-                    for (int i = 0; i < lists.Length; i++)
-                    {
-                        loglistfromService.Add(lists[i]);
-                    }
-
-                    KjqbService.ScheduleInService[] list2;
-                    list2 = ser.SearchShareScheduleUnRead((int)this.user.Id);
-
-                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list2.Length).ToString();
-
-                    for (int i = 0; i < list2.Length; i++)
-                    {
-                        schedulelistfromService.Add(list2[i]);
-                    }
-
-                    KjqbService.CommentInService[] list3;
-                    list3 = ser.SearchCommentlogUnRead((int)this.user.Id);
-                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list3.Length).ToString();
-                    for (int i = 0; i < list3.Length; i++)
-                    {
-                        commentlistfromService.Add(list3[i]);
-                    }
-
-                    KjqbService.TimeArrangeForManagerInService[] list4;
-                    list4 = ser.SearchTimeArrangeForManagerUnRead((int)this.user.Id);
-                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list4.Length).ToString();
-                    for (int i = 0; i < list4.Length; i++)
-                    {
-                        tfmListfromservice.Add(list4[i]);
-                    }
-
-                    KjqbService.LeaveInService[] lists5;
-                    lists5 = ser.SearchLeaveInfoUnRead((int)this.user.Id);
-                    for (int i = 0; i < lists5.Length; i++)
-                    {
-                        levlistfromservice.Add(lists5[i]);
-                    }
-
-                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
-
-                    KjqbService.BusinessService[] lists6;
-                    lists6 = ser.SearchBusinessInfoUnRead((int)this.user.Id);
-                    for (int i = 0; i < lists6.Length; i++)
-                    {
-                        businessfromservice.Add(lists6[i]);
-                    }
-
-                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
-
-
-                    SetMessageCount(meaaageCountLabelOfRiZhi, lists.Length);
-
-                    SetMessageCount(this.meaaageCountLabelOfRicheng, list2.Length);
-
-                    SetMessageCount(this.meaaageCountLabelOfZhiBan, list4.Length);
-
-
-                    SetMessageCount(this.messageCountLabelOfCommentLog, list3.Length);
-
-
-                    SetMessageCount(this.meaaageCountLabelOFQingJia, lists5.Length);
-
-                    SetMessageCount(this.meaaageCountLabelCHuChai, lists6.Length);
-
-
-                    #region 接受聊天信息
-                    this.ReceiveChattingMessage();
-                    #endregion
-
-                }
-                catch
-                {
-                    MessageBox.Show("未能与服务器建立连接……");
-                }
-
-
-                #endregion
-            }
-        }
+        
 
 
         #region 自定义窗体初始化方法
@@ -384,10 +277,34 @@ namespace WorkLogForm
 
         private void backgroundWorkerLoadUserList_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            LoadUserList();
+
+            string sql = "select u from WkTDept u";
+            IList depts = baseService.loadEntityList(sql);
+            if (depts != null && depts.Count > 0)
+            {
+                foreach (WkTDept d in depts)
+                {
+                    this.userlistDept.Add(d);
+                }
+            }
+            string sql1 = "select u from WkTUser u ";
+            IList userlistusers = baseService.loadEntityList(sql1);
+            if (userlistusers != null && userlistusers.Count > 0)
+            {
+                foreach (WkTUser u in userlistusers)
+                {
+                    this.userlistUser.Add(u);
+                }
+            }
+
+           
         }
 
 
+        private void backgroundWorkerLoad_UserList(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            LoadUserList();
+        }
 
         private void backgroundWorkerLoadBaseInfo_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
@@ -413,7 +330,7 @@ namespace WorkLogForm
 
         private void whenLoadDone()
         {
-            if (loadCount == 4)
+            if (loadCount == 3)
             {
                 loginForm.CloseLogin();
                 this.TimerOfShowWindow.Enabled = true;
@@ -958,7 +875,11 @@ namespace WorkLogForm
         #endregion  
 
         #region 主界面切换
-        
+        private void rc_flowLayoutPanel_MouseEnter(object sender, EventArgs e)
+        {
+            Panel p = (Panel)sender;
+            p.Focus();
+        }
         /// <summary>
         /// 设置中间五个按钮全部变成灰色
         /// </summary>
@@ -1618,40 +1539,37 @@ namespace WorkLogForm
         private void Showcontacts()
         {
             chatListBox1.Items.Clear();
-            
-            string sql = "select u from WkTDept u";
-            IList depts = baseService.loadEntityList(sql);
-            if (depts != null && depts.Count > 0)
+
+            if (userlistDept != null && userlistDept.Count > 0)
             {
-                foreach (WkTDept o in depts)
+                foreach (WkTDept o in userlistDept)
                 {
                     ChatListItem item = new ChatListItem(o.KdName.Trim());
-                    string sql1 = "select u from WkTUser u left join u.Kdid dept where dept.Id = " + o.Id + " order by u.KuOnline desc";
-                    IList userlist = baseService.loadEntityList(sql1);
 
-                    if (userlist != null && userlist.Count > 0)
+                    if (userlistUser != null && userlistUser.Count > 0)
                     {
                         #region 二层循环
-                        foreach (WkTUser oo in userlist)
+                        foreach (WkTUser oo in userlistUser)
                         {
-                            if (oo.Id != user.Id)
+                            if (oo.Kdid.Id == o.Id)
                             {
-                                ChatListSubItem subItem = new ChatListSubItem("", oo.KuName.Trim(), "");
-                                subItem.userid =int.Parse(oo.Id.ToString());
-                              
-                                if (oo.KuOnline == 1)
+                                if (oo.Id != user.Id)
                                 {
-                                    subItem.Status = (ChatListSubItem.UserStatus)(1);
-                                }
-                                else
-                                {
-                                    subItem.Status = (ChatListSubItem.UserStatus)(5);
-                                }
-                                //subItem.ta
+                                    ChatListSubItem subItem = new ChatListSubItem("", oo.KuName.Trim(), "");
+                                    subItem.userid = int.Parse(oo.Id.ToString());
 
-                                item.SubItems.AddAccordingToStatus(subItem);
+                                    if (oo.KuOnline == 1)
+                                    {
+                                        subItem.Status = (ChatListSubItem.UserStatus)(1);
+                                    }
+                                    else
+                                    {
+                                        subItem.Status = (ChatListSubItem.UserStatus)(5);
+                                    }
+
+                                    item.SubItems.AddAccordingToStatus(subItem);
+                                }
                             }
-
                         }
                         #endregion end 二层循环
 
@@ -1693,7 +1611,7 @@ namespace WorkLogForm
 
 
 
-        private ChatListSubItem GetTheUserById(int theuserid)
+        public ChatListSubItem GetTheUserById(int theuserid)
         {
             foreach (ChatListItem group in chatListBox1.Items)
             {
@@ -2324,15 +2242,11 @@ namespace WorkLogForm
         }
         #endregion
 
-        private void rc_flowLayoutPanel_MouseEnter(object sender, EventArgs e)
-        {
-            Panel p = (Panel)sender;
-            p.Focus();
-        }
-
       
+        
 
 
+        #region 接受聊天信息
         private void timerMessageSend_Tick(object sender, EventArgs e)
         {
             try
@@ -2352,7 +2266,7 @@ namespace WorkLogForm
                     schedulelistfromService.Add(lists2[i]);
                 }
 
-                
+
                 //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists2.Length).ToString();
 
                 KjqbService.CommentInService[] lists3;
@@ -2361,10 +2275,10 @@ namespace WorkLogForm
                 {
                     commentlistfromService.Add(lists3[i]);
                 }
-                
+
                 //SetMessageCount(this.meaaageCountLabelOfRicheng, lists2.Length);
                 //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists3.Length).ToString();
-                
+
                 KjqbService.TimeArrangeForManagerInService[] lists4;
                 lists4 = ser.SearchTimeArrangeForManager((int)this.user.Id);
                 for (int i = 0; i < lists4.Length; i++)
@@ -2400,7 +2314,7 @@ namespace WorkLogForm
                 SetMessageCount(this.meaaageCountLabelOFQingJia, lists5.Length);
 
                 SetMessageCount(this.meaaageCountLabelCHuChai, lists6.Length);
-               
+
                 SetMessageCount(this.messageCountLabelOfCommentLog, lists3.Length);
 
             }
@@ -2409,20 +2323,119 @@ namespace WorkLogForm
                 this.timerMessageSend.Stop();
                 MessageBox.Show("与服务器失去建立连接，可能是由于网络原因，程序将退出，未记录本次签退时间，请在网络正常后再次登录。");
                 this.Close();
-            
+
             }
         }
+        private void LoadUnReadMessage()
+        {
 
-      
+            if (this.InvokeRequired)
+            {
+                LoadUnreadMessage d = new LoadUnreadMessage(LoadUnReadMessage);
+                this.Invoke(d);
+            }
+            else
+            {
+                #region 开启时读取未读的推送信息
+                ////////////////////////////////
+
+                try
+                {
+                    loglistfromService = new List<KjqbService.LogInService>();
+                    schedulelistfromService = new List<KjqbService.ScheduleInService>();
+                    commentlistfromService = new List<KjqbService.CommentInService>();
+                    tfmListfromservice = new List<KjqbService.TimeArrangeForManagerInService>();
+                    levlistfromservice = new List<KjqbService.LeaveInService>();
+                    businessfromservice = new List<KjqbService.BusinessService>();
+                    chatinservice = new List<KjqbService.ChatInService>();
 
 
-     
-        
+                    KjqbService.LogInService[] lists;
+                    lists = ser.SearchShareLogUnRead((int)this.user.Id);
 
 
-        #region 接受聊天信息
+                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists.Length).ToString();
 
 
+                    for (int i = 0; i < lists.Length; i++)
+                    {
+                        loglistfromService.Add(lists[i]);
+                    }
+
+                    KjqbService.ScheduleInService[] list2;
+                    list2 = ser.SearchShareScheduleUnRead((int)this.user.Id);
+
+                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list2.Length).ToString();
+
+                    for (int i = 0; i < list2.Length; i++)
+                    {
+                        schedulelistfromService.Add(list2[i]);
+                    }
+
+                    KjqbService.CommentInService[] list3;
+                    list3 = ser.SearchCommentlogUnRead((int)this.user.Id);
+                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list3.Length).ToString();
+                    for (int i = 0; i < list3.Length; i++)
+                    {
+                        commentlistfromService.Add(list3[i]);
+                    }
+
+                    KjqbService.TimeArrangeForManagerInService[] list4;
+                    list4 = ser.SearchTimeArrangeForManagerUnRead((int)this.user.Id);
+                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + list4.Length).ToString();
+                    for (int i = 0; i < list4.Length; i++)
+                    {
+                        tfmListfromservice.Add(list4[i]);
+                    }
+
+                    KjqbService.LeaveInService[] lists5;
+                    lists5 = ser.SearchLeaveInfoUnRead((int)this.user.Id);
+                    for (int i = 0; i < lists5.Length; i++)
+                    {
+                        levlistfromservice.Add(lists5[i]);
+                    }
+
+                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists5.Length).ToString();
+
+                    KjqbService.BusinessService[] lists6;
+                    lists6 = ser.SearchBusinessInfoUnRead((int)this.user.Id);
+                    for (int i = 0; i < lists6.Length; i++)
+                    {
+                        businessfromservice.Add(lists6[i]);
+                    }
+
+                    //this.labelNewMEssageCount.Text = (int.Parse(this.labelNewMEssageCount.Text) + lists6.Length).ToString();
+
+
+                    SetMessageCount(meaaageCountLabelOfRiZhi, lists.Length);
+
+                    SetMessageCount(this.meaaageCountLabelOfRicheng, list2.Length);
+
+                    SetMessageCount(this.meaaageCountLabelOfZhiBan, list4.Length);
+
+
+                    SetMessageCount(this.messageCountLabelOfCommentLog, list3.Length);
+
+
+                    SetMessageCount(this.meaaageCountLabelOFQingJia, lists5.Length);
+
+                    SetMessageCount(this.meaaageCountLabelCHuChai, lists6.Length);
+
+
+                    #region 接受聊天信息
+                    this.ReceiveChattingMessage();
+                    #endregion
+
+                }
+                catch
+                {
+                    MessageBox.Show("未能与服务器建立连接……");
+                }
+
+
+                #endregion
+            }
+        }
         private bool IsInChatUserlist(long id)
         {
             if (chattinguserlist != null && chattinguserlist.Count > 0)
@@ -2444,7 +2457,7 @@ namespace WorkLogForm
         /// <summary>
         /// 如果已经在和这个人聊天则不能再创建窗体
         /// </summary>
-        List<WkTUser> chatwindowsusers;
+       public List<WkTUser> chatwindowsusers;
 
         private void chatListBox1_DoubleClickSubItem(object sender, ChatListEventArgs e)
         {
@@ -2477,7 +2490,7 @@ namespace WorkLogForm
 
             }
         }
-        private void RemoveFromChaterList(int id)
+        public void RemoveFromChaterList(int id)
         {
 
             if (chattinguserlist !=null&& this.chattinguserlist.Count > 0)
@@ -2517,7 +2530,7 @@ namespace WorkLogForm
                         {
                             sec = new Secretary(this);
                             sec.Show();
-                            sec.AddMessageLabelInFlowPanel1(w.KuName);
+                            sec.AddMessageLabelInFlowPanel1(w);
                         }
 
                         else
@@ -2527,7 +2540,7 @@ namespace WorkLogForm
                                 sec = new Secretary(this);
                                 sec.Show();
                             }
-                            sec.AddMessageLabelInFlowPanel1(w.KuName);
+                            sec.AddMessageLabelInFlowPanel1(w);
                         }
 
                         this.chattinguserlist.Add(w);
@@ -2649,22 +2662,22 @@ namespace WorkLogForm
         private void timerOfMouseOrKeyUnDo_Tick(object sender, EventArgs e)
         {
             
-            timeCount++;
-            if (this.timeCount > 60*40)//timecount单位秒 40分钟
-            {
-                this.timerOfMouseOrKeyUnDo.Stop();
-                ShowMsg showmsg = new ShowMsg();
-                showmsg.ShowDialog();
-                if (showmsg.DialogResult == DialogResult.OK)
-                {
-                    this.Close();
-                }
-                else
-                {
-                    timeCount = 0;
-                    this.timerOfMouseOrKeyUnDo.Start();
-                }
-            }
+            //timeCount++;
+            //if (this.timeCount > 60*40)//timecount单位秒 40分钟
+            //{
+            //    this.timerOfMouseOrKeyUnDo.Stop();
+            //    ShowMsg showmsg = new ShowMsg();
+            //    showmsg.ShowDialog();
+            //    if (showmsg.DialogResult == DialogResult.OK)
+            //    {
+            //        this.Close();
+            //    }
+            //    else
+            //    {
+            //        timeCount = 0;
+            //        this.timerOfMouseOrKeyUnDo.Start();
+            //    }
+            //}
         }
 
         #endregion
@@ -2742,6 +2755,8 @@ namespace WorkLogForm
             }
         }
         #endregion
+
+      
 
         
 

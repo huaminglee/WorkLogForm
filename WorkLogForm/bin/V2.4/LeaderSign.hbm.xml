@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="ClassLibrary" assembly="ClassLibrary">
+
+  <class name="LeaderSign" table="LEADERSIGN" >
+    <id name="Id" column="Id" type="long"  length="10" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <!--<id name="Id" type="Int64" unsaved-value="0" >
+      <column name="ID" length="18" sql-type="int" not-null="true" unique="true" />
+      <generator class="identity"  />
+    </id>-->
+    <property name="LLS_LEADERID" column="LLS_LEADERID" type="long" length="10"/>
+    <property name="LLS_STAFFID" column="LLS_STAFFID" type="long" length="10"/>
+    <property name="LLS_SIGNINTIME" column="LLS_SIGNINTIME" type="long" length="10"/>
+    <property name="LLS_SIGNBACKTIME" column="LLS_SIGNBACKTIME" type="long" length="10"/>
+    <property name="LLS_TIMESTAMP" column="LLS_TIMESTAMP" type="DateTime" />
+    <property name="LLS_APPROVALSTATUS" column="LLS_APPROVALSTATUS" type="int" length="4" />   
+  </class>
+
+</hibernate-mapping>

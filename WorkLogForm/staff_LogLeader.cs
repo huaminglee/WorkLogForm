@@ -173,7 +173,7 @@ namespace WorkLogForm
         #region 个人日志 已处理
         private void personal_search_button_Click(object sender, EventArgs e)
         {
-            IList logList = baseService.loadEntityList("from StaffLog where State=" + (int)IEntity.stateEnum.Normal + " and WriteTime>=" + dateTimePicker1.Value.Ticks + " and WriteTime<=" + dateTimePicker2.Value.Ticks + " and Staff=" + user.Id + " and Content like '%"+this.textBox1.Text.Trim()+"%' order by WriteTime desc");
+            IList logList = baseService.loadEntityList("from StaffLog where State=" + (int)IEntity.stateEnum.Normal + " and WriteTime>=" + dateTimePicker1.Value.Date.Ticks + " and WriteTime<=" + dateTimePicker2.Value.Date.AddDays(1).Ticks + " and Staff=" + user.Id + " and Content like '%"+this.textBox1.Text.Trim()+"%' order by WriteTime desc");
             personal_dataGridView.Rows.Clear();
             initPersonalDataGridView(logList);
         }

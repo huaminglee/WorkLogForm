@@ -1,7 +1,6 @@
 E:\WorkLogForm1\WorkLogForm\OnLineUpdate\bin\Release\OnLineUpdate.exe.config
 E:\WorkLogForm1\WorkLogForm\OnLineUpdate\bin\Release\OnLineUpdate.exe
 E:\WorkLogForm1\WorkLogForm\OnLineUpdate\bin\Release\OnLineUpdate.pdb
-E:\WorkLogForm1\WorkLogForm\OnLineUpdate\obj\Release\OnLineUpdate.csprojResolveAssemblyReference.cache
 E:\WorkLogForm1\WorkLogForm\OnLineUpdate\obj\Release\OnLineUpdate.OnLineUpdateWindow.resources
 E:\WorkLogForm1\WorkLogForm\OnLineUpdate\obj\Release\OnLineUpdate.Properties.Resources.resources
 E:\WorkLogForm1\WorkLogForm\OnLineUpdate\obj\Release\OnLineUpdate.csproj.GenerateResource.Cache
@@ -10,3 +9,5 @@ E:\WorkLogForm1\WorkLogForm\OnLineUpdate\obj\Release\OnLineUpdate.pdb
 E:\WorkLogForm1\WorkLogForm\WorkLogForm\bin\Debug\OnLineUpdate.exe.config
 E:\WorkLogForm1\WorkLogForm\WorkLogForm\bin\Debug\OnLineUpdate.exe
 E:\WorkLogForm1\WorkLogForm\WorkLogForm\bin\Debug\OnLineUpdate.pdb
+E:\WorkLogForm1\WorkLogForm\WorkLogForm\bin\Debug\UpdateConfig.xml
+E:\WorkLogForm1\WorkLogForm\OnLineUpdate\obj\Release\OnLineUpdate.csprojResolveAssemblyReference.cache

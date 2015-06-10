@@ -211,6 +211,16 @@ namespace WorkLogForm.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap HideRichengInWriteLog {
+            get {
+                object obj = ResourceManager.GetObject("HideRichengInWriteLog", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Icon iconBlue128X128 {
@@ -263,26 +273,6 @@ namespace WorkLogForm.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap InstantMessengerLogo {
-            get {
-                object obj = ResourceManager.GetObject("InstantMessengerLogo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap login14 {
-            get {
-                object obj = ResourceManager.GetObject("login14", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
         internal static System.Drawing.Bitmap LoginBg {
             get {
                 object obj = ResourceManager.GetObject("LoginBg", resourceCulture);
@@ -326,16 +316,6 @@ namespace WorkLogForm.Properties {
         internal static System.Drawing.Bitmap LoginbuttonEnter {
             get {
                 object obj = ResourceManager.GetObject("LoginbuttonEnter", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap logined3 {
-            get {
-                object obj = ResourceManager.GetObject("logined3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -423,16 +403,6 @@ namespace WorkLogForm.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap refresh {
-            get {
-                object obj = ResourceManager.GetObject("refresh", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
         internal static System.Drawing.Bitmap rzOn {
             get {
                 object obj = ResourceManager.GetObject("rzOn", resourceCulture);
@@ -446,6 +416,16 @@ namespace WorkLogForm.Properties {
         internal static System.Drawing.Bitmap setting {
             get {
                 object obj = ResourceManager.GetObject("setting", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap ShowRichengInWriteLog {
+            get {
+                object obj = ResourceManager.GetObject("ShowRichengInWriteLog", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -546,26 +526,6 @@ namespace WorkLogForm.Properties {
         internal static System.Drawing.Bitmap 个人考勤 {
             get {
                 object obj = ResourceManager.GetObject("个人考勤", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 个人随笔_副本 {
-            get {
-                object obj = ResourceManager.GetObject("个人随笔_副本", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 个人随笔1 {
-            get {
-                object obj = ResourceManager.GetObject("个人随笔1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -863,26 +823,6 @@ namespace WorkLogForm.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap 我的日程 {
-            get {
-                object obj = ResourceManager.GetObject("我的日程", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 我的日程_副本 {
-            get {
-                object obj = ResourceManager.GetObject("我的日程_副本", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
         internal static System.Drawing.Bitmap 我的随笔 {
             get {
                 object obj = ResourceManager.GetObject("我的随笔", resourceCulture);
@@ -986,26 +926,6 @@ namespace WorkLogForm.Properties {
         internal static System.Drawing.Bitmap 日志 {
             get {
                 object obj = ResourceManager.GetObject("日志", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 日志分享 {
-            get {
-                object obj = ResourceManager.GetObject("日志分享", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 日志分享_副本 {
-            get {
-                object obj = ResourceManager.GetObject("日志分享_副本", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1203,26 +1123,6 @@ namespace WorkLogForm.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap 系统管理 {
-            get {
-                object obj = ResourceManager.GetObject("系统管理", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 系统管理1 {
-            get {
-                object obj = ResourceManager.GetObject("系统管理1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
         internal static System.Drawing.Bitmap 系统设置 {
             get {
                 object obj = ResourceManager.GetObject("系统设置", resourceCulture);
@@ -1236,46 +1136,6 @@ namespace WorkLogForm.Properties {
         internal static System.Drawing.Bitmap 综合统计 {
             get {
                 object obj = ResourceManager.GetObject("综合统计", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 编写日志 {
-            get {
-                object obj = ResourceManager.GetObject("编写日志", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 编写日志1 {
-            get {
-                object obj = ResourceManager.GetObject("编写日志1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 编写日程 {
-            get {
-                object obj = ResourceManager.GetObject("编写日程", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 编写日程1 {
-            get {
-                object obj = ResourceManager.GetObject("编写日程1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1456,16 +1316,6 @@ namespace WorkLogForm.Properties {
         internal static System.Drawing.Bitmap 随笔管理 {
             get {
                 object obj = ResourceManager.GetObject("随笔管理", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 首页背景2 {
-            get {
-                object obj = ResourceManager.GetObject("首页背景2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

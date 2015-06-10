@@ -1,0 +1,30 @@
+﻿<AutoUpdater>
+<URLAddres URL="ftp://202.113.127.142/WorkLog/"/>
+//升级文件所在服务器端的网址
+<UpdateInfo>
+<UpdateTime Date="2015-04-09"/>
+//升级文件的更新日期
+<Version Num="V1.8"/>
+//升级文件的版本号
+</UpdateInfo>
+<UpdateFileList>
+//升级文件列表
+
+
+<UpdateFile FileName="/setting.ini" DestPath="\"/>
+
+<UpdateFile FileName="/WorkLogForm.exe" DestPath="\"/>
+
+<UpdateFile FileName="/Readme.txt" DestPath="\"/>
+
+
+
+
+</UpdateFileList>
+<RestartApp>
+<ReStart Allow="Yes"/>
+//允许重新启动应用程序
+<AppName Name="EnergyEquipmentProject.exe"/>
+//启动的应用程序名
+</RestartApp>
+</AutoUpdater>

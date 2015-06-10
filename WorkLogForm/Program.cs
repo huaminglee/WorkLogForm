@@ -43,6 +43,7 @@ namespace WorkLogForm
         static login login;
         static string thePreUpdateDate;
         static System.Threading.Thread mainthread;
+        static System.Threading.Thread update;
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
@@ -54,36 +55,20 @@ namespace WorkLogForm
             Process instance = RunningInstance();
             if (instance == null)
             {
-
-
                 #region 在线更新
-                thePreUpdateDate = "";
                 try
                 {
-                    string _ip = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "ip"));
-                    string _id = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "id"));
-                    string _pwd = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "pwd"));
-                    FileUpDown fileUpDown = new FileUpDown(_ip, _id, _pwd);
+                    //string _ip = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "ip"));
+                    //string _id = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "id"));
+                    //string _pwd = Securit.DeDES(FileReadAndWrite.IniReadValue("ftpfile", "pwd"));
+                    //FileUpDown fileUpDown = new FileUpDown(_ip, _id, _pwd);
 
-                    string theLastsUpdateVersionNumber = GetTheUpdateVersionNum(System.Windows.Forms.Application.StartupPath);//上次的版本号
+                    thePreUpdateDate = GetTheUpdateVersionNum(System.Windows.Forms.Application.StartupPath);//上次的版本号
 
+                    //fileUpDown.Download(CommonStaticParameter.TEMP, "UpdateConfig.xml", "WorkLog");
 
-
-                    fileUpDown.Download(CommonStaticParameter.TEMP, "UpdateConfig.xml", "WorkLog");
-
-                    thePreUpdateDate = GetTheUpdateVersionNum(CommonStaticParameter.TEMP);//这次的版本号
-                    if (thePreUpdateDate != "")
-                    {
-                        //如果客户端将升级的应用程序的更新版本号与服务器上的不一致则进行更新    
-                        if (thePreUpdateDate != theLastsUpdateVersionNumber)
-                        {
-                            MessageBox.Show("当前软件不是最新的，请更新后登陆！", "系统提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            {
-                                System.Diagnostics.Process.Start(Application.StartupPath + "\\" + "OnLineUpdate.exe");
-                                return;
-                            }
-                        }
-                    }
+                    //thePreUpdateDate = GetTheUpdateVersionNum(CommonStaticParameter.TEMP);//这次的版本号
+                   
                 }
                 catch (Exception ex)
                 {
@@ -92,8 +77,11 @@ namespace WorkLogForm
                 #endregion
 
 
+                string isSelfStarting = FileReadAndWrite.IniReadValue("temp", "isSelfStarting");
+
                 //Application.EnableVisualStyles();
                 //Application.SetCompatibleTextRenderingDefault(false);
+                if (isSelfStarting == CommonStaticParameter.YES)
                 SetSelfStarting();
 
 
@@ -133,10 +121,20 @@ namespace WorkLogForm
             mainForm.Role = login.Role;
             mainForm.loginForm = login;
             SqlDependency.Start("UID=" + WorkLogForm.CommonClass.Securit.DeDES(id) + ";PWD=" + WorkLogForm.CommonClass.Securit.DeDES(pwd) + ";Database=" + WorkLogForm.CommonClass.Securit.DeDES(db) + ";server=" + WorkLogForm.CommonClass.Securit.DeDES(ip));
-            //mainForm.ShowDialog();
-            Application.Run(mainForm);
+            mainForm.ShowDialog();
+            //Application.Run(mainForm);
+            if (mainForm.DialogResult == DialogResult.OK)
+            {
+                update = new Thread(new ThreadStart(onlineUpdate));
+                update.ApartmentState = ApartmentState.STA;
+                update.Start();
+            }
         }
-
+        [STAThread]
+        static void onlineUpdate()
+        {
+            System.Diagnostics.Process.Start(Application.StartupPath + "\\" + "OnLineUpdate.exe");
+        }
         static void login_ShowMain(object sender, LoginEventArgs e)
         {
             mainthread = new System.Threading.Thread(new System.Threading.ThreadStart(MainThread));

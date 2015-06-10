@@ -5,6 +5,9 @@
     <EntitySet Name="ScheduleMessages" EntityType="KjqbServiceModel.ScheduleMessage" />
     <EntitySet Name="CommentMessages" EntityType="KjqbServiceModel.CommentMessage" />
     <EntitySet Name="TimeArrangeForManagerMessages" EntityType="KjqbServiceModel.TimeArrangeForManagerMessage" />
+    <EntitySet Name="LeaveMessages" EntityType="KjqbServiceModel.LeaveMessage" />
+    <EntitySet Name="BusinessMessages" EntityType="KjqbServiceModel.BusinessMessage" />
+    <EntitySet Name="ChatMessages" EntityType="KjqbServiceModel.ChatMessage" />
   </EntityContainer>
   <EntityType Name="LogMessage">
     <Key>
@@ -54,5 +57,42 @@
     <Property Type="Int64" Name="SendUserId" />
     <Property Type="Decimal" Name="TimeStamp" Precision="18" Scale="0" />
     <Property Type="Int32" Name="ExamineOrExamineResult" />
+  </EntityType>
+  <EntityType Name="LeaveMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="LeaveId" />
+    <Property Type="Int64" Name="UserId" />
+    <Property Type="Int64" Name="SendUserId" />
+    <Property Type="Int32" Name="State" />
+    <Property Type="Int32" Name="IsRead" />
+    <Property Type="Decimal" Name="TimeStamp" Precision="18" Scale="0" />
+    <Property Type="Int32" Name="ExamineOrExamineResult" />
+  </EntityType>
+  <EntityType Name="BusinessMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" />
+    <Property Type="Int64" Name="ReceiveID" />
+    <Property Type="Int64" Name="BusinessID" />
+    <Property Type="Decimal" Name="TimeStamp" Precision="18" Scale="0" />
+    <Property Type="Int32" Name="Type" />
+    <Property Type="Int32" Name="State" />
+    <Property Type="Int32" Name="IsRead" />
+  </EntityType>
+  <EntityType Name="ChatMessage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="State" />
+    <Property Type="Int32" Name="IsRead" />
+    <Property Type="Decimal" Name="ReceiveUserId" Precision="18" Scale="0" />
+    <Property Type="Decimal" Name="SendUserId" Precision="18" Scale="0" />
+    <Property Type="String" Name="ChatContent" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="TimeStamp" Precision="18" Scale="0" />
   </EntityType>
 </Schema>

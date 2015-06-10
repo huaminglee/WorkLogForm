@@ -343,8 +343,11 @@
 		<row><td>Component1</td><td>{034F2CA2-28C9-4A26-89F8-6361FA2FD3B8}</td><td>INSTALLDIR</td><td>2</td><td/><td>File1</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Component2</td><td>{D68BA38D-AABB-4BA9-8231-A777AD920288}</td><td>INSTALLDIR</td><td>2</td><td/><td>File2</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Component3</td><td>{5001C32B-940E-402B-B289-01A32BE57EF9}</td><td>INSTALLDIR</td><td>2</td><td/><td>File3</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Component5</td><td>{703A40BF-E37E-4AFA-8798-1C88800AF1F9}</td><td>INSTALLDIR</td><td>2</td><td/><td>File5</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>Component7</td><td>{F804A24F-6AFA-4578-9F56-8A8DA2D7A9BF}</td><td>INSTALLDIR</td><td>2</td><td/><td>File7</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{D331CD53-0D82-4F39-82A5-6332F2AD8337}</td><td>TEMP</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{2B9DADB7-D564-43D3-9A89-EE0D247673C2}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{F3791395-CC5C-4177-A88D-15840F8B41FB}</td><td>ICONS</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.Office.Interop.Excel.dll</td><td>{B308F59F-7EF7-418D-970D-D252541DA909}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.office.interop.exc</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.Office.Interop.Word.dll</td><td>{6E42D0B3-F079-476E-807F-66B4D7D7D53C}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.office.interop.wor</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>Microsoft.VisualBasic.PowerPacks.Vs.dll</td><td>{BB543633-E759-46A0-B30D-49DB95AD1A86}</td><td>INSTALLDIR</td><td>2</td><td/><td>microsoft.visualbasic.powerp</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1057,6 +1060,7 @@
 	<table name="CreateFolder">
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
+		<row><td>ICONS</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>INSTALLDIR</td><td>NewComponent1</td></row>
 		<row><td>TEMP</td><td>ISX_DEFAULTCOMPONENT</td></row>
 	</table>
@@ -1149,6 +1153,7 @@
 		<row><td>FavoritesFolder</td><td>TARGETDIR</td><td>.:FAVORI~1|Favorites</td><td/><td>0</td><td/></row>
 		<row><td>FontsFolder</td><td>TARGETDIR</td><td>.:Fonts</td><td/><td>0</td><td/></row>
 		<row><td>GlobalAssemblyCache</td><td>TARGETDIR</td><td>.:Global~1|GlobalAssemblyCache</td><td/><td>0</td><td/></row>
+		<row><td>ICONS</td><td>INSTALLDIR</td><td>icons</td><td/><td>0</td><td/></row>
 		<row><td>INSTALLDIR</td><td>WORKLOG1</td><td>.</td><td/><td>0</td><td/></row>
 		<row><td>ISCommonFilesFolder</td><td>CommonFilesFolder</td><td>Instal~1|InstallShield</td><td/><td>0</td><td/></row>
 		<row><td>ISMyCompanyDir</td><td>ProgramFilesFolder</td><td>MYCOMP~1|My Company Name</td><td/><td>0</td><td/></row>
@@ -1878,8 +1883,11 @@
 		<row><td>AlwaysInstall</td><td>Component1</td></row>
 		<row><td>AlwaysInstall</td><td>Component2</td></row>
 		<row><td>AlwaysInstall</td><td>Component3</td></row>
+		<row><td>AlwaysInstall</td><td>Component5</td></row>
+		<row><td>AlwaysInstall</td><td>Component7</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.Office.Interop.Excel.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.Office.Interop.Word.dll</td></row>
 		<row><td>AlwaysInstall</td><td>Microsoft.VisualBasic.PowerPacks.Vs.dll</td></row>
@@ -1902,11 +1910,13 @@
 		<row><td>File1</td><td>Component1</td><td>ClassLibrary.主输出</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ClassLibrary&gt;|Built</td><td>3</td><td/></row>
 		<row><td>File2</td><td>Component2</td><td>WinHtmlEditor.主输出</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WinHtmlEditor&gt;|Built</td><td>3</td><td/></row>
 		<row><td>File3</td><td>Component3</td><td>OnLineUpdate.主输出</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;OnLineUpdate&gt;|Built</td><td>3</td><td/></row>
+		<row><td>File5</td><td>Component5</td><td>ChattingCtrl.主输出</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;ChattingCtrl&gt;|Built</td><td>3</td><td/></row>
+		<row><td>File7</td><td>Component7</td><td>SkinForm.主输出</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;SkinForm&gt;|Built</td><td>3</td><td/></row>
 		<row><td>microsoft.office.interop.exc</td><td>Microsoft.Office.Interop.Excel.dll</td><td>MICROS~1.DLL|Microsoft.Office.Interop.Excel.dll</td><td>0</td><td/><td/><td/><td>1</td><td>E:\WorkLogForm1\WorkLogForm\WorkLogForm\bin\Release\Microsoft.Office.Interop.Excel.dll</td><td>1</td><td/></row>
 		<row><td>microsoft.office.interop.wor</td><td>Microsoft.Office.Interop.Word.dll</td><td>MICROS~1.DLL|Microsoft.Office.Interop.Word.dll</td><td>0</td><td/><td/><td/><td>1</td><td>E:\WorkLogForm1\WorkLogForm\WorkLogForm\bin\Release\Microsoft.Office.Interop.Word.dll</td><td>1</td><td/></row>
 		<row><td>microsoft.visualbasic.powerp</td><td>Microsoft.VisualBasic.PowerPacks.Vs.dll</td><td>MICROS~1.DLL|Microsoft.VisualBasic.PowerPacks.Vs.dll</td><td>0</td><td/><td/><td/><td>1</td><td>E:\WorkLogForm1\WorkLogForm\WorkLogForm\bin\Release\Microsoft.VisualBasic.PowerPacks.Vs.dll</td><td>1</td><td/></row>
 		<row><td>setting.ini</td><td>ISX_DEFAULTCOMPONENT1</td><td>setting.ini</td><td>0</td><td/><td/><td/><td>1</td><td>E:\WorkLogForm1\WorkLogForm\WorkLogForm\bin\Release\setting.ini</td><td>1</td><td/></row>
-		<row><td>updateconfig.xml</td><td>ISX_DEFAULTCOMPONENT1</td><td>UPDATE~1.XML|UpdateConfig.xml</td><td>0</td><td/><td/><td/><td>1</td><td>E:\WorkLogForm1\WorkLogForm\WorkLogForm\bin\Debug\temp\UpdateConfig.xml</td><td>1</td><td/></row>
+		<row><td>updateconfig.xml</td><td>ISX_DEFAULTCOMPONENT1</td><td>UPDATE~1.XML|UpdateConfig.xml</td><td>0</td><td/><td/><td/><td>1</td><td>E:\WorkLogForm1\WorkLogForm\WorkLogForm\bin\Release\UpdateConfig.xml</td><td>1</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -1923,6 +1933,7 @@
 		<col key="yes" def="s72">Tag</col>
 		<col def="S255">Data</col>
 		<row><td>PROJECT_ASSISTANT_DEFAULT_FEATURE</td><td>AlwaysInstall</td></row>
+		<row><td>PROJECT_ASSISTANT_FEATURES</td><td>NonSelectable</td></row>
 	</table>
 
 	<table name="ISBillBoard">
@@ -2053,8 +2064,11 @@
 		<row><td>Component1</td><td/><td/><td>_A1E54DCF_1283_4233_B659_DF1EFDC397D4_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Component2</td><td/><td/><td>_D52DEB73_0998_4DB3_B826_CB360E76776E_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Component3</td><td/><td/><td>_57503931_6729_4786_9B14_062ADB5F869A_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Component5</td><td/><td/><td>_C23867E8_20A7_44DA_AFD0_EB1FA366BF5E_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>Component7</td><td/><td/><td>_F1928A8F_BF84_4C00_8CBC_A21C4D111F3A_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_AEF6BB02_7F18_413C_9773_0EE8C3D142D7_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_572C146A_EAD9_497A_8C3C_85B560725E04_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_0F0F19F5_6D80_43D3_A7C8_378D2990EE26_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.Office.Interop.Excel.dll</td><td/><td/><td>_388C370E_13DF_4ED9_8ED6_1944DC962D82_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.Office.Interop.Word.dll</td><td/><td/><td>_B8BA3550_3FDF_4EFF_B206_0AA9465FB4DF_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>Microsoft.VisualBasic.PowerPacks.Vs.dll</td><td/><td/><td>_9931D723_7B10_44B5_87EA_9ADB5D5AAEE5_FILTER</td><td/><td/><td/><td/></row>
@@ -2360,6 +2374,7 @@
 		<col def="S255">Value</col>
 		<col def="S255">TestValue</col>
 		<col def="i4">Type</col>
+		<row><td>ChattingCtrl</td><td>ChattingCtrl\ChattingCtrl.csproj</td><td/><td>2</td></row>
 		<row><td>ClassLibrary</td><td>ClassLibrary\ClassLibrary.csproj</td><td/><td>2</td></row>
 		<row><td>CommonFilesFolder</td><td/><td/><td>1</td></row>
 		<row><td>ISPROJECTDIR</td><td/><td/><td>1</td></row>
@@ -2368,6 +2383,7 @@
 		<row><td>ISProjectFolder</td><td/><td/><td>1</td></row>
 		<row><td>OnLineUpdate</td><td>OnLineUpdate\OnLineUpdate.csproj</td><td/><td>2</td></row>
 		<row><td>ProgramFilesFolder</td><td/><td/><td>1</td></row>
+		<row><td>SkinForm</td><td>SkinForm\SkinForm.csproj</td><td/><td>2</td></row>
 		<row><td>SystemFolder</td><td/><td/><td>1</td></row>
 		<row><td>WinHtmlEditor</td><td>WinHtmlEditor\WinHtmlEditor.csproj</td><td/><td>2</td></row>
 		<row><td>WindowsFolder</td><td/><td/><td>1</td></row>
@@ -2681,7 +2697,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>2052</td><td>ITI</td><td>0</td><td/><td>1243824331</td></row>
+		<row><td>COMPANY_NAME</td><td>2052</td><td>ITI</td><td>0</td><td/><td>186854543</td></row>
 		<row><td>DN_AlwaysInstall</td><td>2052</td><td>始终安装</td><td>0</td><td/><td>1243862602</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>2052</td><td>系统颜色设置不足以运行 [ProductName]。</td><td>0</td><td/><td>1243862602</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>2052</td><td>操作系统不足以运行 [ProductName]。</td><td>0</td><td/><td>1243862602</td></row>
@@ -3783,8 +3799,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>2052</td><td>对于运行 [ProductName] 处理器不足。</td><td>0</td><td/><td>1243862602</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>2052</td><td>对于运行 [ProductName] 内存量不足。</td><td>0</td><td/><td>1243862602</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>2052</td><td>对于运行 [ProductName] 屏幕分辨率不足。</td><td>0</td><td/><td>1243862602</td></row>
-		<row><td>ID_STRING1</td><td>2052</td><td>http://www.ITI.com</td><td>0</td><td/><td>1243824331</td></row>
-		<row><td>ID_STRING2</td><td>2052</td><td>ITI</td><td>0</td><td/><td>1243824331</td></row>
+		<row><td>ID_STRING1</td><td>2052</td><td>http://www.ITI.com</td><td>0</td><td/><td>186854543</td></row>
+		<row><td>ID_STRING2</td><td>2052</td><td>ITI</td><td>0</td><td/><td>186854543</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>WorkLog</td><td>0</td><td/><td>1243864714</td></row>
 		<row><td>ID_STRING3</td><td>2052</td><td>WorkLog</td><td>0</td><td/><td>1243864714</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>2052</td><td>系统将不安装此功能。</td><td>0</td><td/><td>1243862602</td></row>
@@ -4028,7 +4044,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{E7CA2158-3097-458C-B28C-0E4AE4DA547F}</td></row>
 		<row><td>ISUSSignature</td><td>{15DEF54C-C34F-46AE-BBB7-DC3F3EA1373F}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewObjects,viewRelease,viewUI,viewISToday,viewFileExtensions</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewObjects,viewRelease,viewUI,viewISToday,viewFileExtensions,viewAppV</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>

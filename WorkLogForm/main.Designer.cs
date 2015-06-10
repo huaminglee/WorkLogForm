@@ -58,6 +58,7 @@
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.ri_zhi_pictureBox = new System.Windows.Forms.PictureBox();
             this.ri_cheng_pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tong_xun_pictureBox = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.setting_pictureBox = new System.Windows.Forms.PictureBox();
             this.rc_flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -66,7 +67,6 @@
             this.rc_toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.rz_flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.schedule_listen_timer = new System.Windows.Forms.Timer(this.components);
-            this.tong_xun_pictureBox = new System.Windows.Forms.PictureBox();
             this.Show_SuiBi_flowPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.write_SuiBi = new System.Windows.Forms.Panel();
             this.labelMessageBox1 = new ChattingCtrl.LabelMessageBox();
@@ -124,10 +124,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ri_zhi_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ri_cheng_pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tong_xun_pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.setting_pictureBox)).BeginInit();
             this.paneOfRiCheng.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tong_xun_pictureBox)).BeginInit();
             this.write_SuiBi.SuspendLayout();
             this.panelOfSuibi.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -490,6 +490,7 @@
             this.ri_zhi_pictureBox.Size = new System.Drawing.Size(17, 20);
             this.ri_zhi_pictureBox.TabIndex = 17;
             this.ri_zhi_pictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.ri_zhi_pictureBox, "日志分享");
             this.ri_zhi_pictureBox.Click += new System.EventHandler(this.ri_zhi_pictureBox_Click);
             this.ri_zhi_pictureBox.MouseEnter += new System.EventHandler(this.ri_zhi_pictureBox_MouseEnter);
             this.ri_zhi_pictureBox.MouseLeave += new System.EventHandler(this.ri_zhi_pictureBox_MouseLeave);
@@ -505,9 +506,26 @@
             this.ri_cheng_pictureBox1.Size = new System.Drawing.Size(20, 20);
             this.ri_cheng_pictureBox1.TabIndex = 18;
             this.ri_cheng_pictureBox1.TabStop = false;
+            this.toolTip1.SetToolTip(this.ri_cheng_pictureBox1, "我的日程");
             this.ri_cheng_pictureBox1.Click += new System.EventHandler(this.ri_cheng_pictureBox1_Click);
             this.ri_cheng_pictureBox1.MouseEnter += new System.EventHandler(this.ri_cheng_pictureBox1_MouseEnter);
             this.ri_cheng_pictureBox1.MouseLeave += new System.EventHandler(this.ri_cheng_pictureBox1_MouseLeave);
+            // 
+            // tong_xun_pictureBox
+            // 
+            this.tong_xun_pictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.tong_xun_pictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tong_xun_pictureBox.BackgroundImage")));
+            this.tong_xun_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.tong_xun_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tong_xun_pictureBox.Location = new System.Drawing.Point(250, 93);
+            this.tong_xun_pictureBox.Name = "tong_xun_pictureBox";
+            this.tong_xun_pictureBox.Size = new System.Drawing.Size(20, 20);
+            this.tong_xun_pictureBox.TabIndex = 19;
+            this.tong_xun_pictureBox.TabStop = false;
+            this.toolTip1.SetToolTip(this.tong_xun_pictureBox, "随笔分享");
+            this.tong_xun_pictureBox.Click += new System.EventHandler(this.tong_xun_pictureBox_Click);
+            this.tong_xun_pictureBox.MouseEnter += new System.EventHandler(this.tong_xun_pictureBox_MouseEnter);
+            this.tong_xun_pictureBox.MouseLeave += new System.EventHandler(this.tong_xun_pictureBox_MouseLeave);
             // 
             // pictureBox10
             // 
@@ -589,21 +607,6 @@
             // 
             this.schedule_listen_timer.Interval = 60000;
             this.schedule_listen_timer.Tick += new System.EventHandler(this.schedule_listen_timer_Tick);
-            // 
-            // tong_xun_pictureBox
-            // 
-            this.tong_xun_pictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.tong_xun_pictureBox.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tong_xun_pictureBox.BackgroundImage")));
-            this.tong_xun_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tong_xun_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tong_xun_pictureBox.Location = new System.Drawing.Point(250, 93);
-            this.tong_xun_pictureBox.Name = "tong_xun_pictureBox";
-            this.tong_xun_pictureBox.Size = new System.Drawing.Size(20, 20);
-            this.tong_xun_pictureBox.TabIndex = 19;
-            this.tong_xun_pictureBox.TabStop = false;
-            this.tong_xun_pictureBox.Click += new System.EventHandler(this.tong_xun_pictureBox_Click);
-            this.tong_xun_pictureBox.MouseEnter += new System.EventHandler(this.tong_xun_pictureBox_MouseEnter);
-            this.tong_xun_pictureBox.MouseLeave += new System.EventHandler(this.tong_xun_pictureBox_MouseLeave);
             // 
             // Show_SuiBi_flowPanel
             // 
@@ -817,7 +820,7 @@
             // backgroundWorkerLoadUserList
             // 
             this.backgroundWorkerLoadUserList.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerLoadUserList_DoWork);
-            this.backgroundWorkerLoadUserList.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerLoad_RunWorkerCompleted);
+            this.backgroundWorkerLoadUserList.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerLoad_UserList);
             // 
             // backgroundWorkerLoadBaseInfo
             // 
@@ -1002,10 +1005,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ri_zhi_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ri_cheng_pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tong_xun_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.setting_pictureBox)).EndInit();
             this.paneOfRiCheng.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tong_xun_pictureBox)).EndInit();
             this.write_SuiBi.ResumeLayout(false);
             this.write_SuiBi.PerformLayout();
             this.panelOfSuibi.ResumeLayout(false);
@@ -1084,7 +1087,7 @@
         private ChattingCtrl.MessageCountLabel meaaageCountLabelOFQingJia;
         private ChattingCtrl.MessageCountLabel meaaageCountLabelOfZhiBan;
         private ChattingCtrl.MessageCountLabel meaaageCountLabelCHuChai;
-        private ChattingCtrl.MessageCountLabel meaaageCountLabelOfXiaoXI;
+        public ChattingCtrl.MessageCountLabel meaaageCountLabelOfXiaoXI;
         private ChattingCtrl.MessageCountLabel meaaageCountLabelOfRicheng;
         private ChattingCtrl.MessageCountLabel meaaageCountLabelOfRiZhi;
         private ChattingCtrl.PanelOfLogCommentMessage panelOfLogCommentMessage1;

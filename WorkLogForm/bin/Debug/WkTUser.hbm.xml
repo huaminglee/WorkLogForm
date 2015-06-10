@@ -23,7 +23,7 @@
     <property name="KuLtime" column="KU_LTIME" type="String" length="20" />
     <property name="KuRtime" column="KU_RTIME" type="String" length="20"/>
     <property name="KuLastAddr" column="KU_LASTADDR" type="String" length="20" />
-    <property name="KuOnline" column="KU_ONLINE" type="String" length="1" />
+    <property name="KuOnline" column="KU_ONLINE" type="Int32" length="1" />
     <property name="KuLtimes" column="KU_LTIMES" type="Int32" length="6"/>
     <property name="KuLimit" column="KU_LIMIT" type="Int32" length="6" />
     <property name="KuStyle" column="KU_STYLE" type="String" length="20" />

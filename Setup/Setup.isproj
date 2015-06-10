@@ -29,6 +29,10 @@
 	</ItemGroup>
 	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2013Limited\InstallShield.targets"/>
 	<ItemGroup>
+		<ProjectReference Include="..\ChattingCtrl\ChattingCtrl.csproj">
+			<Name>ChattingCtrl</Name>
+			<Project>{94288E94-B44E-4644-BCA6-68FE4CBDDFD5}</Project>
+		</ProjectReference>
 		<ProjectReference Include="..\ClassLibrary\ClassLibrary.csproj">
 			<Name>ClassLibrary</Name>
 			<Project>{EB82119B-0737-4A23-A13E-D702690A347E}</Project>
@@ -36,6 +40,10 @@
 		<ProjectReference Include="..\OnLineUpdate\OnLineUpdate.csproj">
 			<Name>OnLineUpdate</Name>
 			<Project>{C0283241-07EA-447F-8CCC-7AA14F67C494}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\SkinForm\SkinForm.csproj">
+			<Name>SkinForm</Name>
+			<Project>{7F988DDA-955F-42F2-82EB-D6058FB7FF75}</Project>
 		</ProjectReference>
 		<ProjectReference Include="..\WinHtmlEditor\WinHtmlEditor.csproj">
 			<Name>WinHtmlEditor</Name>

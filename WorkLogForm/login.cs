@@ -171,6 +171,7 @@ namespace WorkLogForm
         private void button1_Click(object sender, EventArgs e)
         {
             LoginLoading();
+            if (!backgroundWorker1.IsBusy)
             backgroundWorker1.RunWorkerAsync();
         }
 
@@ -355,6 +356,8 @@ namespace WorkLogForm
             this.LoginButtonNoOn();
             this.pictureBox1.Cursor = Cursors.Hand;
             this.label1.Cursor = Cursors.Hand;
+            this.textBox1.Enabled = true;
+            this.textBox1.Enabled = true;
         }
 
         /// <summary>
@@ -367,6 +370,8 @@ namespace WorkLogForm
             SetLabel1location("正在登录…");
             this.LoginButtonOn();
             this.label1.ForeColor = Color.White;
+            this.textBox1.Enabled = false;
+            this.textBox1.Enabled = false;
         }
 
         private void SetLabel1location(string str)
@@ -508,7 +513,10 @@ namespace WorkLogForm
             if (e.KeyCode == Keys.Enter)
             {
                 LoginLoading();
-                backgroundWorker1.RunWorkerAsync();
+                if (!backgroundWorker1.IsBusy)
+                {
+                    backgroundWorker1.RunWorkerAsync();
+                }
             }
         }
         #endregion

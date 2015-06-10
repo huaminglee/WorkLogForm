@@ -234,10 +234,10 @@
             // close_pictureBox
             // 
             this.close_pictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.close_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.关闭渐变;
+            this.close_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.close;
             this.close_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.close_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.close_pictureBox.Location = new System.Drawing.Point(503, 0);
+            this.close_pictureBox.Location = new System.Drawing.Point(506, 0);
             this.close_pictureBox.Name = "close_pictureBox";
             this.close_pictureBox.Size = new System.Drawing.Size(28, 23);
             this.close_pictureBox.TabIndex = 172;
@@ -249,10 +249,10 @@
             // min_pictureBox
             // 
             this.min_pictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.min_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.最小化渐变;
+            this.min_pictureBox.BackgroundImage = global::WorkLogForm.Properties.Resources.Min;
             this.min_pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.min_pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.min_pictureBox.Location = new System.Drawing.Point(475, 0);
+            this.min_pictureBox.Location = new System.Drawing.Point(478, 0);
             this.min_pictureBox.Name = "min_pictureBox";
             this.min_pictureBox.Size = new System.Drawing.Size(28, 23);
             this.min_pictureBox.TabIndex = 171;

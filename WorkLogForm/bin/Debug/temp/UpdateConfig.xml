@@ -1,0 +1,34 @@
+﻿<AutoUpdater>
+<URLAddres URL="ftp://202.113.127.142/WorkLog/"/>
+//升级文件所在服务器端的网址
+<UpdateInfo>
+<UpdateTime Date="2015-04-07"/>
+//升级文件的更新日期
+<Version Num="1.7"/>
+//升级文件的版本号
+</UpdateInfo>
+<UpdateFileList>
+//升级文件列表
+
+
+<UpdateFile FileName="/ClassLibrary.dll" DestPath="\"/>
+
+
+<UpdateFile FileName="/WinHtmlEditor.dll" DestPath="\"/>
+
+
+<UpdateFile FileName="/WorkLogForm.exe" DestPath="\"/>
+
+
+<UpdateFile FileName="/WorkLogForm.exe.config" DestPath="\"/>
+
+
+
+</UpdateFileList>
+<RestartApp>
+<ReStart Allow="Yes"/>
+//允许重新启动应用程序
+<AppName Name="EnergyEquipmentProject.exe"/>
+//启动的应用程序名
+</RestartApp>
+</AutoUpdater>

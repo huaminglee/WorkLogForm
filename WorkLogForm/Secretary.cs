@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CCWin;
+using ClassLibrary;
+using ChattingCtrl._ChatListBox;
 namespace WorkLogForm
 {
     public partial class Secretary : SkinMain
@@ -62,21 +64,63 @@ namespace WorkLogForm
         /// 向flow1中添加message消息
         /// </summary>
         /// <param name="content"></param>
-        public void AddMessageLabelInFlowPanel1(string content)
+        public void AddMessageLabelInFlowPanel1(WkTUser user)
         {
             Label label = new Label();
             label.Font = new Font(new FontFamily("微软雅黑"), 10, FontStyle.Regular);
             label.ForeColor = Color.DarkRed;
             label.AutoSize = true;
-            label.Text = content;
+            label.Text = user.KuName;
             label.Margin = new System.Windows.Forms.Padding(0);
             label.Parent = flowLayoutPanel1;
+            label.Cursor = Cursors.Hand;
+            label.Tag = user;
+            label.Click += label_Click;
             if (this.flowLayoutPanel1.Controls.Count > 4)
             {
                 this.linkLabel1.Visible = true;
                 this.flowLayoutPanel1.Controls.RemoveAt(0);
             }
+
+
         }
+        void label_Click(object sender, EventArgs e)
+        {
+            WkTUser w = (WkTUser)(((Label)sender).Tag);
+
+            ChatListSubItem cha = main.GetTheUserById(int.Parse(w.Id.ToString()));
+            if (cha.IsTwinkle)
+            {
+                cha.IsTwinkle = !cha.IsTwinkle;
+                main.RemoveFromChaterList(cha.userid);
+                main.meaaageCountLabelOfXiaoXI.MessageCount = 0;
+            }
+
+            if (main.chatwindowsusers == null)
+            {
+                main.chatwindowsusers = new List<WkTUser>();
+            }
+            if (!main.chatwindowsusers.Contains(w))
+            {
+                ChatWindows chat = new ChatWindows();
+                chat.ReceiveUser = w;
+                chat.SendUser = main.user;
+                chat.Chatwindwosuser = main.chatwindowsusers;
+                chat.Show();
+            }
+            else
+            {
+
+            }
+            Label l = (Label)sender;
+            this.flowLayoutPanel1.Controls.Remove(l);
+            l.Dispose();
+            if (this.flowLayoutPanel1.Controls.Count == 0)
+            {
+                this.Close();
+            }
+        }
+
         #endregion
 
         public void ClearMessagePanel()
@@ -100,7 +144,7 @@ namespace WorkLogForm
         public void WindowsStartPosition()
         {
             int x = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size.Width - this.SkinSize.Width+this.MainPosition.X;
-            int y = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size.Height - this.SkinSize.Height + this.MainPosition.Y; ;
+            int y = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size.Height - this.SkinSize.Height + this.MainPosition.Y;
             this.SetDesktopLocation(x, y);
             this.SkinOpacity = 255;
             this.Opacity = 1;
@@ -110,17 +154,11 @@ namespace WorkLogForm
         #region 窗体关闭
         private void contextMenuStrip1_Click(object sender, EventArgs e)
         {
-            //this.SkinOpacity = 0;
-            //this.Visible = false;
             this.Close();
         }
         private void label1_Click(object sender, EventArgs e)
         {
             this.Close();
-            //this.SkinOpacity = 0;
-            //this.Visible = false;
-
-
         }
         #endregion
         

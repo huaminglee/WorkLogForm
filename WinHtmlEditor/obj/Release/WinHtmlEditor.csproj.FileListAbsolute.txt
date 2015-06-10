@@ -1,0 +1,14 @@
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\bin\Release\WinHtmlEditor.dll
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\bin\Release\WinHtmlEditor.pdb
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\bin\Release\NetSpell.SpellChecker.dll
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Release\WinHtmlEditor.ContextMenuForm.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Release\WinHtmlEditor.OfficeColorPicker.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Release\WinHtmlEditor.ToolStripColorPicker.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Release\WinHtmlEditor.EditHtmlForm.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Release\WinHtmlEditor.FindReplaceForm.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Release\WinHtmlEditor.HtmlEditor.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Release\WinHtmlEditor.Properties.Resources.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Release\WinHtmlEditor.TablePropertyForm.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Release\WinHtmlEditor.csproj.GenerateResource.Cache
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Release\WinHtmlEditor.dll
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Release\WinHtmlEditor.pdb

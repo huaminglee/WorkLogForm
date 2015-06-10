@@ -16,3 +16,6 @@ E:\WorkLogForm1\WorkLogForm\ChattingCtrl\obj\Release\ChattingCtrl.MessageCountLa
 E:\WorkLogForm1\WorkLogForm\ChattingCtrl\obj\Release\ChattingCtrl.PanelOfLogCommentMessage.resources
 E:\WorkLogForm1\WorkLogForm\ChattingCtrl\obj\Release\ChattingCtrl.panelOfLogCommentMessageItem.resources
 E:\WorkLogForm1\WorkLogForm\ChattingCtrl\obj\Release\ChattingCtrl.PanelOfRIchengAllInfo.resources
+E:\WorkLogForm1\WorkLogForm\ChattingCtrl\obj\Release\ChattingCtrl.ChatintSubItem.resources
+E:\WorkLogForm1\WorkLogForm\ChattingCtrl\obj\Release\ChattingCtrl.ChattingPanel.resources
+E:\WorkLogForm1\WorkLogForm\ChattingCtrl\obj\Release\ChattingCtrl.ChattingTimePanel.resources

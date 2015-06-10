@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="ClassLibrary" assembly="ClassLibrary">
+
+  <class name="Comments" table="LOG_T_COMMENTS" >
+    <id name="Id" column="Id" type="long"  length="10" unsaved-value="0">
+      <generator class="native" />
+    </id>
+    <property name="Content" column="Contents" type="StringClob" length="2147483647" />
+    <property name="CommentPersonName" column="CommentPersonName" type="String" length="6" />
+    <property name="State" column="STATE" type="int" length="1"/>
+    <property name="TimeStamp" column="TIMESTAMP" type="long" length="10"/>
+  </class>
+
+</hibernate-mapping>

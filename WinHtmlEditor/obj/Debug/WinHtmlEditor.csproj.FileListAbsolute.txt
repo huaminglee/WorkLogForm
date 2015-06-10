@@ -113,3 +113,17 @@ D:\Users\仕\Desktop\Project1\WinHtmlEditor\obj\Debug\WinHtmlEditor.TablePropert
 D:\Users\仕\Desktop\Project1\WinHtmlEditor\obj\Debug\WinHtmlEditor.csproj.GenerateResource.Cache
 D:\Users\仕\Desktop\Project1\WinHtmlEditor\obj\Debug\WinHtmlEditor.dll
 D:\Users\仕\Desktop\Project1\WinHtmlEditor\obj\Debug\WinHtmlEditor.pdb
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\bin\Debug\WinHtmlEditor.dll
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\bin\Debug\WinHtmlEditor.pdb
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Debug\WinHtmlEditor.ContextMenuForm.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Debug\WinHtmlEditor.OfficeColorPicker.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Debug\WinHtmlEditor.ToolStripColorPicker.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Debug\WinHtmlEditor.EditHtmlForm.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Debug\WinHtmlEditor.FindReplaceForm.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Debug\WinHtmlEditor.HtmlEditor.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Debug\WinHtmlEditor.Properties.Resources.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Debug\WinHtmlEditor.TablePropertyForm.resources
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Debug\WinHtmlEditor.csproj.GenerateResource.Cache
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Debug\WinHtmlEditor.dll
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Debug\WinHtmlEditor.pdb
+E:\WorkLogForm1\WorkLogForm\WinHtmlEditor\obj\Debug\WinHtmlEditor.csprojResolveAssemblyReference.cache

@@ -29,6 +29,7 @@ namespace WorkLogForm
             get { return isView; }
             set { isView = value; }
         }
+
         private String commentPersonName;
         /// <summary>
         /// 传送评论人信息也就是当前登陆系统的人
@@ -38,6 +39,7 @@ namespace WorkLogForm
             get { return commentPersonName; }
             set { commentPersonName = value; }
         }
+
         private bool isComment = false;
         /// <summary>
         /// 用否需要评论（现在规定只要是展示就需要可以评论）
@@ -74,7 +76,7 @@ namespace WorkLogForm
             initialWindow();
             initData();
             schedule_listView.Focus();
-            this.Location = new Point((Screen.GetBounds(this).Width - this.Width) / 2, (Screen.GetBounds(this).Height - this.Height) / 2);
+            //this.Location = new Point((Screen.GetBounds(this).Width - this.Width) / 2, (Screen.GetBounds(this).Height - this.Height) / 2);
         }     
         #region 自定义窗体初始化方法
         private void initialWindow()
@@ -87,40 +89,45 @@ namespace WorkLogForm
                 label4.Font = new Font(label4.Font.FontFamily, (float)18, FontStyle.Bold);
                 label4.Location = new Point(630, 44);
                 label4.Text = user.KuName+"的日志-" + logDate.Year + "年" + logDate.Month + "月" + logDate.Day + "日";
-                label3.Dispose();
-                label2.Dispose();
+                
                 schedule_listView.Dispose();
                 button1.Dispose();
-                button2.Dispose();
+               
                 button3.Dispose();
                 htmlEditor1.ShowToolBar = false;
                 htmlEditor1.ReadOnly = true;
-                htmlEditor1.Location = new Point(57, 90);
-                htmlEditor1.Size = new Size(830, 326);
+                this.label3.Text = "评  论";
+                this.comment_listView.Parent = RichengPanel;
+                this.comment_listView.Location = this.schedule_listView.Location;
+                this.comment_listView.Size = this.schedule_listView.Size;
+                this.schedule_listView.Visible = false;
+
+
                 comment_listView.Visible = true;
                 comment_textBox.Visible = true;
                 comment_button.Visible = true;
             }
-            else if (this.isView == true )
-            {
-                label1.Dispose();
-                label4.Font = new Font(label4.Font.FontFamily, (float)21.75, FontStyle.Bold);
-                label4.Location = new Point(647, 104);
-                label4.Text = "查看日志-" + logDate.Year + "年" + logDate.Month + "月" + logDate.Day + "日";
-                label3.Dispose();
-                label2.Dispose();
-                schedule_listView.Dispose();
-                button1.Dispose();
-                button2.Dispose();
-                button3.Dispose();
-                htmlEditor1.ShowToolBar = false;
-                htmlEditor1.ReadOnly = true;
-                htmlEditor1.Location = new Point(57, 90);
-                htmlEditor1.Size = new Size(890, 425);
-                comment_listView.Top += 99;
-                comment_listView.Visible = true;
-            }
-            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 5, Screen.PrimaryScreen.WorkingArea.Height / 8);
+            //else if (this.isView == true)
+            //{
+            //    label1.Dispose();
+            //    label4.Font = new Font(label4.Font.FontFamily, (float)21.75, FontStyle.Bold);
+            //    label4.Location = new Point(647, 104);
+            //    label4.Text = "查看日志-" + logDate.Year + "年" + logDate.Month + "月" + logDate.Day + "日";
+            //    label3.Dispose();
+            //    label2.Dispose();
+            //    schedule_listView.Dispose();
+            //    button1.Dispose();
+            //    //button2.Dispose();
+            //    button3.Dispose();
+            //    htmlEditor1.ShowToolBar = false;
+            //    htmlEditor1.ReadOnly = true;
+            //    htmlEditor1.Location = new Point(57, 90);
+            //    htmlEditor1.Size = new Size(890, 425);
+            //    comment_listView.Top += 99;
+            //    comment_listView.Visible = true;
+            //}
+           
+            //this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width / 5, Screen.PrimaryScreen.WorkingArea.Height / 8);
         }
         private void initData()
         {
@@ -128,7 +135,7 @@ namespace WorkLogForm
             {
                 logDate = DateTime.Now;
             }
-            IList staffLogList = baseService.loadEntityList("from StaffLog where State=" + (int)IEntity.stateEnum.Normal + " and WriteTime=" + logDate.Date.Ticks + " and Staff=" + user.Id);
+            IList staffLogList = baseService.loadEntityList("from StaffLog where State=" + (int)IEntity.stateEnum.Normal + " and WriteTime >=" + logDate.Date.Ticks + " and Staff=" + user.Id);
            
             if (staffLogList != null && staffLogList.Count > 0)
             {
@@ -162,11 +169,11 @@ namespace WorkLogForm
         #region 最小化关闭按钮
         private void min_pictureBox_MouseEnter(object sender, EventArgs e)
         {
-            min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.最小化_副本;
+            min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.Minenter;
         }
         private void min_pictureBox_MouseLeave(object sender, EventArgs e)
         {
-            min_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.最小化渐变;
+            min_pictureBox.BackgroundImage = null;
         }
         private void min_pictureBox_Click(object sender, EventArgs e)
         {
@@ -178,11 +185,11 @@ namespace WorkLogForm
         }
         private void close_pictureBox_MouseEnter(object sender, EventArgs e)
         {
-            close_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.关闭渐变_副本;
+            close_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.Closeenter;
         }
         private void close_pictureBox_MouseLeave(object sender, EventArgs e)
         {
-            close_pictureBox.BackgroundImage = WorkLogForm.Properties.Resources.关闭渐变;
+            close_pictureBox.BackgroundImage = null;
         }
         #endregion
         #region 窗体移动代码
@@ -210,6 +217,7 @@ namespace WorkLogForm
             }
         }
         #endregion
+
         private void initCommentList(IList<Comments> scList)
         {
             if (scList != null && scList.Count > 0)
@@ -404,10 +412,7 @@ namespace WorkLogForm
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+       
         private void button3_Click(object sender, EventArgs e)
         {
             InterimHead interimHead = new InterimHead();
@@ -431,40 +436,88 @@ namespace WorkLogForm
 
         private void comment_button_Click(object sender, EventArgs e)
         {
-            StaffLog staffLog = (StaffLog)htmlEditor1.Tag;
-            Comments comment = new Comments();
-            comment.Content = comment_textBox.Text.Trim();
-            comment.CommentPersonName = this.CommentPersonName;
-            comment.State = (int)IEntity.stateEnum.Normal;
-            comment.TimeStamp = DateTime.Now.Ticks;
-            staffLog.Comments.Add(comment);
-            baseService.SaveOrUpdateEntity(staffLog);
-            initCommentList(staffLog.Comments);
-            this.comment_textBox.Text = "";
+            this.panelofWriteComment.Visible = true;
 
 
-            #region 向服务中发送数据
-            try
+
+         
+
+        }
+
+        
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (this.RichengPanel.Visible == true)
             {
-                KjqbService.Service1Client ser = new KjqbService.Service1Client();
-                if (comment.CommentPersonName != "")
+                this.RichengPanel.Visible = false;
+                this.pictureBox1.Image = WorkLogForm.Properties.Resources.ShowRichengInWriteLog;
+                this.htmlEditor1.Height = 580;
+                this.panel2.Location = new Point (this.panel2.Location.X,this.htmlEditor1.Location.Y+htmlEditor1.Height+5);
+
+            }
+            else if (this.RichengPanel.Visible == false)
+            {
+                this.RichengPanel.Visible = true;
+                this.pictureBox1.Image = WorkLogForm.Properties.Resources.HideRichengInWriteLog;
+                this.htmlEditor1.Height = 410;
+                this.panel2.Location = new Point(this.panel2.Location.X, this.htmlEditor1.Location.Y + htmlEditor1.Height + 5);
+
+            }
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            if (this.comment_textBox.Text.Trim().Length > 0)
+            {
+
+                StaffLog staffLog = (StaffLog)htmlEditor1.Tag;
+                Comments comment = new Comments();
+                comment.Content = comment_textBox.Text.Trim();
+                comment.CommentPersonName = this.CommentPersonName;
+                comment.State = (int)IEntity.stateEnum.Normal;
+                comment.TimeStamp = DateTime.Now.Ticks;
+                staffLog.Comments.Add(comment);
+                baseService.SaveOrUpdateEntity(staffLog);
+                initCommentList(staffLog.Comments);
+                this.comment_textBox.Text = "";
+
+
+                #region 向服务中发送数据
+                try
                 {
-                    KjqbService.CommentInService ll = new KjqbService.CommentInService();
-                    ll.LogId = staffLog.Id;
-                    ll.CommentUserName = this.CommentPersonName;
-                    ll.LogUserId = staffLog.Staff.Id;
-                    ll.TimeStamp = DateTime.Now.Ticks;
-                    ser.SaveInCommentListInService(ll);
+                    KjqbService.Service1Client ser = new KjqbService.Service1Client();
+                    if (comment.CommentPersonName != "")
+                    {
+                        KjqbService.CommentInService ll = new KjqbService.CommentInService();
+                        ll.LogId = staffLog.Id;
+                        ll.CommentUserName = this.CommentPersonName;
+                        ll.LogUserId = staffLog.Staff.Id;
+                        ll.TimeStamp = DateTime.Now.Ticks;
+                        ser.SaveInCommentListInService(ll);
+
+                    }
+                }
+                catch
+                {
+
 
                 }
-            }
-            catch
-            {
- 
-            
-            }
-            #endregion
+                #endregion 
 
-        }      
+                this.labelMessageBox1.MessageageShow("评论成功！");
+
+            }
+            else
+            {
+                this.labelMessageBox1.MessageageShow("您的评论内容为空……");
+            }
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.panelofWriteComment.Visible = false;
+        }
+      
+
     }
 }

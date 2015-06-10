@@ -6,12 +6,18 @@
     <id name="Id" column="Id" type="long"  length="10" unsaved-value="0">
       <generator class="native" />
     </id>
-    
-    <property name="Startime" column="Startime" type="long" length="18" not-null="true"/>
-    <property name="Endtime" column="Endtime" type="long" length="18" not-null="true"/>
 
+    <property name="TimeMonth" column="TimeMonth" type="long" length="10"/>
+    
     <many-to-one name="UserId" column="UserId" lazy="false" class="ClassLibrary.WkTUser, ClassLibrary" ></many-to-one>
- 
+    <many-to-one name="ArrangeUserId" column="ArrangeUserId" lazy="false" class="ClassLibrary.WkTUser, ClassLibrary" ></many-to-one>
+    
+    <property name="ExamineState" column="ExamineState" type="int" length="1"/>
+    <property name="DutyType" column="DutyType" type="int" length="1"/>
+    <property name="IsDone" column="IsDone" type="int" length="1"/>
+    <property name="State" column="STATE" type="int" length="1"/>
+    <property name="TimeStamp" column="TIMESTAMP" type="long" length="10"/>
+  
   </class>
 
 </hibernate-mapping>
