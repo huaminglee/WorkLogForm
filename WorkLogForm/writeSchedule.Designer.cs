@@ -586,6 +586,7 @@
             this.Name = "writeSchedule";
             this.ShowInTaskbar = false;
             this.Text = "日程编写";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.writeSchedule_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.writeSchedule_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.writeSchedule_MouseMove);

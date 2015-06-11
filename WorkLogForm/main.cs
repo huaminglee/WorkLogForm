@@ -48,6 +48,10 @@ namespace WorkLogForm
 
         #endregion
 
+
+        CommonClass.FromHide fromhide;
+        
+        
         public login loginForm;
 
         FileUpDown fileUpDown;
@@ -62,8 +66,7 @@ namespace WorkLogForm
         private List<WkTUser> chattinguserlist = new List<WkTUser>();
 
         private IList scheduleList;
-        private EventHandler mouseLeave;
-        private EventHandler mouseEnter;
+  
         private int height,width;
         private BaseService baseService = new BaseService();
         public WkTUser user;
@@ -115,7 +118,7 @@ namespace WorkLogForm
         private statistics_Attendance statisticsAttendance;
         private writeLog write_log;
         private writeSchedule write_schedule;
-        private personal_setting personalSetting;
+        public personal_setting personalSetting;
         private shou_ye shouYe;
         private TimeManagement time_management;
         private WorkLogForm.Leave leave;
@@ -125,8 +128,7 @@ namespace WorkLogForm
         private BusinessManagement businessManagement;
         private WorkOvertime workOvertime;
         private SuiBiGuanLi_New suibiguanli;
-        private NewMessageWindow newMessageWindow;
-        private InstantMessenger InstantMessengerWindows;
+     
         KjqbService.Service1Client ser = new KjqbService.Service1Client();
         int loadCount;
         #endregion
@@ -152,6 +154,7 @@ namespace WorkLogForm
             CreativeFileUpDownClass.Enabled = true;
             
             this.versionNum = versionNum;
+            fromhide = new FromHide(this);
         }
 
        
@@ -399,8 +402,7 @@ namespace WorkLogForm
         /// </summary>
         private void initialWindow()
         {
-            mouseLeave = new System.EventHandler(main_MouseLeave);
-            mouseEnter = new System.EventHandler(main_MouseEnter);
+           
             height = this.Height;
             width = this.Width;
             creatWindow.SetFormRoundRectRgn(this, 15);
@@ -566,7 +568,7 @@ namespace WorkLogForm
         #endregion
 
 
-        #region 窗体特效事件：窗口拖拽到最上端自动隐藏
+        #region 窗体特效事件: 个人设置窗口一起移动
         private int x, y;
         private void main_MouseDown(object sender, MouseEventArgs e)
         {
@@ -578,25 +580,15 @@ namespace WorkLogForm
         }
         private void main_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left&&this.Location.Y>0)
+            if (e.Button == MouseButtons.Left && this.Location.Y > 0)
             {
                 if (personalSetting != null && personalSetting.Created)
                 {
                     personalSetting.Top = MousePosition.Y - y;
                     personalSetting.Left = MousePosition.X - x - personalSetting.Width;
                 }
-                if (newMessageWindow != null && newMessageWindow.Created)
-                {
-                    newMessageWindow.Top = MousePosition.Y - y;
-                    newMessageWindow.Left = MousePosition.X - x - newMessageWindow.Width;
-                }
-                if (InstantMessengerWindows != null && InstantMessengerWindows.Created)
-                {
-                    InstantMessengerWindows.Top = MousePosition.Y - y;
-                    InstantMessengerWindows.Left = MousePosition.X - x - InstantMessengerWindows.Width;
-                }
-                Top = MousePosition.Y - y;
-                Left = MousePosition.X - x;
+               
+             
             }
             else if (e.Button == MouseButtons.Left && e.Y > this.y)
             {
@@ -605,64 +597,14 @@ namespace WorkLogForm
                     personalSetting.Top = MousePosition.Y - y;
                     personalSetting.Left = MousePosition.X - x - personalSetting.Width;
                 }
-                if (newMessageWindow != null && newMessageWindow.Created)
-                {
-                    newMessageWindow.Top = MousePosition.Y - y;
-                    newMessageWindow.Left = MousePosition.X - x - newMessageWindow.Width;
-                }
-                Top = MousePosition.Y - y;
-                Left = MousePosition.X - x;
+             
+          
             }
         }
-        private void main_Move(object sender, EventArgs e)//实现窗口拖拽到最上端自动隐藏
-        {
-            if (this.Location.Y <= 0)
-            {
-                this.MouseLeave += mouseLeave;
-                this.MouseEnter += mouseEnter;
-                this.Top = 0;
-            }
-        }
-        private void main_MouseLeave(object sender, EventArgs e)
-        {
 
-            if (this.Location.Y == 0 && (MousePosition.Y >= this.Location.Y + this.height || MousePosition.X <= this.Location.X || this.PointToClient(new Point(MousePosition.X, MousePosition.Y)).X >= this.width))
-            {
-                timer2.Stop();
-                timer1.Start();
-            }
-        }
-        private void main_MouseEnter(object sender, EventArgs e)
-        {
-            if (this.Location.Y == 0&&(MousePosition.Y<=5||MousePosition.X>=this.Location.X||MousePosition.X<=this.Location.X+this.width))
-            {
-                timer1.Stop();
-                timer2.Start();
-            }
-        }
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (this.Height < 10)
-            {
-                this.Height = 2;
-                timer1.Stop();
-                return;
-            }
-            this.Height = this.Height / 5;
-        }
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            int h = Height * 5;
-            if (h >= this.height)
-            {
-                this.Height = this.height;
-                timer2.Stop();
-            }
-            else
-            {
-                this.Height = h;
-            }
-        }
+        
+      
+       
 
 
 
@@ -679,7 +621,7 @@ namespace WorkLogForm
         #region 按钮功能
         private void min_pictureBox_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
+            this.Location = new Point(this.Location.X, (this.Height - 2) * (-1));
         }
         private void close_pictureBox_Click(object sender, EventArgs e)
         {
@@ -794,13 +736,41 @@ namespace WorkLogForm
             //点鼠标右键,return  
             if (Mouse_e.Button == MouseButtons.Left)
             {
-                this.WindowState = FormWindowState.Normal;
+                //this.WindowState = FormWindowState.Normal;
+                this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width * 3 / 5, Screen.PrimaryScreen.WorkingArea.Height / 20);
                 this.Activate();
             }
         }
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width * 3 / 5, Screen.PrimaryScreen.WorkingArea.Height / 20);
+            this.Activate();
+        }
+
         #endregion
 
+        #region 任务栏右下角图标右键项
+        /// <summary>
+        /// 右键退出
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
+        /// <summary>
+        /// 右键还原
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Width * 3 / 5, Screen.PrimaryScreen.WorkingArea.Height / 20);
+            this.Activate();
+        }
+        #endregion 
         #region 主界面四个按钮
 
         #region 主界面按钮效果的效果
@@ -2576,28 +2546,7 @@ namespace WorkLogForm
         #endregion
 
 
-        #region 任务栏右下角图标右键项
-        /// <summary>
-        /// 右键退出
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        /// <summary>
-        /// 右键还原
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Normal;
-            this.Activate();
-        }
-        #endregion 
+   
 
 
         #region 钩子事件判定鼠标未操作时间
@@ -2758,14 +2707,17 @@ namespace WorkLogForm
 
       
 
-        
 
-       
 
-       
+
+
+
+
+
+
 
         #endregion
-      
+
 
 
     }

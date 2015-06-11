@@ -530,6 +530,7 @@
             this.Name = "writeLog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "日志编写";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.writeLog_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.writeLog_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.writeLog_MouseMove);

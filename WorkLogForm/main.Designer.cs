@@ -2,6 +2,9 @@
 {
     partial class main
     {
+
+
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -142,12 +145,10 @@
             // timer1
             // 
             this.timer1.Interval = 50;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // timer2
             // 
             this.timer2.Interval = 50;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // user_label
             // 
@@ -199,6 +200,7 @@
             this.notifyIcon1.Text = "工作小助手";
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.Click += new System.EventHandler(this.notifyIcon1_Click);
+            this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
             // contextMenuStrip1
             // 
@@ -978,13 +980,12 @@
             this.SkinShowInTaskbar = false;
             this.SkinSize = new System.Drawing.Size(380, 642);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "main";
+            this.Text = "WorkLog";
             this.TransparencyKey = System.Drawing.Color.Gainsboro;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.main_FormClosing);
             this.Load += new System.EventHandler(this.main_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.main_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.main_MouseMove);
-            this.Move += new System.EventHandler(this.main_Move);
             ((System.ComponentModel.ISupportInitialize)(this.min_pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.close_pictureBox)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);

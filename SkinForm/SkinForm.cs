@@ -151,7 +151,7 @@ namespace CCWin
                     if (this.Top < 0)
                     {
                         this.Top = 0;
-                        Main.Top = 0 + Main.MainPosition.Y;
+                        Main.Top = 0; //+ Main.MainPosition.Y;
                     }
                 }
             }

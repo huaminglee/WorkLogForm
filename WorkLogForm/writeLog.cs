@@ -16,6 +16,9 @@ namespace WorkLogForm
 {
     public partial class writeLog : Form
     {
+
+
+       
         private BaseService baseService = new BaseService();
         private WkTUser user;
         private DateTime logDate;
@@ -101,7 +104,7 @@ namespace WorkLogForm
                 this.comment_listView.Location = this.schedule_listView.Location;
                 this.comment_listView.Size = this.schedule_listView.Size;
                 this.schedule_listView.Visible = false;
-
+                
 
                 comment_listView.Visible = true;
                 comment_textBox.Visible = true;

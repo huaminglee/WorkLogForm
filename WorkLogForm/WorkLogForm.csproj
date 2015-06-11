@@ -151,6 +151,7 @@
     </Compile>
     <Compile Include="CommonClass\FileReadAndWrite.cs" />
     <Compile Include="CommonClass\FileUpDown.cs" />
+    <Compile Include="CommonClass\FromHide.cs" />
     <Compile Include="CommonClass\HtmlUtility.cs" />
     <Compile Include="CommonClass\OperateImage.cs" />
     <Compile Include="DCIEngine.FrameWork.Snap\Hook.cs" />

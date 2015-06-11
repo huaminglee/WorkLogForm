@@ -171,6 +171,9 @@ namespace WorkLogForm
         private void button1_Click(object sender, EventArgs e)
         {
             LoginLoading();
+            this.pictureBox1.Focus();
+            //this.textBox2.Enabled = false;
+            //this.textBox1.Enabled = false;
             if (!backgroundWorker1.IsBusy)
             backgroundWorker1.RunWorkerAsync();
         }
@@ -357,7 +360,7 @@ namespace WorkLogForm
             this.pictureBox1.Cursor = Cursors.Hand;
             this.label1.Cursor = Cursors.Hand;
             this.textBox1.Enabled = true;
-            this.textBox1.Enabled = true;
+            this.textBox2.Enabled = true;
         }
 
         /// <summary>
@@ -548,13 +551,17 @@ namespace WorkLogForm
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
+
             this.ShowLabelMessage(loginMessage);
             loginError();
             if (loginMessage == "登录成功！")
             {
+                
                 SetLabel1location("正在绘制主界面…");
                 this.ShowLabelMessage("登录成功！");
                 this.pictureBox1.Enabled = false;
+                this.textBox2.Enabled = false;
+                this.textBox1.Enabled = false;
                 this.label1.Enabled = false;
                 this.close_pictureBox.Enabled = false;
                 this.pictureBox1.Cursor = Cursors.WaitCursor;
